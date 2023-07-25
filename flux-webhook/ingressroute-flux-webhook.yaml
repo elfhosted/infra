@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flux-webhook.${dns_domain}
+  namespace: flux-system
+spec:
+  routes:
+    - match: Host(`flux-webhook.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: webhook-receiver
+          kind: Service
+          port: 80
+  tls:
+    secretName: letsencrypt-wildcard-cert-${dns_domain}        

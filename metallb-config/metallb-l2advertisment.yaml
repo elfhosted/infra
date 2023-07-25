@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: k8s
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - k8s

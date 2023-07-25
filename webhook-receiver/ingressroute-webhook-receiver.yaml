@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: webhook-receiver.${dns_domain}
+  namespace: webhook-receiver
+spec:
+  routes:
+    - match: Host(`webhook-receiver.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: webhook-receiver
+          kind: Service
+          port: 9000

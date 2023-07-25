@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-sonarr-4k-maroon
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: sonarr
+          theme: maroon
+          addons:
+            - 4k-logo
+          baseUrl: https://theme-park.${dns_domain}

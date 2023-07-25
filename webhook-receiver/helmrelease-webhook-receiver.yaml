@@ -1,0 +1,62 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: webhook-receiver
+  namespace: webhook-receiver
+spec:
+  chart:
+    spec:
+      chart: webhook-receiver
+      version: 0.0.x
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: webhook-receiver
+  values:
+    persistence: 
+      config:
+        enabled: "true"
+        mountPath: "/etc/webhook/hooks.yaml"
+        subPath: hooks.yaml
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: webhook-receiver-hooks
+      repo:
+        enabled: true
+        type: emptyDir
+        mountPath: /repo          
+    envFrom: 
+    - secretRef:
+        name: webhook-receiver    
+    args: 
+    - -verbose 
+    - -hooks=/etc/webhook/hooks.yaml 
+    - -hotreload 
+    - -template  
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "webhook-receiver-hooks"
+    initContainers:
+      pull-repo:
+        image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
+        command:
+        - /bin/sh
+        - -c
+        - |
+          set -x
+          set -e
+
+          gh auth setup-git
+          gh repo clone geek-cookbook/elfhosted-tenants /repo/
+          git config --global --add safe.directory /repo
+
+        volumeMounts:
+        - mountPath: /repo
+          name: repo
+        envFrom: 
+        - secretRef:
+            name: webhook-receiver     

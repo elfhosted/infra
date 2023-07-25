@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-nzbget-dark
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: nzbget
+          theme: dark
+          baseUrl: https://theme-park.${dns_domain}

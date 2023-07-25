@@ -1,0 +1,8 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: openspeedtest-buffer
+  namespace: openspeedtest
+spec:
+  buffering:
+    maxRequestBodyBytes: 10000000000

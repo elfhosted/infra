@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: speed.${dns_domain}
+  namespace: openspeedtest
+spec:
+  routes:
+    - match: Host(`speed.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: openspeedtest
+          kind: Service
+          port: 3000
+      middlewares:
+        - name: openspeedtest-buffer

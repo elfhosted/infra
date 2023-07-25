@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-resilio-sync-hotpink
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: resilio-sync
+          theme: hotpink
+          baseUrl: https://theme-park.${dns_domain}

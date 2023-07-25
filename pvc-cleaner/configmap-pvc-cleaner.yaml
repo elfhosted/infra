@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pvc-cleaner
+  namespace: pvc-cleaner
+data:
+  pvc-cleaner.sh: |
+    #!/bin/bash
+
+    # Don't abort on a failure, this can caus
+    set -e
+
+    # Debug logs
+    # set -x
+
+    # Set timestamp
+    TIMESTAMP_NOW=$(date +%s)
+
+    NAMESPACES=$(kubectl get ns | grep aa | cut -f1 -d" ")
+    for NS in ${NAMESPACES}
+    do
+
+      # Get a list of all customer PVCs starting with config-
+      PVCS=$(kubectl get pvc -n $NS | grep config- | cut -f1 -d' ')
+            
+      for PVC in ${PVCS}
+      do
+        if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'Used By:       <none>'); then
+          # does the PVC already have a timestamp?
+          if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
+            # clean it up if it's > 3 days
+            TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | cut -f2 -d=)
+            TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
+            if [[ $TIMESTAMP_DIFF -gt 259200 ]]; then
+              echo check for a deployment
+              exit
+              echo "PVC $PVC in namespace $NS has been unused for > 3days, removing it.."
+              #echo kubectl delete pvc -n $NS $PVC
+            else
+              echo "Found labeled, unused PVC $PVC in NS $NS, but it's less than 3d old, so ignoring"
+            fi
+          else
+            # label for cleanup in 3 days
+            echo "Found unused PVC $PVC in NS $NS, labeling for deletion in 3d"
+            kubectl label pvc -n $NS $PVC elfhosted.com/unused-since=$TIMESTAMP_NOW
+          fi
+        else
+          # the volume is mounted, so if there _was_ a label on the PVC, remove it
+          if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
+            kubectl label pvc -n $NS $PVC elfhosted.com/unused-since- --overwrite
+          fi
+        fi
+      done
+    done    
+    

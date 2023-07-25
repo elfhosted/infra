@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dev.${dns_domain}
+  namespace: wordpress-dev
+spec:
+  routes:
+    - match: Host(`dev.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: wordpress-dev
+          kind: Service
+          port: 80

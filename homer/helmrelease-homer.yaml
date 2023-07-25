@@ -1,0 +1,75 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: homer
+  namespace: homer
+spec:
+  chart:
+    spec:
+      chart: homer
+      version: 8.x
+      sourceRef:
+        kind: HelmRepository
+        name: geek-cookbook
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: homer
+  values:
+    image:
+      repository: ghcr.io/geek-cookbook/homer
+      tag: 23.05.1@sha256:674e62c670dfbd4e67790067c45da8c0e214372a1acad1bc3ba881a8130e2ecf
+      pullPolicy: IfNotPresent
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "homer-config" # Reload the deployment every time the yaml config changes
+      replicas: 2
+      strategy: RollingUpdate              
+
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists          
+      
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
+              
+    priorityClassName: cluster-low
+    
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: infra.${dns_domain}
+            paths:
+              - path: /
+                pathType: Prefix
+                          
+    service:
+      main:
+        enabled: true   
+    persistence: 
+      config:
+        enabled: "true"
+        mountPath: "/www/assets/config.yml"
+        subPath: "config.yml"
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: homer-config
+      dev:
+        enabled: "true"
+        mountPath: "/www/assets/dev.yml"
+        subPath: "dev.yml"
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: homer-config            
+    configmap:
+      config:
+        enabled: false

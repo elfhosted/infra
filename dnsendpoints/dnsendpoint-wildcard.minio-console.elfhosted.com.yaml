@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "wildcard.minio-console.${dns_domain}"
+  namespace: dnsendpoints
+spec:
+  endpoints:
+  - dnsName: "*.minio-console.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "traefik-ingress.${dns_domain}"     

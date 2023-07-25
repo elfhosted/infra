@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-sabnzbd-overseerr
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: sabnzbd
+          theme: overseerr
+          baseUrl: https://theme-park.${dns_domain}

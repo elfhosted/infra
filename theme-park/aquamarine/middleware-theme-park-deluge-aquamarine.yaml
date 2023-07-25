@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-deluge-aquamarine
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: deluge
+          theme: aquamarine
+          baseUrl: https://theme-park.${dns_domain}

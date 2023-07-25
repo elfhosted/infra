@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: error-pages
+  namespace: traefik
+spec:
+  errors:
+    status:
+      - "400-599"
+    query: /{status}.html
+    service:
+      name: error-pages
+      namespace: error-pages
+      port: 8080

@@ -1,0 +1,7 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: tenant-low
+value: 2000
+globalDefault: false
+description: "Used for tenant background pods like media automation"

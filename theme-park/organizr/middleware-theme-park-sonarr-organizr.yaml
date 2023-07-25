@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-sonarr-organizr
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: sonarr
+          theme: organizr
+          baseUrl: https://theme-park.${dns_domain}

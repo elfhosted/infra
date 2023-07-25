@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "nginx-ingress.infra.${dns_domain}"
+  namespace: nginx-ingress-controller
+spec:
+  endpoints:
+  - dnsName: "nginx-ingress.infra.${dns_domain}"
+    recordTTL: 180
+    recordType: A
+    targets:
+    - ${cluster_nic_class_c}.100

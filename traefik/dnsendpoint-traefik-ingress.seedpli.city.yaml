@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "traefik-ingress.${dns_domain}"
+  namespace: traefik
+spec:
+  endpoints:
+  - dnsName: "traefik-ingress.${dns_domain}"
+    recordTTL: 180
+    recordType: A
+    targets:
+    - ${traefik_ingress_dns_ip} # LB / pfsense directs this to ${cluster_nic_class_c}.101

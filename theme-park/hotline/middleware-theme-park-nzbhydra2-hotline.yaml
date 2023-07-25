@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-nzbhydra2-hotline
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: nzbhydra2
+          theme: hotline
+          baseUrl: https://theme-park.${dns_domain}

@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  namespace: letsencrypt-wildcard-cert  
+spec:
+  acme:
+    email: admin@${dns_domain}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - selector:
+        dnsZones:
+          - "${dns_domain}"
+      dns01:
+        cloudflare:
+          email: admin@${dns_domain}
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token            

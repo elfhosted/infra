@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "rook-ceph.infra.${dns_domain}"
+  namespace: rook-ceph
+spec:
+  endpoints:
+  - dnsName: "rook-ceph.infra.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "nginx-ingress.infra.${dns_domain}"

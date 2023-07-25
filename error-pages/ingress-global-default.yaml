@@ -1,0 +1,18 @@
+# This is global beautiful error pages step 1.. Traefik doesn't seem to have a similar concept using ingressroutes,
+# but we can use the ingress's defaultBackend function to direct any unmatched requests to a given service
+# (doesnt' matter if they fail, but it's best to use something which will 404 rather than 503)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-default-backend
+  namespace: error-pages
+  annotations:
+    traefik.ingress.kubernetes.io/priority: -2
+    traefik.ingress.kubernetes.io/router.middlewares: error-pages-error-pages@kubernetescrd
+spec:
+  ingressClassName: traefik
+  defaultBackend:
+    service:
+      name: error-pages
+      port: 
+        number: 8080 # Easy way to return a 404     

@@ -1,0 +1,92 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: alertmanager-discord-tenants
+  namespace: alertmanager-discord
+spec:
+  chart:
+    spec:
+      chart: alertmanager-discord
+      version: 1.3.x
+      sourceRef:
+        kind: HelmRepository
+        name: geek-cookbook
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: alertmanager-discord-tenants
+  values:
+    #
+    # IMPORTANT NOTE
+    #
+    # This chart inherits from our common library chart. You can check the default values/options here:
+    # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+    #
+    replicas: 2
+    image:
+      # -- image repository
+      repository: rogerrum/alertmanager-discord
+      # -- image tag
+      # tag: 1.0.3 # Just use whatever the upstream chart provides
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
+
+    # -- environment variables. See [image docs](https://github.com/metalmatze/alertmanager-bot) for more configuration options.
+    # @default -- See below
+    env:
+      # -- Discord Username
+      DISCORD_USERNAME: "Alertmanager (Tenants)"
+      ALERTMANAGER_URL: "https://alertmanager.infra.elfhosted.com"
+    #   -- Discord Avatar icon
+    #  DISCORD_AVATAR_URL: "https://avatars3.githubusercontent.com/u/3380462"
+    #   -- Enable Verbose mode (log request and responses)
+    #  VERBOSE: "ON"
+    #   -- Discord Webhook - Can be used from envValueFrom secrets
+      DISCORD_WEBHOOK:
+        valueFrom:
+          secretKeyRef:
+            name: alertmanager-discord-secret
+            key: DISCORD_WEBHOOK_TENANTS
+
+
+    # -- Configures service settings for the chart. Normally this does not need to be modified.
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            port: 9094
+
+    # -- Enable and configure ingress settings for the chart under this key.
+    # @default -- Disabled
+    ingress:
+      main:
+        enabled: false
+
+    # -- Configures probes for the chart. Normally this does not need to be modified.
+    # @default -- Disabled
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+
+    # -- Configure persistence settings for the chart under this key.
+    # @default -- See values.yaml
+    persistence:
+      data:
+        enabled: false

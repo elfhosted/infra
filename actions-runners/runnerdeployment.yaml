@@ -1,0 +1,14 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: runner.${dns_domain}
+  namespace: actions-runners
+spec:
+  replicas: 1
+  template:
+    spec:
+      ephemeral: true
+      organization: geek-cookbook
+      serviceAccountName: actions-runners
+      labels: 
+      - actions-runner-${dns_domain}         

@@ -1,0 +1,98 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubernetes-replicator
+  namespace: kubernetes-replicator
+spec:
+  chart:
+    spec:
+      chart: kubernetes-replicator
+      version: 2.9.x
+      sourceRef:
+        kind: HelmRepository
+        name: mittwald
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: kubernetes-replicator
+  values:
+    image:
+      repository: quay.io/mittwald/kubernetes-replicator
+      #tag: stable # if no tag is given, the chart's appVersion is used
+      pullPolicy: Always
+    imagePullSecrets: []
+    nameOverride: ""
+    fullnameOverride: ""
+    grantClusterAdmin: false
+    automountServiceAccountToken: true
+    args: []
+      # - -resync-period=30m
+      # - -allow-all=false
+
+    ## Deployment strategy / DaemonSet updateStrategy
+    ##
+    updateStrategy: {}
+    #   type: RollingUpdate
+    #   rollingUpdate:
+    #     maxUnavailable: 1
+
+    serviceAccount:
+      create: true
+      annotations: {}
+      name:
+      privileges: []
+      automountServiceAccountToken: true
+      # - apiGroups: [""]
+      #   resources: ["configmaps"]
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 10001
+
+    priorityClassName: ""
+
+    resources:
+      limits:
+        cpu: 1
+        memory: 256Mi
+      requests:
+        cpu: 1m
+        memory: 64Mi
+
+    nodeSelector: {}
+
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists          
+      
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
+
+    podLabels: {}
+
+    podAnnotations: {}
+
+    livenessProbe:
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      timeoutSeconds: 1
+      failureThreshold: 3
+      successThreshold: 1
+
+    readinessProbe:
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      timeoutSeconds: 1
+      failureThreshold: 3
+      successThreshold: 1

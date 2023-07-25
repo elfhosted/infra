@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pvc-cleaner
+  namespace: pvc-cleaner
+  labels:
+    app.kubernetes.io/name: pvc-cleaner  
+spec:
+  schedule: "0 0 * * *" # run daily
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: pvc-cleaner
+        spec:
+          restartPolicy: Never
+          serviceAccountName: pvc-cleaner
+          containers:
+          - name: "pvc-cleaner"
+            command: [ "/pvc-cleaner.sh" ]
+            image: ghcr.io/geek-cookbook/tooling:focal-20230624@sha256:3a43385968a692fd1ec02bffdea62ddb888e48cb3b883332aa98b1747f4a532b
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 568
+              runAsGroup: 568
+              capabilities:
+                drop:
+                - ALL                
+            volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: "/pvc-cleaner.sh"
+              subPath: pvc-cleaner.sh
+              name: pvc-cleaner
+          volumes:
+            - name: tmp
+              emptyDir: {}   
+            - name: pvc-cleaner
+              configMap:
+                name: pvc-cleaner 
+                defaultMode: 0755       

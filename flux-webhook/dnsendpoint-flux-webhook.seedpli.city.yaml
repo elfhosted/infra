@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "flux-webhook.${dns_domain}"
+  namespace: flux-system
+spec:
+  endpoints:
+  - dnsName: flux-webhook.${dns_domain}
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "traefik-ingress.${dns_domain}"

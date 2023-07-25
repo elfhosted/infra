@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: letsencrypt-wildcard-cert-infra.${dns_domain}
+  namespace: letsencrypt-wildcard-cert
+spec:
+ secretName: letsencrypt-wildcard-cert-infra.${dns_domain}
+ issuerRef:
+   name: letsencrypt-prod
+   kind: ClusterIssuer
+ dnsNames:
+  - "infra.${dns_domain}"
+  - "*.infra.${dns_domain}"

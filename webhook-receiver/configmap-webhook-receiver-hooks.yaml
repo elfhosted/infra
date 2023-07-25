@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webhook-receiver-hooks
+  namespace: webhook-receiver
+data:
+  hooks.yaml: |
+    - id: process-user
+      execute-command: /repo/scripts/process-user.sh
+      response-message: I got your payload! Hello!
+      response-headers:
+      - name: Access-Control-Allow-Origin
+        value: '*'
+        command-working-directory: "/tmp"
+      pass-file-to-command:
+      - source: entire-payload
+        envname: WEBHOOK_PAYLOAD
+    - id: process-user-deletion
+      execute-command: /repo/scripts/process-user-deletion.sh
+      response-message: I got your payload! Hello!
+      response-headers:
+      - name: Access-Control-Allow-Origin
+        value: '*'
+        command-working-directory: "/tmp"
+      pass-file-to-command:
+      - source: entire-payload
+        envname: WEBHOOK_PAYLOAD        
+      # trigger-rule:
+      #   and:
+      #     # - match:
+      #     #     type: payload-hmac-sha256
+      #     #     secret: '{{ getenv "HOOK_SECRET" | js }}'
+      #     #     parameter:
+      #     #       source: header
+      #     #       name: X-WC-Webhook-Signature   
+      #     - match: # only activate for paying customers
+      #         type: "value"
+      #         value: "true"
+      #         parameter:
+      #           source: "payload"
+      #           name: "is_paying_customer"   
+
+    - id: process-subscription
+      execute-command: /repo/scripts/process-subscription.sh
+      response-message: Subscription processed
+      response-headers:
+      - name: Access-Control-Allow-Origin
+        value: '*'
+        command-working-directory: "/tmp"
+      pass-file-to-command:
+      - source: entire-payload
+        # name: line_items
+        envname: WEBHOOK_PAYLOAD     
+    - id: process-subscription-deletion
+      execute-command: /repo/scripts/process-subscription-deletion.sh
+      response-message: Subscription deleted
+      response-headers:
+      - name: Access-Control-Allow-Origin
+        value: '*'
+        command-working-directory: "/tmp"
+      pass-file-to-command:
+      - source: entire-payload
+        # name: line_items
+        envname: WEBHOOK_PAYLOAD                                                                   
+      # trigger-rule:
+      #   and:
+      #     # - match:
+      #     #     type: payload-hmac-sha256
+      #     #     secret: '{{ getenv "HOOK_SECRET" | js }}'
+      #     #     parameter:
+      #     #       source: header
+      #     #       name: X-WC-Webhook-Signature
+      #     - match: # only activate for active subscriptions
+      #         type: "value"
+      #         value: "active"
+      #         parameter:
+      #           source: "payload"
+      #           name: "status"   
+    - id: test-hook-secret
+      execute-command: ls $WEBHOOK_PAYLOAD
+      response-message: Testing...
+      response-headers:
+      - name: Access-Control-Allow-Origin
+        value: '*'
+        command-working-directory: "/tmp"
+      pass-file-to-command:
+      - source: entire-payload
+        # name: line_items
+        envname: WEBHOOK_PAYLOAD                                                                   
+      trigger-rule:
+        and:
+          - match:
+              type: payload-hmac-sha256
+              secret: '{{ getenv "HOOK_SECRET" | js }}'
+              parameter:
+                source: header
+                name: X-WC-Webhook-Signature

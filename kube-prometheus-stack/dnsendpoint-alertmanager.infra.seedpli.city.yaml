@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "alertmanager.infra.${dns_domain}"
+  namespace: kube-prometheus-stack
+spec:
+  endpoints:
+  - dnsName: "alertmanager.infra.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "nginx-ingress.infra.${dns_domain}"

@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-calibreweb-THEME_NAME_HERE
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: calibreweb
+          theme: THEME_NAME_HERE
+          baseUrl: https://theme-park.${dns_domain}

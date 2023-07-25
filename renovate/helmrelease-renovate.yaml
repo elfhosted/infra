@@ -1,0 +1,288 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: renovate
+  namespace: renovate
+spec:
+  chart:
+    spec:
+      chart: renovate
+      version: 35.105.4
+      sourceRef:
+        kind: HelmRepository
+        name: renovate
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: renovate
+  values:
+    global:
+      # -- Additional labels to be set on all renovate resources
+      commonLabels: {}
+
+    # -- Override the name of the chart
+    nameOverride: ''
+    # -- Override the fully qualified app name
+    fullnameOverride: ''
+
+    cronjob:
+      # Every hour
+      schedule: '0/30 * * * *'
+      # -- If it is set to true, all subsequent executions are suspended. This setting does not apply to already started executions.
+      suspend: false
+      # -- Annotations to set on the cronjob
+      annotations: {}
+      # -- Labels to set on the cronjob
+      labels: {}
+      # -- "Allow" to allow concurrent runs, "Forbid" to skip new runs if a previous run is still running or "Replace" to replace the previous run
+      concurrencyPolicy: ''
+      # -- Amount of failed jobs to keep in history
+      failedJobsHistoryLimit: ''
+      # -- Amount of completed jobs to keep in history
+      successfulJobsHistoryLimit: ''
+      # -- Set to Never to restart the job when the pod fails or to OnFailure to restart when a container fails
+      jobRestartPolicy: Never
+      # -- Time to keep the job after it finished before automatically deleting it
+      ttlSecondsAfterFinished: ''
+      # -- Deadline for the job to finish
+      activeDeadlineSeconds: ''
+      # -- Number of times to retry running the pod before considering the job as being failed
+      jobBackoffLimit: ''
+      # -- Deadline to start the job, skips execution if job misses it's configured deadline
+      startingDeadlineSeconds: ''
+      # -- Additional initContainers that can be executed before renovate
+      initContainers: []
+      # initContainers:
+      # - name: INIT_CONTAINER_NAME
+      #   image: INIT_CONTAINER_IMAGE
+
+      # -- Prepend shell commands before renovate runs
+      preCommand: ''
+      # preCommand: |
+      #   echo hello
+      #   echo world
+
+      # -- Append shell commands after renovate runs
+      postCommand: ''
+      # postCommand: |
+      #   echo hello
+      #   echo world
+
+    pod:
+      # -- Annotations to set on the pod
+      annotations: {}
+      # -- Labels to set on the pod
+      labels: {}
+
+    image:
+      # -- Repository to pull renovate image from
+      repository: renovate/renovate
+      # -- Renovate image tag to pull
+      tag: 35.105.4
+      # -- "IfNotPresent" to pull the image if no image with the specified tag exists on the node, "Always" to always pull the image or "Never" to try and use pre-pulled images
+      pullPolicy: IfNotPresent
+
+    # -- Add `-slim` suffix to image tag and `binarySource=install`
+    slim: false
+
+    # -- Secret to use to pull the image from the repository
+    imagePullSecrets: {}
+
+    renovate:
+      # -- Custom exiting global renovate config
+      existingConfigFile: ''
+      # -- Inline global renovate config.json
+      # config: ''
+      # See https://docs.renovatebot.com/self-hosted-configuration
+      config: |
+        {
+          "platform": "github",
+          "repositories": ["geek-cookbook/elfhosted-charts","geek-cookbook/elfhosted-infra"],
+          "dryRun": false,
+          "printConfig": false,
+          "autodiscoverFilter": ["geek-cookbook/elfhosted-charts","geek-cookbook/elfhosted-infra"],
+          "allowedPostUpgradeCommands": ["./scripts/bump-myprecious.sh"]
+        }
+
+      # -- Renovate Container-level security-context
+      securityContext: {}
+
+      # -- Options related to persistence
+      persistence:
+        cache:
+          # -- Allow the cache to persist between runs
+          enabled: true
+          # -- Storage class of the cache PVC
+          storageClass: "ceph-filesystem"
+          # -- Storage size of the cache PVC
+          storageSize: "10Gi"
+
+    ssh_config:
+      # -- Whether to enable the use and creation of a secret containing .ssh files
+      enabled: false
+
+      # Provide .ssh config file contents
+      # -- Contents of the id_rsa file
+      id_rsa: ''
+      # -- Contents of the id_rsa_pub file
+      id_rsa_pub: ''
+      # -- Contents of the config file
+      config: ''
+
+      # or provide the name of an existing secret to be read instead.
+      # -- Name of the existing secret containing a valid .ssh configuration
+      existingSecret: ''
+
+    # -- Environment variables that should be referenced from a k8s secret, cannot be used when existingSecret is set
+    secrets: {}
+    # or provide the name of an existing secret to be read instead.
+    existingSecret: 'renovate-config'
+
+    dind:
+      # -- Enable dind sidecar usage?
+      enabled: false
+      slim:
+        # -- Do not add `-slim` suffix to image tag when using dind
+        enabled: true
+      image:
+        # -- Repository to pull dind image from
+        repository: docker
+        # -- dind image tag to pull
+        tag: 24.0.2-dind
+        # -- "IfNotPresent" to pull the image if no image with the specified tag exists on the node, "Always" to always pull the image or "Never" to try and use pre-pulled images
+        pullPolicy: IfNotPresent
+
+      # -- DinD Container-level security-context. Privileged is needed for DinD, it will not work without!
+      securityContext:
+        privileged: true
+
+    # -- Additional configmaps. A generated configMap name is: "renovate.fullname" + "extra" + name(below) e.g. renovate-netrc-config
+    extraConfigmaps: []
+    # extraConfigmaps:
+    #   - name: netrc-config
+    #     data:
+    #       .netrc: |-
+    #         machine gitlab.example.com
+    #         login gitlab-ci-token
+    #         password some-pass
+    #   - name: yet-another-config
+    #     data:
+    #       ya-config.yaml: |-
+    #         "key"="value"
+    #         "key1"="value1"
+
+    # -- Additional volumes to the pod
+    extraVolumes: []
+    # extraVolumes:
+    #   - name: netrc-config
+    #     configMap:
+    #       name: renovate-extra-netrc-config
+
+    # -- Additional volumeMounts to the container
+    extraVolumeMounts: []
+    # extraVolumeMounts:
+    #   - name: netrc-config
+    #     mountPath: /home/ubuntu/.netrc
+    #     subPath: .netrc
+
+    # -- Additional containers to the pod
+    extraContainers: []
+    # extraContainers:
+    #   - name: vault-agent
+    #     image: vault:1.6.2
+    #     args:
+    #     - agent
+    #     - -config
+    #     - /vault/config/config.hcl
+    #     env:
+    #     - name: VAULT_ADDR
+    #       value: https://vault:8200
+    #     - name: VAULT_SKIP_VERIFY
+    #       value: "false"
+    #     - name: VAULT_CACERT
+    #       value: /vault/tls/ca.crt
+
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      # Annotations to add to the service account
+      annotations: {}
+      # -- The name of the service account to use
+      # If not set and create is true, a name is generated using the fullname template
+      name: ''
+
+    # -- Specify resource limits and requests for the renovate container
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #  cpu: 100m
+      #  memory: 128Mi
+      # requests:
+      #  cpu: 100m
+      #  memory: 128Mi
+
+    # -- Environment variables to add from existing secrets/configmaps. Uses the keys as variable name
+    envFrom: []
+    # envFrom:
+    #   - secretRef:
+    #     name: env-secrets
+    #   - configMapRef:
+    #     name: env-configmap
+
+    env:
+      RENOVATE_AUTODISCOVER: true
+      RENOVATE_DETECT_HOST_RULES_FROM_ENV: true # refer to https://docs.renovatebot.com/self-hosted-configuration/#detecthostrulesfromenv for ghcr.io login
+      LOG_LEVEL: debug
+
+    # -- Additional env. Helpful too if you want to use anything other than a `value` source.
+    envList: []
+    # envList:
+    #   - name: POD_NAME
+    #     valueFrom:
+    #       fieldRef:
+    #         fieldPath: metadata.name
+
+    redis:
+      # Configuration for a Redis subchart. Additional documentation at
+      # https://github.com/bitnami/charts/tree/master/bitnami/redis
+
+      # -- Enable the Redis subchart?
+      enabled: false
+
+      # -- Override the prefix of the redisHost
+      nameOverride: ''
+
+      # -- Disable replication by default
+      architecture: standalone
+
+      auth:
+        # -- Don't require a password by default
+        enabled: false
+
+      # -- Override Kubernetes version for redis chart
+      kubeVersion: ''
+
+    # Override APIVersions
+    # If you want to template helm charts but cannot access k8s API server
+    # you can set api versions here
+    apiVersionOverrides:
+      # -- String to override apiVersion of cronjob rendered by this helm chart
+      cronjob: ''
+
+    # -- Override hostname resolution
+    hostAliases: []
+    # See: https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
+    # hostAliases:
+    #   - ip: "your-ip"
+    #     hostnames:
+    #       - "your-hostname"
+
+    # -- Pod-level security-context
+    securityContext:
+      fsGroup: 1000
+
+    # -- Select the node using labels to specify where the cronjob pod should run on
+    nodeSelector: {}

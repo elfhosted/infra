@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-vars
+  namespace: cluster-vars
+  annotations:
+    replicator.v1.mittwald.de/replicate-to: "*"
+data:
+  dns_domain: ci-elfhosted.com
+  cluster_nic_class_c: 192.168.41
+  traefik_ingress_dns_ip: 192.168.41.101

@@ -1,0 +1,7 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: cluster-canary
+value: -1
+globalDefault: false
+description: "Used for services which we _want_ to be evicted to indicate contention"

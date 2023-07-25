@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "wildcard.health.${dns_domain}"
+  namespace: dnsendpoints
+spec:
+  endpoints:
+  - dnsName: "*.health.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "traefik-ingress.${dns_domain}"     

@@ -1,0 +1,12 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-lidarr-plex
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: lidarr
+          theme: plex
+          baseUrl: https://theme-park.${dns_domain}
+     
