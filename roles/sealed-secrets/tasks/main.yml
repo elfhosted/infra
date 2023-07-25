@@ -1,0 +1,35 @@
+- name: "Create temporary directory for storing decryption keys prior to insertion"
+  tempfile:
+    state: directory
+    suffix: temp
+  register: certdir
+
+- name: stage the decryption cert
+  copy:
+    dest: "{{ certdir.path }}/cert.pem"
+    content: "{{ sealed_secrets_cert }}"  
+
+- name: stage the decryption key
+  copy:
+    dest: "{{ certdir.path }}/key.pem"
+    content: "{{ sealed_secrets_key }}"    
+
+- name: create namespace for sealed-secrets
+  shell: |
+    kubectl create ns sealed-secrets --dry-run=client -o yaml | \
+      kubectl apply -f - 
+
+- name: create secret for sealed certs decryption
+  shell: |
+    kubectl -n sealed-secrets create secret tls sealed-secrets-elfhosted-expires-2033 \    
+      --cert={{ certdir.path }}/cert.pem --key={{ certdir.path }}/key.pem --dry-run=client -o yaml | \
+      kubectl apply -f -  
+
+- name: label common decryption keypair for sealed-secrets-controller to consume
+  shell: |
+    kubectl -n sealed-secrets label secret sealed-secrets-elfhosted-expires-2033 sealedsecrets.bitnami.com/sealed-secrets-key=active --overwrite
+
+- name: "Remove temporary directories 🗑"
+  file:
+    path: "{{ certdir.path }}"
+    state: absent

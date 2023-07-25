@@ -1,0 +1,51 @@
+# do these as root
+
+- block:
+
+  - name: "create temporary LOCAL directory for per-cluster sealed secret sealing cert"
+    tempfile:
+      state: directory
+      suffix: temp
+    register: kubeconfig_dir
+
+  - name: get kubeconfig from master[0]
+    fetch: 
+      src: /etc/rancher/k3s/k3s.yaml
+      dest: "{{ kubeconfig_dir.path }}/kubeconfig"
+      flat: yes
+    become: yes
+    delegate_to: "{{ groups['k3s_servers'][0] }}"
+
+  - name: ensure .kube/config exists
+    file:
+      path: .kube
+      state: directory
+
+  - name: write kubeconfig to .kube/config
+    copy:
+      src: "{{ kubeconfig_dir.path }}/kubeconfig"
+      dest: .kube/config
+      mode: 0600
+
+  - name: replace 127.0.0.1 in kubeconfig with k8s API IP (provided by load balancer or haproxy)
+    shell: sed -i 's/127.0.0.1/{{ k8s_api_ip }}/' .kube/config
+
+  - name: get latest kubectl
+    become: yes
+    shell: |
+      cd /tmp
+      curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/{{ host_arch }}/kubectl"
+      install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      rm kubectl
+
+  - name: setup kubectl/flux auto-completion
+    blockinfile:
+      path: .bashrc
+      block: |
+        source <(kubectl completion bash)
+        source <(flux completion bash)
+        alias k=kubectl
+        alias f=flux
+        complete -F __start_kubectl k
+        complete -F __start_flux f
+    

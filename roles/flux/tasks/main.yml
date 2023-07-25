@@ -1,0 +1,72 @@
+- name: "Create temporary directory for cli download"
+  tempfile:
+    state: directory
+    suffix: temp
+  register: tempdir  
+  
+- name: Download flux CLI v{{ packages.flux.version }}
+  get_url:
+    url: "https://github.com/fluxcd/flux2/releases/download/v{{ packages.flux.version }}/flux_{{ packages.flux.version }}_linux_{{ host_arch }}.tar.gz"
+    dest: "{{ tempdir.path }}"
+
+- name: Unzip /{{ tempdir.path }}/flux_{{ packages.flux.version }}_linux_{{ host_arch }}.tar.gz
+  become: true
+  unarchive:
+    src: "{{ tempdir.path }}/flux_{{ packages.flux.version }}_linux_{{ host_arch }}.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: "Clean up temporary directory"
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent        
+
+# - name: get current git branch (flux will sync with this branch)
+#   command: git branch --show-current
+#   delegate_to: localhost
+#   become: no
+#   register: current_branch
+
+# - name: hard-coded for CI for now
+#   set_var: 
+#     current_branch: ci
+
+- name: Install flux components
+  shell: flux install \
+    --version=v{{ packages.flux.version }} \
+    --toleration-keys node-role.kubernetes.io/control-plane
+  ignore_errors: true
+
+# # We create the flux-system source here becasue it avoids us having to store credentials in the flux repo
+- name: add flux-system git source
+  shell: |
+    flux create source git flux-system \
+    --verbose \
+    --branch={{ flux_repo_branch }} \
+    --interval=15m \
+    --timeout=5m \
+    --url={{ github_flux_repo }} \
+    --username={{ github_flux_username }} \
+    --password={{ github_flux_password }}
+
+# Add kustomization pointing to our primary dependencies, which our kube-cluster kustomization below, depends on:
+- name: add flux-system kustomization
+  shell: |
+    flux create kustomization flux-system \
+    --verbose \
+    --path=./bootstrap \
+    --source GitRepository/flux-system \
+    --timeout=5m \  
+    --prune \
+    --interval=15m \
+    --export | kubectl apply -f -
+
+- name: add ci cluster-vars
+  shell: |
+    flux create kustomization cluster-vars \
+    --source=GitRepository/flux-system \
+    --path=./cluster-vars/{{ dns_domain }} \
+    --depends-on=flux-system \
+    --prune=true \
+    --interval=60m \
+    --export | kubectl apply -f -

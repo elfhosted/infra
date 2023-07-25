@@ -1,0 +1,68 @@
+- name: install necessary packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+    - unattended-upgrades
+    - tuned
+    - nfs-common
+    
+- name: Allow admin SSH sources to this host
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+    src: '{{ item }}'
+    state: enabled
+  loop: "{{ firewall.admin_source }}"
+
+- name: Allow any incoming traffic in the cluster range
+  ufw:
+    direction: in
+    rule: "allow"
+    interface: "{{ cluster_nic }}"
+
+- name: Allow any incoming traffic from the cluster for host-network exposed services
+  ufw:
+    direction: in
+    rule: "allow"
+    src: "10.2.0.0/15"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "10250", proto: "tcp" } # kubelet metrics
+    - { port: "9100", proto: "tcp" }  # node-exporter  
+    - { port: "6443", proto: "tcp" }  # k8s-api    
+    - { port: "8080", proto: "tcp" }  # kured
+    - { port: "7472", proto: "tcp" }  # metallb 
+
+- name: Allow any incoming traffic into the ceph cluster network
+  ufw:
+    direction: in
+    rule: "allow"
+    src: 10.0.44.0/24
+
+- name: Set tuned profile to throughput-performance
+  command: tuned-adm profile throughput-performance
+
+- name: Change various sysctl-settings
+  sysctl:
+    name: '{{ item.key }}'
+    value: '{{ item.value }}'
+    sysctl_set: yes
+    state: present
+    reload: yes
+    ignoreerrors: yes
+  with_dict: '{{ sysctl_config }}'
+
+- name: Disable swap for current session
+  command: swapoff -a
+  become: true
+
+- name: Disable swap permanently, persist reboots
+  replace:
+    path: /etc/fstab
+    regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
+    replace: '#\1\2\3swap\4'
+    backup: yes  

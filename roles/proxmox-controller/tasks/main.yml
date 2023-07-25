@@ -1,0 +1,55 @@
+# Run these locally
+- name: Prepare terraform plan locally
+  delegate_to: localhost
+  become: no
+  block:
+
+  - name: Create directories for terraform plan
+    file:
+      name: "{{ terraform_dir }}-controller"
+      state: directory
+
+  - name: Create terraform plan for controller
+    template:
+      src: ../proxmox/templates/elf_node.tf.j2
+      dest: "{{ terraform_dir }}-controller/{{ inventory_hostname_short }}.tf"
+    when: "inventory_hostname in groups['controllers']" 
+    with_items: "{{ groups['controllers'] }}"
+    
+  - name: Actually create VMs with terraform (can only run once)
+    when: "inventory_hostname in groups['proxmox_servers']"
+    run_once: true 
+    block:
+
+    - name: Create terraform plan for terraform provider
+      template:
+        src: main.tf.j2
+        dest: "{{ terraform_dir }}-controller/main.tf"
+
+    - name: Run terraform init
+      command: terraform init -upgrade
+      args:
+        chdir: "{{ terraform_dir }}-controller"
+
+    - name: Destroy existing terraform resources 🗑
+      command: terraform destroy -auto-approve
+      args:
+        chdir: "{{ terraform_dir }}-controller"
+      when: 
+      - destroy_terraform_resources is defined
+
+    - name: Run terraform plan
+      command: terraform plan       
+      args:
+        chdir: "{{ terraform_dir }}-controller"
+
+    - name: Run terraform apply
+      command: terraform apply -auto-approve -parallelism=3
+      args:
+        chdir: "{{ terraform_dir }}-controller"
+
+- name: Don't exit this play until the controller is reachable (it might still be booting up)
+  wait_for_connection: 
+    delay: 60
+    timeout: 300
+  when: "inventory_hostname in groups['controllers']" 

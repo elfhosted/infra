@@ -1,0 +1,62 @@
+---
+# tasks file for k3s_agents
+
+- name: get node token
+  command: cat /var/lib/rancher/k3s/server/node-token
+  register: node_token_result
+  become: yes
+  delegate_to: "{{ groups['k3s_servers'][0] }}"
+
+- set_fact:
+    node_token: "{{ node_token_result.stdout }}"
+    master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
+
+- name: ensure /etc/rancher/ exists
+  file:
+    path: /etc/rancher/k3s
+    state: directory
+
+- name: prepare kubelet extra args
+  copy:
+    src: kubelet-server.config
+    dest: /etc/rancher/k3s/kubelet-server.config
+
+- name: install k3s on workers
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    K3S_URL=https://{{ master_ip }}:6443 
+    K3S_TOKEN={{ node_token }}
+    INSTALL_K3S_EXEC="agent \
+      --flannel-iface={{ cluster_nic }} \
+      --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
+      --prefer-bundled-bin" \
+    sh -
+  # args:
+    # creates: /usr/local/bin/k3s
+  register: workers_install_result
+  become: yes
+  when: "inventory_hostname in groups['k3s_agents']"  
+
+- name: install k3s on dwarves (tainted)
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    K3S_URL=https://{{ master_ip }}:6443 
+    K3S_TOKEN={{ node_token }}
+    INSTALL_K3S_EXEC="agent \
+      --flannel-iface={{ cluster_nic }} \
+      --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
+      --prefer-bundled-bin \
+      --node-taint node-role.elfhosted.com/storage=true:NoSchedule \
+      --node-label node-role.elfhosted.com/storage=true" \
+    sh -
+  # args:
+    # creates: /usr/local/bin/k3s
+  register: workers_install_result
+  become: yes
+  when: "inventory_hostname in groups['k3s_dwarves']"    
+
+- name: results of installation
+  debug: var=workers_install_result.stdout_lines
+  when: 
+    - workers_install_result is changed
+    - "inventory_hostname in groups['k3s_agents']"  

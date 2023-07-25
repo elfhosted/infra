@@ -1,0 +1,32 @@
+- name: Prepare cilium cluster values
+  template:
+    src: cilium-values.yaml.j2
+    dest: /tmp/cilium-values.yaml
+
+- become: true
+  block:
+
+  - name: Install Cilium CLI from https://github.com/cilium/cilium-cli/releases/download/{{ packages.cilium.cli.version }}/cilium-linux-{{ host_arch }}.tar.gz
+    unarchive:
+      src: "https://github.com/cilium/cilium-cli/releases/download/{{ packages.cilium.cli.version }}/cilium-linux-{{ host_arch }}.tar.gz"
+      dest: "/usr/local/bin/"
+      remote_src: yes
+      extra_opts: [--strip-components=1]
+
+  - name: Download and unpack helm-{{ packages.helm.version }}-linux-{{ host_arch }}.tar.gz
+    unarchive:
+      src: "https://get.helm.sh/helm-{{ packages.helm.version }}-linux-{{ host_arch }}.tar.gz"
+      dest: "/usr/bin/"
+      remote_src: yes
+      extra_opts: [--strip-components=1]
+
+- name: Add helm repo
+  command: helm repo add cilium https://helm.cilium.io/
+
+- name: Install cilium via helm (without servicemonitors since we don't have the CRD yet)
+  command: helm upgrade --install cilium cilium/cilium --version {{ packages.cilium.version }} \
+    --namespace kube-system \
+    -f /tmp/cilium-values.yaml \
+    --set hubble.metrics.serviceMonitor.enabled=false \
+    --set operator.prometheus.serviceMonitor.enabled=false \
+    --set prometheus.serviceMonitor.enabled=false

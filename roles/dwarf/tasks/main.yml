@@ -1,0 +1,6 @@
+one-time
+hdparm -W0 /dev/sd*
+
+permanent
+edit /etc/hdparm and set
+write_cache = off

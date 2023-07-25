@@ -1,0 +1,24 @@
+
+[prod:children]
+k3s_servers
+k3s_agents
+k3s_dwarves
+controllers
+
+[k3s_servers]
+fairy01     ansible_host=10.0.42.11 cluster_nic=enp0s31f6.4000
+fairy02     ansible_host=10.0.42.12 cluster_nic=enp0s31f6.4000
+fairy03     ansible_host=10.0.42.13 cluster_nic=enp0s31f6.4000
+
+[k3s_agents]
+elf01        ansible_host=10.0.42.21 cluster_nic=eno1.4000 extra_longhorn_disk=/dev/nvme1n1
+elf02        ansible_host=10.0.42.22 cluster_nic=eno1.4000
+elf03        ansible_host=10.0.42.23 cluster_nic=eno1.4000
+
+[k3s_dwarves]
+dwarf01      ansible_host=10.0.42.81 cluster_nic=enp3s0.4000
+dwarf02      ansible_host=10.0.42.82 cluster_nic=eno1.4000
+dwarf03      ansible_host=10.0.42.83 cluster_nic=enp3s0.4000
+
+[controllers]
+tinkerbell   ansible_host=tinkerbell-public.elfhosted.com
