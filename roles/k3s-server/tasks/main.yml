@@ -41,6 +41,7 @@
       --disable-kube-proxy \
       --disable traefik \
       --disable servicelb \
+      --disable local-storage \
       --kube-controller-manager-arg=node-cidr-mask-size=22 \
       --kubelet-arg=max-pods=500 \
       --node-taint node-role.kubernetes.io/control-plane=true:NoSchedule \
