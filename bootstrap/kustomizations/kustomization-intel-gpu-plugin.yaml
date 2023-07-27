@@ -10,7 +10,7 @@ spec:
   timeout: 2m # if not set, this defaults to interval duration, which is 1h
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: infra
   healthChecks:
     - apiVersion: apps/v1
       kind: DaemonSet
