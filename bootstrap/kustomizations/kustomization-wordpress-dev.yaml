@@ -13,7 +13,7 @@ spec:
   - name: rook-ceph-cluster  
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: infra
   validation: server
   healthChecks:
     - apiVersion: apps/v1

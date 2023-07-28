@@ -430,7 +430,15 @@ spec:
           - name: dwarf02
             deviceFilter: "." 
           - name: dwarf03
-            deviceFilter: "."                        
+            deviceFilter: "."   
+
+          # and the CI nodes...
+          - name: hobbit01
+            deviceFilter: "."   
+          - name: hobbit02
+            deviceFilter: "."     
+          - name: hobbit03
+            deviceFilter: "."                                                          
 
       # The section for configuring management of daemon disruptions during upgrade or fencing.
       disruptionManagement:
@@ -505,7 +513,7 @@ spec:
         storageClass:
           enabled: true
           name: ceph-block
-          isDefault: false
+          isDefault: true
           reclaimPolicy: Delete
           allowVolumeExpansion: true
           volumeBindingMode: "Immediate"
