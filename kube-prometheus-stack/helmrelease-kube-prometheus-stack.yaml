@@ -167,7 +167,8 @@ spec:
       runbookUrl: "https://runbooks.prometheus-operator.dev/runbooks"
 
       ## Disabled PrometheusRule alerts
-      disabled: {}
+      disabled:
+        KubeSceduler: true
       # KubeAPIDown: true
       # NodeRAIDDegraded: true
 
