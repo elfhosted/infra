@@ -761,7 +761,7 @@ spec:
       accessMode: ReadWriteOnce
       ## @param persistence.size Persistent Volume size
       ##
-      size: 1Gi
+      size: 10Gi
       ## @param persistence.dataSource Custom PVC data source
       ##
       dataSource: {}
