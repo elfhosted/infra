@@ -29,6 +29,16 @@
 #    master_ip: "{{ hostvars[groups['k3s_servers'][0]].ansible_host }}"
     master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
 
+- name: ensure /etc/rancher/k3s exists
+  file:
+    path: /etc/rancher/k3s
+    state: directory
+
+- name: copy k3s config.yaml to /etc/rancher/k3s
+  template:
+    src: k3s-config.yaml.j2
+    dest: /etc/rancher/k3s/config.yaml
+
 - name: install k3s on master[1-n]
   shell: >
     curl -sfL https://get.k3s.io | 
@@ -47,8 +57,8 @@
       --node-taint node-role.kubernetes.io/control-plane=true:NoSchedule \
       --prefer-bundled-bin" \
     sh -
-  # args:
-  #   creates: /usr/local/bin/k3s
+  args:
+    creates: /usr/local/bin/k3s
   when: "groups['k3s_servers'][0] != inventory_hostname"
 
 - name: setup kubectl auto-completion

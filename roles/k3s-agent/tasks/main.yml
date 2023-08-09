@@ -55,6 +55,24 @@
   become: yes
   when: "inventory_hostname in groups['k3s_dwarves']"    
 
+- name: install k3s on egress-gateways (tainted)
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    K3S_URL=https://{{ master_ip }}:6443 
+    K3S_TOKEN={{ node_token }}
+    INSTALL_K3S_EXEC="agent \
+      --flannel-iface={{ cluster_nic }} \
+      --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
+      --prefer-bundled-bin \
+      --node-taint node-role.elfhosted.com/egressgateway=true:NoSchedule \
+      --node-label node-role.elfhosted.com/egressgateway=true" \
+    sh -
+  # args:
+    # creates: /usr/local/bin/k3s
+  register: workers_install_result
+  become: yes
+  when: "inventory_hostname in groups['egress_gateways']"      
+
 - name: results of installation
   debug: var=workers_install_result.stdout_lines
   when: 
