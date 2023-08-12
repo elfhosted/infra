@@ -31,7 +31,7 @@
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
   - { import_role: { name: flux }, tags: [ flux ] }  
 
-- hosts: k3s_dwarves,k3s_agents,egress_gateways
+- hosts: k3s_dwarves,k3s_agents
   gather_facts: no
   become: yes
 
