@@ -1435,10 +1435,10 @@ spec:
         ## Requires proper certs (not self-signed) and delegated authentication/authorization checks.
         ## If null or unset, the value is determined dynamically based on target Kubernetes version.
         ##
-        https: false
+        https: true
 
         # Skip TLS certificate validation when scraping
-        insecureSkipVerify: null
+        insecureSkipVerify: true
 
         # Name of the server to use when validating TLS certificate
         serverName: null
@@ -1763,10 +1763,10 @@ spec:
         ## Requires proper certs (not self-signed) and delegated authentication/authorization checks.
         ## If null or unset, the value is determined dynamically based on target Kubernetes version.
         ##
-        https: null
+        https: true
 
         ## Skip TLS certificate validation when scraping
-        insecureSkipVerify: null
+        insecureSkipVerify: true
 
         ## Name of the server to use when validating TLS certificate
         serverName: null
@@ -1802,10 +1802,10 @@ spec:
 
       ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: []
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       service:
         enabled: true

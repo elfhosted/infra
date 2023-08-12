@@ -40,7 +40,7 @@
 # # We create the flux-system source here becasue it avoids us having to store credentials in the flux repo
 - name: add flux-system git source
   shell: |
-    flux create source git flux-system \
+    flux create source git infra \
     --verbose \
     --branch={{ flux_repo_branch }} \
     --interval=15m \
@@ -52,10 +52,10 @@
 # Add kustomization pointing to our primary dependencies, which our kube-cluster kustomization below, depends on:
 - name: add flux-system kustomization
   shell: |
-    flux create kustomization flux-system \
+    flux create kustomization infra \
     --verbose \
     --path=./bootstrap \
-    --source GitRepository/flux-system \
+    --source GitRepository/infra \
     --timeout=5m \  
     --prune \
     --interval=15m \
@@ -64,9 +64,9 @@
 - name: add ci cluster-vars
   shell: |
     flux create kustomization cluster-vars \
-    --source=GitRepository/flux-system \
+    --source=GitRepository/infra \
     --path=./cluster-vars/{{ dns_domain }} \
-    --depends-on=flux-system \
+    --depends-on=infra \
     --prune=true \
     --interval=60m \
     --export | kubectl apply -f -
