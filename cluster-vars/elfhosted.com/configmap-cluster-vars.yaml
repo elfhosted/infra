@@ -9,7 +9,6 @@ data:
   dns_domain: elfhosted.com
   cluster_nic_class_c: 10.0.42
   traefik_ingress_dns_ip: 142.132.247.26
-  k3s_server_endpoints:
-  - 10.0.42.11
-  - 10.0.42.12
-  - 10.0.42.13  
+  k3s_server_endpoint_1: 10.0.42.11
+  k3s_server_endpoint_2: 10.0.42.12
+  k3s_server_endpoint_3: 10.0.42.13

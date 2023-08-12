@@ -1384,10 +1384,10 @@ spec:
 
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: ${k3s_server_endpoints}
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       ## If using kubeControllerManager.endpoints only the port and targetPort are used
       ##
@@ -1621,10 +1621,10 @@ spec:
 
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: ${k3s_server_endpoints}
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
@@ -1713,10 +1713,10 @@ spec:
 
       ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: ${k3s_server_endpoints}
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       ## If using kubeScheduler.endpoints only the port and targetPort are used
       ##
