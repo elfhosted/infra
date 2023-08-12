@@ -1798,14 +1798,11 @@ spec:
     ## Component scraping kube proxy
     ##
     kubeProxy:
-      enabled: true
+      enabled: false # we are kube-proxy-less via Cilium
 
       ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: 
-      - ${k3s_server_endpoint_1}
-      - ${k3s_server_endpoint_2}
-      - ${k3s_server_endpoint_3}
+      endpoints: []
 
       service:
         enabled: true
