@@ -9,3 +9,7 @@ data:
   dns_domain: ci-elfhosted.com
   cluster_nic_class_c: 192.168.41
   traefik_ingress_dns_ip: 192.168.41.101
+  k3s_server_endpoints:
+  - 10.0.42.11
+  - 10.0.42.12
+  - 10.0.42.13    
