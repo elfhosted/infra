@@ -12,4 +12,5 @@ data:
   k3s_server_endpoints:
   - 10.0.42.11
   - 10.0.42.12
-  - 10.0.42.13    
+  - 10.0.42.13
+  test: batman
