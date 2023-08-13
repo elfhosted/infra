@@ -4,4 +4,4 @@ k8s_api_ip: 10.0.40.4
 flux_repo_branch: main
 
 firewall:
-  admin_source: {{ vault_admin_source }}
+  admin_source: "{{ vault_admin_source }}"

@@ -32,6 +32,9 @@
     proto: "{{ item.proto }}"
   with_items:
     - { port: "10250", proto: "tcp" } # kubelet metrics
+    - { port: "10257", proto: "tcp" } # kube-controller metrics
+    - { port: "10259", proto: "tcp" } # kube-scheduler metrics
+    - { port: "2381", proto: "tcp" }  # k3s etcd
     - { port: "9100", proto: "tcp" }  # node-exporter  
     - { port: "6443", proto: "tcp" }  # k8s-api    
     - { port: "8080", proto: "tcp" }  # kured

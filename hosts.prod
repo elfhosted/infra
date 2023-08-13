@@ -4,6 +4,7 @@ k3s_servers
 k3s_agents
 k3s_dwarves
 controllers
+egress_gateways
 
 [k3s_servers]
 fairy01     ansible_host=10.0.42.11 cluster_nic=enp0s31f6.4000
@@ -22,3 +23,6 @@ dwarf03      ansible_host=10.0.42.83 cluster_nic=enp3s0.4000
 
 [controllers]
 tinkerbell   ansible_host=tinkerbell-public.elfhosted.com
+
+[egress_gateways]
+tinkerbell   ansible_host=tinkerbell-tailscale.elfhosted.com cluster_nic=enp7s0

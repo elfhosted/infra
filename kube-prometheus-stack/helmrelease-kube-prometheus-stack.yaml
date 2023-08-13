@@ -1380,14 +1380,14 @@ spec:
     ## Component scraping the kube controller manager
     ##
     kubeControllerManager:
-      enabled: false
+      enabled: true
 
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: []
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       ## If using kubeControllerManager.endpoints only the port and targetPort are used
       ##
@@ -1435,10 +1435,10 @@ spec:
         ## Requires proper certs (not self-signed) and delegated authentication/authorization checks.
         ## If null or unset, the value is determined dynamically based on target Kubernetes version.
         ##
-        https: false
+        https: true
 
         # Skip TLS certificate validation when scraping
-        insecureSkipVerify: null
+        insecureSkipVerify: true
 
         # Name of the server to use when validating TLS certificate
         serverName: null
@@ -1621,10 +1621,10 @@ spec:
 
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: []
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
       ##
@@ -1713,10 +1713,10 @@ spec:
 
       ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
       ##
-      endpoints: []
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
+      endpoints: 
+      - ${k3s_server_endpoint_1}
+      - ${k3s_server_endpoint_2}
+      - ${k3s_server_endpoint_3}
 
       ## If using kubeScheduler.endpoints only the port and targetPort are used
       ##
@@ -1763,10 +1763,10 @@ spec:
         ## Requires proper certs (not self-signed) and delegated authentication/authorization checks.
         ## If null or unset, the value is determined dynamically based on target Kubernetes version.
         ##
-        https: null
+        https: true
 
         ## Skip TLS certificate validation when scraping
-        insecureSkipVerify: null
+        insecureSkipVerify: true
 
         ## Name of the server to use when validating TLS certificate
         serverName: null
@@ -1798,14 +1798,11 @@ spec:
     ## Component scraping kube proxy
     ##
     kubeProxy:
-      enabled: true
+      enabled: false # we are kube-proxy-less via Cilium
 
       ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
       ##
       endpoints: []
-      # - 10.141.4.22
-      # - 10.141.4.23
-      # - 10.141.4.24
 
       service:
         enabled: true
