@@ -1,0 +1,80 @@
+- name: ensure /etc/kata-containers exists
+  file:
+    path: /etc/kata-containers
+    state: directory
+
+- name: Download and unpack kata-containers {{ packages.kata_containers.version }}
+  unarchive:
+    src: https://github.com/kata-containers/kata-containers/releases/download/{{ packages.kata_containers.version }}/kata-static-{{ packages.kata_containers.version }}-x86_64.tar.xz
+    dest: /
+    remote_src: yes
+
+- name: Create a symbolic link for kata-containers shim
+  ansible.builtin.file:
+    src: /opt/kata/bin/containerd-shim-kata-v2
+    dest: /usr/local/bin/containerd-shim-kata-v2
+    state: link
+
+- name: Copy /var/lib/rancher/k3s/agent/etc/containerd/config.toml to .tmpl
+  copy:
+    src: /var/lib/rancher/k3s/agent/etc/containerd/config.toml
+    dest: /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+    remote_src: true
+
+- name: Copy /opt/kata/share/defaults/kata-containers/configuration.toml to /etc/kata-containers/
+  copy:
+    src: /opt/kata/share/defaults/kata-containers/{{ item }}
+    dest: /etc/kata-containers/{{ item }}
+    remote_src: true
+  with_items:
+  - configuration-fc.toml
+  - configuration-qemu.toml
+  - configuration.toml
+
+- name: Create kata-fc shim
+  copy:
+    dest: /usr/local/bin/containerd-shim-kata-fc-v2
+    content: |
+      #!/bin/bash
+      KATA_CONF_FILE=/etc/kata-containers/configuration-fc.toml /usr/local/bin/containerd-shim-kata-v2 $@
+    mode: 0755
+
+- name: Insert/Update kata runtime into /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+  ansible.builtin.blockinfile:
+    path: /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+    block: |
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata]
+        runtime_type = "io.containerd.kata.v2"
+
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata.options]
+        ConfigPath = "/etc/kata-containers/configuration.toml"
+
+      # And for firecracker
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata-fc]
+        runtime_type = "io.containerd.kata-fc.v2"
+        
+      # Explicitly for pods which don't need persistence
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata-without-host-devices]
+        runtime_type = "io.containerd.kata.v2"
+        privileged_without_host_devices = true
+
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata-without-host-devices.options]
+          ConfigPath = "/etc/kata-containers/configuration.toml"
+
+      [plugins."io.containerd.snapshotter.v1.devmapper"]
+        pool_name = "devpool"
+        root_path = "/var/lib/containerd/devmapper"
+        base_image_size = "10GB"
+        discard_blocks = true
+
+  notify: restart_k3s_agent
+
+- name: Copy setup-devmapper.sh
+  copy:
+    src: setup-devmapper.sh
+    dest: /usr/local/sbin/setup-devmapper.sh
+    mode: 0755
+
+- name: Run setup-devmapper.sh
+  command: /usr/local/sbin/setup-devmapper.sh
+  ignore_errors: true
