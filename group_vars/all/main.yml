@@ -8,7 +8,7 @@ packages:
   helm:
     version: v3.12.1
   cilium:
-    version: 1.13.4
+    version: 1.14.0
     cli:
       version: v0.15.0
   kata_containers:
