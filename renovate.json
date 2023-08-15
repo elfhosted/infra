@@ -3,5 +3,6 @@
   "baseBranches": ["ci"],
   "flux": {
     "fileMatch": ["kustomization-.+\\.yaml$", "helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$"]
-  }
+  },
+  "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}"
 }
