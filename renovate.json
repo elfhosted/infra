@@ -5,5 +5,6 @@
     "fileMatch": ["kustomization-.+\\.yaml$", "helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$"]
   },
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
-  "prConcurrentLimit": 50
+  "prConcurrentLimit": 50,
+  "branchConcurrentLimit": 0
 }
