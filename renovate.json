@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "baseBranches": ["ci"],
   "flux": {
-    "fileMatch": ["kustomization-.+\\.yaml$", "helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$"]
+    "fileMatch": ["helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$", "bootstrap/flux-system/gotk-components.yaml$"]
   },
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
   "prHourlyLimit": 0,
