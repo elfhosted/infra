@@ -31,6 +31,13 @@
   - configuration-qemu.toml
   - configuration.toml
 
+- name: Set kata to cgroups v2
+  ansible.builtin.lineinfile:
+    path: /etc/kata-containers/configuration.toml
+    regexp: 'sandbox_cgroup_only='
+    line: 'sandbox_cgroup_only=true'  
+  notify: restart_k3s_agent
+
 - name: Create kata-fc shim
   copy:
     dest: /usr/local/bin/containerd-shim-kata-fc-v2
@@ -38,6 +45,13 @@
       #!/bin/bash
       KATA_CONF_FILE=/etc/kata-containers/configuration-fc.toml /usr/local/bin/containerd-shim-kata-v2 $@
     mode: 0755
+
+- name: Set devmapper to the default snapshotter
+  ansible.builtin.lineinfile:
+    path: /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+    regexp: 'snapshotter ='
+    line: '  snapshotter = "devmapper"'  
+  notify: restart_k3s_agent
 
 - name: Insert/Update kata runtime into /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
   ansible.builtin.blockinfile:

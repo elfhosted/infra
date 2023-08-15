@@ -23,6 +23,9 @@
 - name: Add helm repo
   command: helm repo add cilium https://helm.cilium.io/
 
+- name: Update helm repos
+  command: helm repo update
+
 - name: Install cilium via helm (without servicemonitors since we don't have the CRD yet)
   command: helm upgrade --install cilium cilium/cilium --version {{ packages.cilium.version }} \
     --namespace kube-system \
