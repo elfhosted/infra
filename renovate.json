@@ -4,5 +4,6 @@
   "flux": {
     "fileMatch": ["kustomization-.+\\.yaml$", "helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$"]
   },
-  "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}"
+  "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
+  "prConcurrentLimit": 50
 }
