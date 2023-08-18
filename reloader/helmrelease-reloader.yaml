@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: reloader
-      version: v1.0.26
+      version: v1.0.36
       sourceRef:
         kind: HelmRepository
         name: stakater
@@ -112,10 +112,10 @@ spec:
         labels:
           provider: stakater
           group: com.stakater.platform
-          version: v1.0.24
+          version: v1.0.36
         image:
           name: ghcr.io/stakater/reloader
-          tag: v1.0.24
+          tag: v1.0.36
           pullPolicy: IfNotPresent
         # Support for extra environment variables.
         env:
@@ -297,3 +297,10 @@ spec:
         enabled: true
         # Set the minimum available replicas
         minAvailable: 1
+
+      netpol:
+        enabled: false
+        from: []
+        # - podSelector:
+        #     matchLabels:
+        #       app.kubernetes.io/name: prometheus
