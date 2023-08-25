@@ -1,3 +1,17 @@
+- name: load vsock modules
+  modprobe:
+    name: "{{ item }}"
+  with_items: 
+  - vhost-vsock
+  - vhost-net
+
+- name: add vsock modules to /etc/modules-load.d/vsock.conf
+  copy:
+    dest: /etc/modules-load.d/vsock.conf
+    content: |
+      vhost-vsock
+      vhost-net
+      
 - name: ensure /etc/kata-containers exists
   file:
     path: /etc/kata-containers
@@ -50,7 +64,7 @@
   ansible.builtin.lineinfile:
     path: /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
     regexp: 'snapshotter ='
-    line: '  snapshotter = "devmapper"'  
+    line: '  snapshotter = "overlayfs"'  
   notify: restart_k3s_agent
 
 - name: Insert/Update kata runtime into /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
@@ -75,11 +89,12 @@
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata-without-host-devices.options]
           ConfigPath = "/etc/kata-containers/configuration.toml"
 
-      [plugins."io.containerd.snapshotter.v1.devmapper"]
-        pool_name = "devpool"
-        root_path = "/var/lib/containerd/devmapper"
-        base_image_size = "10GB"
-        discard_blocks = true
+      # not working yet
+      # [plugins."io.containerd.snapshotter.v1.devmapper"]
+      #   pool_name = "devpool"
+      #   root_path = "/var/lib/containerd/devmapper"
+      #   base_image_size = "10GB"
+      #   discard_blocks = true
 
   notify: restart_k3s_agent
 
