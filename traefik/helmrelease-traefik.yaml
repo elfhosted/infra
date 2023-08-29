@@ -231,8 +231,7 @@ spec:
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
         # labelSelector: environment=production,method=traefik
-        namespaces:
-          - error-pages
+        namespaces: [] # need this to work for any namespaces
         # IP used for Kubernetes Ingress endpoints
         publishedService:
           enabled: false

@@ -7,7 +7,8 @@
     - unattended-upgrades
     - tuned
     - nfs-common
-    
+    - iperf3
+
 - name: Allow admin SSH sources to this host
   ufw:
     rule: allow
@@ -16,6 +17,13 @@
     src: '{{ item }}'
     state: enabled
   loop: "{{ firewall.admin_source }}"
+
+- name: Allow port 5201 for occasional iperf testing
+  ufw:
+    rule: allow
+    port: 5201
+    proto: tcp
+    state: enabled
 
 - name: Allow any incoming traffic in the cluster range
   ufw:
