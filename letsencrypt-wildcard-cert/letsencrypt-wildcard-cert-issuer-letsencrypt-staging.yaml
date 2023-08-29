@@ -19,3 +19,6 @@ spec:
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token            
+    - http01:
+        ingress:
+          ingressClassName: traefik            
