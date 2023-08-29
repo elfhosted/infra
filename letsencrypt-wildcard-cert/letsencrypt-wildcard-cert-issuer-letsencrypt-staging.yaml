@@ -19,7 +19,6 @@ spec:
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token            
-    - selector: {} # will this let us use http01 for non-elf domains?
-      http01:
+    - http01:
         ingress:
           ingressClassName: traefik            
