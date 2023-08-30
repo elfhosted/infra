@@ -103,7 +103,8 @@ spec:
         }
 
       # -- Renovate Container-level security-context
-      securityContext: {}
+      securityContext:
+        fsGroupChangePolicy: Always
 
       # -- Options related to persistence
       persistence:
