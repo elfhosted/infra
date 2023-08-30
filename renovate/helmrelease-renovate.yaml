@@ -111,7 +111,7 @@ spec:
           # -- Allow the cache to persist between runs
           enabled: true
           # -- Storage class of the cache PVC
-          storageClass: "ceph-filesystem"
+          storageClass: "ceph-block"
           # -- Storage size of the cache PVC
           storageSize: "10Gi"
 
