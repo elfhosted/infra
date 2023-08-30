@@ -107,14 +107,14 @@ spec:
     hostNetwork: false
 
     metrics:
-      create: true
+      create: false
       namespace: ""
       labels: {}
       interval: 60s
       scrapeTimeout: ""
 
     service:
-      create: true
+      create: false
       port: 8080
       annotations: {}
       name: ""
