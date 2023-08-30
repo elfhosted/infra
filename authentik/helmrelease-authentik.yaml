@@ -293,16 +293,17 @@ spec:
         enabled: false
       image:
         tag: 6.2.10-debian-11-r13
-      resources:
-        limits:
-          # cpu: "500m"
-          memory: "128Mi"
-        requests:
-          cpu: "50m"
-          memory: "64Mi"   
-      persistence:
-        enabled: true
-        storageClass: ceph-block
-        size: 1Gi
-        accessModes:
-          - ReadWriteOnce          
+      master:
+        resources:
+          limits:
+            # cpu: "500m"
+            memory: "128Mi"
+          requests:
+            cpu: "50m"
+            memory: "64Mi"   
+        persistence:
+          enabled: true
+          storageClass: ceph-block
+          size: 1Gi
+          accessModes:
+            - ReadWriteOnce          
