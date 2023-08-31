@@ -110,7 +110,7 @@ spec:
       persistence:
         cache:
           # -- Allow the cache to persist between runs
-          enabled: true
+          enabled: false
           # -- Storage class of the cache PVC
           storageClass: "ceph-block"
           # -- Storage size of the cache PVC
