@@ -1,1 +1,22 @@
-{"fields":[{"name":"","value":":privatebin: [Privatebin](https://docs.elfhosted.com/app/privatebin)\n:uptimekuma: [Uptime Kuma](https://docs.elfhosted.com/app/uptimekuma)\n:seafile: [Seafile](https://docs.elfhosted.com/app/seafile)\n","inline":true},{"name":"","value":":resiliosync: [Resilio Sync](https://docs.elfhosted.com/app/resiliosync)\n:syncthing: [Syncthing](https://docs.elfhosted.com/app/syncthing)\n\n","inline":true},{"name":"","value":":thelounge: [The Lounge](https://docs.elfhosted.com/app/thelounge)\n:vaultwarden: [Vaultwarden](https://docs.elfhosted.com/app/valtwarden)\n:mattermost: [Mattermost](https://docs.elfhosted.com/app/mattermost)","inline":true}],"title":":tools: Tools ","description":"React to this message with the icons of the apps you use, and you'll be tagged in https://discord.com/channels/396055506072109067/1119547206312149072 for important updates / changes to these apps","color":16098851}
+{
+    "fields": [
+        {
+            "name": "",
+            "value": ":privatebin: [Privatebin](https://docs.elfhosted.com/app/privatebin)\n:uptimekuma: [Uptime Kuma](https://docs.elfhosted.com/app/uptimekuma)\n:seafile: [Seafile](https://docs.elfhosted.com/app/seafile)\n",
+            "inline": true
+        },
+        {
+            "name": "",
+            "value": ":resiliosync: [Resilio Sync](https://docs.elfhosted.com/app/resiliosync)\n:syncthing: [Syncthing](https://docs.elfhosted.com/app/syncthing)\n:miniflux: [Miniflux](https://docs.elfhosted.com/app/miniflux)\n\n",
+            "inline": true
+        },
+        {
+            "name": "",
+            "value": ":thelounge: [The Lounge](https://docs.elfhosted.com/app/thelounge)\n:vaultwarden: [Vaultwarden](https://docs.elfhosted.com/app/valtwarden)\n:mattermost: [Mattermost](https://docs.elfhosted.com/app/mattermost)",
+            "inline": true
+        }
+    ],
+    "title": ":tools: Tools ",
+    "description": "React to this message with the icons of the apps you use, and you'll be tagged in https://discord.com/channels/396055506072109067/1119547206312149072 for important updates / changes to these apps",
+    "color": 16098851
+}

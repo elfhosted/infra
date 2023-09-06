@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2023.6.3
+      version: 2023.8.2
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -15,7 +15,6 @@ spec:
   interval: 15m
   timeout: 5m        
   values:
-
     # -- Server replicas
     replicas: 1
     # -- Custom priority class for different treatment by the scheduler
@@ -37,7 +36,7 @@ spec:
 
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.6.1
+      tag: 2023.8.2
       # -- optional container image digest
       digest: ""
       pullPolicy: IfNotPresent
@@ -55,7 +54,7 @@ spec:
       annotations: {}
       labels: {}
       hosts:
-        - host: authentik.infra.elfhosted.com
+        - host: authentik.infra.${dns_domain}
           paths:
             - path: "/"
               pathType: Prefix
@@ -261,7 +260,7 @@ spec:
         accessModes:
           - ReadWriteOnce
       image:
-        tag: 11.19.0-debian-11-r4
+        tag: 15.4.0-debian-11-r0
       resources:
         limits:
           # cpu: "500m"
@@ -284,7 +283,7 @@ spec:
 
       podSecurityContext:
         enabled: true
-        runAsUser: 1001                
+        runAsUser: 1001
     redis:
       # -- enable the bundled bitnami redis chart
       enabled: true
@@ -306,4 +305,4 @@ spec:
           storageClass: ceph-block
           size: 1Gi
           accessModes:
-            - ReadWriteOnce          
+            - ReadWriteOnce

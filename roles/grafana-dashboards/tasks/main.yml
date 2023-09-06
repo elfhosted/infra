@@ -1,0 +1,36 @@
+  - delegate_to: localhost
+    block:
+
+    - name: "Get list of dashboards"
+      find:
+        paths: "roles/grafana-dashboards/files/dashboards/"
+      register: dashboards
+
+    - name: Explicitly specify Prometheus datasource name in dashboards (replacing ${DS_PROMETHEUS})
+      replace:
+        path: "{{ item.path }}"
+        regexp: '\$\{DS_PROMETHEUS\}'
+        replace: Prometheus
+      with_items: "{{ dashboards.files }}"
+
+    - name: Explicitly specify Prometheus datasource name in dashboards (replacing ${DS_LOKI})
+      replace:
+        path: "{{ item.path }}"
+        regexp: '\$\{DS_LOKI\}'
+        replace: loki
+      with_items: "{{ dashboards.files }}"    
+
+    - name: Explicitly specify Prometheus datasource name in dashboards (replacing $datasource)
+      replace:
+        path: "{{ item.path }}"
+        regexp: '\$datasource'
+        replace: Prometheus
+      with_items: "{{ dashboards.files }}"
+
+    - name: Create configmaps from dashboards
+      shell: |
+        kubectl create configmap -n kube-prometheus-stack -o yaml --dry-run=client \
+        {{ item.path | basename | replace('_','-') }} --from-file={{ item.path }} \
+        | kubectl label -f- --dry-run=client -o yaml --local grafana_dashboard=1 \
+        > kube-prometheus-stack/configmap-dashboard-{{ item.path | basename | replace('_','-') }}.yaml
+      with_items: "{{ dashboards.files }}"
