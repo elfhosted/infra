@@ -1,9 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: nimbolus
-  namespace: flux-system
-spec:
-  interval: 15m
-  url: https://nimbolus.github.io/helm-charts
