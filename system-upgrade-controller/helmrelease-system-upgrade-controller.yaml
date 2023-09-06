@@ -29,7 +29,7 @@ spec:
       repository: rancher/system-upgrade-controller
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
+      tag: "v0.13.1"
 
     imagePullSecrets: []
     nameOverride: ""
