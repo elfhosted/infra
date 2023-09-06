@@ -434,11 +434,11 @@ spec:
 
     ## -- enable optional CRDs for Prometheus Operator
     ##
-      ## Create a dedicated metrics service for use with ServiceMonitor
-      #  service:
-      #    enabled: false
-      #    labels: {}
-      #    annotations: {}
+      # Create a dedicated metrics service for use with ServiceMonitor
+      service:
+        enabled: true
+        labels: {}
+        annotations: {}
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
       #  disableAPICheck: false
       #  serviceMonitor:
