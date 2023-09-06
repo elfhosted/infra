@@ -14,6 +14,9 @@ spec:
         kind: HelmRepository
         name: nimbolus
         namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: system-upgrade-controller
   values:
 
     # Default values for system-upgrade-controller.
