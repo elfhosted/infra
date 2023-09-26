@@ -1,8 +1,9 @@
+!ecembed 1120688714448896090 #🎁┆elf-apps
 {
     "fields": [
         {
             "name": "",
-            "value": ":privatebin: [Privatebin](https://docs.elfhosted.com/app/privatebin)\n:uptimekuma: [Uptime Kuma](https://docs.elfhosted.com/app/uptimekuma)\n:seafile: [Seafile](https://docs.elfhosted.com/app/seafile)\n",
+            "value": ":privatebin: [Privatebin](https://docs.elfhosted.com/app/privatebin)\n:uptimekuma: [Uptime Kuma](https://docs.elfhosted.com/app/uptimekuma)\n:seafile: [Seafile](https://docs.elfhosted.com/app/seafile)\n:joplin: [Joplin Server](https://docs.elfhosted.com/app/joplin-server)\n",
             "inline": true
         },
         {

@@ -1,0 +1,67 @@
+!rr addmany #🎁┆elf-apps 1120687816733626509 
+:emby: elf-emby-users
+:jellyfin: elf-jellyfin-users
+:plex: elf-plex-users
+:navidrome: elf-navidrome-users
+:calibre: elf-calibre-users
+:calibreweb: elf-calibreweb-users
+:kavita: elf-kavita-users
+:komga: elf-komga-users
+:audiobookshelf: elf-audiobookshelf-users
+:navidrome: elf-navidrome-users
+
+# Manage Media
+
+!rr addmany #🎁┆elf-apps 1120688089128513617
+:bazarr: elf-bazarr-users
+:jellyseerr: elf-jellyseerr-users
+:lidarr: elf-lidar-users
+:ombi: elf-ombi-users
+:overseerr: elf-overseerr-users
+:nextpvr: elf-nextpvr-users
+:radarr: elf-radarr-users
+:shoko: elf-shoko-users
+:sonarr: elf-sonarr-users
+:tautulli: elf-tautulli-users
+:xteve: elf-xteve-users
+:lazylibrarian: elf-lazylibrarian-users
+:mylar: elf-mylar-users
+:readarr: elf-readarr-users
+:notifiarr: elf-notifiarr-users
+
+!rr addmany #🎁┆elf-apps 1120688193407307817
+:nzbget: elf-nzbget-users
+:nzbhydra: elf-nzbhydra-users
+:sabnzbd: elf-sabnzbd-users
+:deluge: elf-deluge-users
+:qbittorrent: elf-qbittorrent-users
+:rutorrent: elf-rutorrent-users
+:autobrr: elf-autobrr-users
+:prowlarr: elf-prowlarr-users
+:pyload: elf-pyload-users
+:rapidleech: elf-rapidleech-users
+:rdtclient: elf-rdtclient-users
+
+!rr addmany #🎁┆elf-apps 1120688714448896090
+:privatebin: elf-privatebin-users
+:uptimekuma: elf-uptimekuma-users
+:seafile: elf-seafile-users
+:resiliosync: elf-resiliosync-users
+:syncthing: elf-syncthing-users
+:thelounge: elf-thelounge-users
+:vaultwarden: elf-vaultwarden-users
+:mattermost: elf-mattermost-users
+:miniflux: elf-rpdb-users
+:joplin: elf-joplin-users
+
+
+
+!rr addmany #🎁┆elf-apps 1120688714448896090 
+:privatebin: elf-privatebin-users
+:gotify: elf-gotify-users
+:unpackerr: elf-unpackerr-users
+
+:rpdb: elf-rpdb-users
+:miniflux: elf-rpdb-users
+:joplin: elf-joplin-users
+

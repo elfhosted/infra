@@ -1,1 +1,26 @@
-{"fields":[{"name":"","value":":bazarr: [Bazarr](https://docs.elfhosted.com/app/bazarr)\n:jellyseerr: [Jellyseerr](https://docs.elfhosted.com/app/jellyseerr)\n:lidarr: [Lidarr](https://docs.elfhosted.com/app/lidarr) \n:ombi: [Ombi](https://docs.elfhosted.com/app/ombi)\n:overseerr: [Overseerr](https://docs.elfhosted.com/app/overseer)\n:nextpvr: [NextPVR](https://docs.elfhosted.com/app/nextpvr)\n\n","inline":true},{"name":"","value":":radarr: [Radarr](https://docs.elfhosted.com/app/radarr)\n:shoko: [Shoko](https://docs.elfhosted.com/app/shoko)\n:sonarr: [Sonarr](https://docs.elfhosted.com/app/sonarr)\n:tautulli: [Tautulli](https://docs.elfhosted.com/app/tautulli)\n:xteve: [xTeVe](https://docs.elfhosted.com/app/xteve)","inline":true},{"name":"","value":":lazylibrarian: [Lazy Librarian](https://docs.elfhosted.com/app/lazylibrarian)\n:mylar: [Mylar](https://docs.elfhosted.com/app/mylar)\n:readarr:: [Readarr](https://docs.elfhosted.com/app/readarr)\n","inline":true}],"title":":headphones: Manage Media :book:","description":"React to this message with the icons of the apps you use, and you'll be tagged in https://discord.com/channels/396055506072109067/1119547206312149072 for important updates / changes to these apps","author":{"name":"More 🧝 Elf-Service App Updates"},"color":16098851}
+!ecembed 1120688089128513617 #🎁┆elf-apps
+{
+    "fields": [
+        {
+            "name": "",
+            "value": ":bazarr: [Bazarr](https://docs.elfhosted.com/app/bazarr)\n:jellyseerr: [Jellyseerr](https://docs.elfhosted.com/app/jellyseerr)\n:lidarr: [Lidarr](https://docs.elfhosted.com/app/lidarr) \n:ombi: [Ombi](https://docs.elfhosted.com/app/ombi)\n:overseerr: [Overseerr](https://docs.elfhosted.com/app/overseer)\n:nextpvr: [NextPVR](https://docs.elfhosted.com/app/nextpvr)\n\n",
+            "inline": true
+        },
+        {
+            "name": "",
+            "value": ":radarr: [Radarr](https://docs.elfhosted.com/app/radarr)\n:shoko: [Shoko](https://docs.elfhosted.com/app/shoko)\n:sonarr: [Sonarr](https://docs.elfhosted.com/app/sonarr)\n:tautulli: [Tautulli](https://docs.elfhosted.com/app/tautulli)\n:xteve: [xTeVe](https://docs.elfhosted.com/app/xteve)",
+            "inline": true
+        },
+        {
+            "name": "",
+            "value": ":lazylibrarian: [Lazy Librarian](https://docs.elfhosted.com/app/lazylibrarian)\n:mylar: [Mylar](https://docs.elfhosted.com/app/mylar)\n:readarr:: [Readarr](https://docs.elfhosted.com/app/readarr)\n:notifiarr: [Notifiarr](https://docs.elfhosted.com/app/notifiarr)\n",
+            "inline": true
+        }
+    ],
+    "title": ":headphones: Manage Media :book:",
+    "description": "React to this message with the icons of the apps you use, and you'll be tagged in https://discord.com/channels/396055506072109067/1119547206312149072 for important updates / changes to these apps",
+    "author": {
+        "name": "More 🧝 Elf-Service App Updates"
+    },
+    "color": 16098851
+}
