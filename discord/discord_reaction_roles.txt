@@ -28,6 +28,7 @@
 :mylar: elf-mylar-users
 :readarr: elf-readarr-users
 :notifiarr: elf-notifiarr-users
+:tdarr: elf-tdarr-users
 
 !rr addmany #🎁┆elf-apps 1120688193407307817
 :nzbget: elf-nzbget-users
