@@ -16,6 +16,9 @@ spec:
   timeout: 5m
   releaseName: nginx-ingress-controller
   values:
+    # Copyright VMware, Inc.
+    # SPDX-License-Identifier: APACHE-2.0
+
     ## @section Global parameters
     ## Global Docker image parameters
     ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
@@ -66,13 +69,15 @@ spec:
     ## @param image.registry Nginx Ingress Controller image registry
     ## @param image.repository Nginx Ingress Controller image repository
     ## @param image.tag Nginx Ingress Controller image tag (immutable tags are recommended)
+    ## @param image.digest Nginx Ingress Controller image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag
     ## @param image.pullPolicy Nginx Ingress Controller image pull policy
     ## @param image.pullSecrets Specify docker-registry secret names as an array
     ##
     image:
       registry: docker.io
       repository: bitnami/nginx-ingress-controller
-      tag: 1.2.0-debian-10-r7
+      tag: 1.9.0-debian-11-r0
+      digest: ""
       ## Specify a imagePullPolicy
       ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
       ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -230,7 +235,7 @@ spec:
     daemonset:
       ## @param daemonset.useHostPort If `kind` is `DaemonSet`, this will enable `hostPort` for `TCP/80` and `TCP/443`
       ##
-      useHostPort: true
+      useHostPort: false
       ## @param daemonset.hostPorts [object] HTTP and HTTPS ports
       ##
       hostPorts:
@@ -380,6 +385,11 @@ spec:
     ## to keep resolving names inside the Kubernetes network
     ##
     dnsPolicy: ClusterFirst
+    ## @param dnsConfig is an object with optional parameters to pass to the DNS resolver
+    ## The dnsConfig field is optional and it can work with any dnsPolicy settings.
+    ## However, when a Pod's dnsPolicy is set to "None", the dnsConfig field has to be specified.
+    ##
+    dnsConfig: {}
     ## @param terminationGracePeriodSeconds How many seconds to wait before terminating a pod
     ##
     terminationGracePeriodSeconds: 60
@@ -499,13 +509,15 @@ spec:
       ## @param defaultBackend.image.registry Default backend image registry
       ## @param defaultBackend.image.repository Default backend image repository
       ## @param defaultBackend.image.tag Default backend image tag (immutable tags are recommended)
+      ## @param defaultBackend.image.digest Default backend image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag
       ## @param defaultBackend.image.pullPolicy Image pull policy
       ## @param defaultBackend.image.pullSecrets Specify docker-registry secret names as an array
       ##
       image:
         registry: docker.io
         repository: bitnami/nginx
-        tag: 1.21.6-debian-10-r105
+        tag: 1.25.2-debian-11-r34
+        digest: ""
         ## Specify a imagePullPolicy
         ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
         ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -825,6 +837,16 @@ spec:
       ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
       ##
       externalIPs: []
+      ## @param service.ipFamilyPolicy Controller Service ipFamilyPolicy (optional, cloud specific)
+      ## This can be either SingleStack, PreferDualStack or RequireDualStack
+      ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
+      ##
+      ipFamilyPolicy: ""
+      ## @param service.ipFamilies Controller Service ipFamilies (optional, cloud specific)
+      ## This can be either ["IPv4"], ["IPv6"], ["IPv4", "IPv6"] or ["IPv6", "IPv4"]
+      ## ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
+      ##
+      ipFamilies: []
       ## @param service.loadBalancerIP Kubernetes LoadBalancerIP to request for Controller (optional, cloud specific)
       ## ref: https://kubernetes.io/docs/user-guide/services/#type-loadbalancer
       ##
@@ -980,7 +1002,7 @@ spec:
         ##
         metricRelabelings: []
         ## @param metrics.serviceMonitor.selector ServiceMonitor selector labels
-        ## ref: https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-configuration
+        ## ref: https://github.com/bitnami/charts/tree/main/bitnami/prometheus-operator#prometheus-configuration
         ## e.g:
         ## selector:
         ##   prometheus: my-prometheus
