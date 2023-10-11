@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: wordpress
-      version: 17.x.x
+      version: 18.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
