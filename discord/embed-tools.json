@@ -3,17 +3,17 @@
     "fields": [
         {
             "name": "",
-            "value": ":privatebin: [Privatebin](https://docs.elfhosted.com/app/privatebin)\n:uptimekuma: [Uptime Kuma](https://docs.elfhosted.com/app/uptimekuma)\n:seafile: [Seafile](https://docs.elfhosted.com/app/seafile)\n:joplin: [Joplin Server](https://docs.elfhosted.com/app/joplin-server)\n",
+            "value": ":privatebin: [Privatebin](https://elfhosted.com/app/privatebin)\n:uptimekuma: [Uptime Kuma](https://elfhosted.com/app/uptimekuma)\n:seafile: [Seafile](https://elfhosted.com/app/seafile)\n:joplin: [Joplin Server](https://elfhosted.com/app/joplin-server)\n",
             "inline": true
         },
         {
             "name": "",
-            "value": ":resiliosync: [Resilio Sync](https://docs.elfhosted.com/app/resiliosync)\n:syncthing: [Syncthing](https://docs.elfhosted.com/app/syncthing)\n:miniflux: [Miniflux](https://docs.elfhosted.com/app/miniflux)\n\n",
+            "value": ":resiliosync: [Resilio Sync](https://elfhosted.com/app/resiliosync)\n:syncthing: [Syncthing](https://elfhosted.com/app/syncthing)\n:miniflux: [Miniflux](https://elfhosted.com/app/miniflux)\n\n",
             "inline": true
         },
         {
             "name": "",
-            "value": ":thelounge: [The Lounge](https://docs.elfhosted.com/app/thelounge)\n:vaultwarden: [Vaultwarden](https://docs.elfhosted.com/app/valtwarden)\n:mattermost: [Mattermost](https://docs.elfhosted.com/app/mattermost)",
+            "value": ":thelounge: [The Lounge](https://elfhosted.com/app/thelounge)\n:vaultwarden: [Vaultwarden](https://elfhosted.com/app/valtwarden)\n:mattermost: [Mattermost](https://elfhosted.com/app/mattermost)",
             "inline": true
         }
     ],
