@@ -577,21 +577,15 @@ spec:
 
     # Backup schedules to create.
     # Eg:
-    # schedules:
-    #   mybackup:
-    #     disabled: false
-    #     labels:
-    #       myenv: foo
-    #     annotations:
-    #       myenv: foo
-    #     schedule: "0 0 * * *"
-    #     useOwnerReferencesInBackup: false
-    #     template:
-    #       ttl: "240h"
-    #       storageLocation: default
-    #       includedNamespaces:
-    #       - foo
-    schedules: {}
+    schedules:
+      daily:
+        disabled: false
+        schedule: "0 0 * * *" # midnight UTC
+        useOwnerReferencesInBackup: false
+        template:
+          ttl: "240h"
+          storageLocation: default
+          includedNamespaces: [] # cover all namespaces
 
     # Velero ConfigMaps.
     # Eg:
