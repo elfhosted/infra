@@ -3,17 +3,17 @@
     "fields": [
         {
             "name": "",
-            "value": ":bazarr: [Bazarr](https://docs.elfhosted.com/app/bazarr)\n:jellyseerr: [Jellyseerr](https://docs.elfhosted.com/app/jellyseerr)\n:lidarr: [Lidarr](https://docs.elfhosted.com/app/lidarr) \n:ombi: [Ombi](https://docs.elfhosted.com/app/ombi)\n:overseerr: [Overseerr](https://docs.elfhosted.com/app/overseer)\n:nextpvr: [NextPVR](https://docs.elfhosted.com/app/nextpvr)\n\n",
+            "value": ":bazarr: [Bazarr](https://elfhosted.com/app/bazarr)\n:jellyseerr: [Jellyseerr](https://elfhosted.com/app/jellyseerr)\n:lidarr: [Lidarr](https://elfhosted.com/app/lidarr) \n:ombi: [Ombi](https://elfhosted.com/app/ombi)\n:overseerr: [Overseerr](https://elfhosted.com/app/overseer)\n:nextpvr: [NextPVR](https://elfhosted.com/app/nextpvr)\n\n",
             "inline": true
         },
         {
             "name": "",
-            "value": ":radarr: [Radarr](https://docs.elfhosted.com/app/radarr)\n:shoko: [Shoko](https://docs.elfhosted.com/app/shoko)\n:sonarr: [Sonarr](https://docs.elfhosted.com/app/sonarr)\n:tautulli: [Tautulli](https://docs.elfhosted.com/app/tautulli)\n:xteve: [xTeVe](https://docs.elfhosted.com/app/xteve)",
+            "value": ":radarr: [Radarr](https://elfhosted.com/app/radarr)\n:shoko: [Shoko](https://elfhosted.com/app/shoko)\n:sonarr: [Sonarr](https://elfhosted.com/app/sonarr)\n:tautulli: [Tautulli](https://elfhosted.com/app/tautulli)\n:xteve: [xTeVe](https://elfhosted.com/app/xteve)",
             "inline": true
         },
         {
             "name": "",
-            "value": ":lazylibrarian: [Lazy Librarian](https://docs.elfhosted.com/app/lazylibrarian)\n:mylar: [Mylar](https://docs.elfhosted.com/app/mylar)\n:readarr:: [Readarr](https://docs.elfhosted.com/app/readarr)\n:notifiarr: [Notifiarr](https://docs.elfhosted.com/app/notifiarr)\n",
+            "value": ":lazylibrarian: [Lazy Librarian](https://elfhosted.com/app/lazylibrarian)\n:mylar: [Mylar](https://elfhosted.com/app/mylar)\n:readarr:: [Readarr](https://elfhosted.com/app/readarr)\n:notifiarr: [Notifiarr](https://elfhosted.com/app/notifiarr)\n:tdarr: [Tdarr](https://elfhosted.com/app/tdarr)\n",
             "inline": true
         }
     ],

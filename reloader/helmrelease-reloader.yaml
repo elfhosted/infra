@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: reloader
-      version: v1.0.36
+      version: 1.0.43
       sourceRef:
         kind: HelmRepository
         name: stakater
@@ -30,6 +30,7 @@ spec:
     fullnameOverride: ""
 
     reloader:
+      autoReloadAll: false
       isArgoRollouts: false
       isOpenshift: false
       ignoreSecrets: false
@@ -304,3 +305,5 @@ spec:
         # - podSelector:
         #     matchLabels:
         #       app.kubernetes.io/name: prometheus
+        
+      webhookUrl: ""

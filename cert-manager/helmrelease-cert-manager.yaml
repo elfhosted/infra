@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cert-manager
-      version: 1.12.x
+      version: 1.13.x
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -39,6 +39,8 @@ spec:
       priorityClassName: "cluster-important"
       rbac:
         create: true
+        # Aggregate ClusterRoles to Kubernetes default user-facing roles. Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+        aggregateClusterRoles: true
 
       podSecurityPolicy:
         enabled: false
@@ -104,7 +106,7 @@ spec:
 
       # Setting a digest will override any tag
       # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     # Override the namespace used to store DNS provider credentials etc. for ClusterIssuer
     # resources. By default, the same namespace as cert-manager is deployed within is
@@ -296,14 +298,13 @@ spec:
 
     # LivenessProbe settings for the controller container of the controller Pod.
     #
-    # Disabled by default, because the controller has a leader election mechanism
-    # which should cause it to exit if it is unable to renew its leader election
-    # record.
+    # Enabled by default, because we want to enable the clock-skew liveness probe that
+    # restarts the controller in case of a skew between the system clock and the monotonic clock.
     # LivenessProbe durations and thresholds are based on those used for the Kubernetes
     # controller-manager. See:
     # https://github.com/kubernetes/kubernetes/blob/806b30170c61a38fedd54cc9ede4cd6275a1ad3b/cmd/kubeadm/app/util/staticpod/utils.go#L241-L245
     livenessProbe:
-      enabled: false
+      enabled: true
       initialDelaySeconds: 10
       periodSeconds: 10
       timeoutSeconds: 15
@@ -450,7 +451,7 @@ spec:
         # Setting a digest will override any tag
         # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
-        pullPolicy: IfNotPresent
+        pullPolicy: Always
 
       serviceAccount:
         # Specifies whether a service account should be created
@@ -617,7 +618,7 @@ spec:
         # Setting a digest will override any tag
         # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
-        pullPolicy: IfNotPresent
+        pullPolicy: Always
 
       serviceAccount:
         # Specifies whether a service account should be created
@@ -731,7 +732,7 @@ spec:
         # Setting a digest will override any tag
         # digest: sha256:0e072dddd1f7f8fc8909a2ca6f65e76c5f0d2fcfb8be47935ae3457e8bbceb20
 
-        pullPolicy: IfNotPresent
+        pullPolicy: Always
 
       rbac:
         # annotations for the startup API Check job RBAC and PSP resources
