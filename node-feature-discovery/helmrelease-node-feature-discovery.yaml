@@ -17,9 +17,9 @@ spec:
   releaseName: node-feature-discovery
   values:
     image:
-      repository: registry.k8s.io/nfd/node-feature-discovery
+      repository: gcr.io/k8s-staging-nfd/node-feature-discovery
       # This should be set to 'IfNotPresent' for released version
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
       # tag, if defined will use the given image tag, else Chart.AppVersion will be used
       # tag
     imagePullSecrets: []
@@ -28,9 +28,10 @@ spec:
     fullnameOverride: ""
     namespaceOverride: ""
 
-    enableNodeFeatureApi: false
+    enableNodeFeatureApi: true
 
     master:
+      enable: true
       config: ### <NFD-MASTER-CONF-START-DO-NOT-REMOVE>
         # noPublish: false
         # extraLabelNs: ["added.ns.io","added.kubernets.io"]
@@ -38,17 +39,45 @@ spec:
         # resourceLabels: ["vendor-1.com/feature-1","vendor-2.io/feature-2"]
         # enableTaints: false
         # labelWhiteList: "foo"
+        # resyncPeriod: "2h"
+        # klog:
+        #    addDirHeader: false
+        #    alsologtostderr: false
+        #    logBacktraceAt:
+        #    logtostderr: true
+        #    skipHeaders: false
+        #    stderrthreshold: 2
+        #    v: 0
+        #    vmodule:
+        ##   NOTE: the following options are not dynamically run-time configurable
+        ##         and require a nfd-master restart to take effect after being changed
+        #    logDir:
+        #    logFile:
+        #    logFileMaxSize: 1800
+        #    skipLogHeaders: false
+        # leaderElection:
+        #   leaseDuration: 15s
+        #   # this value has to be lower than leaseDuration and greater than retryPeriod*1.2
+        #   renewDeadline: 10s
+        #   # this value has to be greater than 0
+        #   retryPeriod: 2s
+        # nfdApiParallelism: 10
       ### <NFD-MASTER-CONF-END-DO-NOT-REMOVE>
       # The TCP port that nfd-master listens for incoming requests. Default: 8080
+      # Deprecated this parameter is related to the deprecated gRPC API and will
+      # be removed with it in a future release  
       port: 8080
+      metricsPort: 8081
       instance:
       featureApi:
+      resyncPeriod:
       denyLabelNs: []
       extraLabelNs: []
       resourceLabels: []
       enableTaints: false
       crdController: null
       featureRulesController: null
+      nfdApiParallelism: null
       deploymentAnnotations: {}
       replicaCount: 1
 
@@ -122,6 +151,7 @@ spec:
                     values: [""]
 
     worker:
+      enable: true
       config: ### <NFD-WORKER-CONF-START-DO-NOT-REMOVE>
         #core:
         #  labelWhiteList:
@@ -172,6 +202,7 @@ spec:
         #        - "SSE4"
         #        - "SSE42"
         #        - "SSSE3"
+        #        - "TDX_GUEST"
         #      attributeWhitelist:
         #  kernel:
         #    kconfigFile: "/path/to/kconfig"
@@ -201,7 +232,7 @@ spec:
         #      - "vendor"
         #      - "device"
         #  local:
-        #    hooksEnabled: true
+        #    hooksEnabled: false
         #  custom:
         #    # The following feature demonstrates the capabilities of the matchFeatures
         #    - name: "my custom rule"
@@ -350,6 +381,7 @@ spec:
         #
     ### <NFD-WORKER-CONF-END-DO-NOT-REMOVE>
 
+      metricsPort: 8081
       daemonsetAnnotations: {}
       podSecurityContext: {}
         # fsGroup: 2000
@@ -422,6 +454,7 @@ spec:
       rbac:
         create: true
 
+      metricsPort: 8081
       kubeletConfigPath:
       kubeletPodResourcesSockPath:
       updateInterval: 60s
@@ -451,10 +484,11 @@ spec:
       nodeSelector: {}
       tolerations: []
       annotations: {}
+      daemonsetAnnotations: {}
       affinity: {}
       podSetFingerprint: true
 
-    topologyGC:
+    gc:
       enable: true
       replicaCount: 1
 
@@ -487,9 +521,12 @@ spec:
         #   cpu: 100m
         #   memory: 128Mi
 
+      metricsPort: 8081
+
       nodeSelector: {}
       tolerations: []
       annotations: {}
+      deploymentAnnotations: {}
       affinity: {}
 
     # Optionally use encryption for worker <--> master comms
@@ -500,3 +537,7 @@ spec:
     tls:
       enable: false
       certManager: false
+
+    prometheus:
+      enable: false
+      labels: {}
