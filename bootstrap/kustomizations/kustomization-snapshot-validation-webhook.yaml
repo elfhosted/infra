@@ -1,0 +1,18 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: snapshot-validation-webhook
+  namespace: flux-system
+spec:
+  interval: 15m
+  path: snapshot-validation-webhook
+  prune: true # remove any elements later removed from the above path
+  timeout: 2m # if not set, this defaults to interval duration, which is 1h
+  sourceRef:
+    kind: GitRepository
+    name: infra
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: snapshot-controller
+      namespace: snapshot-controller
