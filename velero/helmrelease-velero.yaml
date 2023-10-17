@@ -584,7 +584,7 @@ spec:
         useOwnerReferencesInBackup: false
         template:
           ttl: "240h"
-          storageLocation: default
+          storageLocation: b2
           includedNamespaces: [] # cover all namespaces
 
     # Velero ConfigMaps.
