@@ -406,7 +406,7 @@ spec:
       # How long to wait by default before backups can be garbage collected. Default: 72h
       defaultBackupTTL:
       # Name of the default volume snapshot location.
-      defaultVolumeSnapshotLocations:
+      defaultVolumeSnapshotLocations: csi:rook-ceph
       # `velero server` default: empty
       disableControllers:
       # `velero server` default: 1h
@@ -431,7 +431,7 @@ spec:
       terminatingResourceTimeout:
       # Comma separated list of velero feature flags. default: empty
       # features: EnableCSI
-      features:
+      features: EnableCSI
       # `velero server` default: velero
       namespace:
 
