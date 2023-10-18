@@ -328,7 +328,7 @@ spec:
         # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
         caCert:
         # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
-        prefix: velero-$(dns_domain)
+        prefix: velero-${dns_domain}
         # default indicates this location is the default backup storage location. Optional.
         default: true
         # validationFrequency defines how frequently Velero should validate the object storage. Optional.
@@ -406,7 +406,7 @@ spec:
       # How long to wait by default before backups can be garbage collected. Default: 72h
       defaultBackupTTL:
       # Name of the default volume snapshot location.
-      defaultVolumeSnapshotLocations:
+      defaultVolumeSnapshotLocations: csi:rook-ceph
       # `velero server` default: empty
       disableControllers:
       # `velero server` default: 1h
@@ -431,7 +431,7 @@ spec:
       terminatingResourceTimeout:
       # Comma separated list of velero feature flags. default: empty
       # features: EnableCSI
-      features:
+      features: EnableCSI
       # `velero server` default: velero
       namespace:
 
@@ -584,8 +584,11 @@ spec:
         useOwnerReferencesInBackup: false
         template:
           ttl: "240h"
-          storageLocation: default
+          storageLocation: b2
           includedNamespaces: [] # cover all namespaces
+          labelSelector:
+            matchLabels:
+              velero-schedule: daily
 
     # Velero ConfigMaps.
     # Eg:

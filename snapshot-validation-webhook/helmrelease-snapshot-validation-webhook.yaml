@@ -1,0 +1,96 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: snapshot-validation-webhook
+  namespace: snapshot-validation-webhook
+spec:
+  chart:
+    spec:
+      chart: snapshot-validation-webhook
+      version: 1.8.x # auto-update to semver bugfixes only 
+      sourceRef:
+        kind: HelmRepository
+        name: piraeus-charts
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: snapshot-validation-webhook
+  values: # paste contents of upstream values.yaml below, indented 4 spaces 
+    replicaCount: 2
+
+    args:
+      tlsPrivateKeyFile: /etc/snapshot-validation/tls.key
+      tlsCertFile: /etc/snapshot-validation/tls.crt
+      port: 8443
+
+    image:
+      repository: registry.k8s.io/sig-storage/snapshot-validation-webhook
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+
+    webhook:
+      timeoutSeconds: 2
+      failurePolicy: Fail
+
+    tls:
+      certificateSecret: ""
+      autogenerate: true
+      renew: false
+      certManagerIssuerRef: {}
+
+    imagePullSecrets: []
+    podAnnotations: {}
+    podLabels: {}
+
+    networkPolicy:
+      enabled: false
+      ingress: {}
+        # - from:
+        #   - ipBlock:
+        #       cidr: 0.0.0.0/0
+
+    ## Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+    ##
+    podDisruptionBudget:
+      enabled: true
+      # maxUnavailable: 1
+      minAvailable: 1
+
+    priorityClassName: cluster-normal
+
+    ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/
+    ##
+    topologySpreadConstraints: []
+      # - maxSkew: 1
+      #   topologyKey: topology.kubernetes.io/zone
+      #   whenUnsatisfiable: ScheduleAnyway
+      #   labelSelector:
+      #     matchLabels:
+      #       app.kubernetes.io/instance: snapshot-validation-webhook
+
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+
+    resources: {}
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+    serviceAccount:
+      create: true
+      name: ""
+
+    rbac:
+      create: true

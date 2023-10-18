@@ -1,0 +1,28 @@
+- name: "Create temporary directory for cli download"
+  tempfile:
+    state: directory
+    suffix: temp
+  register: tempdir  
+
+- name: Unzip /{{ tempdir.path }}/velero-{{ packages.velero.version }}-linux-amd64.tar.gz
+  unarchive:
+    src: "https://github.com/vmware-tanzu/velero/releases/download/{{ packages.velero.version }}/velero-{{ packages.velero.version }}-linux-amd64.tar.gz"
+    dest: "{{ tempdir.path }}"
+    remote_src: yes
+
+- name: copy velero CLI to /usr/local/bin
+  become: true
+  copy:
+    remote_src: yes
+    src: "{{ tempdir.path }}/velero-{{ packages.velero.version }}-linux-amd64/velero"
+    dest: /usr/local/bin/velero
+    mode: 0755
+
+- name: "Clean up temporary directory"
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent    
+
+- name: setup velero cli auto-completion
+  become: true
+  shell: /usr/local/bin/velero completion bash > /etc/bash_completion.d/velero
