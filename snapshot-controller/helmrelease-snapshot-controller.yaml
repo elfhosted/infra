@@ -73,19 +73,21 @@ spec:
       # Specifies whether a ServiceMonitor should be created
       create: true
 
-    volumeSnapshotClasses:
-    - name: csi-rbdplugin-snapclass
-      driver: rook-ceph.rbd.csi.ceph.com # driver:namespace:operator
-      labels:
-        velero.io/csi-volumesnapshot-class: "true"
-      parameters:
-        # Specify a string that identifies your cluster. Ceph CSI supports any
-        # unique string. When Ceph CSI is deployed by Rook use the Rook namespace,
-        # for example "rook-ceph".
-        clusterID: rook-ceph # namespace:cluster
-        csi.storage.k8s.io/snapshotter-secret-name: rook-csi-rbd-provisioner
-        csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph # namespace:cluster
-      deletionPolicy: Delete # docs suggest this may need to be set to "Retain" for restoring
+    volumeSnapshotClasses: []
+    # We deploy our volumesnapshotclasses in rook-ceph-cluster helmrelease
+    # - name: csi-rbdplugin-snapclass
+    #   driver: rook-ceph.rbd.csi.ceph.com # driver:namespace:operator
+    #   labels:
+    #     velero.io/csi-volumesnapshot-class: "true"
+    #   parameters:
+    #     # Specify a string that identifies your cluster. Ceph CSI supports any
+    #     # unique string. When Ceph CSI is deployed by Rook use the Rook namespace,
+    #     # for example "rook-ceph".
+    #     clusterID: rook-ceph # namespace:cluster
+    #     csi.storage.k8s.io/snapshotter-secret-name: rook-csi-rbd-provisioner
+    #     csi.storage.k8s.io/snapshotter-secret-namespace: rook-ceph # namespace:cluster
+    #   deletionPolicy: Delete # docs suggest this may need to be set to "Retain" for restoring
+
 
 
     priorityClassName: "cluster-normal"
