@@ -632,7 +632,8 @@ spec:
       isDefault: true
       deletionPolicy: Delete
       annotations: {}
-      labels: {}
+      labels:
+        velero.io/csi-volumesnapshot-class: "true"
       # see https://rook.io/docs/rook/v1.10/Storage-Configuration/Ceph-CSI/ceph-csi-snapshot/#cephfs-snapshots for available configuration
       parameters: {}
 
@@ -644,7 +645,8 @@ spec:
       isDefault: false
       deletionPolicy: Delete
       annotations: {}
-      labels: {}
+      labels:
+        velero.io/csi-volumesnapshot-class: "true"
       # see https://rook.io/docs/rook/v1.10/Storage-Configuration/Ceph-CSI/ceph-csi-snapshot/#rbd-snapshots for available configuration
       parameters: {}
 
