@@ -586,9 +586,6 @@ spec:
           ttl: "240h"
           storageLocation: b2
           includedNamespaces: [] # cover all namespaces
-          labelSelector:
-            matchLabels:
-              velero-schedule: daily
 
     # Velero ConfigMaps.
     # Eg:
