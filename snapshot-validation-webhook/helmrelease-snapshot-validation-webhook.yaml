@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: snapshot-validation-webhook
-      version: 1.8.x # auto-update to semver bugfixes only 
+      version: 1.9.x # auto-update to semver bugfixes only 
       sourceRef:
         kind: HelmRepository
         name: piraeus-charts
