@@ -16,27 +16,39 @@ spec:
   timeout: 5m        
   values:
     # -- Server replicas
-    replicas: 1
+    replicas: 2
     # -- Custom priority class for different treatment by the scheduler
     priorityClassName:
     # -- server securityContext
     securityContext: {}
     # -- server containerSecurityContext
     containerSecurityContext: {}
+    # -- server deployment strategy
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+      #  maxSurge: 25%
+       maxUnavailable: 1
 
     worker:
       # -- worker replicas
-      replicas: 1
+      replicas: 2
       # -- Custom priority class for different treatment by the scheduler
       priorityClassName:
       # -- worker securityContext
       securityContext: {}
-      # -- server containerSecurityContext
+      # -- worker containerSecurityContext
       containerSecurityContext: {}
+      # -- worker strategy
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+        #  maxSurge: 25%
+         maxUnavailable: 1
 
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.8.2
+      tag: 2023.10.2
       # -- optional container image digest
       digest: ""
       pullPolicy: IfNotPresent
@@ -181,6 +193,34 @@ spec:
         minReplicas: 1
         maxReplicas: 5
         targetCPUUtilizationPercentage: 80
+
+    pdb:
+      server:
+        # -- Deploy a PodDistrubtionBudget for the server
+        enabled: true
+        # -- Labels to be added to the server pdb
+        labels: {}
+        # -- Annotations to be added to the server pdb
+        annotations: {}
+        # -- Number of pods that are available after eviction as number or percentage (eg.: 50%)
+        # @default -- `""` (defaults to 0 if not specified)
+        minAvailable: "1"
+        # -- Number of pods that are unavailable after eviction as number or percentage (eg.: 50%)
+        ## Has higher precedence over `pdb.server.minAvailable`
+        maxUnavailable: ""
+      worker:
+        # -- Deploy a PodDistrubtionBudget for the worker
+        enabled: true
+        # -- Labels to be added to the worker pdb
+        labels: {}
+        # -- Annotations to be added to the worker pdb
+        annotations: {}
+        # -- Number of pods that are available after eviction as number or percentage (eg.: 50%)
+        # @default -- `""` (defaults to 0 if not specified)
+        minAvailable: "1"
+        # -- Number of pods that are unavailable after eviction as number or percentage (eg.: 50%)
+        ## Has higher precedence over `pdb.worker.minAvailable`
+        maxUnavailable: ""
 
     livenessProbe:
       # -- enables or disables the livenessProbe
