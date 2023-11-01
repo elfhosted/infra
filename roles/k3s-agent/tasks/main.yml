@@ -22,10 +22,12 @@
     dest: /etc/rancher/k3s/kubelet-server.config
 
 - name: install k3s on workers
+  environment:
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+    K3S_URL: https://{{ master_ip }}:6443 
+    K3S_TOKEN: "{{ node_token }}"
   shell: >
     curl -sfL https://get.k3s.io | 
-    K3S_URL=https://{{ master_ip }}:6443 
-    K3S_TOKEN={{ node_token }}
     INSTALL_K3S_EXEC="agent \
       --flannel-iface={{ cluster_nic }} \
       --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \

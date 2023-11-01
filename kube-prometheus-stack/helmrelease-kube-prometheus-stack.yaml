@@ -3209,7 +3209,7 @@ spec:
 
         ## How long to retain metrics
         ##
-        retention: 10d
+        retention: 90d
 
         ## Maximum size of metrics
         ##

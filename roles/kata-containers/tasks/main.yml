@@ -98,12 +98,12 @@
 
   notify: restart_k3s_agent
 
-- name: Copy setup-devmapper.sh
-  copy:
-    src: setup-devmapper.sh
-    dest: /usr/local/sbin/setup-devmapper.sh
-    mode: 0755
+# - name: Copy setup-devmapper.sh
+#   copy:
+#     src: setup-devmapper.sh
+#     dest: /usr/local/sbin/setup-devmapper.sh
+#     mode: 0755
 
-- name: Run setup-devmapper.sh
-  command: /usr/local/sbin/setup-devmapper.sh
-  ignore_errors: true
+# - name: Run setup-devmapper.sh
+#   command: /usr/local/sbin/setup-devmapper.sh
+#   ignore_errors: true

@@ -77,12 +77,29 @@
       state: absent
     with_items: "{{ files_to_delete.files }}"
 
-  - name: Create terraform plan for vms
+  - name: Create terraform plan for server vms
     template:
-      src: elf_node.tf.j2
+      src: elf_server_node.tf.j2
       dest: "{{ terraform_dir }}/{{ inventory_hostname_short }}.tf"
-    when: "inventory_hostname in groups['proxmox_vms']" 
-    with_items: "{{ groups['proxmox_vms'] }}"
+    when: 
+    - "inventory_hostname in groups['k3s_servers']" 
+    with_items: "{{ groups['k3s_servers'] }}"
+
+  - name: Create terraform plan for agent vms
+    template:
+      src: elf_agent_node.tf.j2
+      dest: "{{ terraform_dir }}/{{ inventory_hostname_short }}.tf"
+    when: 
+    - "inventory_hostname in groups['k3s_agents']" 
+    with_items: "{{ groups['k3s_agents'] }}"
+
+  - name: Create terraform plan for storage vms
+    template:
+      src: elf_storage_node.tf.j2
+      dest: "{{ terraform_dir }}/{{ inventory_hostname_short }}.tf"
+    when: 
+    - "inventory_hostname in groups['k3s_dwarves']" 
+    with_items: "{{ groups['k3s_dwarves'] }}"    
 
   # not part of a normal install, this should be handled by a ci-specific playbook - @funkypenguin
   # - name: Create terraform plan for ci runners

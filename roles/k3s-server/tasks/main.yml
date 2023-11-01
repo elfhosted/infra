@@ -1,22 +1,20 @@
 ---
-# tasks file for k3s-master
+- name: ensure /etc/rancher/k3s exists
+  file:
+    path: /etc/rancher/k3s
+    state: directory
 
-# update  
+- name: copy k3s config.yaml to /etc/rancher/k3s
+  template:
+    src: k3s-config.yaml.j2
+    dest: /etc/rancher/k3s/config.yaml
+  notify: restart k3s
+
 - name: install k3s on master[0]
-  shell: >
-    curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server \
-      --flannel-backend=none  \
-      --disable-network-policy \
-      --disable-kube-proxy \
-      --disable traefik \
-      --disable servicelb \
-      --flannel-iface={{ cluster_nic }} \
-      --kube-controller-manager-arg=node-cidr-mask-size=22 \
-      --kubelet-arg=max-pods=500 \
-      --node-taint node-role.kubernetes.io/control-plane=true:NoSchedule \
-      --prefer-bundled-bin \
-      --cluster-init" \
-    sh -
+  environment: 
+    INSTALL_K3S_EXEC: "server"
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: curl -sfL https://get.k3s.io |  sh -
   args:
     creates: /usr/local/bin/k3s    
   when: "groups['k3s_servers'][0] == inventory_hostname"
@@ -29,37 +27,15 @@
 
 - set_fact:
     node_token: "{{ node_token_result.stdout }}"
-#    master_ip: "{{ hostvars[groups['k3s_servers'][0]].ansible_host }}"
     master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
 
-- name: ensure /etc/rancher/k3s exists
-  file:
-    path: /etc/rancher/k3s
-    state: directory
-
-- name: copy k3s config.yaml to /etc/rancher/k3s
-  template:
-    src: k3s-config.yaml.j2
-    dest: /etc/rancher/k3s/config.yaml
-
 - name: install k3s on master[1-n]
-  shell: >
-    curl -sfL https://get.k3s.io | 
-    K3S_URL=https://{{ master_ip }}:6443 
-    K3S_TOKEN={{ node_token }}
-    INSTALL_K3S_EXEC="server \
-      --flannel-iface={{ cluster_nic }} \
-      --flannel-backend=none  \
-      --disable-network-policy \
-      --disable-kube-proxy \
-      --disable traefik \
-      --disable servicelb \
-      --disable local-storage \
-      --kube-controller-manager-arg=node-cidr-mask-size=22 \
-      --kubelet-arg=max-pods=500 \
-      --node-taint node-role.kubernetes.io/control-plane=true:NoSchedule \
-      --prefer-bundled-bin" \
-    sh -
+  environment:
+     K3S_URL: "https://{{ master_ip }}:6443"
+     K3S_TOKEN: "{{ node_token }}"
+     INSTALL_K3S_EXEC: "server"
+     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: curl -sfL https://get.k3s.io | sh -
   args:
     creates: /usr/local/bin/k3s
   when: "groups['k3s_servers'][0] != inventory_hostname"

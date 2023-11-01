@@ -5,7 +5,7 @@ proxmox_host_name: proxmox
 proxmox_vm_ram: 16384
 proxmox_vm_cores: 8
 proxmox_vm_network_bridge: vmbr0
-proxmox_vm_disk0_size: 50G
+proxmox_vm_disk0_size: 30G
 proxmox_vm_disk1_size: 10G
 proxmox_vlan_gateway: 192.168.40.1
 proxmox_host_username: root@pam
@@ -15,6 +15,7 @@ cluster_nic_class_c: 192.168.41
 dns_domain: ci-elfhosted.com
 k8s_api_ip: 192.168.41.11
 flux_repo_branch: ci
+rook_ceph_osd_ram: 2Gi
 
 firewall:
   admin_source: 
