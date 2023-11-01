@@ -18,6 +18,11 @@ spec:
       kind: Deployment
       name: nginx-ingress-controller
       namespace: nginx-ingress-controller
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: nginx-ingress-controller
+      namespace: nginx-ingress-controller        
   postBuild:
     substituteFrom:
       - kind: ConfigMap

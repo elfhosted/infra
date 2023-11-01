@@ -13,6 +13,11 @@ spec:
   sourceRef:
     kind: GitRepository
     name: infra
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: webhook-receiver
+      namespace: webhook-receiver
   postBuild:
     substituteFrom:
       - kind: ConfigMap

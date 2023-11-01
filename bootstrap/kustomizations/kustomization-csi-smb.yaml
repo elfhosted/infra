@@ -19,7 +19,12 @@ spec:
     - apiVersion: apps/v1
       kind: Deployment
       name: csi-smb-controller
-      namespace: csi-smb      
+      namespace: csi-smb   
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: csi-smb
+      namespace: csi-smb         
   postBuild:
     substituteFrom:
       - kind: ConfigMap

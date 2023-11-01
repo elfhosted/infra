@@ -10,6 +10,7 @@ spec:
   timeout: 2m # if not set, this defaults to interval duration, which is 1h
   dependsOn:
   - name: "traefik"  
+  - name: "rook-ceph-cluster"
   sourceRef:
     kind: GitRepository
     name: infra
@@ -29,7 +30,12 @@ spec:
     - apiVersion: apps/v1
       kind: StatefulSet
       name: authentik-redis-master
-      namespace: authentik                  
+      namespace: authentik   
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: authentik
+      namespace: authentik                     
   postBuild:
     substituteFrom:
       - kind: ConfigMap

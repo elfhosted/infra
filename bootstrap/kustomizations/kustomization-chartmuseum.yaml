@@ -18,6 +18,11 @@ spec:
       kind: Deployment
       name: chartmuseum
       namespace: chartmuseum
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: chartmuseum
+      namespace: chartmuseum     
   postBuild:
     substituteFrom:
       - kind: ConfigMap

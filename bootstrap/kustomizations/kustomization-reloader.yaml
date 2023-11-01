@@ -16,6 +16,11 @@ spec:
       kind: Deployment
       name: reloader-reloader
       namespace: reloader
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: reloader
+      namespace: reloader
   postBuild:
     substituteFrom:
       - kind: ConfigMap

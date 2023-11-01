@@ -20,6 +20,10 @@ spec:
       kind: Deployment
       name: wordpress-dev
       namespace: wordpress-dev
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: wordpress-dev
+      namespace: wordpress-dev
   postBuild:
     substituteFrom:
       - kind: ConfigMap

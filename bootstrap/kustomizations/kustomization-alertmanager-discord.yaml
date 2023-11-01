@@ -21,7 +21,12 @@ spec:
     - apiVersion: apps/v1
       kind: Deployment
       name: alertmanager-discord-tenants
-      namespace: alertmanager-discord      
+      namespace: alertmanager-discord
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: alert-manager-discord
+      namespace: alert-manager-discord         
   postBuild:
     substituteFrom:
       - kind: ConfigMap
