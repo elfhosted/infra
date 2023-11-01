@@ -11,6 +11,8 @@ spec:
   sourceRef:
     kind: GitRepository
     name: infra
+  dependsOn:
+  - name: cluster-vars
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
