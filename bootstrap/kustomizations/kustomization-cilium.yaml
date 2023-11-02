@@ -10,6 +10,7 @@ spec:
   timeout: 2m # if not set, this defaults to interval duration, which is 1h
   dependsOn:
   - name: kubernetes-replicator
+  - name: external-dns
   sourceRef:
     kind: GitRepository
     name: infra
@@ -18,11 +19,6 @@ spec:
       kind: DaemonSet
       name: cilium
       namespace: cilium
-    # Always use the helmrelease to determine health too
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: cilium
-      namespace: kube-system
   postBuild:
     substituteFrom:
       - kind: ConfigMap
