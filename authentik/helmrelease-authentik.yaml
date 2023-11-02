@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2023.8.3
+      version: 2023.8.4
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -48,7 +48,7 @@ spec:
 
     image:
       repository: ghcr.io/goauthentik/server
-      tag: 2023.10.2
+      tag: 2023.8.4
       # -- optional container image digest
       digest: ""
       pullPolicy: IfNotPresent
