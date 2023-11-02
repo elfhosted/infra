@@ -15,7 +15,7 @@ spec:
     name: infra
   healthChecks:
     - apiVersion: apps/v1
-      kind: Daemonset
+      kind: DaemonSet
       name: cilium
       namespace: cilium
     # Always use the helmrelease to determine health too
