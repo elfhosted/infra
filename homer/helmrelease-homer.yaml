@@ -17,8 +17,8 @@ spec:
   releaseName: homer
   values:
     image:
-      repository: ghcr.io/geek-cookbook/homer
-      tag: 23.05.1@sha256:674e62c670dfbd4e67790067c45da8c0e214372a1acad1bc3ba881a8130e2ecf
+      repository: funkypenguin/homer-with-kube-icons
+      tag: v23.10.1
       pullPolicy: IfNotPresent
     controller:
       annotations:
