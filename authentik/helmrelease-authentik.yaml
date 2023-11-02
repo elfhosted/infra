@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2023.8.4
+      version: 2023.8.x
       sourceRef:
         kind: HelmRepository
         name: authentik
