@@ -18,7 +18,7 @@ spec:
     - apiVersion: apps/v1
       kind: DaemonSet
       name: cilium
-      namespace: cilium
+      namespace: kube-system
   postBuild:
     substituteFrom:
       - kind: ConfigMap
