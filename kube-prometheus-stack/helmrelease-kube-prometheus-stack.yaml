@@ -3213,7 +3213,7 @@ spec:
 
         ## Maximum size of metrics
         ##
-        retentionSize: "${prometheus_storage}"
+        retentionSize: "${prometheus_storage}Gb"
 
         ## Allow out-of-order/out-of-bounds samples ingested into Prometheus for a specified duration
         ## See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#tsdb
@@ -3320,7 +3320,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: ${prometheus_storage}
+                  storage: ${prometheus_storage}Gi
         #    selector: {}
 
         ## Using tmpfs volume
