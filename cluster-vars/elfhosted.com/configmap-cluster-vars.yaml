@@ -12,3 +12,5 @@ data:
   k3s_server_endpoint_1: 10.0.42.11
   k3s_server_endpoint_2: 10.0.42.12
   k3s_server_endpoint_3: 10.0.42.13
+  prometheus_storage: 100Gi
+  rook_ceph_osd_ram: 4Gi

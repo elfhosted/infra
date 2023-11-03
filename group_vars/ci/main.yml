@@ -15,7 +15,6 @@ cluster_nic_class_c: 192.168.41
 dns_domain: ci-elfhosted.com
 k8s_api_ip: 192.168.41.11
 flux_repo_branch: ci
-rook_ceph_osd_ram: 2Gi
 
 firewall:
   admin_source: 
