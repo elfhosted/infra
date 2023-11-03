@@ -18,6 +18,11 @@ spec:
       kind: Deployment
       name: theme-park
       namespace: theme-park
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: theme-park
+      namespace: theme-park      
   postBuild:
     substituteFrom:
       - kind: ConfigMap

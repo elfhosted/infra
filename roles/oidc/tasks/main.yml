@@ -1,0 +1,27 @@
+  - name: get k3s cluster CA cert
+    shell: cat /etc/rancher/k3s/k3s.yaml | yq "." -o=json |  jq  -r '.clusters[] | select(.name=="default") | .cluster | ."certificate-authority-data"'
+    register: _cluster_ca_cert
+
+  - name: set _cluster_ca_cert_contents
+    set_fact:
+      _cluster_ca_cert_contents: "{{ _cluster_ca_cert.stdout }}"
+
+  - name: "Prepare OIDC ClusterRoleBinding"
+    copy:
+      src: clusterrolebinding.yaml
+      dest: /tmp/clusterrolebinding.yaml
+
+  - name: "Apply OIDC ClusterRoleBinding"
+    shell: k3s kubectl apply -f /tmp/clusterrolebinding.yaml
+
+  - name: ensure {{ local_home }}/.kube exists
+    file:
+      path: "{{ local_home }}/.kube"
+      state: directory
+      
+  - name: Create local kubecontext
+    template:
+      src: oidc-kubeconfig.j2
+      dest: "{{ local_home }}/.kube/{{ dns_domain }}-oidc"
+    delegate_to: localhost
+    become: no

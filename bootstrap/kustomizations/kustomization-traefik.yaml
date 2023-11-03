@@ -8,6 +8,7 @@ spec:
   path: traefik
   dependsOn:
   - name: external-dns
+  - name: metallb--metallb-system
   prune: true # remove any elements later removed from the above path
   timeout: 2m # if not set, this defaults to interval duration, which is 1h
   sourceRef:
@@ -18,6 +19,11 @@ spec:
       kind: Deployment
       name: traefik
       namespace: traefik
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: traefik
+      namespace: traefik      
   postBuild:
     substituteFrom:
       - kind: ConfigMap

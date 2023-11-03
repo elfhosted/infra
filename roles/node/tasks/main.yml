@@ -8,6 +8,12 @@
     - tuned
     - nfs-common
     - iperf3
+    - jq
+
+- name: install yq via snap
+  snap:
+    name: yq    
+  when: "inventory_hostname in groups['k3s_servers']"  
 
 - name: Allow admin SSH sources to this host
   ufw:
@@ -85,4 +91,5 @@
       size: 100%FREE
       resizefs: true
   become: yes
-  when: "inventory_hostname in groups['k3s_agents']"  
+  when: "inventory_hostname in groups['k3s_agents']" 
+  ignore_errors: true # this only applies in prod, not CI

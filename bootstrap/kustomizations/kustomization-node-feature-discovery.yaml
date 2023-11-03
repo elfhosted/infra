@@ -11,6 +11,8 @@ spec:
   sourceRef:
     kind: GitRepository
     name: infra
+  dependsOn:
+  - name: cilium       
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
@@ -19,7 +21,7 @@ spec:
     - apiVersion: apps/v1
       kind: DaemonSet
       name: node-feature-discovery-worker
-      namespace: node-feature-discovery      
+      namespace: node-feature-discovery         
   postBuild:
     substituteFrom:
       - kind: ConfigMap

@@ -11,8 +11,15 @@ spec:
   sourceRef:
     kind: GitRepository
     name: infra
+  dependsOn:
+  - name: cluster-vars
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
+      name: kubernetes-replicator
+      namespace: kubernetes-replicator
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
       name: kubernetes-replicator
       namespace: kubernetes-replicator

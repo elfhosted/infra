@@ -2,6 +2,7 @@ cluster_nic_class_c: 10.0.42
 dns_domain: elfhosted.com
 k8s_api_ip: 10.0.40.4
 flux_repo_branch: main
+rook_ceph_osd_ram: 4Gi
 
 firewall:
   admin_source: "{{ vault_admin_source }}"

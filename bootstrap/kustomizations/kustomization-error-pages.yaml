@@ -18,6 +18,11 @@ spec:
       kind: Deployment
       name: error-pages
       namespace: error-pages
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: error-pages
+      namespace: error-pages        
   postBuild:
     substituteFrom:
       - kind: ConfigMap

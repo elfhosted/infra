@@ -18,6 +18,11 @@ spec:
       kind: Deployment
       name: actions-runner-controller
       namespace: actions-runner-controller
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: actions-runner-controller
+      namespace: action-runner-controller
   postBuild:
     substituteFrom:
       - kind: ConfigMap
