@@ -345,7 +345,7 @@ spec:
             memory: ${rook_ceph_osd_ram}
           requests:
             cpu: "1000m"
-            memory: ${rook_ceph_osd_ram}
+            memory: "${rook_ceph_osd_ram}" # debug
         prepareosd:
           # limits: It is not recommended to set limits on the OSD prepare job
           #         since it's a one-time burst for memory that must be allowed to
