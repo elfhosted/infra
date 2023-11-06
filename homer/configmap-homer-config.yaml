@@ -120,9 +120,9 @@ data:
           icon: "assets/png/traefik.png"
           url: "https://traefik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute   
-        - name: "LibreNMS"
-          icon: "assets/png/librenms.png"
-          url: "https://librenms.infra.${dns_domain}"
+        - name: "Authentik"
+          icon: "assets/png/authentik.png"
+          url: "https://authentik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute                              
           
       - name: "Manage"
