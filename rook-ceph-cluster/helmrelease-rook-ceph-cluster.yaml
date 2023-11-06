@@ -585,21 +585,21 @@ spec:
             resources:
               limits:
                 cpu: "2000m"
-                memory: "16Gi"
+                memory: "4Gi"
               requests:
                 cpu: "1000m"
-                memory: "8Gi"
+                memory: "4Gi"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.${dns_domain}/storage
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists      
+                    - key: node-role.${dns_domain}/storage
+                      operator: Exists         
         storageClass:
           enabled: true
           isDefault: false
