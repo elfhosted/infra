@@ -25,4 +25,6 @@ disable:
 - "local-storage"
 node-taint:
   - node-role.kubernetes.io/control-plane=true:NoSchedule
-# tls-san: {{ k8s_ha_api_ip }} # this seems to break, for some reason
+tls-san: 
+  - "{{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}"
+  - "{{ k8s_ha_api_ip }}"
