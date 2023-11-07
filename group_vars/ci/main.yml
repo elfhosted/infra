@@ -13,7 +13,7 @@ terraform_dir: ~/.terraform/elfhosted-ci
 proxmox_node: proxmox # all CI VMs go to the host named "proxmox"
 cluster_nic_class_c: 192.168.41
 dns_domain: ci-elfhosted.com
-k8s_api_ip: 192.168.41.11
+k8s_ha_api_ip: 192.168.41.100
 flux_repo_branch: ci
 
 firewall:

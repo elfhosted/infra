@@ -28,7 +28,7 @@
       mode: 0600
 
   - name: replace 127.0.0.1 in kubeconfig with k8s API IP (provided by load balancer or haproxy)
-    shell: sed -i 's/127.0.0.1/{{ k8s_api_ip }}/' .kube/config
+    shell: sed -i 's/127.0.0.1/{{ k8s_ha_api_ip }}/' .kube/config
 
   - name: get latest kubectl
     become: yes
