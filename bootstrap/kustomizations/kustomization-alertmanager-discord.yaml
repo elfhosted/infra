@@ -26,7 +26,11 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: alert-manager-discord
-      namespace: alert-manager-discord         
+      namespace: alert-manager-discord-infrastructure   
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: alert-manager-discord
+      namespace: alert-manager-discord-tenants            
   postBuild:
     substituteFrom:
       - kind: ConfigMap
