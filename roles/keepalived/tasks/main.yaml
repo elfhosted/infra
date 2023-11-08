@@ -15,3 +15,17 @@
     enabled: yes
     daemon_reload: yes
     state: restarted
+
+- name: Allow multicast for keepalived
+  ufw:
+    rule: allow
+    proto: any
+    dest: 224.0.0.18
+    state: enabled
+
+- name: Allow port 8443 for HA kube-apiserver
+  ufw:
+    rule: allow
+    port: 8443
+    proto: tcp
+    state: enabled

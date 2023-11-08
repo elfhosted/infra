@@ -1,6 +1,5 @@
 cluster_nic_class_c: 10.0.42
 dns_domain: elfhosted.com
-k8s_ha_api_url: 10.0.40.4
 
 packages:
   flux:

@@ -12,7 +12,7 @@ vrrp_script haproxy-check {
 vrrp_instance haproxy-vip {
     state MASTER
     priority 101
-    interface eth1 # only works in CI, obviously
+    interface eth0 # only works in CI, obviously
     virtual_router_id 47
     advert_int 3
 
