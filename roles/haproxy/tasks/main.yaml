@@ -1,0 +1,17 @@
+- name: Ensure haproxy is installed
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - haproxy
+
+- name: Copy haproxy config
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+
+- name: start and enable haproxy
+  systemd:
+    name: haproxy
+    enabled: yes
+    daemon_reload: yes
+    state: restarted

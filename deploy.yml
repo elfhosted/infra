@@ -14,9 +14,15 @@
 
   vars:
       local_home: "{{ lookup('env','HOME') }}"
+      haproxy_k8s_backends: |
+            {% for master in groups["k3s_servers"] %}
+            server k8s-api-{{ hostvars[master]["inventory_hostname_short"]}} {{ cluster_nic_class_c }}.{{ hostvars[master]["ansible_host"].split(".")[3] }}:6443 check
+            {% endfor %} 
 
-  tasks: 
+  tasks:
   - { import_role: { name: node }, tags: [ node ] }
+  - { import_role: { name: haproxy }, tags: [ haproxy ], when: "inventory_hostname in groups['k3s_servers']" }
+  - { import_role: { name: keepalived }, tags: [ keepalived ], when: "inventory_hostname in groups['k3s_servers']" }
   - { import_role: { name: k3s-server }, tags: [ k3s-server ] }
   - { import_role: { name: oidc }, tags: [ oidc], when: "groups['k3s_servers'][0] == inventory_hostname" }
 
@@ -35,7 +41,7 @@
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
   - { import_role: { name: velero }, tags: [ velero ] }  
   - { import_role: { name: flux }, tags: [ flux ] }  
-  - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }    
+  - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }
 
 - hosts: k3s_dwarves,k3s_agents
   gather_facts: no

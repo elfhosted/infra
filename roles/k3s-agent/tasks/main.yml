@@ -24,7 +24,7 @@
 - name: install k3s on workers
   environment:
     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-    K3S_URL: https://{{ k8s_ha_api_ip }}:6443 
+    K3S_URL: https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }} 
     K3S_TOKEN: "{{ node_token }}"
   shell: >
     curl -sfL https://get.k3s.io | 
@@ -42,7 +42,7 @@
 - name: install k3s on dwarves (tainted)
   shell: >
     curl -sfL https://get.k3s.io | 
-    K3S_URL=https://{{ k8s_ha_api_ip }}:6443 
+    K3S_URL=https://{{ k8s_ha_api_url }}:6443 
     K3S_TOKEN={{ node_token }}
     INSTALL_K3S_EXEC="agent \
       --flannel-iface={{ cluster_nic }} \
