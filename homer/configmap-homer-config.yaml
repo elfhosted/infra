@@ -105,26 +105,32 @@ data:
         # logo: "path/to/logo"
         items:
         - name: "AlertManager"
+          subtitle: "Alert"
           logo: "assets/png/alertmanager.png"
           url: "https://alertmanager.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute
         - name: "Grafana"
+          subtitle: "Dashboards and Performance Metrics"
           logo: "assets/png/grafana.png"
           url: "https://grafana.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute                  
         - name: "Prometheus"
+          subtitle: "Performance Metrics (raw)"
           logo: "assets/png/prometheus.png"
           url: "https://prometheus.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute
         - name: "Traefik"
+          subtitle: "HTTP(S) Ingress Dashboard"
           logo: "assets/png/traefik.png"
           url: "https://traefik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute   
         - name: "Authentik"
+          subtitle: "Identity Provider"
           logo: "assets/png/authentik.png"
           url: "https://authentik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute  
         - name: "Rook Ceph"
+          subtitle: "Network Storage Dashboard"
           logo: "assets/png/authentik.png"
           url: "https://rook-ceph.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute                                        
@@ -135,7 +141,7 @@ data:
         # logo: "path/to/logo"
         items:
         - name: "Wordpress Admin"
-          icon: "fas users-cog"
+          icon: "fa fas users-cog"
           url: "https://store.elfhosted.com/wp-admin/"
           target: "_blank" # optional html tag target attribute
           
