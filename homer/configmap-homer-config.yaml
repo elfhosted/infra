@@ -107,5 +107,9 @@ data:
           - name: "Concourse"
             logo: "assets/png/concourse.png"
             subtitle: "CI/CD Pipelines"
-            url: "https://concourse.ci-elpenguino.net"
+            url: "https://concourse.${dns_domain}"
             target: "_blank" # optional html tag target attribute
+          - name: "AlertManager"
+            icon: "assets/png/alertmanager.png"
+            url: "https://alertmanager.infra.${dns_domain}"
+            target: "_blank" # optional html tag target attribute            
