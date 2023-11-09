@@ -95,12 +95,19 @@ data:
         # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
         # logo: "path/to/logo"
         items:
-          - name: "Confluence"
-            # logo: "assets/png/confluence.png"
-            # Alternatively a fa icon can be provided:
-            icon: "fab fa-confluence"
-            subtitle: "Documentation"
-            # tag: "public"
-            # tagstyle: "is-danger"
-            url: "https://gerg.atlassian.net/wiki/spaces/KC/overview?homepageId=262265"
-            target: "_blank" # optional html tag target attribute
+        - name: "AlertManager"
+          icon: "assets/png/aletmanager.png"
+          url: "https://alertmanager.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute
+        - name: "Grafana"
+          icon: "assets/png/grafana.png"
+          url: "https://grafana.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute                  
+        - name: "Prometheus"
+          icon: "assets/png/prometheus.png"
+          url: "https://prometheus.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute
+        - name: "Traefik"
+          icon: "assets/png/traefik.png"
+          url: "https://traefik.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute   
