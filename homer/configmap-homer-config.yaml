@@ -9,53 +9,52 @@ data:
     # Homepage configuration
     # See https://fontawesome.com/icons for icons options
 
-    # Optional: Use external configuration file. 
+    # Optional: Use external configuration file.
     # Using this will ignore remaining config in this file
     # externalConfig: https://example.com/server-luci/config.yaml
 
-    title: "ElfHosted"
-    subtitle: "Infrastructure"
-    # documentTitle: "Welcome" # Customize the browser tab text
-    # logo: "assets/png/.png"
+    subtitle: "ci-elpenguino.net's"
+    title: "Kube Cluster Dashboard"
+    documentTitle: "ci-elpenguino.net Kube Cluster" # Customize the browser tab text
     # Alternatively a fa icon can be provided:
-    icon: "fas fa-skull-crossbones"
+    icon: "fas fa-globe"
 
-    header: false # Set to false to hide the header
-    footer: false
+    header: true # Set to false to hide the header
+    footer: true
 
-    columns: "4" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
-    connectivityCheck: false # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
+    columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+    connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
     # Optional theming
-    theme: default # 'default' or one of the themes available in 'src/assets/themes'.
+    # theme: default # 'default' or one of the themes available in 'src/assets/themes'.
 
     # Optional custom stylesheet
     # Will load custom CSS files. Especially useful for custom icon sets.
-    stylesheet:
-      - "assets/custom.css"
+    # stylesheet:
+    #   - "assets/custom.css"
 
     # Here is the exhaustive list of customization parameters
     # However all value are optional and will fallback to default if not set.
     # if you want to change only some of the colors, feel free to remove all unused key.
     colors:
       light:
-        highlight-primary: "#3367d6"
+        highlight-primary: "#222526"
         highlight-secondary: "#4285f4"
         highlight-hover: "#5a95f5"
-        background: "#f5f5f5"
+        background: "#222526"
         card-background: "#ffffff"
         text: "#363636"
-        text-header: "#424242"
+        text-header: "#ffffff"
         text-title: "#303030"
         text-subtitle: "#424242"
         card-shadow: rgba(0, 0, 0, 0.1)
         link-hover: "#363636"
-        background-image: /assets/infra.jpg
+        background-image: /assets/backgrounds/kubernetes-background-5.jpeg
       dark:
-        highlight-primary: "#3367d6"
+        highlight-primary: "#222526"
         highlight-secondary: "#4285f4"
         highlight-hover: "#5a95f5"
-        background: "#131313"
+        background: "#222526"
         card-background: "#2b2b2b"
         text: "#eaeaea"
         text-header: "#ffffff"
@@ -63,102 +62,45 @@ data:
         text-subtitle: "#f5f5f5"
         card-shadow: rgba(0, 0, 0, 0.4)
         link-hover: "#ffdd57"
-        background-image: /assets/infra.jpg
+        background-image: /assets/backgrounds/kubernetes-background-5.jpeg
 
-    # # Optional message
-    # message:
-    #   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
-    #   # mapping: # allows to map fields from the remote format to the one expected by Homer
-    #   #   title: 'id' # use value from field 'id' as title
-    #   #   content: 'value' # value from field 'value' as content
-    #   # refreshInterval: 10000 # Optional: time interval to refresh message
-    #   #
-    #   # Real example using chucknorris.io for showing Chuck Norris facts as messages:
-    #   url: https://{{ .Release.Name }}.${dns_domain}/assets/message/message.json"
-    #   mapping:
-    #     title: 'Capacity'
-    #     content: 'content'
-    #   refreshInterval: 300000
-    #   style: "is-warning"
-    #   title: "Wecome to your seedplicity home page!"
-    #   icon: "fa fa-exclamation-triangle"
-    #   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
     # Optional navbar
     # links: [] # Allows for navbar (dark mode, layout, and search) without any links
     links:
-      - name: "Admin"
-        icon: "fas fa-fire"
-        url: "https://infra.${dns_domain}"
+
+      - name: "Global"
+        icon: "fas fa-globe"
+        url: "#config"
+      - name: "Cluster"
+        icon: "fas fa-server"
+        url: "#cluster"
+      - name: "Controller"
+        icon: "fas fa-computer"
+        url: "#controller"  
+        
+      - name: "Dev"
+        icon: "fas fa-flask-vial"
+        url: "#dev"  
+      - name: "Prod"
+        icon: "fas fa-briefcase"
+        url: "#prod"        
 
     # Services
     # First level array represents a group.
     # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
     services:
-      - name: "Monitor"
-        icon: "fas fa-lock"
+      - name: "Cloud"
+        icon: "fas fa-cloud"
         # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
         # logo: "path/to/logo"
         items:
-        - name: "AlertManager"
-          icon: "assets/png/alertmanager.png"
-          url: "https://alertmanager.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute
-        - name: "Grafana"
-          icon: "assets/png/grafana.png"
-          url: "https://grafana.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute                  
-        - name: "Prometheus"
-          icon: "assets/png/prometheus.png"
-          url: "https://prometheus.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute
-        - name: "Traefik"
-          icon: "assets/png/traefik.png"
-          url: "https://traefik.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute   
-        - name: "Authentik"
-          icon: "assets/png/authentik.png"
-          url: "https://authentik.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute                              
-          
-      - name: "Manage"
-        icon: "fas fa-tasks"
-        # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
-        # logo: "path/to/logo"
-        items:
-        - name: "Wordpress Admin"
-          icon: "fas users-cog"
-          url: "https://store.elfhosted.com/wp-admin/"
-          target: "_blank" # optional html tag target attribute
-          
-      - name: "GitHub Repos"
-        icon: "fas fa-github"
-        items:
-          - name: "Tenants"
-            subtitle: "Tenant Configs (Private)"
-            icon: "fas fa-github"
-            tag: "github"
-            # # Optional tagstyle
-            # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhostetd-tenants"          
-          - name: "Flux"
-            subtitle: "GitOps Deployments"
-            icon: "fas fa-github"
-            tag: "github"
-            # # Optional tagstyle
-            # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elf-infra"  
-          - name: "Charts"
-            subtitle: "Helm Charts"
-            icon: "fas fa-github"
-            tag: "github"
-            # # Optional tagstyle
-            # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elf-charts"              
-          - name: "Containers"
-            # subtitle: ""
-            icon: "fas fa-github"
-            # tag: "app"
-            # # Optional tagstyle
-            # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/containers"              
+          - name: "Confluence"
+            # logo: "assets/png/confluence.png"
+            # Alternatively a fa icon can be provided:
+            icon: "fab fa-confluence"
+            subtitle: "Documentation"
+            # tag: "public"
+            # tagstyle: "is-danger"
+            url: "https://gerg.atlassian.net/wiki/spaces/KC/overview?homepageId=262265"
+            target: "_blank" # optional html tag target attribute
