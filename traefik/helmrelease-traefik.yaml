@@ -490,13 +490,13 @@ spec:
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
         disableAPICheck: true
         serviceMonitor:
-          metricRelabelings: []
+          metricRelabelings:
             - sourceLabels: [__name__]
               separator: ;
               regex: ^fluentd_output_status_buffer_(oldest|newest)_.+
               replacement: $1
               action: drop
-          relabelings: []
+          relabelings:
             - sourceLabels: [__meta_kubernetes_pod_node_name]
               separator: ;
               regex: ^(.*)$
@@ -515,19 +515,19 @@ spec:
           #   foo: bar
           # namespace: "another-namespace"
           # namespaceSelector: {}
-        prometheusRule:
-          additionalLabels: {}
-          namespace: "another-namespace"
-          rules:
-            - alert: TraefikDown
-              expr: up{job="traefik"} == 0
-              for: 5m
-              labels:
-                context: traefik
-                severity: warning
-              annotations:
-                summary: "Traefik Down"
-                description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
+      prometheusRule:
+        additionalLabels: {}
+        namespace: "another-namespace"
+        rules:
+          - alert: TraefikDown
+            expr: up{job="traefik"} == 0
+            for: 5m
+            labels:
+              context: traefik
+              severity: warning
+            annotations:
+              summary: "Traefik Down"
+              description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
 
     ## Tracing
     # -- https://doc.traefik.io/traefik/observability/tracing/overview/
