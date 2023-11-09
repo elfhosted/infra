@@ -1148,9 +1148,9 @@ spec:
           client_id: grafana
           scopes:  openid profile email groups
           role_attribute_path: contains(groups[*], 'admin-grafana') && 'Admin' || contains(groups[*], 'editor-grafana') && 'Editor' || 'Viewer'
-          api_url:  http://authentik.authentik.svc.cluster.local//application/o/userinfo/
-          token_url: https://keycloak.{{ helm_ingress_dns_suffix }}/auth/realms/kube-cluster/protocol/openid-connect/token
-          auth_url: https://keycloak.{{ helm_ingress_dns_suffix }}/auth/realms/kube-cluster/protocol/openid-connect/auth
+          api_url:  http://authentik.authentik.svc.cluster.local/application/o/userinfo/
+          token_url: https://authentik.infra.${dns_domain}/application/o/authorize/
+          auth_url: https://authentik.${dns_domain}/application/o/authorize/
 
 
     ## Flag to disable all the kubernetes component scrapers
