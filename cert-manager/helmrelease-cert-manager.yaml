@@ -712,9 +712,17 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
 
-      affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists 
 
-      tolerations: []
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
 
       # Optional additional labels to add to the startupapicheck Pods
       podLabels: {}

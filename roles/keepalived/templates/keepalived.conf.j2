@@ -1,0 +1,31 @@
+global_defs {
+  enable_script_security
+  script_user haproxy haproxy
+}
+
+vrrp_script haproxy-check {
+    script "/usr/bin/killall -0 haproxy"
+    interval 2
+    weight 20
+}
+
+vrrp_instance haproxy-vip {
+    state MASTER
+    priority 101
+    interface eth0 # only works in CI, obviously
+    virtual_router_id 47
+    advert_int 3
+
+    authentication {
+        auth_type PASS
+        auth_pass iambatman
+    }
+
+    virtual_ipaddress {
+        {{ k8s_ha_api_ip }}
+    }
+
+    track_script {
+        haproxy-check weight 20
+    }
+}

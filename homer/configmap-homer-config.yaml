@@ -105,25 +105,29 @@ data:
         # logo: "path/to/logo"
         items:
         - name: "AlertManager"
-          icon: "assets/png/aletmanager.png"
+          logo: "assets/png/alertmanager.png"
           url: "https://alertmanager.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute
         - name: "Grafana"
-          icon: "assets/png/grafana.png"
+          logo: "assets/png/grafana.png"
           url: "https://grafana.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute                  
         - name: "Prometheus"
-          icon: "assets/png/prometheus.png"
+          logo: "assets/png/prometheus.png"
           url: "https://prometheus.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute
         - name: "Traefik"
-          icon: "assets/png/traefik.png"
+          logo: "assets/png/traefik.png"
           url: "https://traefik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute   
-        - name: "LibreNMS"
-          icon: "assets/png/librenms.png"
-          url: "https://librenms.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute                              
+        - name: "Authentik"
+          logo: "assets/png/authentik.png"
+          url: "https://authentik.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute  
+        - name: "Rook Ceph"
+          logo: "assets/png/authentik.png"
+          url: "https://rook-ceph.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute                                        
           
       - name: "Manage"
         icon: "fas fa-tasks"

@@ -36,9 +36,9 @@ imagePullSecrets:
 # @default -- `"~/.kube/config"`
 kubeConfigPath: ""
 # -- (string) Kubernetes service host
-k8sServiceHost: "{{ k8s_api_ip }}"
+k8sServiceHost: "{{ k8s_ha_api_ip }}"
 # -- (string) Kubernetes service port
-k8sServicePort: "6443"
+k8sServicePort: "{{ k8s_ha_api_port }}"
 
 # -- Configure the client side rate limit for the agent and operator
 #

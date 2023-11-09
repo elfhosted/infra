@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: rook-ceph
-      version: v1.11.x
+      version: v1.12.x
       sourceRef:
         kind: HelmRepository
         name: rook-release
@@ -16,12 +16,16 @@ spec:
   timeout: 5m
   releaseName: rook-ceph
   values:
+    # Default values for rook-ceph-operator
+    # This is a YAML-formatted file.
+    # Declare variables to be passed into your templates.
+
     image:
       # -- Image
       repository: rook/ceph
       # -- Image tag
       # @default -- `master`
-      tag: v1.11.6
+      tag: master
       # -- Image pull policy
       pullPolicy: IfNotPresent
 
@@ -71,12 +75,23 @@ spec:
     # -- If true, create & use RBAC resources
     rbacEnable: true
 
+    rbacAggregate:
+      # -- If true, create a ClusterRole aggregated to [user facing roles](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles) for objectbucketclaims
+      enableOBCs: false
+
     # -- If true, create & use PSP resources
     pspEnable: false
 
-    # Set the priority class for the rook operator deployment if desired
+    # -- Set the priority class for the rook operator deployment if desired
     priorityClassName: cluster-critical
 
+    # -- Set the container security context for the operator
+    containerSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 2016
+      runAsGroup: 2016
+      capabilities:
+        drop: ["ALL"]
     # -- If true, loop devices are allowed to be used for osds in test clusters
     allowLoopDevices: false
 
@@ -87,8 +102,6 @@ spec:
       enableRbdDriver: true
       # -- Enable Ceph CSI CephFS driver
       enableCephfsDriver: true
-      # -- Enable Ceph CSI GRPC Metrics
-      enableGrpcMetrics: false
       # -- Enable host networking for CSI CephFS and RBD nodeplugins. This may be necessary
       # in some network configurations where the SDN does not provide access to an external cluster or
       # there is significant drop in read/write performance
@@ -165,6 +178,10 @@ spec:
       # -- CSI CephFS plugin daemonset update strategy, supported values are OnDelete and RollingUpdate
       # @default -- `RollingUpdate`
       cephFSPluginUpdateStrategy:
+
+      # -- A maxUnavailable parameter of CSI cephFS plugin daemonset update strategy.
+      # @default -- `1`
+      cephFSPluginUpdateStrategyMaxUnavailable:
 
       # -- CSI NFS plugin daemonset update strategy, supported values are OnDelete and RollingUpdate
       # @default -- `RollingUpdate`
@@ -453,17 +470,9 @@ spec:
       # -- Enable Ceph CSI Liveness sidecar deployment
       enableLiveness: false
 
-      # -- CSI CephFS driver GRPC metrics port
-      # @default -- `9091`
-      cephfsGrpcMetricsPort:
-
       # -- CSI CephFS driver metrics port
       # @default -- `9081`
       cephfsLivenessMetricsPort:
-
-      # -- Ceph CSI RBD driver GRPC metrics port
-      # @default -- `9090`
-      rbdGrpcMetricsPort:
 
       # -- CSI Addons server port
       # @default -- `9070`
@@ -483,6 +492,10 @@ spec:
         enabled: true
         # -- Service monitor scrape interval
         interval: 5s
+        # -- ServiceMonitor additional labels
+        labels: {}
+        # -- Use a different namespace for the ServiceMonitor
+        namespace:
 
       # -- Kubelet root directory path (if the Kubelet uses a different path for the `--root-dir` flag)
       # @default -- `/var/lib/kubelet`
@@ -490,32 +503,32 @@ spec:
 
       cephcsi:
         # -- Ceph CSI image
-        # @default -- `quay.io/cephcsi/cephcsi:v3.8.0`
+        # @default -- `quay.io/cephcsi/cephcsi:v3.9.0`
         image:
 
       registrar:
         # -- Kubernetes CSI registrar image
-        # @default -- `registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.7.0`
+        # @default -- `registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.8.0`
         image:
 
       provisioner:
         # -- Kubernetes CSI provisioner image
-        # @default -- `registry.k8s.io/sig-storage/csi-provisioner:v3.4.0`
+        # @default -- `registry.k8s.io/sig-storage/csi-provisioner:v3.5.0`
         image:
 
       snapshotter:
         # -- Kubernetes CSI snapshotter image
-        # @default -- `registry.k8s.io/sig-storage/csi-snapshotter:v6.2.1`
+        # @default -- `registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2`
         image:
 
       attacher:
         # -- Kubernetes CSI Attacher image
-        # @default -- `registry.k8s.io/sig-storage/csi-attacher:v4.1.0`
+        # @default -- `registry.k8s.io/sig-storage/csi-attacher:v4.3.0`
         image:
 
       resizer:
         # -- Kubernetes CSI resizer image
-        # @default -- `registry.k8s.io/sig-storage/csi-resizer:v1.7.0`
+        # @default -- `registry.k8s.io/sig-storage/csi-resizer:v1.8.0`
         image:
 
       # -- Image pull policy
@@ -534,7 +547,7 @@ spec:
         # -- Enable CSIAddons
         enabled: false
         # -- CSIAddons Sidecar image
-        image: "quay.io/csiaddons/k8s-sidecar:v0.5.0"
+        image: "quay.io/csiaddons/k8s-sidecar:v0.7.0"
 
       nfs:
         # -- Enable the nfs csi driver
@@ -568,7 +581,7 @@ spec:
       # If cephFSAttachRequired is set to false it skips the volume attachments and makes the creation
       # of pods using the CephFS PVC fast. **WARNING** It's highly discouraged to use this for
       # CephFS RWO volumes. Refer to this [issue](https://github.com/kubernetes/kubernetes/issues/103305) for more details.
-      cephFSAttachRequired: true # TODO - test this @funkypenguin
+      cephFSAttachRequired: true
       # -- Whether to skip any attach operation altogether for RBD PVCs. See more details
       # [here](https://kubernetes-csi.github.io/docs/skip-attach.html#skip-attach-with-csi-driver-object).
       # If set to false it skips the volume attachments and makes the creation of pods using the RBD PVC fast.
@@ -586,6 +599,8 @@ spec:
 
     # -- Enable discovery daemon
     enableDiscoveryDaemon: false
+    # -- Set the discovery daemon device discovery interval (default to 60m)
+    discoveryDaemonInterval: 60m
 
     # -- The timeout for ceph commands in seconds
     cephCommandsTimeoutSeconds: "15"
@@ -658,7 +673,7 @@ spec:
       #    - key: key
       #      operator: Exists
       #      effect: NoSchedule
-      nodeAffinity: node-role.kubernetes.io/control-plane
+      # nodeAffinity: key1=value1,value2; key2=value3
 
     # [^1]: `nodeAffinity` and `*NodeAffinity` options should have the format `"role=storage,rook; storage=ceph"` or `storage=;role=rook-example` or `storage=;` (_checks only for presence of key_)
 

@@ -1,0 +1,31 @@
+- name: Ensure keepalived is installed
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - keepalived
+
+- name: Copy keepalived config
+  template:
+    src: keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+
+- name: start and enable keepalived
+  systemd:
+    name: keepalived
+    enabled: yes
+    daemon_reload: yes
+    state: restarted
+
+- name: Allow multicast for keepalived
+  ufw:
+    rule: allow
+    proto: any
+    dest: 224.0.0.18
+    state: enabled
+
+- name: Allow port 8443 for HA kube-apiserver
+  ufw:
+    rule: allow
+    port: 8443
+    proto: tcp
+    state: enabled

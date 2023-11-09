@@ -61,15 +61,7 @@ spec:
         type: "custom"
         volumeSpec:
           configMap:
-            name: homer-config
-      dev:
-        enabled: "true"
-        mountPath: "/www/assets/dev.yml"
-        subPath: "dev.yml"
-        type: "custom"
-        volumeSpec:
-          configMap:
-            name: homer-config            
+            name: homer-config        
     configmap:
       config:
         enabled: false

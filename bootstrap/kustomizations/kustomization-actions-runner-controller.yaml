@@ -13,6 +13,7 @@ spec:
     name: infra
   dependsOn:
   - name: sealed-secrets
+  - name: traefik
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
