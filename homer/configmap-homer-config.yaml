@@ -90,10 +90,6 @@ data:
       - name: "Admin"
         icon: "fas fa-fire"
         url: "https://infra.${dns_domain}"
-      - name: "Dev"
-        icon: "fas fa-file-alt"
-        url: "#dev"
-
 
     # Services
     # First level array represents a group.
@@ -105,7 +101,7 @@ data:
         # logo: "path/to/logo"
         items:
         - name: "AlertManager"
-          icon: "assets/png/aletmanager.png"
+          icon: "assets/png/alertmanager.png"
           url: "https://alertmanager.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute
         - name: "Grafana"
