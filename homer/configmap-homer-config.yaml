@@ -96,7 +96,7 @@ data:
     # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
     services:
       - name: "Monitor"
-        icon: "fas fa-watchman-monitoring"
+        icon: "fas fa-lock"
         # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
         # logo: "path/to/logo"
         items:
@@ -135,26 +135,26 @@ data:
         icon: "fas fa-github"
         items:
           - name: "Tenants"
-            subtitle: "Tenant Configs"
+            subtitle: "Tenant Configs (Private)"
             icon: "fas fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-tenants"          
+            url: "https://github.com/geek-cookbook/elfhostetd-tenants"          
           - name: "Flux"
             subtitle: "GitOps Deployments"
             icon: "fas fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-flux"  
+            url: "https://github.com/geek-cookbook/elf-infra"  
           - name: "Charts"
             subtitle: "Helm Charts"
             icon: "fas fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-charts"              
+            url: "https://github.com/geek-cookbook/elf-charts"              
           - name: "Containers"
             # subtitle: ""
             icon: "fas fa-github"
