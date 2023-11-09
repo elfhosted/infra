@@ -488,7 +488,7 @@ spec:
           labels: {}
           annotations: {}
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
-      #  disableAPICheck: false
+        disableAPICheck: true
         serviceMonitor:
           metricRelabelings: []
             - sourceLabels: [__name__]
