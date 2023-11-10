@@ -133,7 +133,12 @@ data:
           subtitle: "Network Storage Dashboard"
           logo: "assets/png/authentik.png"
           url: "https://rook-ceph.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute                                        
+          target: "_blank" # optional html tag target attribute   
+        - name: "Polaris"
+          subtitle: "Best Practice Audit"
+          logo: "assets/png/polaris.png"
+          url: "https://polaris.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute                                                  
           
       - name: "Manage"
         icon: "fas fa-tasks"
