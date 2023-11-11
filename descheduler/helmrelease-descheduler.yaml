@@ -143,6 +143,14 @@ spec:
                 cpu:
                 memory:
                 pods: 3
+          # to be tweaked based on https://github.com/kubernetes-sigs/descheduler/#label-filtering
+          # labelSelector:
+          #   matchLabels:
+          #     component: redis
+          #   matchExpressions:
+          #     - {key: tier, operator: In, values: [cache]}
+          #     - {key: environment, operator: NotIn, values: [dev]}
+
 
     priorityClassName: system-cluster-critical # don't deschedule yourself
 

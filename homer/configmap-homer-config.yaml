@@ -124,14 +124,9 @@ data:
           logo: "assets/png/traefik.png"
           url: "https://traefik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute   
-        - name: "Authentik"
-          subtitle: "Identity Provider"
-          logo: "assets/png/authentik.png"
-          url: "https://authentik.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute  
         - name: "Rook Ceph"
           subtitle: "Network Storage Dashboard"
-          logo: "assets/png/authentik.png"
+          logo: "assets/png/ceph.png"
           url: "https://rook-ceph.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute   
         - name: "Polaris"
@@ -145,38 +140,43 @@ data:
         # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
         # logo: "path/to/logo"
         items:
+        - name: "Authentik"
+          subtitle: "Identity Provider"
+          logo: "assets/png/authentik.png"
+          url: "https://authentik.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute          
         - name: "Wordpress Admin"
-          icon: "fa fas users-cog"
+          logo: "assets/png/wordpress.png"
           url: "https://store.elfhosted.com/wp-admin/"
           target: "_blank" # optional html tag target attribute
           
       - name: "GitHub Repos"
-        icon: "fas fa-github"
+        icon: "fab fa-github"
         items:
           - name: "Tenants"
             subtitle: "Tenant Configs"
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
             url: "https://github.com/geek-cookbook/elfhosted-tenants"          
           - name: "Flux"
             subtitle: "GitOps Deployments"
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-flux"  
+            url: "https://github.com/geek-cookbook/elf-infra"  
           - name: "Charts"
             subtitle: "Helm Charts"
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-charts"              
+            url: "https://github.com/geek-cookbook/elf-charts"              
           - name: "Containers"
             # subtitle: ""
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             # tag: "app"
             # # Optional tagstyle
             # tagstyle: "is-success"
