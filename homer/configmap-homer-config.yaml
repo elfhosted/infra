@@ -13,8 +13,8 @@ data:
     # Using this will ignore remaining config in this file
     # externalConfig: https://example.com/server-luci/config.yaml
 
-    title: "ElfHosted"
-    subtitle: "Infrastructure"
+    subtitle: "${dns_domain}'s"
+    title: "Cluster Dashboard"
     # documentTitle: "Welcome" # Customize the browser tab text
     # logo: "assets/png/.png"
     # Alternatively a fa icon can be provided:
@@ -50,7 +50,7 @@ data:
         text-subtitle: "#424242"
         card-shadow: rgba(0, 0, 0, 0.1)
         link-hover: "#363636"
-        background-image: /assets/infra.jpg
+        background-image: /assets/backgrounds/${dashboard_background}
       dark:
         highlight-primary: "#3367d6"
         highlight-secondary: "#4285f4"
@@ -63,7 +63,7 @@ data:
         text-subtitle: "#f5f5f5"
         card-shadow: rgba(0, 0, 0, 0.4)
         link-hover: "#ffdd57"
-        background-image: /assets/infra.jpg
+        background-image: /assets/backgrounds/${dashboard_background}
 
     # # Optional message
     # message:

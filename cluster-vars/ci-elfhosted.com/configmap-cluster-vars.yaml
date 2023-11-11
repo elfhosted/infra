@@ -14,3 +14,4 @@ data:
   k3s_server_endpoint_3: 192.168.41.13
   prometheus_storage: '10' # don't append a unit here
   rook_ceph_osd_ram: 2Gi
+  dashboard_background: development.jpg
