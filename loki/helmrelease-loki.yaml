@@ -259,7 +259,7 @@ spec:
           {{- tpl (. | toYaml) $ | nindent 4 }}
         {{- end }}
       # Should authentication be enabled
-      auth_enabled: true
+      auth_enabled: false
       # -- memberlist configuration (overrides embedded default)
       memberlistConfig: {}
       # -- Extra memberlist configuration
