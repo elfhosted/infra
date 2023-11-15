@@ -438,7 +438,10 @@ spec:
         # -- Additional annotations for the `tokengen` Job
         annotations: {}
         # -- Tolerations for tokengen Job
-        tolerations: []
+        tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule        
         # -- Additional volumes for Pods
         extraVolumes: []
         # -- Additional volume mounts for Pods
@@ -656,7 +659,10 @@ spec:
           # -- The name of the PriorityClass for GrafanaAgent pods
           priorityClassName: null
           # -- Tolerations for GrafanaAgent pods
-          tolerations: []
+          tolerations:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+            effect: NoSchedule          
         # PodLogs configuration
         podLogs:
           # -- PodLogs version
@@ -704,7 +710,10 @@ spec:
         # -- Node selector for canary pods
         nodeSelector: {}
         # -- Tolerations for canary pods
-        tolerations: []
+        tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule        
         # -- The name of the PriorityClass for loki-canary pods
         priorityClassName: null
         # -- Image to use for loki canary
@@ -813,6 +822,12 @@ spec:
                 matchLabels:
                   {{- include "loki.writeSelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists                 
       # -- DNS config for write pods
       dnsConfig: {}
       # -- Node selector for write pods
@@ -820,7 +835,10 @@ spec:
       # -- Topology Spread Constraints for write pods
       topologySpreadConstraints: []
       # -- Tolerations for write pods
-      tolerations: []
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
       podManagementPolicy: "Parallel"
       persistence:
@@ -899,12 +917,21 @@ spec:
                   matchLabels:
                     {{- include "loki.tableManagerSelectorLabels" . | nindent 12 }}
                 topologyKey: failure-domain.beta.kubernetes.io/zone
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists                   
       # -- DNS config table-manager pods
       dnsConfig: {}
       # -- Node selector for table-manager pods
       nodeSelector: {}
       # -- Tolerations for table-manager pods
-      tolerations: []
+      tolerations: 
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule      
       # -- Enable deletes by retention
       retention_deletes_enabled: false
       # -- Set retention period
@@ -991,6 +1018,12 @@ spec:
                 matchLabels:
                   {{- include "loki.readSelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists                 
       # -- DNS config for read pods
       dnsConfig: {}
       # -- Node selector for read pods
@@ -998,7 +1031,10 @@ spec:
       # -- Topology Spread Constraints for read pods
       topologySpreadConstraints: []
       # -- Tolerations for read pods
-      tolerations: []
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
       podManagementPolicy: "Parallel"
       persistence:
@@ -1094,6 +1130,12 @@ spec:
                 matchLabels:
                   {{- include "loki.backendSelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists                 
       # -- DNS config for backend pods
       dnsConfig: {}
       # -- Node selector for backend pods
@@ -1101,7 +1143,10 @@ spec:
       # -- Topology Spread Constraints for backend pods
       topologySpreadConstraints: []
       # -- Tolerations for backend pods
-      tolerations: []
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
       podManagementPolicy: "Parallel"
       persistence:
@@ -1188,12 +1233,21 @@ spec:
                 matchLabels:
                   {{- include "loki.singleBinarySelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists               
       # -- DNS config for single binary pods
       dnsConfig: {}
       # -- Node selector for single binary pods
       nodeSelector: {}
       # -- Tolerations for single binary pods
-      tolerations: []
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule      
       persistence:
         # -- Enable StatefulSetAutoDeletePVC feature
         enableStatefulSetAutoDeletePVC: true
@@ -1354,6 +1408,12 @@ spec:
                 matchLabels:
                   {{- include "loki.gatewaySelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists                 
       # -- DNS config for gateway pods
       dnsConfig: {}
       # -- Node selector for gateway pods
@@ -1361,7 +1421,10 @@ spec:
       # -- Topology Spread Constraints for gateway pods
       topologySpreadConstraints: []
       # -- Tolerations for gateway pods
-      tolerations: []
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule      
       # Gateway service configuration
       service:
         # -- Port of the gateway service
