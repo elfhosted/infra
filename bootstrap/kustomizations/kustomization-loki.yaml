@@ -1,28 +1,40 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: promtail
+  name: loki
   namespace: flux-system
 spec:
   interval: 15m
-  path: promtail
+  path: loki
   prune: true # remove any elements later removed from the above path
   timeout: 2m # if not set, this defaults to interval duration, which is 1h
   dependsOn:
   - name: rook-ceph-cluster  
-  - name: loki
+  - name: kube-prometheus-stack
   sourceRef:
     kind: GitRepository
     name: infra
   healthChecks:
     - apiVersion: apps/v1
-      kind: DaemonSet
-      name: promtail
-      namespace: kube-system
+      kind: Deployment
+      name: loki-gateway
+      namespace: loki
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: loki-read
+      namespace: loki
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: loki-backend
+      namespace: loki
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: loki-write
+      namespace: loki
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: promtail
-      namespace: promtail      
+      name: loki
+      namespace: loki      
   postBuild:
     substituteFrom:
       - kind: ConfigMap
