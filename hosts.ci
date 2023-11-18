@@ -22,6 +22,11 @@ hobbit03    ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54
 [controllers]
 gollum01    ansible_host=192.168.40.3  cluster_nic=eth1 proxmox_id=400 mac=52:54:00:40:00:03
 
+[haproxy_servers]
+pixie01     ansible_host=192.168.40.11 cluster_nic=eth1 proxmox_id=401 mac=52:54:00:40:00:11
+pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54:00:40:00:12
+pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54:00:40:00:13
+
 [k3s_servers]
 pixie01     ansible_host=192.168.40.11 cluster_nic=eth1 proxmox_id=401 mac=52:54:00:40:00:11
 pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54:00:40:00:12

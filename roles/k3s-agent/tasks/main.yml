@@ -1,15 +1,15 @@
 ---
 # tasks file for k3s_agents
 
-- name: get node token
-  command: cat /var/lib/rancher/k3s/server/node-token
-  register: node_token_result
-  become: yes
-  delegate_to: "{{ groups['k3s_servers'][0] }}"
+# - name: get node token
+#   command: cat /var/lib/rancher/k3s/server/node-token
+#   register: node_token_result
+#   become: yes
+#   delegate_to: "{{ groups['k3s_servers'][0] }}"
 
-- set_fact:
-    node_token: "{{ node_token_result.stdout }}"
-    master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
+# - set_fact:
+#     node_token: "{{ node_token_result.stdout }}"
+#     master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
 
 - name: ensure /etc/rancher/ exists
   file:
@@ -24,8 +24,8 @@
 - name: install k3s on workers
   environment:
     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-    K3S_URL: https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }} 
-    K3S_TOKEN: "{{ node_token }}"
+    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
+    K3S_TOKEN: "{{ k3s_token }}"
   shell: >
     curl -sfL https://get.k3s.io | 
     INSTALL_K3S_EXEC="agent \

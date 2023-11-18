@@ -9,6 +9,7 @@
     - nfs-common
     - iperf3
     - jq
+    - snapd
 
 - name: install yq via snap
   snap:

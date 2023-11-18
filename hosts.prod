@@ -26,3 +26,6 @@ tinkerbell   ansible_host=tinkerbell-public.elfhosted.com
 
 [egress_gateways]
 tinkerbell   ansible_host=tinkerbell-tailscale.elfhosted.com cluster_nic=enp7s0
+
+[haproxy_servers]
+# nothing here, we use hetzner's LB in prod

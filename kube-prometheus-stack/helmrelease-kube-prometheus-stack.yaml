@@ -1071,7 +1071,7 @@ spec:
         editable: true
         orgId: 1
         type: loki
-        url: http://loki-gateway.loki.svc.cluster.local
+        url: http://loki-gateway.loki
         version: 1
         withCredentials: false      
       # - name: prometheus-sample
