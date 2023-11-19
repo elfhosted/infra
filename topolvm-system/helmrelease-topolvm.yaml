@@ -661,10 +661,10 @@ spec:
         # name: webhook-issuer
       podMutatingWebhook:
         # webhook.podMutatingWebhook.enabled -- Enable Pod MutatingWebhook.
-        enabled: true
+        enabled: false # don't want this interfering with pod creation
       pvcMutatingWebhook:
         # webhook.pvcMutatingWebhook.enabled -- Enable PVC MutatingWebhook.
-        enabled: true
+        enabled: false # don't want this interfering with pod creation
 
     # Container Security Context
     # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
