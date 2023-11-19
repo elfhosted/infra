@@ -139,6 +139,7 @@
     ansible_pipelining: no
 
 - name: "Create a volume group on top of /dev/sdb for topolvm on k3s servers"
+  become: true
   lvg:
     vg: vg0
     pvs: "/dev/sdb"
