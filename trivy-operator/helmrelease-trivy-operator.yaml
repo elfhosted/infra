@@ -36,7 +36,7 @@ spec:
     # -- excludeNamespaces is a comma separated list of namespaces (or glob patterns)
     # to be excluded from scanning. Only applicable in the all namespaces install
     # mode, i.e. when the targetNamespaces values is a blank string.
-    excludeNamespaces: ""
+    excludeNamespaces: "aa-*" # ignore tenant namespaces for now
 
     # -- targetWorkloads is a comma seperated list of Kubernetes workload resources
     # to be included in the vulnerability and config-audit scans
@@ -53,7 +53,7 @@ spec:
       # -- namespace to install the operator, defaults to the .Release.Namespace
       namespace: ""
       # -- replicas the number of replicas of the operator's pod
-      replicas: 1
+      replicas: 2
 
       # -- number of old history to retain to allow rollback (if not set, default Kubernetes value is set to 10)
       revisionHistoryLimit: ~
@@ -109,7 +109,7 @@ spec:
       accessGlobalSecretsAndServiceAccount: true
       # -- builtInTrivyServer The flag enable the usage of built-in trivy server in cluster ,its also override the following trivy params with built-in values
       # trivy.mode = ClientServer and serverURL = http://<serverServiceName>.<trivy operator namespace>:4975
-      builtInTrivyServer: false
+      builtInTrivyServer: true
       # -- controllerCacheSyncTimeout the duration to wait for controller resources cache sync (default: 5m).
       controllerCacheSyncTimeout: "5m"
 
@@ -162,7 +162,7 @@ spec:
       repository: "aquasecurity/trivy-operator"
       # -- tag is an override of the image tag, which is by default set by the
       # appVersion field in Chart.yaml.
-      tag: ""
+      tag: "0.16.0" # waiting for 0.17.0 for fix to nodecollector
       # -- pullPolicy set the operator pullPolicy
       pullPolicy: IfNotPresent
       # -- pullSecrets set the operator pullSecrets
@@ -345,7 +345,7 @@ spec:
         # "docker.io": docker-mirror.example.com
 
       # -- severity is a comma separated list of severity levels reported by Trivy.
-      severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+      severity: HIGH,CRITICAL
 
       # -- slow this flag is to use less CPU/memory for scanning though it takes more time than normal scanning. It fits small-footprint
       slow: true
