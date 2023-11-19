@@ -856,7 +856,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: ceph-block
+        storageClass: topolvm-provisioner
         # -- Selector for persistent disk
         selector: null
     # Configuration for the table-manager
@@ -1047,7 +1047,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: ceph-block
+        storageClass: topolvm-provisioner
         # -- Selector for persistent disk
         selector: null
     # Configuration for the backend pod(s)
@@ -1164,7 +1164,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: ceph-block
+        storageClass: topolvm-provisioner
         # -- Selector for persistent disk
         selector: null
     # Configuration for the single binary node(s)
@@ -1260,7 +1260,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: ceph-block
+        storageClass: topolvm-provisioner
         # -- Selector for persistent disk
         selector: null
     # Use either this ingress or the gateway, but not both at once.
