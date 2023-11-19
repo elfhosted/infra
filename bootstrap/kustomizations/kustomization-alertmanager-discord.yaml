@@ -12,7 +12,8 @@ spec:
     kind: GitRepository
     name: infra
   dependsOn:
-  - name: sealed-secrets    
+  - name: sealed-secrets
+  - name: cluster-vars    
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
