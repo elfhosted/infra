@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: infra 
   dependsOn:
-  - name: cluster-vars       
+  - name: kubernetes-replicator    
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
