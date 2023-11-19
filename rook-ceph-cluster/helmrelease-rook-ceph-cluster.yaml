@@ -14,6 +14,9 @@ spec:
         namespace: flux-system
   dependsOn:
   - name: "rook-ceph"
+  install:
+    disableWait: true # can take a long time to install, but it's just a bunch of CRDs
+    disableWaitForJobs: true
   interval: 15m
   timeout: 5m
   releaseName: rook-ceph-cluster
