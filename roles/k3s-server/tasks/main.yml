@@ -12,21 +12,22 @@
 
 - name: install k3s on master[0]
   environment:
-    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}" # need to remove this on a first install
     INSTALL_K3S_EXEC: "server"
     K3S_TOKEN: "{{ k3s_token }}"
     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-  shell: curl -sfL https://get.k3s.io |  sh - 
+  shell: curl -sfL https://get.k3s.io |  sh -
+  args: 
+    creates: /usr/local/bin/k3s # only run this if k3s isn't already installed on master
   when: "groups['k3s_servers'][0] == inventory_hostname"
 
-- name: install k3s on master[1-n] (now we have a URL)
+- name: install k3s on masters (now we have a HA API)
   environment:
      K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
      K3S_TOKEN: "{{ k3s_token }}"
      INSTALL_K3S_EXEC: "server"
      INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
   shell: curl -sfL https://get.k3s.io | sh -
-  when: "groups['k3s_servers'][0] != inventory_hostname"
+  # when: "groups['k3s_servers'][0] != inventory_hostname"
   throttle: 1
 
 - name: setup kubectl auto-completion

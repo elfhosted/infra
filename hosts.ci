@@ -6,13 +6,14 @@ proxmox_servers
 controllers
 
 [proxmox_servers]
-proxmox     ansible_host=192.168.29.3 ansible_user=root
+proxmox     ansible_host=192.168.29.3 ansible_user=root template_vm_id=1936
+p2          ansible_host=192.168.29.4 ansible_user=root template_vm_id=1935 proxmox_storage=local-lvm
 
 [proxmox_vms]
-pixie01     ansible_host=192.168.40.11 cluster_nic=eth1 proxmox_id=401 mac=52:54:00:40:00:11 proxmox_vm_cores=8
-pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54:00:40:00:12 proxmox_vm_cores=8
-pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54:00:40:00:13 proxmox_vm_cores=8
-sprite01    ansible_host=192.168.40.21 cluster_nic=eth1 proxmox_id=404 mac=52:54:00:40:00:21 proxmox_vm_cores=16
+pixie01     ansible_host=192.168.40.11 cluster_nic=eth1 proxmox_id=401 mac=52:54:00:40:00:11 proxmox_vm_cores=8 proxmox_node=p2 proxmox_storage=local-lvm
+pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54:00:40:00:12 proxmox_vm_cores=8 proxmox_node=p2 proxmox_storage=local-lvm
+pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54:00:40:00:13 proxmox_vm_cores=8 
+sprite01    ansible_host=192.168.40.21 cluster_nic=eth1 proxmox_id=404 mac=52:54:00:40:00:21 proxmox_vm_cores=16 proxmox_node=p2 proxmox_storage=local-lvm
 sprite02    ansible_host=192.168.40.22 cluster_nic=eth1 proxmox_id=405 mac=52:54:00:40:00:22 proxmox_vm_cores=16
 sprite03    ansible_host=192.168.40.23 cluster_nic=eth1 proxmox_id=406 mac=52:54:00:40:00:23 proxmox_vm_cores=16
 hobbit01    ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:54:00:40:00:81 proxmox_vm_cores=8

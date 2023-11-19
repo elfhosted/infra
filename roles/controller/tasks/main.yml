@@ -35,6 +35,7 @@
       src: "{{ item }}"
       dest: /usr/local/bin/
       mode: 0755
+    become: true
     with_fileglob:
       - "files/scripts/*"
 
