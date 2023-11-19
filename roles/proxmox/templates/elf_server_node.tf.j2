@@ -31,5 +31,10 @@ EOF
         size = "{{ proxmox_vm_disk0_size }}"
         type = "scsi"
     }
+    disk {
+        storage = "{{ proxmox_nfs_storage }}"
+        size = "{{ proxmox_vm_topolvm_disk_size }}"
+        type = "scsi"
+    }    
 }
 

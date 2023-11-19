@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: topolvm
-  namespace: topolvm
+  namespace: topolvm-system
 spec:
   chart:
     spec:
