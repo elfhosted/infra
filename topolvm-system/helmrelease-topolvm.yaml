@@ -110,15 +110,8 @@ spec:
       # scheduler.tolerations -- Specify tolerations on the Deployment or DaemonSet.
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
       tolerations:
-        - key: CriticalAddonsOnly
-          operator: Exists
         - key: node-role.kubernetes.io/control-plane
-          effect: Exists
-        # node-role.kubernetes.io/master taint will not be used in k8s 1.25+.
-        # cf. https://github.com/kubernetes/enhancements/blob/master/keps/sig-cluster-lifecycle/kubeadm/2067-rename-master-label-taint/README.md
-        # TODO: remove this when minimum supported version becomes 1.25.
-        - key: node-role.kubernetes.io/master
-          effect: Exists
+          effect: NoSchedule
 
       # scheduler.nodeSelector -- Specify nodeSelector on the Deployment or DaemonSet.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -178,7 +171,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
       tolerations:
         - key: node-role.kubernetes.io/control-plane
-          effect: Exists
+          effect: NoSchedule
 
       # lvmd.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -303,7 +296,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
       tolerations:
         - key: node-role.kubernetes.io/control-plane
-          effect: Exists
+          effect: NoSchedule
 
       # node.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -467,7 +460,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
       tolerations:
         - key: node-role.kubernetes.io/control-plane
-          effect: Exists
+          effect: NoSchedule
 
       # controller.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
