@@ -4,13 +4,13 @@ metadata:
   name: rook-ceph-cluster
   namespace: flux-system
 spec:
-  interval: 15m
+  interval: 1h
   path: ./rook-ceph-cluster
   dependsOn:
   - name: "rook-ceph"
   - name: "snapshot-validation-webhook" # because we need the CRDs
   prune: true # remove any elements later removed from the above path
-  timeout: 2m # if not set, this defaults to interval duration, which is 1h
+  timeout: 30m # this can take a while to reconcile
   sourceRef:
     kind: GitRepository
     name: infra
