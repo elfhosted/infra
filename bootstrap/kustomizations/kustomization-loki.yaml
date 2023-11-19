@@ -9,7 +9,7 @@ spec:
   prune: true # remove any elements later removed from the above path
   timeout: 2m # if not set, this defaults to interval duration, which is 1h
   dependsOn:
-  - name: rook-ceph-cluster  
+  - name: topolvm--topolvm-system 
   - name: kube-prometheus-stack
   sourceRef:
     kind: GitRepository

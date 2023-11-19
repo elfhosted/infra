@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-  - name: "rook-ceph-cluster"
+  - name: "topolvm--topolvm-system"
   interval: 15m
   path: ./kube-prometheus-stack
   prune: true # remove any elements later removed from the above path
