@@ -461,6 +461,7 @@ spec:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
+          operator: Exists
 
       # controller.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
