@@ -1317,7 +1317,7 @@ spec:
       # -- Specifies whether the gateway should be enabled
       enabled: true
       # -- Number of replicas for the gateway
-      replicas: 1
+      replicas: 3
       # -- Enable logging of 2xx and 3xx HTTP requests
       verboseLogging: true
       autoscaling:
