@@ -286,16 +286,16 @@ spec:
       # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
       storage:
         bucketNames:
-          chunks: chunks
+          chunks: loki # only using this currently
           ruler: ruler
           admin: admin
-        type: filesystem
+        type: s3
         s3:
           s3: null
-          endpoint: null
+          endpoint: http://minio.minio:9000
           region: null
-          secretAccessKey: null
-          accessKeyId: null
+          secretAccessKey: loki
+          accessKeyId: loki
           signatureVersion: null
           s3ForcePathStyle: false
           insecure: false
