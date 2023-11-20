@@ -1,0 +1,253 @@
+- delegate_to: localhost
+  become: no
+  block:
+
+  - name: "Do we already have a user for {{ authentik_user_email }}?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/users/?email={{ authentik_user_email }}"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: _existing_user
+
+  - name: set the primary user pk value
+    set_fact:
+      user_pk: "{{ _existing_user.json.results[0].pk }}"
+    when: _existing_user.json.results
+
+  - name: "Create {{ authentik_user_email }}"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/users/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        email: "{{ authentik_user_email }}"
+        username: "{{ authentik_user_username }}"
+        name: "{{ authentik_user_firstname }} {{ authentik_user_lastname }}"
+      body_format: json
+      status_code: 201
+    when: not _existing_user.json.results # resolves to false/undefined if search is empty
+    register: _new_user
+
+  - name: set the user pk value
+    set_fact:
+      user_pk: "{{ _new_user.json.pk }}" # no results here, because this is the result of a POST to create an individual user
+    when: not _existing_user.json.results
+
+  - name: "set user password"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/users/{{ user_pk }}/set_password/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        password: "{{ authentik_user_password }}"
+      body_format: json
+      status_code: 204
+
+  - name: "what's the ID of the built-in authentik Admins group?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/groups/?is_superuser=true"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: authentic_admins_group
+
+  - name: set the group pk value
+    set_fact:
+      authentic_admin_group_pk: "{{ authentic_admins_group.json.results[0].pk }}"
+
+  - name: "add our user to the built-in authentik Admins group"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/groups/{{ authentic_admin_group_pk }}/add_user/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      body:
+        pk: "{{ user_pk }}"
+      status_code: 200,204  
+
+  - name: "what's the ID of the built-in authentik default email scope?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?scope_name=email"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _email_propertymapping  
+
+  - name: "what's the ID of the built-in authentik default profile scope?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?scope_name=profile"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _profile_propertymapping       
+
+  - name: "what's the ID of the built-in authentik default authentication flow?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/flows/instances/default-authentication-flow/"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: _authentication_flow
+
+  - name: "what's the ID of the built-in authentik default-provider-authorization-implicit-consent authorization flow?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/flows/instances/default-provider-authorization-implicit-consent/"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: _authorization_flow
+
+  - name: "what's the ID of the built-in authentik signing key?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/crypto/certificatekeypairs/"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: _authentik_keypairs
+
+  - name: "Do we already have a property mapping for minio-policy?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?name=minio-policy"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _existing_minio_propertymapping
+
+  - name: set the propertymapping pk value
+    set_fact:
+      minio_propertymapping_pk: "{{ _existing_minio_propertymapping.json.results[0].pk }}"
+    when: _existing_minio_propertymapping.json.results
+
+  - name: "create minio-policy property mapping"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      body:
+        name: "minio-policy"
+        expression: |
+          if ak_is_group_member(request.user, name="admin-minio"):
+            return {
+              "minio-policy": "consoleAdmin"
+            }
+        scope_name: "minio-policy"
+      status_code: 201
+    when: not _existing_minio_propertymapping.json.results
+    register: _new_minio_propertymapping 
+    
+  - name: set the minio-policy propertymapping pk value
+    set_fact:
+      minio_propertymapping_pk: "{{ _new_minio_propertymapping.json.pk }}"
+    when: not _existing_minio_propertymapping.json.results        
+
+  # Create oauth applications / providers
+  - name: create oauth providers (controller)
+    include_tasks: authentik_oauth_provider_application.yml
+    with_items:
+      - name: kube-apiserver
+        secret: "{{ keycloak_kubernetes_client_secret }}"
+        redirect_uris: |
+          http://localhost:18000
+          https://dashboard-internal.{{ dns_domain }}/oauth2/callback
+          https://weave-gitops-internal.{{ dns_domain }}/oauth2/callback
+        icon: https://homer.{{ dns_domain }}/assets/png/kubernetes.png
+      - name: grafana
+        secret: "{{ keycloak_grafana_client_secret }}"
+        redirect_uris: |
+          https://grafana-internal.{{ dns_domain }}/login/generic_oauth
+        icon: https://homer.{{ dns_domain }}/assets/png/grafana.png
+    loop_control:
+      loop_var: provider
+
+  - name: "what's the ID of the built-in authentik Embedded Outpost?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/outposts/instances/?name__iexact=authentik+Embedded+Outpost"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: authentic_embedded_outpost
+
+  - name: Prepare to collect all proxy provider ids
+    set_fact: 
+      proxy_provider_pks: []
+        
+  - name: create proxy providers
+    include_tasks: authentik_proxy_provider_application.yml
+    with_items:
+      - name: alertmanager
+        external_host: https://alertmanager.infra.{{ dns_domain }}
+        internal_host: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc.cluster.local:9093
+        icon: https://infra.{{ dns_domain }}/assets/png/alertmanager.png
+      - name: prometheus
+        external_host: https://prometheus.infra.{{ dns_domain }}
+        internal_host: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090
+        icon: https://infra.{{ dns_domain }}/assets/png/prometheus.png
+      - name: polaris
+        external_host: https://polaris.infra.{{ dns_domain }}
+        internal_host: http://polaris-dashboard.polaris.svc.cluster.local:80
+        icon: https://infra.{{ dns_domain }}/assets/png/polaris.png
+      - name: homer
+        external_host: https://infra.{{ dns_domain }}
+        internal_host: http://homer.homer.svc.cluster.local:8080
+      - name: hubble
+        external_host: https://hubble.infra.{{ dns_domain }}
+        internal_host: http://hubble-ui.kube-system.svc.cluster.local:80
+        icon: https://infra.{{ dns_domain }}/assets/png/hubble.png
+      - name: thanos
+        external_host: https://thanos.infra.{{ dns_domain }}
+        internal_host: http://thanos-query.thanos.svc.cluster.local:9090
+        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png                      
+    loop_control:
+      loop_var: provider
+
+  - name: "Update default embedded outpost for proxy providers"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/outposts/instances/{{ authentic_embedded_outpost.json.results[0].pk }}/"
+      method: PUT
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        providers: "{{ proxy_provider_pks }}"
+        name: authentik Embedded Outpost
+        type: proxy
+        config: "{{ authentic_embedded_outpost.json.results[0].config }}"
+        authentik_host: https://authentik.infra.{{ dns_domain }}
+      body_format: json
+      status_code: 200
+
+  # Create groups
+  - name: create groups
+    include_tasks: authentik_group.yml
+    with_items:
+      - admin-kubernetes
+      - admin-grafana
+      - admin-minio
+    loop_control:
+      loop_var: group
+
+- name: Update authentication flow
+  include_tasks: authentik_authentication_flow.yml

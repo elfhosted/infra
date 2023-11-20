@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-health
+  namespace: kube-prometheus-stack
+spec:
+  groups:
+  - name: kube-cluster
+    rules:
+    - alert: HostHighCpuLoad
+      expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{mode!="idle"}[2m]))) > 0.8) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: Host high CPU load (instance {{ $labels.instance }})
+        description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    - alert: HostCpuHighIowait
+      expr: (avg by (instance) (rate(node_cpu_seconds_total{mode="iowait"}[5m])) * 100 > 50) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: Host CPU high iowait (instance {{ $labels.instance }})
+        description: "CPU iowait > 50%. A high iowait means that you are disk or network bound.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    - alert: HostPhysicalComponentTooHot
+      expr: ((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 90)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: Host physical component too hot (instance {{ $labels.instance }})
+        description: "Physical hardware component too hot\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    - alert: HostNodeOvertemperatureAlarm
+      expr: (node_hwmon_temp_crit_alarm_celsius == 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: Host node overtemperature alarm (instance {{ $labels.instance }})
+        description: "Physical node temperature alarm triggered\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    - alert: HostKernelVersionDeviations
+      expr: (count(sum(label_replace(node_uname_info, "kernel", "$1", "release", "([0-9]+.[0-9]+.[0-9]+).*")) by (kernel)) > 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: Host kernel version deviations (instance {{ $labels.instance }})
+        description: "Different kernel versions are running\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"

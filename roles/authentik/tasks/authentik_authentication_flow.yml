@@ -1,0 +1,106 @@
+  - name: "what's the ID of the built-in default-authentication-flow flow?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-authentication-flow/"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: default_authentication_flow
+
+  # - debug:
+  #     var: default_authentication_flow.json.pk
+
+  - name: "what's the pk of the built-in default-authentication-password stage?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/stages/password/?search=default-authentication-password"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: default_authentication_password
+
+  # - debug:
+  #     var: default_authentication_password.json.results[0].pk
+
+
+  - name: "what's the ID of the default-recovery-flow flow?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-recovery-flow/"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: default_recovery_flow
+
+  # - debug:
+  #     var: default_recovery_flow.json.pk      
+
+  - name: "get pk for default-authentication-identification stage in built-in default-authentication-flow"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/bindings/?target={{ default_authentication_flow.json.pk }}&search=default-authentication-identification"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: _stage
+
+  - debug:
+      var: _stage.json.results[0].pk
+
+  - name: "update default-authentication-identification stage"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/stages/identification/{{ _stage.json.results[0].stage}}/"
+      method: PUT
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+      body:
+        password_stage:	"{{ default_authentication_password.json.results[0].pk }}"
+        recovery_flow:	"{{ default_recovery_flow.json.pk }}"
+        name: "default-authentication-identification"
+        user_fields: ["username", "email"]
+        case_insensitive_matching: true
+        show_matched_user: true
+        enrollment_flow: null
+        passwordless_flow: null
+        sources: []
+        show_source_labels: false
+    register: _result
+
+  - name: "Update default-authentication-flow flow"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-authentication-flow/"
+      method: PUT
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+      body:
+        name: "{{ helm_ingress_dns_suffix }} {{ helm_chart_context }} login"
+        slug: "default-authentication-flow"
+        title: "{{ helm_ingress_dns_suffix }} {{ helm_chart_context }} login"
+        designation: "authentication"
+        policy_engine_mode: "any"
+        compatibility_mode: true
+        layout: "stacked"
+        denied_action: "message_continue"
+        authentication: "none"
+
+  - name: "Update login background"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-authentication-flow/set_background_url/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+      body:
+        url: "{{ authentik_login_background }}"
+
+
+

@@ -1,0 +1,131 @@
+  # - name: Use a null skip_path_regex if it's not set
+  #   set_fact: 
+  #     skip_path_regex: dummy-value-because-none-was-provided
+    
+  # - name: If we were offered a skip_path_regex for this provider, apply it
+  #   set_fact: 
+  #     skip_path_regex: "{{ provider.skip_path_regex }}"
+  #   when: provider.skip_path_regex is defined
+
+  # - debug:
+  #     var: skip_path_regex
+
+  - name: "Do we already have a proxy provider for {{ provider.name }}?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/providers/proxy/?name__iexact={{ provider.name }}"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _existing_provider
+
+  - name: "Update provider for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/providers/proxy/{{ _existing_provider.json.results[0].pk }}/"
+      method: PUT
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        name: "{{ provider.name }}"      
+        external_host: "{{ provider.external_host }}"
+        internal_host: "{{ provider.internal_host }}"
+        internal_host_ssl_validation: false
+        authentication_flow: "{{ _authentication_flow.json.pk }}"
+        authorization_flow: "{{ _authorization_flow.json.pk }}"   
+        # skip_path_regex: "{{ skip_path_regex }}"
+      body_format: json
+      status_code: 200
+    when: _existing_provider.json.results # resolves to false/undefined if search is empty
+
+  - name: set the (existing) provider pk value
+    set_fact:
+      provider_pk: "{{ _existing_provider.json.results[0].pk }}"
+    when: _existing_provider.json.results
+
+  - name: "Create provider for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/providers/proxy/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        name: "{{ provider.name }}"
+        external_host: "{{ provider.external_host }}"
+        internal_host: "{{ provider.internal_host }}"
+        internal_host_ssl_validation: false
+        authentication_flow: "{{ _authentication_flow.json.pk }}"
+        authorization_flow: "{{ _authorization_flow.json.pk }}"     
+        # skip_path_regex: "{{ skip_path_regex }}"
+      body_format: json
+      status_code: 201
+    when: not _existing_provider.json.results # resolves to false/undefined if search is empty
+    register: _new_provider
+
+  - name: set the (new) provider pk value
+    set_fact:
+      provider_pk: "{{ _new_provider.json.pk }}"
+    when: not _existing_provider.json.results
+
+  - name: "Do we already have an application for {{ provider.name }}?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/applications/?name={{ provider.name }}"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _existing_application
+
+  - name: set the (existing) application pk value
+    set_fact:
+      application_pk: "{{ _existing_application.json.results[0].pk }}"
+    when: _existing_application.json.results
+
+  - name: "Create application for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/applications/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        name: "{{ provider.name }}"
+        slug: "{{ provider.name }}"
+        provider: "{{ provider_pk }}"
+      body_format: json
+      status_code: 201
+    when: not _existing_application.json.results # resolves to false/undefined if search is empty
+    register: _new_application
+
+  - name: set the (new) application pk value
+    set_fact:
+      application_pk: "{{ _new_application.json.pk }}"
+    when: not _existing_application.json.results
+
+  - name: "Set icon for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/applications/{{ provider.name }}/set_icon_url/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        url: "{{ provider.icon }}"
+      body_format: json
+      status_code: 200
+    when: provider.icon is defined
+
+  - name: Combine all the proxy providers pks to add to outpost
+    set_fact: 
+      proxy_provider_pks: "{{ proxy_provider_pks + [ provider_pk ] }}"
+
+  - name: Create ingress manifest for {{ provider.external_host }} (controller)
+    template:
+      src: "outpost-ingress.yaml.j2"
+      dest: "flux/{{ helm_ingress_dns_suffix }}/{{ helm_chart_context }}/flux-system/ingress-{{ provider.name }}.{{ helm_ingress_dns_suffix }}.yaml"
+    when: helm_chart_context == "controller"
+
+  - name: Create virtualservice manifest for {{ provider.external_host }} (cluster)
+    template:
+      src: "outpost-istio-virtualservice.yaml.j2"
+      dest: "flux/{{ helm_ingress_dns_suffix }}/{{ helm_chart_context }}/istiod--istio-system/virtualservice-{{ provider.name }}.{{ helm_ingress_dns_suffix }}.yaml"
+    when: helm_chart_context == "cluster"    
