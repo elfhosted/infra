@@ -17,7 +17,7 @@ spec:
       tolerations:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists          
-      - key: "node-role.{dns_domain}/download"
+      - key: "node-role.${dns_domain}/download"
         operator: "Exists"
         effect: "NoSchedule"           
       serviceAccountName: csi-nodeplugin-rclone
