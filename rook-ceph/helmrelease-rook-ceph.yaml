@@ -56,7 +56,7 @@ spec:
     # Tolerations for the rook-ceph-operator to allow it to run on nodes with particular taints
     tolerations:
       - key: node-role.kubernetes.io/control-plane
-        operator: Exists    
+        operator: Exists            
 
     # -- Delay to use for the `node.kubernetes.io/unreachable` pod failure toleration to override
     # the Kubernetes default of 5 minutes
@@ -459,7 +459,10 @@ spec:
       # -- Array of tolerations in YAML format which will be added to CephCSI plugin DaemonSet
       pluginTolerations:  
         - key: node-role.kubernetes.io/control-plane # not sure this'll work for PVC mounting though
-          operator: Exists                  
+          operator: Exists     
+        - key: "node-role.{dns_domain}/download"
+          operator: "Exists"
+          effect: "NoSchedule"                          
       #    - key: key
       #      operator: Exists
       #      effect: NoSchedule

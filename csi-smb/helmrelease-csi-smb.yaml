@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: csi-driver-smb
-      version: 1.12.x
+      version: 1.13.x
       sourceRef:
         kind: HelmRepository
         name: csi-driver-smb
@@ -19,23 +19,23 @@ spec:
     image:
       baseRepo: registry.k8s.io/sig-storage
       smb:
-        repository: registry.k8s.io/sig-storage/smbplugin
-        tag: v1.12.0
+        repository: gcr.io/k8s-staging-sig-storage/smbplugin
+        tag: canary
         pullPolicy: IfNotPresent
       csiProvisioner:
         repository: registry.k8s.io/sig-storage/csi-provisioner
-        tag: v3.5.0
+        tag: v3.6.2
         pullPolicy: IfNotPresent
       livenessProbe:
         repository: registry.k8s.io/sig-storage/livenessprobe
-        tag: v2.10.0
+        tag: v2.11.0
         pullPolicy: IfNotPresent
       nodeDriverRegistrar:
         repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
-        tag: v2.8.0
+        tag: v2.9.1
         pullPolicy: IfNotPresent
       csiproxy:
-        repository: ghcr.io/kubernetes-sigs/sig-windows/csi-provisioner
+        repository: ghcr.io/kubernetes-sigs/sig-windows/csi-proxy
         tag: v1.1.2
         pullPolicy: IfNotPresent
 
@@ -96,6 +96,9 @@ spec:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
+        - key: "node-role.{dns_domain}/download"
+          operator: "Exists"
+          effect: "NoSchedule"          
 
     node:
       maxUnavailable: 1
@@ -165,6 +168,7 @@ spec:
         dsName: csi-proxy-win # daemonset name
         tolerations: {}
         affinity: {}
+        username: "NT AUTHORITY\\SYSTEM"
         nodeSelector:
           "kubernetes.io/os": windows
 
