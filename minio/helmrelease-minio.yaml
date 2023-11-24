@@ -289,7 +289,7 @@ spec:
     ##
     resources:
       requests:
-        memory: 1Gi
+        memory: 500Mi
 
     ## List of policies to be created after minio install
     ##
