@@ -669,6 +669,7 @@ spec:
           metadataPool:
             replicated:
               size: 2
+            deviceClass: ssd
           dataPools:
             - failureDomain: host
               replicated:
@@ -729,6 +730,7 @@ spec:
           metadataPool:
             replicated:
               size: 2
+            deviceClass: ssd
           dataPools:
             - failureDomain: host
               replicated:
