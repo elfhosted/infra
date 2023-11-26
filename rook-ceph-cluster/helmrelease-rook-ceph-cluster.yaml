@@ -464,23 +464,35 @@ spec:
           # - name: goblin01
           #   devices:
           #     - name: nvme0n1p3
+                # config:
+                #   deviceClass: ssd          
           #     - name: nvme1n1  
-
+                # config:
+                #   deviceClass: ssd
           # - name: goblin02
           #   devices:
           #     - name: nvme0n1p3
+                # config:
+                #   deviceClass: ssd
           #     - name: nvme1n1  
-
+                # config:
+                #   deviceClass: ssd
           # - name: goblin03
           #   devices:
           #     - name: nvme0n1
+                # config:
+                #   deviceClass: ssd          
           #     - name: nvme1n1p3 # this booted backwards in rescue mode                                    
+                # config:
+                #   deviceClass: ssd
 
           # and the CI nodes...
           - name: hobbit01
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
+                config:
+                  deviceClass: ssd
               - name: sdc
               - name: sdd
               - name: sde
@@ -488,7 +500,9 @@ spec:
           - name: hobbit02
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
+                config:
+                  deviceClass: ssd              
               - name: sdc
               - name: sdd
               - name: sde
@@ -496,7 +510,9 @@ spec:
           - name: hobbit03
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
+                config:
+                  deviceClass: ssd
               - name: sdc
               - name: sdd
               - name: sde
