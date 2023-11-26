@@ -460,7 +460,7 @@ spec:
       pluginTolerations:  
         - key: node-role.kubernetes.io/control-plane # not sure this'll work for PVC mounting though
           operator: Exists     
-        - key: "node-role.{dns_domain}/download"
+        - key: "node-role.${dns_domain}/download"
           operator: "Exists"
           effect: "NoSchedule"                          
       #    - key: key
