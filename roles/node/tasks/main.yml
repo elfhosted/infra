@@ -94,3 +94,4 @@
   become: yes
   when: "inventory_hostname in groups['k3s_agents']" 
   ignore_errors: true # this only applies in prod, not CI
+
