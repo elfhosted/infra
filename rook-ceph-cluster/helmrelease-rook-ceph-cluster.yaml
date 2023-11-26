@@ -500,10 +500,10 @@ spec:
                 cpu: 3
                 memory: 63488Mi # 62GB, we want to maximize the use of these             
             devices:
-              - name: nvme0n1
+              - name: nvme0n1p3
                 config:
                   deviceClass: ssd          
-              - name: nvme1n1p3 # this booted backwards in rescue mode                                    
+              - name: nvme1n1                                  
                 config:
                   deviceClass: ssd
 
