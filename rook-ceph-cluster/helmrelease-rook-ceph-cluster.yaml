@@ -14,6 +14,9 @@ spec:
         namespace: flux-system
   dependsOn:
   - name: "rook-ceph"
+  install:
+    disableWait: true # can take a long time to install, but it's just a bunch of CRDs
+    disableWaitForJobs: true
   interval: 15m
   timeout: 5m
   releaseName: rook-ceph-cluster
@@ -458,12 +461,59 @@ spec:
               - name: sde
               - name: sdf
 
+          - name: goblin01
+            resources: 
+              limits: 
+                cpu: 3
+                memory: 63488Mi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 3
+                memory: 63488Mi # 62GB, we want to maximize the use of these          
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd    
+              - name: nvme1n1  
+                config:
+                  deviceClass: ssd
+          - name: goblin02
+            resources: 
+              limits: 
+                cpu: 3
+                memory: 63488Mi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 3
+                memory: 63488Mi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd
+              - name: nvme1n1  
+                config:
+                  deviceClass: ssd
+          - name: goblin03
+            resources: 
+              limits: 
+                cpu: 3
+                memory: 63488Mi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 3
+                memory: 63488Mi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1p3 # this booted backwards in rescue mode                                    
+                config:
+                  deviceClass: ssd
 
           # and the CI nodes...
           - name: hobbit01
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
+                config:
+                  deviceClass: ssd
               - name: sdc
               - name: sdd
               - name: sde
@@ -471,7 +521,9 @@ spec:
           - name: hobbit02
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
+                config:
+                  deviceClass: ssd              
               - name: sdc
               - name: sdd
               - name: sde
@@ -479,7 +531,9 @@ spec:
           - name: hobbit03
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
+                config:
+                  deviceClass: ssd
               - name: sdc
               - name: sdd
               - name: sde
@@ -549,6 +603,7 @@ spec:
         # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
         spec:
           failureDomain: host
+          deviceClass: hdd
           replicated:
             size: 2
           # Enables collecting RBD per-image IO statistics by enabling dynamic OSD performance counters. Defaults to false.
@@ -623,6 +678,7 @@ spec:
               parameters:
                 pg_num: '1024' # create the pool with a pre-configured placement group number
                 pgp_num: '1024' # this should at least match `pg_num` so that all PGs are used
+              deviceClass: hdd
           metadataServer:
             activeCount: 1
             activeStandby: true
@@ -667,6 +723,66 @@ spec:
             # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
             # in hyperconverged settings where the volume is mounted on the same node as the osds.
             csi.storage.k8s.io/fstype: ext4
+      - name: ceph-filesystem-ssd
+        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
+        spec:
+          metadataPool:
+            replicated:
+              size: 2
+          dataPools:
+            - failureDomain: host
+              replicated:
+                size: 2
+              # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
+              name: data0
+              parameters:
+                # pg_num: '1024' # create the pool with a pre-configured placement group number
+                # pgp_num: '1024' # this should at least match `pg_num` so that all PGs are used
+              deviceClass: ssd
+          metadataServer:
+            activeCount: 1
+            activeStandby: true
+            resources:
+              limits:
+                cpu: "2000m"
+                memory: "16Gi"
+              requests:
+                cpu: "1000m"
+                memory: "4Gi"
+            priorityClassName: system-cluster-critical
+            placement:
+              tolerations:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: node-role.kubernetes.io/control-plane
+                      operator: Exists    
+        storageClass:
+          enabled: true
+          isDefault: false
+          name: ceph-filesystem-ssd
+          # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
+          pool: data0
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          volumeBindingMode: "Immediate"
+          mountOptions: []
+          # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage.md#provision-storage for available configuration
+          parameters:
+            # The secrets contain Ceph admin credentials.
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+            csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+            # Specify the filesystem type of the volume. If not specified, csi-provisioner
+            # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
+            # in hyperconverged settings where the volume is mounted on the same node as the osds.
+            csi.storage.k8s.io/fstype: ext4            
 
     # -- Settings for the filesystem snapshot class
     # @default -- See [CephFS Snapshots](../Storage-Configuration/Ceph-CSI/ceph-csi-snapshot.md#cephfs-snapshots)
@@ -696,54 +812,54 @@ spec:
 
     # -- A list of CephObjectStore configurations to deploy
     # @default -- See [below](#ceph-object-stores)
-    cephObjectStores:
-      - name: ceph-objectstore
-        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration
-        spec:
-          metadataPool:
-            failureDomain: host
-            replicated:
-              size: 3
-          dataPool:
-            failureDomain: host
-            erasureCoded:
-              dataChunks: 2
-              codingChunks: 1
-          preservePoolsOnDelete: true
-          gateway:
-            port: 80
-            resources:
-              limits:
-                cpu: "2000m"
-                memory: "2Gi"
-              requests:
-                cpu: "1000m"
-                memory: "1Gi"
-            # securePort: 443
-            # sslCertificateRef:
-            instances: 1
-            priorityClassName: system-cluster-critical
-        storageClass:
-          enabled: true
-          name: ceph-bucket
-          reclaimPolicy: Delete
-          volumeBindingMode: "Immediate"
-          # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim.md#storageclass for available configuration
-          parameters:
-            # note: objectStoreNamespace and objectStoreName are configured by the chart
-            region: us-east-1
-        ingress:
-          # Enable an ingress for the ceph-objectstore
-          enabled: false
-          # annotations: {}
-          # host:
-          #   name: objectstore.example.com
-          #   path: /
-          # tls:
-          # - hosts:
-          #     - objectstore.example.com
-          #   secretName: ceph-objectstore-tls
-          # ingressClassName: nginx
+    cephObjectStores: []
+      # - name: ceph-objectstore
+      #   # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration
+      #   spec:
+      #     metadataPool:
+      #       failureDomain: host
+      #       replicated:
+      #         size: 3
+      #     dataPool:
+      #       failureDomain: host
+      #       erasureCoded:
+      #         dataChunks: 2
+      #         codingChunks: 1
+      #     preservePoolsOnDelete: true
+      #     gateway:
+      #       port: 80
+      #       resources:
+      #         limits:
+      #           cpu: "2000m"
+      #           memory: "2Gi"
+      #         requests:
+      #           cpu: "1000m"
+      #           memory: "1Gi"
+      #       # securePort: 443
+      #       # sslCertificateRef:
+      #       instances: 1
+      #       priorityClassName: system-cluster-critical
+      #   storageClass:
+      #     enabled: true
+      #     name: ceph-bucket
+      #     reclaimPolicy: Delete
+      #     volumeBindingMode: "Immediate"
+      #     # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim.md#storageclass for available configuration
+      #     parameters:
+      #       # note: objectStoreNamespace and objectStoreName are configured by the chart
+      #       region: us-east-1
+      #   ingress:
+      #     # Enable an ingress for the ceph-objectstore
+      #     enabled: false
+      #     # annotations: {}
+      #     # host:
+      #     #   name: objectstore.example.com
+      #     #   path: /
+      #     # tls:
+      #     # - hosts:
+      #     #     - objectstore.example.com
+      #     #   secretName: ceph-objectstore-tls
+      #     # ingressClassName: nginx
     # cephECBlockPools are disabled by default, please remove the comments and set desired values to enable it
     #cephECBlockPools:
     #  # For erasure coded a replicated metadata pool is required.
