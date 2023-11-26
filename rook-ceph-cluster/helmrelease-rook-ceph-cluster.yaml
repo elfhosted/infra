@@ -693,7 +693,7 @@ spec:
             replicated:
               size: 2
           dataPools:
-            - failureDomain: ssd
+            - failureDomain: host
               replicated:
                 size: 2
               # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
