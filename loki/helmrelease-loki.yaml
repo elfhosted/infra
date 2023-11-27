@@ -298,7 +298,7 @@ spec:
           accessKeyId: loki
           signatureVersion: null
           s3ForcePathStyle: true
-          insecure: false
+          insecure: true
           http_config: {}
         gcs:
           chunkBufferSize: 0
