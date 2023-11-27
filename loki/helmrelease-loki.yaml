@@ -297,7 +297,7 @@ spec:
           secretAccessKey: ${loki_secretAccessKey}
           accessKeyId: loki
           signatureVersion: null
-          s3ForcePathStyle: false
+          s3ForcePathStyle: true
           insecure: false
           http_config: {}
         gcs:
