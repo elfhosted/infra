@@ -14,4 +14,5 @@ data:
   k3s_server_endpoint_3: 10.0.42.13
   prometheus_storage: '300' # don't append a unit here
   rook_ceph_osd_ram: 4Gi
+  rook_ceph_mds_ram: 4Gi
   dashboard_background: production.jpg  
