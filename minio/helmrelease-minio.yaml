@@ -295,7 +295,7 @@ spec:
     ##
     ## In addition to default policies [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
     ## you can define additional policies with custom supported actions and resources
-    policies: []
+    policies:
     ## writeexamplepolicy policy grants creation or deletion of buckets with name
     ## starting with example. In addition, grants objects write permissions on buckets starting with
     ## example.
@@ -346,6 +346,13 @@ spec:
     #               "10.0.0.0/8",
     #               "192.168.0.0/24"
     #             ]
+    - name: loki
+      statements:
+        - resources:
+          - 'arn:aws:s3:::loki/*'
+          - 'arn:aws:s3:::loki'
+          actions:
+          - 's3:*'
     #
     ## Additional Annotations for the Kubernetes Job makePolicyJob
     makePolicyJob:
@@ -368,11 +375,14 @@ spec:
       ## NOTE: this will fail if LDAP is enabled in your MinIO deployment
       ## make sure to disable this if you are using LDAP.
       - accessKey: console
-        secretKey: console123
+        existingSecret: console-credentials
+        existingSecretKey: password
         policy: consoleAdmin
       - accessKey: loki
-        secretKey: loki
-        policy: readwrite
+        existingSecret: loki-credentials        
+        existingSecretKey: password
+        policy: loki
+
       # Or you can refer to specific secret
       #- accessKey: externalSecret
       #  existingSecret: my-secret
@@ -456,7 +466,7 @@ spec:
       - name: loki
         policy: none
         purge: false
-        versioning: true
+        versioning: false
         # set objectlocking for
         # bucket [true|false] NOTE: versioning is enabled by default if you use locking
         objectlocking: false      
