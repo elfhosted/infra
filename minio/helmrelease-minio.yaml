@@ -201,8 +201,8 @@ spec:
     ##
 
     ingress:
-      enabled: false
-      ingressClassName: ~
+      enabled: true
+      ingressClassName: nginx
       labels: {}
         # node-role.kubernetes.io/ingress: platform
       annotations: {}
@@ -215,7 +215,7 @@ spec:
         # nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
       path: /
       hosts:
-        - minio-example.local
+        - minio.infra.${dns_domain}
       tls: []
       #  - secretName: chart-example-tls
       #    hosts:
@@ -231,8 +231,8 @@ spec:
       annotations: {}
 
     consoleIngress:
-      enabled: false
-      ingressClassName: ~
+      enabled: true
+      ingressClassName: nginx
       labels: {}
         # node-role.kubernetes.io/ingress: platform
       annotations: {}
@@ -245,7 +245,7 @@ spec:
         # nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
       path: /
       hosts:
-        - console.minio-example.local
+        - minio-console.infra.${dns_domain}
       tls: []
       #  - secretName: chart-example-tls
       #    hosts:

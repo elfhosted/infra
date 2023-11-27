@@ -124,6 +124,12 @@ data:
           logo: "assets/png/ceph.png"
           url: "https://rook-ceph.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute  
+        - name: "Minio Console"
+          subtitle: "Object Storage"
+          logo: "assets/png/minio.png"
+          url: "https://minio-console.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute  
+
 
       - name: "GitHub Repos"
         icon: "fab fa-github"
