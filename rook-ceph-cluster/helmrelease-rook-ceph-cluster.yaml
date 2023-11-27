@@ -787,18 +787,9 @@ spec:
     # -- Settings for the filesystem snapshot class
     # @default -- See [CephFS Snapshots](../Storage-Configuration/Ceph-CSI/ceph-csi-snapshot.md#cephfs-snapshots)
     cephFileSystemVolumeSnapshotClass:
-    - name: ceph-filesystem
+      name: ceph-filesystem
       enabled: true
       isDefault: true
-      deletionPolicy: Delete
-      annotations: {}
-      labels:
-        velero.io/csi-volumesnapshot-class: "true"
-      # see https://rook.io/docs/rook/v1.10/Storage-Configuration/Ceph-CSI/ceph-csi-snapshot/#cephfs-snapshots for available configuration
-      parameters: {}
-    - name: ceph-filesystem-ssd
-      enabled: true
-      isDefault: false
       deletionPolicy: Delete
       annotations: {}
       labels:
