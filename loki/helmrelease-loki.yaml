@@ -294,7 +294,7 @@ spec:
           s3: null
           endpoint: http://minio.minio:9000
           region: null
-          secretAccessKey: loki
+          secretAccessKey: ${loki_secretAccessKey}
           accessKeyId: loki
           signatureVersion: null
           s3ForcePathStyle: false
