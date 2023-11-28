@@ -109,6 +109,11 @@
 - name: Install lm-sensors
   apt: pkg=lm-sensors  
   
+- name: Ensure directory /var/lib/node-exporter/textfiles/ exists
+  file:
+     path: /var/lib/node-exporter/textfiles
+     state: directory    
+     
 - name: Expose smartmon metrics to node-exporter
   cron:
     name: "smartmon metrics"
