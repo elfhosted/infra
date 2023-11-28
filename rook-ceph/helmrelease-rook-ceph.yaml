@@ -25,9 +25,9 @@ spec:
       repository: rook/ceph
       # -- Image tag
       # @default -- `master`
-      tag: master
+      tag: v1.12.8
       # -- Image pull policy
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     crds:
       # -- Whether the helm chart should create and update the CRDs. If false, the CRDs must be
