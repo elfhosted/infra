@@ -739,7 +739,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: ceph-block
+              storageClassName: topolvm-provisioner
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
@@ -3355,7 +3355,7 @@ spec:
         ##
           volumeClaimTemplate:
             spec:
-              storageClassName: ceph-block
+              storageClassName: topolvm-provisioner
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:

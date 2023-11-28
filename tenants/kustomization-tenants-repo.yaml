@@ -9,7 +9,7 @@ spec:
   dependsOn:
   - name: sealed-secrets
   prune: true # remove any elements later removed from the above path
-  timeout: 2m # if not set, this defaults to interval duration, which is 1h
+  timeout: 10m # if not set, this defaults to interval duration, which is 1h
   sourceRef:
     kind: GitRepository
     name: tenants

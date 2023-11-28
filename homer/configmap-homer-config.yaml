@@ -13,17 +13,17 @@ data:
     # Using this will ignore remaining config in this file
     # externalConfig: https://example.com/server-luci/config.yaml
 
-    title: "ElfHosted"
-    subtitle: "Infrastructure"
+    subtitle: "${dns_domain}'s"
+    title: "Cluster Dashboard"
     # documentTitle: "Welcome" # Customize the browser tab text
     # logo: "assets/png/.png"
     # Alternatively a fa icon can be provided:
     icon: "fas fa-skull-crossbones"
 
-    header: false # Set to false to hide the header
-    footer: false
+    header: true # Set to false to hide the header
+    footer: true
 
-    columns: "4" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+    columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
     connectivityCheck: false # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
     # Optional theming
@@ -50,7 +50,7 @@ data:
         text-subtitle: "#424242"
         card-shadow: rgba(0, 0, 0, 0.1)
         link-hover: "#363636"
-        background-image: /assets/infra.jpg
+        background-image: /assets/backgrounds/${dashboard_background}
       dark:
         highlight-primary: "#3367d6"
         highlight-secondary: "#4285f4"
@@ -63,36 +63,11 @@ data:
         text-subtitle: "#f5f5f5"
         card-shadow: rgba(0, 0, 0, 0.4)
         link-hover: "#ffdd57"
-        background-image: /assets/infra.jpg
-
-    # # Optional message
-    # message:
-    #   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
-    #   # mapping: # allows to map fields from the remote format to the one expected by Homer
-    #   #   title: 'id' # use value from field 'id' as title
-    #   #   content: 'value' # value from field 'value' as content
-    #   # refreshInterval: 10000 # Optional: time interval to refresh message
-    #   #
-    #   # Real example using chucknorris.io for showing Chuck Norris facts as messages:
-    #   url: https://{{ .Release.Name }}.${dns_domain}/assets/message/message.json"
-    #   mapping:
-    #     title: 'Capacity'
-    #     content: 'content'
-    #   refreshInterval: 300000
-    #   style: "is-warning"
-    #   title: "Wecome to your seedplicity home page!"
-    #   icon: "fa fa-exclamation-triangle"
-    #   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        background-image: /assets/backgrounds/${dashboard_background}
 
     # Optional navbar
     # links: [] # Allows for navbar (dark mode, layout, and search) without any links
-    links:
-      - name: "Admin"
-        icon: "fas fa-fire"
-        url: "https://infra.${dns_domain}"
-      - name: "Dev"
-        icon: "fas fa-file-alt"
-        url: "#dev"
+    links: []
 
 
     # Services
@@ -100,7 +75,7 @@ data:
     # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
     services:
       - name: "Monitor"
-        icon: "fas fa-watchman-monitoring"
+        icon: "fa-solid fa-chart-simple"
         # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
         # logo: "path/to/logo"
         items:
@@ -124,54 +99,65 @@ data:
           logo: "assets/png/traefik.png"
           url: "https://traefik.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute   
-        - name: "Authentik"
-          subtitle: "Identity Provider"
-          logo: "assets/png/authentik.png"
-          url: "https://authentik.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute  
-        - name: "Rook Ceph"
-          subtitle: "Network Storage Dashboard"
-          logo: "assets/png/authentik.png"
-          url: "https://rook-ceph.infra.${dns_domain}"
-          target: "_blank" # optional html tag target attribute                                        
+        - name: "Polaris"
+          subtitle: "Best Practice Audit"
+          logo: "assets/png/polaris.png"
+          url: "https://polaris.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute                                                  
           
       - name: "Manage"
         icon: "fas fa-tasks"
         # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
         # logo: "path/to/logo"
         items:
+        - name: "Authentik"
+          subtitle: "Identity Provider"
+          logo: "assets/png/authentik.png"
+          url: "https://authentik.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute          
         - name: "Wordpress Admin"
-          icon: "fa fas users-cog"
+          logo: "assets/png/wordpress.png"
           url: "https://store.elfhosted.com/wp-admin/"
           target: "_blank" # optional html tag target attribute
-          
+        - name: "Rook Ceph"
+          subtitle: "Network Storage Dashboard"
+          logo: "assets/png/ceph.png"
+          url: "https://rook-ceph.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute  
+        - name: "Minio Console"
+          subtitle: "Object Storage"
+          logo: "assets/png/minio.png"
+          url: "https://minio-console.infra.${dns_domain}"
+          target: "_blank" # optional html tag target attribute  
+
+
       - name: "GitHub Repos"
-        icon: "fas fa-github"
+        icon: "fab fa-github"
         items:
           - name: "Tenants"
             subtitle: "Tenant Configs"
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
             url: "https://github.com/geek-cookbook/elfhosted-tenants"          
           - name: "Flux"
             subtitle: "GitOps Deployments"
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-flux"  
+            url: "https://github.com/geek-cookbook/elf-infra"  
           - name: "Charts"
             subtitle: "Helm Charts"
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-charts"              
+            url: "https://github.com/geek-cookbook/elf-charts"              
           - name: "Containers"
             # subtitle: ""
-            icon: "fas fa-github"
+            icon: "fab fa-github"
             # tag: "app"
             # # Optional tagstyle
             # tagstyle: "is-success"

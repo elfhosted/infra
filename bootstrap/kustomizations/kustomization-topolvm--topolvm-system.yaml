@@ -1,0 +1,41 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: topolvm--topolvm-system
+  namespace: flux-system
+spec:
+  interval: 15m
+  path: ./topolvm-system
+  prune: true # remove any elements later removed from the above path
+  timeout: 10m # if not set, this defaults to interval duration, which is 1h
+  sourceRef:
+    kind: GitRepository
+    name: infra 
+  dependsOn:
+  - name: kubernetes-replicator    
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: topolvm-controller
+      namespace: topolvm-system
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: topolvm-lvmd-0
+      namespace: topolvm-system
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: topolvm-node
+      namespace: topolvm-system
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: topolvm-scheduler
+      namespace: topolvm-system
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: topolvm
+      namespace: topolvm-system     
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars

@@ -9,6 +9,7 @@
     - nfs-common
     - iperf3
     - jq
+    - snapd
 
 - name: install yq via snap
   snap:
@@ -93,3 +94,4 @@
   become: yes
   when: "inventory_hostname in groups['k3s_agents']" 
   ignore_errors: true # this only applies in prod, not CI
+

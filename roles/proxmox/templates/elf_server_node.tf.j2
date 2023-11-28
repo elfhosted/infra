@@ -1,7 +1,7 @@
 resource "proxmox_vm_qemu" "{{ inventory_hostname_short }}" {
     name = "{{ inventory_hostname_short }}"
     target_node = "{{ proxmox_node }}"
-    clone = "template-jammy"
+    clone = "template-elfhosted-{{ proxmox_node }}"
     os_type = "cloud-init"
     ipconfig0 = "ip={{ ansible_host }}/24,gw={{ proxmox_vlan_gateway }}"  
     ipconfig1 = "ip={{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}/24"
@@ -31,5 +31,10 @@ EOF
         size = "{{ proxmox_vm_disk0_size }}"
         type = "scsi"
     }
+    disk {
+        storage = "{{ proxmox_nfs_storage }}"
+        size = "{{ proxmox_vm_topolvm_disk_size }}"
+        type = "scsi"
+    }    
 }
 

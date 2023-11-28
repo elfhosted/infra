@@ -1,11 +1,8 @@
 kube-apiserver-arg:
 - "oidc-issuer-url=https://authentik.infra.{{ dns_domain }}/application/o/kube-apiserver/"
 - "oidc-client-id=kube-apiserver"
-- "oidc-username-claim=email"
+- "oidc-username-claim=email,profile"
 - "oidc-groups-claim=groups"
-- "oidc-username-prefix='oidc:'"
-- "oidc-groups-prefix='oidc:'"
-- "anonymous-auth=true" # for proxy health checks
 kube-controller-manager-arg:
 - "bind-address=0.0.0.0"
 - "node-cidr-mask-size=22"

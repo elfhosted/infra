@@ -1,0 +1,127 @@
+  - name: "Do we already have an oauth2 provider for {{ provider.name }}?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/providers/oauth2/?name={{ provider.name }}"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _existing_provider
+
+  - name: "Update provider for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/providers/oauth2/{{ _existing_provider.json.results[0].pk }}/"
+      method: PUT
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        access_code_validity: "minutes=1"
+        access_token_validity: "minutes=5"
+        authentication_flow: "{{ _authentication_flow.json.pk }}"
+        authorization_flow: "{{ _authorization_flow.json.pk }}"
+        client_id: "{{ provider.name }}"
+        client_secret: "{{ provider.secret }}"
+        client_type: confidential
+        include_claims_in_id_token: true
+        issuer_mode: per_provider
+        name: "{{ provider.name }}"
+        property_mappings:
+        - "{{ _email_propertymapping.json.results[0].pk }}"
+        - "{{ _profile_propertymapping.json.results[0].pk }}"
+        - "{{ minio_propertymapping_pk }}"
+        redirect_uris: "{{ provider.redirect_uris }}"
+        refresh_token_validity: "days=30"
+        signing_key: "{{ _authentik_keypairs.json.results[0].pk }}"
+      body_format: json
+      status_code: 200
+    when: _existing_provider.json.results # resolves to false/undefined if search is empty
+
+  - name: "Create provider for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/providers/oauth2/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        access_code_validity: "minutes=1"
+        access_token_validity: "minutes=5"
+        authentication_flow: "{{ _authentication_flow.json.pk }}"
+        authorization_flow: "{{ _authorization_flow.json.pk }}"
+        client_id: "{{ provider.name }}"
+        client_secret: "{{ provider.secret }}"
+        client_type: confidential
+        include_claims_in_id_token: true
+        issuer_mode: per_provider
+        name: "{{ provider.name }}"
+        property_mappings:
+        - "{{ _profile_propertymapping.json.results[0].pk }}"
+        - "{{ _email_propertymapping.json.results[0].pk }}"
+        - "{{ minio_propertymapping_pk }}"
+        redirect_uris: "{{ provider.redirect_uris }}"
+        refresh_token_validity: "days=30"
+        signing_key: "{{ _authentik_keypairs.json.results[0].pk }}"
+      body_format: json
+      status_code: 201
+    when: not _existing_provider.json.results # resolves to false/undefined if search is empty
+    register: _new_provider
+
+  - name: "Create application for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/applications/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        name: "{{ provider.name }}"
+        slug: "{{ provider.name }}"
+        provider: "{{ _new_provider.json.pk }}"
+      body_format: json
+      status_code: 201
+    when: not _existing_provider.json.results # resolves to false/undefined if search is empty
+    register: _new_application
+
+  - name: "Set icon for {{ provider.name }}"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/applications/{{ provider.name }}/set_icon_url/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        url: "{{ provider.icon }}"
+      body_format: json
+      status_code: 200
+    when: provider.icon is defined
+
+  # - name: set the group pk value
+  #   set_fact:
+  #     group_pk: "{{ _existing_group.json.results[0].pk }}"
+  #   when: _existing_group.json.results
+
+  # - name: "create {{ group }} group"
+  #   uri:
+  #     url: "https://{{ authentik_dns_name }}/api/v3/core/groups/"
+  #     method: POST
+  #     headers:
+  #       Authorization: "Bearer {{ authentik_bootstrap_token }}"
+  #     body:
+  #       name: "{{ group }}"
+  #     body_format: json
+  #     status_code: 201
+  #   when: not _existing_group.json.results
+  #   register: _new_group 
+    
+  # - name: set the group pk value
+  #   set_fact:
+  #     group_pk: "{{ _new_group.json.pk }}"
+  #   when: not _existing_group.json.results
+
+  # - name: "add our primary user to the {{ group }} group"
+  #   uri:
+  #     url: "https://{{ authentik_dns_name }}/api/v3/core/groups/{{ group_pk }}/add_user/"
+  #     method: POST
+  #     headers:
+  #       Authorization: "Bearer {{ authentik_bootstrap_token }}"
+  #     body_format: json
+  #     body:
+  #       pk: "{{ user_pk }}"
+  #     status_code: 200,204

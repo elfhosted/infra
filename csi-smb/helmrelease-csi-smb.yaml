@@ -96,7 +96,7 @@ spec:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
           effect: "NoSchedule"
-        - key: "node-role.{dns_domain}/download"
+        - key: "node-role.${dns_domain}/download"
           operator: "Exists"
           effect: "NoSchedule"          
 

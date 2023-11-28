@@ -70,7 +70,7 @@ spec:
 
     # -- Global log level for the operator.
     # Options: `ERROR`, `WARNING`, `INFO`, `DEBUG`
-    logLevel: INFO
+    logLevel: DEBUG
 
     # -- If true, create & use RBAC resources
     rbacEnable: true

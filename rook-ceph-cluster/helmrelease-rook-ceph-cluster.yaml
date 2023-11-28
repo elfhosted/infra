@@ -689,7 +689,7 @@ spec:
                 memory: "16Gi"
               requests:
                 cpu: "1000m"
-                memory: "4Gi"
+                memory: "${rook_ceph_mds_ram}"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
@@ -750,7 +750,7 @@ spec:
                 memory: "16Gi"
               requests:
                 cpu: "1000m"
-                memory: "4Gi"
+                memory: "${rook_ceph_mds_ram}"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
@@ -789,8 +789,8 @@ spec:
     # -- Settings for the filesystem snapshot class
     # @default -- See [CephFS Snapshots](../Storage-Configuration/Ceph-CSI/ceph-csi-snapshot.md#cephfs-snapshots)
     cephFileSystemVolumeSnapshotClass:
-      enabled: true
       name: ceph-filesystem
+      enabled: true
       isDefault: true
       deletionPolicy: Delete
       annotations: {}

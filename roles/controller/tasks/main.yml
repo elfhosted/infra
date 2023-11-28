@@ -30,6 +30,15 @@
   - name: replace 127.0.0.1 in kubeconfig with k8s API IP (provided by load balancer or haproxy)
     shell: sed -i 's/127.0.0.1:6443/{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}/' .kube/config
 
+  - name: copy scripts to /usr/local/bin
+    copy:
+      src: "{{ item }}"
+      dest: /usr/local/bin/
+      mode: 0755
+    become: true
+    with_fileglob:
+      - "files/scripts/*"
+
   - name: get latest kubectl
     become: yes
     shell: |

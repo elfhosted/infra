@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: gkc-etcd-rules
+  namespace: kube-prometheus-stack
+spec:
+  groups:
+  - name: etcd
+    rules:
+    - alert: EtcdLeader
+      expr: |
+        max(etcd_server_has_leader) < 1
+      for: 3m
+      labels:
+        severity: critical
+      annotations:
+        summary: "etcd Leader Alert"
+        description: "Etcd on {{ $labels.instance }} doesn't have leader"
+    - alert: EtcdDB
+      expr: |
+        etcd_mvcc_db_total_size_in_bytes >= 999900000
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: "etcd db size"
+        description: "Etcd on {{ $labels.instance }} db has almost exceeded 1GB"
+    - alert: EtcdDB
+      expr: |
+        etcd_mvcc_db_total_size_in_bytes >= 1999900000
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "etcd db size"
+        description: "Etcd on {{ $labels.instance }} db has almost exceeded 2GB"

@@ -1,0 +1,43 @@
+  - name: "Do we already have a group for {{ group }}?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/groups/?name={{ group }}"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _existing_group
+
+  - name: set the group pk value
+    set_fact:
+      group_pk: "{{ _existing_group.json.results[0].pk }}"
+    when: _existing_group.json.results
+
+  - name: "create {{ group }} group"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/groups/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body:
+        name: "{{ group }}"
+      body_format: json
+      status_code: 201
+    when: not _existing_group.json.results
+    register: _new_group 
+    
+  - name: set the group pk value
+    set_fact:
+      group_pk: "{{ _new_group.json.pk }}"
+    when: not _existing_group.json.results
+
+  - name: "add our primary user to the {{ group }} group"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/core/groups/{{ group_pk }}/add_user/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      body:
+        pk: "{{ user_pk }}"
+      status_code: 200,204

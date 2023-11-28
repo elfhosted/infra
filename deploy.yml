@@ -21,8 +21,8 @@
 
   tasks:
   - { import_role: { name: node }, tags: [ node ] }
-  - { import_role: { name: haproxy }, tags: [ haproxy ], when: "inventory_hostname in groups['k3s_servers']" }
-  - { import_role: { name: keepalived }, tags: [ keepalived ], when: "inventory_hostname in groups['k3s_servers']" }
+  - { import_role: { name: haproxy }, tags: [ haproxy ], when: "inventory_hostname in groups['haproxy_servers']" }
+  - { import_role: { name: keepalived }, tags: [ keepalived ], when: "inventory_hostname in groups['haproxy_servers']" }
   - { import_role: { name: k3s-server }, tags: [ k3s-server ] }
   - { import_role: { name: oidc }, tags: [ oidc], when: "groups['k3s_servers'][0] == inventory_hostname" }
 

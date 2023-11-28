@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: smartmon-device-health
+  namespace: kube-prometheus-stack
+spec:
+  groups:
+  - name: kube-cluster
+    rules:
+    - alert: SmartDeviceUnhealthy
+      expr: smartmon_device_smart_healthy < 1
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        description: Smartmon reports an unhealthy device ({{$labels.namespace}}/{{$labels.pod}})
