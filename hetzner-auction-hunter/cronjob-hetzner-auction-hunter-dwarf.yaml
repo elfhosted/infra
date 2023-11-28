@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hah-dwarf
+  namespace: hetzner-auction-hunter
+spec:
+  schedule: "${hetzner_auction_hunter_cron}"
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: "hah"
+            image: danielskowronski/hetzner-auction-hunter:v2.0.0
+            args:
+            - -f /config/dwarf.state
+            - --provider slack
+            - --price 49
+            - --disk-size 4000
+            - --disk-count 4
+            - --dc FSN
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 65535
+              runAsGroup: 65535
+              capabilities:
+                drop:
+                - ALL                
+            volumeMounts:
+            - mountPath: /config
+              name: hetzner-auction-hunter
+          volumes:
+            - name: hetzner-auction-server
+              persistentVolumeClaim:
+                claimName: hetzner-auction-server  
+  
