@@ -2608,7 +2608,7 @@ spec:
       # Thanos sidecar on prometheus nodes
       # (Please remember to change ${kube-prometheus-stack.fullname} and ${namespace}. Not just copy and paste!)
       thanosService:
-        enabled: false
+        enabled: true
         annotations: {}
         labels: {}
 
@@ -2642,7 +2642,7 @@ spec:
       # ServiceMonitor to scrape Sidecar metrics
       # Needs thanosService to be enabled as well
       thanosServiceMonitor:
-        enabled: false
+        enabled: true
         interval: ""
 
         ## Additional labels
@@ -2782,7 +2782,7 @@ spec:
       ## https://github.com/kubernetes/kubernetes/issues/45398
       ##
       podDisruptionBudget:
-        enabled: false
+        enabled: true
         minAvailable: 1
         maxUnavailable: ""
 
@@ -3359,17 +3359,17 @@ spec:
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
         ##
-        storageSpec:
+        storageSpec: {}
         ## Using PersistentVolumeClaim
         ##
-          volumeClaimTemplate:
-            spec:
-              storageClassName: topolvm-provisioner
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: ${prometheus_storage}Gi
-        #    selector: {}
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: topolvm-provisioner
+        #       accessModes: ["ReadWriteOnce"]
+        #       resources:
+        #         requests:
+        #           storage: ${prometheus_storage}Gi
+        # #    selector: {}
 
         ## Using tmpfs volume
         ##
