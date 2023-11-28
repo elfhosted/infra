@@ -2631,7 +2631,7 @@ spec:
         ## If undefined (the default) or set to null, no storageClassName spec is
         ## set, choosing the default provisioner.
         ##
-        storageClass: "topoplvm-provisioner"
+        storageClass: "topolvm-provisioner"
         ## @param storegateway.persistence.accessModes PVC Access Modes for data volume
         ##
         accessModes:
