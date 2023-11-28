@@ -353,6 +353,14 @@ spec:
           - 'arn:aws:s3:::loki'
           actions:
           - 's3:*'
+
+    - name: thanos
+      statements:
+        - resources:
+          - 'arn:aws:s3:::thanos/*'
+          - 'arn:aws:s3:::thanos'
+          actions:
+          - 's3:*'          
     #
     ## Additional Annotations for the Kubernetes Job makePolicyJob
     makePolicyJob:
@@ -382,6 +390,10 @@ spec:
         existingSecret: loki-credentials        
         existingSecretKey: password
         policy: loki
+      - accessKey: thanos
+        existingSecret: thanos-credentials        
+        existingSecretKey: password
+        policy: thanos        
 
       # Or you can refer to specific secret
       #- accessKey: externalSecret

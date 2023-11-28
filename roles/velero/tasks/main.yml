@@ -4,9 +4,9 @@
     suffix: temp
   register: tempdir  
 
-- name: Unzip /{{ tempdir.path }}/velero-{{ packages.velero.version }}-linux-amd64.tar.gz
+- name: Unzip /{{ tempdir.path }}/velero-{{ packages.velero.version }}-linux-{{ host_arch }}.tar.gz
   unarchive:
-    src: "https://github.com/vmware-tanzu/velero/releases/download/{{ packages.velero.version }}/velero-{{ packages.velero.version }}-linux-amd64.tar.gz"
+    src: "https://github.com/vmware-tanzu/velero/releases/download/{{ packages.velero.version }}/velero-{{ packages.velero.version }}-linux-{{ host_arch }}.tar.gz"
     dest: "{{ tempdir.path }}"
     remote_src: yes
 
@@ -14,7 +14,7 @@
   become: true
   copy:
     remote_src: yes
-    src: "{{ tempdir.path }}/velero-{{ packages.velero.version }}-linux-amd64/velero"
+    src: "{{ tempdir.path }}/velero-{{ packages.velero.version }}-linux-{{ host_arch }}/velero"
     dest: /usr/local/bin/velero
     mode: 0755
 
