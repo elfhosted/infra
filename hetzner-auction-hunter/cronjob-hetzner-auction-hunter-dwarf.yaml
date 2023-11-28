@@ -40,5 +40,5 @@ spec:
           volumes:
             - name: hetzner-auction-hunter
               persistentVolumeClaim:
-                claimName: hetzner-auction-server  
+                claimName: hetzner-auction-hunter  
   
