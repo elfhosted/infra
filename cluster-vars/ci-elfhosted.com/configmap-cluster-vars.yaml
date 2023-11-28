@@ -16,4 +16,4 @@ data:
   rook_ceph_osd_ram: 2Gi
   rook_ceph_mds_ram: 1Gi
   dashboard_background: development.jpg
-  hetzner_auction_hunter_cron: 0 0 * 2 31 # don't automatically run
+  hetzner_auction_hunter_cron: 0 0 31 2 * # don't automatically run
