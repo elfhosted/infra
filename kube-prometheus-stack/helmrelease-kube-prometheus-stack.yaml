@@ -1997,8 +1997,17 @@ spec:
 
       tolerations:
       - key: node-role.kubernetes.io/control-plane
-        operator: Exists     
+        operator: Exists   
+      - key: node-role.${dns_domain}/storage
+        operator: Exists             
     
+      extraHostVolumeMounts:
+      - name: text-file-collector
+        hostPath: /var/lib/node-exporter/textfiles/
+        mountPath: /var/lib/node-exporter/textfiles/
+        readOnly: true
+        mountPropagation: HostToContainer
+        
       namespaceOverride: ""
       podLabels:
         ## Add the 'node-exporter' label to be used by serviceMonitor to match standard common usage in rules and grafana dashboards
