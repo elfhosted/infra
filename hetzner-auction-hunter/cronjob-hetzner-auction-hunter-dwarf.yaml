@@ -21,6 +21,7 @@ spec:
             - --disk-size 4000
             - --disk-count 4
             - --dc FSN
+            - --exclude-tax
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
