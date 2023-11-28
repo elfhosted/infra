@@ -95,3 +95,39 @@
   when: "inventory_hostname in groups['k3s_agents']" 
   ignore_errors: true # this only applies in prod, not CI
 
+- name: copy script for grabbing smartmon metrics
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    mode: u+x
+  loop:
+    - smartmon_metrics.sh
+
+- name: Install smartmontools
+  apt: pkg=smartmontools
+
+- name: Install lm-sensors
+  apt: pkg=lm-sensors  
+  
+- name: Expose smartmon metrics to node-exporter
+  cron:
+    name: "smartmon metrics"
+    minute: "*/5"
+    hour: "*"
+    job: "/usr/local/bin/smartmon_metrics.sh > /var/lib/node-exporter/textfiles/smart_metrics.prom && chmod 644 /var/lib/node-exporter/textfiles/smart_metrics.prom"
+
+- name: ignore irrelevant logs via rsyslog
+  copy:
+    src: ignore-irrelevant-logs.conf
+    dest: /etc/rsyslog.d/ignore-irrelevant-logs.conf
+
+- name: update logrotate.conf 
+  copy:
+    src: logrotate.conf
+    dest: /etc/logrotate.conf
+
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+    enabled: yes
