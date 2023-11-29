@@ -14,14 +14,18 @@ spec:
           containers:
           - name: "hah"
             image: danielskowronski/hetzner-auction-hunter:v2.0.0
-            args:
-            - -f /config/dwarf.state
-            - --provider slack
-            - --price 49
-            - --disk-size 4000
-            - --disk-count 4
-            - --dc FSN
-            - --exclude-tax
+            command:
+            - /bin/bash
+            - -c
+            - |
+              /hah.py \
+              -f /config/dwarf.state \
+              --provider slack \
+              --price 49 \
+              --disk-size 4000 \
+              --disk-count 4 \
+              --dc FSN \
+              --exclude-tax
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
