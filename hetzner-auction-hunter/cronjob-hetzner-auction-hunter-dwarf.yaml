@@ -33,14 +33,16 @@ spec:
               seccompProfile:
                 type: RuntimeDefault   
               runAsNonRoot: true
-              runAsUser: 65535
-              runAsGroup: 65535
+              runAsUser: 65534
+              runAsGroup: 65534
               capabilities:
                 drop:
                 - ALL                
             volumeMounts:
             - mountPath: /config
               name: hetzner-auction-hunter
+          securityContext:
+            fsGroup: 65534
           volumes:
             - name: hetzner-auction-hunter
               persistentVolumeClaim:
