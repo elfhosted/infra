@@ -354,7 +354,7 @@ spec:
         containerPort: 1514
         protocol: TCP
         service:
-          type: ClusterIP
+          type: LoadBalancer
           clusterIP: null
           port: 1514
           externalIPs: []

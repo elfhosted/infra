@@ -14,6 +14,9 @@ spec:
           containers:
           - name: "hah"
             image: funkypenguin/hetzner-auction-hunter:v2.0.0
+            envFrom:
+            - secretRef:
+                name: hetzner-auction-hunter-env     
             command:
             - /bin/bash
             - -c
