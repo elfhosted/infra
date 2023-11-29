@@ -13,7 +13,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: "hah"
-            image: danielskowronski/hetzner-auction-hunter:v2.0.0
+            image: funkypenguin/hetzner-auction-hunter:v2.0.0
             command:
             - /bin/bash
             - -c
