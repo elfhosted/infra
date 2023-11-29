@@ -304,7 +304,7 @@ spec:
       tlsConfig: null
       # -- Prometheus rules will be deployed for alerting purposes
       prometheusRule:
-        enabled: true
+        enabled: false # seems to be erroring
         additionalLabels: {}
         # namespace:
         rules: []
