@@ -1017,6 +1017,7 @@ spec:
           ## URL of prometheus datasource
           ##
           # url: http://prometheus-stack-prometheus:9090/
+          url: http://thanos-query.thanos:9090/
 
           ## Prometheus request timeout in seconds
           # timeout: 30
@@ -3516,7 +3517,7 @@ spec:
         ## This is experimental and may change significantly without backward compatibility in any release.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#thanosspec
         ##
-        thanos: {}
+        thanos:
           # secretProviderClass:
           #   provider: gcp
           #   parameters:
@@ -3525,6 +3526,10 @@ spec:
           #         fileName: "objstore.yaml"
           # objectStorageConfigFile: /var/secrets/object-store.yaml
 
+          objectStorageConfig:
+            key: objstore.yml
+            name: thanos-objectstore-config
+            
         ## Containers allows injecting additional containers. This is meant to allow adding an authentication proxy to a Prometheus pod.
         ## if using proxy extraContainer update targetPort with proxy container port
         containers: []
