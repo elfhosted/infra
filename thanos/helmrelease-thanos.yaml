@@ -699,10 +699,10 @@ spec:
       ingress:
         ## @param query.ingress.enabled Enable ingress controller resource
         ##
-        enabled: false
+        enabled: true
         ## @param query.ingress.hostname Default host for the ingress resource
         ##
-        hostname: thanos.local
+        hostname: thanos.infra.${dns_domain}
         ## @param query.ingress.secretName Custom secretName for the ingress resource
         ## If query.ingress.secretName is not set, the secret will be named as follows: query.ingress.hostname-tls
         secretName: ""   
