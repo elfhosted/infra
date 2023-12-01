@@ -2,7 +2,7 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: "thanos.infra.${dns_domain}"
-  namespace: kube-thanos-stack
+  namespace: thanos
 spec:
   endpoints:
   - dnsName: "thanos.infra.${dns_domain}"
