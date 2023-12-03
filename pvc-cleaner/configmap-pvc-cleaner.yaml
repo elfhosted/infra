@@ -21,7 +21,7 @@ data:
     do
 
       # Get a list of all customer PVCs starting with config-
-      PVCS=$(kubectl get pvc -n $NS | grep config- | cut -f1 -d' ')
+      PVCS=$(kubectl get pvc -n $NS | cut -f1 -d' ')
             
       for PVC in ${PVCS}
       do
