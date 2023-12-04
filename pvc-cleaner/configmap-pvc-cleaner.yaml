@@ -34,9 +34,9 @@ data:
           if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
             # if yes, and it's older than 31 days, then label for deletion
-            TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | cut -f2 -d=)
+            TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk -s '{print $3}')
             TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
-            if [[ $TIMESTAMP_DIFF -gt 2764800 ]]; then # 2764800 sec = 32 days
+            if [[ $TIMESTAMP_DIFF -gt 276480 ]]; then # 276480 sec = 3.2 days
 
               echo "PVC $PVC in namespace $NS has been unused for > 31 days, flagging for removal it.."
               kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d=true --overwrite
