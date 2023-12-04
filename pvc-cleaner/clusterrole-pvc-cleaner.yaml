@@ -7,5 +7,5 @@ rules:
   resources: ["persistentvolumeclaims"]
   verbs: ["*"]
 - apiGroups: [""]
-  resources: ["namespaces"]
-  verbs: ["list"]
+  resources: ["namespaces","pods"]
+  verbs: ["list","get"]
