@@ -24,6 +24,8 @@ dwarf02      ansible_host=10.0.42.82 cluster_nic=eno1.4000
 dwarf03      ansible_host=10.0.42.83 cluster_nic=enp3s0.4000
 dwarf04      ansible_host=10.0.42.84 cluster_nic=eno1.4000
 dwarf05      ansible_host=10.0.42.85 cluster_nic=eno1.4000
+dwarf06      ansible_host=10.0.42.86 cluster_nic=eno1.4000
+dwarf07      ansible_host=10.0.42.87 cluster_nic=eno1.4000
 goblin01     ansible_host=10.0.42.61 cluster_nic=eno1.4000
 goblin02     ansible_host=10.0.42.62 cluster_nic=eno1.4000
 goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000

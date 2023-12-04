@@ -473,8 +473,21 @@ spec:
               - name: sda4
               - name: sdb
               - name: sdc
-              - name: sdd              
+              - name: sdd    
 
+          - name: dwarf06
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd                            
+
+          - name: dwarf07
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd    
 
           - name: goblin01
             resources: 
