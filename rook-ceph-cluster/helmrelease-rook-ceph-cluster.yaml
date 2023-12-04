@@ -437,7 +437,7 @@ spec:
           - name: dwarf01
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd
               - name: sde
@@ -446,7 +446,7 @@ spec:
           - name: dwarf02
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd
               - name: sde
@@ -455,7 +455,7 @@ spec:
           - name: dwarf03
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd
               - name: sde
@@ -464,14 +464,14 @@ spec:
           - name: dwarf04
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd              
 
           - name: dwarf05
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd              
 
