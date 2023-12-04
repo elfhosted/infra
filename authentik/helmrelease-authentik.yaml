@@ -295,7 +295,7 @@ spec:
       existingSecret: authentik-postgresql-secrets
       persistence:
         enabled: true
-        storageClass: ceph-block
+        storageClass: ceph-block-ssd
         size: 1Gi
         accessModes:
           - ReadWriteOnce
@@ -342,7 +342,7 @@ spec:
             memory: "64Mi"   
         persistence:
           enabled: true
-          storageClass: ceph-block
+          storageClass: ceph-block-ssd
           size: 1Gi
           accessModes:
             - ReadWriteOnce
