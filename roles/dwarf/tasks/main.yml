@@ -1,6 +1,9 @@
-one-time
-hdparm -W0 /dev/sd*
+- name: disable write cache (once-off)
+  shell: hdparm -W0 /dev/sd*
 
-permanent
-edit /etc/hdparm and set
-write_cache = off
+- name: disable write cache (permanent)
+  lineinfile:
+    path: /etc/hdparm.conf
+    regexp: '#write_cache = off'
+    line: write_cache = off
+    create: no
