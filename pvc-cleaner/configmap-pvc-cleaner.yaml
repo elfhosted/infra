@@ -7,30 +7,29 @@ data:
   pvc-cleaner.sh: |
     #!/bin/bash
 
-    # Don't abort on a failure, this can caus
-    set -e
-
     # Debug logs
     set -x
+
+    set -o pipefail
 
     # Set timestamp
     TIMESTAMP_NOW=$(date +%s)
 
-    NAMESPACES=$(kubectl get ns | grep aa | cut -f1 -d" ")
+    NAMESPACES=$(kubectl get ns --no-headers=true | grep aa | cut -f1 -d" ")
     for NS in ${NAMESPACES}
     do
 
       # Get a list of all customer PVCs starting with config-
-      PVCS=$(kubectl get pvc -n $NS | cut -f1 -d' ')
+      PVCS=$(kubectl get pvc -n $NS --no-headers=true | cut -f1 -d' ')
             
       for PVC in ${PVCS}
       do
         # Is PVC currently bound
+
         if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'Used By:       <none>'); then
 
           kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
               
-
           # if not, then does the PVC already have a timestamp?
           if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
