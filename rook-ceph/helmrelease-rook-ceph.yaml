@@ -462,7 +462,10 @@ spec:
           operator: Exists     
         - key: "node-role.${dns_domain}/download"
           operator: "Exists"
-          effect: "NoSchedule"                          
+          effect: "NoSchedule"          
+        - key: "node-role.${dns_domain}/storage"
+          operator: "Exists"
+          effect: "NoSchedule"                                    
       #    - key: key
       #      operator: Exists
       #      effect: NoSchedule
