@@ -461,6 +461,21 @@ spec:
               - name: sde
               - name: sdf
 
+          - name: dwarf04
+            devices:
+              - name: sda4
+              - name: sbd
+              - name: sdc
+              - name: sdd              
+
+          - name: dwarf05
+            devices:
+              - name: sda4
+              - name: sbd
+              - name: sdc
+              - name: sdd              
+
+
           - name: goblin01
             resources: 
               limits: 
