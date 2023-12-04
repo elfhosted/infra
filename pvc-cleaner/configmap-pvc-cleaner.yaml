@@ -34,7 +34,7 @@ data:
           if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
             # if yes, and it's older than 31 days, then label for deletion
-            TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk -s '{print $3}')
+            TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk '{split($0,a); print a[3]}')
             TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
             if [[ $TIMESTAMP_DIFF -gt 276480 ]]; then # 276480 sec = 3.2 days
 
