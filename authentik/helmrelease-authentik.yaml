@@ -133,7 +133,7 @@ spec:
         # -- set the redis hostname to talk to
         # @default -- `{{ .Release.Name }}-redis-master`
         host: "{{ .Release.Name }}-redis-master"
-        password: ""  
+        password: "randomdoesntmatter"  
 
     # -- List of config maps to mount blueprints from. Only keys in the
     # configmap ending with ".yaml" wil be discovered and applied
@@ -295,7 +295,7 @@ spec:
       existingSecret: authentik-postgresql-secrets
       persistence:
         enabled: true
-        storageClass: ceph-block
+        storageClass: ceph-block-ssd
         size: 1Gi
         accessModes:
           - ReadWriteOnce
@@ -329,7 +329,8 @@ spec:
       enabled: true
       architecture: standalone
       auth:
-        enabled: false
+        enabled: true
+        password: randomdoesntmatter
       image:
         tag: 6.2.10-debian-11-r13
       master:
@@ -342,7 +343,7 @@ spec:
             memory: "64Mi"   
         persistence:
           enabled: true
-          storageClass: ceph-block
+          storageClass: ceph-block-ssd
           size: 1Gi
           accessModes:
             - ReadWriteOnce
