@@ -3258,7 +3258,7 @@ spec:
 
         ## How long to retain metrics
         ##
-        retention: 90d
+        retention: 6h # because we have thanos, see https://thanos.io/tip/components/sidecar.md/
 
         ## Maximum size of metrics
         ##
@@ -3360,17 +3360,26 @@ spec:
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
         ##
-        storageSpec: {}
-        ## Using PersistentVolumeClaim
-        ##
-        #   volumeClaimTemplate:
-        #     spec:
-        #       storageClassName: topolvm-provisioner
-        #       accessModes: ["ReadWriteOnce"]
-        #       resources:
-        #         requests:
-        #           storage: ${prometheus_storage}Gi
-        # #    selector: {}
+        storageSpec:
+        # Using PersistentVolumeClaim
+        #
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner"
+                resources:
+                  requests:
+                    storage: 10Gi
+
+          # volumeClaimTemplate:
+          #   spec:
+          #     storageClassName: topolvm-provisioner
+          #     accessModes: ["ReadWriteOnce"]
+          #     resources:
+          #       requests:
+          #         storage: ${prometheus_storage}Gi
+        #    selector: {}
 
         ## Using tmpfs volume
         ##
