@@ -96,7 +96,7 @@ spec:
     deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
 
     deschedulerPolicy:
-      nodeSelector: "node-role.{{ dns_domain }}/tenant=true"
+      nodeSelector: "node-role.${dns_domain}/tenant=true"
       maxNoOfPodsToEvictPerNode: 10
       maxNoOfPodsToEvictPerNamespace: 2
       # ignorePvcPods: true
