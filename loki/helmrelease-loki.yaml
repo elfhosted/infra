@@ -846,7 +846,14 @@ spec:
         volumeClaimsEnabled: true
         # -- Parameters used for the `data` volume when volumeClaimEnabled if false
         dataVolumeParameters:
-          emptyDir: {}
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner"
+                resources:
+                  requests:
+                    storage: 10Gi
         # -- Enable StatefulSetAutoDeletePVC feature
         enableStatefulSetAutoDeletePVC: false
         # -- Size of persistent disk
@@ -1154,7 +1161,14 @@ spec:
         volumeClaimsEnabled: true
         # -- Parameters used for the `data` volume when volumeClaimEnabled if false
         dataVolumeParameters:
-          emptyDir: {}
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner"
+                resources:
+                  requests:
+                    storage: 10Gi
         # -- Enable StatefulSetAutoDeletePVC feature
         enableStatefulSetAutoDeletePVC: true
         # -- Size of persistent disk
