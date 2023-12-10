@@ -42,6 +42,7 @@
   - { import_role: { name: velero }, tags: [ velero ] }  
   - { import_role: { name: flux }, tags: [ flux ] }  
   - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }
+  - { import_role: { name: authentik }, tags: [ authentik ] }
 
 - hosts: k3s_dwarves,k3s_agents
   gather_facts: no

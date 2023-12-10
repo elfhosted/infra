@@ -133,7 +133,7 @@ spec:
         # -- set the redis hostname to talk to
         # @default -- `{{ .Release.Name }}-redis-master`
         host: "{{ .Release.Name }}-redis-master"
-        password: "randomdoesntmatter"  
+        password: ""
 
     # -- List of config maps to mount blueprints from. Only keys in the
     # configmap ending with ".yaml" wil be discovered and applied
@@ -329,8 +329,7 @@ spec:
       enabled: true
       architecture: standalone
       auth:
-        enabled: true
-        password: randomdoesntmatter
+        enabled: false
       image:
         tag: 6.2.10-debian-11-r13
       master:
