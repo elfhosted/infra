@@ -51,8 +51,8 @@ data:
             kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since=$TIMESTAMP_NOW
           fi
         else
+            echo "Volume is mounted, remove any existing annotations / labels"
           # the volume is mounted, so if there _was_ a label/annotation on the PVC, remove it
-          if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
             kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since- --overwrite
             kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound- --overwrite
             kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d- --overwrite
