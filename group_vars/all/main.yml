@@ -15,4 +15,6 @@ packages:
   velero:
     version: v1.12.0
   k3s:
-    version: v1.27.3+k3s1    
+    version: v1.27.3+k3s1
+  autorestic:
+    version: 1.7.9    

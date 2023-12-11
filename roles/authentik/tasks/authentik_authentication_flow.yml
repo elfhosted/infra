@@ -35,8 +35,8 @@
       status_code: 200,404
     register: default_recovery_flow
 
-  # - debug:
-  #     var: default_recovery_flow.json.pk      
+  - debug:
+      var: default_recovery_flow.json.pk      
 
   - name: "get pk for default-authentication-identification stage in built-in default-authentication-flow"
     uri:
@@ -81,9 +81,9 @@
       body_format: json
       status_code: 200
       body:
-        name: "{{ helm_ingress_dns_suffix }} {{ helm_chart_context }} login"
+        name: "{{ dns_domain }} login"
         slug: "default-authentication-flow"
-        title: "{{ helm_ingress_dns_suffix }} {{ helm_chart_context }} login"
+        title: "{{ dns_domain }} login"
         designation: "authentication"
         policy_engine_mode: "any"
         compatibility_mode: true

@@ -73,7 +73,8 @@ spec:
       tls: []
 
     # -- Annotations to add to the server and worker deployments
-    annotations: {}
+    annotations: 
+      configmap.reloader.stakater.com/reload: "authentik-blueprints" # Reload the deployments when blueprints are changed
 
     # -- Annotations to add to the server and worker pods
     podAnnotations: {}
@@ -137,7 +138,8 @@ spec:
 
     # -- List of config maps to mount blueprints from. Only keys in the
     # configmap ending with ".yaml" wil be discovered and applied
-    blueprints: []
+    blueprints:
+    - authentik-blueprints
 
     # -- see configuration options at https://goauthentik.io/docs/installation/configuration/
     env: {}

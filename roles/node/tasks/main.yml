@@ -10,10 +10,12 @@
     - iperf3
     - jq
     - snapd
+    - bzip2
+    - restic
 
 - name: install yq via snap
   snap:
-    name: yq    
+    name: yq
   when: "inventory_hostname in groups['k3s_servers']"  
 
 - name: Allow admin SSH sources to this host

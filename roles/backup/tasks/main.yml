@@ -1,0 +1,37 @@
+---
+- name: "Create temporary directory for cli download"
+  tempfile:
+    state: directory
+    suffix: temp
+  register: tempdir  
+
+- name: download autorestic {{ packages.autorestic.version }}
+  get_url:
+    url: https://github.com/cupcakearmy/autorestic/releases/download/v{{ packages.autorestic.version }}/autorestic_{{ packages.autorestic.version }}_linux_amd64.bz2
+    dest: /usr/local/bin/autorestic.bz2
+
+- name: Uncompress autorestic
+  shell: |
+    bunzip2 -f /usr/local/bin/autorestic.bz2
+    chmod 755 /usr/local/bin/autorestic
+
+- name: copy script to check autorestic restores
+  copy:
+    src: check-autorestic-restore.sh
+    dest: /usr/local/bin/check-autorestic-restore.sh
+
+- name: setup autorestic config
+  template:
+    src: autorestic.yml.j2
+    dest: /root/.autorestic.yml
+
+- name: "Create cronjobs for running autorestic daily backup / restore test"
+  cron:
+    name: autorestic
+    special_time: daily
+    job: /usr/local/bin/autorestic --ci cron && /usr/local/bin/check-autorestic-restore.sh
+
+- name: "Clean up temporary directory"
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent      
