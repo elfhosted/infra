@@ -63,7 +63,8 @@ spec:
     ingress:
       enabled: true
       ingressClassName: "nginx"
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       labels: {}
       hosts:
         - host: authentik.infra.${dns_domain}
