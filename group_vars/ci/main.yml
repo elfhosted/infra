@@ -18,6 +18,7 @@ dns_domain: ci-elfhosted.com
 k8s_ha_api_ip: 192.168.40.4
 k8s_ha_api_port: 8443
 flux_repo_branch: ci
+authentik_login_background: https://images.unsplash.com/photo-1608096275202-85fd2fc2e4d9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=karsten-winegeart-W9c6YicHKyE-unsplash.jpg
 
 firewall:
   admin_source: 
