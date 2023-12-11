@@ -25,6 +25,7 @@
   - { import_role: { name: keepalived }, tags: [ keepalived ], when: "inventory_hostname in groups['haproxy_servers']" }
   - { import_role: { name: k3s-server }, tags: [ k3s-server ] }
   - { import_role: { name: oidc }, tags: [ oidc], when: "groups['k3s_servers'][0] == inventory_hostname" }
+  - { import_role: { name: backup }, tags: [ backup ] }
 
 - hosts: controllers
   gather_facts: yes
@@ -42,6 +43,7 @@
   - { import_role: { name: velero }, tags: [ velero ] }  
   - { import_role: { name: flux }, tags: [ flux ] }  
   - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }
+  - { import_role: { name: authentik }, tags: [ authentik ] }
 
 - hosts: k3s_dwarves,k3s_agents
   gather_facts: no

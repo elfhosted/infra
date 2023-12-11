@@ -73,7 +73,8 @@ spec:
       tls: []
 
     # -- Annotations to add to the server and worker deployments
-    annotations: {}
+    annotations: 
+      configmap.reloader.stakater.com/reload: "authentik-blueprints" # Reload the deployments when blueprints are changed
 
     # -- Annotations to add to the server and worker pods
     podAnnotations: {}
@@ -133,11 +134,12 @@ spec:
         # -- set the redis hostname to talk to
         # @default -- `{{ .Release.Name }}-redis-master`
         host: "{{ .Release.Name }}-redis-master"
-        password: "randomdoesntmatter"  
+        password: "" # this is overridden by an env var, so I don't have to stick it in the chart in cleartext
 
     # -- List of config maps to mount blueprints from. Only keys in the
     # configmap ending with ".yaml" wil be discovered and applied
-    blueprints: []
+    blueprints:
+    - authentik-blueprints
 
     # -- see configuration options at https://goauthentik.io/docs/installation/configuration/
     env: {}
@@ -330,7 +332,8 @@ spec:
       architecture: standalone
       auth:
         enabled: true
-        password: randomdoesntmatter
+        existingSecret: authentik-secrets
+        existingSecretPasswordKey: AUTHENTIK_REDIS__PASSWORD
       image:
         tag: 6.2.10-debian-11-r13
       master:

@@ -17,6 +17,10 @@
       user_pk: "{{ _existing_user.json.results[0].pk }}"
     when: _existing_user.json.results
 
+  - name: set authentik_dns_name
+    set_fact:
+      authentik_dns_name: "authentik.infra.{{ dns_domain }}"
+
   - name: "Create {{ authentik_user_email }}"
     uri:
       url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/users/"
@@ -162,22 +166,27 @@
       minio_propertymapping_pk: "{{ _new_minio_propertymapping.json.pk }}"
     when: not _existing_minio_propertymapping.json.results        
 
-  # Create oauth applications / providers
-  - name: create oauth providers (controller)
+  - name: create oauth providers
     include_tasks: authentik_oauth_provider_application.yml
     with_items:
       - name: kube-apiserver
-        secret: "{{ keycloak_kubernetes_client_secret }}"
+        secret: "{{ authentik_kube_apiserver_client_secret }}"
         redirect_uris: |
+          http://localhost:8000
           http://localhost:18000
-          https://dashboard-internal.{{ dns_domain }}/oauth2/callback
-          https://weave-gitops-internal.{{ dns_domain }}/oauth2/callback
-        icon: https://homer.{{ dns_domain }}/assets/png/kubernetes.png
+          https://dashboard.{{ dns_domain }}/oauth2/callback
+          https://weave-gitops.{{ dns_domain }}/oauth2/callback
+        icon: https://infra.{{ dns_domain }}/assets/png/kubernetes.png
       - name: grafana
-        secret: "{{ keycloak_grafana_client_secret }}"
+        secret: "{{ authentik_grafana_client_secret }}"
         redirect_uris: |
-          https://grafana-internal.{{ dns_domain }}/login/generic_oauth
-        icon: https://homer.{{ dns_domain }}/assets/png/grafana.png
+          https://grafana.infra.{{ dns_domain }}/login/generic_oauth
+        icon: https://infra.{{ dns_domain }}/assets/png/grafana.png
+      # - name: minio
+      #   secret: "{{ authentik_minio_client_secret }}"
+      #   redirect_uris: |
+      #     https://minio.infra.{{ dns_domain }}/login/generic_oauth
+      #   icon: https://infra.{{ dns_domain }}/assets/png/minio.png        
     loop_control:
       loop_var: provider
 
