@@ -659,7 +659,7 @@ spec:
           allowVolumeExpansion: true
           additionalParameters: {}
           # "topolvm.io/device-class": "ssd"
-      - name: topolvm-provisioner-thni  # Defines name of storage class.
+      - name: topolvm-provisioner-thin  # Defines name of storage class.
         storageClass:
           # Supported filesystems are: ext4, xfs, and btrfs.
           fsType: xfs
