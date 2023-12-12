@@ -85,17 +85,7 @@
     path: /etc/fstab
     regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
     replace: '#\1\2\3swap\4'
-    backup: yes  
-
-- name: Expand /var/lib LVM volume to 100%
-  lvol:
-      vg: vg0
-      lv: var-lib
-      size: 100%FREE
-      resizefs: true
-  become: yes
-  when: "inventory_hostname in groups['k3s_agents']" 
-  ignore_errors: true # this only applies in prod, not CI
+    backup: yes 
 
 - name: copy script for grabbing smartmon metrics
   copy:
