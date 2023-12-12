@@ -3,6 +3,8 @@ kube-apiserver-arg:
 - "oidc-client-id=kube-apiserver"
 - "oidc-username-claim=email,profile"
 - "oidc-groups-claim=groups"
+- "oidc-groups-prefix=oidc:"
+- "oidc-username-prefix=oidc:"
 kube-controller-manager-arg:
 - "bind-address=0.0.0.0"
 - "node-cidr-mask-size=22"

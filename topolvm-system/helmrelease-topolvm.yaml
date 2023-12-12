@@ -155,6 +155,12 @@ spec:
           volume-group: vg0
           default: true
           spare-gb: 10
+        - name: vg0-thin
+          volume-group: vg0
+          type: thin
+          thin-pool:
+            name: thinpool
+            overprovision-ratio: 10.0          
 
       # lvmd.lvcreateOptionClasses -- Specify the lvcreate-option-class settings.
       lvcreateOptionClasses: []
@@ -653,6 +659,23 @@ spec:
           allowVolumeExpansion: true
           additionalParameters: {}
           # "topolvm.io/device-class": "ssd"
+      - name: topolvm-provisioner-thni  # Defines name of storage class.
+        storageClass:
+          # Supported filesystems are: ext4, xfs, and btrfs.
+          fsType: xfs
+          # reclaimPolicy
+          reclaimPolicy:  # Delete
+          # Additional annotations
+          annotations: {}
+          # Default storage class for dynamic volume provisioning
+          # ref: https://kubernetes.io/docs/concepts/storage/dynamic-provisioning
+          isDefaultClass: false
+          # volumeBindingMode can be either WaitForFirstConsumer or Immediate. WaitForFirstConsumer is recommended because TopoLVM cannot schedule pods wisely if volumeBindingMode is Immediate.
+          volumeBindingMode: WaitForFirstConsumer
+          # enables CSI drivers to expand volumes. This feature is available for Kubernetes 1.16 and later releases.
+          allowVolumeExpansion: true
+          additionalParameters:
+            "topolvm.io/device-class": "vg0-thin"          
 
     webhook:
       # webhook.caBundle -- Specify the certificate to be used for AdmissionWebhook.
