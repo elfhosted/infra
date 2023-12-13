@@ -85,7 +85,16 @@
     path: /etc/fstab
     regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
     replace: '#\1\2\3swap\4'
-    backup: yes 
+    backup: yes  
+
+- name: Create a thin pool on vg0
+  community.general.lvol:
+    vg: vg0
+    thinpool: thinpool
+    size: 100%FREE  
+  when: 
+  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers']"
+  ignore_errors: true # so we can run it multiple times
 
 - name: copy script for grabbing smartmon metrics
   copy:
