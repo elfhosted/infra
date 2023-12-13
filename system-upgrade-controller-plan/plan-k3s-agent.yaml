@@ -15,8 +15,7 @@ spec:
     args:
     - prepare
     - k3s-server # wait for the k3s-server plan to apply
-  image: rancher/k3s-upgrade
-  serviceAccountName: system-upgrade
   upgrade:
     image: rancher/k3s-upgrade
+  serviceAccountName: system-upgrade
   version: ${k3s_version}
