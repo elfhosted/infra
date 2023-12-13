@@ -94,12 +94,13 @@ spec:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
     deschedulerPolicyAPIVersion: "descheduler/v1alpha2"
-    nodeSelector: "node-role.${dns_domain}/download=true"
-
+    
     deschedulerPolicy:
+      nodeSelector: "node-role.${dns_domain}/download=true"
       maxNoOfPodsToEvictPerNode: 100
       maxNoOfPodsToEvictPerNamespace: 2
       ignorePvcPods: false
+      nodeFit: true
       # evictLocalStoragePods: true
       # tracing:
       #   collectorEndpoint: otel-collector.observability.svc.cluster.local:4317
