@@ -93,7 +93,7 @@ spec:
       dry-run:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
-    deschedulerPolicyAPIVersion: "descheduler/v1alpha2"
+    deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
     
     deschedulerPolicy:
       nodeSelector: "node-role.${dns_domain}/download=true"
@@ -101,63 +101,23 @@ spec:
       maxNoOfPodsToEvictPerNamespace: 2
       ignorePvcPods: false
       nodeFit: true
-      # evictLocalStoragePods: true
-      # tracing:
-      #   collectorEndpoint: otel-collector.observability.svc.cluster.local:4317
-      #   transportCert: ""
-      #   serviceName: ""
-      #   serviceNamespace: ""
-      #   sampleRate: 1.0
-      #   fallbackToNoOpProviderOnError: true
+      evictLocalStoragePods: true
       strategies:
         RemoveDuplicates:
           enabled: true
-        RemovePodsHavingTooManyRestarts:
-          enabled: true
-          params:
-            podsHavingTooManyRestarts:
-              podRestartThreshold: 100
-              includingInitContainers: true
-        RemovePodsViolatingNodeTaints:
-          enabled: true
-        RemovePodsViolatingNodeAffinity:
-          enabled: true
-          params:
-            nodeAffinityType:
-            - requiredDuringSchedulingIgnoredDuringExecution
-        RemovePodsViolatingInterPodAntiAffinity:
-          enabled: true
-        RemovePodsViolatingTopologySpreadConstraint:
-          enabled: true
-          params:
-            includeSoftConstraints: false
         LowNodeUtilization:
           enabled: true
           params:
             nodeResourceUtilizationThresholds:
-              useDeviationThresholds: true # percentage of the mean. Since cpu/mem is based on requests, not actual usage, it's not much use. However, pod count is a useful metric to balance on
+              useDeviationThresholds: false # not as much use when we have 2 nodes
               thresholds:
-                cpu: 5
-                memory: 5
-                pods: 3
+                cpu: 50
+                memory: 50
+                pods: 100
               targetThresholds:
-                cpu: 5
-                memory: 5
-                pods: 3
-            namespaces:
-              exclude:
-              - "rook-ceph"
-              - "traefik"
-              - "metallb-system"
-              - "kube-system"
-                            
-          # to be tweaked based on https://github.com/kubernetes-sigs/descheduler/#label-filtering
-          # labelSelector:
-          #   matchLabels:
-          #     component: redis
-          #   matchExpressions:
-          #     - {key: tier, operator: In, values: [cache]}
-          #     - {key: environment, operator: NotIn, values: [dev]}
+                cpu: 30
+                memory: 30
+                pods: 80
 
 
     priorityClassName: system-cluster-critical # don't deschedule yourself
