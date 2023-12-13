@@ -19,8 +19,8 @@ data:
     for NS in ${NAMESPACES}
     do
 
-      # Get a list of all customer PVCs starting with config-
-      PVCS=$(kubectl get pvc -n $NS --no-headers=true | cut -f1 -d' ')
+      # Get a list of all customer PVCs excluding tmp (because it's ephemeral)
+      PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -v tmp | cut -f1 -d' ')
             
       for PVC in ${PVCS}
       do

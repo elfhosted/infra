@@ -43,4 +43,11 @@ hobbit01      ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:
 hobbit02      ansible_host=192.168.40.82 cluster_nic=eth1 proxmox_id=408 mac=52:54:00:40:00:82
 hobbit03      ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54:00:40:00:83
 
+[node_role_download]
+sprite01
+
+[node_role_app]
+sprite02
+sprite03
+
 # Why are we using a separate cluster NIC? For most accurate simulation of the Hetzner design
