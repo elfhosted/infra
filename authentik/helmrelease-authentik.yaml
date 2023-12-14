@@ -346,8 +346,8 @@ spec:
 
       #  -- tolerations applied to the deployments
       tolerations:
-      - key: "node-role.kubernetes.io/control-plane"
-        effect: "NoSchedule"
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
                 
     redis:
       # -- enable the bundled bitnami redis chart
@@ -384,5 +384,5 @@ spec:
 
         #  -- tolerations applied to the deployments
         tolerations:
-        - key: "node-role.kubernetes.io/control-plane"
-          effect: "NoSchedule"            
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists     
