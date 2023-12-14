@@ -90,7 +90,7 @@ spec:
 
     cmdOptions:
       v: 3
-      dry-run:
+      # dry-run:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
     deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
