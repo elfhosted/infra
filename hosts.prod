@@ -17,11 +17,11 @@ elf02        ansible_host=10.0.42.22 cluster_nic=eno1.4000
 elf03        ansible_host=10.0.42.23 cluster_nic=eno1.4000
 orc01        ansible_host=10.0.42.41 cluster_nic=eno1.4000
 orc02        ansible_host=10.0.42.42 cluster_nic=eno1.4000
+orc03        ansible_host=10.0.42.43 cluster_nic=enp0s31f6.4000
+
 
 [k3s_dwarves]
-dwarf01      ansible_host=10.0.42.81 cluster_nic=enp3s0.4000
 dwarf02      ansible_host=10.0.42.82 cluster_nic=eno1.4000
-dwarf03      ansible_host=10.0.42.83 cluster_nic=enp3s0.4000
 dwarf04      ansible_host=10.0.42.84 cluster_nic=eno1.4000
 dwarf05      ansible_host=10.0.42.85 cluster_nic=eno1.4000
 dwarf06      ansible_host=10.0.42.86 cluster_nic=eno1.4000
@@ -33,6 +33,7 @@ goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
 [node_role_download]
 orc01
 orc02
+orc03
 
 [node_role_app]
 elf01
