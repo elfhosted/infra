@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: descheduler-download
+  name: descheduler-errors
   namespace: descheduler
 spec:
   chart:
@@ -56,7 +56,7 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "45 22 * * *" # 15 min before end of maint window
+    schedule: "45 22 31 02 *" # keep cronjob for manual runs when we need to get rid of errors
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3
@@ -90,35 +90,17 @@ spec:
 
     cmdOptions:
       v: 3
-      # dry-run:
+      dry-run:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
     deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
     
-    deschedulerPolicy:
-      nodeSelector: "node-role.${dns_domain}/download=true"
-      maxNoOfPodsToEvictPerNode: 100
-      maxNoOfPodsToEvictPerNamespace: 2
-      ignorePvcPods: false
-      nodeFit: true
-      evictLocalStoragePods: true
-      strategies:
-        RemoveDuplicates:
-          enabled: true
-        LowNodeUtilization:
-          enabled: true
-          params:
-            nodeResourceUtilizationThresholds:
-              useDeviationThresholds: true # not as much use when we have 2 nodes
-              thresholds:
-                cpu: 1
-                memory: 1
-                pods: 1
-              targetThresholds:
-                cpu: 5
-                memory: 5
-                pods: 5
 
+    # Just a simple policy to get rid of errored pods
+    deschedulerPolicy:
+      strategies:
+        RemoveErrors:
+          enabled: true
 
     priorityClassName: system-cluster-critical # don't deschedule yourself
 

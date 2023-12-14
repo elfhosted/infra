@@ -56,7 +56,7 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "0 22 * * *" 
+    schedule: "45 22 * * *" # 15 min before end of maint window
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3
@@ -90,7 +90,7 @@ spec:
 
     cmdOptions:
       v: 3
-      dry-run:
+      # dry-run:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
     deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
@@ -136,7 +136,7 @@ spec:
           enabled: true
           params:
             nodeResourceUtilizationThresholds:
-              useDeviationThresholds: false # percentage of the mean. Since cpu/mem is based on requests, not actual usage, it's not much use. However, pod count is a useful metric to balance on
+              useDeviationThresholds: true # percentage of the mean. Since cpu/mem is based on requests, not actual usage, it's not much use. However, pod count is a useful metric to balance on
               thresholds:
                 cpu: 3
                 memory: 3
