@@ -56,7 +56,7 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "45 22 31 02 *" # keep cronjob for manual runs when we need to get rid of errors
+    schedule: "0 22 * * *" # keep cronjob for manual runs when we need to get rid of errors
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3
@@ -95,7 +95,6 @@ spec:
     # Recommended to use the latest Policy API version supported by the Descheduler app version
     deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
     
-
     # Just a simple policy to get rid of errored pods
     deschedulerPolicy:
       strategies:
