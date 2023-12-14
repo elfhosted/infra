@@ -336,18 +336,19 @@ spec:
         enabled: true
         runAsUser: 1001
 
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists 
+      primary:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: Exists 
 
-      #  -- tolerations applied to the deployments
-      tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists
+        #  -- tolerations applied to the deployments
+        tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
                 
     redis:
       # -- enable the bundled bitnami redis chart
