@@ -808,7 +808,13 @@ spec:
       # -- volumeClaimTemplates to add to StatefulSet
       extraVolumeClaimTemplates: []
       # -- Resource requests and limits for the write
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Grace period to allow the write to shutdown before it is killed. Especially for the ingester,
       # this must be increased. It must be long enough so writes can be gracefully shutdown flushing/transferring
       # all data and to successfully leave the member ring on shutdown.
@@ -903,7 +909,14 @@ spec:
       # -- Volumes to add to the table-manager pods
       extraVolumes: []
       # -- Resource requests and limits for the table-manager
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
+
       # -- Containers to add to the table-manager pods
       extraContainers: []
       # -- Grace period to allow the table-manager to shutdown before it is killed
@@ -1013,7 +1026,13 @@ spec:
       # -- Volumes to add to the read pods
       extraVolumes: []
       # -- Resource requests and limits for the read
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Grace period to allow the read to shutdown before it is killed
       terminationGracePeriodSeconds: 30
       # -- Affinity for read pods. Passed through `tpl` and, thus, to be configured as string
@@ -1123,7 +1142,13 @@ spec:
       # -- Volumes to add to the backend pods
       extraVolumes: []
       # -- Resource requests and limits for the backend
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Grace period to allow the backend to shutdown before it is killed. Especially for the ingester,
       # this must be increased. It must be long enough so backends can be gracefully shutdown flushing/transferring
       # all data and to successfully leave the member ring on shutdown.
@@ -1408,7 +1433,13 @@ spec:
             - ALL
         allowPrivilegeEscalation: false
       # -- Resource requests and limits for the gateway
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Containers to add to the gateway pods
       extraContainers: []
       # -- Grace period to allow the gateway to shutdown before it is killed

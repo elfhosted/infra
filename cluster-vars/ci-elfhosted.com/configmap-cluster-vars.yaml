@@ -2,9 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cluster-vars
-  namespace: cluster-vars
-  annotations:
-    replicator.v1.mittwald.de/replicate-to: "*"
+  namespace: flux-system
+  # annotations:
+  #   replicator.v1.mittwald.de/replicate-to: "*"
 data:
   dns_domain: ci-elfhosted.com
   cluster_nic_class_c: 192.168.41
@@ -17,3 +17,4 @@ data:
   rook_ceph_mds_ram: 1Gi
   dashboard_background: development.jpg
   hetzner_auction_hunter_cron: 0 0 31 2 * # don't automatically run
+  k3s_version: v1.27.6+k3s1

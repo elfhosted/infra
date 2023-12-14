@@ -56,7 +56,7 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "0 22 * * *" 
+    schedule: "45 22 * * *" # 15 min before end of maint window
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3
@@ -90,10 +90,10 @@ spec:
 
     cmdOptions:
       v: 3
-      dry-run:
+      # dry-run:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
-    deschedulerPolicyAPIVersion: "descheduler/v1alpha2"
+    deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
     
 
     deschedulerPolicy:
@@ -138,28 +138,13 @@ spec:
             nodeResourceUtilizationThresholds:
               useDeviationThresholds: true # percentage of the mean. Since cpu/mem is based on requests, not actual usage, it's not much use. However, pod count is a useful metric to balance on
               thresholds:
-                cpu: 5
-                memory: 5
+                cpu: 3
+                memory: 3
                 pods: 3
               targetThresholds:
-                cpu: 5
-                memory: 5
+                cpu: 3
+                memory: 3
                 pods: 3
-            namespaces:
-              exclude:
-              - "rook-ceph"
-              - "traefik"
-              - "metallb-system"
-              - "kube-system"
-                            
-          # to be tweaked based on https://github.com/kubernetes-sigs/descheduler/#label-filtering
-          # labelSelector:
-          #   matchLabels:
-          #     component: redis
-          #   matchExpressions:
-          #     - {key: tier, operator: In, values: [cache]}
-          #     - {key: environment, operator: NotIn, values: [dev]}
-
 
     priorityClassName: system-cluster-critical # don't deschedule yourself
 
