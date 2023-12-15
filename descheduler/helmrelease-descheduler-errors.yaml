@@ -56,13 +56,13 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "0 22 * * *" # keep cronjob for manual runs when we need to get rid of errors
+    schedule: "45 10 * * *" # 15 min before end of maint window
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3
     # failedJobsHistoryLimit: 1
     # ttlSecondsAfterFinished 600
-    timeZone: Pacific/Auckland # Try to keep maint window in sync when DST changes
+    # timeZone: Pacific/Auckland # not working currently
 
     # Required when running as a Deployment
     deschedulingInterval: 5m
