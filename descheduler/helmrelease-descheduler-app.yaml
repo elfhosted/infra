@@ -56,7 +56,7 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "45 9 * * *" # 15 min before end of maint window
+    schedule: "45 10 * * *" # 15 min before end of maint window
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3

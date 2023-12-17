@@ -36,12 +36,19 @@ data:
             # if yes, and it's older than 31 days, then label for deletion
             TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk '{split($0,a); print a[3]}')
             TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
-            if [[ $TIMESTAMP_DIFF -gt 276480 ]]; then # 276480 sec = 3.2 days
+            if [[ $TIMESTAMP_DIFF -gt 2764800 ]]; then # 2764800 sec = 32 days
 
               echo "PVC $PVC in namespace $NS has been unused for > 31 days, flagging for removal it.."
               kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d=true --overwrite
 
               #echo kubectl delete pvc -n $NS $PVC
+
+            elif [[ $TIMESTAMP_DIFF -gt 691200 ]]; then # 691200 sec = 8 days
+
+              echo "PVC $PVC in namespace $NS has been unused for > 31 days, flagging for removal it.."
+              kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-8d=true --overwrite
+
+              #echo kubectl delete pvc -n $NS $PVC              
             else
               echo "Found annotated, unused PVC $PVC in NS $NS, but it's less than 3d old, so ignoring"
             fi
@@ -55,6 +62,7 @@ data:
           kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since- --overwrite
           kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound- --overwrite
           kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d- --overwrite
+          kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-8d- --overwrite
         fi
       done
     done    
