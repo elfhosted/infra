@@ -12,6 +12,7 @@ spec:
     - key: node-role.kubernetes.io/control-plane
       operator: DoesNotExist
   prepare:
+    image: rancher/k3s-upgrade
     args:
     - prepare
     - k3s-server # wait for the k3s-server plan to apply
