@@ -362,13 +362,22 @@ spec:
           actions:
           - 's3:*'          
 
-    - name: goldilocks
+    - name: goldilocks-rw
       statements:
         - resources:
           - 'arn:aws:s3:::goldilocks/*'
           - 'arn:aws:s3:::goldilocks'
           actions:
-          - 's3:*'             
+          - 's3:*'   
+
+    - name: goldilocks-ro
+      statements:
+        - resources:
+          - 'arn:aws:s3:::goldilocks/*'
+          - 'arn:aws:s3:::goldilocks'
+          actions:
+          - 's3:ListBucket'
+          - 's3:GetObject'                       
     #
     ## Additional Annotations for the Kubernetes Job makePolicyJob
     makePolicyJob:
@@ -402,10 +411,14 @@ spec:
         existingSecret: thanos-credentials        
         existingSecretKey: password
         policy: thanos    
-      - accessKey: goldilocks
-        existingSecret: goldilocks-credentials        
+      - accessKey: goldilocks-rw
+        existingSecret: goldilocks-rw-credentials        
         existingSecretKey: password
-        policy: goldilocks                
+        policy: goldilocks-rw
+      - accessKey: goldilocks-ro
+        existingSecret: goldilocks-ro-credentials        
+        existingSecretKey: password
+        policy: goldilocks-ro
 
       # Or you can refer to specific secret
       #- accessKey: externalSecret
