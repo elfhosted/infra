@@ -361,6 +361,14 @@ spec:
           - 'arn:aws:s3:::thanos'
           actions:
           - 's3:*'          
+
+    - name: goldilocks
+      statements:
+        - resources:
+          - 'arn:aws:s3:::goldilocks/*'
+          - 'arn:aws:s3:::goldilocks'
+          actions:
+          - 's3:*'             
     #
     ## Additional Annotations for the Kubernetes Job makePolicyJob
     makePolicyJob:
@@ -393,7 +401,11 @@ spec:
       - accessKey: thanos
         existingSecret: thanos-credentials        
         existingSecretKey: password
-        policy: thanos        
+        policy: thanos    
+      - accessKey: goldilocks
+        existingSecret: goldilocks-credentials        
+        existingSecretKey: password
+        policy: goldilocks                
 
       # Or you can refer to specific secret
       #- accessKey: externalSecret
@@ -488,7 +500,14 @@ spec:
         versioning: false
         # set objectlocking for
         # bucket [true|false] NOTE: versioning is enabled by default if you use locking
-        objectlocking: false              
+        objectlocking: false    
+      - name: goldilocks
+        policy: none
+        purge: false
+        versioning: false
+        # set objectlocking for
+        # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+        objectlocking: false                      
 
     ## Additional Annotations for the Kubernetes Job makeBucketJob
     makeBucketJob:
