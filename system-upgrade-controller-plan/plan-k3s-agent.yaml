@@ -16,10 +16,10 @@ spec:
     - prepare
     - k3s-server # wait for the k3s-server plan to apply
   tolerations:
-  - key: "node-role.elfhosted.com/download"
+  - key: "node-role.${dns_domain}/download"
     operator: "Exists"
     effect: "NoSchedule"
-  - key: "node-role.elfhosted.com/storage"
+  - key: "node-role.${dns_domain}/storage"
     operator: "Exists"
     effect: "NoSchedule"    
   upgrade:
