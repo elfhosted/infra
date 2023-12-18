@@ -15,6 +15,13 @@ spec:
     args:
     - prepare
     - k3s-server # wait for the k3s-server plan to apply
+  tolerations:
+  - key: "node-role.elfhosted.com/download"
+    operator: "Exists"
+    effect: "NoSchedule"
+  - key: "node-role.elfhosted.com/storage"
+    operator: "Exists"
+    effect: "NoSchedule"    
   upgrade:
     image: rancher/k3s-upgrade
   serviceAccountName: system-upgrade
