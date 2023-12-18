@@ -63,13 +63,13 @@
 - name: taint and label download workers
   become: no
   shell: |
-    kubectl label node {{ inventory_hostname_short }} node-role.elfhosted.com/download=true --overwrite
-    kubectl taint node {{ inventory_hostname_short }} node-role.elfhosted.com/download=true:NoSchedule  --overwrite
+    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download=true --overwrite
+    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download=true:NoSchedule  --overwrite
   when: "inventory_hostname in groups['node_role_download']"  
   delegate_to: "{{ groups['controllers'][0] }}"
 
 - name: label app workers
   become: no
-  shell: kubectl label node {{ inventory_hostname_short }} node-role.elfhosted.com/app=true
+  shell: kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/app=true
   when: "inventory_hostname in groups['node_role_app']"  
   delegate_to: "{{ groups['controllers'][0] }}"  
