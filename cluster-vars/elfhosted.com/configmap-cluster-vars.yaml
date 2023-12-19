@@ -8,6 +8,7 @@ metadata:
 data:
   dns_domain: elfhosted.com
   cluster_nic_class_c: 10.0.42
+  nginx_ingress_ip: 100.64.39.133 # change this back to 10.0.42.100 to access directly instead of via tinkerbell's iptables
   traefik_ingress_dns_ip: 142.132.247.26
   k3s_server_endpoint_1: 10.0.42.11
   k3s_server_endpoint_2: 10.0.42.12

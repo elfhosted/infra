@@ -9,4 +9,4 @@ spec:
     recordTTL: 180
     recordType: A
     targets:
-    - ${cluster_nic_class_c}.100
+    - ${nginx_ingress_ip}
