@@ -234,9 +234,13 @@
       - name: thanos
         external_host: https://thanos.infra.{{ dns_domain }}
         internal_host: http://thanos-query.thanos.svc.cluster.local:9090
-        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png      
-        slug: thanos     
-        host: thanos.infra.${dns_domain}           
+        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png       
+        host: thanos.infra.${dns_domain}   
+      - name: traefik
+        external_host: https://traefik.infra.{{ dns_domain }}
+        internal_host: http://traefik-dashboard.traefik.svc.cluster.local:9090
+        icon: https://infra.{{ dns_domain }}/assets/png/traefik.png        
+        host: traefik.infra.${dns_domain}                  
     loop_control:
       loop_var: provider
 
