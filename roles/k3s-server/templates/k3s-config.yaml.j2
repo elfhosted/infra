@@ -1,7 +1,7 @@
 kube-apiserver-arg:
 - "oidc-issuer-url=https://authentik.infra.{{ dns_domain }}/application/o/kube-apiserver/"
 - "oidc-client-id=kube-apiserver"
-- "oidc-username-claim=email,profile"
+- "oidc-username-claim=email"
 - "oidc-groups-claim=groups"
 - "oidc-groups-prefix=oidc:"
 - "oidc-username-prefix=oidc:"

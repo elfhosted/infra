@@ -1139,8 +1139,9 @@ spec:
         #   filters: oauth.generic_oauth:debug
         # grafana_net:
         #   url: https://grafana.net
-        # server:
-        #   enforce_domain: false
+        server:
+          enforce_domain: true
+          domain: grafana.infra.{$dns_domain}
         auth.generic_oauth:
           enabled: true
           allow_sign_up: false

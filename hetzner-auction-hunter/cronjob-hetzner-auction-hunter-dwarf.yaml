@@ -24,7 +24,7 @@ spec:
               /hah.py \
               -f /config/dwarf.state \
               --provider slack \
-              --price 50 \
+              --price 60 \
               --disk-size 10000 \
               --disk-count 4 \
               --dc FSN \
