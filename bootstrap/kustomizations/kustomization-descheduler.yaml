@@ -21,8 +21,16 @@ spec:
     # Always use the helmrelease to determine health too
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: descheduler
-      namespace: descheduler                     
+      name: descheduler-app
+      namespace: descheduler      
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: descheduler-download
+      namespace: descheduler        
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: descheduler-errors
+      namespace: descheduler                               
   postBuild:
     substituteFrom:
       - kind: ConfigMap
