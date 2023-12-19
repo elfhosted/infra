@@ -42,13 +42,7 @@ spec:
     
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: infra.${dns_domain}
-            paths:
-              - path: /
-                pathType: Prefix
+        enabled: false
                           
     service:
       main:

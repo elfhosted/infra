@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: alertmanager.ci-elfhosted.com
+  name: hubble.infra.${dns_domain}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: alertmanager.ci-elfhosted.com
+  - host: hubble.infra.${dns_domain}
     http:
       paths:
       - backend:

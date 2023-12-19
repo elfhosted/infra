@@ -121,4 +121,5 @@
   - name: Create ingress manifest for {{ provider.external_host }}
     template:
       src: "outpost-ingress.yaml.j2"
-      dest: "authentik/ingress-{{ provider.name }}.{{ dns_domain }}.yaml"
+      dest: "authentik/ingress-{{ provider.name }}-via-authentik.yaml"
+      

@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: polaris.ci-elfhosted.com
+  name: infra.${dns_domain}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: polaris.ci-elfhosted.com
+  - host: infra.${dns_domain}
     http:
       paths:
       - backend:

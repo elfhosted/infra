@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prometheus.ci-elfhosted.com
+  name: thanos.infra.${dns_domain}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: prometheus.ci-elfhosted.com
+  - host: thanos.infra.${dns_domain}
     http:
       paths:
       - backend:

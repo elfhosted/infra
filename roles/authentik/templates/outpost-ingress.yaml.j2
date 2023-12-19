@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ provider.name }}.{{ dns_domain }}
+  name: {{ provider.host }}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ provider.name }}.{{ dns_domain }}
+  - host: {{ provider.host }}
     http:
       paths:
       - backend:
