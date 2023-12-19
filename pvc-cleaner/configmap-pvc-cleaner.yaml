@@ -41,15 +41,15 @@ data:
               echo "PVC $PVC in namespace $NS has been unused for > 31 days, flagging for removal it.."
               kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d=true --overwrite
 
-              kubectl delete pvc -n $NS $PVC
+              echo kubectl delete pvc -n $NS $PVC
 
             elif [[ $TIMESTAMP_DIFF -gt 691200 ]]; then # 691200 sec = 8 days
 
               echo "PVC $PVC in namespace $NS has been unused for > 8 days, flagging for removal it.."
               kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-8d=true --overwrite
 
-              if [ ! grep -q elfstorage $PVC ]; then
-                kubectl delete pvc -n $NS $PVC # allow elfstorage to persist up to 32d
+              if ! (echo $PVC | grep -q elfstorage); then
+                echo kubectl delete pvc -n $NS $PVC # allow elfstorage to persist up to 32d
               fi
             else
               echo "Found annotated, unused PVC $PVC in NS $NS, but it's less than 8d old, so ignoring"
