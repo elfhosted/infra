@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ provider.host }}
+  name: prometheus.infra.${dns_domain}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ provider.host }}
+  - host: prometheus.infra.${dns_domain}
     http:
       paths:
       - backend:

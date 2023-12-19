@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: thanos
-      version: 12.6.x
+      version: 12.20.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -699,7 +699,7 @@ spec:
       ingress:
         ## @param query.ingress.enabled Enable ingress controller resource
         ##
-        enabled: true
+        enabled: false
         ## @param query.ingress.hostname Default host for the ingress resource
         ##
         hostname: thanos.infra.${dns_domain}

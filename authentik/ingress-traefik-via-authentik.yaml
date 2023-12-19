@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: thanos.ci-elfhosted.com
+  name: traefik.infra.${dns_domain}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: thanos.ci-elfhosted.com
+  - host: traefik.infra.${dns_domain}
     http:
       paths:
       - backend:

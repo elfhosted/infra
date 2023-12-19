@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hubble.ci-elfhosted.com
+  name: polaris.infra.${dns_domain}
   namespace: authentik
 spec:
   ingressClassName: nginx
   rules:
-  - host: hubble.ci-elfhosted.com
+  - host: polaris.infra.${dns_domain}
     http:
       paths:
       - backend:

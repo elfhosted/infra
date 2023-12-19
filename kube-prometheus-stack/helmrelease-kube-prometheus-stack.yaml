@@ -395,7 +395,7 @@ spec:
       #       {{ end }}
 
       ingress:
-        enabled: true
+        enabled: false
 
         # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
         # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
@@ -1139,8 +1139,9 @@ spec:
         #   filters: oauth.generic_oauth:debug
         # grafana_net:
         #   url: https://grafana.net
-        # server:
-        #   enforce_domain: false
+        server:
+          enforce_domain: true
+          domain: grafana.infra.${dns_domain}
         auth.generic_oauth:
           enabled: true
           allow_sign_up: false
@@ -2839,7 +2840,7 @@ spec:
       #     someoneelse:$apr1$DMZX2Z4q$6SbQIfyuLQd.xmo/P0m2c.
 
       ingress:
-        enabled: true
+        enabled: false
 
         # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
         # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress

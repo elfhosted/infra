@@ -211,25 +211,36 @@
         external_host: https://alertmanager.infra.{{ dns_domain }}
         internal_host: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc.cluster.local:9093
         icon: https://infra.{{ dns_domain }}/assets/png/alertmanager.png
+        host: alertmanager.infra.${dns_domain}
       - name: prometheus
         external_host: https://prometheus.infra.{{ dns_domain }}
         internal_host: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090
         icon: https://infra.{{ dns_domain }}/assets/png/prometheus.png
+        host: prometheus.infra.${dns_domain}
       - name: polaris
         external_host: https://polaris.infra.{{ dns_domain }}
         internal_host: http://polaris-dashboard.polaris.svc.cluster.local:80
         icon: https://infra.{{ dns_domain }}/assets/png/polaris.png
+        host: polaris.infra.${dns_domain}
       - name: homer
         external_host: https://infra.{{ dns_domain }}
         internal_host: http://homer.homer.svc.cluster.local:8080
+        host: infra.${dns_domain}
       - name: hubble
         external_host: https://hubble.infra.{{ dns_domain }}
         internal_host: http://hubble-ui.kube-system.svc.cluster.local:80
         icon: https://infra.{{ dns_domain }}/assets/png/hubble.png
+        host: hubble.infra.${dns_domain}
       - name: thanos
         external_host: https://thanos.infra.{{ dns_domain }}
         internal_host: http://thanos-query.thanos.svc.cluster.local:9090
-        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png                      
+        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png       
+        host: thanos.infra.${dns_domain}   
+      - name: traefik
+        external_host: https://traefik.infra.{{ dns_domain }}
+        internal_host: http://traefik-dashboard.traefik.svc.cluster.local:9090
+        icon: https://infra.{{ dns_domain }}/assets/png/traefik.png        
+        host: traefik.infra.${dns_domain}                  
     loop_control:
       loop_var: provider
 
