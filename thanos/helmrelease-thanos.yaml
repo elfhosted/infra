@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: thanos
-      version: 12.6.x
+      version: 12.20.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
