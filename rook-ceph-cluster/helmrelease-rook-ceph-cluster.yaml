@@ -489,6 +489,27 @@ spec:
               - name: sdc
               - name: sdd    
 
+          - name: dwarf08
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd    
+
+          - name: dwarf09
+            devices:
+              - name: sdb4 # weird server won't boot any other way
+              - name: sda
+              - name: sdc
+              - name: sdd    
+
+          - name: dwarf10
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd                                
+
           - name: goblin01
             resources: 
               limits: 
