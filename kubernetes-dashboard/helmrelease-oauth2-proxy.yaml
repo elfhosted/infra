@@ -110,7 +110,7 @@ spec:
       session-store-type: cookie
       cookie-refresh: 15m    
       oidc-issuer-url: https://authentik.infra.${dns_domain}/application/o/kube-apiserver/
-      redirect-url: https://dashboard.infra.${dns_domain}/oauth2/callback      
+      redirect-url: https://kubernetes-dashboard.infra.${dns_domain}/oauth2/callback      
     extraEnv: []
 
     # -- Custom labels to add into metadata
