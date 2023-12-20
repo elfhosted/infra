@@ -137,7 +137,7 @@ spec:
     ## List of node taints to tolerate (requires Kubernetes >= 1.6)
     tolerations:
     - key: "node-role.kubernetes.io/control-plane"
-      effect: "NoSchedule"    
+      operator: "Exists"    
 
     ## Affinity for pod assignment
     ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity

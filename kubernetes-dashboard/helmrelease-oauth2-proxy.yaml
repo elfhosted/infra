@@ -109,6 +109,8 @@ spec:
       # redis-connection-url: "redis://redis-master"
       session-store-type: cookie
       cookie-refresh: 15m    
+      oidc-issuer-url: https://authentik.infra.${dns_domain}/application/o/kube-apiserver/
+      redirect-url: https://dashboard.infra.${dns_domain}/oauth2/callback      
     extraEnv: []
 
     # -- Custom labels to add into metadata
@@ -227,13 +229,20 @@ spec:
     # Ref: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling
     # topologySpreadConstraints: []
 
-    # Affinity for pod assignment
-    # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-    # affinity: {}
+    tolerations:
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"    
 
-    # Tolerations for pod assignment
-    # Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-    tolerations: []
+    ## Affinity for pod assignment
+    ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+    # Run on masters
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: "node-role.kubernetes.io/control-plane"
+              operator: Exists  
 
     # Node labels for pod assignment
     # Ref: https://kubernetes.io/docs/user-guide/node-selection/
