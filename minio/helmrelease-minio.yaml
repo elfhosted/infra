@@ -582,7 +582,7 @@ spec:
     ## See https://min.io/docs/minio/linux/operations/external-iam/configure-openid-external-identity-management.html for a tutorial on using these variables.
     oidc:
       enabled: true
-      configUrl: "https://authentik.${dns_domain}/application/o/minio/.well-known/openid-configuration"
+      configUrl: "https://authentik.infra.${dns_domain}/application/o/minio/.well-known/openid-configuration"
       redirectUri: "https://minio-console.infra.${dns_domain}/oauth_callback"
       clientId: "minio"
       clientSecret: "${minio_client_secret}"
