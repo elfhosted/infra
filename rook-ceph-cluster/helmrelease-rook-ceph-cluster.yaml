@@ -514,10 +514,10 @@ spec:
             resources: 
               limits: 
                 cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these
+                memory: 32768Mi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these          
+                memory: 32768Mi # 62GB, we want to maximize the use of these          
             devices:
               - name: nvme0n1p3
                 config:
