@@ -570,6 +570,9 @@ spec:
       ## Please refer for comprehensive list https://min.io/docs/minio/linux/reference/minio-server/minio-server.html
       ## MINIO_SUBNET_LICENSE: "License key obtained from https://subnet.min.io"
       ## MINIO_BROWSER: "off"
+      MINIO_BROWSER_REDIRECT_URL: https://minio-console.infra.${dns_domain}/oauth_callback
+      MINIO_SERVER_URL: https://minio-console.infra.${dns_domain}
+      MINIO_PROMETHEUS_URL: http://thanos-query.thanos:9090/
 
     ## The name of a secret in the same kubernetes namespace which contain secret values
     ## This can be useful for LDAP password, etc
@@ -583,7 +586,6 @@ spec:
     oidc:
       enabled: true
       configUrl: "https://authentik.infra.${dns_domain}/application/o/minio/.well-known/openid-configuration"
-      redirectUri: "https://minio-console.infra.${dns_domain}/oauth_callback"
       clientId: "minio"
       clientSecret: "${minio_client_secret}"
       # Provide existing client secret from the Kubernetes Secret resource, existing secret will have priority over `clientSecret`
