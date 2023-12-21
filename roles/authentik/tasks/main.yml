@@ -174,8 +174,8 @@
         redirect_uris: |
           http://localhost:8000
           http://localhost:18000
-          https://dashboard.{{ dns_domain }}/oauth2/callback
-          https://weave-gitops.{{ dns_domain }}/oauth2/callback
+          https://kubernetes-dashboard.infra.{{ dns_domain }}/oauth2/callback
+          https://weave-gitops.infra.{{ dns_domain }}/oauth2/callback
         icon: https://infra.{{ dns_domain }}/assets/png/kubernetes.png
       - name: grafana
         secret: "{{ authentik_grafana_client_secret }}"
