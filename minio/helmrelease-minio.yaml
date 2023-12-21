@@ -581,16 +581,16 @@ spec:
     ## The following section documents environment variables for enabling external identity management using an OpenID Connect (OIDC)-compatible provider.
     ## See https://min.io/docs/minio/linux/operations/external-iam/configure-openid-external-identity-management.html for a tutorial on using these variables.
     oidc:
-      enabled: false
-      configUrl: "https://identity-provider-url/.well-known/openid-configuration"
+      enabled: true
+      configUrl: "https://authentik.${dns_domain}/application/o/minio/.well-known/openid-configuration"
+      redirectUri: "https://minio-console.infra.${dns_domain}/oauth_callback"
       clientId: "minio"
-      clientSecret: ""
+      clientSecret: "${minio_client_secret}"
       # Provide existing client secret from the Kubernetes Secret resource, existing secret will have priority over `clientSecret`
       existingClientSecretName: ""
       existingClientSecretKey: ""
-      claimName: "policy"
+      claimName: "minio-policy"
       scopes: "openid,profile,email"
-      redirectUri: "https://console-endpoint-url/oauth_callback"
       # Can leave empty
       claimPrefix: ""
       comment: ""
@@ -603,7 +603,7 @@ spec:
     ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
     ##
     podDisruptionBudget:
-      enabled: false
+      enabled: true
       maxUnavailable: 1
 
     ## Specify the service account to use for the MinIO pods. If 'create' is set to 'false'
