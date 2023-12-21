@@ -14,7 +14,7 @@ data:
   k3s_server_endpoint_2: 10.0.42.12
   k3s_server_endpoint_3: 10.0.42.13
   prometheus_storage: '10' # don't append a unit here
-  rook_ceph_osd_ram: 7000Mi
+  rook_ceph_osd_ram: 6500Mi
   rook_ceph_mds_ram: 4Gi
   dashboard_background: production.jpg  
   hetzner_auction_hunter_cron: 0 * * * * # run hourly
