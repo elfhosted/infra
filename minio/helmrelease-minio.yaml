@@ -570,7 +570,7 @@ spec:
       ## Please refer for comprehensive list https://min.io/docs/minio/linux/reference/minio-server/minio-server.html
       ## MINIO_SUBNET_LICENSE: "License key obtained from https://subnet.min.io"
       ## MINIO_BROWSER: "off"
-      MINIO_BROWSER_REDIRECT_URL: https://minio-console.infra.${dns_domain}/oauth_callback
+      MINIO_BROWSER_REDIRECT_URL: https://minio-console.infra.${dns_domain}
       MINIO_SERVER_URL: https://minio-console.infra.${dns_domain}
       MINIO_PROMETHEUS_URL: http://thanos-query.thanos:9090/
 
