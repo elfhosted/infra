@@ -856,11 +856,11 @@ spec:
                 codingChunks: 2
               deviceClass: hdd          
           metadataServer:
-            activeCount: 1
-            activeStandby: true
+            activeCount: 2
+            activeStandby: false
             resources:
               limits:
-                cpu: "2000m"
+                cpu: "10000m"
                 memory: "16Gi"
               requests:
                 cpu: "1000m"
@@ -868,13 +868,13 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.${dns_domain}/download
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
+                    - key: node-role.${dns_domain}/download
                       operator: Exists    
         storageClass:
           enabled: true

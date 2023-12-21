@@ -113,6 +113,7 @@
       body_format: json
       status_code: 200
     when: provider.icon is defined
+    ignore_errors: true
 
   - name: Combine all the proxy providers pks to add to outpost
     set_fact: 

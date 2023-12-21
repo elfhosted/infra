@@ -269,5 +269,5 @@
     loop_control:
       loop_var: group
 
-- name: Update authentication flow
-  include_tasks: authentik_authentication_flow.yml
+  - name: Update authentication flow
+    include_tasks: authentik_authentication_flow.yml

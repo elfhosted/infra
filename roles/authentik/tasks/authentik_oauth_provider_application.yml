@@ -91,6 +91,7 @@
       body_format: json
       status_code: 200
     when: provider.icon is defined
+    ignore_errors: true
 
   # - name: set the group pk value
   #   set_fact:
