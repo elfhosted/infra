@@ -879,7 +879,7 @@ spec:
         storageClass:
           enabled: true
           isDefault: false
-          name: ceph-filesystem-ec
+          name: ceph-filesystem-ec-8-2
           # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
           pool: ec-8-2
           reclaimPolicy: Delete
