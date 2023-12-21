@@ -847,10 +847,10 @@ spec:
               # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
               name: data0
               deviceClass: ssd
-            - name: ec-8-2
               parameters:
                 pg_num: '4096' # create the pool with a pre-configured placement group number
-                pgp_num: '4096' # this should at least match `pg_num` so that all PGs are used
+                pgp_num: '4096' # this should at least match `pg_num` so that all PGs are used              
+            - name: ec-8-2
               erasureCoded:
                 dataChunks: 8
                 codingChunks: 2
