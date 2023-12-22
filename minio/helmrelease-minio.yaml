@@ -592,7 +592,7 @@ spec:
       existingClientSecretName: ""
       existingClientSecretKey: ""
       claimName: "minio-policy"
-      scopes: "openid,profile,email"
+      scopes: "profile,email,minio-policy"
       # Can leave empty
       claimPrefix: ""
       comment: ""
