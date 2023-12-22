@@ -185,7 +185,7 @@
       - name: minio
         secret: "{{ authentik_minio_client_secret }}"
         redirect_uris: |
-          https://minio.infra.{{ dns_domain }}/login/generic_oauth
+          https://minio-console.infra.{{ dns_domain }}/oauth_callback
         icon: https://infra.{{ dns_domain }}/assets/png/minio.png        
     loop_control:
       loop_var: provider
