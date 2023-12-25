@@ -56,6 +56,7 @@
     - { port: "6443", proto: "tcp" }  # k8s-api    
     - { port: "8080", proto: "tcp" }  # kured
     - { port: "7472", proto: "tcp" }  # metallb 
+    - { port: "4244", proto: "tcp" }  # hubble     
 
 - name: Allow any incoming traffic into the ceph cluster network
   ufw:
