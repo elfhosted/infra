@@ -6,4 +6,4 @@ metadata:
 spec:
   ipWhiteList:
     sourceRange:
-      - 10.2.0.0/15
+      - 10.0.0.0/8 # larger than you'd think, but it covers csi-rclone mounting zurgs
