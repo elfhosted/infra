@@ -19,4 +19,4 @@ data:
   rook_ceph_mds_ram: 4Gi
   dashboard_background: production.jpg  
   hetzner_auction_hunter_cron: 0 * * * * # run hourly
-  k3s_version: v1.27.8+k3s1
+  k3s_version: v1.27.8+k3s2
