@@ -513,11 +513,11 @@ spec:
           - name: goblin01
             resources: 
               limits: 
-                cpu: 3
-                memory: 32768Mi # 62GB, we want to maximize the use of these
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these
               requests:
-                cpu: 3
-                memory: 32768Mi # 62GB, we want to maximize the use of these          
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these          
             devices:
               - name: nvme0n1p3
                 config:
@@ -528,11 +528,11 @@ spec:
           - name: goblin02
             resources: 
               limits: 
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these
               requests:
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these             
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -543,11 +543,11 @@ spec:
           - name: goblin03
             resources: 
               limits: 
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these
               requests:
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these             
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
