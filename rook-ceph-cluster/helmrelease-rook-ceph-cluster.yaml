@@ -802,13 +802,13 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.${dns_domain}/storage
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
+                    - key: node-role.${dns_domain}/storage
                       operator: Exists    
         storageClass:
           enabled: true
