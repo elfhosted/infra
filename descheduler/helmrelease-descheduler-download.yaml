@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: descheduler
-      version: 0.27.0
+      version: 0.28.1
       sourceRef:
         kind: HelmRepository
         name: descheduler
@@ -56,13 +56,13 @@ spec:
     commonLabels: {}
 
     cronJobApiVersion: "batch/v1"
-    schedule: "45 10 * * *" # 15 min before end of maint window
+    schedule: "45 22 * * *" # 15 min before end of maint window
     suspend: false
     # startingDeadlineSeconds: 200
     # successfulJobsHistoryLimit: 3
     # failedJobsHistoryLimit: 1
     # ttlSecondsAfterFinished 600
-    # timeZone: Pacific/Auckland # not working currently
+    timeZone: Pacific/Auckland
 
     # Required when running as a Deployment
     deschedulingInterval: 5m
