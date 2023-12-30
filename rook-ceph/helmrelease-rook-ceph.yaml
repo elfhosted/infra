@@ -445,14 +445,14 @@ spec:
 
       # -- Array of tolerations in YAML format which will be added to CSI provisioner deployment
       provisionerTolerations: 
-        - key: node-role.kubernetes.io/control-plane # run on nodes which are kept for reserve customer capacity
+        - key: node-role.${dns_domain}/storage # run on nodes which are kept for reserve customer capacity
           operator: Exists
       #    - key: key
       #      operator: Exists
       #      effect: NoSchedule
 
       # -- The node labels for affinity of the CSI provisioner deployment [^1]
-      provisionerNodeAffinity: node-role.kubernetes.io/control-plane=true
+      provisionerNodeAffinity: node-role.${dns_domain}/storage=true
       # Set pluginTolerations and pluginNodeAffinity for plugin daemonset pods.
       # The CSI plugins need to be started on all the nodes where the clients need to mount the storage.
 
@@ -520,8 +520,7 @@ spec:
       provisioner:
         # -- Kubernetes CSI provisioner image
         # @default -- `registry.k8s.io/sig-storage/csi-provisioner:v3.5.0`
-        # image:
-        image: registry.k8s.io/sig-storage/csi-provisioner:v3.5.0 # See https://github.com/rook/rook/issues/13458
+        image:
 
       snapshotter:
         # -- Kubernetes CSI snapshotter image
