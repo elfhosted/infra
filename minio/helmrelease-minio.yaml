@@ -177,7 +177,7 @@ spec:
       storageClass: "topolvm-provisioner"
       volumeName: ""
       accessMode: ReadWriteOnce
-      size: 100Gi
+      size: ${minio_storage}
 
       ## If subPath is set mount a sub folder of a volume instead of the root of the volume.
       ## This is especially handy for volume plugins that don't natively support sub mounting (like glusterfs).
@@ -596,7 +596,7 @@ spec:
       scopes: "profile,email,minio-policy"
       # Can leave empty
       claimPrefix: ""
-      comment: ""
+      comment: "authentik"
 
     networkPolicy:
       enabled: false
