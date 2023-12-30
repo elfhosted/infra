@@ -596,7 +596,7 @@ spec:
       scopes: "profile,email,minio-policy"
       # Can leave empty
       claimPrefix: ""
-      comment: ""
+      comment: "authentik"
 
     networkPolicy:
       enabled: false
