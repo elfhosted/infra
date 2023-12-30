@@ -571,7 +571,8 @@ spec:
       ## MINIO_SUBNET_LICENSE: "License key obtained from https://subnet.min.io"
       ## MINIO_BROWSER: "off"
       MINIO_BROWSER_REDIRECT_URL: https://minio-console.infra.${dns_domain}
-      MINIO_SERVER_URL: https://minio-console.infra.${dns_domain}
+      MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio-console.infra.${dns_domain}/oauth_callback
+      MINIO_SERVER_URL: https://minio.infra.${dns_domain}
       MINIO_PROMETHEUS_URL: http://thanos-query.thanos:9090/
 
     ## The name of a secret in the same kubernetes namespace which contain secret values
