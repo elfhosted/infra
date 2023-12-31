@@ -174,7 +174,7 @@ spec:
       ##
       ## Storage class of PV to bind. By default it looks for standard storage class.
       ## If the PV uses a different storage class, specify that here.
-      storageClass: "topolvm-provisioner"
+      storageClass: "topolvm-provisioner-thin"
       volumeName: ""
       accessMode: ReadWriteOnce
       size: ${minio_storage}

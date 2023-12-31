@@ -54,7 +54,7 @@
     - { port: "2381", proto: "tcp" }  # k3s etcd
     - { port: "9100", proto: "tcp" }  # node-exporter  
     - { port: "6443", proto: "tcp" }  # k8s-api   
-    - { port: "6800", proto: "tcp" }  # ceph (not sure what, but necessary for csi-provisioner)  
+    - { port: "6800:7300", proto: "tcp" }  # ceph (not sure what, but necessary for csi-provisioner)  
     - { port: "8080", proto: "tcp" }  # kured
     - { port: "7472", proto: "tcp" }  # metallb 
     - { port: "4244", proto: "tcp" }  # hubble     
