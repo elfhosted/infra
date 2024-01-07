@@ -40,10 +40,11 @@
   - { import_role: { name: controller }, tags: [ controller ] }
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }  
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
-  - { import_role: { name: velero }, tags: [ velero ] }  
+  - { import_role: { name: velero }, tags: [ velero ] }
   - { import_role: { name: flux }, tags: [ flux ] }  
   - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }
   - { import_role: { name: authentik }, tags: [ authentik ] }
+  - { import_role: { name: tetragon }, tags: [ tetragon ] }
 
 - hosts: k3s_dwarves,k3s_agents
   gather_facts: no

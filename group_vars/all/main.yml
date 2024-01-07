@@ -4,6 +4,8 @@ dns_domain: elfhosted.com
 packages:
   flux:
     version: 2.0.1
+  tetragon:
+    version: 1.0.1
   helm:
     version: v3.12.1
   cilium:

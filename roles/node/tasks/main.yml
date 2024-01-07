@@ -27,9 +27,9 @@
     state: enabled
   loop: "{{ firewall.admin_source }}"
 
-- name: Allow port 5201 for occasional iperf testing
+- name: Allow port 5201 for occasional iperf testing (enable when necessary)
   ufw:
-    rule: allow
+    rule: deny
     port: 5201
     proto: tcp
     state: enabled
@@ -64,6 +64,20 @@
     direction: in
     rule: "allow"
     src: 10.0.44.0/24
+
+- name: Determine public NIC name (step 1/2)
+  set_fact: 
+    cluster_nic_split: "{{ cluster_nic | split('.')}}" 
+
+- name: Determine public NIC name (step 2/2)
+  set_fact: 
+    public_nic: "{{ cluster_nic_split.0 }}"     
+
+- name: Drop any unexpected incoming traffic hitting the hetzner public nic ({{ public_nic }}) # (this is the case anyway, but we want to avoid unnecessary logging)
+  ufw:
+    direction: in
+    rule: "deny"
+    interface: "{{ public_nic }}"    
 
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance

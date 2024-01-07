@@ -1,0 +1,21 @@
+- name: "Create temporary directory for cli download"
+  tempfile:
+    state: directory
+    suffix: temp
+  register: tempdir  
+  
+- name: Download tetragon CLI v{{ packages.tetragon.version }}
+  get_url:
+    url: "https://github.com/cilium/tetragon/releases/download/v{{ packages.tetragon.version }}/tetra-linux-{{ host_arch }}.tar.gz"
+    dest: "{{ tempdir.path }}"
+
+- name: Unzip /{{ tempdir.path }}/tetra-linux-{{ host_arch }}.tar.gz
+  unarchive:
+    src: "{{ tempdir.path }}/tetra-linux-{{ host_arch }}.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: "Clean up temporary dirs 🗑"
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent
