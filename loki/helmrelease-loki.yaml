@@ -1448,8 +1448,10 @@ spec:
       # @default -- Hard node and soft zone anti-affinity
       affinity: |
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
+          preferredDuringSchedulingIgnoredDuringExecution: 
+          - weight: 100  
+            podAffinityTerm:    
+              labelSelector:
                 matchLabels:
                   {{- include "loki.gatewaySelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
