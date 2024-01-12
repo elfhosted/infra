@@ -37,16 +37,17 @@ spec:
 
     # -- Cluster ceph.conf override
     # Ability to override ceph.conf
-    # configOverride: |
-    #   [global]
-    #   public network =  ${cluster_nic_class_c}.0/24
-    #   cluster network = 10.0.44.0/24
-    #   public addr = ""
-    #   cluster addr = ""
-    #   bluefs_buffered_io = false
+    configOverride: |
+      [mds]
+      mds_session_blocklist_on_timeout = false
+      mds_cap_revoke_eviction_timeout = 300
 
-    #   [mds]
-    #   mds_session_blocklist_on_timeout = false
+      [global]
+      # public network =  ${cluster_nic_class_c}.0/24
+      # cluster network = 10.0.44.0/24
+      # public addr = ""
+      # cluster addr = ""
+      bluefs_buffered_io = true
 
     # Installs a debugging toolbox deployment
     toolbox:
