@@ -47,7 +47,7 @@ spec:
       # cluster network = 10.0.44.0/24
       # public addr = ""
       # cluster addr = ""
-      # bluefs_buffered_io = false
+      bluefs_buffered_io = true
 
     # Installs a debugging toolbox deployment
     toolbox:
