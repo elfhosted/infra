@@ -810,7 +810,18 @@ spec:
                   nodeSelectorTerms:
                   - matchExpressions:
                     - key: node-role.${dns_domain}/storage
-                      operator: Exists    
+                      operator: Exists
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 100  
+                  podAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                        - ceph-filesystem
+                    topologyKey: "kubernetes.io/hostname"                    
         storageClass:
           enabled: true
           isDefault: false
@@ -877,6 +888,17 @@ spec:
                   - matchExpressions:
                     - key: node-role.${dns_domain}/storage
                       operator: Exists    
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 100  
+                  podAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                        - ceph-filesystem-ec-8-2
+                    topologyKey: "kubernetes.io/hostname"                      
         storageClass:
           enabled: true
           isDefault: false
@@ -938,6 +960,17 @@ spec:
                   - matchExpressions:
                     - key: node-role.${dns_domain}/storage
                       operator: Exists    
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 100  
+                  podAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                        - ceph-filesystem-ssd
+                    topologyKey: "kubernetes.io/hostname"
         storageClass:
           enabled: true
           isDefault: false
