@@ -58,8 +58,8 @@ spec:
       # -- Additional deployment labels (e.g. for filtering deployment by custom labels)
       labels: {}
       # -- Additional pod annotations (e.g. for mesh injection or prometheus scraping)
-      podAnnotations: {}
-      # -- Additional Pod labels (e.g. for filtering Pod by custom labels)
+      podAnnotations:
+        kubernetes.io/egress-bandwidth: "700M" # only ever use 70% of NIC for egress, save some for ceph!
       podLabels: {}
       # -- Additional containers (e.g. for metric offloading sidecars)
       additionalContainers: []
