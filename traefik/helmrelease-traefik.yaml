@@ -37,7 +37,7 @@ spec:
       # -- Enable deployment
       enabled: true
       # -- Deployment or DaemonSet
-      kind: Daemonset
+      kind: DaemonSet
       # -- Number of pods of the deployment (only applies when kind == Deployment)
       replicas: 1
       # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
