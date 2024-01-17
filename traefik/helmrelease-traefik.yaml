@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 25.x.x
+      version: 26.x.x
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -58,7 +58,9 @@ spec:
       # -- Additional deployment labels (e.g. for filtering deployment by custom labels)
       labels: {}
       # -- Additional pod annotations (e.g. for mesh injection or prometheus scraping)
+      # It supports templating. One can set it with values like traefik/name: '{{ template "traefik.name" . }}'
       podAnnotations: {}
+      # -- Additional Pod labels (e.g. for filtering Pod by custom labels)
       podLabels: {}
       # -- Additional containers (e.g. for metric offloading sidecars)
       additionalContainers: []
@@ -119,10 +121,10 @@ spec:
 
     # -- Pod disruption budget
     podDisruptionBudget:
-      enabled: true
+      enabled: false
       # maxUnavailable: 1
       # maxUnavailable: 33%
-      minAvailable: 1
+      # minAvailable: 0
       # minAvailable: 25%
 
     # -- Create a default IngressClass for Traefik
@@ -315,10 +317,10 @@ spec:
         # format: json
         # By default, the level is set to ERROR.
         # -- Alternative logging levels are DEBUG, PANIC, FATAL, ERROR, WARN, and INFO.
-        level: ERROR
+        level: WARN
       access:
         # -- To enable access logs
-        enabled: false
+        enabled: true
         ## By default, logs are written using the Common Log Format (CLF) on stdout.
         ## To write logs in JSON, use json in the format option.
         ## If the given format is unsupported, the default (CLF) is used instead.
@@ -532,7 +534,7 @@ spec:
     # -- https://doc.traefik.io/traefik/observability/tracing/overview/
     tracing: {}
     #  openTelemetry: # traefik v3+ only
-    #    grpc: {}
+    #    grpc: true
     #    insecure: true
     #    address: localhost:4317
     # instana:
@@ -627,28 +629,6 @@ spec:
     #     name: secret-name
 
     ports:
-      web-internal:
-        port: 8352
-        # -- Use hostPort if set.
-        # hostPort: 9000
-        #
-        # -- Use hostIP if set. If not set, Kubernetes will default to 0.0.0.0, which
-        # means it's listening on all your interfaces and all your IPs. You may want
-        # to set this value if you need traefik to listen on specific interface
-        # only.
-        # hostIP: 192.168.100.10
-
-        # Defines whether the port is exposed if service.type is LoadBalancer or
-        # NodePort.
-        #
-        # -- You SHOULD NOT expose the traefik port on production deployments.
-        # If you want to access it from outside your cluster,
-        # use `kubectl port-forward` or create a secure ingress
-        expose: true
-        # -- The exposed port for this service
-        exposedPort: 8352
-        # -- The port protocol (TCP/UDP)
-        protocol: TCP
       traefik:
         port: 9000
         # -- Use hostPort if set.
@@ -671,6 +651,10 @@ spec:
         exposedPort: 9000
         # -- The port protocol (TCP/UDP)
         protocol: TCP
+        # -- Defines whether the port is exposed on the internal service;
+        # note that ports exposed on the default service are exposed on the internal
+        # service by default as well.
+        exposeInternal: false
       web:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
         # asDefault: true
@@ -686,6 +670,10 @@ spec:
         # -- Use nodeport if set. This is useful if you have configured Traefik in a
         # LoadBalancer.
         # nodePort: 32080
+        # -- Defines whether the port is exposed on the internal service;
+        # note that ports exposed on the default service are exposed on the internal
+        # service by default as well.
+        exposeInternal: false
         # Port Redirections
         # Added in 2.2, you can make permanent redirects via entrypoints.
         # https://docs.traefik.io/routing/entrypoints/#redirection
@@ -714,6 +702,10 @@ spec:
         ## -- The port protocol (TCP/UDP)
         protocol: TCP
         # nodePort: 32443
+        # -- Defines whether the port is exposed on the internal service;
+        # note that ports exposed on the default service are exposed on the internal
+        # service by default as well.
+        exposeInternal: false
         ## -- Specify an application protocol. This may be used as a hint for a Layer 7 load balancer.
         # appProtocol: https
         #
@@ -775,6 +767,10 @@ spec:
         exposedPort: 9100
         # -- The port protocol (TCP/UDP)
         protocol: TCP
+        # -- Defines whether the port is exposed on the internal service;
+        # note that ports exposed on the default service are exposed on the internal
+        # service by default as well.
+        exposeInternal: false
 
     # -- TLS Options are created as TLSOption CRDs
     # https://doc.traefik.io/traefik/https/tls/#tls-options
@@ -817,10 +813,10 @@ spec:
       labels: {}
       # -- Additional entries here will be added to the service spec.
       # -- Cannot contain type, selector or ports entries.
-      spec:
-        externalTrafficPolicy: Local
-        loadBalancerIP: "${cluster_nic_class_c}.101"
-        # clusterIP: "2.3.4.5"
+      spec: {}
+      # externalTrafficPolicy: Cluster
+      # loadBalancerIP: "1.2.3.4"
+      # clusterIP: "2.3.4.5"
       loadBalancerSourceRanges: []
       # - 192.168.0.1/32
       # - 172.16.0.0/16
@@ -836,7 +832,7 @@ spec:
       #   - IPv4
       #   - IPv6
       ##
-      ## -- An additionnal and optional internal Service.
+      ## -- An additional and optional internal Service.
       ## Same parameters as external Service
       # internal:
       #   type: ClusterIP
@@ -849,9 +845,9 @@ spec:
 
     autoscaling:
       # -- Create HorizontalPodAutoscaler object.
-      enabled: true
-      minReplicas: 2
-      maxReplicas: 3
+      enabled: false
+    #   minReplicas: 1
+    #   maxReplicas: 10
     #   metrics:
     #   - type: Resource
     #     resource:
@@ -952,26 +948,21 @@ spec:
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
     # -- on nodes where no other traefik pods are scheduled.
     # It should be used when hostNetwork: true to prevent port conflicts
-    # affinity disbalde if we're a daemonset
-    # affinity: 
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #       - matchExpressions:
-    #         - key: node-role.kubernetes.io/control-plane
-    #           operator: Exists
-    #   podAntiAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       - labelSelector:
-    #           matchLabels:
-    #             app.kubernetes.io/name: '{{ template "traefik.name" . }}'
-    #             app.kubernetes.io/instance: '{{ .Release.Name }}-{{ .Release.Namespace }}'
-    #         topologyKey: kubernetes.io/hostname
+    affinity: {}
+    #  podAntiAffinity:
+    #    requiredDuringSchedulingIgnoredDuringExecution:
+    #      - labelSelector:
+    #          matchLabels:
+    #            app.kubernetes.io/name: '{{ template "traefik.name" . }}'
+    #            app.kubernetes.io/instance: '{{ .Release.Name }}-{{ .Release.Namespace }}'
+    #        topologyKey: kubernetes.io/hostname
 
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
+    # -- Tolerations allow the scheduler to schedule pods with matching taints.
     tolerations: []
-    
+    # -- You can use topology spread constraints to control
+    # how Pods are spread across your cluster among failure-domains.
     topologySpreadConstraints: []
     # This example topologySpreadConstraints forces the scheduler to put traefik pods
     # on nodes where no other traefik pods are scheduled.
