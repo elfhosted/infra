@@ -197,8 +197,8 @@ spec:
       # -- Customize updateStrategy: RollingUpdate or OnDelete
       type: RollingUpdate
       rollingUpdate:
-        maxUnavailable: 0
-        maxSurge: 1
+        maxUnavailable: 1
+        maxSurge: 0
 
     readinessProbe:
       # -- The number of consecutive failures allowed before considering the probe as failed.
