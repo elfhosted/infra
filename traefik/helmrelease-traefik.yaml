@@ -140,8 +140,10 @@ spec:
       # -- Enable traefik version 3
       #  enabled: false
       plugins:
-        # -- Enable traefik experimental plugins
-        enabled: true
+        traefik-themepark:
+          moduleName: github.com/packruler/traefik-themepark
+          version: v1.3.1
+
       kubernetesGateway:
         # -- Enable traefik experimental GatewayClass CRD
         enabled: false
@@ -589,11 +591,9 @@ spec:
     # -- Additional arguments to be passed at Traefik's binary
     # All available options available on https://docs.traefik.io/reference/static-configuration/cli/
     ## Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress.ingressclass=traefik-internal,--log.level=DEBUG}"`
-    additionalArguments:
-    - "--providers.kubernetesCRD.allowEmptyServices=true" # makes the 503 vs 404 magic work
-    - "--experimental.plugins.traefik-themepark.moduleName=github.com/packruler/traefik-themepark"
-    - "--experimental.plugins.traefik-themepark.version=v1.3.0"
-    - "--providers.kubernetescrd.allowCrossNamespace=true" # so that we can globally apply middleware for theme-park
+    additionalArguments: []
+    # - "--providers.kubernetesCRD.allowEmptyServices=true" # makes the 503 vs 404 magic work
+    # # - "--providers.kubernetescrd.allowCrossNamespace=true" # so that we can globally apply middleware for theme-park
 
     #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
     #  - "--log.level=DEBUG"
