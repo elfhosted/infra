@@ -58,8 +58,7 @@ spec:
       # -- Additional deployment labels (e.g. for filtering deployment by custom labels)
       labels: {}
       # -- Additional pod annotations (e.g. for mesh injection or prometheus scraping)
-      podAnnotations:
-        kubernetes.io/egress-bandwidth: "700M" # only ever use 70% of NIC for egress, save some for ceph!
+      podAnnotations: {}
       podLabels: {}
       # -- Additional containers (e.g. for metric offloading sidecars)
       additionalContainers: []
@@ -974,8 +973,6 @@ spec:
     tolerations:
     - key: node-role.kubernetes.io/control-plane
       operator: Exists
-    - key: node-role.elfhosted.com/storage
-      operator: Exists      
 
     topologySpreadConstraints: []
     # This example topologySpreadConstraints forces the scheduler to put traefik pods
