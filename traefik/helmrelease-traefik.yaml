@@ -970,10 +970,8 @@ spec:
 
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
-    tolerations:
-    - key: node-role.kubernetes.io/control-plane
-      operator: Exists
-
+    tolerations: []
+    
     topologySpreadConstraints: []
     # This example topologySpreadConstraints forces the scheduler to put traefik pods
     # on nodes where no other traefik pods are scheduled.
