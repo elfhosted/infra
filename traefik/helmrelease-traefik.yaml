@@ -686,8 +686,9 @@ spec:
         #   insecure: false
         #
         # Enable the Proxy Protocol header parsing for the entry point
-        # proxyProtocol:
-        #   trustedIPs: []
+        proxyProtocol:
+          trustedIPs:
+          - 10.0.40.3
         #   insecure: false
       websecure:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
@@ -725,8 +726,9 @@ spec:
         #   insecure: false
         #
         ## -- Enable the Proxy Protocol header parsing for the entry point
-        # proxyProtocol:
-        #   trustedIPs: []
+        proxyProtocol:
+          trustedIPs:
+          - 10.0.40.3
         #   insecure: false
         #
         ## Set TLS at the entrypoint
@@ -802,7 +804,7 @@ spec:
       ## -- Single service is using `MixedProtocolLBService` feature gate.
       ## -- When set to false, it will create two Service, one for TCP and one for UDP.
       single: true
-      type: LoadBalancer
+      type: ClusterIP
       # -- Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
       annotations: {}
       # -- Additional annotations for TCP service only
