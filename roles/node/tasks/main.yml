@@ -112,13 +112,14 @@
   - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers']"
   ignore_errors: true # so we can run it multiple times
 
-- name: copy script for grabbing smartmon metrics
+- name: copy scripts
   copy:
     src: "{{ item }}"
     dest: /usr/local/bin/{{ item }}
     mode: u+x
   loop:
     - smartmon_metrics.sh
+    - kill-unwanted-transcodes.sh
 
 - name: Install smartmontools
   apt: pkg=smartmontools
@@ -137,6 +138,13 @@
     minute: "*/5"
     hour: "*"
     job: "/usr/local/bin/smartmon_metrics.sh > /var/lib/node-exporter/textfiles/smart_metrics.prom && chmod 644 /var/lib/node-exporter/textfiles/smart_metrics.prom"
+
+- name: Add cron scripts to kill unwanted transcodes
+  cron:
+    name: "unwanted transcodes"
+    minute: "*"
+    hour: "*"
+    job: "/usr/local/bin/kill-unwanted-transcodes.sh"
 
 - name: ignore irrelevant logs via rsyslog
   copy:

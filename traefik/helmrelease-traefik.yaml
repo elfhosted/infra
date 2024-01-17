@@ -37,7 +37,7 @@ spec:
       # -- Enable deployment
       enabled: true
       # -- Deployment or DaemonSet
-      kind: Deployment
+      kind: DaemonSet
       # -- Number of pods of the deployment (only applies when kind == Deployment)
       replicas: 1
       # -- Number of old history to retain to allow rollback (If not set, default Kubernetes value is set to 10)
@@ -59,7 +59,6 @@ spec:
       labels: {}
       # -- Additional pod annotations (e.g. for mesh injection or prometheus scraping)
       podAnnotations: {}
-      # -- Additional Pod labels (e.g. for filtering Pod by custom labels)
       podLabels: {}
       # -- Additional containers (e.g. for metric offloading sidecars)
       additionalContainers: []
@@ -676,10 +675,10 @@ spec:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
         # asDefault: true
         port: 8000
-        # hostPort: 8000
+        hostPort: 8000
         # containerPort: 8000
-        expose: true
-        exposedPort: 80
+        # expose: true
+        # exposedPort: 80
         ## -- Different target traefik port on the cluster, useful for IP type LB
         # targetPort: 80
         # The port protocol (TCP/UDP)
@@ -706,10 +705,10 @@ spec:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
         # asDefault: true
         port: 8443
-        # hostPort: 8443
+        hostPort: 8443
         # containerPort: 8443
-        expose: true
-        exposedPort: 443
+        # expose: true
+        # exposedPort: 443
         ## -- Different target traefik port on the cluster, useful for IP type LB
         # targetPort: 80
         ## -- The port protocol (TCP/UDP)
@@ -953,20 +952,21 @@ spec:
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
     # -- on nodes where no other traefik pods are scheduled.
     # It should be used when hostNetwork: true to prevent port conflicts
-    affinity: 
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: Exists
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchLabels:
-                app.kubernetes.io/name: '{{ template "traefik.name" . }}'
-                app.kubernetes.io/instance: '{{ .Release.Name }}-{{ .Release.Namespace }}'
-            topologyKey: kubernetes.io/hostname
+    # affinity disbalde if we're a daemonset
+    # affinity: 
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #       - matchExpressions:
+    #         - key: node-role.kubernetes.io/control-plane
+    #           operator: Exists
+    #   podAntiAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       - labelSelector:
+    #           matchLabels:
+    #             app.kubernetes.io/name: '{{ template "traefik.name" . }}'
+    #             app.kubernetes.io/instance: '{{ .Release.Name }}-{{ .Release.Namespace }}'
+    #         topologyKey: kubernetes.io/hostname
 
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
