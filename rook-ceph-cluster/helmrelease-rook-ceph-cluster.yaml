@@ -822,7 +822,7 @@ spec:
             activeStandby: false
             resources:
               limits:
-                cpu: "2000m"
+                cpu: "10"
                 memory: "64Gi"
               requests:
                 cpu: "1000m"
@@ -899,7 +899,7 @@ spec:
             activeStandby: false
             resources:
               limits:
-                cpu: "10000m"
+                cpu: "10"
                 memory: "64Gi"
               requests:
                 cpu: "1000m"
@@ -971,7 +971,7 @@ spec:
             activeStandby: false
             resources:
               limits:
-                cpu: "2000m"
+                cpu: "10"
                 memory: "64Gi"
               requests:
                 cpu: "1000m"
