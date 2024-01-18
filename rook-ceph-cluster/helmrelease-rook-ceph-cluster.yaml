@@ -895,7 +895,7 @@ spec:
                 codingChunks: 2
               deviceClass: hdd          
           metadataServer:
-            activeCount: 3
+            activeCount: 2
             activeStandby: false
             resources:
               limits:
@@ -967,7 +967,7 @@ spec:
                 # pgp_num: '1024' # this should at least match `pg_num` so that all PGs are used
               deviceClass: ssd
           metadataServer:
-            activeCount: 3
+            activeCount: 1
             activeStandby: false
             resources:
               limits:
