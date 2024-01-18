@@ -896,7 +896,7 @@ spec:
               deviceClass: hdd          
           metadataServer:
             activeCount: 2
-            activeStandby: true
+            activeStandby: false
             resources:
               limits:
                 cpu: "10000m"

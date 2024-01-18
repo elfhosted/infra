@@ -17,7 +17,7 @@ data:
   prometheus_storage: '10' # don't append a unit here
   minio_storage: '200Gi'
   rook_ceph_osd_ram: 6500Mi
-  rook_ceph_mds_ram: 16Gi
+  rook_ceph_mds_ram: 32Gi
   dashboard_background: production.jpg  
   hetzner_auction_hunter_cron: 0 * * * * # run hourly
   k3s_version: v1.28.4+k3s2
