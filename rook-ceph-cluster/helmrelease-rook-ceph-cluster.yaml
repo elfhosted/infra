@@ -39,7 +39,7 @@ spec:
     # Ability to override ceph.conf
     configOverride: |
       [mds]
-      mds_cap_revoke_eviction_timeout = 300
+      mds_cap_revoke_eviction_timeout = 600
 
       # This prevents evicted clients from being blocklisted
       # get a list of MDSs using "ceph config dump", and then apply like this:
@@ -823,7 +823,7 @@ spec:
             resources:
               limits:
                 cpu: "2000m"
-                memory: "16Gi"
+                memory: "64Gi"
               requests:
                 cpu: "1000m"
                 memory: "${rook_ceph_mds_ram}"
@@ -900,7 +900,7 @@ spec:
             resources:
               limits:
                 cpu: "10000m"
-                memory: "16Gi"
+                memory: "64Gi"
               requests:
                 cpu: "1000m"
                 memory: "${rook_ceph_mds_ram}"
@@ -972,7 +972,7 @@ spec:
             resources:
               limits:
                 cpu: "2000m"
-                memory: "16Gi"
+                memory: "64Gi"
               requests:
                 cpu: "1000m"
                 memory: "${rook_ceph_mds_ram}"
