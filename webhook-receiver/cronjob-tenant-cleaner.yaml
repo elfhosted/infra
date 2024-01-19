@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tenant-cleaner
+  namespace: tenant-cleaner
+  labels:
+    app.kubernetes.io/name: tenant-cleaner  
+spec:
+  schedule: "0 * * * *" # run hourly
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: tenant-cleaner
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: "tenant-cleaner"
+            command: [ "/tenant-cleaner.sh" ]
+            image: ghcr.io/geek-cookbook/tooling:focal-20230624@sha256:3a43385968a692fd1ec02bffdea62ddb888e48cb3b883332aa98b1747f4a532b
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 568
+              runAsGroup: 568
+              capabilities:
+                drop:
+                - ALL              
+            envFrom:
+            - secretRef:
+                name: webhook-receiver                  
+            volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: "/tenant-cleaner.sh"
+              subPath: tenant-cleaner.sh
+              name: tenant-cleaner
+          volumes:
+            - name: tmp
+              emptyDir: {}   
+            - name: tenant-cleaner
+              configMap:
+                name: tenant-cleaner 
+                defaultMode: 0755       
