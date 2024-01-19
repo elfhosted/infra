@@ -73,5 +73,21 @@ spec:
           - matchExpressions:
             - key: node-role.kubernetes.io/control-plane
               operator: Exists
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - webhook-receiver
+          topologyKey: "kubernetes.io/hostname"
 
-    priorityClassName: cluster-low
+    priorityClassName: cluster-important
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 500m
+        memory: 10240Mi # fix this once we prove it's sorted          

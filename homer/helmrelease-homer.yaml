@@ -37,7 +37,16 @@ spec:
           - matchExpressions:
             - key: node-role.kubernetes.io/control-plane
               operator: Exists 
-              
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - homer
+          topologyKey: "kubernetes.io/hostname"
+                        
     priorityClassName: cluster-low
     
     ingress:
@@ -59,3 +68,10 @@ spec:
     configmap:
       config:
         enabled: false
+    resources:
+      requests:
+        cpu: 1m
+        memory: 4Mi
+      limits:
+        cpu: 10m
+        memory: 64Mi
