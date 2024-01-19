@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: tenant-cleaner
-  namespace: tenant-cleaner
+  namespace: webhook-receiver
   labels:
     app.kubernetes.io/name: tenant-cleaner  
 spec:

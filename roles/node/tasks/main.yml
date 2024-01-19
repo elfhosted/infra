@@ -12,6 +12,7 @@
     - snapd
     - bzip2
     - restic
+    - intel-gpu-tools
 
 - name: install yq via snap
   snap:
