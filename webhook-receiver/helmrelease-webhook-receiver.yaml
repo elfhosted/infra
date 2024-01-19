@@ -42,6 +42,11 @@ spec:
       replicas: 2
       annotations:
         configmap.reloader.stakater.com/reload: "webhook-receiver-hooks"
+      strategy: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+        
     initContainers:
       pull-repo:
         image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
