@@ -17,6 +17,7 @@ elf02        ansible_host=10.0.42.22 cluster_nic=eno1.4000
 elf03        ansible_host=10.0.42.23 cluster_nic=eno1.4000
 elf04        ansible_host=10.0.42.24 cluster_nic=eno1.4000
 elf05        ansible_host=10.0.42.25 cluster_nic=eno1.4000
+elf06        ansible_host=10.0.42.26 cluster_nic=enp0s31f6.4000 # the first i7 host
 orc01        ansible_host=10.0.42.41 cluster_nic=eno1.4000
 orc02        ansible_host=10.0.42.42 cluster_nic=eno1.4000
 orc03        ansible_host=10.0.42.43 cluster_nic=enp0s31f6.4000

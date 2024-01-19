@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tenant-cleaner
+  namespace: webhook-receiver
+data:
+  tenant-cleaner.sh: |
+    #!/bin/bash
+
+    # setup git
+    git config --global user.name "Elfbot"
+    git config --global user.email "elfbot@elfhosted.com"
+    git config --global pull.rebase true
+    git config --global --add safe.directory /repo
+
+    # set -x
+    # set -e
+
+    gh auth setup-git
+
+    # Setup the until loop
+    while :
+    do
+        TEMPDIR=$(mktemp -d)
+        cd $TEMPDIR
+        until gh repo clone geek-cookbook/elfhosted-tenants
+        do
+            sleep $((0 + RANDOM % 10)); # avoid races 
+        done
+        git config --global --add safe.directory elfhosted-tenants
+        cd elfhosted-tenants
+
+
+        TIMESTAMP_NOW=$(date +%s)
+
+        # Clear all expired orders
+        for ORDER in $(find ./tenants/ -name order-*.yaml); do
+            TIMESTAMP_ORDER=$(grep webhook_received_timestamp $ORDER | awk '{print $2}')
+            TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_ORDER))
+            if [[ $TIMESTAMP_DIFF -gt 86400 ]]; then # 86400s = 1 days
+                echo "expiring $ORDER ($TIMESTAMP_DIFF sec old)"
+                rm $ORDER
+            fi
+        done
+        
+        # Iterate over tenants, regenerating or expiring helmreleases
+        for TENANTDIR in $(ls -1v tenants); do
+          if [[ ls $TENANTDIR/subscription-*.yaml || ls $TENANTDIR/order-*.yaml  ]]; then
+              # Now merge the base with the helmrelease, and then merge with any orders, and add remaining subscriptions
+              yq ea '. as $item ireduce ({}; . * $item )' \
+                  ${TENANTDIR}/base-*.yaml $(ls -1v ${TENANTDIR}/order-*.yaml | sort -V) $(ls -1v ${TENANTDIR}/subscription-*.yaml | sort -V) \
+                  > ${TENANTDIR}/helmrelease.yaml
+          else
+            echo "# no active orders or subscriptions" > ${TENANTDIR}/helmrelease.yaml
+          fi
+        done
+
+        git add .
+        git commit -m "$MESSAGE" .
+
+        # just debugging at present
+        sleep 30m
+        break
+
+        # git pull # we've made our commit, so we're not going to get clobbered
+        # # break out of the loop if git push was successful, else loop again
+        # if [[ $(git push --set-upstream origin) ]]; then
+        #     # clean up
+        #     cd /tmp
+        #     rm -rf $TEMPDIR
+        #     break
+        # else
+        #     sleep 7s
+        #     # clean up
+        #     cd /tmp
+        #     rm -rf $TEMPDIR        
+        # fi
+    done
