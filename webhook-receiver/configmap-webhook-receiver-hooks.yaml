@@ -24,7 +24,7 @@ data:
         command-working-directory: "/tmp"
       pass-file-to-command:
       - source: entire-payload
-        envname: WEBHOOK_PAYLOAD        
+        envname: WEBHOOK_PAYLOAD
       # trigger-rule:
       #   and:
       #     # - match:
@@ -32,13 +32,13 @@ data:
       #     #     secret: '{{ getenv "HOOK_SECRET" | js }}'
       #     #     parameter:
       #     #       source: header
-      #     #       name: X-WC-Webhook-Signature   
+      #     #       name: X-WC-Webhook-Signature
       #     - match: # only activate for paying customers
       #         type: "value"
       #         value: "true"
       #         parameter:
       #           source: "payload"
-      #           name: "is_paying_customer"   
+      #           name: "is_paying_customer"
 
     - id: process-subscription
       execute-command: /repo/scripts/process-subscription.sh
@@ -50,7 +50,7 @@ data:
       pass-file-to-command:
       - source: entire-payload
         # name: line_items
-        envname: WEBHOOK_PAYLOAD     
+        envname: WEBHOOK_PAYLOAD
     - id: process-subscription-deletion
       execute-command: /repo/scripts/process-subscription-deletion.sh
       response-message: Subscription deleted
@@ -61,7 +61,7 @@ data:
       pass-file-to-command:
       - source: entire-payload
         # name: line_items
-        envname: WEBHOOK_PAYLOAD                                                                   
+        envname: WEBHOOK_PAYLOAD
       # trigger-rule:
       #   and:
       #     # - match:
@@ -75,7 +75,7 @@ data:
       #         value: "active"
       #         parameter:
       #           source: "payload"
-      #           name: "status"   
+      #           name: "status"
     - id: test-hook-secret
       execute-command: ls $WEBHOOK_PAYLOAD
       response-message: Testing...
@@ -86,7 +86,7 @@ data:
       pass-file-to-command:
       - source: entire-payload
         # name: line_items
-        envname: WEBHOOK_PAYLOAD                                                                   
+        envname: WEBHOOK_PAYLOAD
       trigger-rule:
         and:
           - match:

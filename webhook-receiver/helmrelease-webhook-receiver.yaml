@@ -16,6 +16,7 @@ spec:
   timeout: 5m
   releaseName: webhook-receiver
   values:
+    replicaCount: 2
     persistence: 
       config:
         enabled: "true"
@@ -60,3 +61,14 @@ spec:
         envFrom: 
         - secretRef:
             name: webhook-receiver     
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists             
