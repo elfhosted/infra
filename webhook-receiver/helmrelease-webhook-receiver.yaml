@@ -17,7 +17,7 @@ spec:
   releaseName: webhook-receiver
   values:
     replicaCount: 2
-    persistence: 
+    persistence:
       config:
         enabled: "true"
         mountPath: "/etc/webhook/hooks.yaml"
@@ -29,16 +29,17 @@ spec:
       repo:
         enabled: true
         type: emptyDir
-        mountPath: /repo          
-    envFrom: 
+        mountPath: /repo
+    envFrom:
     - secretRef:
-        name: webhook-receiver    
-    args: 
-    - -verbose 
-    - -hooks=/etc/webhook/hooks.yaml 
-    - -hotreload 
-    - -template  
+        name: webhook-receiver
+    args:
+    - -verbose
+    - -hooks=/etc/webhook/hooks.yaml
+    - -hotreload
+    - -template
     controller:
+      replicas: 2
       annotations:
         configmap.reloader.stakater.com/reload: "webhook-receiver-hooks"
     initContainers:
@@ -58,17 +59,19 @@ spec:
         volumeMounts:
         - mountPath: /repo
           name: repo
-        envFrom: 
+        envFrom:
         - secretRef:
-            name: webhook-receiver     
+            name: webhook-receiver
     tolerations:
     - key: node-role.kubernetes.io/control-plane
       operator: Exists
-      
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
             - key: node-role.kubernetes.io/control-plane
-              operator: Exists             
+              operator: Exists
+
+    priorityClassName: cluster-low
