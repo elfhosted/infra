@@ -13,7 +13,7 @@ spec:
     name: infra
   healthChecks:
     - apiVersion: apps/v1
-      kind: Daemonset
+      kind: DaemonSet
       name: tetragon
       namespace: tetragon
     - apiVersion: apps/v1
