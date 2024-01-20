@@ -99,7 +99,7 @@ spec:
     deschedulerPolicy:
       nodeSelector: "node-role.${dns_domain}/app=true"
       maxNoOfPodsToEvictPerNode: 100
-      maxNoOfPodsToEvictPerNamespace: 1
+      maxNoOfPodsToEvictPerNamespace: 2
       ignorePvcPods: false
       nodeFit: true
       # evictLocalStoragePods: true
