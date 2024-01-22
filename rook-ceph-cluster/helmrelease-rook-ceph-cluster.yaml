@@ -819,7 +819,7 @@ spec:
               deviceClass: hdd
           metadataServer:
             activeCount: 1
-            activeStandby: false
+            activeStandby: true
             resources:
               limits:
                 cpu: "10"
@@ -896,7 +896,7 @@ spec:
               deviceClass: hdd          
           metadataServer:
             activeCount: 1
-            activeStandby: false
+            activeStandby: true
             resources:
               limits:
                 cpu: "10"
@@ -968,7 +968,7 @@ spec:
               deviceClass: ssd
           metadataServer:
             activeCount: 2
-            activeStandby: false
+            activeStandby: true
             resources:
               limits:
                 cpu: "10"
