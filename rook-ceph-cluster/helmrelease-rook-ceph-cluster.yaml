@@ -38,36 +38,36 @@ spec:
     # -- Cluster ceph.conf override
     # Ability to override ceph.conf
     configOverride: |
-      [mds]
-      mds_cap_revoke_eviction_timeout = 600
+      # [mds]
+      # mds_cap_revoke_eviction_timeout = 600
 
       # This prevents evicted clients from being blocklisted
       # get a list of MDSs using "ceph config dump", and then apply like this:
       # ceph config set mds.ceph-filesystem-ssd-b  mds_session_blocklist_on_timeout false
       
-      [mds.ceph-filesystem-a]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-a]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-b]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-b]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-ec-8-2-a]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-ec-8-2-a]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-ec-8-2-b]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-ec-8-2-b]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-ec-8-2-c]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-ec-8-2-c]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-ec-8-2-d]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-ec-8-2-d]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-ssd-a]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-ssd-a]
+      # mds_session_blocklist_on_timeout = false
 
-      [mds.ceph-filesystem-ssd-b]
-      mds_session_blocklist_on_timeout = false
+      # [mds.ceph-filesystem-ssd-b]
+      # mds_session_blocklist_on_timeout = false
 
       [global]
       # public network =  ${cluster_nic_class_c}.0/24

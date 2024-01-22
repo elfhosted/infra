@@ -1,0 +1,51 @@
+{
+    "fields": [
+        {
+            "name": "Dojo coupon code",
+            "value": "Use coupon code `KUTAM7BC` for 100% off any ElfHosted app, for a period of 3 days",
+            "inline": false
+        },
+        {
+            "name": "Available skillsets",
+            "value": "Ready to begin your training? Embark on one (or more) of the brave disciplines below:",
+            "inline": false
+        },
+        {
+            "name": ":crossed_swords: Social Samurai",
+            "value": "--------------\nYou're a sharer - a Redditor, a tweeter of tweets, a tooter of toots, an... \"influencer\" (*shudder*). \n\nYou tik the toks, and twitch the streams.\n\nYou know what a \"personal brand\" is. You know what an \"alt\" Reddit account is, how to upvote, and how to read the room.\n\nYou know that it's not about what you know, but what you know how to find!",
+            "inline": true
+        },
+        {
+            "name": ":lock: Debrid Demon ",
+            "value": "--------------\nYou're familiar with [Zurg](https://elfhosted.com/app/zurg), [RDTClient](https://elfhosted.com/app/rdtclient), and the \"[Infinite Streaming](https://elfhosted.com/guides/media/)\" guides. \n\nYou know how to use Real-Debrid's UI, and to have your streamer libraries updated when new content arrives, using [Autoscan](https://elfhosted.com/app/autoscan/) or Zurg's plex_update.sh\n\n(You know who *@yowmamasita* is :metal:)",
+            "inline": true
+        },
+        {
+            "name": ":pirate_flag: Arrgonaut",
+            "value": "--------------\nYou're intimately familiar with the eccentricities of <:sonarr:492069283418079232> [Sonarr](https://elfhosted.com/app/sonarr/), <:radarr:803861879432019968> [Radarr](https://elfhosted.com/app/radarr/), and the lesser Aars. You can plumb them into NZB, torrent, and debrid downloaders. \n\nYou know how to consolidate indexers / trackers using <:prowlarr:1119544922631049338> [Prowlarr](https://elfhosted.com/app/prowlarr/), use tags and priorities.\n\nYou know what a :trash: TRaSH guide is, and how to use it!",
+            "inline": true
+        },
+        {
+            "name": ":droplet: Torrent Titan",
+            "value": "--------------\nYou're a master of the torrents. You understand seeders, leechers, trackers and ratios. You're know how to drive with <:qbittorrent:1119545012552728586> [qBittorrent](https://elfhosted.com/app/qbittorrent), <:deluge:1119543681205157978> [Deluge](https://elfhosted.com/app/nzbget), and even the janky <:rutorrent:1119545500362883072>  [ruTorrent](https://elfhosted.com/app/rutorrent).\n\nYou can make <:autobrr:1119543362702286879> [Autobrr](https://elfhosted.com/app/autobrr/) auto**purr**, you know how to order torrent clients with BYO VPN.\n\nYou know how to make use of ephemeral `/tmp` to speed up your downloads and reduce I/O.",
+            "inline": true
+        },
+        {
+            "name": ":ninja: NZB Ninja",
+            "value": "--------------\nYou know how to setup providers, and indexers, you're comfortable with with <:sabnzbd:803862285772521472> [SABnzbd](https://elfhosted.com/app/sabnzbd) and <:nzbget:803861753548374077> [NZBGet](https://elfhosted.com/app/nzbget/), and know how to use <:prowlarr:1119544922631049338> [Prowlarr](https://elfhosted.com/app/prowlarr/) to tie it all together.",
+            "inline": true
+        },
+        {
+            "name": ":elf: Elf Lord",
+            "value": "--------------\nYour blood bleeds green. Your ears prick up (*haha*) at the sound of an elf in need. You've Subdued the  [Store](https://store.elfhosted.com), and you've Konquered the  [Kubernetes Dashboard](https://elfhosted.com/app/kubernetes-dashboard/). You relax with [rclone](https://elfhosted.com/app/rcloneui/) remotes and [migrations](https://elfhosted.com/how-to/migrate/).\n\n [ElfBot](https://elfhosted.com/app/elfbot/) is your lapdog, logs reveal themselves to you, and Discord is your domicile!",
+            "inline": true
+        },
+        {
+            "name": "How to graduate",
+            "value": "--------------\nIf you feel you're ready, pick one of the options below for the **ULTIMATE TEST** (*a conversation with @funkypenguin*)",
+            "inline": false
+        }
+    ],
+    "description": "Welcome, brave elf, to the ElfVengers Dojo! The purpose of this channel is to provide brave volunteers (you) with resources to get familiar with the ElfHosted apps / processes, so as to better help your fellow elves.\n\nTo this end, ElfHosted resources are free to you for a period of 3 days to trial (*and to surface bugs*), using the top secret coupon code below (*rotated occasionally*)",
+    "color": 5273134
+}
