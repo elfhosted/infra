@@ -836,7 +836,7 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/storage
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
@@ -913,7 +913,7 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/storage
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists    
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
@@ -985,7 +985,7 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/storage
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists    
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
