@@ -836,7 +836,7 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/storage
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
@@ -913,7 +913,7 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/storage
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists    
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
@@ -967,7 +967,7 @@ spec:
                 # pgp_num: '1024' # this should at least match `pg_num` so that all PGs are used
               deviceClass: ssd
           metadataServer:
-            activeCount: 2
+            activeCount: 1
             activeStandby: true
             resources:
               limits:
@@ -985,7 +985,7 @@ spec:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/storage
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists    
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 

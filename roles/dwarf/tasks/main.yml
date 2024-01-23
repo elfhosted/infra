@@ -1,5 +1,6 @@
 - name: disable write cache (once-off)
   shell: hdparm -W0 /dev/sd*
+  ignore_errors: true
 
 - name: disable write cache (permanent)
   lineinfile:
@@ -7,3 +8,4 @@
     regexp: '#write_cache = off'
     line: write_cache = off
     create: no
+  ignore_errors: true
