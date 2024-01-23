@@ -1,0 +1,47 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cephfs-remote
+provisioner: cephfs.csi.ceph.com
+parameters:
+  clusterID: 34722624-ebcf-11ed-acd1-6cb3110970bc
+
+  monitors: 176.9.222.246:6789
+  monitors: 176.9.222.249:6789
+  monitors: 176.9.222.250:6789
+  monitors: 176.9.222.251:6789
+  monitors: 176.9.222.252:6789
+
+  # (required) CephFS filesystem name into which the volume shall be created
+  # eg: fsName: myfs
+  fsName: cephfs
+
+  # (optional) Comma separated string of Ceph-fuse mount options.
+  # For eg:
+  # fuseMountOptions: debug
+
+  # (optional) Comma separated string of Cephfs kernel mount options.
+  # Check man mount.ceph for mount options. For eg:
+  # kernelMountOptions: readdir_max_bytes=1048576,norbytes
+
+  # The secrets have to contain user and/or Ceph admin credentials.
+  csi.storage.k8s.io/provisioner-secret-name: ceph-key
+  csi.storage.k8s.io/provisioner-secret-namespace: csi-cephfs-remote
+  csi.storage.k8s.io/controller-expand-secret-name: ceph-key
+  csi.storage.k8s.io/controller-expand-secret-namespace: csi-cephfs-remote
+  csi.storage.k8s.io/node-stage-secret-name: ceph-key
+  csi.storage.k8s.io/node-stage-secret-namespace: csi-cephfs-remote
+
+  # (optional) The driver can use either ceph-fuse (fuse) or
+  # ceph kernelclient (kernel).
+  # If omitted, default volume mounter will be used - this is
+  # determined by probing for ceph-fuse and mount.ceph
+  mounter: kernel
+
+  # (optional) Prefix to use for naming subvolumes.
+  # If omitted, defaults to "csi-vol-".
+  # volumeNamePrefix: "foo-bar-"
+
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+mountOptions: []
