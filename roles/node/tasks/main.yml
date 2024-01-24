@@ -28,12 +28,22 @@
     state: enabled
   loop: "{{ firewall.admin_source }}"
 
-- name: Allow port 5201 for occasional iperf testing (enable when necessary)
+# - name: Allow port 5201 for occasional iperf testing (enable when necessary)
+#   ufw:
+#     rule: deny
+#     port: 5201
+#     proto: tcp
+#     state: enabled
+
+- name: Allow any incoming traffic to the public IP for host-port exposed services
   ufw:
-    rule: deny
-    port: 5201
-    proto: tcp
-    state: enabled
+    direction: in
+    rule: "allow"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "80", proto: "tcp" }  # traefik web
+    - { port: "443", proto: "tcp" } # traefik websecure
 
 - name: Allow any incoming traffic in the cluster range
   ufw:
