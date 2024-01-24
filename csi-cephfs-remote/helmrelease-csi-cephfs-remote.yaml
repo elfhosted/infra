@@ -114,13 +114,7 @@ spec:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
         
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists 
+      affinity: {}
 
       # Set to true to enable Ceph Kernel clients
       # on kernel < 4.17 which support quotas
