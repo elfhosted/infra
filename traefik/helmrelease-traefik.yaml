@@ -659,7 +659,7 @@ spec:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
         # asDefault: true
         port: 8000
-        hostPort: 8000
+        hostPort: 80
         # containerPort: 8000
         # expose: true
         # exposedPort: 80
@@ -694,7 +694,7 @@ spec:
         ## -- Enable this entrypoint as a default entrypoint. When a service doesn't explicitly set an entrypoint it will only use this entrypoint.
         # asDefault: true
         port: 8443
-        hostPort: 8443
+        hostPort: 443
         # containerPort: 8443
         # expose: true
         # exposedPort: 443
