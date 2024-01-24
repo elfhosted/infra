@@ -6,11 +6,7 @@ provisioner: cephfs.csi.ceph.com
 parameters:
   clusterID: 34722624-ebcf-11ed-acd1-6cb3110970bc
 
-  monitors: 176.9.222.246:6789
-  monitors: 176.9.222.249:6789
-  monitors: 176.9.222.250:6789
-  monitors: 176.9.222.251:6789
-  monitors: 176.9.222.252:6789
+  monitors: 176.9.222.246:6789,176.9.222.249:6789,176.9.222.250:6789,176.9.222.251:6789,176.9.222.252:6789
 
   # (required) CephFS filesystem name into which the volume shall be created
   # eg: fsName: myfs
