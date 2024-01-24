@@ -12,6 +12,8 @@ parameters:
   # eg: fsName: myfs
   fsName: cephfs
 
+  provisionVolume: "false"
+  
   # (optional) Comma separated string of Ceph-fuse mount options.
   # For eg:
   # fuseMountOptions: debug
