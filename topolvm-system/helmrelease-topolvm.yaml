@@ -182,7 +182,10 @@ spec:
           operator: Exists
         - key: node-role.${dns_domain}/download
           effect: NoSchedule
-          operator: Exists             
+          operator: Exists  
+        - key: node-role.${dns_domain}/download-only
+          effect: NoSchedule
+          operator: Exists                       
 
       # lvmd.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
