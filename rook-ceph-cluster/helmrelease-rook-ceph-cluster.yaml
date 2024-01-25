@@ -830,6 +830,8 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
+              - key: node-role.${dns_domain}/mds
+                operator: Exists  
               - key: node-role.${dns_domain}/storage
                 operator: Exists
               nodeAffinity:
@@ -907,8 +909,10 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
+              - key: node-role.${dns_domain}/mds
+                operator: Exists  
               - key: node-role.${dns_domain}/storage
-                operator: Exists
+                operator: Exists                                
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
@@ -979,6 +983,8 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
+              - key: node-role.${dns_domain}/mds
+                operator: Exists  
               - key: node-role.${dns_domain}/storage
                 operator: Exists
               nodeAffinity:
