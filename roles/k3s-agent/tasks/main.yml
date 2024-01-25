@@ -68,6 +68,14 @@
   when: "inventory_hostname in groups['node_role_download']"  
   delegate_to: "{{ groups['controllers'][0] }}"
 
+- name: taint and label download-only workers # free ingress traffic, metered egress
+  become: no
+  shell: |
+    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true --overwrite
+    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true:NoSchedule  --overwrite
+  when: "inventory_hostname in groups['node_role_download_only']"  
+  delegate_to: "{{ groups['controllers'][0] }}"  
+
 - name: label app workers
   become: no
   shell: kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/app=true

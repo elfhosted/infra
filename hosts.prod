@@ -50,6 +50,8 @@ mds02        ansible_host=10.0.42.72 cluster_nic=enp0s31f6.4000 # an i7 host, 64
 orc01
 orc02
 orc03
+
+[node_role_download_only]
 giant01
 
 [node_role_app]
