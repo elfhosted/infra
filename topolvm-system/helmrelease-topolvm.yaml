@@ -160,7 +160,7 @@ spec:
           type: thin
           thin-pool:
             name: thinpool
-            overprovision-ratio: 10.0          
+            overprovision-ratio: 20.0          
 
       # lvmd.lvcreateOptionClasses -- Specify the lvcreate-option-class settings.
       lvcreateOptionClasses: []
