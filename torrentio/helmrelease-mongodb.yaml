@@ -1114,7 +1114,7 @@ spec:
       ## If defined, PVC must be created manually before volume will be bound
       ## Ignored when mongodb.architecture=replicaset
       ##
-      existingClaim: ""
+      existingClaim: "mongodb"
       ## @param persistence.resourcePolicy Setting it to "keep" to avoid removing PVCs during a helm delete operation. Leaving it empty will delete PVCs after the chart deleted
       ##
       resourcePolicy: ""
