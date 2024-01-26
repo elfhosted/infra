@@ -97,8 +97,8 @@ spec:
     
     # Just a simple policy to get rid of errored pods
     deschedulerPolicy:
-
-      - name: ProfileName
+      profiles:
+      - name: Clean Up
         pluginConfig:
         - name: "RemoveFailedPods"
           args:
