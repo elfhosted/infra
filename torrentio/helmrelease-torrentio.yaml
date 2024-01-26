@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: velero
-  namespace: velero
+  name: torrentio
+  namespace: torrentio
 spec:
   chart:
     spec:
@@ -14,7 +14,7 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: torrentio
+  releaseName: scraper
   values:
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
