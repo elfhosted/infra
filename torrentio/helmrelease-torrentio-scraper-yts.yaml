@@ -51,8 +51,8 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 10001
-      runAsGroup: 10001
+      # runAsUser: 568
+      # runAsGroup: 568
     automountServiceAccountToken: false
     persistence:
       tmp:
@@ -63,8 +63,8 @@ spec:
     env:
       PORT: 7001
       ENABLE_SYNC: true
-      PUID: 10001
-      PGID: 10001
+      PUID: 568
+      PGID: 568
       SCRAPER: ytsScraper
     envFrom:
     - secretRef:

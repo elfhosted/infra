@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: torrentio-scraper-ytsfull
+  name: torrentio-scraper-nyaasi
   namespace: torrentio
 spec:
   chart:
@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: torrentio-scraper-ytsfull
+  releaseName: torrentio-scraper-nyaasi
   values:
     global:
-      nameOverride: torrentio-scraper-ytsfull
+      nameOverride: torrentio-scraper-nyaasi
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
     tolerations:
@@ -59,13 +59,13 @@ spec:
         enabled: true
         mountPath: /tmp
         type: emptyDir
-        sizeLimit: 1Gi          
+        sizeLimit: 1Gi     
     env:
       PORT: 7001
       ENABLE_SYNC: true
       PUID: 568
       PGID: 568
-      SCRAPER: ytsFullScraper
+      SCRAPER: nyaaSiScraper
     envFrom:
     - secretRef:
         name: torrentio-env        
