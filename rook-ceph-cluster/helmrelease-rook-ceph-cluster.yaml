@@ -826,18 +826,19 @@ spec:
                 memory: "64Gi"
               requests:
                 cpu: "1000m"
-                # memory: "${rook_ceph_mds_ram}"
-                memory: "4Gi"
+                memory: "${rook_ceph_mds_ram}"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/mds
+                operator: Exists  
+              - key: node-role.${dns_domain}/storage
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/download-only
+                    - key: node-role.${dns_domain}/mds
                       operator: Exists
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
@@ -978,19 +979,18 @@ spec:
                 memory: "64Gi"
               requests:
                 cpu: "1000m"
-                memory: "${rook_ceph_mds_ram}"
+                # memory: "${rook_ceph_mds_ram}"
+                memory: "4Gi"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/mds
-                operator: Exists  
-              - key: node-role.${dns_domain}/storage
+              - key: node-role.${dns_domain}/download-only
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.${dns_domain}/mds
+                    - key: node-role.${dns_domain}/download-only
                       operator: Exists    
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
