@@ -1,9 +1,9 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: rate-limit-minio
-  namespace: traefik
+  name: rate-limit-torrentio
+  namespace: torrentio
 spec:
   rateLimit:
-    average: 5  # request / sec
+    average: 1  # request / sec
     burst: 20

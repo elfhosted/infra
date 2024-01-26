@@ -1,0 +1,17 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: torrentio.${dns_domain}
+  namespace: torrentio
+spec:
+  routes:
+    - match: Host(`torrentio.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: torrentio-addon
+          kind: Service
+          port: 7001
+      middlewares:  
+        - name: error-pages
+          namespace: traefik
+        - name: rate-limit-torrentio
