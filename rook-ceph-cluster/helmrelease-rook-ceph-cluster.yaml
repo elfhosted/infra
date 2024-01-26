@@ -980,9 +980,7 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/mds
-                operator: Exists  
-              - key: node-role.${dns_domain}/storage
+              - key: node-role.${dns_domain}/download-only
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
