@@ -14,7 +14,7 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: mongodb
+  releaseName: postgresql
   values:
     # Copyright VMware, Inc.
     # SPDX-License-Identifier: APACHE-2.0
@@ -72,7 +72,7 @@ spec:
     nameOverride: ""
     ## @param fullnameOverride String to fully override common.names.fullname template
     ##
-    fullnameOverride: ""
+    fullnameOverride: "postgresql"
     ## @param clusterDomain Kubernetes Cluster Domain
     ##
     clusterDomain: cluster.local

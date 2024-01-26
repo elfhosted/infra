@@ -16,6 +16,8 @@ spec:
   timeout: 5m
   releaseName: torrentio-addon
   values:
+    global:
+      nameOverride: torrentio-addon
     image:
       repository: ghcr.io/geek-cookbook/torrentio-addon
       tag: rolling@sha256:356c887a2d151921e68ee760ded72650787b394ace60685ce57d5850dd220233
