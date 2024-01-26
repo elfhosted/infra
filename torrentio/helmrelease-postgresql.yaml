@@ -154,7 +154,7 @@ spec:
       password: ""
       ## @param auth.database Name for a custom database to create
       ##
-      database: ""
+      database: "torrentio"
       ## @param auth.replicationUsername Name of the replication user
       ##
       replicationUsername: repl_user
