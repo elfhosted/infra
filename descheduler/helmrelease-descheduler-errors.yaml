@@ -93,27 +93,48 @@ spec:
       # dry-run:
 
     # Recommended to use the latest Policy API version supported by the Descheduler app version
-    deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
+    deschedulerPolicyAPIVersion: "descheduler/v1alpha2"
     
     # Just a simple policy to get rid of errored pods
     deschedulerPolicy:
-      strategies:
-        RemoveFailedPods:
-          enabled: true
-        LowNodeUtilization:
-          enabled: false
-        RemoveDuplicates:
-          enabled: false
-        RemovePodsHavingTooManyRestarts:
-          enabled: false
-        RemovePodsViolatingInterPodAntiAffinity: 
-          enabled: true
-        RemovePodsViolatingNodeAffinity:
-          enabled: true
-        RemovePodsViolatingNodeTaints:
-          enabled: true
-        RemovePodsViolatingTopologySpreadConstraint:
-          enabled: true
+      profiles:
+      - name: Clean Up
+        pluginConfig:
+        - name: "RemoveFailedPods"
+          args:
+            reasons:
+            - "NodeAffinity"
+            - "Evicted"
+            includingInitContainers: true
+            excludeOwnerKinds:
+            - "Job"
+            minPodLifetimeSeconds: 300
+        plugins:
+          deschedule:
+            enabled:
+              - "RemoveFailedPods"
+
+
+      # strategies:
+      #   RemoveFailedPods:
+      #     enabled: true
+      #     params:
+      #       reasons:
+      #       - Evicted
+      #   LowNodeUtilization:
+      #     enabled: false
+      #   RemoveDuplicates:
+      #     enabled: false
+      #   RemovePodsHavingTooManyRestarts:
+      #     enabled: false
+      #   RemovePodsViolatingInterPodAntiAffinity: 
+      #     enabled: true
+      #   RemovePodsViolatingNodeAffinity:
+      #     enabled: true
+      #   RemovePodsViolatingNodeTaints:
+      #     enabled: true
+      #   RemovePodsViolatingTopologySpreadConstraint:
+      #     enabled: true
 
     priorityClassName: system-cluster-critical # don't deschedule yourself
 
