@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: torrentio
+  namespace: torrentio
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: torrentio
+  minAvailable: 1
