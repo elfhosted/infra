@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: torrentio
+  name: torrentio-addon
   namespace: torrentio
 spec:
   chart:
@@ -14,22 +14,20 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: scraper
+  releaseName: torrentio-addon
   values:
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
       tag: rolling@sha256:341a06c24c83e28111425c82cd4b167d993459454b2e59171de5522ccc212520
-    # securityContext:
-    #   seccompProfile:
-    #     type: RuntimeDefault
-    #   readOnlyRootFilesystem: true
-    # podSecurityContext:
-    #   seccompProfile:
-    #     type: RuntimeDefault
-    #   runAsUser: 568
-    #   runAsGroup: 568
-    #   fsGroup: 568
-    #   fsGroupChangePolicy: "OnRootMismatch"
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
     automountServiceAccountToken: false
     env:
       PORT: 7001
@@ -48,11 +46,3 @@ spec:
         ports:
           http:
             port: 7001
-    persistence:
-      config:
-        enabled: true
-        type: custom
-        mountPath: /iceberg/data
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: config-iceberg-ssd
