@@ -17,8 +17,8 @@ spec:
   releaseName: torrentio-addon
   values:
     image:
-      repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:341a06c24c83e28111425c82cd4b167d993459454b2e59171de5522ccc212520
+      repository: ghcr.io/geek-cookbook/torrentio-addon
+      tag: rolling@sha256:356c887a2d151921e68ee760ded72650787b394ace60685ce57d5850dd220233
     securityContext:
       seccompProfile:
         type: RuntimeDefault

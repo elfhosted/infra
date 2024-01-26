@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:1d1ba0f1ff20ee5816182ab3dbf1d5e596495611b4ec0c6eb7b4f2d1b46e944c
+      tag: rolling@sha256:036b93fffadae5e1ab334785ebf91b08d0710c5c9eb204c10680c07cea0f5183
     securityContext:
       seccompProfile:
         type: RuntimeDefault
