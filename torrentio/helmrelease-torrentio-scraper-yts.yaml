@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: torrentio-scraper
+  name: torrentio-scraper-yts
   namespace: torrentio
 spec:
   chart:
@@ -17,10 +17,33 @@ spec:
   releaseName: torrentio-scraper
   values:
     global:
-      nameOverride: torrentio-scraper
+      nameOverride: torrentio-scraper-yts
+    podLabels:
+      app.elfhosted.com/class: torrentio-scraper  
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists           
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists  
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/class
+                operator: In
+                values:
+                - torrentio-scraper
+            topologyKey: "kubernetes.io/hostname"    
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:036b93fffadae5e1ab334785ebf91b08d0710c5c9eb204c10680c07cea0f5183
+      tag: rolling@sha256:137d2297fdce408e23265ec81a8c3f1f451cd07610c6382bd66c7952b70b1d04
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -50,6 +73,7 @@ spec:
       ENABLE_SYNC: true
       PUID: 10001
       PGID: 10001
+      SCRAPER: ytsScraper
     envFrom:
     - secretRef:
         name: torrentio-env        

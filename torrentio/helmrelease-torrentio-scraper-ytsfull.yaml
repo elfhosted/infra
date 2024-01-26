@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: torrentio-addon
+  name: torrentio-scraper-ytsfull
   namespace: torrentio
 spec:
   chart:
@@ -14,13 +14,36 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: torrentio-addon
+  releaseName: torrentio-scraper
   values:
     global:
-      nameOverride: torrentio-addon
+      nameOverride: torrentio-scraper-ytsfull
+    podLabels:
+      app.elfhosted.com/class: torrentio-scraper  
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists           
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists  
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/class
+                operator: In
+                values:
+                - torrentio-scraper
+            topologyKey: "kubernetes.io/hostname"    
     image:
-      repository: ghcr.io/geek-cookbook/torrentio-addon
-      tag: rolling@sha256:86356544a93d0677652f05f858eb43ed1c57f0ca995fbdb890ceb7705e337d2e
+      repository: ghcr.io/geek-cookbook/torrentio-scraper
+      tag: rolling@sha256:137d2297fdce408e23265ec81a8c3f1f451cd07610c6382bd66c7952b70b1d04
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -31,19 +54,6 @@ spec:
       runAsUser: 10001
       runAsGroup: 10001
     automountServiceAccountToken: false
-    replicas: 2
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - torrentio
-            topologyKey: "kubernetes.io/hostname"
     persistence:
       tmp: 
         enabled: true
@@ -57,15 +67,16 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 1Gi      
+                    storage: 1Gi  
     env:
       PORT: 7001
       ENABLE_SYNC: true
       PUID: 10001
       PGID: 10001
+      SCRAPER: ytsFullScraper
     envFrom:
     - secretRef:
-        name: torrentio-env     
+        name: torrentio-env        
     # resources:
     ingress:
       main:
