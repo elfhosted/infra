@@ -16,6 +16,8 @@ spec:
   timeout: 5m
   releaseName: torrentio-scraper
   values:
+    global:
+      nameOverride: torrentio-scraper
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
       tag: rolling@sha256:036b93fffadae5e1ab334785ebf91b08d0710c5c9eb204c10680c07cea0f5183
