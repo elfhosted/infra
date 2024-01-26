@@ -15,7 +15,7 @@ data:
   k3s_server_endpoint_2: 10.0.42.12
   k3s_server_endpoint_3: 10.0.42.13
   prometheus_storage: '90' # don't append a unit here
-  minio_storage: '200Gi'
+  minio_storage: '500Gi'
   rook_ceph_osd_ram: 6500Mi
   rook_ceph_mds_ram: 12Gi
   dashboard_background: production.jpg  
