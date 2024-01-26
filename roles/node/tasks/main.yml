@@ -6,13 +6,15 @@
     packages:
     - unattended-upgrades
     - tuned
-    - nfs-common
     - iperf3
     - jq
     - snapd
     - bzip2
     - restic
     - intel-gpu-tools
+    - linux-generic-hwe-22.04
+    - vnstat
+    - jnettop
 
 - name: install yq via snap
   snap:
