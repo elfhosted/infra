@@ -33,11 +33,12 @@ spec:
     automountServiceAccountToken: false
     env:
       PORT: 7001
-      MONGODB_URI: mongodb://mongodb:27017/torrentio
-      DATABASE_URI: postgres://postgres@postgres:5432/torrentio
       ENABLE_SYNC: true
       PUID: 10001
       PGID: 10001
+    envFrom:
+    - secretRef:
+        name: torrentio-env        
     # resources:
     ingress:
       main:
