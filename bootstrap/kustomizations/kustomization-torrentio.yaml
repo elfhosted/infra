@@ -22,29 +22,8 @@ spec:
       namespace: torrentio   
     - apiVersion: apps/v1
       kind: Deployment
-      name: torrentio-scraper
-      namespace: torrentio
-    - apiVersion: apps/v1
-      kind: Deployment
       name: torrentio-addon
       namespace: torrentio       
-    # Always use the helmrelease to determine health too
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: mongodb
-      namespace: torrentio 
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: postgresql
-      namespace: torrentio   
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: torrentio-scraper
-      namespace: torrentio  
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: torrentio-addon
-      namespace: torrentio                        
   postBuild:
     substituteFrom:
       - kind: ConfigMap
