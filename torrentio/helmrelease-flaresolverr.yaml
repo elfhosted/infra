@@ -51,7 +51,13 @@ spec:
                 operator: In
                 values:
                 - flaresolverr
-            topologyKey: "kubernetes.io/hostname"       
+            topologyKey: "kubernetes.io/hostname"  
+    persistence:
+      tmp:
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        sizeLimit: 1Gi                   
     resources:
       requests:
         cpu: 10m
