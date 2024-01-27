@@ -1219,6 +1219,7 @@ spec:
         server:
           enforce_domain: true
           domain: grafana.infra.${dns_domain}
+          root_url: https://grafana.infra.${dns_domain}      
         auth.generic_oauth:
           enabled: true
           allow_sign_up: false
