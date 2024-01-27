@@ -31,6 +31,9 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     replicas: 2
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists        
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
