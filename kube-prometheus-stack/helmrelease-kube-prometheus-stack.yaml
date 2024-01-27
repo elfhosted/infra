@@ -3873,8 +3873,9 @@ spec:
           # objectStorageConfigFile: /var/secrets/object-store.yaml
 
           objectStorageConfig:
-            key: objstore.yml
-            name: thanos-objectstore-config
+            existingSecret:
+              name: thanos-objectstore-config
+              key: objstore.yml
             
         ## Containers allows injecting additional containers. This is meant to allow adding an authentication proxy to a Prometheus pod.
         ## if using proxy extraContainer update targetPort with proxy container port
