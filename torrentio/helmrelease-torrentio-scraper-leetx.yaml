@@ -66,6 +66,7 @@ spec:
       PUID: 568
       PGID: 568
       SCRAPER: leetxScraper
+      FLARESOLVER_ENDPOINT: http://flaresolverr:8191/v1
     envFrom:
     - secretRef:
         name: torrentio-env        
