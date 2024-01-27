@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: flaresolverr
-      version: 0.2.1
+      version: 5.4.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
