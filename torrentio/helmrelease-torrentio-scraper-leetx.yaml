@@ -43,7 +43,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"    
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:137d2297fdce408e23265ec81a8c3f1f451cd07610c6382bd66c7952b70b1d04
+      tag: rolling@sha256:d9cb2776b950f25427124279432749c0daafd3ccd9c528cfa00d660b9f1609b8
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -66,7 +66,7 @@ spec:
       PUID: 568
       PGID: 568
       SCRAPER: leetxScraper
-      FLARESOLVER_ENDPOINT: http://flaresolverr:8191/v1
+      FLARESOLVERR_ENDPOINT: http://flaresolverr:8191/v1
     envFrom:
     - secretRef:
         name: torrentio-env        
