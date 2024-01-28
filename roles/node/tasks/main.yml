@@ -12,9 +12,13 @@
     - bzip2
     - restic
     - intel-gpu-tools
-    - linux-generic-hwe-22.04
     - vnstat
     - jnettop
+
+- name: remove hwe kernel (doesn't play nice)
+  apt:
+    name: linux-generic-hwe-22.04
+    state: absent
 
 - name: install yq via snap
   snap:

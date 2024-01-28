@@ -23,12 +23,12 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      # readOnlyRootFilesystem: 
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 10001
-      runAsGroup: 10001
+      # runAsUser: 10001
+      # runAsGroup: 10001
     automountServiceAccountToken: false
     replicas: 2
     tolerations:
@@ -63,8 +63,7 @@ spec:
         cpu: 10m
         memory: 128Mi
       limits:
-        cpu: 1
-        memory: 256Mi
+        memory: 4Gi
 
     additionalContainers:
       create-session:
@@ -80,3 +79,5 @@ spec:
             "cmd": "sessions.create",
             "session":"leetx"
           }'
+
+          sleep infinity
