@@ -1204,6 +1204,8 @@ spec:
         #   action: replace
 
       grafana.ini:
+        auth.basic:
+          enabled: true # see https://github.com/prometheus-community/helm-charts/issues/1806 
         # paths:
         #   data: /var/lib/grafana/data
         #   logs: /var/log/grafana
