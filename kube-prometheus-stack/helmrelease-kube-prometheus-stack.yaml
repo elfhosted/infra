@@ -3710,7 +3710,7 @@ spec:
                 storageClassName: "topolvm-provisioner"
                 resources:
                   requests:
-                    storage: 10Gi
+                    storage: ${prometheus_storage}Gi
 
           # volumeClaimTemplate:
           #   spec:
