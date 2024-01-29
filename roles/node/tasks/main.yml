@@ -181,3 +181,8 @@
     name: rsyslog
     state: restarted
     enabled: yes
+
+- name: remove HWE kernel
+  shell: |
+    apt remove -y --purge linux-generic-hwe-22.04
+    apt remove -y --purge linux-hwe-* linux-modules-6* linux-modules-6* linux-modules-6*
