@@ -359,7 +359,7 @@ spec:
           port: 1514
           externalIPs: []
           nodePort: null
-          loadBalancerIP: ${cluster_nic_class_c}.102 # for syslog from non-cluster devices
+          loadBalancerIP: ${cluster_nic_class_c}.202 # for syslog from non-cluster devices
           loadBalancerSourceRanges: []
           externalTrafficPolicy: Local
     #    ingress:

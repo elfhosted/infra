@@ -34,6 +34,8 @@ giant03      ansible_host=10.0.42.53 cluster_nic=enp44s0.4000 # 10Gbps node
 # gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
 gnome01      ansible_host=10.0.42.101 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
 gnome02      ansible_host=10.0.42.102 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
+gnome03      ansible_host=10.0.42.103 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
+
 
 
 [k3s_dwarves]
