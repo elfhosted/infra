@@ -67,6 +67,7 @@ spec:
       PGID: 568
       SCRAPER: leetxScraper
       FLARESOLVERR_ENDPOINT: http://flaresolverr:8191/v1
+      ENABLE_SCHEDULING: "true"
     envFrom:
     - secretRef:
         name: torrentio-env        
