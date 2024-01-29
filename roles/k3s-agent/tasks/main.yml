@@ -58,7 +58,7 @@
     # creates: /usr/local/bin/k3s
   register: workers_install_result
   become: yes
-  when: "inventory_hostname in groups['k3s_dwarves']"    
+  when: "inventory_hostname in groups['k3s_dwarves']"
 
 - name: taint and label download workers
   become: no
@@ -75,6 +75,14 @@
     kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true:NoSchedule  --overwrite
   when: "inventory_hostname in groups['node_role_download_only']"  
   delegate_to: "{{ groups['controllers'][0] }}"    
+
+- name: label lightweight workers # no GPU, no heavy workloads
+  become: no
+  shell: |
+    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/lightweight=true --overwrite
+    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/lightweight=true:NoSchedule  --overwrite
+  when: "inventory_hostname in groups['node_role_lightweight']"  
+  delegate_to: "{{ groups['controllers'][0] }}"      
 
 - name: label app workers
   become: no
