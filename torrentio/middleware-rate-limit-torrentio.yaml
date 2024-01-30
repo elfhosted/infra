@@ -4,6 +4,7 @@ metadata:
   name: rate-limit-torrentio
   namespace: torrentio
 spec:
+  # Intended to be suitable for public, casual, streaming use
   rateLimit:
-    average: 10  # request / sec
-    burst: 30
+    average: 1
+    burst: 10
