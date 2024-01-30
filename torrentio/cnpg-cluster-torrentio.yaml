@@ -1,0 +1,28 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: torrentio
+  namespace: torrentio
+spec:
+  instances: 3
+
+  # Example of rolling update strategy:
+  # - unsupervised: automated update of the primary once all
+  #                 replicas have been upgraded (default)
+  # - supervised: requires manual supervision to perform
+  #               the switchover of the primary
+  primaryUpdateStrategy: unsupervised
+
+  # Persistent storage configuration
+  storage:
+    size: 10Gi
+
+  superuserSecret:
+      name: superuser-secret
+
+  bootstrap:
+    initdb:
+      database: torrentio
+      owner: torrentio
+      secret:
+        name: app-secret
