@@ -13,17 +13,13 @@ spec:
     name: infra
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
-      name: postgresql
-      namespace: torrentio
-    - apiVersion: apps/v1
       kind: Deployment
       name: mongodb
       namespace: torrentio   
     - apiVersion: apps/v1
       kind: Deployment
       name: torrentio-addon
-      namespace: torrentio       
+      namespace: torrentio 
   postBuild:
     substituteFrom:
       - kind: ConfigMap

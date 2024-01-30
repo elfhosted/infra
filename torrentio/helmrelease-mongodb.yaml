@@ -1101,7 +1101,7 @@ spec:
     persistence:
       ## @param persistence.enabled Enable MongoDB(&reg;) data persistence using PVC
       ##
-      enabled: true
+      enabled: false # we are just used for caching, no need for storage
       ## @param persistence.name Name of the PVC and mounted volume
       ##
       name: "datadir"
@@ -1114,7 +1114,7 @@ spec:
       ## If defined, PVC must be created manually before volume will be bound
       ## Ignored when mongodb.architecture=replicaset
       ##
-      existingClaim: "mongodb"
+      existingClaim: ""
       ## @param persistence.resourcePolicy Setting it to "keep" to avoid removing PVCs during a helm delete operation. Leaving it empty will delete PVCs after the chart deleted
       ##
       resourcePolicy: ""
