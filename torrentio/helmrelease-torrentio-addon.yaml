@@ -32,6 +32,9 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     replicas: 2
+    strategy:
+    rollingUpdate:
+      unavailable: 1
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
