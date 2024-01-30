@@ -35,7 +35,7 @@ spec:
     # This is a YAML-formatted file.
     # Please declare variables to be passed to your templates.
 
-    replicaCount: 1
+    replicaCount: 2
 
     image:
       repository: ghcr.io/cloudnative-pg/cloudnative-pg
@@ -148,15 +148,21 @@ spec:
     # -- Nodeselector for the operator to be installed.
     nodeSelector: {}
 
-    # -- Tolerations for the operator to be installed.
-    tolerations: []
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
 
-    # -- Affinity for the operator to be installed.
-    affinity: {}
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
 
     monitoring:
       # -- Specifies whether the monitoring should be enabled. Requires Prometheus Operator CRDs.
-      podMonitorEnabled: false
+      podMonitorEnabled: true
 
     # Default monitoring queries
     monitoringQueriesConfigMap:
