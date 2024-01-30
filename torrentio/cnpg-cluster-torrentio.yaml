@@ -18,11 +18,11 @@ spec:
     size: 10Gi
 
   superuserSecret:
-      name: superuser-secret
+      name: cnpg-postgres-credentials
 
   bootstrap:
     initdb:
       database: torrentio
       owner: torrentio
       secret:
-        name: app-secret
+        name: cnpg-torrentio-credentials
