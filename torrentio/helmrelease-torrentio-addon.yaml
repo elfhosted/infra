@@ -31,10 +31,11 @@ spec:
       runAsUser: 10001
       runAsGroup: 10001
     automountServiceAccountToken: false
-    replicas: 2
-    strategy:
-    rollingUpdate:
-      unavailable: 1
+    controller:
+      replicas: 2
+      strategy:
+      rollingUpdate:
+        unavailable: 1
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
@@ -66,6 +67,7 @@ spec:
       ENABLE_SYNC: true
       PUID: 10001
       PGID: 10001
+      TENANT_NAME: Public
     envFrom:
     - secretRef:
         name: torrentio-env     
