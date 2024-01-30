@@ -30,7 +30,8 @@ spec:
       # runAsUser: 10001
       # runAsGroup: 10001
     automountServiceAccountToken: false
-    replicas: 2
+    controller:
+      replicas: 10
     tolerations:
     - key: node-role.elfhosted.com/storage
       operator: Exists        

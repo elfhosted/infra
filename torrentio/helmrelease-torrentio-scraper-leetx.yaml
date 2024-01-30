@@ -43,7 +43,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"    
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:d9cb2776b950f25427124279432749c0daafd3ccd9c528cfa00d660b9f1609b8
+      tag: rolling@sha256:7fa0f622a8143a1acf60475811926d57f68d906e5a899faf77f8860579b505fe
     securityContext:
       seccompProfile:
         type: RuntimeDefault
