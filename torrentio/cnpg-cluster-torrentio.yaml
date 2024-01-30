@@ -25,4 +25,4 @@ spec:
       database: torrentio
       owner: torrentio
       secret:
-        name: cnpg-torrentio-credentials
+        name: app-secret
