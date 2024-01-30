@@ -1,0 +1,41 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cnpg--cnpg-system
+  namespace: flux-system
+spec:
+  interval: 15m
+  path: ./cnpg-system
+  prune: true # remove any elements later removed from the above path
+  timeout: 10m # if not set, this defaults to interval duration, which is 1h
+  sourceRef:
+    kind: GitRepository
+    name: infra 
+  dependsOn:
+  - name: topolvm--topolvm-system 
+  # healthChecks:
+  #   - apiVersion: apps/v1
+  #     kind: Deployment
+  #     name: cnpg-controller
+  #     namespace: cnpg-system
+  #   - apiVersion: apps/v1
+  #     kind: DaemonSet
+  #     name: cnpg-lvmd-0
+  #     namespace: cnpg-system
+  #   - apiVersion: apps/v1
+  #     kind: DaemonSet
+  #     name: cnpg-node
+  #     namespace: cnpg-system
+  #   - apiVersion: apps/v1
+  #     kind: DaemonSet
+  #     name: cnpg-scheduler
+  #     namespace: cnpg-system
+  #   # Always use the helmrelease to determine health too
+  #   - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+  #     kind: HelmRelease
+  #     name: cnpg
+  #     namespace: cnpg-system     
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
