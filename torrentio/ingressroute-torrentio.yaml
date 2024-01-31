@@ -5,8 +5,8 @@ metadata:
   namespace: torrentio
 spec:
   routes:
-    # Matches are evaluated downwards - last match wins
-    - match: Host(`torrentio.${dns_domain}`)
+    # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
+    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`{something:.+}/stream/{else:.+}`)
       kind: Rule
       services:
         - name: torrentio-addon
@@ -16,85 +16,8 @@ spec:
         - name: error-pages
           namespace: traefik
         - name: rate-limit-torrentio
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && (Path(`/`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/configure`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/realdebrid`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/premiumize`) 
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/alldebrid`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/debridlink`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/offcloud`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
-    # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/putio`))
+    # everything else is static and can be less rate-limited
+    - match: Host(`torrentio.${dns_domain}`)
       kind: Rule
       services:
         - name: torrentio-addon
