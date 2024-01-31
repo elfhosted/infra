@@ -5,6 +5,17 @@ metadata:
   namespace: torrentio
 spec:
   routes:
+    # static pages can be less rate-limited
+    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/configure`) || PathPrefix(`/realdebrid`) || PathPrefix(`/premiumize`) || PathPrefix(`/alldebrid`) || PathPrefix(`/debridlink`) PathPrefix(`/offcloud`) || PathPrefix(`/putio`)
+      kind: Rule
+      services:
+        - name: torrentio-addon
+          kind: Service
+          port: 7001
+      middlewares:  
+        - name: error-pages
+          namespace: traefik   
+        - name: rate-limit-torrentio-static
     - match: Host(`torrentio.${dns_domain}`)
       kind: Rule
       services:
