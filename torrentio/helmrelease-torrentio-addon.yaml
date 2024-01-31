@@ -36,6 +36,8 @@ spec:
       strategy:
       rollingUpdate:
         unavailable: 1
+    annotations:
+      configmap.reloader.stakater.com/reload: "torrentio-env"
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
