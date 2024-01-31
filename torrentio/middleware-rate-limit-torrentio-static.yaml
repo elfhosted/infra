@@ -1,12 +1,11 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: rate-limit-torrentio
+  name: rate-limit-torrentio-static
   namespace: torrentio
 spec:
   # Intended to be suitable for public, casual, streaming use
-  # Non-static pages which might incur lookups
+  # Static pages which don't incur DB lookups
   rateLimit:
-    average: 1 # 1 request every 3 seconds
+    average: 1 # 1 per second per source IP
     burst: 10 # burst up to 10 at once
-    period: 3

@@ -1,0 +1,28 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno1:
+      addresses:
+        - 94.130.132.231/32
+        - 2a01:4f8:13b:370f::2/64
+      routes:
+        - on-link: true
+          to: 0.0.0.0/0
+          via: 94.130.132.193
+        - to: default
+          via: fe80::1
+      nameservers:
+        addresses:
+          - 185.12.64.1
+          - 185.12.64.2
+  vlans:
+      {{ cluster_nic }}:
+        id: 4000
+        link: {{ cluster_nic.split(".")[0] }}
+        mtu: 1400
+        addresses:
+          - {{ ansible_host }}/24
+        routes:
+          - to: "10.0.40.0/22"
+            via: "10.0.42.1"

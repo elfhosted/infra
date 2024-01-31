@@ -1,0 +1,66 @@
+- delegate_to: "{{ inventory_hostname_short}}-public.elfhosted.com"
+  block: 
+
+  - name: Copy installimage template to node in rescue mode
+    template:
+      src: installimage-elf.conf.j2
+      dest: /tmp/installimage.conf
+
+  - name: Reimage target
+    command: /root/.oldroot/nfs/install/installimage -c /tmp/installimage.conf -a
+
+  - name: Reboot target, wait for it to come back
+    reboot:
+      reboot_timeout: 300 # wait up to 5 min
+
+  - name: Confirm node is available
+    wait_for_connection: 
+      delay: 60
+
+  - name: Add VLAN 4000
+    ansible.builtin.blockinfile:
+      path: /etc/netplan/01-netcfg.yaml
+      block: |
+        # For the vSwitch
+          vlans:
+              {{ cluster_nic }}:
+                id: 4000
+                link: {{ cluster_nic.split(".")[0] }}
+                mtu: 1400
+                addresses:
+                  - {{ ansible_host }}/24
+                routes:
+                  - to: "10.0.40.0/22"
+                    via: "10.0.42.1"
+
+  - name: Update and upgrade apt packages
+    become: true
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+
+  - name: Reboot target, wait for it to come back
+    reboot:
+      reboot_timeout: 300 # wait up to 5 min
+
+  - name: Confirm node is available
+    wait_for_connection: 
+      delay: 60
+
+
+# - name: Set server's name to foo.example.com
+#   community.hrobot.server:
+#     hetzner_user: "{{ hetzner_webservice_username }}"
+#     hetzner_password: "{{ hetzner_webservice_password }}"
+#     server_number: "{{ hetzner_id }}"
+#     server_name: "{{ inventory_hostname_short}}.elfhosted.com"
+#   delegate_to: localhost
+#   become: no
+
+# - name: Enable a rescue system (64bit Linux) for the next boot
+#   community.hrobot.boot:
+#     hetzner_user: "{{ hetzner_webservice_username }}"
+#     hetzner_password: "{{ hetzner_webservice_password }}"
+#     rescue:
+#       os: linux
