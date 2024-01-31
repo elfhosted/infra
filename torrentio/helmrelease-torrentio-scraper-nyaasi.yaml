@@ -22,25 +22,10 @@ spec:
       app.elfhosted.com/class: torrentio-scraper  
     tolerations:
     - key: node-role.elfhosted.com/storage
-      operator: Exists           
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/storage
-              operator: Exists  
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/class
-                operator: In
-                values:
-                - torrentio-scraper
-            topologyKey: "kubernetes.io/hostname"    
+      operator: Exists      
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "torrentio-env"           
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
       tag: rolling@sha256:7fa0f622a8143a1acf60475811926d57f68d906e5a899faf77f8860579b505fe
