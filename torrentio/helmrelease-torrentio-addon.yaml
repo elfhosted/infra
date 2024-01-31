@@ -20,7 +20,7 @@ spec:
       nameOverride: torrentio-addon
     image:
       repository: ghcr.io/geek-cookbook/torrentio-addon
-      tag: rolling@sha256:56f3ede8821dcc8d7869b4e8f1b74e4beac6662ae3f8b83802df39ff0e5f4e62
+      tag: rolling@sha256:18cf516f53b76e7697a0cd87f1dc35c5c2a7b59991e499c470ba50c0b65de942
     securityContext:
       seccompProfile:
         type: RuntimeDefault
