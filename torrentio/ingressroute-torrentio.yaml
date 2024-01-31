@@ -17,7 +17,7 @@ spec:
           namespace: traefik
         - name: rate-limit-torrentio
     # static pages can be less rate-limited
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/configure`) || PathPrefix(`/realdebrid`) || PathPrefix(`/premiumize`) || PathPrefix(`/alldebrid`) || PathPrefix(`/debridlink`) PathPrefix(`/offcloud`) || PathPrefix(`/putio`)
+    - match: Host(`torrentio.${dns_domain}`) && (Path(`/`) || PathPrefix(`/configure`) || PathPrefix(`/realdebrid`) || PathPrefix(`/premiumize`) || PathPrefix(`/alldebrid`) || PathPrefix(`/debridlink`) PathPrefix(`/offcloud`) || PathPrefix(`/putio`))
       kind: Rule
       services:
         - name: torrentio-addon
