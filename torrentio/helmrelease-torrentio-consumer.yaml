@@ -58,7 +58,7 @@ spec:
       UDP_TRACKERS_ENABLED: true
     envFrom:
     - secretRef:
-        name: torrentio-env        
+        name: torrentio-consumer-env        
     # resources:
     ingress:
       main:
