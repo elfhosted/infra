@@ -65,7 +65,10 @@ spec:
         enabled: false
     service:
       main:
-        enabled: false # necessary for probes        
+        enabled: false # necessary for probes     
+      ports:
+        http:
+          port: 9999 # bogus to satisfy chart             
     # not sure how to health-check this yet
     probes:
       liveness:
