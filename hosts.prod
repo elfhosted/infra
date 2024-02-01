@@ -24,9 +24,11 @@ elf09        ansible_host=10.0.42.29 cluster_nic=eno1.4000 # 128GB
 elf10        ansible_host=10.0.42.30 cluster_nic=eno1.4000 # 128GB
 elf11        ansible_host=10.0.42.31 cluster_nic=eno1.4000 # 128GB
 elf12        ansible_host=10.0.42.32 cluster_nic=eno1.4000 # 128GB
-elf13        ansible_host=10.0.42.32 cluster_nic=eno1.4000 # 128GB
-elf14        ansible_host=10.0.42.32 cluster_nic=eno1.4000 # 128GB
-elf15        ansible_host=10.0.42.32 cluster_nic=eno1.4000 # 128GB
+elf13        ansible_host=10.0.42.33 cluster_nic=eno1.4000 # 128GB
+elf14        ansible_host=10.0.42.34 cluster_nic=eno1.4000 # 128GB
+elf15        ansible_host=10.0.42.35 cluster_nic=eno1.4000 # 128GB
+elf16        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
+
 
 orc01        ansible_host=10.0.42.41 cluster_nic=eno1.4000
 orc02        ansible_host=10.0.42.42 cluster_nic=eno1.4000
@@ -58,6 +60,8 @@ elf12-public.elfhosted.com
 elf13-public.elfhosted.com
 elf14-public.elfhosted.com
 elf15-public.elfhosted.com
+elf16-public.elfhosted.com
+
 
 [k3s_dwarves]
 dwarf01      ansible_host=10.0.42.81 cluster_nic=eno1.4000
