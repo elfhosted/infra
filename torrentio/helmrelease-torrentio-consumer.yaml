@@ -24,7 +24,7 @@ spec:
     - key: node-role.elfhosted.com/storage
       operator: Exists       
     controller:
-      replicas: 1
+      replicas: 10
       annotations:
         configmap.reloader.stakater.com/reload: "torrentio-env"   
     image:
