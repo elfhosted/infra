@@ -20,12 +20,9 @@ spec:
       nameOverride: torrentio-producer
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
-    tolerations:
-    - key: node-role.elfhosted.com/storage
-      operator: Exists       
     controller:
       annotations:
-        configmap.reloader.stakater.com/reload: "torrentio-env"   
+        secret.reloader.stakater.com/reload: "torrentio-env"   
     image:
       repository: ghcr.io/geek-cookbook/torrentio-producer
       tag: rolling@sha256:cb24d0a2f45cd2c852668543b756d04b8328f771fd23421522fee7d5cb7aa399

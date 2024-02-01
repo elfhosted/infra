@@ -20,13 +20,10 @@ spec:
       nameOverride: torrentio-consumer
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
-    tolerations:
-    - key: node-role.elfhosted.com/storage
-      operator: Exists       
     controller:
       replicas: 10
       annotations:
-        configmap.reloader.stakater.com/reload: "torrentio-env"   
+        configmap.reloader.stakater.com/reload: "torrentio-consumer-env"   
     image:
       repository: ghcr.io/geek-cookbook/torrentio-consumer
       tag: rolling@sha256:f8f30ba334d58114c7cd9a3d266f652bb45aabfa76901c3d2a051e082ced2e54
@@ -47,7 +44,6 @@ spec:
         type: emptyDir
         sizeLimit: 1Gi     
     env:
-      PORT: 7001
       RABBIT_URI: amqp://torrentio:torrentio@10.43.122.46:5672/?heartbeat=30 # use service IP for rabbit because of VPN
       QUEUE_NAME: ingested
       JOB_CONCURRENCY: 5
