@@ -57,6 +57,9 @@ spec:
     ingress:
       main:
         enabled: false
+    service:
+      main:
+        enabled: false # necessary for probes        
     # not sure how to health-check this yet
     probes:
       liveness:
