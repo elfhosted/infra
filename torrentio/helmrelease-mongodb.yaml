@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: mongodb
-      version: 14.7.x
+      version: 14.8.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
