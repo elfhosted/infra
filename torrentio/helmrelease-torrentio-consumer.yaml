@@ -63,12 +63,14 @@ spec:
     ingress:
       main:
         enabled: false
-    service:
-      main:
-        enabled: true # necessary for probes
-        ports:
-          http:
-            port: 7001
+    # not sure how to health-check this yet
+    probes:
+      liveness:
+        enabled: false
+      startup:
+        enabled: false
+      readiness:
+        enabled: false            
     addons:
       vpn:
         enabled: true # in case we ever need it
