@@ -7,6 +7,6 @@ spec:
   # Intended to be suitable for public, casual, streaming use
   # Non-static pages which might incur lookups
   rateLimit:
-    average: 1 # 1 request every seconds
-    burst: 10 # burst up to 10 at once
-    period: 1
+    average: 1  # 1 request every ..
+    period: 10s # 
+    burst: 10   # allow burst up to 10 at once
