@@ -48,7 +48,7 @@ spec:
         sizeLimit: 1Gi     
     env:
       PORT: 7001
-      RABBIT_URI: amqp://guest:guest@10.43.122.46:5672/?heartbeat=30 # use service IP for rabbit because of VPN
+      RABBIT_URI: amqp://torrentio:torrentio@10.43.122.46:5672/?heartbeat=30 # use service IP for rabbit because of VPN
       QUEUE_NAME: ingested
       JOB_CONCURRENCY: 5
       JOBS_ENABLED: true

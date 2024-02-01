@@ -48,8 +48,8 @@ spec:
     env:
       RabbitMqConfiguration__Host: rabbitmq
       RabbitMqConfiguration__QueueName: ingested
-      RabbitMqConfiguration__Username: torrentio-producer
-      RabbitMqConfiguration__Password: torrentio-producer      
+      RabbitMqConfiguration__Username: torrentio
+      RabbitMqConfiguration__Password: torrentio      
     envFrom:
     - secretRef:
         name: torrentio-env        
