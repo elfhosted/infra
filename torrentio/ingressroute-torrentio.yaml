@@ -6,7 +6,7 @@ metadata:
 spec:
   routes:
     # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
-    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`{something:.+}/stream/{else:.+}`)
+    - match: Host(`torrentio.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
       services:
         - name: torrentio-addon
