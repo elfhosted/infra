@@ -7,5 +7,6 @@ spec:
   # Intended to be suitable for public, casual, streaming use
   # Static pages which don't incur DB lookups
   rateLimit:
-    average: 10 # 10 per second per source IP
-    burst: 100 # burst up to 100 at once
+    average: 1  # 1 request every ..
+    period: 1s  # 
+    burst: 10   # allow burst up to 10 at once
