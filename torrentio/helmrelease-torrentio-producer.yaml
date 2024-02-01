@@ -46,7 +46,7 @@ spec:
         type: emptyDir
         sizeLimit: 1Gi     
     env:
-      RabbitMqConfiguration__Host: rabbitmq
+      RabbitMqConfiguration__Host: 10.43.122.46
       RabbitMqConfiguration__QueueName: ingested
       RabbitMqConfiguration__Username: torrentio
       RabbitMqConfiguration__Password: torrentio      
