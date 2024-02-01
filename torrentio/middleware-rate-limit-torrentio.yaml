@@ -9,4 +9,4 @@ spec:
   rateLimit:
     average: 1  # 1 request every ..
     period: 10s # 
-    burst: 10   # allow burst up to 10 at once
+    burst: 20   # allow burst up to 20 at once
