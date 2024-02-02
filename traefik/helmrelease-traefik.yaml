@@ -139,7 +139,7 @@ spec:
       # v3:
       # -- Enable traefik version 3
       #  enabled: false
-      plugins:
+      plugins: {}
         # seems to generate more load than it's worth
         # traefik-themepark:
         #   moduleName: github.com/packruler/traefik-themepark
