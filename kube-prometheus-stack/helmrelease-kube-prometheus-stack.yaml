@@ -859,14 +859,14 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
               - matchExpressions:
-                - key: node-role.elfhosted.com/lightweight
+                - key: node-role.kubernetes.io/control-plane
                   operator: Exists
 
         ## If specified, the pod's tolerations.
         ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
         ##
         tolerations:
-        - key: node-role.elfhosted.com/lightweight
+        - key: node-role.kubernetes.io/control-plane
           operator: Exists
         ## If specified, the pod's topology spread constraints.
         ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
