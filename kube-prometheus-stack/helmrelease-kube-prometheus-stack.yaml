@@ -859,14 +859,14 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
               - matchExpressions:
-                - key: node-role.kubernetes.io/control-plane
+                - key: node-role.elfhosted.com/lightweight
                   operator: Exists
 
         ## If specified, the pod's tolerations.
         ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
         ##
         tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: node-role.elfhosted.com/lightweight
           operator: Exists
         ## If specified, the pod's topology spread constraints.
         ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
@@ -992,11 +992,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists
                 
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
 
       ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
@@ -2098,7 +2098,7 @@ spec:
     prometheus-node-exporter:
 
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists   
       - key: node-role.${dns_domain}/storage
         operator: Exists      
@@ -2483,10 +2483,10 @@ spec:
               requiredDuringSchedulingIgnoredDuringExecution:
                 nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
+                  - key: node-role.elfhosted.com/lightweight
                     operator: Exists        
           tolerations:
-          - key: node-role.kubernetes.io/control-plane
+          - key: node-role.elfhosted.com/lightweight
             operator: Exists      
 
           ## SecurityContext holds pod-level security attributes and common container settings.
@@ -2734,7 +2734,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists    
 
       # ## Assign custom affinity rules to the prometheus operator
@@ -2745,7 +2745,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists
       dnsConfig: {}
         # nameservers:
@@ -3396,7 +3396,7 @@ spec:
         ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
         ##
         tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: node-role.elfhosted.com/lightweight
           operator: Exists
 
         ## If specified, the pod's topology spread constraints.
@@ -3671,7 +3671,7 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
               - matchExpressions:
-                - key: node-role.kubernetes.io/control-plane
+                - key: node-role.elfhosted.com/lightweight
                   operator: Exists
 
         ## The remote_read spec configuration for Prometheus.
