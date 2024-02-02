@@ -25,7 +25,7 @@ data:
         cd $TEMPDIR
         until gh repo clone geek-cookbook/elfhosted-tenants
         do
-            sleep $((0 + RANDOM % 10)); # avoid races 
+            sleep $((0 + RANDOM % 10)); # avoid races
         done
         git config --global --add safe.directory elfhosted-tenants
         cd elfhosted-tenants
@@ -42,10 +42,11 @@ data:
                 rm $ORDER
             fi
         done
-        
+
         # Iterate over tenants, regenerating or expiring helmreleases
-        for TENANTDIR in $(ls -1v tenants); do
-          if [[ ls $TENANTDIR/subscription-*.yaml || ls $TENANTDIR/order-*.yaml  ]]; then
+        for TENANT in $(ls -1v tenants); do
+          TENANTDIR="tenants/${TENANT}"
+          if [[ $(ls $TENANTDIR/subscription-*.yaml) || $(ls $TENANTDIR/order-*.yaml) ]]; then
               # Now merge the base with the helmrelease, and then merge with any orders, and add remaining subscriptions
               yq ea '. as $item ireduce ({}; . * $item )' \
                   ${TENANTDIR}/base-*.yaml $(ls -1v ${TENANTDIR}/order-*.yaml | sort -V) $(ls -1v ${TENANTDIR}/subscription-*.yaml | sort -V) \
@@ -73,6 +74,6 @@ data:
         #     sleep 7s
         #     # clean up
         #     cd /tmp
-        #     rm -rf $TEMPDIR        
+        #     rm -rf $TEMPDIR
         # fi
     done
