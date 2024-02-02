@@ -967,7 +967,7 @@ spec:
                 # pgp_num: '1024' # this should at least match `pg_num` so that all PGs are used
               deviceClass: ssd
           metadataServer:
-            activeCount: 2
+            activeCount: 1
             activeStandby: true
             resources:
               limits:
