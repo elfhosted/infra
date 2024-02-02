@@ -3705,23 +3705,23 @@ spec:
         storageSpec:
         # Using PersistentVolumeClaim
         #
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner"
-                resources:
-                  requests:
-                    storage: ${prometheus_storage}Gi
+          # ephemeral:
+          #   volumeClaimTemplate:
+          #     spec:
+          #       accessModes: [ "ReadWriteOnce" ]
+          #       storageClassName: "topolvm-provisioner"
+          #       resources:
+          #         requests:
+          #           storage: ${prometheus_storage}Gi
 
-          # volumeClaimTemplate:
-          #   spec:
-          #     storageClassName: topolvm-provisioner
-          #     accessModes: ["ReadWriteOnce"]
-          #     resources:
-          #       requests:
-          #         storage: ${prometheus_storage}Gi
-        #    selector: {}
+          volumeClaimTemplate:
+            spec:
+              storageClassName: topolvm-provisioner
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: ${prometheus_storage}Gi
+              selector: {}
 
         ## Using tmpfs volume
         ##
