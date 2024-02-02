@@ -19,7 +19,7 @@ spec:
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/geek-cookbook/tooling:focal-20230624@sha256:3a43385968a692fd1ec02bffdea62ddb888e48cb3b883332aa98b1747f4a532b
+            image: ghcr.io/geek-cookbook/tooling:focal-20240123@sha256:3f49f2ab73e53143a1c6c156b4d35342088437665f61e900509b0453df85e461
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
