@@ -19,10 +19,10 @@ spec:
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/geek-cookbook/tooling:focal-20240123@sha256:3f49f2ab73e53143a1c6c156b4d35342088437665f61e900509b0453df85e461
+            image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               privileged: false
               seccompProfile:
                 type: RuntimeDefault   
