@@ -140,9 +140,10 @@ spec:
       # -- Enable traefik version 3
       #  enabled: false
       plugins:
-        traefik-themepark:
-          moduleName: github.com/packruler/traefik-themepark
-          version: v1.3.1
+        # seems to generate more load than it's worth
+        # traefik-themepark:
+        #   moduleName: github.com/packruler/traefik-themepark
+        #   version: v1.3.1
 
       kubernetesGateway:
         # -- Enable traefik experimental GatewayClass CRD
