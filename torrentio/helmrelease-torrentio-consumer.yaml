@@ -25,8 +25,8 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "torrentio-consumer-env"   
     image:
-      repository: ghcr.io/geek-cookbook/torrentio-consumer
-      tag: rolling@sha256:f8f30ba334d58114c7cd9a3d266f652bb45aabfa76901c3d2a051e082ced2e54
+      repository: ghcr.io/geek-cookbook/selfhostio-consumer
+      tag: rolling@sha256:806f6fcdcdaadfcc14e6eac381d1c1729cad8021792da3ba3db9dfa67d58cd6c
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -43,6 +43,32 @@ spec:
         mountPath: /tmp
         type: emptyDir
         sizeLimit: 1Gi     
+    npm: 
+      enabled: true
+      type: custom
+      mountPath: /.npm
+      volumeSpec:
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes: [ "ReadWriteOnce" ]
+              storageClassName: "topolvm-provisioner-thin"
+              resources:
+                requests:
+                  storage: 1Gi   
+    pm2: 
+      enabled: true
+      type: custom
+      mountPath: /.pm2
+      volumeSpec:
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes: [ "ReadWriteOnce" ]
+              storageClassName: "topolvm-provisioner-thin"
+              resources:
+                requests:
+                  storage: 1Gi           
     env:
       RABBIT_URI: amqp://torrentio:torrentio@10.43.122.46:5672/?heartbeat=30 # use service IP for rabbit because of VPN
       QUEUE_NAME: ingested
