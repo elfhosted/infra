@@ -13,3 +13,5 @@ spec:
   resources:
     - kind: GitRepository
       name: tenants
+    - kind: GitRepository
+      name: tenants-shard-a      
