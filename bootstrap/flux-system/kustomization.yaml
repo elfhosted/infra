@@ -4,8 +4,8 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - shard-a
-patchesStrategicMerge:
-  - flux-system-patch.yaml
+# patchesStrategicMerge:
+#   - flux-system-patch.yaml
 patches:
   - target:
       kind: Deployment
