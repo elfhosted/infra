@@ -15,7 +15,7 @@ patches:
       kind: all
       metadata:
           name: all
-      : delete      
+      $patch: delete      
   - target:
       labelSelector: "app.kubernetes.io/component=notification-controller"
     patch: |
@@ -23,7 +23,7 @@ patches:
       kind: all
       metadata:
         name: all
-      : delete      
+      $patch: delete      
   - target:
       kind: Deployment
       name: (image-reflector-controller|image-automation-controller)
@@ -32,7 +32,7 @@ patches:
       kind: Deployment
       metadata:
         name: all
-      : delete      
+      $patch: delete      
   - target:
       kind: Service
       name: source-controller
