@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  name: tenants-shard-a
+  name: tenants-shard-n
   namespace: flux-system
   labels:
     sharding.fluxcd.io/key: shard-n
