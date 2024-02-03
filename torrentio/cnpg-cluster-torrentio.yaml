@@ -16,7 +16,7 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: ceph-block-ssd
-    size: 5Gi
+    size: 10Gi
 
   superuserSecret:
       name: cnpg-postgres-credentials
