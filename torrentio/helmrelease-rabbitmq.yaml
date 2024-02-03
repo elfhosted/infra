@@ -966,7 +966,7 @@ spec:
     persistence:
       ## @param persistence.enabled Enable RabbitMQ data persistence using PVC
       ##
-      enabled: false
+      enabled: true
       ## @param persistence.storageClass PVC Storage Class for RabbitMQ data volume
       ## If defined, storageClassName: <storageClass>
       ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -974,7 +974,7 @@ spec:
       ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
       ##   GKE, AWS & OpenStack)
       ##
-      storageClass: ""
+      storageClass: "ceph-block-ssd"
       ## @param persistence.selector Selector to match an existing Persistent Volume
       ## selector:
       ##   matchLabels:
@@ -1001,7 +1001,7 @@ spec:
       ## @param persistence.size PVC Storage Request for RabbitMQ data volume
       ## If you change this value, you might have to adjust `rabbitmq.diskFreeLimit` as well
       ##
-      size: 8Gi
+      size: 1Gi
       ## @param persistence.annotations Persistence annotations. Evaluated as a template
       ## Example:
       ## annotations:
