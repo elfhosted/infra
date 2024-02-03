@@ -4,6 +4,31 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - shard-a
+- shard-b
+- shard-c
+- shard-d
+- shard-e
+- shard-f
+- shard-g
+- shard-h
+- shard-i
+- shard-j
+- shard-k
+- shard-l
+- shard-m
+- shard-n
+- shard-o
+- shard-p
+- shard-q
+- shard-r
+- shard-s
+- shard-t
+- shard-u
+- shard-v
+- shard-w
+- shard-x
+- shard-y
+- shard-z
 # patchesStrategicMerge:
 #   - flux-system-patch.yaml
 patches:

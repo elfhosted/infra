@@ -5,7 +5,7 @@ metadata:
   name: tenants-shard-a
   namespace: flux-system
   labels:
-    sharding.fluxcd.io/key: shard-a
+    sharding.fluxcd.io/key: shard-r
 spec:
   interval: 1m0s
   ref:
