@@ -28,39 +28,8 @@ data:
     git config --global --add safe.directory elfhosted-tenants
     cd elfhosted-tenants
 
-    TIMESTAMP_NOW=$(date +%s)
+    ./scripts-tenant-cleaner.sh
 
-    # Clear all expired orders
-    for ORDER in $(find ./tenants/ -name order-*.yaml); do
-        TIMESTAMP_ORDER=$(grep webhook_received_timestamp $ORDER | awk '{print $2}')
-        TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_ORDER))
-        if [[ $TIMESTAMP_DIFF -gt 86400 ]]; then # 86400s = 1 days
-            echo "expiring $ORDER ($TIMESTAMP_DIFF sec old)"
-            rm $ORDER
-        fi
-    done
-    # We can take this away on a future run, we no longer us this naming convention
-    for ORDER in $(find ./tenants/ -name subscription-onetime-*.yaml); do
-        TIMESTAMP_ORDER=$(grep webhook_received_timestamp $ORDER | awk '{print $2}')
-        TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_ORDER))
-        if [[ $TIMESTAMP_DIFF -gt 86400 ]]; then # 86400s = 1 days
-            echo "expiring $ORDER ($TIMESTAMP_DIFF sec old)"
-            rm $ORDER
-        fi
-    done
-
-    # Iterate over tenants, regenerating or expiring helmreleases
-    for TENANT in $(ls -1v tenants); do
-      TENANTDIR="tenants/${TENANT}"
-      if [[ $(ls $TENANTDIR/subscription-*.yaml 2> /dev/null) || $(ls $TENANTDIR/order-*.yaml 2> /dev/null) ]]; then
-          # Now merge the base with the helmrelease, and then merge with any orders, and add remaining subscriptions
-          yq ea '. as $item ireduce ({}; . * $item )' \
-              ${TENANTDIR}/base-*.yaml $(ls -1v ${TENANTDIR}/order-*.yaml | sort -V) $(ls -1v ${TENANTDIR}/subscription-*.yaml | sort -V) \
-              > ${TENANTDIR}/helmrelease.yaml
-      else
-        echo "# no active orders or subscriptions" > ${TENANTDIR}/helmrelease.yaml
-      fi
-    done
 
     git add .
     git commit -m "Tenant cleaner cleans tenants!" .
