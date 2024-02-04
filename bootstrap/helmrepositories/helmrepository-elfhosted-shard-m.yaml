@@ -1,0 +1,11 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: elfhosted-shard-m
+  namespace: flux-system
+  labels:
+    sharding.fluxcd.io/key: shard-m
+spec:
+  interval: 15m
+  url: http://chartmuseum.chartmuseum:8080
