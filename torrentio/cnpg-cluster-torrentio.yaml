@@ -27,3 +27,22 @@ spec:
       owner: torrentio
       secret:
         name: app-secret
+
+  backup:
+      # Volume snapshot backups
+      volumeSnapshot:
+        className: ceph-block
+      # WAL archive
+      barmanObjectStore:        
+        destinationPath: s3://cpng/
+        endpointURL: "http://minio.minio:9000"
+        s3Credentials:
+          accessKeyId:
+            name: cnpg-minio-credentials
+            key: ACCESS_KEY_ID
+          secretAccessKey:
+            name: cngp-minio-credentials
+            key: ACCESS_SECRET_KEY
+        wal:
+          compression: gzip
+          maxParallel: 2      
