@@ -2193,7 +2193,7 @@ spec:
     metrics:
       ## @param metrics.enabled Enable using a sidecar Prometheus exporter
       ##
-      enabled: false
+      enabled: true
       ## Bitnami MongoDB(&reg;) Promtheus Exporter image
       ## ref: https://hub.docker.com/r/bitnami/mongodb-exporter/tags/
       ## @param metrics.image.registry [default: REGISTRY_NAME] MongoDB(&reg;) Prometheus exporter image registry
@@ -2383,7 +2383,7 @@ spec:
       serviceMonitor:
         ## @param metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using Prometheus Operator
         ##
-        enabled: false
+        enabled: true
         ## @param metrics.serviceMonitor.namespace Namespace which Prometheus is running in
         ##
         namespace: ""
@@ -2421,7 +2421,7 @@ spec:
       prometheusRule:
         ## @param metrics.prometheusRule.enabled Set this to true to create prometheusRules for Prometheus operator
         ##
-        enabled: false
+        enabled: true
         ## @param metrics.prometheusRule.additionalLabels Additional labels that can be used so prometheusRules will be discovered by Prometheus
         ##
         additionalLabels: {}
