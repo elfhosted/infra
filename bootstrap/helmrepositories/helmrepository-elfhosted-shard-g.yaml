@@ -2,10 +2,10 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: elfhosted-shard-a
+  name: elfhosted-shard-g
   namespace: flux-system
   labels:
-    sharding.fluxcd.io/key: shard-a
+    sharding.fluxcd.io/key: shard-g
 spec:
   interval: 15m
   url: http://chartmuseum.chartmuseum:8080

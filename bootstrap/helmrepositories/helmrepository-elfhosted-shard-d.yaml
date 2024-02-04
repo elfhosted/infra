@@ -5,7 +5,7 @@ metadata:
   name: elfhosted-shard-d
   namespace: flux-system
   labels:
-    sharding.fluxcd.io/key: shard-d  
+    sharding.fluxcd.io/key: shard-d
 spec:
-  interval: 1m
+  interval: 15m
   url: http://chartmuseum.chartmuseum:8080
