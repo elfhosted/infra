@@ -370,6 +370,14 @@ spec:
           actions:
           - 's3:*'   
 
+    - name: cnpg
+      statements:
+        - resources:
+          - 'arn:aws:s3:::cnpg/*'
+          - 'arn:aws:s3:::cnpg'
+          actions:
+          - 's3:*'   
+
     - name: goldilocks-ro
       statements:
         - resources:
@@ -411,6 +419,10 @@ spec:
         existingSecret: thanos-credentials        
         existingSecretKey: password
         policy: thanos    
+      - accessKey: cnpg
+        existingSecret: cnpg-credentials        
+        existingSecretKey: password
+        policy: cnpg            
       - accessKey: goldilocks-rw
         existingSecret: goldilocks-rw-credentials        
         existingSecretKey: password
@@ -514,6 +526,13 @@ spec:
         # set objectlocking for
         # bucket [true|false] NOTE: versioning is enabled by default if you use locking
         objectlocking: false    
+      - name: cnpg
+        policy: none
+        purge: false
+        versioning: false
+        # set objectlocking for
+        # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+        objectlocking: false            
       - name: goldilocks
         policy: none
         purge: false
