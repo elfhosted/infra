@@ -1172,7 +1172,7 @@ spec:
     ingress:
       ## @param ingress.enabled Enable ingress resource for Management console
       ##
-      enabled: false
+      enabled: true
 
       ## @param ingress.path Path for the default host. You may need to set this to '/*' in order to use this with ALB ingress controllers.
       ##
@@ -1183,7 +1183,7 @@ spec:
       pathType: ImplementationSpecific
       ## @param ingress.hostname Default host for the ingress resource
       ##
-      hostname: rabbitmq.local
+      hostname: rabbitmq.infra.${dns_domain}
       ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
       ## For a full list of possible ingress annotations, please see
       ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
