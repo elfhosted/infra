@@ -1203,36 +1203,41 @@ spec:
         #   replacement: $1
         #   action: replace
 
-      # grafana.ini:
-      #   auth.basic:
-      #     enabled: true # see https://github.com/prometheus-community/helm-charts/issues/1806 
-      #   # paths:
-      #   #   data: /var/lib/grafana/data
-      #   #   logs: /var/log/grafana
-      #   #   plugins: /var/lib/grafana/plugins
-      #   #   provisioning: /etc/grafana/provisioning
-      #   # analytics:
-      #   #   check_for_updates: true
-      #   # log:
-      #   #   mode: console
-      #   #   filters: oauth.generic_oauth:debug
-      #   # grafana_net:
-      #   #   url: https://grafana.net
-      #   server:
-      #     enforce_domain: true
-      #     domain: grafana.infra.${dns_domain}
-      #     root_url: https://grafana.infra.${dns_domain}      
-      #   auth.generic_oauth:
-      #     enabled: true
-      #     allow_sign_up: false
-      #     name: authentik
-      #     auto_login: false
-      #     client_id: grafana
-      #     scopes:  openid profile email groups
-      #     role_attribute_path: contains(groups[*], 'admin-grafana') && 'Admin' || contains(groups[*], 'editor-grafana') && 'Editor' || 'Viewer'
-      #     api_url:  http://authentik.authentik.svc.cluster.local/application/o/userinfo/
-      #     token_url: https://authentik.infra.${dns_domain}/application/o/authorize/
-      #     auth_url: https://authentik.infra.${dns_domain}/application/o/authorize/
+      plugins:
+        - digrich-bubblechart-panel
+        - grafana-clock-panel
+        - grafana-piechart-panel
+        
+      grafana.ini:
+        auth.basic:
+          enabled: true # see https://github.com/prometheus-community/helm-charts/issues/1806 
+        # paths:
+        #   data: /var/lib/grafana/data
+        #   logs: /var/log/grafana
+        #   plugins: /var/lib/grafana/plugins
+        #   provisioning: /etc/grafana/provisioning
+        # analytics:
+        #   check_for_updates: true
+        # log:
+        #   mode: console
+        #   filters: oauth.generic_oauth:debug
+        # grafana_net:
+        #   url: https://grafana.net
+        server:
+          enforce_domain: true
+          domain: grafana.infra.${dns_domain}
+          root_url: https://grafana.infra.${dns_domain}      
+        auth.generic_oauth:
+          enabled: true
+          allow_sign_up: false
+          name: authentik
+          auto_login: false
+          client_id: grafana
+          scopes:  openid profile email groups
+          role_attribute_path: contains(groups[*], 'admin-grafana') && 'Admin' || contains(groups[*], 'editor-grafana') && 'Editor' || 'Viewer'
+          api_url:  http://authentik.authentik.svc.cluster.local/application/o/userinfo/
+          token_url: https://authentik.infra.${dns_domain}/application/o/authorize/
+          auth_url: https://authentik.infra.${dns_domain}/application/o/authorize/
 
 
     ## Flag to disable all the kubernetes component scrapers
