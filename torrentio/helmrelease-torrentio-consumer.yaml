@@ -21,12 +21,13 @@ spec:
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
     controller:
-      replicas: 10
+      replicas: 1
       annotations:
-        configmap.reloader.stakater.com/reload: "torrentio-consumer-env"   
+        configmap.reloader.stakater.com/reload: "torrentio-env"   
+        secret.reloader.stakater.com/reload: "torrentio-env"
     image:
       repository: ghcr.io/geek-cookbook/selfhostio-consumer
-      tag: rolling@sha256:806f6fcdcdaadfcc14e6eac381d1c1729cad8021792da3ba3db9dfa67d58cd6c
+      tag: rolling@sha256:83cd5c39199afa51e4e5a005215cc0858dc9fddf85a0e8ee85bf61d018fcb785
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -42,45 +43,12 @@ spec:
         enabled: true
         mountPath: /tmp
         type: emptyDir
-        sizeLimit: 1Gi     
-      npm: 
-        enabled: true
-        type: custom
-        mountPath: /.npm
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
-      pm2: 
-        enabled: true
-        type: custom
-        mountPath: /.pm2
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi           
-    env:
-      RABBIT_URI: amqp://torrentio:torrentio@10.43.73.86:5672/?heartbeat=30 # use service IP for rabbit because of VPN
-      QUEUE_NAME: ingested
-      JOB_CONCURRENCY: 5
-      JOBS_ENABLED: true
-      ENABLE_SYNC: true
-      MAX_SINGLE_TORRENT_CONNECTIONS: 10
-      TORRENT_TIMEOUT: 30000
-      UDP_TRACKERS_ENABLED: true
+        sizeLimit: 1Gi       
     envFrom:
     - secretRef:
-        name: torrentio-consumer-env        
+        name: torrentio-env 
+    - configMapRef:
+        name: torrentio-env    
     # resources:
     ingress:
       main:

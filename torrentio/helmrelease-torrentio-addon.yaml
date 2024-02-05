@@ -20,7 +20,7 @@ spec:
       nameOverride: torrentio-addon
     image:
       repository: ghcr.io/geek-cookbook/selfhostio-addon
-      tag: rolling@sha256:4bd35e10f6b9e0b7b8e21c33d9ac116d4976885e147175c3e911a8a206a4a072
+      tag: rolling@sha256:39210805352229d3e4f7ab54c7d46eb352403d37eebebd5411e3b34f225b879a
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -98,7 +98,10 @@ spec:
       TENANT_NAME: Public
     envFrom:
     - secretRef:
-        name: torrentio-env     
+        name: torrentio-env 
+    - configMapRef:
+        name: torrentio-env 
+
     # resources:
     ingress:
       main:

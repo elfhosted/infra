@@ -178,14 +178,14 @@ spec:
       ## @param auth.enabled Enable authentication
       ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
       ##
-      enabled: false
+      enabled: true
       ## @param auth.rootUser MongoDB(&reg;) root user
       ##
-      rootUser: root
+      rootUser: mongo
       ## @param auth.rootPassword MongoDB(&reg;) root password
       ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mongodb#setting-the-root-user-and-password-on-first-run
       ##
-      rootPassword: ""
+      rootPassword: "mongo"
       ## MongoDB(&reg;) custom users and databases
       ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mongodb#creating-a-user-and-database-on-first-run
       ## @param auth.usernames List of custom users to be created during the initialization
