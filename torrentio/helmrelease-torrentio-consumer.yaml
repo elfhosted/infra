@@ -66,7 +66,12 @@ spec:
       startup:
         enabled: false
       readiness:
-        enabled: false            
+        enabled: false       
+    initContainers:
+    - name: stagger-startup
+      image: alpine:latest
+      command:
+      - sleep $((0 + RANDOM % 300)) # stagger startup when scaling consumers      
     addons:
       vpn:
         enabled: true # in case we ever need it
