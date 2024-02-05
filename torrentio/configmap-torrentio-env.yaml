@@ -28,7 +28,7 @@ data:
   JOBS_ENABLED: 'true'
   MAX_SINGLE_TORRENT_CONNECTIONS: "10"
   TORRENT_TIMEOUT: "30000"
-  UDP_TRACKERS_ENABLED: true
+  UDP_TRACKERS_ENABLED: "true"
   AUTO_CREATE_AND_APPLY_MIGRATIONS: 'false' # Fix for #66 - toggle on for development
 
   # Producer
