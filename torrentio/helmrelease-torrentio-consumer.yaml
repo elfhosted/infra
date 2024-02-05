@@ -26,7 +26,7 @@ spec:
         configmap.reloader.stakater.com/reload: "torrentio-env"   
         secret.reloader.stakater.com/reload: "torrentio-env"
     image:
-      repository: ghcr.io/geek-cookbook/selfhostio-consumer
+      repository: ghcr.io/geek-cookbook/knightclawler-consumer
       tag: rolling@sha256:83cd5c39199afa51e4e5a005215cc0858dc9fddf85a0e8ee85bf61d018fcb785
     securityContext:
       seccompProfile:

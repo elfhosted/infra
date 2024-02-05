@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: torrentio-addon
     image:
-      repository: ghcr.io/geek-cookbook/selfhostio-addon
+      repository: ghcr.io/geek-cookbook/knightcrawler-addon
       tag: rolling@sha256:39210805352229d3e4f7ab54c7d46eb352403d37eebebd5411e3b34f225b879a
     securityContext:
       seccompProfile:
