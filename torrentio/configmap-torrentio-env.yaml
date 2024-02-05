@@ -19,7 +19,7 @@ data:
   MONGO_INITDB_ROOT_PASSWORD: mongo
 
   # Addon
-  DEBUG_MODE: false
+  DEBUG_MODE: "false"
 
   # Consumer
   RABBIT_URI: amqp://torrentio:torrentio@10.43.73.86:5672/?heartbeat=30
