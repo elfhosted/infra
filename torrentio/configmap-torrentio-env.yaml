@@ -8,7 +8,9 @@ data:
   POSTGRES_HOST: "10.43.74.255"
   POSTGRES_PORT: "5432"
   POSTGRES_USER: torrentio
+  POSTGRES_USERNAME: torrentio
   # POSTGRES_PASSWORD  - set in secret
+  POSTGRES_DATABASE: torrentio
   POSTGRES_DB: torrentio
 
   # MongoDB
