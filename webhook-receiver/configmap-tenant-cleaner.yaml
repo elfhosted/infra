@@ -28,7 +28,7 @@ data:
     git config --global --add safe.directory elfhosted-tenants
     cd elfhosted-tenants
 
-    ./scripts-tenant-cleaner.sh
+    ./scripts/tenant-cleaner.sh
 
 
     git add .
