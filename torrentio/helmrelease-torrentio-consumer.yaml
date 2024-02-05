@@ -21,10 +21,13 @@ spec:
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
     controller:
-      replicas: 30
+      replicas: 6
       annotations:
         configmap.reloader.stakater.com/reload: "torrentio-env"   
         secret.reloader.stakater.com/reload: "torrentio-env"
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1        
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-consumer
       tag: rolling@sha256:e50452c9157c5b70d357398ec363cf4de2342cea510dcc65530b3b7979edb8af
@@ -48,30 +51,17 @@ spec:
     - secretRef:
         name: torrentio-env 
     - configMapRef:
-        name: torrentio-env    
+        name: torrentio-env
     # resources:
     ingress:
       main:
         enabled: false
     service:
       main:
-        enabled: false # necessary for probes     
+        enabled: true # necessary for probes     
       ports:
         http:
-          port: 9999 # bogus to satisfy chart             
-    # not sure how to health-check this yet
-    probes:
-      liveness:
-        enabled: false
-      startup:
-        enabled: false
-      readiness:
-        enabled: false       
-    initContainers:
-    - name: stagger-startup
-      image: alpine:latest
-      command:
-      - sleep $((0 + RANDOM % 300)) # stagger startup when scaling consumers      
+          port: 7001 # bogus to satisfy chart                
     addons:
       vpn:
         enabled: true # in case we ever need it

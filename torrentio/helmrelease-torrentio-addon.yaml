@@ -33,7 +33,7 @@ spec:
     automountServiceAccountToken: false
     controller:
       replicas: 2
-      strategy:
+      strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
       annotations:
@@ -92,7 +92,6 @@ spec:
                     storage: 1Gi                          
     env:
       PORT: 7001
-      ENABLE_SYNC: true
       PUID: 10001
       PGID: 10001
       TENANT_NAME: Public
