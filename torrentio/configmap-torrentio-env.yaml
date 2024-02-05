@@ -5,15 +5,15 @@ metadata:
   namespace: torrentio
 data:
   # PostgreSQL
-  POSTGRES_HOST: 10.43.74.255
-  POSTGRES_PORT: 5432
+  POSTGRES_HOST: "10.43.74.255"
+  POSTGRES_PORT: "5432"
   POSTGRES_USER: torrentio
   # POSTGRES_PASSWORD  - set in secret
   POSTGRES_DB: torrentio
 
   # MongoDB
-  MONGODB_HOST: 10.43.242.207
-  MONGODB_PORT: 27017
+  MONGODB_HOST: "10.43.242.207"
+  MONGODB_PORT: "27017"
   MONGODB_DB: torrentio
   MONGO_INITDB_ROOT_USERNAME: mongo
   MONGO_INITDB_ROOT_PASSWORD: mongo
@@ -24,20 +24,20 @@ data:
   # Consumer
   RABBIT_URI: amqp://torrentio:torrentio@10.43.73.86:5672/?heartbeat=30
   QUEUE_NAME: ingested
-  JOB_CONCURRENCY: 20
+  JOB_CONCURRENCY: "20"
   JOBS_ENABLED: 'true'
-  MAX_SINGLE_TORRENT_CONNECTIONS: 10
-  TORRENT_TIMEOUT: 30000
+  MAX_SINGLE_TORRENT_CONNECTIONS: "10"
+  TORRENT_TIMEOUT: "30000"
   UDP_TRACKERS_ENABLED: true
   AUTO_CREATE_AND_APPLY_MIGRATIONS: 'false' # Fix for #66 - toggle on for development
 
   # Producer
-  RabbitMqConfiguration__Host: 10.43.73.86
+  RabbitMqConfiguration__Host: "10.43.73.86"
   RabbitMqConfiguration__QueueName: ingested
   RabbitMqConfiguration__Username: torrentio
   RabbitMqConfiguration__Password: torrentio
   RabbitMqConfiguration__Durable: 'true'
-  RabbitMqConfiguration__MaxQueueSize: 0
-  RabbitMqConfiguration__MaxPublishBatchSize: 500
-  RabbitMqConfiguration__PublishIntervalInSeconds: 10
+  RabbitMqConfiguration__MaxQueueSize: "0"
+  RabbitMqConfiguration__MaxPublishBatchSize: "500"
+  RabbitMqConfiguration__PublishIntervalInSeconds: "10"
   # GithubSettings__PAT - set in secret
