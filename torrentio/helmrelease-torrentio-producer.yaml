@@ -22,10 +22,11 @@ spec:
       app.elfhosted.com/class: torrentio-scraper  
     controller:
       annotations:
-        secret.reloader.stakater.com/reload: "torrentio-env"   
+        configmap.reloader.stakater.com/reload: "torrentio-env"   
+        secret.reloader.stakater.com/reload: "torrentio-env"
     image:
       repository: ghcr.io/geek-cookbook/selfhostio-producer
-      tag: rolling@sha256:318914cd7605d7ce0cf474282c278adf6bc435acfbd7761b1a0c4cb7ce65db69
+      tag: rolling@sha256:0b081a3daa697917434bf148d9f9030ee25dc768c3bd86fd34c19053adb99c1b
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -42,14 +43,11 @@ spec:
         mountPath: /tmp
         type: emptyDir
         sizeLimit: 1Gi     
-    env:
-      RabbitMqConfiguration__Host: 10.43.73.86
-      RabbitMqConfiguration__QueueName: ingested
-      RabbitMqConfiguration__Username: torrentio
-      RabbitMqConfiguration__Password: torrentio      
     envFrom:
     - secretRef:
-        name: torrentio-env        
+        name: torrentio-env 
+    - configMapRef:
+        name: torrentio-env     
     # resources:
     ingress:
       main:
