@@ -21,13 +21,13 @@ spec:
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
     controller:
-      replicas: 1
+      replicas: 30
       annotations:
         configmap.reloader.stakater.com/reload: "torrentio-env"   
         secret.reloader.stakater.com/reload: "torrentio-env"
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-consumer
-      tag: rolling@sha256:83cd5c39199afa51e4e5a005215cc0858dc9fddf85a0e8ee85bf61d018fcb785
+      tag: rolling@sha256:e50452c9157c5b70d357398ec363cf4de2342cea510dcc65530b3b7979edb8af
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -66,7 +66,12 @@ spec:
       startup:
         enabled: false
       readiness:
-        enabled: false            
+        enabled: false       
+    initContainers:
+    - name: stagger-startup
+      image: alpine:latest
+      command:
+      - sleep $((0 + RANDOM % 300)) # stagger startup when scaling consumers      
     addons:
       vpn:
         enabled: true # in case we ever need it
