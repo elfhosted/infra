@@ -41,7 +41,7 @@ spec:
             name: cnpg-minio-credentials
             key: ACCESS_KEY_ID
           secretAccessKey:
-            name: cngp-minio-credentials
+            name: cnpg-minio-credentials
             key: ACCESS_SECRET_KEY
         wal:
           compression: gzip
