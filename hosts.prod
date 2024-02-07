@@ -62,6 +62,11 @@ elf14-public.elfhosted.com
 elf15-public.elfhosted.com
 elf16-public.elfhosted.com
 
+goblin04-public.elfhosted.com
+goblin05-public.elfhosted.com
+goblin06-public.elfhosted.com
+
+
 
 [k3s_dwarves]
 dwarf01      ansible_host=10.0.42.81 cluster_nic=eno1.4000
@@ -77,6 +82,14 @@ dwarf10      ansible_host=10.0.42.90 cluster_nic=eno1.4000
 goblin01     ansible_host=10.0.42.61 cluster_nic=eno1.4000
 goblin02     ansible_host=10.0.42.62 cluster_nic=eno1.4000
 goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
+
+goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
+goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
+goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
+goblin04     ansible_host=10.0.42.64 cluster_nic=eth1.4000
+goblin05     ansible_host=10.0.42.65 cluster_nic=eth1.4000
+goblin06     ansible_host=10.0.42.66 cluster_nic=eth1.4000
+
 
 [node_role_download]
 orc01

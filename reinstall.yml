@@ -1,7 +1,7 @@
 ---
 
 
-- hosts: k3s_agents
+- hosts: k3s_agents,k3s_dwarves
   gather_facts: no
   become: yes
 

@@ -5,6 +5,13 @@
     template:
       src: installimage-elf.conf.j2
       dest: /tmp/installimage.conf
+    when: "inventory_hostname in groups['k3s_agents']"  
+
+  - name: Copy installimage template to node in rescue mode
+    template:
+      src: installimage-osd.conf.j2
+      dest: /tmp/installimage.conf
+    when: "inventory_hostname in groups['k3s_dwarves']"  
 
   - name: Reimage target
     command: /root/.oldroot/nfs/install/installimage -c /tmp/installimage.conf -a
