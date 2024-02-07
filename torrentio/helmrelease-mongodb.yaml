@@ -168,7 +168,7 @@ spec:
     schedulerName: ""
     ## @param architecture MongoDB(&reg;) architecture (`standalone` or `replicaset`)
     ##
-    architecture: replicaset
+    architecture: standalone
     ## @param useStatefulSet Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)
     ##
     useStatefulSet: true
