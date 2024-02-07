@@ -1001,7 +1001,7 @@ spec:
       ## @param persistence.size PVC Storage Request for RabbitMQ data volume
       ## If you change this value, you might have to adjust `rabbitmq.diskFreeLimit` as well
       ##
-      size: 1Gi
+      size: 10Gi
       ## @param persistence.annotations Persistence annotations. Evaluated as a template
       ## Example:
       ## annotations:
