@@ -27,3 +27,5 @@ node-taint:
 tls-san: 
   - "{{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}"
   - "{{ k8s_ha_api_ip }}"
+etcd-arg:
+- "quota-backend-bytes=8589934592" # 8GB
