@@ -58,10 +58,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: true # necessary for probes     
-        ports:
-          http:
-            port: 7001 # bogus to satisfy chart                
+        enabled: false
     addons:
       vpn:
         enabled: false # in case we ever need it
