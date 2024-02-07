@@ -168,10 +168,10 @@ spec:
     schedulerName: ""
     ## @param architecture MongoDB(&reg;) architecture (`standalone` or `replicaset`)
     ##
-    architecture: standalone
+    architecture: replicaset
     ## @param useStatefulSet Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)
     ##
-    useStatefulSet: false
+    useStatefulSet: true
     ## MongoDB(&reg;) Authentication parameters
     ##
     auth:
@@ -469,7 +469,7 @@ spec:
     ## @param replicaCount Number of MongoDB(&reg;) nodes (only when `architecture=replicaset`)
     ## Ignored when mongodb.architecture=standalone
     ##
-    replicaCount: 2
+    replicaCount: 3
     ## @param updateStrategy.type Strategy to use to replace existing MongoDB(&reg;) pods. When architecture=standalone and useStatefulSet=false,
     ## this parameter will be applied on a deployment object. In other case it will be applied on a statefulset object
     ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
@@ -494,7 +494,7 @@ spec:
     ## @param podAntiAffinityPreset MongoDB(&reg;) Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
     ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
     ##
-    podAntiAffinityPreset: soft
+    podAntiAffinityPreset: hard
     ## Node affinity preset
     ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
     ##
@@ -742,7 +742,7 @@ spec:
     pdb:
       ## @param pdb.create Enable/disable a Pod Disruption Budget creation for MongoDB(&reg;) pod(s)
       ##
-      create: false
+      create: true
       ## @param pdb.minAvailable Minimum number/percentage of MongoDB(&reg;) pods that must still be available after the eviction
       ##
       minAvailable: 1
@@ -778,7 +778,7 @@ spec:
       ## e.g:
       ## clusterIP: None
       ##
-      clusterIP: ""
+      clusterIP: "10.43.0.3"
       ## @param service.externalIPs Specify the externalIP value ClusterIP service type (only for standalone architecture)
       ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
       ##
@@ -1101,7 +1101,7 @@ spec:
     persistence:
       ## @param persistence.enabled Enable MongoDB(&reg;) data persistence using PVC
       ##
-      enabled: false # we are just used for caching, no need for storage
+      enabled: true # we are just used for caching, no need for storage
       ## @param persistence.name Name of the PVC and mounted volume
       ##
       name: "datadir"
@@ -1124,7 +1124,7 @@ spec:
       ## If undefined (the default) or set to null, no storageClassName spec is
       ## set, choosing the default provisioner.
       ##
-      storageClass: ""
+      storageClass: "ceph-block-ssd"
       ## @param persistence.accessModes PV Access Mode
       ##
       accessModes:
