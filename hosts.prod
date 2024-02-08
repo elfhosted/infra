@@ -28,6 +28,7 @@ elf13        ansible_host=10.0.42.33 cluster_nic=eno1.4000 # 128GB
 elf14        ansible_host=10.0.42.34 cluster_nic=eno1.4000 # 128GB
 elf15        ansible_host=10.0.42.35 cluster_nic=eno1.4000 # 128GB
 elf16        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
+elf17        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
 
 
 orc01        ansible_host=10.0.42.41 cluster_nic=eno1.4000
@@ -61,6 +62,7 @@ elf13-public.elfhosted.com
 elf14-public.elfhosted.com
 elf15-public.elfhosted.com
 elf16-public.elfhosted.com
+elf17-public.elfhosted.com
 
 goblin04-public.elfhosted.com
 goblin05-public.elfhosted.com
@@ -86,9 +88,9 @@ goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
 goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
 goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
 goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
-goblin04     ansible_host=10.0.42.64 cluster_nic=eth1.4000
-goblin05     ansible_host=10.0.42.65 cluster_nic=eth1.4000
-goblin06     ansible_host=10.0.42.66 cluster_nic=eth1.4000
+goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
+goblin05     ansible_host=10.0.42.65 cluster_nic=enp1s0.4000
+goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 
 
 [node_role_download]
