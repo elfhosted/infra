@@ -13,7 +13,6 @@ spec:
     name: infra
   dependsOn:
   - name: topolvm--topolvm-system   
-  - name: kubernetes-replicator
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
