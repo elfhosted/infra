@@ -256,10 +256,10 @@ spec:
         - name : csi-snapshotter
           resource:
             requests:
-              memory: 1Gi # we have a LOT of snapshots
+              memory: 256Mi
               cpu: 100m
             limits:
-              memory: 1Gi # we have a LOT of snapshots
+              memory: 256Mi
               cpu: 10
         - name : csi-rbdplugin
           resource:
@@ -344,10 +344,10 @@ spec:
         - name : csi-snapshotter
           resource:
             requests:
-              memory: 128Mi
+              memory: 1Gi
               cpu: 100m
             limits:
-              memory: 256Mi
+              memory: 1Gi
               cpu: 10
         - name : csi-cephfsplugin
           resource:
