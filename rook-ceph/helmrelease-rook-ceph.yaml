@@ -256,10 +256,10 @@ spec:
         - name : csi-snapshotter
           resource:
             requests:
-              memory: 128Mi
+              memory: 1Gi # we have a LOT of snapshots
               cpu: 100m
             limits:
-              memory: 256Mi
+              memory: 1Gi # we have a LOT of snapshots
               cpu: 10
         - name : csi-rbdplugin
           resource:
@@ -447,14 +447,14 @@ spec:
 
       # -- Array of tolerations in YAML format which will be added to CSI provisioner deployment
       provisionerTolerations: 
-        - key: node-role.${dns_domain}/storage # run on nodes which are kept for reserve customer capacity
+        - key: node-role.kubernetes.io/control-plane # run on control plane nodes, tenant nodes are too busy
           operator: Exists
       #    - key: key
       #      operator: Exists
       #      effect: NoSchedule
 
       # -- The node labels for affinity of the CSI provisioner deployment [^1]
-      provisionerNodeAffinity: node-role.${dns_domain}/storage=true
+      provisionerNodeAffinity: node-role.kubernetes.io/control-plane=true
       # Set pluginTolerations and pluginNodeAffinity for plugin daemonset pods.
       # The CSI plugins need to be started on all the nodes where the clients need to mount the storage.
 
