@@ -583,6 +583,69 @@ spec:
               - name: nvme1n1                                  
                 config:
                   deviceClass: ssd
+          - name: goblin04
+            resources: 
+              limits: 
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme2n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme3n1                                  
+                config:
+                  deviceClass: ssd     
+          - name: goblin05
+            resources: 
+              limits: 
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme2n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme3n1                                  
+                config:
+                  deviceClass: ssd     
+          - name: goblin06
+            resources: 
+              limits: 
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme2n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme3n1                                  
+                config:
+                  deviceClass: ssd                                                                    
 
           # and the CI nodes...
           - name: hobbit01
