@@ -28,7 +28,8 @@ elf13        ansible_host=10.0.42.33 cluster_nic=eno1.4000 # 128GB
 elf14        ansible_host=10.0.42.34 cluster_nic=eno1.4000 # 128GB
 elf15        ansible_host=10.0.42.35 cluster_nic=eno1.4000 # 128GB
 elf16        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
-elf17        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
+elf17        ansible_host=10.0.42.37 cluster_nic=eno1.4000 # 128GB
+elf18        ansible_host=10.0.42.38 cluster_nic=eno1.4000 # 128GB
 
 
 orc01        ansible_host=10.0.42.41 cluster_nic=eno1.4000
@@ -63,6 +64,7 @@ elf14-public.elfhosted.com
 elf15-public.elfhosted.com
 elf16-public.elfhosted.com
 elf17-public.elfhosted.com
+elf18-public.elfhosted.com
 
 goblin04-public.elfhosted.com
 goblin05-public.elfhosted.com
