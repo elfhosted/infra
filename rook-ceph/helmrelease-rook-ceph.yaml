@@ -42,13 +42,15 @@ spec:
     resources:
       limits:
         cpu: 10 # avoid throttling
-        memory: 2048Mi
+        memory: 4Gi
       requests:
         cpu: 100m
-        memory: 1024Mi
+        memory: 2Gi
 
     # -- Kubernetes [`nodeSelector`](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector) to add to the Deployment.
-    nodeSelector: {}
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: true
+      
     # Constraint rook-ceph-operator Deployment to nodes with label `disktype: ssd`.
     # For more info, see https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
     #  disktype: ssd
