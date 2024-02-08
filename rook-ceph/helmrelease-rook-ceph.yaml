@@ -49,8 +49,10 @@ spec:
 
     # -- Kubernetes [`nodeSelector`](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector) to add to the Deployment.
     nodeSelector:
-      node-role.kubernetes.io/control-plane: true
-      
+      - matchExpressions:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+
     # Constraint rook-ceph-operator Deployment to nodes with label `disktype: ssd`.
     # For more info, see https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
     #  disktype: ssd
