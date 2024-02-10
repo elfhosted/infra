@@ -28,7 +28,7 @@ spec:
         configmap.reloader.stakater.com/reload: "torrentio-env"         
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:a0e2202bc5af4c86cd9b9112f3de9e8015403d41a94563ce15714780dee693d1
+      tag: rolling@sha256:d92e88a1c70054d6c6cfbec7309d194bcbd14320834358c97cede31c3b271daa
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -47,7 +47,6 @@ spec:
         sizeLimit: 1Gi     
     env:
       PORT: 7001
-      ENABLE_SYNC: true
       PUID: 568
       PGID: 568
       SCRAPER: leetxScraper
