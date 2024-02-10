@@ -1,0 +1,67 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: torrentio-scraper-ytsfull
+  namespace: torrentio
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: torrentio-scraper-ytsfull
+  values:
+    global:
+      nameOverride: torrentio-scraper-ytsfull
+    podLabels:
+      app.elfhosted.com/class: torrentio-scraper  
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists           
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "torrentio-env"  
+    image:
+      repository: ghcr.io/geek-cookbook/torrentio-scraper
+      tag: rolling@sha256:2891c78f02e63e18490a59a22d3fc857985ee8ba50084c7dc6ccc8bc9ebc3744
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      # runAsUser: 568
+      # runAsGroup: 568
+    automountServiceAccountToken: false
+    persistence:
+      tmp:
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        sizeLimit: 1Gi          
+    env:
+      PORT: 7001
+      ENABLE_SYNC: true
+      PUID: 568
+      PGID: 568
+      SCRAPER: ytsFullScraper
+      ENABLE_SCHEDULING: "true"
+    envFrom:
+    - secretRef:
+        name: torrentio-env        
+    # resources:
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 7001
