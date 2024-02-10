@@ -5,7 +5,7 @@ metadata:
   namespace: torrentio
 data:
   # PostgreSQL
-  POSTGRES_HOST: pooler-torrentio # fixed IP in case we need VPN "10.43.74.255"
+  POSTGRES_HOST: "10.43.74.255"
   POSTGRES_PORT: "5432"
   POSTGRES_USER: torrentio
   POSTGRES_USERNAME: torrentio
@@ -14,7 +14,7 @@ data:
   POSTGRES_DB: torrentio
 
   # MongoDB
-  MONGODB_HOST: mongodb # "10.43.242.207" fixed IP in case we turn VPN on
+  MONGODB_HOST: "10.43.0.3"
   MONGODB_PORT: "27017"
   MONGODB_DB: torrentio
   MONGO_INITDB_ROOT_USERNAME: mongo
@@ -24,7 +24,7 @@ data:
   DEBUG_MODE: "false"
 
   # Consumer
-  RABBIT_URI: amqp://torrentio:torrentio@rabbitmq:5672/?heartbeat=30
+  RABBIT_URI: amqp://torrentio:torrentio@10.43.0.2:5672/?heartbeat=30
   QUEUE_NAME: ingested
   JOB_CONCURRENCY: "20"
   JOBS_ENABLED: 'true'
@@ -34,7 +34,7 @@ data:
   AUTO_CREATE_AND_APPLY_MIGRATIONS: 'false' # Fix for #66 - toggle on for development
 
   # Producer
-  RabbitMqConfiguration__Host: rabbitmq # 10.43.0.2 (fixed IP if we turn VPN on)
+  RabbitMqConfiguration__Host: 10.43.0.2
   RabbitMqConfiguration__QueueName: ingested
   RabbitMqConfiguration__Username: torrentio
   RabbitMqConfiguration__Password: torrentio
