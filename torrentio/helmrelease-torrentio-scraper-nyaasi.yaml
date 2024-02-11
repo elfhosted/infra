@@ -53,7 +53,7 @@ spec:
       ENABLE_SCHEDULING: "true"
     envFrom:
     - secretRef:
-        name: torrentio-env        
+        name: torrentio-scraper-env       
     # resources:
     ingress:
       main:
