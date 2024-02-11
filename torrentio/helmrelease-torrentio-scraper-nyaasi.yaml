@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: torrentio-scraper-eztv
+  name: torrentio-scraper-nyaasi
   namespace: torrentio
 spec:
   chart:
@@ -14,18 +14,18 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: torrentio-scraper-eztv
+  releaseName: torrentio-scraper-nyaasi
   values:
     global:
-      nameOverride: torrentio-scraper-eztv
+      nameOverride: torrentio-scraper-nyaasi
     podLabels:
       app.elfhosted.com/class: torrentio-scraper  
     tolerations:
     - key: node-role.elfhosted.com/storage
-      operator: Exists       
+      operator: Exists      
     controller:
       annotations:
-        configmap.reloader.stakater.com/reload: "torrentio-env"   
+        configmap.reloader.stakater.com/reload: "torrentio-env"           
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
       tag: rolling@sha256:770aadea2f707b5d9e095f0c243e0e58a4d5453e6e292e6565b05246a36ffe78
@@ -49,11 +49,11 @@ spec:
       PORT: 7001
       PUID: 568
       PGID: 568
-      SCRAPER: eztvScraper
+      SCRAPER: nyaaSiScraper
       ENABLE_SCHEDULING: "true"
     envFrom:
     - secretRef:
-        name: torrentio-scraper-env        
+        name: torrentio-env        
     # resources:
     ingress:
       main:
@@ -64,28 +64,3 @@ spec:
         ports:
           http:
             port: 7001
-    addons:
-      vpn:
-        enabled: true # in case we ever need it
-        gluetun:
-          image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: torrentio-vpn
-        env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"        
-        securityContext:
-          runAsUser: 0
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config            

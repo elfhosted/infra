@@ -28,7 +28,7 @@ spec:
         configmap.reloader.stakater.com/reload: "torrentio-env"               
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:2891c78f02e63e18490a59a22d3fc857985ee8ba50084c7dc6ccc8bc9ebc3744
+      tag: rolling@sha256:770aadea2f707b5d9e095f0c243e0e58a4d5453e6e292e6565b05246a36ffe78
     securityContext:
       seccompProfile:
         type: RuntimeDefault
