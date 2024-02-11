@@ -50,7 +50,7 @@ spec:
       PUID: 568
       PGID: 568
       SCRAPER: leetxScraper
-      FLARESOLVERR_ENDPOINT: http://10.43.180.218:8191/v1
+      FLARESOLVERR_ENDPOINT: http://localhost:8191/v1
       ENABLE_SCHEDULING: "true"
     envFrom:
     - secretRef:
@@ -65,6 +65,9 @@ spec:
         ports:
           http:
             port: 7001
+    additionalContainers:
+      flaresolverr:
+        image: ghcr.io/flaresolverr/flaresolverr:v3.3.13
     addons:
       vpn:
         enabled: true # in case we ever need it
