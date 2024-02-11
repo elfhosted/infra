@@ -28,7 +28,7 @@ spec:
         configmap.reloader.stakater.com/reload: "torrentio-env"         
     image:
       repository: ghcr.io/geek-cookbook/torrentio-scraper
-      tag: rolling@sha256:d92e88a1c70054d6c6cfbec7309d194bcbd14320834358c97cede31c3b271daa
+      tag: rolling@sha256:770aadea2f707b5d9e095f0c243e0e58a4d5453e6e292e6565b05246a36ffe78
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -50,7 +50,7 @@ spec:
       PUID: 568
       PGID: 568
       SCRAPER: leetxScraper
-      FLARESOLVERR_ENDPOINT: http://flaresolverr:8191/v1
+      FLARESOLVERR_ENDPOINT: http://10.43.180.218:8191/v1
       ENABLE_SCHEDULING: "true"
     envFrom:
     - secretRef:
@@ -65,3 +65,28 @@ spec:
         ports:
           http:
             port: 7001
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: torrentio-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"        
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config             
