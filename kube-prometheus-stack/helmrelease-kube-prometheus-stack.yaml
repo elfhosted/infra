@@ -1020,7 +1020,11 @@ spec:
       ##
       defaultDashboardsEditable: true
 
-      adminPassword: prom-operator
+      admin:
+        ## Name of the secret. Can be templated.
+        existingSecret: "grafana-credentials"
+        userKey: admin-user
+        passwordKey: admin-password      
 
       rbac:
         ## If true, Grafana PSPs will be created
@@ -2563,13 +2567,13 @@ spec:
       networkPolicy:
         ## Enable creation of NetworkPolicy resources.
         ##
-        enabled: false
+        enabled: true
 
         ## Flavor of the network policy to use.
         #  Can be:
         #  * kubernetes for networking.k8s.io/v1/NetworkPolicy
         #  * cilium     for cilium.io/v2/CiliumNetworkPolicy
-        flavor: kubernetes
+        flavor: cilium
 
         # cilium:
         #   egress:
