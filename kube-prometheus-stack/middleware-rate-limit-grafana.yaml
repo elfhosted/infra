@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: rate-limit-grafana-public
+  name: rate-limit-grafana
   namespace: kube-prometheus-stack
 spec:
   # Protect grafana from DDOS

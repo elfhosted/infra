@@ -1,11 +1,11 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana-public.${dns_domain}
+  name: grafana.${dns_domain}
   namespace: kube-prometheus-stack
 spec:
   routes:
-    - match: Host(`grafana-public.${dns_domain}`)
+    - match: Host(`grafana.${dns_domain}`)
       kind: Rule
       services:
         - name: kube-prometheus-stack-grafana
@@ -14,4 +14,4 @@ spec:
       middlewares:  
         - name: error-pages
           namespace: traefik
-        - name: rate-limit-grafana-public
+        - name: rate-limit-grafana
