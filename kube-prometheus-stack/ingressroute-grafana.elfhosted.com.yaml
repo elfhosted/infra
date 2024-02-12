@@ -5,6 +5,17 @@ metadata:
   namespace: kube-prometheus-stack
 spec:
   routes:
+    - match: Host(`grafana.${dns_domain}`) && Path(`/login`)
+      kind: Rule
+      services:
+        - name: kube-prometheus-stack-grafana
+          kind: Service
+          port: 80
+      middlewares:  
+        - name: error-pages
+          namespace: traefik
+        - name: protect-grafana-login
+
     - match: Host(`grafana.${dns_domain}`)
       kind: Rule
       services:
@@ -14,4 +25,4 @@ spec:
       middlewares:  
         - name: error-pages
           namespace: traefik
-        - name: rate-limit-grafana
+        - name: rate-limit-grafana        
