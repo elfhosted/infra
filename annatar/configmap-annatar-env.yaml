@@ -9,7 +9,7 @@ data:
   LOG_LEVEL: info
   LISTEN_PORT: "8000"
   LISTEN_HOST: "0.0.0.0"
-  REDIS_URL: "redis"
+  REDIS_URL: "redis-master"
   JACKETT_TIMEOUT: "5"
   JACKETT_MAX_RESULTS: "10" 
   # JACKETT_URL: # set in secret annatar-evr
