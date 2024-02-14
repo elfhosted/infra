@@ -12,6 +12,7 @@ data:
   REDIS_URL: "redis-master"
   JACKETT_TIMEOUT: "5"
   JACKETT_MAX_RESULTS: "10" 
+  LOG_LEVEL: "error" # Avoid inadvertently logging API keys
   # JACKETT_URL: # set in secret annatar-evr
   # JACKETT_API_KEY: # set in secret annatar-env
   JACKETT_INDEXERS: eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,yts
