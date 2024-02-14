@@ -4,6 +4,9 @@
   "flux": {
     "fileMatch": ["helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$", "bootstrap/flux-system/gotk-components.yaml$"]
   },
+  "helm-values": {
+    "fileMatch": ["helmrelease-.+\\.yaml$"]
+  },  
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0
