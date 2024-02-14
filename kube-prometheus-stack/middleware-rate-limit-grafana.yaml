@@ -6,6 +6,6 @@ metadata:
 spec:
   # Protect grafana from DDOS
   rateLimit:
-    average: 1  # 1 request every ..
+    average: 5  # 1 request every ..
     period: 1s  # 
     burst: 20   # allow burst up to 20 at once
