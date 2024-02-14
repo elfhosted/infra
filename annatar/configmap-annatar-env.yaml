@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: annatar-env
+  namespace: annatar
+data:
+  ENV: "prod"
+  WORKERS: "8"
+  LOG_LEVEL: info
+  LISTEN_PORT: "8000"
+  LISTEN_HOST: "0.0.0.0"
+  REDIS_URL: "redis"
+  JACKETT_TIMEOUT: "5"
+  JACKETT_MAX_RESULTS: "10" 
+  # JACKETT_URL: # set in secret annatar-evr
+  # JACKETT_API_KEY: # set in secret annatar-env
+  JACKETT_INDEXERS: eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,yts
