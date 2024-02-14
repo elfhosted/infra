@@ -67,9 +67,9 @@ spec:
                     storage: 1Gi                       
     envFrom:
     - secretRef:
-        name: torrentio-env 
+        name: annatar-env 
     - configMapRef:
-        name: torrentio-env 
+        name: annatar-env 
 
     # resources:
     ingress:
