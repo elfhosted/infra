@@ -9,5 +9,5 @@ spec:
   # so let's only accept one per minute
   rateLimit:
     average: 1 # 1 request every minute
-    burst: 1
-    period: 1
+    burst: 2
+    period: 1m
