@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "baseBranches": ["ci"],
+  "repositories": ["geek-cookbook/elf-infra"],
+  "assignees": ["funkypenguin"],  
   "flux": {
     "fileMatch": ["helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$", "bootstrap/flux-system/gotk-components.yaml$"]
   },
