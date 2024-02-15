@@ -17,12 +17,15 @@ spec:
     - prepare
     - k3s-server # wait for the k3s-server plan to apply
   tolerations:
-  - key: "node-role.${dns_domain}/download"
+  - key: "node-role.${dns_domain}/download-only"
     operator: "Exists"
     effect: "NoSchedule"
   - key: "node-role.${dns_domain}/storage"
     operator: "Exists"
-    effect: "NoSchedule"    
+    effect: "NoSchedule"  
+  - key: "node-role.${dns_domain}/lightweight"
+    operator: "Exists"
+    effect: "NoSchedule"        
   upgrade:
     image: rancher/k3s-upgrade
   serviceAccountName: system-upgrade
