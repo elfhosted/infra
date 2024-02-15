@@ -9,5 +9,16 @@
   },  
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
   "prHourlyLimit": 0,
-  "prConcurrentLimit": 0
+  "prConcurrentLimit": 0,
+  "packageRules": [
+    { // auto-merge upstream app-level images
+      "matchPackagePatterns": ["digest"],
+      "automerge": true,
+      "automergeType": "branch",
+      "platformAutomerge": true,
+      "ignoreTests": true,
+      "baseBranches": ["main"],
+      "packagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer"]
+    } 
+  ]
 }
