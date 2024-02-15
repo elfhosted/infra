@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knightcrawler-monitoring
+  namespace: torrentio
+  labels:
+    cnpg.io/reload: "true"
+data:
+  custom_queries: |
+    torrents_total: 
+      query: "SELECT reltuples AS estimate FROM pg_class where relname = 'torrents';"
+
+      metrics:
+        - estimate:
+            usage: "GAUGE"
+            description: "Estimate total torrents"

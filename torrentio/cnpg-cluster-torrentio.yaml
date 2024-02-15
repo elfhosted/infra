@@ -18,6 +18,12 @@ spec:
     storageClass: ceph-block-ssd
     size: 1000Gi
 
+  monitoring:
+    enablePodMonitor: true
+    customQueriesConfigMap:
+          - name: torrentio-monitoring
+            key: custom-queries
+                
   superuserSecret:
       name: cnpg-postgres-credentials
 
