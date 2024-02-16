@@ -30,11 +30,20 @@ elf15        ansible_host=10.0.42.35 cluster_nic=eno1.4000 # 128GB
 elf16        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
 elf17        ansible_host=10.0.42.37 cluster_nic=eno1.4000 # 128GB
 elf18        ansible_host=10.0.42.38 cluster_nic=eno1.4000 # 128GB
+elf19        ansible_host=10.0.42.39 cluster_nic=eno1.4000 # 128GB
+elf20        ansible_host=10.0.42.40 cluster_nic=eno1.4000 # 128GB
+elf21        ansible_host=10.0.42.41 cluster_nic=eno1.4000 # 128GB
+elf22        ansible_host=10.0.42.42 cluster_nic=eno1.4000 # 128GB
+elf23        ansible_host=10.0.42.43 cluster_nic=eno1.4000 # 128GB
+elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
+elf25        ansible_host=10.0.42.45 cluster_nic=eno1.4000 # 128GB
+elf26        ansible_host=10.0.42.46 cluster_nic=eno1.4000 # 128GB
+elf27        ansible_host=10.0.42.47 cluster_nic=eno1.4000 # 128GB
+elf28        ansible_host=10.0.42.48 cluster_nic=eno1.4000 # 128GB
+elf29        ansible_host=10.0.42.49 cluster_nic=eno1.4000 # 128GB
+elf30        ansible_host=10.0.42.50 cluster_nic=eno1.4000 # 128GB
 
 
-orc01        ansible_host=10.0.42.41 cluster_nic=eno1.4000
-orc02        ansible_host=10.0.42.42 cluster_nic=eno1.4000
-orc03        ansible_host=10.0.42.43 cluster_nic=enp0s31f6.4000
 
 giant01      ansible_host=10.0.42.51 cluster_nic=enp39s0.4000 # 10Gbps node
 giant02      ansible_host=10.0.42.52 cluster_nic=enp1s0.4000  # 10Gbps node
@@ -65,6 +74,18 @@ elf15-public.elfhosted.com
 elf16-public.elfhosted.com
 elf17-public.elfhosted.com
 elf18-public.elfhosted.com
+elf19-public.elfhosted.com
+elf20-public.elfhosted.com
+elf21-public.elfhosted.com
+elf22-public.elfhosted.com
+elf23-public.elfhosted.com
+elf24-public.elfhosted.com
+elf25-public.elfhosted.com
+elf26-public.elfhosted.com
+elf27-public.elfhosted.com
+elf28-public.elfhosted.com
+elf29-public.elfhosted.com
+elf30-public.elfhosted.com
 
 goblin04-public.elfhosted.com
 goblin05-public.elfhosted.com
