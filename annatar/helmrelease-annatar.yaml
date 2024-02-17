@@ -20,7 +20,7 @@ spec:
       nameOverride: annatar
     image:
       repository: ghcr.io/geek-cookbook/annatar
-      tag: rolling@sha256:332b8322ae014c42f122bcbb14c184fc19fa1d9d0f1cdcf3c20ba07f27395e54
+      tag: rolling@sha256:dbf0c38bc60b4fb125b1fd286ed40951bb60ffda498f8d5e5f1d1ba9ce91e1b3
     securityContext:
       seccompProfile:
         type: RuntimeDefault
