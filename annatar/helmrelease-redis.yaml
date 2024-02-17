@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: redis
-      version: 18.13.x
+      version: 18.14.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
