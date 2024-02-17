@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: tetragon
-      version: 1.0.1
+      version: 1.0.2
       sourceRef:
         kind: HelmRepository
         name: cilium
@@ -67,7 +67,7 @@ spec:
       image:
         override: ~
         repository: quay.io/cilium/tetragon
-        tag: v1.0.1
+        tag: v1.0.2
       resources: {}
       extraArgs: {}
       extraEnv: []
@@ -179,7 +179,7 @@ spec:
       image:
         override: ~
         repository: quay.io/cilium/tetragon-operator
-        tag: v1.0.1
+        tag: v1.0.2
         # tetragon-operator image-digest
         suffix: ""
         pullPolicy: IfNotPresent
@@ -224,4 +224,4 @@ spec:
         image:
           override: ~
           repository: quay.io/cilium/hubble-export-stdout
-          tag: v1.0.3
+          tag: v1.0.4
