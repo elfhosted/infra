@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: knightcrawler-monitoring
+  name: torrentio-monitoring
   namespace: torrentio
   labels:
     cnpg.io/reload: "true"

@@ -21,8 +21,8 @@ spec:
   monitoring:
     enablePodMonitor: true
     customQueriesConfigMap:
-          - name: torrentio-monitoring
-            key: custom-queries
+    - name: torrentio-monitoring
+      key: custom-queries
                 
   superuserSecret:
       name: cnpg-postgres-credentials
