@@ -606,7 +606,7 @@ spec:
           # -- Docker image repository for sidecar config-reloader
           repository: jimmidyson/configmap-reload
           # -- Docker image tag for sidecar config-reloader
-          tag: v0.8.0
+          tag: v0.9.0
           # -- Docker image pull policy for sidecar config-reloader
           pullPolicy: IfNotPresent
         # Extra args for the config-reloader container.
