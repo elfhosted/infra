@@ -12,10 +12,13 @@
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
-  "automerge": true,
-  "automergeType": "pr",
-  "platformAutomerge": true,  
   "packageRules": [
+    { // most updates go through ci and manual merging first
+      "automerge": false,
+      "ignoreTests": true,
+      "baseBranches": ["ci"],
+      "excludePackagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer"]
+    },
     { // auto-merge upstream app-level images
       "matchPackagePatterns": ["digest","patch"],
       "automerge": true,
