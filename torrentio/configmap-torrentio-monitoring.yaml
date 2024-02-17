@@ -16,7 +16,7 @@ data:
             description: "Estimate total torrents"
 
     torrents_type:
-      query: "current_database() as datname, COUNT(torrents."type"), "type" 
+      query: "current_database() as datname, COUNT(torrents.'type'), 'type' 
               from torrents 
               group by type"
 
@@ -33,7 +33,7 @@ data:
 
 
     torrents_provider:
-      query: "current_database() as datname, COUNT(torrents."provider"), "provider" 
+      query: "current_database() as datname, COUNT(torrents.'provider'), 'provider' 
               from torrents 
               group by provider"
 
