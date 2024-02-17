@@ -36,6 +36,9 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
+    env:
+      PORT: 3649
+      TENANT_NAME: Public
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
