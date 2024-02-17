@@ -6,7 +6,7 @@ metadata:
   labels:
     cnpg.io/reload: "true"
 data:
-  custom_queries: |
+  custom-queries: |
     torrents_total: 
       query: "SELECT reltuples AS estimate FROM pg_class where relname = 'torrents';"
 
