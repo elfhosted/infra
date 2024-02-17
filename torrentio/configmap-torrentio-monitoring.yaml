@@ -14,3 +14,36 @@ data:
         - estimate:
             usage: "GAUGE"
             description: "Estimate total torrents"
+
+    torrents_type 
+      query: "current_database() as datname, COUNT(torrents."type"), "type" 
+              from torrents 
+              group by type"
+
+      metrics:
+        - datname:
+            usage: "LABEL"
+            description: "Name of current database"      
+        - count:
+            usage: "GAUGE"
+            description: "Amount of torrents of type"
+        - type:
+            usage: "LABEL"
+            description: "type of torrents"            
+
+
+    torrents_provider
+      query: "current_database() as datname, COUNT(torrents."provider"), "provider" 
+              from torrents 
+              group by provider"
+
+      metrics:
+        - datname:
+            usage: "LABEL"
+            description: "Name of current database"      
+        - count:
+            usage: "GAUGE"
+            description: "Amount of torrents of provider"
+        - provider:
+            usage: "LABEL"
+            description: "provider of torrents"          
