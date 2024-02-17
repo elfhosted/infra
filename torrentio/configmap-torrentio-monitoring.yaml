@@ -16,9 +16,10 @@ data:
             description: "Estimate total torrents"
 
     torrents_type:
-      query: "current_database() as datname, COUNT(torrents.'type'), 'type' 
-              from torrents 
-              group by type"
+      query: | 
+        SELECT current_database() as datname, COUNT(torrents.'type'), 'type' 
+        from torrents 
+        group by type
 
       metrics:
         - datname:
@@ -33,9 +34,10 @@ data:
 
 
     torrents_provider:
-      query: "current_database() as datname, COUNT(torrents.'provider'), 'provider' 
-              from torrents 
-              group by provider"
+      query: |
+        SELECT current_database() as datname, COUNT(torrents.'provider'), 'provider' 
+        from torrents 
+        group by provider
 
       metrics:
         - datname:
