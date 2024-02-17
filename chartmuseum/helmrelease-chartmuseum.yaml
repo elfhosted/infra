@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: chartmuseum
-      version: 3.10.1
+      version: 3.10.2
       sourceRef:
         kind: HelmRepository
         name: chartmuseum
@@ -23,7 +23,7 @@ spec:
       type: RollingUpdate
     image:
       repository: ghcr.io/helm/chartmuseum
-      tag: v0.15.0
+      tag: v0.16.1
       pullPolicy: IfNotPresent
     secret:
       labels: {}
