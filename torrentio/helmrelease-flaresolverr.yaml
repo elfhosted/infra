@@ -19,7 +19,7 @@ spec:
     image:
       registry: ghcr.io
       repository: flaresolverr/flaresolverr
-      tag: v3.3.13
+      tag: v3.3.14
     securityContext:
       seccompProfile:
         type: RuntimeDefault
