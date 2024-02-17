@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranches": ["ci"],
+  "baseBranches": ["ci","main"],
   "repositories": ["geek-cookbook/elf-infra"],
   "assignees": ["funkypenguin"],  
   "flux": {
@@ -12,9 +12,12 @@
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true,  
   "packageRules": [
     { // auto-merge upstream app-level images
-      "matchPackagePatterns": ["digest"],
+      "matchPackagePatterns": ["digest","patch"],
       "automerge": true,
       "automergeType": "branch",
       "platformAutomerge": true,
