@@ -36,9 +36,6 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
-      annotations:
-        secret.reloader.stakater.com/reload: "xtremio-env"
-        configmap.reloader.stakater.com/reload: "xtremio-env"
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
@@ -65,11 +62,6 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi                       
-    envFrom:
-    - secretRef:
-        name: xtremio-env 
-    - configMapRef:
-        name: xtremio-env 
 
     # resources:
     ingress:
@@ -80,29 +72,4 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 8000
-    addons:
-      vpn:
-        enabled: false # in case we ever need it
-        gluetun:
-          image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: torrentio-vpn
-        env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"        
-        securityContext:
-          runAsUser: 0
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config             
+            port: 3649
