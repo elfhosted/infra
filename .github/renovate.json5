@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranches": ["ci"],
+  "baseBranches": ["ci","main"],
   "repositories": ["geek-cookbook/elf-infra"],
   "assignees": ["funkypenguin"],  
   "flux": {
@@ -13,8 +13,14 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "packageRules": [
+    { // most updates go through ci and manual merging first
+      "automerge": false,
+      "ignoreTests": true,
+      "baseBranches": ["ci"],
+      "excludePackagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer"]
+    },
     { // auto-merge upstream app-level images
-      "matchPackagePatterns": ["digest"],
+      "matchPackagePatterns": ["digest","patch"],
       "automerge": true,
       "automergeType": "branch",
       "platformAutomerge": true,
