@@ -67,7 +67,7 @@ spec:
             port: 7001
     additionalContainers:
       flaresolverr:
-        image: ghcr.io/flaresolverr/flaresolverr:v3.3.13
+        image: ghcr.io/flaresolverr/flaresolverr:v3.3.14
     addons:
       vpn:
         enabled: true # in case we ever need it
