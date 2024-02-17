@@ -7,7 +7,7 @@ metadata:
     cnpg.io/reload: "true"
 data:
   custom-queries: |
-    torrents_total: 
+    torrents_total:
       query: "SELECT reltuples AS estimate FROM pg_class where relname = 'torrents';"
 
       metrics:
@@ -16,36 +16,36 @@ data:
             description: "Estimate total torrents"
 
     torrents_type:
-      query: | 
-        SELECT current_database() as datname, COUNT(torrents.'type'), 'type' 
-        from torrents 
+      query: |
+        SELECT current_database() as datname, COUNT(torrents.'type'), 'type'
+        from torrents
         group by type
 
       metrics:
         - datname:
             usage: "LABEL"
-            description: "Name of current database"      
+            description: "Name of current database"
         - count:
             usage: "GAUGE"
             description: "Amount of torrents of type"
         - type:
             usage: "LABEL"
-            description: "type of torrents"            
+            description: "type of torrents"
 
 
     torrents_provider:
       query: |
-        SELECT current_database() as datname, COUNT(torrents.'provider'), 'provider' 
-        from torrents 
+        SELECT current_database() as datname, COUNT(torrents.'provider'), 'provider'
+        from torrents
         group by provider
 
       metrics:
         - datname:
             usage: "LABEL"
-            description: "Name of current database"      
+            description: "Name of current database"
         - count:
             usage: "GAUGE"
             description: "Amount of torrents of provider"
         - provider:
             usage: "LABEL"
-            description: "provider of torrents"          
+            description: "provider of torrents"
