@@ -17,9 +17,9 @@ data:
 
     torrents_type:
       query: |
-        SELECT current_database() as datname, COUNT(torrents.'type'), 'type'
+        select current_database() as datname, count(torrents.type), type
         from torrents
-        group by type
+        group by type;
 
       metrics:
         - datname:
@@ -35,9 +35,9 @@ data:
 
     torrents_provider:
       query: |
-        SELECT current_database() as datname, COUNT(torrents.'provider'), 'provider'
+        select current_database() as datname, count(torrents.provider), provider
         from torrents
-        group by provider
+        group by provider;
 
       metrics:
         - datname:
