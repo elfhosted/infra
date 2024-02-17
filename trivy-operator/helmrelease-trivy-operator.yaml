@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: trivy-operator
-      version: 0.18.4
+      version: 0.20.6
       sourceRef:
         kind: HelmRepository
         name: aqua
@@ -162,7 +162,7 @@ spec:
       repository: "aquasecurity/trivy-operator"
       # -- tag is an override of the image tag, which is by default set by the
       # appVersion field in Chart.yaml.
-      tag: "0.16.0" # waiting for 0.17.0 for fix to nodecollector
+      tag: "0.18.5" # waiting for 0.17.0 for fix to nodecollector
       # -- pullPolicy set the operator pullPolicy
       pullPolicy: IfNotPresent
       # -- pullSecrets set the operator pullSecrets
@@ -286,7 +286,7 @@ spec:
         # -- repository of the Trivy image
         repository: aquasecurity/trivy
         # -- tag version of the Trivy image
-        tag: 0.45.1
+        tag: 0.49.1
         # -- imagePullSecret is the secret name to be used when pulling trivy image from private registries example : reg-secret
         # It is the user responsibility to create the secret for the private registry in `trivy-operator` namespace
         imagePullSecret: ~
