@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: stremio-jackett-cacher
+  namespace: stremio-jackett-cacher
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: stremio-jackett-cacher
+  minAvailable: 1
