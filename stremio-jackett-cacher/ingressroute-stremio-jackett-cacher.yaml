@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremio-jackett-cacher.${dns_domain}
+  namespace: stremio-jackett-cacher
+spec:
+  routes:
+    - match: Host(`stremio-jackett-cacher.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: stremio-jackett-cacher
+          kind: Service
+          port: 8080
+      middlewares:  
+        - name: error-pages
+          namespace: traefik
+        - name: rate-limit-stremio-jackett-cacher        
+
