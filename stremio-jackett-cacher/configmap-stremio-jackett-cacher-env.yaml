@@ -7,5 +7,5 @@ data:
   DB_USER: stremio-jackett-cacher
   # DB_PASSWORD - set in secret
   DB_HOST: stremio-jackett-cacher-rw
-  DB_PORT: 5432
+  DB_PORT: "5432"
   DB_NAME: stremio-jackett-cacher
