@@ -17,7 +17,8 @@
       "automerge": false,
       "ignoreTests": true,
       "baseBranches": ["ci"],
-      "excludePackagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer"]
+      "packagePatterns": [ ".*" ],
+      "excludePackagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer","stremio-jackett-crawler","xtremio"]
     },
     { // auto-merge upstream app-level images
       "matchPackagePatterns": ["digest","patch"],
@@ -26,7 +27,7 @@
       "platformAutomerge": true,
       "ignoreTests": true,
       "baseBranches": ["main"],
-      "packagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer"]
+      "packagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer","stremio-jackett-crawler","xtremio"]
     } 
   ]
 }
