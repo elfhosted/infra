@@ -439,7 +439,7 @@ spec:
         annotations: {}
         # -- Tolerations for tokengen Job
         tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: node-role.elfhosted.com/lightweight
           operator: Exists
           effect: NoSchedule        
         # -- Additional volumes for Pods
@@ -660,7 +660,7 @@ spec:
           priorityClassName: null
           # -- Tolerations for GrafanaAgent pods
           tolerations:
-          - key: node-role.kubernetes.io/control-plane
+          - key: node-role.elfhosted.com/lightweight
             operator: Exists
             effect: NoSchedule          
         # PodLogs configuration
@@ -711,7 +711,7 @@ spec:
         nodeSelector: {}
         # -- Tolerations for canary pods
         tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: node-role.elfhosted.com/lightweight
           operator: Exists
           effect: NoSchedule        
         # -- The name of the PriorityClass for loki-canary pods
@@ -832,7 +832,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for write pods
       dnsConfig: {}
@@ -842,7 +842,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for write pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
@@ -941,7 +941,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                   
       # -- DNS config table-manager pods
       dnsConfig: {}
@@ -949,7 +949,7 @@ spec:
       nodeSelector: {}
       # -- Tolerations for table-manager pods
       tolerations: 
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- Enable deletes by retention
@@ -1048,7 +1048,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for read pods
       dnsConfig: {}
@@ -1058,7 +1058,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for read pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
@@ -1166,7 +1166,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for backend pods
       dnsConfig: {}
@@ -1176,7 +1176,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for backend pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
@@ -1276,7 +1276,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists               
       # -- DNS config for single binary pods
       dnsConfig: {}
@@ -1284,7 +1284,7 @@ spec:
       nodeSelector: {}
       # -- Tolerations for single binary pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       persistence:
@@ -1459,7 +1459,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for gateway pods
       dnsConfig: {}
@@ -1469,7 +1469,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for gateway pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # Gateway service configuration
