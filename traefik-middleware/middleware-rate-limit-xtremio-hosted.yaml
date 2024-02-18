@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-xtremio-hosted
+  namespace: traefik
+spec:
+  rateLimit:
+    average: 60 # 60 requests every ..
+    period: 1m  # 
+    burst: 20   # allow burst up to 10 at once
