@@ -7,7 +7,7 @@ metadata:
     cnpg.io/reload: "true"
 data:
   custom-queries: |
-    total_languages:
+    stremio_jackett_cacher_total_languages:
       query: |
         SELECT  current_database() as datname, COUNT(*) AS total_languages
         FROM (
@@ -25,7 +25,7 @@ data:
             description: "Total languages"
 
 
-    total_occurrences_per_language:
+    stremio_jackett_cacher_total_occurrences_per_language:
       query: |
         SELECT current_database() as datname, language, COUNT(*) AS total_occurrences
         FROM (
@@ -47,7 +47,7 @@ data:
             description: "language of torrents"
 
 
-    total_series:
+    stremio_jackett_cacher_total_series:
       query: SELECT current_database() as datname, COUNT(*) FROM public.series
 
       metrics:
@@ -59,7 +59,7 @@ data:
             description: "Amount of series"
 
 
-    total_movies:
+    stremio_jackett_cacher_total_movies:
       query: SELECT current_database() as datname, COUNT(*) FROM public.movies
 
       metrics:
@@ -70,7 +70,7 @@ data:
             usage: "GAUGE"
             description: "Amount of movies"
 
-    total_entries:
+    stremio_jackett_cacher_total_entries:
       query: |
       SELECT current_database() as datname, COUNT(*) AS total_entries
       FROM (
