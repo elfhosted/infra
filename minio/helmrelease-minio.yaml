@@ -135,7 +135,7 @@ spec:
     # Number of drives attached to a node
     drivesPerNode: 1
     # Number of MinIO containers running
-    replicas: 4
+    replicas: 3
     # Number of expanded MinIO clusters
     pools: 1
 
@@ -633,7 +633,7 @@ spec:
     ##
     podDisruptionBudget:
       enabled: true
-      maxUnavailable: 3
+      maxUnavailable: 2
 
     ## Specify the service account to use for the MinIO pods. If 'create' is set to 'false'
     ## and 'name' is left unspecified, the account 'default' will be used.
