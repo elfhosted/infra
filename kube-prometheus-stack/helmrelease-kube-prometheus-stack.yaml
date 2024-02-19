@@ -1227,6 +1227,10 @@ spec:
         #   filters: oauth.generic_oauth:debug
         # grafana_net:
         #   url: https://grafana.net
+        database:
+          type: postgres
+          host: grafana-rw
+          password: ${grafana_database_password}
         server:
           enforce_domain: false
           domain: grafana.infra.${dns_domain}
