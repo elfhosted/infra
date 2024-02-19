@@ -1382,7 +1382,7 @@ spec:
 
         ## Enable scraping /metrics/probes from kubelet's service
         ##
-        probes: true
+        probes: false # creates prober_probe_duration_seconds_bucket, which we don't need and is high-volume
 
         ## Enable scraping /metrics/resource from kubelet's service
         ## This is disabled by default because container metrics are already exposed by cAdvisor
@@ -1407,6 +1407,17 @@ spec:
           - sourceLabels: [__name__]
             action: drop
             regex: 'container_memory_(mapped_file|swap)'
+          # We OOMKill aggressively, and don't need to record it
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_memory_failures_total'  
+          # There's just sooo much data coming from per-container FS access, we don't need it
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_fs_(reads_bytes_total|reads_total|write_bytes_total|writes_total)'
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_fs_(container_blkio_device_usage_total)'            
           # Drop less useful container process metrics.
           - sourceLabels: [__name__]
             action: drop
