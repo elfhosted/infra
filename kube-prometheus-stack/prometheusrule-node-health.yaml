@@ -5,7 +5,7 @@ metadata:
   namespace: kube-prometheus-stack
 spec:
   groups:
-  - name: kube-cluster
+  - name: cluster-node-health
     rules:
     - alert: HostHighCpuLoad
       expr: (sum by (instance) (avg by (mode, instance) (rate(node_cpu_seconds_total{mode!="idle"}[2m]))) > 0.8) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
