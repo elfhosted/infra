@@ -3291,7 +3291,7 @@ spec:
         ## If undefined (the default) or set to null, no storageClassName spec is
         ## set, choosing the default provisioner.
         ##
-        storageClass: "topolvm-provisioner"
+        storageClass: "topolvm-provisioner-thin"
         ## @param ruler.persistence.accessModes PVC Access Modes for data volume
         ##
         accessModes:
