@@ -72,12 +72,12 @@ data:
 
     stremio_jackett_cacher_total_entries:
       query: |
-      SELECT current_database() as datname, COUNT(*) AS total_entries
-      FROM (
-          SELECT title FROM public.movies
-          UNION ALL
-          SELECT title FROM public.series
-      ) AS combined_entries;
+        SELECT current_database() as datname, COUNT(*) AS total_entries
+        FROM (
+            SELECT title FROM public.movies
+            UNION ALL
+            SELECT title FROM public.series
+        ) AS combined_entries;
 
       metrics:
         - datname:
