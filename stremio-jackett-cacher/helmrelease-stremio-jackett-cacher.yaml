@@ -20,7 +20,7 @@ spec:
       nameOverride: stremio-jackett-cacher
     image:
       repository: ghcr.io/geek-cookbook/stremio-jackett-cacher
-      tag: rolling@sha256:b81db7a48086a4c6b96715fdbc9803bb51a92932e3b46a945db8a8cd060b1df8
+      tag: rolling@sha256:e05c72c37cf477369c135886e3c180de913e6dee8e99f217b781b89a4db35b13
     securityContext:
       seccompProfile:
         type: RuntimeDefault
