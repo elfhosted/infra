@@ -83,6 +83,6 @@ data:
         - datname:
             usage: "LABEL"
             description: "Name of current database"
-        - count:
+        - total_entries:
             usage: "GAUGE"
             description: "Amount of entries"            
