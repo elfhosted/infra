@@ -39,7 +39,8 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "torrentio-env"
     tolerations:
-    - key: node-role.elfhosted.com/storage        
+    - key: node-role.elfhosted.com/storage
+      operator: Exists 
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

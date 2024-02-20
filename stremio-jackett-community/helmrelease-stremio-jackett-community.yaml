@@ -20,7 +20,7 @@ spec:
       nameOverride: stremio-jackett-community
     image:
       repository: ghcr.io/geek-cookbook/stremio-jackett-community
-      tag: v3.0.0@sha256:8bc73d440f9b6ddad37338ade898e3def6633f2b9a8bfe906d485591176a452d
+      tag: v3.0.1@sha256:cec4b5ced1edfb869df5b57f8ffe50eff494a72b1876543622bfaf638057c34e
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -38,6 +38,7 @@ spec:
         unavailable: 1
     env:
       PORT: 3000
+      CACHE_URL: http://stremio-jackett-cacher.stremio-jackett-cacher:8080
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
