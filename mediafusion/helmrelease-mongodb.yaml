@@ -178,7 +178,7 @@ spec:
       ## @param auth.enabled Enable authentication
       ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
       ##
-      enabled: false
+      enabled: true
       ## @param auth.rootUser MongoDB(&reg;) root user
       ##
       rootUser: mongo
