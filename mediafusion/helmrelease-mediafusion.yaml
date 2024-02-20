@@ -28,8 +28,8 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 10001
-      runAsGroup: 10001
+      runAsUser: 568
+      runAsGroup: 568
     automountServiceAccountToken: false
     controller:
       replicas: 2
