@@ -56,7 +56,7 @@ spec:
         mountPath: /config/
         volumeSpec:
           persistentVolumeClaim:
-            claimName: config-prowlarr-ssd
+            claimName: prowlarr
       run: # used for s6-init with non-root
         enabled: true
         type: emptyDir
