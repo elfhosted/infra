@@ -16,6 +16,7 @@ spec:
         - name: error-pages
           namespace: traefik
         - name: rate-limit-mediafusion
+        - name: inflightreq-mediafusion
     # everything else is static and can be less rate-limited
     - match: Host(`mediafusion.${dns_domain}`)
       kind: Rule
