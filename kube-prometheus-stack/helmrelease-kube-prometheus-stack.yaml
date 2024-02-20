@@ -1265,7 +1265,7 @@ spec:
       serviceMonitor:
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: "5m"
+        interval: ""
 
         ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
         ##
@@ -1343,7 +1343,7 @@ spec:
 
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: "5m"
+        interval: ""
 
         ## If true, Prometheus use (respect) labels provided by exporter.
         ##
@@ -2186,7 +2186,7 @@ spec:
 
           ## Scrape interval. If not set, the Prometheus default scrape interval is used.
           ##
-          interval: "5m"
+          interval: "30s"
 
           ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
           ##
@@ -3369,7 +3369,7 @@ spec:
         ## Defaults to 30s.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/release-0.44/pkg/prometheus/promcfg.go#L180-L183
         ##
-        scrapeInterval: "5m"
+        scrapeInterval: "30s"
 
         ## Number of seconds to wait for target to respond before erroring
         ##
