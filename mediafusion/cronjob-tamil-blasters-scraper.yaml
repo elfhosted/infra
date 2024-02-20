@@ -20,7 +20,7 @@ spec:
           containers:
           - name: "tamil-blasters-scraper"
             command: ["pipenv", "run", "python3", "-m", "scrapers.tamil_blasters", "--all"]
-            image: ghcr.io/geek-cookbook/mediafusion:3.7.1@sha256:b245bede101a3c642d75807815935b7ceffd77edfcb8be76bd77c3f171e95932
+            image: ghcr.io/geek-cookbook/mediafusion:3.7.1@sha256:d7e2950b1392b4c304b614b3c2f202d04c41deaafab8d7f907e8f9864b3341be
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
