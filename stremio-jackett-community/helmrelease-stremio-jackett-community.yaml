@@ -20,7 +20,7 @@ spec:
       nameOverride: stremio-jackett-community
     image:
       repository: ghcr.io/geek-cookbook/stremio-jackett-community
-      tag: v3.0.1@sha256:cec4b5ced1edfb869df5b57f8ffe50eff494a72b1876543622bfaf638057c34e
+      tag: v3.0.1@sha256:04b4545daa9e2515ca53113a722fc9bff8f61e8a626d8413f2000215c0021a46
     securityContext:
       seccompProfile:
         type: RuntimeDefault
