@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana.${dns_domain}
+  namespace: kube-prometheus-stack
+spec:
+  routes:
+    - match: Host(`annatar.${dns_domain}`) && Path(`/grafana`)
+      kind: Rule
+      services:
+        - name: kube-prometheus-stack-grafana
+          kind: Service
+          port: 80
+      middlewares:  
+        - name: protect-grafana-login        
+        - name: replace-path-anatar-grafana
