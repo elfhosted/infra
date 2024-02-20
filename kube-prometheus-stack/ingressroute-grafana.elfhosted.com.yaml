@@ -15,6 +15,7 @@ spec:
         - name: error-pages
           namespace: traefik
         - name: protect-grafana-login
+        - name: inflightreq-grafana
 
     - match: Host(`grafana.${dns_domain}`)
       kind: Rule
@@ -25,4 +26,5 @@ spec:
       middlewares:  
         - name: error-pages
           namespace: traefik
-        - name: rate-limit-grafana        
+        - name: rate-limit-grafana       
+        - name: inflightreq-grafana         
