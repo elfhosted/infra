@@ -178,7 +178,7 @@ spec:
       ## @param auth.enabled Enable authentication
       ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
       ##
-      enabled: true
+      enabled: false
       ## @param auth.rootUser MongoDB(&reg;) root user
       ##
       rootUser: mongo
@@ -192,9 +192,13 @@ spec:
       ## @param auth.passwords List of passwords for the custom users set at `auth.usernames`
       ## @param auth.databases List of custom databases to be created during the initialization
       ##
-      usernames: []
-      passwords: []
-      databases: []
+      usernames:
+      - mediafusion
+      passwords:
+      - mediafusion
+      databases: 
+      - mediafusion
+
       ## @param auth.username DEPRECATED: use `auth.usernames` instead
       ## @param auth.password DEPRECATED: use `auth.passwords` instead
       ## @param auth.database DEPRECATED: use `auth.databases` instead
