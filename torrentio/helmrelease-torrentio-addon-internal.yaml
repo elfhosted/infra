@@ -121,7 +121,7 @@ spec:
             port: 7001
     addons:
       vpn:
-        enabled: true # in case we ever need it
+        enabled: false # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia
