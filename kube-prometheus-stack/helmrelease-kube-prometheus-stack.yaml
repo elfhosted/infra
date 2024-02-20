@@ -984,6 +984,7 @@ spec:
     ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
     ##
     grafana:
+      assertNoLeakedSecrets: false # our secrets are sealedsecrets, and we don't care about grafana DB secret showing up in configmap
       enabled: true
       namespaceOverride: ""
 
