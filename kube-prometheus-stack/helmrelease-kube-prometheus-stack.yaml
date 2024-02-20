@@ -1230,7 +1230,7 @@ spec:
         #   url: https://grafana.net
         database:
           type: postgres
-          username: grafana
+          user: grafana
           host: grafana-rw
           password: ${grafana_database_password}
         server:
