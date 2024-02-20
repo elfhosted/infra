@@ -38,7 +38,7 @@ spec:
         unavailable: 1
     env:
       PORT: 3000
-      CACHE_URL: http://stremio-jackett-cacher.stremio-jackett-cacher:8080
+      CACHE_URL: http://10.43.0.4:8080 # the internal IP of the cacher, since this pod is VPN'd
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
