@@ -2237,7 +2237,7 @@ spec:
       persistence:
         ## @param compactor.persistence.enabled Enable data persistence using PVC(s) on Thanos Compactor pods
         ##
-        enabled: false
+        enabled: true
         ## @param compactor.persistence.defaultEmptyDir Defaults to emptyDir if persistence is disabled.
         ##
         defaultEmptyDir: true
