@@ -37,8 +37,7 @@ spec:
       rollingUpdate:
         unavailable: 1
     env:
-      PORT: 3649
-      TENANT_NAME: Public
+      PORT: 3000
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
@@ -65,7 +64,6 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi                       
-
     # resources:
     ingress:
       main:
@@ -75,4 +73,4 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 3649
+            port: 3000
