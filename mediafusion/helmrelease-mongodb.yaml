@@ -778,7 +778,7 @@ spec:
       ## e.g:
       ## clusterIP: None
       ##
-      clusterIP: "10.43.0.3"
+      clusterIP: ""
       ## @param service.externalIPs Specify the externalIP value ClusterIP service type (only for standalone architecture)
       ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
       ##
