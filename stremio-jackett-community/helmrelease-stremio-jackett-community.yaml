@@ -77,7 +77,7 @@ spec:
             port: 3000
     addons:
       vpn:
-        enabled: false # for AllDebrid, getting ready
+        enabled: true # for AllDebrid, getting ready
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia
