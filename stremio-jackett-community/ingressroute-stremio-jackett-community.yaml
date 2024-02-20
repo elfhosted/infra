@@ -10,7 +10,7 @@ spec:
       services:
         - name: stremio-jackett-community
           kind: Service
-          port: 3649
+          port: 3000
       middlewares:  
         - name: error-pages
           namespace: traefik
