@@ -50,7 +50,8 @@ giant02      ansible_host=10.0.42.52 cluster_nic=enp1s0.4000  # 10Gbps node
 giant03      ansible_host=10.0.42.53 cluster_nic=enp44s0.4000 # 10Gbps node
 
 # gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
-gnome02      ansible_host=10.0.42.102 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
+gnome01      ansible_host=10.0.42.101 cluster_nic=eno1.4000 # an i7-8 host, 64GB (old goblin01)
+gnome02      ansible_host=10.0.42.102 cluster_nic=eno1.4000 # an i7-8 host, 64GB (old goblin02)
 gnome03      ansible_host=10.0.42.103 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
 
 # We use these for doing automated hetzner installimage reinstalls
@@ -125,6 +126,7 @@ orc03
 gnome01
 gnome02
 gnome03
+gnome04
 
 [node_role_download_only]
 giant01
