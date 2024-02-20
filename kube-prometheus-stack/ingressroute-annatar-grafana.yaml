@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana.${dns_domain}
+  name: annatar.${dns_domain}-grafana
   namespace: kube-prometheus-stack
 spec:
   routes:
