@@ -5,8 +5,8 @@ metadata:
   namespace: mediafusion
 data:
   HOST_URL: https://mediafusion.${dns_domain}
-  ENABLE_TAMILMV_SEARCH_SCRAPER: false
-  PROWLARR_IMMEDIATE_MAX_PROCESS: 3
-  PROWLARR_SEARCH_INTERVAL_HOUR: 24
+  ENABLE_TAMILMV_SEARCH_SCRAPER: "false"
+  PROWLARR_IMMEDIATE_MAX_PROCESS: "3"
+  PROWLARR_SEARCH_INTERVAL_HOUR: "24"
   IS_SCRAP_FROM_TORRENTIO: "false"
   REDIS_URL: redis://redis-master:6379
