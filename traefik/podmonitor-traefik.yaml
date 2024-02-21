@@ -12,5 +12,4 @@ spec:
     honorLabels: true  
   selector:
     matchLabels:
-      app.kubernetes.io/component: metrics
       app.kubernetes.io/name: traefik
