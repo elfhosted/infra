@@ -493,23 +493,23 @@ spec:
           annotations: {}
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
         disableAPICheck: true
-        serviceMonitor:
-          metricRelabelings:
-            - sourceLabels: [__name__]
-              separator: ;
-              regex: ^fluentd_output_status_buffer_(oldest|newest)_.+
-              replacement: $1
-              action: drop
-          relabelings:
-            - sourceLabels: [__meta_kubernetes_pod_node_name]
-              separator: ;
-              regex: ^(.*)$
-              targetLabel: nodename
-              replacement: $1
-              action: replace
-          jobLabel: traefik
-          interval: 30s
-          honorLabels: true
+        serviceMonitor: null # we use podmonitors instead
+          # metricRelabelings:
+          #   - sourceLabels: [__name__]
+          #     separator: ;
+          #     regex: ^fluentd_output_status_buffer_(oldest|newest)_.+
+          #     replacement: $1
+          #     action: drop
+          # relabelings:
+          #   - sourceLabels: [__meta_kubernetes_pod_node_name]
+          #     separator: ;
+          #     regex: ^(.*)$
+          #     targetLabel: nodename
+          #     replacement: $1
+          #     action: replace
+          # jobLabel: traefik
+          # interval: 30s
+          # honorLabels: true
           # (Optional)
           # scrapeTimeout: 5s
           # honorTimestamps: true
@@ -774,6 +774,27 @@ spec:
         # note that ports exposed on the default service are exposed on the internal
         # service by default as well.
         exposeInternal: false
+      tcp_postgresql:
+        # -- When using hostNetwork, use another port to avoid conflict with node exporter:
+        # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
+        port: 5432
+        # hostPort: 9100
+        # Defines whether the port is exposed if service.type is LoadBalancer or
+        # NodePort.
+        #
+        # -- You may not want to expose the metrics port on production deployments.
+        # If you want to access it from outside your cluster,
+        # use `kubectl port-forward` or create a secure ingress
+        expose: true
+        # -- The exposed port for this service
+        exposedPort: 5432
+        # -- The port protocol (TCP/UDP)
+        protocol: TCP
+        # -- Defines whether the port is exposed on the internal service;
+        # note that ports exposed on the default service are exposed on the internal
+        # service by default as well.
+        exposeInternal: false
+
 
     # -- TLS Options are created as TLSOption CRDs
     # https://doc.traefik.io/traefik/https/tls/#tls-options

@@ -4,11 +4,13 @@ metadata:
   name: traefik
   namespace: traefik
 spec:
+  namespaceSelector:
+    matchNames:
+      - traefik
   podMetricsEndpoints:
   - targetPort: 9100
     honorLabels: true  
   selector:
     matchLabels:
       app.kubernetes.io/component: metrics
-      app.kubernetes.io/instance: traefik-traefik
       app.kubernetes.io/name: traefik
