@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "baseBranches": ["ci","main"],
+  "repositories": ["geek-cookbook/elf-infra"],
+  "assignees": ["funkypenguin"],  
+  "flux": {
+    "fileMatch": ["helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$", "bootstrap/flux-system/gotk-components.yaml$"]
+  },
+  "helm-values": {
+    "fileMatch": ["helmrelease-.+\\.yaml$"]
+  },  
+  "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "packageRules": [
+    { // most updates go through ci and manual merging first
+      "automerge": false,
+      "ignoreTests": true,
+      "baseBranches": ["ci"],
+      "packagePatterns": [ ".*" ],
+      "excludePackagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett-community" ]
+    },
+    { // auto-merge upstream app-level images
+      "matchPackagePatterns": ["digest","patch"],
+      "automerge": true,
+      "automergeType": "branch",
+      "platformAutomerge": true,
+      "ignoreTests": true,
+      "baseBranches": ["main"],
+      "packagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett-community" ]
+    } 
+  ]
+}

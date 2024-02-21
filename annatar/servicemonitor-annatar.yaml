@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: annatar
+  namespace: annatar
+spec:
+  jobLabel: prometheus-job-label
+  endpoints:
+    - port: http
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+      - annatar
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: annatar

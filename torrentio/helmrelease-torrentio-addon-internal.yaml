@@ -1,0 +1,147 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: torrentio-addon-internal
+  namespace: torrentio
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: torrentio-addon-internal
+  values:
+    global:
+      nameOverride: torrentio-addon-internal
+    image:
+      repository: ghcr.io/geek-cookbook/knightcrawler-addon
+      tag: rolling@sha256:dd88c790a7fcbd4faec0abfa25f6604827fcfe9ec60edd89eb24cd0f78717d43
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
+    automountServiceAccountToken: false
+    controller:
+      replicas: 10
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "torrentio-env"
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists 
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - torrentio
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      tmp: 
+        enabled: true
+        type: custom
+        mountPath: /tmp
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi
+      npm: 
+        enabled: true
+        type: custom
+        mountPath: /.npm
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi   
+      pm2: 
+        enabled: true
+        type: custom
+        mountPath: /.pm2
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi                          
+    env:
+      PORT: 7001
+      PUID: 10001
+      PGID: 10001
+      TENANT_NAME: Public
+    envFrom:
+    - secretRef:
+        name: torrentio-env 
+    - configMapRef:
+        name: torrentio-env 
+
+    # resources:
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 7001
+    addons:
+      vpn:
+        enabled: false # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: torrentio-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"        
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config             

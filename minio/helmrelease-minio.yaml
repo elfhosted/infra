@@ -174,10 +174,10 @@ spec:
       ##
       ## Storage class of PV to bind. By default it looks for standard storage class.
       ## If the PV uses a different storage class, specify that here.
-      storageClass: "topolvm-provisioner"
+      storageClass: "topolvm-provisioner-thin"
       volumeName: ""
       accessMode: ReadWriteOnce
-      size: 100Gi
+      size: ${minio_storage}
 
       ## If subPath is set mount a sub folder of a volume instead of the root of the volume.
       ## This is especially handy for volume plugins that don't natively support sub mounting (like glusterfs).
@@ -260,13 +260,17 @@ spec:
       operator: Exists
       
     affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: Exists 
-
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - minio
+            topologyKey: "kubernetes.io/hostname"
     topologySpreadConstraints: []
 
     ## Add stateful containers to have security context, if enabled MinIO will run as this
@@ -289,7 +293,10 @@ spec:
     ##
     resources:
       requests:
-        memory: 500Mi
+        cpu: 100m
+        memory: 3Gi
+      limits:
+        memory: 6Gi
 
     ## List of policies to be created after minio install
     ##
@@ -353,6 +360,39 @@ spec:
           - 'arn:aws:s3:::loki'
           actions:
           - 's3:*'
+
+    - name: thanos
+      statements:
+        - resources:
+          - 'arn:aws:s3:::thanos/*'
+          - 'arn:aws:s3:::thanos'
+          actions:
+          - 's3:*'          
+
+    - name: goldilocks-rw
+      statements:
+        - resources:
+          - 'arn:aws:s3:::goldilocks/*'
+          - 'arn:aws:s3:::goldilocks'
+          actions:
+          - 's3:*'   
+
+    - name: cnpg
+      statements:
+        - resources:
+          - 'arn:aws:s3:::cnpg/*'
+          - 'arn:aws:s3:::cnpg'
+          actions:
+          - 's3:*'   
+
+    - name: goldilocks-ro
+      statements:
+        - resources:
+          - 'arn:aws:s3:::goldilocks/*'
+          - 'arn:aws:s3:::goldilocks'
+          actions:
+          - 's3:ListBucket'
+          - 's3:GetObject'                       
     #
     ## Additional Annotations for the Kubernetes Job makePolicyJob
     makePolicyJob:
@@ -382,6 +422,22 @@ spec:
         existingSecret: loki-credentials        
         existingSecretKey: password
         policy: loki
+      - accessKey: thanos
+        existingSecret: thanos-credentials        
+        existingSecretKey: password
+        policy: thanos    
+      - accessKey: cnpg
+        existingSecret: cnpg-credentials        
+        existingSecretKey: password
+        policy: cnpg            
+      - accessKey: goldilocks-rw
+        existingSecret: goldilocks-rw-credentials        
+        existingSecretKey: password
+        policy: goldilocks-rw
+      - accessKey: goldilocks-ro
+        existingSecret: goldilocks-ro-credentials        
+        existingSecretKey: password
+        policy: goldilocks-ro
 
       # Or you can refer to specific secret
       #- accessKey: externalSecret
@@ -469,7 +525,28 @@ spec:
         versioning: false
         # set objectlocking for
         # bucket [true|false] NOTE: versioning is enabled by default if you use locking
-        objectlocking: false      
+        objectlocking: false    
+      - name: thanos
+        policy: none
+        purge: false
+        versioning: false
+        # set objectlocking for
+        # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+        objectlocking: false    
+      - name: cnpg
+        policy: none
+        purge: false
+        versioning: false
+        # set objectlocking for
+        # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+        objectlocking: false            
+      - name: goldilocks
+        policy: none
+        purge: false
+        versioning: false
+        # set objectlocking for
+        # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+        objectlocking: false                      
 
     ## Additional Annotations for the Kubernetes Job makeBucketJob
     makeBucketJob:
@@ -519,6 +596,10 @@ spec:
       ## Please refer for comprehensive list https://min.io/docs/minio/linux/reference/minio-server/minio-server.html
       ## MINIO_SUBNET_LICENSE: "License key obtained from https://subnet.min.io"
       ## MINIO_BROWSER: "off"
+      MINIO_BROWSER_REDIRECT_URL: https://minio-console.infra.${dns_domain}
+      MINIO_IDENTITY_OPENID_REDIRECT_URI: https://minio-console.infra.${dns_domain}/oauth_callback
+      MINIO_SERVER_URL: https://minio.infra.${dns_domain}
+      MINIO_PROMETHEUS_URL: http://thanos-query.thanos:9090/
 
     ## The name of a secret in the same kubernetes namespace which contain secret values
     ## This can be useful for LDAP password, etc
@@ -530,19 +611,18 @@ spec:
     ## The following section documents environment variables for enabling external identity management using an OpenID Connect (OIDC)-compatible provider.
     ## See https://min.io/docs/minio/linux/operations/external-iam/configure-openid-external-identity-management.html for a tutorial on using these variables.
     oidc:
-      enabled: false
-      configUrl: "https://identity-provider-url/.well-known/openid-configuration"
+      enabled: true
+      configUrl: "https://authentik.infra.${dns_domain}/application/o/minio/.well-known/openid-configuration"
       clientId: "minio"
-      clientSecret: ""
+      clientSecret: "${minio_client_secret}"
       # Provide existing client secret from the Kubernetes Secret resource, existing secret will have priority over `clientSecret`
       existingClientSecretName: ""
       existingClientSecretKey: ""
-      claimName: "policy"
-      scopes: "openid,profile,email"
-      redirectUri: "https://console-endpoint-url/oauth_callback"
+      claimName: "minio-policy"
+      scopes: "profile,email,minio-policy"
       # Can leave empty
       claimPrefix: ""
-      comment: ""
+      comment: "authentik"
 
     networkPolicy:
       enabled: false
@@ -552,8 +632,8 @@ spec:
     ## ref: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/
     ##
     podDisruptionBudget:
-      enabled: false
-      maxUnavailable: 1
+      enabled: true
+      maxUnavailable: 2
 
     ## Specify the service account to use for the MinIO pods. If 'create' is set to 'false'
     ## and 'name' is left unspecified, the account 'default' will be used.

@@ -8,8 +8,6 @@ spec:
   path: ./descheduler
   prune: true # remove any elements later removed from the above path
   timeout: 10m # if not set, this defaults to interval duration, which is 1h
-  dependsOn:
-  - name: kubernetes-replicator    
   sourceRef:
     kind: GitRepository
     name: infra
@@ -21,8 +19,16 @@ spec:
     # Always use the helmrelease to determine health too
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: descheduler
-      namespace: descheduler                     
+      name: descheduler-app
+      namespace: descheduler      
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: descheduler-download
+      namespace: descheduler        
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: descheduler-errors
+      namespace: descheduler                               
   postBuild:
     substituteFrom:
       - kind: ConfigMap

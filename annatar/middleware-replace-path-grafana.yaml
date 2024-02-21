@@ -1,0 +1,8 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: replace-path-grafana
+  namespace: annatar
+spec:
+  replacePath:
+    path: /public-dashboards/5e9480a76da840bb9b81802a1d0b84fc

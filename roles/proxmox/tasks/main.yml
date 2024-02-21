@@ -143,4 +143,3 @@
   lvg:
     vg: vg0
     pvs: "/dev/sdb"
-  when: "inventory_hostname in groups['k3s_servers']"    

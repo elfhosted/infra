@@ -1,0 +1,24 @@
+---
+
+
+- hosts: k3s_agents,k3s_dwarves
+  gather_facts: no
+  become: yes
+
+# allow us to run this either for all hosts, or just a specific host
+
+      
+  tasks: 
+
+  - name: Here be dragons! 🐉
+    pause:
+      prompt: |
+        If the next tasks are run without a limit (`-l` flag), then the tinkerbell workflow for
+        ALL nodes will be reset. This may be OK if the hosts are all booting into their hard drive first,
+        but be aware thaht having a PENDING workflow for any host will result in that host being re-installed
+        without question if it ever boots into tinkerbell. So confirm first that you've called this playbook correctly :)
+        You've chosen "{{ inventory_hostname }}" - please double-check!
+
+        Press return to continue. Press Ctrl+c and then "a" to abort'
+
+  - { import_role: { name: hetzner-reinstall }, tags: [ hetzner-reinstall ] }

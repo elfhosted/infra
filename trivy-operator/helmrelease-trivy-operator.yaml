@@ -10,7 +10,7 @@ spec:
       version: 0.18.4
       sourceRef:
         kind: HelmRepository
-        name: trivy
+        name: aqua
         namespace: flux-system
   interval: 15m
   timeout: 5m
@@ -302,7 +302,7 @@ spec:
       storageClassEnabled: true
 
       # -- storageClassName is the name of the storage class to be used for trivy server PVC. If empty, tries to find default storage class
-      storageClassName: ""
+      storageClassName: "ceph-block-ssd"
 
       # -- podLabels is the extra pod labels to be used for trivy server
       podLabels:

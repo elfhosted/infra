@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tenant-cleaner
+  namespace: webhook-receiver
+data:
+  tenant-cleaner.sh: |
+    #!/bin/bash
+
+    # setup git
+    git config --global user.name "Elfbot"
+    git config --global user.email "elfbot@elfhosted.com"
+    git config --global pull.rebase true
+    git config --global --add safe.directory /repo
+
+    # set -x
+    # set -e
+
+    gh auth setup-git
+
+
+    TEMPDIR=$(mktemp -d)
+    cd $TEMPDIR
+    until gh repo clone geek-cookbook/elfhosted-tenants  -- --depth=1
+    do
+        sleep $((0 + RANDOM % 10)); # avoid races
+    done
+    git config --global --add safe.directory elfhosted-tenants
+    cd elfhosted-tenants
+
+    ./scripts/tenant-cleaner.sh
+
+
+    git add .
+    git commit -m "Tenant cleaner cleans tenants!" .
+
+    git push --set-upstream origin

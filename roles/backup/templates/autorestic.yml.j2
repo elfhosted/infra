@@ -1,0 +1,19 @@
+version: 2
+
+locations:
+  k3s-server:
+    from: /var/lib/rancher/k3s/server/
+    to: b2
+    cron: '0 4 * * *' # Backup daily at 3am local time
+    options:
+      forget:
+        keep-daily: 5
+
+backends:
+  b2:
+    type: b2
+    path: '{{ b2_bucket_name }}:k3s/{{ inventory_hostname_short }}'
+    key: {{ restic_password }}
+    env:
+      B2_ACCOUNT_ID: {{ b2_account_id }}
+      B2_ACCOUNT_KEY: {{ b2_account_key }}

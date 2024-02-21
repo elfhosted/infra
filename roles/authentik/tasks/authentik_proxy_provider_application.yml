@@ -102,7 +102,7 @@
       application_pk: "{{ _new_application.json.pk }}"
     when: not _existing_application.json.results
 
-  - name: "Set icon for {{ provider.name }}"
+  - name: "Set icon for {{ provider.name }} to {{ provider.icon }}"
     uri:
       url: "https://{{ authentik_dns_name }}/api/v3/core/applications/{{ provider.name }}/set_icon_url/"
       method: POST
@@ -113,19 +113,14 @@
       body_format: json
       status_code: 200
     when: provider.icon is defined
+    ignore_errors: true
 
   - name: Combine all the proxy providers pks to add to outpost
     set_fact: 
       proxy_provider_pks: "{{ proxy_provider_pks + [ provider_pk ] }}"
 
-  - name: Create ingress manifest for {{ provider.external_host }} (controller)
+  - name: Create ingress manifest for {{ provider.external_host }}
     template:
       src: "outpost-ingress.yaml.j2"
-      dest: "flux/{{ helm_ingress_dns_suffix }}/{{ helm_chart_context }}/flux-system/ingress-{{ provider.name }}.{{ helm_ingress_dns_suffix }}.yaml"
-    when: helm_chart_context == "controller"
-
-  - name: Create virtualservice manifest for {{ provider.external_host }} (cluster)
-    template:
-      src: "outpost-istio-virtualservice.yaml.j2"
-      dest: "flux/{{ helm_ingress_dns_suffix }}/{{ helm_chart_context }}/istiod--istio-system/virtualservice-{{ provider.name }}.{{ helm_ingress_dns_suffix }}.yaml"
-    when: helm_chart_context == "cluster"    
+      dest: "authentik/ingress-{{ provider.name }}-via-authentik.yaml"
+      

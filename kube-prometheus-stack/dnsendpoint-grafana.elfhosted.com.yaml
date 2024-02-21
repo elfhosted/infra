@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "grafana.${dns_domain}"
+  namespace: kube-prometheus-stack
+spec:
+  endpoints:
+  - dnsName: "grafana.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "traefik-ingress.${dns_domain}"

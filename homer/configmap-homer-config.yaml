@@ -89,10 +89,10 @@ data:
           logo: "assets/png/grafana.png"
           url: "https://grafana.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute                  
-        - name: "Prometheus"
+        - name: "Thanos"
           subtitle: "Performance Metrics (raw)"
-          logo: "assets/png/prometheus.png"
-          url: "https://prometheus.infra.${dns_domain}"
+          logo: "assets/png/thanos.png"
+          url: "https://thanos.infra.${dns_domain}"
           target: "_blank" # optional html tag target attribute
         - name: "Traefik"
           subtitle: "HTTP(S) Ingress Dashboard"

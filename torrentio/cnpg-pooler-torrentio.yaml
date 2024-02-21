@@ -1,0 +1,16 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: pooler-torrentio
+  namespace: torrentio
+spec:
+  cluster:
+    name: torrentio
+
+  instances: 3
+  type: rw
+  pgbouncer:
+    poolMode: session
+    parameters:
+      max_client_conn: "10000"
+      default_pool_size: "10"

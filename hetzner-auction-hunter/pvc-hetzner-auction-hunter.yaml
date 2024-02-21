@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hetzner-auction-hunter
+  namespace: hetzner-auction-hunter
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Mi
+  storageClassName: ceph-filesystem-ssd

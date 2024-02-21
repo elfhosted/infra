@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+    name: theme-park-petio-dracula
+    namespace: theme-park
+spec:
+    plugin:
+        traefik-themepark:
+          app: petio
+          theme: dracula
+          baseUrl: https://theme-park.${dns_domain}

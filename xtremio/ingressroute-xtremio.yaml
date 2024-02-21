@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: xtremio.${dns_domain}
+  namespace: xtremio
+spec:
+  routes:
+    - match: Host(`xtremio.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: xtremio
+          kind: Service
+          port: 3649
+      middlewares:  
+        - name: error-pages
+          namespace: traefik
+        - name: rate-limit-xtremio        
+

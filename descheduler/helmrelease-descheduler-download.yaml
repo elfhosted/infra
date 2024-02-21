@@ -1,0 +1,192 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: descheduler-download
+  namespace: descheduler
+spec:
+  chart:
+    spec:
+      chart: descheduler
+      version: 0.28.x
+      sourceRef:
+        kind: HelmRepository
+        name: descheduler
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m        
+  values:
+    # Default values for descheduler.
+    # This is a YAML-formatted file.
+    # Declare variables to be passed into your templates.
+
+    # CronJob or Deployment
+    kind: CronJob
+
+    image:
+      repository: registry.k8s.io/descheduler/descheduler
+      # Overrides the image tag whose default is the chart version
+      tag: ""
+      pullPolicy: IfNotPresent
+
+    imagePullSecrets:
+    #   - name: container-registry-secret
+
+    resources:
+      requests:
+        cpu: 500m
+        memory: 256Mi
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+
+    nameOverride: ""
+    fullnameOverride: ""
+
+    # labels that'll be applied to all resources
+    commonLabels: {}
+
+    cronJobApiVersion: "batch/v1"
+    schedule: "45 22 * * *" # 15 min before end of maint window
+    suspend: false
+    # startingDeadlineSeconds: 200
+    # successfulJobsHistoryLimit: 3
+    # failedJobsHistoryLimit: 1
+    # ttlSecondsAfterFinished 600
+    timeZone: Pacific/Auckland
+
+    # Required when running as a Deployment
+    deschedulingInterval: 5m
+
+    # Specifies the replica count for Deployment
+    # Set leaderElection if you want to use more than 1 replica
+    # Set affinity.podAntiAffinity rule if you want to schedule onto a node
+    # only if that node is in the same zone as at least one already-running descheduler
+    replicas: 1
+
+    # Specifies whether Leader Election resources should be created
+    # Required when running as a Deployment
+    # NOTE: Leader election can't be activated if DryRun enabled
+    leaderElection: {}
+    #  enabled: true
+    #  leaseDuration: 15s
+    #  renewDeadline: 10s
+    #  retryPeriod: 2s
+    #  resourceLock: "leases"
+    #  resourceName: "descheduler"
+    #  resourceNamescape: "kube-system"
+
+    command:
+    - "/bin/descheduler"
+
+    cmdOptions:
+      v: 3
+      # dry-run:
+
+    # Recommended to use the latest Policy API version supported by the Descheduler app version
+    deschedulerPolicyAPIVersion: "descheduler/v1alpha1"
+    
+    deschedulerPolicy:
+      nodeSelector: "node-role.${dns_domain}/download=true"
+      maxNoOfPodsToEvictPerNode: 100
+      maxNoOfPodsToEvictPerNamespace: 2
+      ignorePvcPods: false
+      nodeFit: true
+      evictLocalStoragePods: true
+      strategies:
+        RemoveDuplicates:
+          enabled: true
+        LowNodeUtilization:
+          enabled: true
+          params:
+            nodeResourceUtilizationThresholds:
+              useDeviationThresholds: true # not as much use when we have 2 nodes
+              thresholds:
+                cpu: 1
+                memory: 1
+                pods: 1
+              targetThresholds:
+                cpu: 5
+                memory: 5
+                pods: 5
+
+
+    priorityClassName: system-cluster-critical # don't deschedule yourself
+
+    nodeSelector: {}
+    #  foo: bar
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
+
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+
+    rbac:
+      # Specifies whether RBAC resources should be created
+      create: true
+
+    serviceAccount:
+      # Specifies whether a ServiceAccount should be created
+      create: true
+      # The name of the ServiceAccount to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name:
+      # Specifies custom annotations for the serviceAccount
+      annotations: {}
+
+    podAnnotations: {}
+
+    podLabels: {}
+
+    dnsConfig: {}
+
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /healthz
+        port: 10258
+        scheme: HTTPS
+      initialDelaySeconds: 3
+      periodSeconds: 10
+
+    service:
+      enabled: false
+
+    serviceMonitor:
+      enabled: true
+      # The namespace where Prometheus expects to find service monitors.
+      # namespace: ""
+      # Add custom labels to the ServiceMonitor resource
+      additionalLabels: {}
+        # prometheus: kube-prometheus-stack
+      interval: ""
+      # honorLabels: true
+      insecureSkipVerify: true
+      serverName: null
+      metricRelabelings: []
+        # - action: keep
+        #   regex: 'descheduler_(build_info|pods_evicted)'
+        #   sourceLabels: [__name__]
+      relabelings: []
+        # - sourceLabels: [__meta_kubernetes_pod_node_name]
+        #   separator: ;
+        #   regex: ^(.*)$
+        #   targetLabel: nodename
+        #   replacement: $1
+        #   action: replace

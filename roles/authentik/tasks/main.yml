@@ -17,6 +17,10 @@
       user_pk: "{{ _existing_user.json.results[0].pk }}"
     when: _existing_user.json.results
 
+  - name: set authentik_dns_name
+    set_fact:
+      authentik_dns_name: "authentik.infra.{{ dns_domain }}"
+
   - name: "Create {{ authentik_user_email }}"
     uri:
       url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/users/"
@@ -162,22 +166,27 @@
       minio_propertymapping_pk: "{{ _new_minio_propertymapping.json.pk }}"
     when: not _existing_minio_propertymapping.json.results        
 
-  # Create oauth applications / providers
-  - name: create oauth providers (controller)
+  - name: create oauth providers
     include_tasks: authentik_oauth_provider_application.yml
     with_items:
       - name: kube-apiserver
-        secret: "{{ keycloak_kubernetes_client_secret }}"
+        secret: "{{ authentik_kube_apiserver_client_secret }}"
         redirect_uris: |
+          http://localhost:8000
           http://localhost:18000
-          https://dashboard-internal.{{ dns_domain }}/oauth2/callback
-          https://weave-gitops-internal.{{ dns_domain }}/oauth2/callback
-        icon: https://homer.{{ dns_domain }}/assets/png/kubernetes.png
+          https://kubernetes-dashboard.infra.{{ dns_domain }}/oauth2/callback
+          https://weave-gitops.infra.{{ dns_domain }}/oauth2/callback
+        icon: https://infra.{{ dns_domain }}/assets/png/kubernetes.png
       - name: grafana
-        secret: "{{ keycloak_grafana_client_secret }}"
+        secret: "{{ authentik_grafana_client_secret }}"
         redirect_uris: |
-          https://grafana-internal.{{ dns_domain }}/login/generic_oauth
-        icon: https://homer.{{ dns_domain }}/assets/png/grafana.png
+          https://grafana.infra.{{ dns_domain }}/login/generic_oauth
+        icon: https://infra.{{ dns_domain }}/assets/png/grafana.png
+      - name: minio
+        secret: "{{ authentik_minio_client_secret }}"
+        redirect_uris: |
+          https://minio-console.infra.{{ dns_domain }}/oauth_callback
+        icon: https://infra.{{ dns_domain }}/assets/png/minio.png        
     loop_control:
       loop_var: provider
 
@@ -202,25 +211,36 @@
         external_host: https://alertmanager.infra.{{ dns_domain }}
         internal_host: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack.svc.cluster.local:9093
         icon: https://infra.{{ dns_domain }}/assets/png/alertmanager.png
+        host: alertmanager.infra.${dns_domain}
       - name: prometheus
         external_host: https://prometheus.infra.{{ dns_domain }}
         internal_host: http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090
         icon: https://infra.{{ dns_domain }}/assets/png/prometheus.png
+        host: prometheus.infra.${dns_domain}
       - name: polaris
         external_host: https://polaris.infra.{{ dns_domain }}
         internal_host: http://polaris-dashboard.polaris.svc.cluster.local:80
         icon: https://infra.{{ dns_domain }}/assets/png/polaris.png
+        host: polaris.infra.${dns_domain}
       - name: homer
         external_host: https://infra.{{ dns_domain }}
         internal_host: http://homer.homer.svc.cluster.local:8080
+        host: infra.${dns_domain}
       - name: hubble
         external_host: https://hubble.infra.{{ dns_domain }}
         internal_host: http://hubble-ui.kube-system.svc.cluster.local:80
         icon: https://infra.{{ dns_domain }}/assets/png/hubble.png
+        host: hubble.infra.${dns_domain}
       - name: thanos
         external_host: https://thanos.infra.{{ dns_domain }}
         internal_host: http://thanos-query.thanos.svc.cluster.local:9090
-        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png                      
+        icon: https://infra.{{ dns_domain }}/assets/png/thanos.png       
+        host: thanos.infra.${dns_domain}   
+      - name: traefik
+        external_host: https://traefik.infra.{{ dns_domain }}
+        internal_host: http://traefik-dashboard.traefik.svc.cluster.local:9000
+        icon: https://infra.{{ dns_domain }}/assets/png/traefik.png        
+        host: traefik.infra.${dns_domain}                      
     loop_control:
       loop_var: provider
 
@@ -249,5 +269,5 @@
     loop_control:
       loop_var: group
 
-- name: Update authentication flow
-  include_tasks: authentik_authentication_flow.yml
+  - name: Update authentication flow
+    include_tasks: authentik_authentication_flow.yml

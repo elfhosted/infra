@@ -3,5 +3,40 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
-patchesStrategicMerge:
-  - flux-system-patch.yaml
+- shard-a
+- shard-b
+- shard-c
+- shard-d
+- shard-e
+- shard-f
+- shard-g
+- shard-h
+- shard-i
+- shard-j
+- shard-k
+- shard-l
+- shard-m
+- shard-n
+- shard-o
+- shard-p
+- shard-q
+- shard-r
+- shard-s
+- shard-t
+- shard-u
+- shard-v
+- shard-w
+- shard-x
+- shard-y
+- shard-z
+# patchesStrategicMerge:
+#   - flux-system-patch.yaml
+patches:
+  - target:
+      kind: Deployment
+      name: "(source-controller|kustomize-controller|helm-controller)"
+      annotationSelector: "!sharding.fluxcd.io/role"
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/0
+        value: --watch-label-selector=!sharding.fluxcd.io/key  

@@ -16,7 +16,8 @@ spec:
   timeout: 5m
   releaseName: webhook-receiver
   values:
-    persistence: 
+    replicaCount: 2
+    persistence:
       config:
         enabled: "true"
         mountPath: "/etc/webhook/hooks.yaml"
@@ -28,18 +29,24 @@ spec:
       repo:
         enabled: true
         type: emptyDir
-        mountPath: /repo          
-    envFrom: 
+        mountPath: /repo
+    envFrom:
     - secretRef:
-        name: webhook-receiver    
-    args: 
-    - -verbose 
-    - -hooks=/etc/webhook/hooks.yaml 
-    - -hotreload 
-    - -template  
+        name: webhook-receiver
+    args:
+    - -verbose
+    - -hooks=/etc/webhook/hooks.yaml
+    - -hotreload
+    - -template
     controller:
+      replicas: 2
       annotations:
         configmap.reloader.stakater.com/reload: "webhook-receiver-hooks"
+      strategy: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+        
     initContainers:
       pull-repo:
         image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
@@ -57,6 +64,35 @@ spec:
         volumeMounts:
         - mountPath: /repo
           name: repo
-        envFrom: 
+        envFrom:
         - secretRef:
-            name: webhook-receiver     
+            name: webhook-receiver
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - webhook-receiver
+          topologyKey: "kubernetes.io/hostname"
+
+    priorityClassName: cluster-important
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 500m
+        memory: 10240Mi # fix this once we prove it's sorted          

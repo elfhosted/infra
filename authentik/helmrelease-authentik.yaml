@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2023.8.x
+      version: 2023.10.x
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -63,7 +63,8 @@ spec:
     ingress:
       enabled: true
       ingressClassName: "nginx"
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       labels: {}
       hosts:
         - host: authentik.infra.${dns_domain}
@@ -73,7 +74,8 @@ spec:
       tls: []
 
     # -- Annotations to add to the server and worker deployments
-    annotations: {}
+    annotations: 
+      configmap.reloader.stakater.com/reload: "authentik-blueprints" # Reload the deployments when blueprints are changed
 
     # -- Annotations to add to the server and worker pods
     podAnnotations: {}
@@ -133,11 +135,12 @@ spec:
         # -- set the redis hostname to talk to
         # @default -- `{{ .Release.Name }}-redis-master`
         host: "{{ .Release.Name }}-redis-master"
-        password: ""  
+        password: "" # this is overridden by an env var, so I don't have to stick it in the chart in cleartext
 
     # -- List of config maps to mount blueprints from. Only keys in the
     # configmap ending with ".yaml" wil be discovered and applied
-    blueprints: []
+    blueprints:
+    - authentik-blueprints
 
     # -- see configuration options at https://goauthentik.io/docs/installation/configuration/
     env: {}
@@ -168,10 +171,18 @@ spec:
     volumeMounts: []
 
     # -- affinity applied to the deployments
-    affinity: {}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists    
 
     #  -- tolerations applied to the deployments
-    tolerations: []
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists 
 
     # -- nodeSelector applied to the deployments
     nodeSelector: {}
@@ -295,7 +306,7 @@ spec:
       existingSecret: authentik-postgresql-secrets
       persistence:
         enabled: true
-        storageClass: ceph-block
+        storageClass: ceph-block-ssd
         size: 1Gi
         accessModes:
           - ReadWriteOnce
@@ -324,12 +335,29 @@ spec:
       podSecurityContext:
         enabled: true
         runAsUser: 1001
+
+      primary:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: Exists 
+
+        #  -- tolerations applied to the deployments
+        tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+                
     redis:
       # -- enable the bundled bitnami redis chart
       enabled: true
       architecture: standalone
       auth:
-        enabled: false
+        enabled: true
+        existingSecret: authentik-secrets
+        existingSecretPasswordKey: AUTHENTIK_REDIS__PASSWORD
       image:
         tag: 6.2.10-debian-11-r13
       master:
@@ -342,7 +370,20 @@ spec:
             memory: "64Mi"   
         persistence:
           enabled: true
-          storageClass: ceph-block
+          storageClass: ceph-block-ssd
           size: 1Gi
           accessModes:
             - ReadWriteOnce
+
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: Exists 
+
+        #  -- tolerations applied to the deployments
+        tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists     

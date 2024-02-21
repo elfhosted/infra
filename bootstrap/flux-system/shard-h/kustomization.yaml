@@ -1,0 +1,82 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - ../gotk-components.yaml
+nameSuffix: "-shard-h"
+commonAnnotations:
+  sharding.fluxcd.io/role: "shard"
+patches:
+  - target:
+      kind: (Namespace|CustomResourceDefinition|ClusterRole|ClusterRoleBinding|ServiceAccount|NetworkPolicy)
+      labelSelector: "app.kubernetes.io/part-of=flux"
+    patch: |
+      apiVersion: v1
+      kind: all
+      metadata:
+          name: all
+      $patch: delete      
+  - target:
+      labelSelector: "app.kubernetes.io/component=notification-controller"
+    patch: |
+      apiVersion: v1
+      kind: all
+      metadata:
+        name: all
+      $patch: delete      
+  - target:
+      kind: Deployment
+      name: (image-reflector-controller|image-automation-controller)
+    patch: |
+      apiVersion: v1
+      kind: Deployment
+      metadata:
+        name: all
+      $patch: delete      
+  - target:
+      kind: Service
+      name: source-controller
+    patch: |
+      - op: replace
+        path: /spec/selector/app
+        value: source-controller-shard-h      
+  - target:
+      kind: Deployment
+      name: source-controller
+    patch: |
+      - op: replace
+        path: /spec/selector/matchLabels/app
+        value: source-controller-shard-h
+      - op: replace
+        path: /spec/template/metadata/labels/app
+        value: source-controller-shard-h
+      - op: replace
+        path: /spec/template/spec/containers/0/args/6
+        value: --storage-adv-addr=source-controller-shard-h.$(RUNTIME_NAMESPACE).svc.cluster.local.      
+  - target:
+      kind: Deployment
+      name: kustomize-controller
+    patch: |
+      - op: replace
+        path: /spec/selector/matchLabels/app
+        value: kustomize-controller-shard-h
+      - op: replace
+        path: /spec/template/metadata/labels/app
+        value: kustomize-controller-shard-h      
+  - target:
+      kind: Deployment
+      name: helm-controller
+    patch: |
+      - op: replace
+        path: /spec/selector/matchLabels/app
+        value: helm-controller-shard-h
+      - op: replace
+        path: /spec/template/metadata/labels/app
+        value: helm-controller-shard-h      
+  - target:
+      kind: Deployment
+      name: (source-controller|kustomize-controller|helm-controller)
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --watch-label-selector=sharding.fluxcd.io/key=shard-h

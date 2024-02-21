@@ -117,7 +117,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/metallb-controller
-        tag: 0.13.7-debian-11-r19
+        # tag: 0.13.7-debian-11-r19
         digest: ""
         ## Specify a imagePullPolicy
         ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -483,7 +483,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/metallb-speaker
-        tag: 0.13.7-debian-11-r18
+        # tag: 0.13.7-debian-11-r18
         digest: ""
         ## Specify a imagePullPolicy
         ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -566,7 +566,13 @@ spec:
       ## @param speaker.affinity Affinity for speaker pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ##
-      affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists 
       ## Node speaker.affinity preset
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
       ##

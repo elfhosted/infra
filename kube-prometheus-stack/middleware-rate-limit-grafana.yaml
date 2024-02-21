@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-grafana
+  namespace: kube-prometheus-stack
+spec:
+  # Protect grafana from DDOS
+  rateLimit:
+    average: 5  # 1 request every ..
+    period: 1s  # 
+    burst: 20   # allow burst up to 20 at once

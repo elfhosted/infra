@@ -80,7 +80,7 @@
     when: not _existing_provider.json.results # resolves to false/undefined if search is empty
     register: _new_application
 
-  - name: "Set icon for {{ provider.name }}"
+  - name: "Set icon for {{ provider.name }} to {{ provider.icon }}"
     uri:
       url: "https://{{ authentik_dns_name }}/api/v3/core/applications/{{ provider.name }}/set_icon_url/"
       method: POST
@@ -91,6 +91,7 @@
       body_format: json
       status_code: 200
     when: provider.icon is defined
+    ignore_errors: true
 
   # - name: set the group pk value
   #   set_fact:

@@ -304,7 +304,7 @@ spec:
       tlsConfig: null
       # -- Prometheus rules will be deployed for alerting purposes
       prometheusRule:
-        enabled: true
+        enabled: false # seems to be erroring
         additionalLabels: {}
         # namespace:
         rules: []
@@ -346,22 +346,22 @@ spec:
 
     # -- Configure additional ports and services. For each configured port, a corresponding service is created.
     # See values.yaml for details
-    extraPorts: {}
-    #  syslog:
-    #    name: tcp-syslog
-    #    annotations: {}
-    #    labels: {}
-    #    containerPort: 1514
-    #    protocol: TCP
-    #    service:
-    #      type: ClusterIP
-    #      clusterIP: null
-    #      port: 1514
-    #      externalIPs: []
-    #      nodePort: null
-    #      loadBalancerIP: null
-    #      loadBalancerSourceRanges: []
-    #      externalTrafficPolicy: null
+    extraPorts:
+      syslog:
+        name: tcp-syslog
+        annotations: {}
+        labels: {}
+        containerPort: 1514
+        protocol: TCP
+        service:
+          type: LoadBalancer
+          clusterIP: null
+          port: 1514
+          externalIPs: []
+          nodePort: null
+          loadBalancerIP: ${cluster_nic_class_c}.202 # for syslog from non-cluster devices
+          loadBalancerSourceRanges: []
+          externalTrafficPolicy: Local
     #    ingress:
     #      # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     #      # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress

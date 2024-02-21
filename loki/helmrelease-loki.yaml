@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: 5.36.x
+      version: 5.41.x
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -439,7 +439,7 @@ spec:
         annotations: {}
         # -- Tolerations for tokengen Job
         tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: node-role.elfhosted.com/lightweight
           operator: Exists
           effect: NoSchedule        
         # -- Additional volumes for Pods
@@ -660,7 +660,7 @@ spec:
           priorityClassName: null
           # -- Tolerations for GrafanaAgent pods
           tolerations:
-          - key: node-role.kubernetes.io/control-plane
+          - key: node-role.elfhosted.com/lightweight
             operator: Exists
             effect: NoSchedule          
         # PodLogs configuration
@@ -711,7 +711,7 @@ spec:
         nodeSelector: {}
         # -- Tolerations for canary pods
         tolerations:
-        - key: node-role.kubernetes.io/control-plane
+        - key: node-role.elfhosted.com/lightweight
           operator: Exists
           effect: NoSchedule        
         # -- The name of the PriorityClass for loki-canary pods
@@ -808,7 +808,13 @@ spec:
       # -- volumeClaimTemplates to add to StatefulSet
       extraVolumeClaimTemplates: []
       # -- Resource requests and limits for the write
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Grace period to allow the write to shutdown before it is killed. Especially for the ingester,
       # this must be increased. It must be long enough so writes can be gracefully shutdown flushing/transferring
       # all data and to successfully leave the member ring on shutdown.
@@ -826,7 +832,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for write pods
       dnsConfig: {}
@@ -836,7 +842,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for write pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
@@ -846,7 +852,14 @@ spec:
         volumeClaimsEnabled: true
         # -- Parameters used for the `data` volume when volumeClaimEnabled if false
         dataVolumeParameters:
-          emptyDir: {}
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 10Gi
         # -- Enable StatefulSetAutoDeletePVC feature
         enableStatefulSetAutoDeletePVC: false
         # -- Size of persistent disk
@@ -856,7 +869,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: topolvm-provisioner
+        storageClass: topolvm-provisioner-thin
         # -- Selector for persistent disk
         selector: null
     # Configuration for the table-manager
@@ -896,7 +909,14 @@ spec:
       # -- Volumes to add to the table-manager pods
       extraVolumes: []
       # -- Resource requests and limits for the table-manager
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
+
       # -- Containers to add to the table-manager pods
       extraContainers: []
       # -- Grace period to allow the table-manager to shutdown before it is killed
@@ -921,7 +941,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                   
       # -- DNS config table-manager pods
       dnsConfig: {}
@@ -929,7 +949,7 @@ spec:
       nodeSelector: {}
       # -- Tolerations for table-manager pods
       tolerations: 
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- Enable deletes by retention
@@ -1006,7 +1026,13 @@ spec:
       # -- Volumes to add to the read pods
       extraVolumes: []
       # -- Resource requests and limits for the read
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Grace period to allow the read to shutdown before it is killed
       terminationGracePeriodSeconds: 30
       # -- Affinity for read pods. Passed through `tpl` and, thus, to be configured as string
@@ -1022,7 +1048,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for read pods
       dnsConfig: {}
@@ -1032,7 +1058,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for read pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
@@ -1047,7 +1073,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: topolvm-provisioner
+        storageClass: topolvm-provisioner-thin
         # -- Selector for persistent disk
         selector: null
     # Configuration for the backend pod(s)
@@ -1116,7 +1142,13 @@ spec:
       # -- Volumes to add to the backend pods
       extraVolumes: []
       # -- Resource requests and limits for the backend
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Grace period to allow the backend to shutdown before it is killed. Especially for the ingester,
       # this must be increased. It must be long enough so backends can be gracefully shutdown flushing/transferring
       # all data and to successfully leave the member ring on shutdown.
@@ -1134,7 +1166,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for backend pods
       dnsConfig: {}
@@ -1144,7 +1176,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for backend pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # -- The default is to deploy all pods in parallel.
@@ -1154,7 +1186,14 @@ spec:
         volumeClaimsEnabled: true
         # -- Parameters used for the `data` volume when volumeClaimEnabled if false
         dataVolumeParameters:
-          emptyDir: {}
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 10Gi
         # -- Enable StatefulSetAutoDeletePVC feature
         enableStatefulSetAutoDeletePVC: true
         # -- Size of persistent disk
@@ -1164,7 +1203,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: topolvm-provisioner
+        storageClass: topolvm-provisioner-thin
         # -- Selector for persistent disk
         selector: null
     # Configuration for the single binary node(s)
@@ -1237,7 +1276,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists               
       # -- DNS config for single binary pods
       dnsConfig: {}
@@ -1245,7 +1284,7 @@ spec:
       nodeSelector: {}
       # -- Tolerations for single binary pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       persistence:
@@ -1260,7 +1299,7 @@ spec:
         # If set to "-", storageClassName: "", which disables dynamic provisioning.
         # If empty or set to null, no storageClassName spec is
         # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: topolvm-provisioner
+        storageClass: topolvm-provisioner-thin
         # -- Selector for persistent disk
         selector: null
     # Use either this ingress or the gateway, but not both at once.
@@ -1394,7 +1433,13 @@ spec:
             - ALL
         allowPrivilegeEscalation: false
       # -- Resource requests and limits for the gateway
-      resources: {}
+      resources:
+        limits: 
+          memory: 2000Mi
+          cpu: 1
+        requests:
+          memory: 1500Mi
+          cpu: 10m
       # -- Containers to add to the gateway pods
       extraContainers: []
       # -- Grace period to allow the gateway to shutdown before it is killed
@@ -1403,8 +1448,10 @@ spec:
       # @default -- Hard node and soft zone anti-affinity
       affinity: |
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
+          preferredDuringSchedulingIgnoredDuringExecution: 
+          - weight: 100  
+            podAffinityTerm:    
+              labelSelector:
                 matchLabels:
                   {{- include "loki.gatewaySelectorLabels" . | nindent 10 }}
               topologyKey: kubernetes.io/hostname
@@ -1412,7 +1459,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.elfhosted.com/lightweight
                 operator: Exists                 
       # -- DNS config for gateway pods
       dnsConfig: {}
@@ -1422,7 +1469,7 @@ spec:
       topologySpreadConstraints: []
       # -- Tolerations for gateway pods
       tolerations:
-      - key: node-role.kubernetes.io/control-plane
+      - key: node-role.elfhosted.com/lightweight
         operator: Exists
         effect: NoSchedule      
       # Gateway service configuration

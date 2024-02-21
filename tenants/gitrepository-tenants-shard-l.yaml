@@ -1,0 +1,16 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: tenants-shard-l
+  namespace: flux-system
+  labels:
+    sharding.fluxcd.io/key: shard-l
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: tenants
+  timeout: 60s
+  url: https://github.com/geek-cookbook/elfhosted-tenants

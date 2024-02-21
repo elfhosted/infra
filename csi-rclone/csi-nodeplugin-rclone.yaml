@@ -19,8 +19,13 @@ spec:
         operator: Exists          
       - key: "node-role.${dns_domain}/download"
         operator: "Exists"
-        effect: "NoSchedule"           
-      serviceAccountName: csi-nodeplugin-rclone
+        effect: "NoSchedule"     
+      - key: "node-role.${dns_domain}/download-only"
+        operator: "Exists"
+        effect: "NoSchedule"  
+      - key: "node-role.${dns_domain}/lightweight"
+        operator: "Exists"
+        effect: "NoSchedule"            
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:

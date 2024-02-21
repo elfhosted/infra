@@ -37,16 +37,44 @@ spec:
 
     # -- Cluster ceph.conf override
     # Ability to override ceph.conf
-    # configOverride: |
-    #   [global]
-    #   public network =  ${cluster_nic_class_c}.0/24
-    #   cluster network = 10.0.44.0/24
-    #   public addr = ""
-    #   cluster addr = ""
-    #   bluefs_buffered_io = false
+    configOverride: |
+      # [mds]
+      # mds_cap_revoke_eviction_timeout = 600
 
-    #   [mds]
-    #   mds_session_blocklist_on_timeout = false
+      # This prevents evicted clients from being blocklisted
+      # get a list of MDSs using "ceph config dump", and then apply like this:
+      # ceph config set mds.ceph-filesystem-ssd-b  mds_session_blocklist_on_timeout false
+      
+      # [mds.ceph-filesystem-a]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-b]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-ec-8-2-a]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-ec-8-2-b]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-ec-8-2-c]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-ec-8-2-d]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-ssd-a]
+      # mds_session_blocklist_on_timeout = false
+
+      # [mds.ceph-filesystem-ssd-b]
+      # mds_session_blocklist_on_timeout = false
+
+      [global]
+      # public network =  ${cluster_nic_class_c}.0/24
+      # cluster network = 10.0.44.0/24
+      # public addr = ""
+      # cluster addr = ""
+      bluefs_buffered_io = true
 
     # Installs a debugging toolbox deployment
     toolbox:
@@ -145,7 +173,7 @@ spec:
       # Use at your OWN risk
       # To understand Rook's upgrade process of Ceph, read https://rook.io/docs/rook/v1.10/Upgrade/ceph-upgrade/
       skipUpgradeChecks: false
-
+      
       # Whether or not continue if PGs are not clean during an upgrade
       continueUpgradeAfterChecksEvenIfNotHealthy: false
 
@@ -338,7 +366,7 @@ spec:
         mgr:
           limits:
             cpu: "1000m"
-            memory: "1Gi"
+            memory: "2Gi"
           requests:
             cpu: "500m"
             memory: "512Mi"
@@ -437,7 +465,7 @@ spec:
           - name: dwarf01
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd
               - name: sde
@@ -446,7 +474,7 @@ spec:
           - name: dwarf02
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd
               - name: sde
@@ -455,20 +483,69 @@ spec:
           - name: dwarf03
             devices:
               - name: sda4
-              - name: sbd
+              - name: sdb
               - name: sdc
               - name: sdd
               - name: sde
               - name: sdf
 
+          - name: dwarf04
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd              
+
+          - name: dwarf05
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd    
+
+          - name: dwarf06
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd                            
+
+          - name: dwarf07
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd    
+
+          - name: dwarf08
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd    
+
+          - name: dwarf09
+            devices:
+              - name: sdb4 # weird server won't boot any other way
+              - name: sda
+              - name: sdc
+              - name: sdd    
+
+          - name: dwarf10
+            devices:
+              - name: sda4
+              - name: sdb
+              - name: sdc
+              - name: sdd                                
+
           - name: goblin01
             resources: 
               limits: 
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these
               requests:
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these          
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these          
             devices:
               - name: nvme0n1p3
                 config:
@@ -479,11 +556,11 @@ spec:
           - name: goblin02
             resources: 
               limits: 
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these
               requests:
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these             
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -494,11 +571,11 @@ spec:
           - name: goblin03
             resources: 
               limits: 
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these
               requests:
-                cpu: 3
-                memory: 63488Mi # 62GB, we want to maximize the use of these             
+                cpu: 2
+                memory: 16384Mi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -506,6 +583,69 @@ spec:
               - name: nvme1n1                                  
                 config:
                   deviceClass: ssd
+          - name: goblin04
+            resources: 
+              limits: 
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme2n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme3n1                                  
+                config:
+                  deviceClass: ssd     
+          - name: goblin05
+            resources: 
+              limits: 
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme2n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme3n1                                  
+                config:
+                  deviceClass: ssd     
+          - name: goblin06
+            resources: 
+              limits: 
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these
+              requests:
+                cpu: 2
+                memory: 30Gi # 62GB, we want to maximize the use of these             
+            devices:
+              - name: nvme0n1p3
+                config:
+                  deviceClass: ssd          
+              - name: nvme1n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme2n1                                  
+                config:
+                  deviceClass: ssd
+              - name: nvme3n1                                  
+                config:
+                  deviceClass: ssd                                                                    
 
           # and the CI nodes...
           - name: hobbit01
@@ -612,7 +752,7 @@ spec:
         storageClass:
           enabled: true
           name: ceph-block
-          isDefault: true
+          isDefault: false
           reclaimPolicy: Delete
           allowVolumeExpansion: true
           volumeBindingMode: "Immediate"
@@ -659,6 +799,66 @@ spec:
             # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
             # in hyperconverged settings where the volume is mounted on the same node as the osds.
             csi.storage.k8s.io/fstype: ext4
+      - name: ceph-blockpool-ssd
+        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
+        spec:
+          failureDomain: host
+          deviceClass: ssd
+          replicated:
+            size: 2
+          # Enables collecting RBD per-image IO statistics by enabling dynamic OSD performance counters. Defaults to false.
+          # For reference: https://docs.ceph.com/docs/master/mgr/prometheus/#rbd-io-statistics
+          # enableRBDStats: true
+        storageClass:
+          enabled: true
+          name: ceph-block-ssd
+          isDefault: true
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          volumeBindingMode: "Immediate"
+          mountOptions: []
+          # see https://kubernetes.io/docs/concepts/storage/storage-classes/#allowed-topologies
+          allowedTopologies: []
+          #        - matchLabelExpressions:
+          #            - key: rook-ceph-role
+          #              values:
+          #                - storage-node
+          # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Block-Storage-RBD/block-storage.md#provision-storage for available configuration
+          parameters:
+            # (optional) mapOptions is a comma-separated list of map options.
+            # For krbd options refer
+            # https://docs.ceph.com/docs/master/man/8/rbd/#kernel-rbd-krbd-options
+            # For nbd options refer
+            # https://docs.ceph.com/docs/master/man/8/rbd-nbd/#options
+            # mapOptions: lock_on_read,queue_depth=1024
+
+            # (optional) unmapOptions is a comma-separated list of unmap options.
+            # For krbd options refer
+            # https://docs.ceph.com/docs/master/man/8/rbd/#kernel-rbd-krbd-options
+            # For nbd options refer
+            # https://docs.ceph.com/docs/master/man/8/rbd-nbd/#options
+            # unmapOptions: force
+
+            # RBD image format. Defaults to "2".
+            imageFormat: "2"
+
+            # RBD image features, equivalent to OR'd bitfield value: 63
+            # Available for imageFormat: "2". Older releases of CSI RBD
+            # support only the `layering` feature. The Linux kernel (KRBD) supports the
+            # full feature complement as of 5.4
+            imageFeatures: layering
+
+            # These secrets contain Ceph admin credentials.
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+            csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+            # Specify the filesystem type of the volume. If not specified, csi-provisioner
+            # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
+            # in hyperconverged settings where the volume is mounted on the same node as the osds.
+            csi.storage.k8s.io/fstype: ext4            
 
     # -- A list of CephFileSystem configurations to deploy
     # @default -- See [below](#ceph-file-systems)
@@ -685,22 +885,33 @@ spec:
             activeStandby: true
             resources:
               limits:
-                cpu: "2000m"
-                memory: "16Gi"
+                cpu: "10"
+                memory: "64Gi"
               requests:
                 cpu: "1000m"
-                memory: "${rook_ceph_mds_ram}"
+                memory: "1Gi"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.${dns_domain}/download-only
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
-                      operator: Exists    
+                    - key: node-role.${dns_domain}/download-only
+                      operator: Exists
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 100  
+                  podAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                        - ceph-filesystem
+                    topologyKey: "kubernetes.io/hostname"                    
         storageClass:
           enabled: true
           isDefault: false
@@ -724,6 +935,83 @@ spec:
             # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
             # in hyperconverged settings where the volume is mounted on the same node as the osds.
             csi.storage.k8s.io/fstype: ext4
+      - name: ceph-filesystem-ec-8-2
+        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
+        spec:
+          metadataPool:
+            replicated:
+              size: 2
+            deviceClass: ssd
+          dataPools:
+            - failureDomain: host
+              replicated:
+                size: 2
+              # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
+              name: data0
+              deviceClass: ssd
+              parameters:
+                pg_num: '4096' # create the pool with a pre-configured placement group number
+                pgp_num: '4096' # this should at least match `pg_num` so that all PGs are used              
+            - name: ec-8-2
+              erasureCoded:
+                dataChunks: 8
+                codingChunks: 2
+              deviceClass: hdd          
+          metadataServer:
+            activeCount: 1
+            activeStandby: true
+            resources:
+              limits:
+                cpu: "10"
+                memory: "64Gi"
+              requests:
+                cpu: "1000m"
+                memory: "1Gi"
+            priorityClassName: system-cluster-critical
+            placement:
+              tolerations:
+              - key: node-role.${dns_domain}/download-only
+                operator: Exists                                
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: node-role.${dns_domain}/download-only
+                      operator: Exists    
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 100  
+                  podAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                        - ceph-filesystem-ec-8-2
+                    topologyKey: "kubernetes.io/hostname"                      
+        storageClass:
+          enabled: true
+          isDefault: false
+          name: ceph-filesystem-ec-8-2
+          # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
+          pool: ec-8-2
+          reclaimPolicy: Delete
+          allowVolumeExpansion: true
+          volumeBindingMode: "Immediate"
+          mountOptions: []
+          # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage.md#provision-storage for available configuration
+          parameters:
+            # The secrets contain Ceph admin credentials.
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+            csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+            # Specify the filesystem type of the volume. If not specified, csi-provisioner
+            # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
+            # in hyperconverged settings where the volume is mounted on the same node as the osds.
+            csi.storage.k8s.io/fstype: ext4            
       - name: ceph-filesystem-ssd
         # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
         spec:
@@ -746,22 +1034,34 @@ spec:
             activeStandby: true
             resources:
               limits:
-                cpu: "2000m"
-                memory: "16Gi"
+                cpu: "10"
+                memory: "64Gi"
               requests:
                 cpu: "1000m"
-                memory: "${rook_ceph_mds_ram}"
+                # memory: "${rook_ceph_mds_ram}"
+                memory: "4Gi"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.kubernetes.io/control-plane
+              - key: node-role.${dns_domain}/download-only
                 operator: Exists
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
                   - matchExpressions:
-                    - key: node-role.kubernetes.io/control-plane
+                    - key: node-role.${dns_domain}/download-only
                       operator: Exists    
+              podAntiAffinity:
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 100  
+                  podAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: app.kubernetes.io/part-of
+                        operator: In
+                        values:
+                        - ceph-filesystem-ssd
+                    topologyKey: "kubernetes.io/hostname"
         storageClass:
           enabled: true
           isDefault: false

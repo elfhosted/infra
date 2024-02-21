@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremio-jackett-community.${dns_domain}
+  namespace: stremio-jackett-community
+spec:
+  routes:
+    - match: Host(`stremio-jackett-community.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: stremio-jackett-community
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: error-pages
+          namespace: traefik
+        - name: rate-limit-stremio-jackett-community  
+        - name: inflightreq-stremio-jackett-community      
+

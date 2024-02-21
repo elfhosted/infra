@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: webhook-receiver
+  namespace: webhook-receiver
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: webhook-receiver
+  minAvailable: 1

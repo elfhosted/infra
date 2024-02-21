@@ -5,7 +5,7 @@ metadata:
   namespace: kube-prometheus-stack
 spec:
   groups:
-  - name: kube-cluster
+  - name: smart-health
     rules:
     - alert: SmartDeviceUnhealthy
       expr: smartmon_device_smart_healthy < 1

@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-flux-webhook
+  namespace: flux-system
+spec:
+  # Every time a commit is made to the tenants repo, a GitHub webhook triggers flux to refresh
+  # Since we have so many customizations, a bunch of requests in a short period can be counter-productive,
+  # so let's only accept one per minute
+  rateLimit:
+    average: 1 # 1 request every minute
+    burst: 2
+    period: 1m

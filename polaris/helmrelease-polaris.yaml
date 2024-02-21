@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: polaris
-      version: 5.16.x # auto-update to semver bugfixes only 
+      version: 5.17.x # auto-update to semver bugfixes only 
       sourceRef:
         kind: HelmRepository
         name: fairwinds-stable
@@ -100,9 +100,19 @@ spec:
       # dashboard.nodeSelector -- Dashboard pod nodeSelector
       nodeSelector: {}
       # dashboard.tolerations -- Dashboard pod tolerations
-      tolerations: []
-      # dashboard.affinity -- Dashboard pods affinity
-      affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists    
+
+      #  -- tolerations applied to the deployments
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists 
+
       # dashboard.topologySpreadConstraints -- Dashboard pods topologySpreadConstraints
       topologySpreadConstraints:
         - maxSkew: 1
@@ -165,9 +175,19 @@ spec:
       # webhook.nodeSelector -- Webhook pod nodeSelector
       nodeSelector: {}
       # webhook.tolerations -- Webhook pod tolerations
-      tolerations: []
-      # webhook.affinity -- Webhook pods affinity
-      affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists    
+
+      #  -- tolerations applied to the deployments
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists 
+
       # webhook.topologySpreadConstraints -- Webhook pods topologySpreadConstraints
       topologySpreadConstraints:
       - maxSkew: 1

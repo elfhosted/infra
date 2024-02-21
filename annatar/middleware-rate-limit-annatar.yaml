@@ -1,0 +1,12 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-annatar
+  namespace: annatar
+spec:
+  # Intended to be suitable for public, casual, streaming use
+  # Non-static pages which might incur lookups
+  rateLimit:
+    average: 1  # 1 request every ..
+    period: 10s # 
+    burst: 20   # allow burst up to 20 at once

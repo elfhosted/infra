@@ -99,6 +99,12 @@ spec:
         - key: "node-role.${dns_domain}/download"
           operator: "Exists"
           effect: "NoSchedule"          
+        - key: "node-role.${dns_domain}/download-only"
+          operator: "Exists"
+          effect: "NoSchedule"  
+        - key: "node-role.${dns_domain}/lightweight"
+          operator: "Exists"
+          effect: "NoSchedule"                    
 
     node:
       maxUnavailable: 1

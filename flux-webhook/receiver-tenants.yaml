@@ -13,3 +13,55 @@ spec:
   resources:
     - kind: GitRepository
       name: tenants
+    - kind: GitRepository
+      name: tenants-shard-a      
+    - kind: GitRepository
+      name: tenants-shard-b
+    - kind: GitRepository
+      name: tenants-shard-c      
+    - kind: GitRepository
+      name: tenants-shard-d      
+    - kind: GitRepository
+      name: tenants-shard-e      
+    - kind: GitRepository
+      name: tenants-shard-f
+    - kind: GitRepository
+      name: tenants-shard-g      
+    - kind: GitRepository
+      name: tenants-shard-h      
+    - kind: GitRepository
+      name: tenants-shard-i      
+    - kind: GitRepository
+      name: tenants-shard-j
+    - kind: GitRepository
+      name: tenants-shard-k      
+    - kind: GitRepository
+      name: tenants-shard-l      
+    - kind: GitRepository
+      name: tenants-shard-m      
+    - kind: GitRepository
+      name: tenants-shard-n
+    - kind: GitRepository
+      name: tenants-shard-o      
+    - kind: GitRepository
+      name: tenants-shard-p      
+    - kind: GitRepository
+      name: tenants-shard-q
+    - kind: GitRepository
+      name: tenants-shard-r
+    - kind: GitRepository
+      name: tenants-shard-s      
+    - kind: GitRepository
+      name: tenants-shard-t      
+    - kind: GitRepository
+      name: tenants-shard-u
+    - kind: GitRepository
+      name: tenants-shard-v
+    - kind: GitRepository
+      name: tenants-shard-w      
+    - kind: GitRepository
+      name: tenants-shard-x      
+    - kind: GitRepository
+      name: tenants-shard-y
+    - kind: GitRepository
+      name: tenants-shard-z

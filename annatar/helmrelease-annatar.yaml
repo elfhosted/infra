@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: annatar
+  namespace: annatar
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: annatar
+  values:
+    global:
+      nameOverride: annatar
+    image:
+      repository: ghcr.io/geek-cookbook/annatar
+      tag: v0.5.11@sha256:e74573ee3c590629675b13bd51b1b37d18c3a0f1530023940c5862e974877fee
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
+    automountServiceAccountToken: false
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        secret.reloader.stakater.com/reload: "annatar-env"
+        configmap.reloader.stakater.com/reload: "annatar-env"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - annatar
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      tmp: 
+        enabled: true
+        type: custom
+        mountPath: /tmp
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi                       
+    envFrom:
+    - secretRef:
+        name: annatar-env 
+    - configMapRef:
+        name: annatar-env 
+
+    # resources:
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8000
+    addons:
+      vpn:
+        enabled: false # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: torrentio-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"        
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config             

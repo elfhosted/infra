@@ -15,16 +15,16 @@ spec:
           requests:
             cpu: 1000m
             memory: 2Gi
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
-      tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists               
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: node-role.kubernetes.io/control-plane
+      #           operator: Exists
+      # tolerations:
+      # - key: node-role.kubernetes.io/control-plane
+      #   operator: Exists               
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,16 +43,16 @@ spec:
           requests:
             cpu: 250m
             memory: 500Mi
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists          
-      tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists       
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: node-role.kubernetes.io/control-plane
+      #           operator: Exists          
+      # tolerations:
+      # - key: node-role.kubernetes.io/control-plane
+      #   operator: Exists       
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -71,16 +71,16 @@ spec:
           requests:
             cpu: 100m
             memory: 64Mi
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists       
-      tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists        
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: node-role.kubernetes.io/control-plane
+      #           operator: Exists       
+      # tolerations:
+      # - key: node-role.kubernetes.io/control-plane
+      #   operator: Exists        
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -99,16 +99,16 @@ spec:
           requests:
             cpu: 250m
             memory: 500Mi
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists          
-      tolerations:
-      - key: node-role.kubernetes.io/control-plane
-        operator: Exists        
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: node-role.kubernetes.io/control-plane
+      #           operator: Exists          
+      # tolerations:
+      # - key: node-role.kubernetes.io/control-plane
+      #   operator: Exists        
 ---
 apiVersion: v1
 kind: Namespace

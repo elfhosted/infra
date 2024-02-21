@@ -155,6 +155,12 @@ spec:
           volume-group: vg0
           default: true
           spare-gb: 10
+        - name: vg0-thin
+          volume-group: vg0
+          type: thin
+          thin-pool:
+            name: thinpool
+            overprovision-ratio: 20.0          
 
       # lvmd.lvcreateOptionClasses -- Specify the lvcreate-option-class settings.
       lvcreateOptionClasses: []
@@ -174,7 +180,15 @@ spec:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
           operator: Exists
-
+        - key: node-role.${dns_domain}/download
+          effect: NoSchedule
+          operator: Exists  
+        - key: node-role.${dns_domain}/download-only
+          effect: NoSchedule
+          operator: Exists      
+        - key: node-role.${dns_domain}/lightweight
+          effect: NoSchedule
+          operator: Exists                                 
 
       # lvmd.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -182,13 +196,13 @@ spec:
 
       # lvmd.affinity -- Specify affinity.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: Exists
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: node-role.kubernetes.io/control-plane
+      #               operator: Exists
 
       # lvmd.volumes -- Specify volumes.
       volumes: []
@@ -301,6 +315,15 @@ spec:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
           operator: Exists
+        - key: node-role.${dns_domain}/download
+          effect: NoSchedule
+          operator: Exists      
+        - key: node-role.${dns_domain}/download-only
+          effect: NoSchedule
+          operator: Exists       
+        - key: node-role.${dns_domain}/lightweight
+          effect: NoSchedule
+          operator: Exists                                 
 
       # node.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -308,13 +331,13 @@ spec:
 
       # node.affinity -- Specify affinity.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: Exists
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: node-role.kubernetes.io/control-plane
+      #               operator: Exists
 
       # node.volumes -- Specify volumes.
       volumes: []
@@ -465,7 +488,7 @@ spec:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
-          operator: Exists
+          operator: Exists       
 
       # controller.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -648,6 +671,23 @@ spec:
           allowVolumeExpansion: true
           additionalParameters: {}
           # "topolvm.io/device-class": "ssd"
+      - name: topolvm-provisioner-thin  # Defines name of storage class.
+        storageClass:
+          # Supported filesystems are: ext4, xfs, and btrfs.
+          fsType: xfs
+          # reclaimPolicy
+          reclaimPolicy:  # Delete
+          # Additional annotations
+          annotations: {}
+          # Default storage class for dynamic volume provisioning
+          # ref: https://kubernetes.io/docs/concepts/storage/dynamic-provisioning
+          isDefaultClass: false
+          # volumeBindingMode can be either WaitForFirstConsumer or Immediate. WaitForFirstConsumer is recommended because TopoLVM cannot schedule pods wisely if volumeBindingMode is Immediate.
+          volumeBindingMode: WaitForFirstConsumer
+          # enables CSI drivers to expand volumes. This feature is available for Kubernetes 1.16 and later releases.
+          allowVolumeExpansion: true
+          additionalParameters:
+            "topolvm.io/device-class": "vg0-thin"          
 
     webhook:
       # webhook.caBundle -- Specify the certificate to be used for AdmissionWebhook.
