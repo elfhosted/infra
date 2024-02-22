@@ -5,7 +5,7 @@ metadata:
   namespace: torrentio
 spec:
   entryPoints:
-    - tcp_postgresql
+    - postgresql
   routes:
   - match: HostSNI(`*`)
     services:
