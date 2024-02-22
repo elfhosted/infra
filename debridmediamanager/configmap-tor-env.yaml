@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tor-env
+  namespace: debridmediamanager
+data:
+  TOR_LOG_CONFIG: 'false'
+  TOR_PROXY: 'true'
+  TOR_PROXY_PORT: '9050'
+  TOR_PROXY_ACCEPT: 'accept 10.2.0.0/15'
+  TOR_PROXY_CONTROL_PORT: '9051'
+  TOR_PROXY_CONTROL_PASSWORD: 'password'
+  TOR_PROXY_CONTROL_COOKIE: 'true'
+  TOR_SERVICE: 'false'
+  TOR_RELAY: 'false'
+  # TOR_SERVICE_HOSTS: 'radarr=80:192.168.1.12'
+  # TOR_SERVICE_HOSTS_CLIENTS: 'radarr=barney'
