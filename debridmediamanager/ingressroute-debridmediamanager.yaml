@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: debridmediamanager.${dns_domain}
+  namespace: debridmediamanager
+spec:
+  routes:
+    - match: Host(`debridmediamanager.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: debridmediamanager
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: error-pages
+          namespace: traefik   
