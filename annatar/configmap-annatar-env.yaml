@@ -15,4 +15,4 @@ data:
   DISABLE_OTEL: "true"
   # JACKETT_URL: # set in secret annatar-env
   # JACKETT_API_KEY: # set in secret annatar-env
-  JACKETT_INDEXERS: eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,yts
+  JACKETT_INDEXERS: yts,eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,bitsearch,limetorrents,badasstorrents
