@@ -93,7 +93,7 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 8000
+            port: 3000
     addons:
       vpn:
         enabled: false # in case we ever need it
