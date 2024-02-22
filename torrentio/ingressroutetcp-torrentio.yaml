@@ -11,4 +11,3 @@ spec:
     services:
     - name: torrentio-rw
       port: 5432
-    passthrough: true
