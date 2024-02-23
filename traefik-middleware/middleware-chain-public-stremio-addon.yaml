@@ -7,5 +7,4 @@ spec:
   chain:
     middlewares:
     - name: error-pages
-    - name: inflightreq-1
-    - name: rate-limit-1-per-10s
+    - name: rate-limit-public-stremio-addon
