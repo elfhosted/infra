@@ -12,14 +12,8 @@ spec:
           kind: Service
           port: 3649
       middlewares:  
-        # pretty error pages
-        - name: error-pages
+        - name: chain-public-stremio-addon
           namespace: traefik
-        # per-user rate-limit
-        - name: rate-limit-1-per-10s
-          namespace: traefik
-        # global rate-limit
-        - name: inflightreq-10
-          namespace: traefik          
+     
    
 
