@@ -7,5 +7,5 @@ spec:
   chain:
     middlewares:
     - name: error-pages
-    - name: inflightreq-1
-    - name: rate-limit-10-per-1s
+    - name: inflightreq-10        # 10  x the hosted limit
+    - name: rate-limit-10-per-1s  # 100 x the hosted limit
