@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-10-per-1s
+  namespace: traefik
+spec:
+  rateLimit:
+    average: 10 # 1 request per source IP every ..
+    period: 1s  # 
+    burst: 10   # allow burst up to 10 at once

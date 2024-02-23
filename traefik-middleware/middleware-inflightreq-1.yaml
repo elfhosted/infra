@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: inflightreq-10
+  namespace: traefik
+spec:
+  # 1 inflight request per source IP
+  inFlightReq:
+    amount: 1
