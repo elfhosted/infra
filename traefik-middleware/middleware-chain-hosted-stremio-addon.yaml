@@ -8,4 +8,4 @@ spec:
     middlewares:
     - name: error-pages
     - name: inflightreq-1
-    - name: limit-10-per-1s
+    - name: rate-limit-10-per-1s
