@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: shluflix.${dns_domain}
+  namespace: shluflix
+spec:
+  routes:
+    - match: Host(`shluflix.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: shluflix
+          kind: Service
+          port: 3649
+      middlewares:  
+        - name: error-pages
+          namespace: traefik
+        - name: rate-limit-shluflix        
+

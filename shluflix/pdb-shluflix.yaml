@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: shluflix
+  namespace: shluflix
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shluflix
+  minAvailable: 1
