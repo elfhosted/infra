@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-public-stremio-addon
+  namespace: traefik
+spec:
+  rateLimit:
+    average: 1    # 1 request per source IP every ..
+    period:  300s # This is a per-node limit, and we have 20+ nodes (x), randomly load-balanced, so it's effectively 1 request per (300/(x))s, or nearly 1/10s
