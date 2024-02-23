@@ -5,6 +5,6 @@ metadata:
   namespace: traefik
 spec:
   rateLimit:
-    average: 10 # 1 request every ..
+    average: 10 # 1 request per source IP every ..
     period: 1s  # 
     burst: 10   # allow burst up to 10 at once

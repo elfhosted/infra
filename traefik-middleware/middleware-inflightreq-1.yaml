@@ -4,6 +4,6 @@ metadata:
   name: inflightreq-10
   namespace: traefik
 spec:
-  # Global limit of 10 requests inflight concurrently
+  # 1 inflight request per source IP
   inFlightReq:
-    amount: 10
+    amount: 1
