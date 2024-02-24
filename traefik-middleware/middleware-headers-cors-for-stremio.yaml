@@ -1,7 +1,8 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: {{ .Release.Name }}-add-cors-for-stremio
+  name: headers-add-cors-for-stremio
+  namespace: traefik-middleware
 spec:
   headers:
     accessControlAllowMethods:
@@ -10,7 +11,6 @@ spec:
       - "OPTIONS"
     accessControlAllowOriginList:
       - "https://app.strem.io"
-    accessControlAllowCredentials: true
     accessControlMaxAge: 100
     addVaryHeader: true
     accessControlAllowHeaders:
