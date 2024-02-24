@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: headers-add-cors-for-stremio
-  namespace: traefik-middleware
+  namespace: traefik
 spec:
   headers:
     accessControlAllowMethods:
