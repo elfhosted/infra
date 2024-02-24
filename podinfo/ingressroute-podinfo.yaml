@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: podinfo.${dns_domain}
+  namespace: podinfo
+spec:
+  routes:
+    - match: Host(`podinfo.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: podinfo
+          kind: Service
+          port: 9898
+      middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
+     
+   
+
