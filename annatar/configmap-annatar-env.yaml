@@ -9,7 +9,7 @@ data:
   LISTEN_PORT: "8000"
   LISTEN_HOST: "0.0.0.0"
   REDIS_URL: "redis-master"
-  JACKETT_TIMEOUT: "45"
+  JACKETT_TIMEOUT: "30"
   JACKETT_MAX_RESULTS: "50"
   LOG_LEVEL: "error" # Avoid inadvertently logging API keys
   DISABLE_OTEL: "true"
