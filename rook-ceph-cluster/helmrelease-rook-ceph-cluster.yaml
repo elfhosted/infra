@@ -1043,14 +1043,23 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/storage
                 operator: Exists
+              - key: node-role.${dns_domain}/download-only
+                operator: Exists                
               nodeAffinity:
-                requiredDuringSchedulingIgnoredDuringExecution:
-                  nodeSelectorTerms:
-                  - matchExpressions:
-                    - key: node-role.${dns_domain}/download-only
-                      operator: Exists    
+                # requiredDuringSchedulingIgnoredDuringExecution:
+                #   nodeSelectorTerms:
+                #   - matchExpressions:
+                #     - key: node-role.${dns_domain}/storage-10g
+                #       operator: Exists    
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 200  
+                  nodeAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: node-role.${dns_domain}/storage-10g
+                        operator: Exists                 
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
