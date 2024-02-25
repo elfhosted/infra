@@ -6,18 +6,6 @@ metadata:
 spec:
   routes:
     # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
-    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
-      kind: Rule
-      services:
-        - name: mediafusion
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: error-pages
-          namespace: traefik
-        - name: rate-limit-mediafusion
-        - name: inflightreq-mediafusion
-    # everything else is static and can be less rate-limited
     - match: Host(`mediafusion.${dns_domain}`)
       kind: Rule
       services:
@@ -25,6 +13,5 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-mediafusion-static
+        - name: chain-public-stremio-addon
+          namespace: traefik
