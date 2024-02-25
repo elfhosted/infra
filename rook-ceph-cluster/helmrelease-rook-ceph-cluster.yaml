@@ -587,10 +587,10 @@ spec:
             resources: 
               limits: 
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these
+                memory: 20Gi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these             
+                memory: 20Gi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -608,10 +608,10 @@ spec:
             resources: 
               limits: 
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these
+                memory: 20Gi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these             
+                memory: 20Gi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -629,10 +629,10 @@ spec:
             resources: 
               limits: 
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these
+                memory: 20Gi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these             
+                memory: 20Gi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
