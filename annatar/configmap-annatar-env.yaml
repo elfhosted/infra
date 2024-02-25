@@ -5,7 +5,7 @@ metadata:
   namespace: annatar
 data:
   ENV: "prod"
-  WORKERS: "8"
+  WORKERS: "16"
   LISTEN_PORT: "8000"
   LISTEN_HOST: "0.0.0.0"
   REDIS_URL: "redis-master"
