@@ -6,17 +6,6 @@ metadata:
 spec:
   routes:
     # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
-    - match: Host(`annatar.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
-      kind: Rule
-      services:
-        - name: annatar
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: error-pages
-          namespace: traefik
-        - name: rate-limit-annatar        
-    # everything else is static and can be less rate-limited
     - match: Host(`annatar.${dns_domain}`)
       kind: Rule
       services:
@@ -24,6 +13,12 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
+        # pretty error pages
         - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-annatar-static
+          namespace: traefik
+        # per-user rate-limit
+        - name: rate-limit-1-per-10s
+          namespace: traefik
+        # global rate-limit
+        - name: inflightreq-10
+          namespace: traefik          
