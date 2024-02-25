@@ -895,12 +895,21 @@ spec:
               tolerations:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists
+              - key: node-role.${dns_domain}/download-only
+                operator: Exists                
               nodeAffinity:
-                requiredDuringSchedulingIgnoredDuringExecution:
-                  nodeSelectorTerms:
-                  - matchExpressions:
-                    - key: node-role.${dns_domain}/download-only
-                      operator: Exists
+                # requiredDuringSchedulingIgnoredDuringExecution:
+                #   nodeSelectorTerms:
+                #   - matchExpressions:
+                #     - key: node-role.${dns_domain}/storage-10g
+                #       operator: Exists    
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 200  
+                  nodeAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: node-role.${dns_domain}/storage-10g
+                        operator: Exists                 
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
@@ -910,8 +919,8 @@ spec:
                       - key: app.kubernetes.io/part-of
                         operator: In
                         values:
-                        - ceph-filesystem
-                    topologyKey: "kubernetes.io/hostname"                    
+                        - ceph-filesystem-ssd
+                    topologyKey: "kubernetes.io/hostname"                
         storageClass:
           enabled: true
           isDefault: false
@@ -972,12 +981,21 @@ spec:
               tolerations:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists                                
+              - key: node-role.${dns_domain}/download-only
+                operator: Exists                
               nodeAffinity:
-                requiredDuringSchedulingIgnoredDuringExecution:
-                  nodeSelectorTerms:
-                  - matchExpressions:
-                    - key: node-role.${dns_domain}/download-only
-                      operator: Exists    
+                # requiredDuringSchedulingIgnoredDuringExecution:
+                #   nodeSelectorTerms:
+                #   - matchExpressions:
+                #     - key: node-role.${dns_domain}/storage-10g
+                #       operator: Exists    
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 200  
+                  nodeAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: node-role.${dns_domain}/storage-10g
+                        operator: Exists                 
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
@@ -987,8 +1005,8 @@ spec:
                       - key: app.kubernetes.io/part-of
                         operator: In
                         values:
-                        - ceph-filesystem-ec-8-2
-                    topologyKey: "kubernetes.io/hostname"                      
+                        - ceph-filesystem-ssd
+                    topologyKey: "kubernetes.io/hostname"                  
         storageClass:
           enabled: true
           isDefault: false
