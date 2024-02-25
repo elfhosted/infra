@@ -587,10 +587,10 @@ spec:
             resources: 
               limits: 
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these
+                memory: 20Gi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these             
+                memory: 20Gi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -608,10 +608,10 @@ spec:
             resources: 
               limits: 
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these
+                memory: 20Gi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these             
+                memory: 20Gi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -629,10 +629,10 @@ spec:
             resources: 
               limits: 
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these
+                memory: 20Gi # 62GB, we want to maximize the use of these
               requests:
                 cpu: 2
-                memory: 30Gi # 62GB, we want to maximize the use of these             
+                memory: 20Gi # 62GB, we want to maximize the use of these             
             devices:
               - name: nvme0n1p3
                 config:
@@ -1043,14 +1043,23 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/storage
                 operator: Exists
+              - key: node-role.${dns_domain}/download-only
+                operator: Exists                
               nodeAffinity:
-                requiredDuringSchedulingIgnoredDuringExecution:
-                  nodeSelectorTerms:
-                  - matchExpressions:
-                    - key: node-role.${dns_domain}/download-only
-                      operator: Exists    
+                # requiredDuringSchedulingIgnoredDuringExecution:
+                #   nodeSelectorTerms:
+                #   - matchExpressions:
+                #     - key: node-role.${dns_domain}/storage-10g
+                #       operator: Exists    
+                preferredDuringSchedulingIgnoredDuringExecution: 
+                - weight: 200  
+                  nodeAffinityTerm:    
+                    labelSelector:
+                      matchExpressions:
+                      - key: node-role.${dns_domain}/storage-10g
+                        operator: Exists                 
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
