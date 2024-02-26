@@ -313,20 +313,20 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
+                  - key: node-role.kubernetes.io/storage
                     operator: Exists
           tolerations:
-          - key: node-role.kubernetes.io/control-plane
+          - key: node-role.kubernetes.io/storage
             operator: Exists                    
         mgr:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
+                  - key: node-role.kubernetes.io/storage
                     operator: Exists     
           tolerations:
-          - key: node-role.kubernetes.io/control-plane
+          - key: node-role.kubernetes.io/storage
             operator: Exists                                     
       #     podAffinity:
       #     podAntiAffinity:
@@ -373,10 +373,10 @@ spec:
         mon:
           limits:
             cpu: "2000m"
-            memory: "2Gi"
+            memory: "4Gi"
           requests:
-            cpu: "1000m"
-            memory: "1Gi"
+            cpu: "2000m"
+            memory: "4Gi"
         osd:
           limits:
             cpu: "2000m"
