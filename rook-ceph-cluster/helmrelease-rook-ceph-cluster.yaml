@@ -895,7 +895,7 @@ spec:
               tolerations:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
@@ -975,7 +975,7 @@ spec:
               tolerations:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists                                
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
