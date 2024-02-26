@@ -901,8 +901,9 @@ spec:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 1
                   preference:
+                    matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists               
+                      operator: Exists             
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
@@ -980,6 +981,7 @@ spec:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 1
                   preference:
+                    matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
                       operator: Exists                 
               podAntiAffinity:
@@ -1055,8 +1057,9 @@ spec:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 1
                   preference:
+                    matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists            
+                      operator: Exists           
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
