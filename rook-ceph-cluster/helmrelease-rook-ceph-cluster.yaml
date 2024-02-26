@@ -895,14 +895,15 @@ spec:
               tolerations:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 1
                   preference:
+                    matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists               
+                      operator: Exists             
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
@@ -974,12 +975,13 @@ spec:
               tolerations:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists                                
-              - key: node-role.${dns_domain}/download-only
+              - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 1
                   preference:
+                    matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
                       operator: Exists                 
               podAntiAffinity:
@@ -1055,8 +1057,9 @@ spec:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 1
                   preference:
+                    matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists            
+                      operator: Exists           
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
