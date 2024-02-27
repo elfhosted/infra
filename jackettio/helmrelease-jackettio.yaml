@@ -32,10 +32,8 @@ spec:
       runAsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 2
-      strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
+      replicas: 1
+      strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "jackettio-env"
         secret.reloader.stakater.com/reload: "jackettio-env"
