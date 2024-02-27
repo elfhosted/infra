@@ -71,8 +71,7 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 1Gi   
-                                        
+                    storage: 1Gi      
     envFrom:
     - secretRef:
         name: jackettio-env 
