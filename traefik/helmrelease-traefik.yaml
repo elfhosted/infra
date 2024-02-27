@@ -493,7 +493,7 @@ spec:
           annotations: {}
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
         disableAPICheck: true
-        serviceMonitor: null # we use podmonitors instead
+        serviceMonitor: false # we use podmonitors instead
           # metricRelabelings:
           #   - sourceLabels: [__name__]
           #     separator: ;
