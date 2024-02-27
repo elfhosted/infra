@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: jackettio
+  namespace: jackettio
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jackettio
+  minAvailable: 1

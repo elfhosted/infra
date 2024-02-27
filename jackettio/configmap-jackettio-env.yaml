@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jackettio-env
+  namespace: jackettio
+data:
+  # TRUST_PROXY: # Should we set this to the LB IP?
+  JACKETT_URL: http://jackett:9117
+  DATA_FOLDER: /config
