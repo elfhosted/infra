@@ -11,9 +11,37 @@ spec:
         - name: podinfo
           kind: Service
           port: 9898
-      middlewares:  
-        - name: chain-public-stremio-addon
-          namespace: traefik
-     
+      # middlewares:  
+      #   - name: chain-public-stremio-addon
+      #     namespace: traefik
+    - match: Host(`podinfo-cloudflare.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: podinfo
+          kind: Service
+          port: 9898
+      # middlewares:  
+      #   - name: chain-public-stremio-addon
+      #     namespace: traefik
+    # - match: Host(`podinfo-cloudflare-ratelimit.${dns_domain}`)
+    #   kind: Rule
+    #   services:
+    #     - name: podinfo
+    #       kind: Service
+    #       port: 9898
+    #   middlewares:  
+    #     - name: chain-public-stremio-addon-cloudflare
+    #       namespace: traefik
+    # - match: Host(`podinfo-ratelimit.${dns_domain}`)
+    #   kind: Rule
+    #   services:
+    #     - name: podinfo
+    #       kind: Service
+    #       port: 9898
+    #   middlewares:  
+    #     - name: chain-public-stremio-addon
+    #       namespace: traefik
+                    
+        
    
 
