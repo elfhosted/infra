@@ -7,6 +7,5 @@ data:
   REQUEST_TIMEOUT: "5000"
   PROXY: "tor:9050"
   JACKETT: "http://jacket:9117"
-  # JACKETT_KEY: # set in secret
   PROWLARR: "http://prowlarr:9696"
   # PROWLARR_KEY: # set in secret
