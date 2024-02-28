@@ -23,6 +23,10 @@ data:
   # Addon
   DEBUG_MODE: "false"
 
+  # Addon and consumer
+  MONGODB_USER: mongo
+  MONGODB_PASSWORD: mongo
+
   # Consumer
   RABBIT_URI: amqp://torrentio:torrentio@10.43.0.2:5672/?heartbeat=30
   QUEUE_NAME: ingested
