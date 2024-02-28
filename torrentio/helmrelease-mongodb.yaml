@@ -623,7 +623,7 @@ spec:
       ##    cpu: 100m
       ##    memory: 128Mi
       ##
-      requests: {}
+      # requests: {}
     ## @param containerPorts.mongodb MongoDB(&reg;) container port
     ##
     containerPorts:
