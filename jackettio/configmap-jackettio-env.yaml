@@ -4,6 +4,9 @@ metadata:
   name: jackettio-env
   namespace: jackettio
 data:
-  # TRUST_PROXY: # Should we set this to the LB IP?
+  TRUST_PROXY: "true"
   JACKETT_URL: http://jackett:9117
   DATA_FOLDER: /config
+  WELCOME_MESSAGE: |
+    This is a public, hosted instance of Jackettio for the StremioAddons community
+  ADDON_ID: ackettio.elfhosted.com  
