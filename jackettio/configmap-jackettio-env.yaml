@@ -8,5 +8,16 @@ data:
   JACKETT_URL: http://jackett:9117
   DATA_FOLDER: /config
   WELCOME_MESSAGE: |
-    This is a public, hosted instance of Jackettio for the StremioAddons community
+    This is a public, ElfHosted instance of jackettio for the community. Enjoy! (reasonable rate-limits apply)
+
+    ElfHosted is an open-source PaaS built and run by geeks, which self-hosts your favorite streaming apps for you automatically and easily. 
+    
+    Individual, hosted Jackettio instances are available (*say, if you need extra indexers*) from $0.05/day, with $10 free credit for new accounts.
+
+    Why use ElfHosted addons?
+
+    ✅ Highly-available, open-source infrastructure / 
+    ✅ Active contributors to r/StremioAddons subreddit and Discord
+    ✅ Geek out over public performance metrics
+
   ADDON_ID: ackettio.elfhosted.com  
