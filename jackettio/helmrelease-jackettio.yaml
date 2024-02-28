@@ -31,6 +31,11 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      capabilities:
+        drop:
+        - ALL        
     automountServiceAccountToken: false
     controller:
       replicas: 1
@@ -76,8 +81,15 @@ spec:
         name: jackettio-env 
     - configMapRef:
         name: jackettio-env 
-
-    # resources:
+    resources:
+      requests:
+        cpu: 1m
+        memory: 50Mi
+        ephemeral-storage: 50Mi
+      limits:
+        cpu: 1
+        memory: 512Mi
+        ephemeral-storage: 100Mi        
     ingress:
       main:
         enabled: false
