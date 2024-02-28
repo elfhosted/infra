@@ -63,42 +63,24 @@ spec:
       tmp: 
         enabled: true
         type: custom
-        mountPath: /tmp
+        mountPath: /.npm
         volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi
+          emptyDir:
+            sizeLimit: 1Gi
       npm: 
         enabled: true
         type: custom
         mountPath: /.npm
         volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
+          emptyDir:
+            sizeLimit: 1Gi
       pm2: 
         enabled: true
         type: custom
         mountPath: /.pm2
         volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                          
+          emptyDir:
+            sizeLimit: 1Gi                                 
     env:
       PORT: 7001
       PUID: 10001
@@ -122,7 +104,7 @@ spec:
             port: 7001
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia
