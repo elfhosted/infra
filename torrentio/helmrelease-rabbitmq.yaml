@@ -824,7 +824,12 @@ spec:
       ##    cpu: 1000m
       ##    memory: 2Gi
       ##
-      limits: {}
+      limits:
+        cpu: 1
+        memory: 1Gi
+      requests:
+        cpu: 50m
+        memory: 200Mi
       ## Examples:
       ## requests:
       ##    cpu: 1000m

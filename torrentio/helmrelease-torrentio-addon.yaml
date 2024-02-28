@@ -101,7 +101,13 @@ spec:
     - configMapRef:
         name: torrentio-env 
 
-    # resources:
+    resources:
+      requests: 
+        cpu: 30m
+        memory: 200Mi
+      limits:
+        cpu: 1
+        memory: 500Mi
     ingress:
       main:
         enabled: false

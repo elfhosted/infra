@@ -612,7 +612,12 @@ spec:
       ##    cpu: 100m
       ##    memory: 128Mi
       ##
-      limits: {}
+      limits:
+        cpu: 1
+        memory: 8Gi
+      requests:
+        cpu: 100m
+        memory: 6Gi
       ## Examples:
       ## requests:
       ##    cpu: 100m
@@ -1461,7 +1466,7 @@ spec:
       ## @param arbiter.enabled Enable deploying the arbiter
       ##   https://docs.mongodb.com/manual/tutorial/add-replica-set-arbiter/
       ##
-      enabled: true
+      enabled: false
       ## @param arbiter.automountServiceAccountToken Mount Service Account token in pod
       ##
       automountServiceAccountToken: false
