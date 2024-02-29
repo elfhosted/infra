@@ -26,7 +26,7 @@ spec:
         secret.reloader.stakater.com/reload: "torrentio-env"
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-producer
-      tag: rolling@sha256:9f41297157f23b3573c7da20e0989691573907e8d6d0e97ae754b0017e7ac8f1
+      tag: rolling@sha256:c09354117f3ef0839ca4e7c0c55e2f3b8ca1fd5cf79459a255ab07039c196a29
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -48,7 +48,13 @@ spec:
         name: torrentio-env 
     - configMapRef:
         name: torrentio-env     
-    # resources:
+    resources:
+      requests: 
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 1
+        memory: 500Mi
     ingress:
       main:
         enabled: false
@@ -68,7 +74,7 @@ spec:
         enabled: false   
     addons:
       vpn:
-        enabled: true # in case we ever need it
+        enabled: false # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia

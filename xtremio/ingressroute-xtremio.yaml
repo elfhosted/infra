@@ -12,7 +12,5 @@ spec:
           kind: Service
           port: 3649
       middlewares:  
-        - name: error-pages
+        - name: chain-public-stremio-addon
           namespace: traefik
-        - name: rate-limit-xtremio        
-

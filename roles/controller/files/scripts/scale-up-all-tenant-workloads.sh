@@ -11,4 +11,5 @@ do
 	do
 		kubectl scale statefulset -n ${NS} ${STATEFULSET} --replicas=1
 	done
+	flux resume kustomization $NS
 done

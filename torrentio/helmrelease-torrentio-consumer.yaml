@@ -30,7 +30,7 @@ spec:
         unavailable: 1        
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-consumer
-      tag: rolling@sha256:227eaec7963f292962c65381cb2c99d4f2ea31cc175ffb249c6abd3f9dbe35a4
+      tag: rolling@sha256:b20bd2d506bb88381ca90f519970cf1f7777c6eb7d89cb819b04ec998a01923d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -61,7 +61,7 @@ spec:
         enabled: false
     addons:
       vpn:
-        enabled: true # in case we ever need it
+        enabled: false # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia

@@ -493,7 +493,7 @@ spec:
           annotations: {}
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
         disableAPICheck: true
-        serviceMonitor: null # we use podmonitors instead
+        serviceMonitor: false # we use podmonitors instead
           # metricRelabelings:
           #   - sourceLabels: [__name__]
           #     separator: ;
@@ -682,9 +682,23 @@ spec:
           port: websecure
         #
         # Trust forwarded  headers information (X-Forwarded-*).
-        # forwardedHeaders:
-        #   trustedIPs: []
-        #   insecure: false
+        forwardedHeaders:
+          trustedIPs:
+          - 173.245.48.0/20
+          - 103.21.244.0/22
+          - 103.22.200.0/22
+          - 103.31.4.0/22
+          - 141.101.64.0/18
+          - 108.162.192.0/18
+          - 190.93.240.0/20
+          - 188.114.96.0/20
+          - 197.234.240.0/22
+          - 198.41.128.0/17
+          - 162.158.0.0/15
+          - 104.16.0.0/13
+          - 104.24.0.0/14
+          - 172.64.0.0/13
+          - 131.0.72.0/22
         #
         # Enable the Proxy Protocol header parsing for the entry point
         proxyProtocol:
@@ -722,9 +736,24 @@ spec:
         # advertisedPort: 4443
         #
         ## -- Trust forwarded  headers information (X-Forwarded-*).
-        # forwardedHeaders:
-        #   trustedIPs: []
-        #   insecure: false
+        forwardedHeaders:
+          trustedIPs:
+          - 173.245.48.0/20
+          - 103.21.244.0/22
+          - 103.22.200.0/22
+          - 103.31.4.0/22
+          - 141.101.64.0/18
+          - 108.162.192.0/18
+          - 190.93.240.0/20
+          - 188.114.96.0/20
+          - 197.234.240.0/22
+          - 198.41.128.0/17
+          - 162.158.0.0/15
+          - 104.16.0.0/13
+          - 104.24.0.0/14
+          - 172.64.0.0/13
+          - 131.0.72.0/22
+          # insecure: false
         #
         ## -- Enable the Proxy Protocol header parsing for the entry point
         proxyProtocol:
@@ -768,26 +797,6 @@ spec:
         expose: false
         # -- The exposed port for this service
         exposedPort: 9100
-        # -- The port protocol (TCP/UDP)
-        protocol: TCP
-        # -- Defines whether the port is exposed on the internal service;
-        # note that ports exposed on the default service are exposed on the internal
-        # service by default as well.
-        exposeInternal: false
-      tcp_postgresql:
-        # -- When using hostNetwork, use another port to avoid conflict with node exporter:
-        # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
-        port: 5432
-        # hostPort: 9100
-        # Defines whether the port is exposed if service.type is LoadBalancer or
-        # NodePort.
-        #
-        # -- You may not want to expose the metrics port on production deployments.
-        # If you want to access it from outside your cluster,
-        # use `kubectl port-forward` or create a secure ingress
-        expose: true
-        # -- The exposed port for this service
-        exposedPort: 5432
         # -- The port protocol (TCP/UDP)
         protocol: TCP
         # -- Defines whether the port is exposed on the internal service;

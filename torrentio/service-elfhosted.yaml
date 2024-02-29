@@ -12,6 +12,6 @@ spec:
     protocol: TCP
     targetPort: 7001
   selector:
-    app.kubernetes.io/name: torrentio-addon
+    app.kubernetes.io/name: torrentio-addon-internal
   sessionAffinity: None
   type: ClusterIP

@@ -47,3 +47,11 @@ spec:
         ports:
           http:
             port: 9070
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /tor/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: tor   

@@ -29,9 +29,9 @@ pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54
 pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54:00:40:00:13
 
 [k3s_servers]
-pixie01     ansible_host=192.168.40.11 cluster_nic=eth1 proxmox_id=401 mac=52:54:00:40:00:11
-pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54:00:40:00:12
-pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54:00:40:00:13
+pixie01     ansible_host=192.168.40.11 cluster_nic=eth1 proxmox_id=401 mac=52:54:00:40:00:11 keepalived_priority=130
+pixie02     ansible_host=192.168.40.12 cluster_nic=eth1 proxmox_id=402 mac=52:54:00:40:00:12 keepalived_priority=120
+pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54:00:40:00:13 keepalived_priority=110
 
 [k3s_agents]
 sprite01        ansible_host=192.168.40.21 cluster_nic=eth1 proxmox_id=404 mac=52:54:00:40:00:21

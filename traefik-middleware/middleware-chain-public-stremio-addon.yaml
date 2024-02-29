@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-public-stremio-addon
+  namespace: traefik
+spec:
+  chain:
+    middlewares:
+    - name: error-pages
+    - name: rate-limit-public-stremio-addon

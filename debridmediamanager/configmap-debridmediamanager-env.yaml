@@ -4,17 +4,7 @@ metadata:
   name: debridmediamanager-env
   namespace: debridmediamanager
 data:
-
-  REQUEST_TIMEOUT=5000
-  # GH_PAT=github-access-token
-  PROXY=tor:9050
-
-  # TMDB_KEY=abc123
-  # MDBLIST_KEY=abc123
-
-  # DATABASE_URL="postgresql://postgres:postgres@localhost:5432"
+  REQUEST_TIMEOUT: "5000"
+  PROXY: "tor:9050"
   JACKETT: "http://jacket:9117"
-  # JACKETT_KEY=abc123
   PROWLARR: "http://prowlarr:9696"
-  # PROWLARR_KEY=abc123
-  # OMDB_KEY=abc123

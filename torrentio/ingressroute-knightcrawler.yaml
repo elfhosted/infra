@@ -5,18 +5,6 @@ metadata:
   namespace: torrentio
 spec:
   routes:
-    # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
-    - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
-      kind: Rule
-      services:
-        - name: torrentio-addon
-          kind: Service
-          port: 7001
-      middlewares:  
-        - name: error-pages
-          namespace: traefik
-        - name: rate-limit-torrentio        
-    # everything else is static and can be less rate-limited
     - match: Host(`knightcrawler.${dns_domain}`)
       kind: Rule
       services:
@@ -24,6 +12,5 @@ spec:
           kind: Service
           port: 7001
       middlewares:  
-        - name: error-pages
-          namespace: traefik   
-        - name: rate-limit-torrentio-static
+        - name: chain-public-stremio-addon
+          namespace: traefik

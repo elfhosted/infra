@@ -5,14 +5,16 @@ metadata:
   namespace: annatar
 data:
   ENV: "prod"
-  WORKERS: "8"
+  WORKERS: "16"
   LISTEN_PORT: "8000"
   LISTEN_HOST: "0.0.0.0"
   REDIS_URL: "redis-master"
-  JACKETT_TIMEOUT: "5"
-  JACKETT_MAX_RESULTS: "10" 
+  JACKETT_TIMEOUT: "45"
+  JACKETT_MAX_RESULTS: "100"
   LOG_LEVEL: "error" # Avoid inadvertently logging API keys
   DISABLE_OTEL: "true"
   # JACKETT_URL: # set in secret annatar-env
   # JACKETT_API_KEY: # set in secret annatar-env
-  JACKETT_INDEXERS: eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,yts
+  JACKETT_INDEXERS: yts,eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,bitsearch,limetorrents,badasstorrents,yourbittorrent
+  FORWARD_ORIGIN_IP: "true"
+  ORIGIN_IP_HEADER: Cf-Connecting-Ip  

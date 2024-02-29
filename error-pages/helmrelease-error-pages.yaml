@@ -18,9 +18,9 @@ spec:
   values:
     image:
       # -- image repository
-      repository: funkypenguin/error-pages
+      repository: ghcr.io/geek-cookbook/error-pages
       # -- image tag
-      tag: elfhosted
+      tag: v2.26.0@sha256:168c9db934107227754428f1301c590310651d80c918d09c004a2644e34e984f
       # -- image pull policy
       pullPolicy: Always
 

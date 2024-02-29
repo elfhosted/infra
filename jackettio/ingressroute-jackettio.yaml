@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jackettio.${dns_domain}
+  namespace: jackettio
+spec:
+  routes:
+    - match: Host(`jackettio.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: jackettio
+          kind: Service
+          port: 4000
+      middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
