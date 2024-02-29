@@ -26,7 +26,7 @@ spec:
         secret.reloader.stakater.com/reload: "torrentio-env"
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-producer
-      tag: rolling@sha256:524620032c9cd611a77dbeed14c9dd11edca20e0c7ec720a9c04f490a80d94e4
+      tag: rolling@sha256:c09354117f3ef0839ca4e7c0c55e2f3b8ca1fd5cf79459a255ab07039c196a29
     securityContext:
       seccompProfile:
         type: RuntimeDefault
