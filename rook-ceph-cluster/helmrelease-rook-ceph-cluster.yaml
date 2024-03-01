@@ -313,20 +313,20 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.kubernetes.io/storage
+                  - key: node-role.${dns_domain}/storage
                     operator: Exists
           tolerations:
-          - key: node-role.kubernetes.io/storage
+          - key: node-role.${dns_domain}/storage
             operator: Exists                    
         mgr:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.kubernetes.io/storage
+                  - key: node-role.${dns_domain}/storage
                     operator: Exists     
           tolerations:
-          - key: node-role.kubernetes.io/storage
+          - key: node-role.${dns_domain}/storage
             operator: Exists                                     
       #     podAffinity:
       #     podAntiAffinity:
