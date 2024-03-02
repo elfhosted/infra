@@ -94,7 +94,7 @@ spec:
       PORT: 7001
       PUID: 10001
       PGID: 10001
-      TENANT_NAME: Public
+      TENANT_NAME: KnightCrawler / Torrentio
     envFrom:
     - secretRef:
         name: torrentio-env 
