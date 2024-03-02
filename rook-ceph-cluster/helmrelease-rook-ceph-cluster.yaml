@@ -893,8 +893,6 @@ spec:
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/download-only
-                operator: Exists
               - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
@@ -971,16 +969,13 @@ spec:
                 memory: "1Gi"
             priorityClassName: system-cluster-critical
             placement:
-              tolerations:
-              - key: node-role.${dns_domain}/download-only
-                operator: Exists                                
+              tolerations:                          
               - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution: 
-                - weight: 1
-                  preference:
-                    matchExpressions:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
                       operator: Exists                 
               podAntiAffinity:
@@ -1049,9 +1044,7 @@ spec:
             placement:
               tolerations:
               - key: node-role.${dns_domain}/storage
-                operator: Exists
-              - key: node-role.${dns_domain}/download-only
-                operator: Exists                
+                operator: Exists            
               nodeAffinity:
                 requiredDuringSchedulingIgnoredDuringExecution:
                   nodeSelectorTerms:
