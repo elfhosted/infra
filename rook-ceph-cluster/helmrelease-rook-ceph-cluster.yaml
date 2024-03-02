@@ -888,7 +888,7 @@ spec:
                 cpu: "10"
                 memory: "64Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m" # lies, lies!
                 memory: "1Gi"
             priorityClassName: system-cluster-critical
             placement:
@@ -967,7 +967,7 @@ spec:
                 cpu: "10"
                 memory: "64Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m" # another lie
                 memory: "1Gi"
             priorityClassName: system-cluster-critical
             placement:
@@ -1042,7 +1042,7 @@ spec:
                 cpu: "10"
                 memory: "64Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m" # it's a lie, but it'll get our pods scheduled
                 # memory: "${rook_ceph_mds_ram}"
                 memory: "4Gi"
             priorityClassName: system-cluster-critical
