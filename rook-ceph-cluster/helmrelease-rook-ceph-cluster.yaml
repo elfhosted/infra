@@ -910,7 +910,7 @@ spec:
                       - key: app.kubernetes.io/part-of
                         operator: In
                         values:
-                        - ceph-filesystem-ssd
+                        - ceph-filesystem
                     topologyKey: "kubernetes.io/hostname"                
         storageClass:
           enabled: true
@@ -987,7 +987,7 @@ spec:
                       - key: app.kubernetes.io/part-of
                         operator: In
                         values:
-                        - ceph-filesystem-ssd
+                        - ceph-filesystem-ec-8-2
                     topologyKey: "kubernetes.io/hostname"                  
         storageClass:
           enabled: true
