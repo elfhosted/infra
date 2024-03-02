@@ -898,12 +898,11 @@ spec:
               - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution: 
-                - weight: 1
-                  preference:
-                    matchExpressions:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists             
+                      operator: Exists                                 
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
@@ -1054,12 +1053,11 @@ spec:
               - key: node-role.${dns_domain}/download-only
                 operator: Exists                
               nodeAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution: 
-                - weight: 1
-                  preference:
-                    matchExpressions:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists           
+                      operator: Exists         
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
