@@ -8,3 +8,5 @@ spec:
     average: 5   # 5 request per source IP every ..
     period:  30s # This is a per-node limit, and we have 20+ nodes (x), randomly load-balanced, so it's effectively 1 request per (30/(x))s, or nearly 1/s
     burst: 10
+    sourceCriterion:
+      depth: 1 # Trust the X-Forwarded-For header from the LB
