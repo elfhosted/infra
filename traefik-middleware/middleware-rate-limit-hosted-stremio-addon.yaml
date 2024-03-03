@@ -5,6 +5,6 @@ metadata:
   namespace: traefik
 spec:
   rateLimit:
-    average: 1   # 1 request per source IP every ..
+    average: 5   # 5 request per source IP every ..
     period:  30s # This is a per-node limit, and we have 20+ nodes (x), randomly load-balanced, so it's effectively 1 request per (30/(x))s, or nearly 1/s
-    burst: 20
+    burst: 10
