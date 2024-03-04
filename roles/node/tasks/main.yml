@@ -34,12 +34,12 @@
     state: enabled
   loop: "{{ firewall.admin_source }}"
 
-# - name: Allow port 5201 for occasional iperf testing (enable when necessary)
-#   ufw:
-#     rule: deny
-#     port: 5201
-#     proto: tcp
-#     state: enabled
+- name: Allow port 5201 for occasional iperf testing (enable when necessary)
+  ufw:
+    rule: allow
+    port: 5201
+    proto: tcp
+    state: enabled
 
 - name: Allow any incoming traffic to the public IP for host-port exposed services
   ufw:
