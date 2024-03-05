@@ -559,7 +559,7 @@ spec:
         internalTrafficPolicy: Cluster
         ## @param master.service.clusterIP Redis&reg; master service Cluster IP
         ##
-        clusterIP: ""
+        clusterIP: "10.43.0.7"
         ## @param master.service.loadBalancerIP Redis&reg; master service Load Balancer IP
         ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
         ##
