@@ -7,9 +7,9 @@ controllers
 egress_gateways
 
 [k3s_servers]
-fairy01     ansible_host=10.0.42.11 cluster_nic=enp0s31f6.4000
-fairy02     ansible_host=10.0.42.12 cluster_nic=enp0s31f6.4000
-fairy03     ansible_host=10.0.42.13 cluster_nic=enp0s31f6.4000
+fairy01     ansible_host=10.0.42.11 cluster_nic=eno1.4000
+fairy02     ansible_host=10.0.42.12 cluster_nic=eno1.4000
+fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
 
 [k3s_agents]
 elf01        ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
@@ -57,6 +57,10 @@ gnome03      ansible_host=10.0.42.103 cluster_nic=enp0s31f6.4000 # an i7 host, 6
 # We use these for doing automated hetzner installimage reinstalls
 # There's no DNS here but these are saved entries in my .ssh/config
 [public_hosts]
+fairy01-public.elfhosted.com
+fairy02-public.elfhosted.com
+fairy03-public.elfhosted.com
+
 elf01-public.elfhosted.com
 elf02-public.elfhosted.com
 elf03-public.elfhosted.com
