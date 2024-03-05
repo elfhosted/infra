@@ -6,6 +6,7 @@ metadata:
   name: elfhosted
   namespace: torrentio
 spec:
+  ClusterIP: 10.43.0.8
   ports:
   - name: http
     port: 80
