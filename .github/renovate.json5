@@ -7,7 +7,7 @@
     "fileMatch": ["helmrelease-.+\\.yaml$", "helmrepository-.+\\.yaml$", "bootstrap/flux-system/gotk-components.yaml$"]
   },
   "helm-values": {
-    "fileMatch": ["helmrelease-.+\\.yaml$"]
+    "fileMatch": ["helmrelease-.+\\.yaml$","cronjob-.+\\.yaml$"]
   },  
   "branchTopic": "{{{replace 'helmrelease-' '' packageFile}}}",
   "prHourlyLimit": 0,
