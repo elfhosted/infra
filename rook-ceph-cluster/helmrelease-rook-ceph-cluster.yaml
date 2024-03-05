@@ -315,7 +315,12 @@ spec:
               preference:
                 matchExpressions:
                 - key: "node-role.${dns_domain}/storage"
-                  operator: Exists         
+                  operator: Exists
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: "node-role.${dns_domain}/storage-1g"
+                  operator: Exists
             # requiredDuringSchedulingIgnoredDuringExecution:
             #   nodeSelectorTerms:
             #     - matchExpressions:
