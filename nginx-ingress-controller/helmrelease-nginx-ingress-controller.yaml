@@ -239,8 +239,8 @@ spec:
       ## @param daemonset.hostPorts [object] HTTP and HTTPS ports
       ##
       hostPorts:
-        http: 7000
-        https: 7443
+        http: 80
+        https: 443
     ## @param replicaCount Desired number of Controller pods
     ##
     replicaCount: 2
