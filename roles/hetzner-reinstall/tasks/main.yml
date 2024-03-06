@@ -7,6 +7,12 @@
       dest: /tmp/installimage.conf
     when: "inventory_hostname in groups['k3s_agents']"  
 
+  - name: Copy installimage template to gnome in rescue mode
+    template:
+      src: installimage-gnome.conf.j2
+      dest: /tmp/installimage.conf
+    when: "inventory_hostname in groups['k3s_observability']"  
+
   - name: Copy installimage template to node in rescue mode
     template:
       src: installimage-elf.conf.j2
