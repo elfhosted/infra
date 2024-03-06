@@ -613,7 +613,7 @@ spec:
       ##    memory: 128Mi
       ##
       limits:
-        cpu: 1
+        cpu: 4
         memory: 8Gi
       requests:
         cpu: 100m
