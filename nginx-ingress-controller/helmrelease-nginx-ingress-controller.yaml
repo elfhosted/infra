@@ -229,13 +229,13 @@ spec:
 
     ## @param kind Install as Deployment or DaemonSet
     ##
-    kind: Deployment
+    kind: Daemonset
     ## Daemonset configuration
     ##
     daemonset:
       ## @param daemonset.useHostPort If `kind` is `DaemonSet`, this will enable `hostPort` for `TCP/80` and `TCP/443`
       ##
-      useHostPort: false
+      useHostPort: true
       ## @param daemonset.hostPorts [object] HTTP and HTTPS ports
       ##
       hostPorts:
