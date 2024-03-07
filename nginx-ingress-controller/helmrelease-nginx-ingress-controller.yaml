@@ -235,12 +235,12 @@ spec:
     daemonset:
       ## @param daemonset.useHostPort If `kind` is `DaemonSet`, this will enable `hostPort` for `TCP/80` and `TCP/443`
       ##
-      useHostPort: true
+      useHostPort: false
       ## @param daemonset.hostPorts [object] HTTP and HTTPS ports
       ##
       hostPorts:
-        http: 80
-        https: 443
+        http: 7000
+        https: 7443
     ## @param replicaCount Desired number of Controller pods
     ##
     replicaCount: 2

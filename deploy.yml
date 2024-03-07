@@ -46,7 +46,7 @@
   - { import_role: { name: authentik }, tags: [ authentik ] }
   - { import_role: { name: tetragon }, tags: [ tetragon ] }
 
-- hosts: k3s_dwarves,k3s_agents
+- hosts: k3s_dwarves,k3s_agents,k3s_observability
   gather_facts: no
   become: yes
 
