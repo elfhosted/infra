@@ -3,6 +3,7 @@
 k3s_servers
 k3s_agents
 k3s_dwarves
+k3s_observability
 controllers
 egress_gateways
 
