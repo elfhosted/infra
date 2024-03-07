@@ -51,6 +51,19 @@
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
 
+- name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
+  ufw:
+    direction: in
+    rule: "allow"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+    src: 10.0.40.3/32 # hetzner LB
+  with_items:
+    # - { port: "7000", proto: "tcp" }  # http
+    - { port: "7443", proto: "tcp" }  # https    
+  when:
+  - "inventory_hostname in groups['k3s_servers']"
+
 - name: Allow any incoming traffic in the cluster range
   ufw:
     direction: in
