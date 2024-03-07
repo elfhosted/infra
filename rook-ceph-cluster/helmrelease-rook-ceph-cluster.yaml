@@ -39,35 +39,35 @@ spec:
     # Ability to override ceph.conf
     configOverride: |
       # [mds]
-      # mds_cap_revoke_eviction_timeout = 600
+      mds_cap_revoke_eviction_timeout = 600
 
       # This prevents evicted clients from being blocklisted
       # get a list of MDSs using "ceph config dump", and then apply like this:
       # ceph config set mds.ceph-filesystem-ssd-b  mds_session_blocklist_on_timeout false
       
-      # [mds.ceph-filesystem-a]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-a]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-b]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-b]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-ec-8-2-a]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-ec-8-2-a]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-ec-8-2-b]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-ec-8-2-b]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-ec-8-2-c]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-ec-8-2-c]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-ec-8-2-d]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-ec-8-2-d]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-ssd-a]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-ssd-a]
+      mds_session_blocklist_on_timeout = false
 
-      # [mds.ceph-filesystem-ssd-b]
-      # mds_session_blocklist_on_timeout = false
+      [mds.ceph-filesystem-ssd-b]
+      mds_session_blocklist_on_timeout = false
 
       [global]
       # public network =  ${cluster_nic_class_c}.0/24
@@ -551,51 +551,7 @@ spec:
               - name: sdc
               - name: sdd                                
 
-          - name: goblin01
-            resources: 
-              limits: 
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these
-              requests:
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these          
-            devices:
-              - name: nvme0n1p3
-                config:
-                  deviceClass: ssd    
-              - name: nvme1n1  
-                config:
-                  deviceClass: ssd
-          - name: goblin02
-            resources: 
-              limits: 
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these
-              requests:
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these             
-            devices:
-              - name: nvme0n1p3
-                config:
-                  deviceClass: ssd
-              - name: nvme1n1  
-                config:
-                  deviceClass: ssd
-          - name: goblin03
-            resources: 
-              limits: 
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these
-              requests:
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these             
-            devices:
-              - name: nvme0n1p3
-                config:
-                  deviceClass: ssd          
-              - name: nvme1n1                                  
-                config:
-                  deviceClass: ssd
+
           - name: goblin04
             resources: 
               limits: 
