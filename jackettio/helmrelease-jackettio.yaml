@@ -20,7 +20,7 @@ spec:
       nameOverride: jackettio
     image:
       repository: ghcr.io/geek-cookbook/jackettio
-      tag: v1.1.9@sha256:1a6ce90645b1a0a9ca63318c6b35b728f614f00bdd4bb216018badafc7328a07
+      tag: v1.1.10@sha256:43da4c8faaadb73aae126c5bbe3f7e4a68bf5a6e0752db11e76f39c8ccb1cc84
     securityContext:
       seccompProfile:
         type: RuntimeDefault
