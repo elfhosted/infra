@@ -309,18 +309,18 @@ spec:
           - key: node-role.${dns_domain}/storage
             operator: Exists
         mon:
-          nodeAffinity:
-            preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                - key: "node-role.${dns_domain}/storage"
-                  operator: Exists
-            - weight: 100
-              preference:
-                matchExpressions:
-                - key: "node-role.${dns_domain}/storage-1g"
-                  operator: Exists
+          # nodeAffinity:
+          #   preferredDuringSchedulingIgnoredDuringExecution:
+          #   - weight: 1
+          #     preference:
+          #       matchExpressions:
+          #       - key: "node-role.${dns_domain}/storage"
+          #         operator: Exists
+          #   - weight: 100
+          #     preference:
+          #       matchExpressions:
+          #       - key: "node-role.${dns_domain}/storage-1g"
+          #         operator: Exists
             # requiredDuringSchedulingIgnoredDuringExecution:
             #   nodeSelectorTerms:
             #     - matchExpressions:
