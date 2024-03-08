@@ -23,7 +23,7 @@ spec:
       - key: "node-role.${dns_domain}/download-only"
         operator: "Exists"
         effect: "NoSchedule"  
-      - key: "node-role.${dns_domain}/lightweight"
+      - key: "node-role.${dns_domain}/observability"
         operator: "Exists"
         effect: "NoSchedule"            
       hostNetwork: true

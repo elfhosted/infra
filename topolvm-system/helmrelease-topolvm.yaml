@@ -186,7 +186,7 @@ spec:
         - key: node-role.${dns_domain}/download-only
           effect: NoSchedule
           operator: Exists      
-        - key: node-role.${dns_domain}/lightweight
+        - key: node-role.${dns_domain}/observability
           effect: NoSchedule
           operator: Exists                                 
 
@@ -321,7 +321,7 @@ spec:
         - key: node-role.${dns_domain}/download-only
           effect: NoSchedule
           operator: Exists       
-        - key: node-role.${dns_domain}/lightweight
+        - key: node-role.${dns_domain}/observability
           effect: NoSchedule
           operator: Exists                                 
 
