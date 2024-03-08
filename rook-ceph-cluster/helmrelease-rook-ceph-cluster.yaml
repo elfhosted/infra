@@ -38,7 +38,7 @@ spec:
     # -- Cluster ceph.conf override
     # Ability to override ceph.conf
     configOverride: |
-      # [mds]
+      [mds]
       mds_cap_revoke_eviction_timeout = 600
 
       # This prevents evicted clients from being blocklisted
