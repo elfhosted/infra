@@ -994,7 +994,7 @@ spec:
     nodeSelector: {}
     # -- Tolerations allow the scheduler to schedule pods with matching taints.
     tolerations:
-    - key: node-role.elfhosted.com/lightweight
+    - key: node-role.elfhosted.com/observability
       operator: Exists                
 
     # -- You can use topology spread constraints to control

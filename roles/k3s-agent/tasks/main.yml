@@ -98,8 +98,8 @@
 - name: label lightweight workers # no GPU, no heavy workloads
   become: no
   shell: |
-    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/lightweight=true --overwrite
-    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/lightweight=true:NoSchedule  --overwrite
+    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/observability=true --overwrite
+    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/observability=true:NoSchedule  --overwrite
   when: "inventory_hostname in groups['node_role_lightweight']"  
   delegate_to: "{{ groups['controllers'][0] }}"      
 
