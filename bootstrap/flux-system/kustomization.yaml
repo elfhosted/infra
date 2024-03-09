@@ -44,16 +44,17 @@ patches:
       kind: Deployment
       name: "(source-controller|kustomize-controller|helm-controller)"
     patch: |
-      - op: replace
-        path: /spec/template/spec
+      - op: add
+        path: /spec/template/spec/affinity
         value:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: Exists          
-          tolerations:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: Exists     
+      - op: add
+        path: /spec/template/spec/tolerations
+        value:                      
           - key: node-role.kubernetes.io/control-plane
             operator: Exists             
