@@ -16,12 +16,8 @@ spec:
   timeout: 10m
   releaseName: kube-prometheus-stack
   install:
-    remediation:
-      retries: -1 # keep trying to remediate  
     crds: CreateReplace  # initially the CRDs are installed in the flux-system kustomization
   upgrade:
-    remediation:
-      retries: 3 # keep trying to remediate
     crds: CreateReplace    
   values:
     # Default values for kube-prometheus-stack.
