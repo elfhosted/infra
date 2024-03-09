@@ -29,8 +29,8 @@ resources:
 - shard-x
 - shard-y
 - shard-z
-# patchesStrategicMerge:
-#   - flux-system-patch.yaml
+patchesStrategicMerge:
+  - flux-system-patch.yaml
 patches:
   - target:
       kind: Deployment
