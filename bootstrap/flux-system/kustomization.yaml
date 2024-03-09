@@ -44,7 +44,7 @@ patches:
       kind: Deployment
       name: "(source-controller|kustomize-controller|helm-controller)"
     patch: |
-      - op: add
+      - op: replace
         path: /spec/template/spec
         value:
           affinity:
