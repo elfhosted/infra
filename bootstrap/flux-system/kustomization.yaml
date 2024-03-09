@@ -29,8 +29,8 @@ resources:
 - shard-x
 - shard-y
 - shard-z
-patchesStrategicMerge:
-  - flux-system-patch.yaml
+# patchesStrategicMerge:
+#   - flux-system-patch.yaml
 patches:
   - target:
       kind: Deployment
@@ -40,3 +40,20 @@ patches:
       - op: add
         path: /spec/template/spec/containers/0/args/0
         value: --watch-label-selector=!sharding.fluxcd.io/key  
+  - target:
+      kind: Deployment
+      name: "(source-controller|kustomize-controller|helm-controller)"
+    patch: |
+      - op: add
+        path: /spec/template/spec
+        value:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists          
+          tolerations:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists             
