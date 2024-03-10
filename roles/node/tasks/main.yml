@@ -142,7 +142,7 @@
     thinpool: thinpool
     size: 100%FREE  
   when: 
-  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers']"
+  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers'] or inventory_hostname in groups['k3s_observability']"
   ignore_errors: true # so we can run it multiple times
 
 - name: copy scripts

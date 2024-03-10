@@ -398,13 +398,13 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: query.podAffinityPreset, query.podAntiAffinityPreset, and query.nodeAffinityPreset will be ignored when it's set
       ##
-      # affinity: {}
-        # nodeAffinity:
-        #   requiredDuringSchedulingIgnoredDuringExecution:
-        #     nodeSelectorTerms:
-        #     - matchExpressions:
-        #       - key: node-role.elfhosted.com/observability
-        #         operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.elfhosted.com/observability
+                operator: Exists
 
       ## @param query.nodeSelector Thanos Query node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -4166,13 +4166,13 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: receiveDistributor.podAffinityPreset, receiveDistributor.podAntiAffinityPreset, and receiveDistributor.nodeAffinityPreset will be ignored when it's set
       ##
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #       - matchExpressions:
-      #         - key: node-role.elfhosted.com/observability
-      #           operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.elfhosted.com/observability
+                operator: Exists
       ## @param receiveDistributor.nodeSelector Thanos Receive Distributor node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
