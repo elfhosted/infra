@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: pvc-cleaner
-  namespace: pvc-cleaner
+  name: elf-cleaner
+  namespace: elf-cleaner
 data:
-  pvc-cleaner.sh: |
+  elf-cleaner.sh: |
     #!/bin/bash
 
     # Debug logs
@@ -15,9 +15,14 @@ data:
     # Set timestamp
     TIMESTAMP_NOW=$(date +%s)
 
-    NAMESPACES=$(kubectl get ns --no-headers=true | grep aa | cut -f1 -d" ")
+    NAMESPACES=$(kubectl get ns --no-headers=true | grep aa | grep -v fnky | cut -f1 -d" ")
     for NS in ${NAMESPACES}
     do
+
+      # Delete any orphaned deployments / needs automated label updates first
+      # VERSION=$(kubectl get helmreleases.helm.toolkit.fluxcd.io -n $NS -o json | jq -r .items[0].status.lastAttemptedRevision)
+	    # echo "helmrelease current version is [$VERSION], deleting any unrelated deployments..."
+	    # kubectl delete deployments.apps -n $NS -l myprecious.elfhosted.com/version!=$VERSION,app.kubernetes.io/name!=kubernetesdashboard,app!=mattermost
 
       # Get a list of all customer PVCs excluding tmp (because it's ephemeral)
       PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -v tmp | cut -f1 -d' ')

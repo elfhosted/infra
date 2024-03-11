@@ -32,7 +32,7 @@ spec:
       runAsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 1
+      replicas: 10
       annotations:
         configmap.reloader.stakater.com/reload: "prowlarr-env"
         secret.reloader.stakater.com/reload: "prowlarr-env"
@@ -44,6 +44,9 @@ spec:
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"              
               spec:
                 accessModes: [ "ReadWriteOnce" ]
                 storageClassName: "topolvm-provisioner-thin"
@@ -53,10 +56,19 @@ spec:
       config:
         enabled: true
         type: custom
-        mountPath: /config/
+        mountPath: /config
         volumeSpec:
-          persistentVolumeClaim:
-            claimName: prowlarr
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"         
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 10Gi         
       run: # used for s6-init with non-root
         enabled: true
         type: emptyDir
@@ -76,6 +88,28 @@ spec:
           http:
             port: 9696
     additionalContainers:
+      config-setup:
+        image: curlimages/curl:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - >
+            until curl -o /config/config.xml https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/xml/prowlarr-config.xml; do
+              echo "Failed to download config file. Retrying...";
+              sleep 3;
+            done;
+            echo "Config file downloaded successfully.";
+            sed -i 's/$PROWLARR_API_KEY/'"$PROWLARR_API_KEY"'/g' /config/config.xml;
+            chmod 664 /config/config.xml;
+            echo "Prowlarr config setup complete.";
+        volumeMounts:
+          - name: config
+            mountPath: /config
+        env:
+          - name: PROWLARR_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: mediafusion-env
+                key: PROWLARR_API_KEY
       setup-indexers: 
         image: apteno/alpine-jq:latest
         command: ["/bin/sh", "-c"]
@@ -96,8 +130,9 @@ spec:
             done;
             echo "Indexers setup complete.";
             sleep infinity;
-        envFrom:
-        - secretRef:
-            name: prowlarr-env
-        - secretRef:
-            name: mediafusion-env
+        env:
+          - name: PROWLARR_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: mediafusion-env
+                key: PROWLARR_API_KEY
