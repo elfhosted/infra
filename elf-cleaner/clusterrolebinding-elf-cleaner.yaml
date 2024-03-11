@@ -1,12 +1,12 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: pvc-cleaner
+  name: elf-cleaner
 subjects:
 - kind: ServiceAccount
-  name: pvc-cleaner
-  namespace: pvc-cleaner
+  name: elf-cleaner
+  namespace: elf-cleaner
 roleRef:
   kind: ClusterRole
-  name: pvc-cleaner
+  name: elf-cleaner
   apiGroup: rbac.authorization.k8s.io

@@ -1,10 +1,10 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: pvc-cleaner
+  name: elf-cleaner
 rules:
 - apiGroups: [""]
-  resources: ["persistentvolumeclaims"]
+  resources: ["persistentvolumeclaims","deployments"]
   verbs: ["*"]
 - apiGroups: [""]
   resources: ["namespaces","pods"]
