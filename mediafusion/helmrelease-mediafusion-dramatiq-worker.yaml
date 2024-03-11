@@ -60,6 +60,9 @@ spec:
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"               
               spec:
                 accessModes: [ "ReadWriteOnce" ]
                 storageClassName: "topolvm-provisioner-thin"
@@ -73,6 +76,9 @@ spec:
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"               
               spec:
                 accessModes: [ "ReadWriteOnce" ]
                 storageClassName: "topolvm-provisioner-thin"

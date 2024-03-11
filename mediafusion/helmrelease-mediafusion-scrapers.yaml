@@ -60,12 +60,31 @@ spec:
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"               
               spec:
                 accessModes: [ "ReadWriteOnce" ]
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
                     storage: 1Gi   
+      scrapy: 
+        enabled: true
+        type: custom
+        mountPath: /mediafusion/.scrapy
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"               
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 10Gi
       local: 
         enabled: true
         type: custom
@@ -73,6 +92,9 @@ spec:
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"               
               spec:
                 accessModes: [ "ReadWriteOnce" ]
                 storageClassName: "topolvm-provisioner-thin"
