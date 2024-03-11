@@ -20,7 +20,7 @@ spec:
           containers:
           - name: "tamil-mv-scraper"
             command: ["pipenv", "run", "python3", "-m", "scrapers.tamilmv", "--all"]
-            image: ghcr.io/geek-cookbook/mediafusion:3.7.4@sha256:11d1a9590d81be99240bcd6f862266467aaf7199bc1973cf1bdfac9a90ff67ad
+            image: ghcr.io/geek-cookbook/mediafusion:3.7.4@sha256:87c15876af36dcf098717f3d36743e8dc7890471efd904ee44cda1c0aaa48e6e
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
