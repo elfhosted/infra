@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
-      tag: 3.7.1@sha256:d454ee0d05cd3064c39661c35a18dc38db546b0d2f37702c0402130963104421
+      tag: 3.7.4@sha256:87c15876af36dcf098717f3d36743e8dc7890471efd904ee44cda1c0aaa48e6e
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -96,7 +96,7 @@ spec:
             port: 8000
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia

@@ -262,7 +262,7 @@ spec:
               memory: 256Mi
               cpu: 100m
             limits:
-              memory: 256Mi
+              memory: 4Gi
               cpu: 10
         - name : csi-rbdplugin
           resource:
@@ -350,7 +350,7 @@ spec:
               memory: 1Gi
               cpu: 100m
             limits:
-              memory: 1Gi
+              memory: 4Gi
               cpu: 10
         - name : csi-cephfsplugin
           resource:
@@ -358,7 +358,7 @@ spec:
               memory: 512Mi
               cpu: 250m
             limits:
-              memory: 1Gi
+              memory: 4Gi
               cpu: 20
         - name : liveness-prometheus
           resource:
@@ -386,7 +386,7 @@ spec:
               memory: 512Mi
               cpu: 250m
             limits:
-              memory: 1Gi
+              memory: 4Gi
               cpu: 20
         - name : liveness-prometheus
           resource:
@@ -474,7 +474,7 @@ spec:
         - key: "node-role.${dns_domain}/storage"
           operator: "Exists"
           effect: "NoSchedule"    
-        - key: "node-role.${dns_domain}/lightweight"
+        - key: "node-role.${dns_domain}/observability"
           operator: "Exists"
           effect: "NoSchedule"                                              
       #    - key: key

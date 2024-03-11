@@ -60,6 +60,25 @@
   become: yes
   when: "inventory_hostname in groups['k3s_dwarves']"
 
+- name: install k3s on gnomes (tainted)
+  environment:
+    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
+    K3S_TOKEN: "{{ k3s_token }}"
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    INSTALL_K3S_EXEC="agent \
+      --flannel-iface={{ cluster_nic }} \
+      --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
+      --prefer-bundled-bin \
+      --node-taint node-role.{{ dns_domain }}/observability=true:NoSchedule \
+      --node-label node-role.{{ dns_domain }}/observability=true" \
+    sh -
+  # args:
+    # creates: /usr/local/bin/k3s
+  become: yes
+  when: "inventory_hostname in groups['k3s_observability']"  
+
 - name: taint and label download workers
   become: no
   shell: |
@@ -79,8 +98,8 @@
 - name: label lightweight workers # no GPU, no heavy workloads
   become: no
   shell: |
-    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/lightweight=true --overwrite
-    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/lightweight=true:NoSchedule  --overwrite
+    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/observability=true --overwrite
+    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/observability=true:NoSchedule  --overwrite
   when: "inventory_hostname in groups['node_role_lightweight']"  
   delegate_to: "{{ groups['controllers'][0] }}"      
 

@@ -10,15 +10,15 @@
     dest: /etc/rancher/k3s/config.yaml
   notify: restart k3s
 
-- name: install k3s on master[0]
-  environment:
-    INSTALL_K3S_EXEC: "server"
-    K3S_TOKEN: "{{ k3s_token }}"
-    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-  shell: curl -sfL https://get.k3s.io |  sh -
-  args: 
-    creates: /usr/local/bin/k3s # only run this if k3s isn't already installed on master
-  when: "groups['k3s_servers'][0] == inventory_hostname"
+# - name: install k3s on master[0]
+#   environment:
+#     INSTALL_K3S_EXEC: "server"
+#     K3S_TOKEN: "{{ k3s_token }}"
+#     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+#   shell: curl -sfL https://get.k3s.io |  sh -
+#   args: 
+#     creates: /usr/local/bin/k3s # only run this if k3s isn't already installed on master
+#   when: "groups['k3s_servers'][0] == inventory_hostname"
 
 - name: install k3s on masters (now we have a HA API)
   environment:

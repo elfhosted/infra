@@ -41,9 +41,9 @@ spec:
       # [mds]
       # mds_cap_revoke_eviction_timeout = 600
 
-      # This prevents evicted clients from being blocklisted
-      # get a list of MDSs using "ceph config dump", and then apply like this:
-      # ceph config set mds.ceph-filesystem-ssd-b  mds_session_blocklist_on_timeout false
+      # # This prevents evicted clients from being blocklisted
+      # # get a list of MDSs using "ceph config dump", and then apply like this:
+      # # ceph config set mds.ceph-filesystem-ssd-b  mds_session_blocklist_on_timeout false
       
       # [mds.ceph-filesystem-a]
       # mds_session_blocklist_on_timeout = false
@@ -187,7 +187,7 @@ spec:
       mon:
         # Set the number of mons to be started. Generally recommended to be 3.
         # For highest availability, an odd number of mons should be specified.
-        count: 3
+        count: 5
         # The mons should be on unique nodes. For production, at least 3 nodes are recommended for this reason.
         # Mons should only be allowed on the same node for test environments where data loss is acceptable.
         allowMultiplePerNode: false
@@ -296,12 +296,12 @@ spec:
       # tolerate taints with a key of 'storage-node'.
       placement:
         all:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: node-role.${dns_domain}/storage
-                    operator: Exists
+          # nodeAffinity:
+          #   requiredDuringSchedulingIgnoredDuringExecution:
+          #     nodeSelectorTerms:
+          #       - matchExpressions:
+          #         - key: node-role.${dns_domain}/storage
+          #           operator: Exists
       #     podAffinity:
       #     podAntiAffinity:
       #     topologySpreadConstraints:
@@ -310,23 +310,36 @@ spec:
             operator: Exists
         mon:
           nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: node-role.kubernetes.io/storage
-                    operator: Exists
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: "node-role.${dns_domain}/storage"
+                  operator: Exists
+            - weight: 100
+              preference:
+                matchExpressions:
+                - key: "node-role.${dns_domain}/storage-1g"
+                  operator: Exists
+            # requiredDuringSchedulingIgnoredDuringExecution:
+            #   nodeSelectorTerms:
+            #     - matchExpressions:
+            #       - key: node-role.kubernetes.io/control-plane
+            #         operator: Exists
           tolerations:
-          - key: node-role.kubernetes.io/storage
-            operator: Exists                    
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists   
+          - key: node-role.${dns_domain}/storage
+            operator: Exists                                
         mgr:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.kubernetes.io/storage
+                  - key: node-role.${dns_domain}/storage
                     operator: Exists     
           tolerations:
-          - key: node-role.kubernetes.io/storage
+          - key: node-role.${dns_domain}/storage
             operator: Exists                                     
       #     podAffinity:
       #     podAntiAffinity:
@@ -538,51 +551,7 @@ spec:
               - name: sdc
               - name: sdd                                
 
-          - name: goblin01
-            resources: 
-              limits: 
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these
-              requests:
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these          
-            devices:
-              - name: nvme0n1p3
-                config:
-                  deviceClass: ssd    
-              - name: nvme1n1  
-                config:
-                  deviceClass: ssd
-          - name: goblin02
-            resources: 
-              limits: 
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these
-              requests:
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these             
-            devices:
-              - name: nvme0n1p3
-                config:
-                  deviceClass: ssd
-              - name: nvme1n1  
-                config:
-                  deviceClass: ssd
-          - name: goblin03
-            resources: 
-              limits: 
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these
-              requests:
-                cpu: 2
-                memory: 16384Mi # 62GB, we want to maximize the use of these             
-            devices:
-              - name: nvme0n1p3
-                config:
-                  deviceClass: ssd          
-              - name: nvme1n1                                  
-                config:
-                  deviceClass: ssd
+
           - name: goblin04
             resources: 
               limits: 
@@ -888,22 +857,19 @@ spec:
                 cpu: "10"
                 memory: "64Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m" # lies, lies!
                 memory: "1Gi"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
-              - key: node-role.${dns_domain}/download-only
-                operator: Exists
               - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution: 
-                - weight: 1
-                  preference:
-                    matchExpressions:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists             
+                      operator: Exists                                 
               podAntiAffinity:
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
@@ -913,7 +879,7 @@ spec:
                       - key: app.kubernetes.io/part-of
                         operator: In
                         values:
-                        - ceph-filesystem-ssd
+                        - ceph-filesystem
                     topologyKey: "kubernetes.io/hostname"                
         storageClass:
           enabled: true
@@ -968,20 +934,17 @@ spec:
                 cpu: "10"
                 memory: "64Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m" # another lie
                 memory: "1Gi"
             priorityClassName: system-cluster-critical
             placement:
-              tolerations:
-              - key: node-role.${dns_domain}/download-only
-                operator: Exists                                
+              tolerations:                          
               - key: node-role.${dns_domain}/storage
                 operator: Exists                
               nodeAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution: 
-                - weight: 1
-                  preference:
-                    matchExpressions:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
                       operator: Exists                 
               podAntiAffinity:
@@ -993,7 +956,7 @@ spec:
                       - key: app.kubernetes.io/part-of
                         operator: In
                         values:
-                        - ceph-filesystem-ssd
+                        - ceph-filesystem-ec-8-2
                     topologyKey: "kubernetes.io/hostname"                  
         storageClass:
           enabled: true
@@ -1043,24 +1006,21 @@ spec:
                 cpu: "10"
                 memory: "64Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m" # it's a lie, but it'll get our pods scheduled
                 # memory: "${rook_ceph_mds_ram}"
                 memory: "4Gi"
             priorityClassName: system-cluster-critical
             placement:
               tolerations:
               - key: node-role.${dns_domain}/storage
-                operator: Exists
-              - key: node-role.${dns_domain}/download-only
-                operator: Exists                
+                operator: Exists            
               nodeAffinity:
-                preferredDuringSchedulingIgnoredDuringExecution: 
-                - weight: 1
-                  preference:
-                    matchExpressions:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
                     - key: node-role.${dns_domain}/storage-10g
-                      operator: Exists           
-              podAntiAffinity:
+                      operator: Exists         
+              podAntiAffinity:              
                 preferredDuringSchedulingIgnoredDuringExecution: 
                 - weight: 100  
                   podAffinityTerm:    

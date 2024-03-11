@@ -1,12 +1,12 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: tamil-mv-scraper
+  name: formula-tgx-spider
   namespace: mediafusion
   labels:
     app.kubernetes.io/name: tenant-cleaner  
 spec:
-  schedule: "30 */6 * * *" # run hourly
+  schedule: "0 */6 * * *" # run hourly
   concurrencyPolicy: Forbid # no more than one instance
   startingDeadlineSeconds: 60
   jobTemplate:
@@ -14,12 +14,12 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/name: tamil-mv-scraper
+            app.kubernetes.io/name: formula-tgx-spider
         spec:
           restartPolicy: Never
           containers:
-          - name: "tamil-mv-scraper"
-            command: ["pipenv", "run", "python3", "-m", "scrapers.tamilmv", "--all"]
+          - name: "formula-tgx-spider"
+            command: ["pipenv", "run", "scrapy", "crawl", "formula_tgx"]
             image: ghcr.io/geek-cookbook/mediafusion:3.7.4@sha256:87c15876af36dcf098717f3d36743e8dc7890471efd904ee44cda1c0aaa48e6e
             securityContext:
               allowPrivilegeEscalation: false

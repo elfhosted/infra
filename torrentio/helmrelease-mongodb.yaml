@@ -613,11 +613,11 @@ spec:
       ##    memory: 128Mi
       ##
       limits:
-        cpu: 1
+        cpu: 2
         memory: 8Gi
       requests:
-        cpu: 100m
-        memory: 6Gi
+        cpu: 1
+        memory: 2Gi
       ## Examples:
       ## requests:
       ##    cpu: 100m
@@ -1106,7 +1106,7 @@ spec:
     persistence:
       ## @param persistence.enabled Enable MongoDB(&reg;) data persistence using PVC
       ##
-      enabled: true # we are just used for caching, no need for storage
+      enabled: false # we are just used for caching, no need for storage
       ## @param persistence.name Name of the PVC and mounted volume
       ##
       name: "datadir"
@@ -1129,7 +1129,7 @@ spec:
       ## If undefined (the default) or set to null, no storageClassName spec is
       ## set, choosing the default provisioner.
       ##
-      storageClass: "ceph-block-ssd"
+      storageClass: "topolvm-provisioner"
       ## @param persistence.accessModes PV Access Mode
       ##
       accessModes:
@@ -1163,7 +1163,7 @@ spec:
         requests: {}
         ## @param persistence.volumeClaimTemplates.dataSource Add dataSource to the VolumeClaimTemplate
         ##
-        dataSource: {}
+        dataSource: {}     
 
     ## Persistent Volume Claim Retention Policy
     ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention

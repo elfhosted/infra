@@ -20,7 +20,7 @@ spec:
       nameOverride: torrentio-addon
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-addon
-      tag: rolling@sha256:ea6c5dcfb0ac540144fba35d9f2cc077371b1efb27ec29b63007f4f413aae545
+      tag: rolling@sha256:60fae8d1152d0a26429f3ba5982053369e7bba989d52cba1cb760174256b94a7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -94,7 +94,7 @@ spec:
       PORT: 7001
       PUID: 10001
       PGID: 10001
-      TENANT_NAME: Public
+      TENANT_NAME: KnightCrawler / Torrentio
     envFrom:
     - secretRef:
         name: torrentio-env 
@@ -119,7 +119,7 @@ spec:
             port: 7001
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia

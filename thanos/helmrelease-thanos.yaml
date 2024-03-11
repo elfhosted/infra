@@ -403,7 +403,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
 
       ## @param query.nodeSelector Thanos Query node labels for pod assignment
@@ -414,7 +414,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##    
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param query.podLabels Thanos Query pod labels
@@ -1092,7 +1092,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param queryFrontend.nodeSelector Thanos Query Frontend node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -1102,7 +1102,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param queryFrontend.podLabels Thanos Query Frontend pod labels
@@ -1556,7 +1556,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param bucketweb.nodeSelector Thanos Bucket Web node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -1566,7 +1566,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param bucketweb.podLabels Thanos Bucket Web pod labels
@@ -2020,7 +2020,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param compactor.nodeSelector Thanos Compactor node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -2030,7 +2030,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param compactor.podLabels Thanos Compactor pod labels
@@ -2502,7 +2502,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param storegateway.nodeSelector Thanos Store Gateway node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -2512,7 +2512,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param storegateway.podLabels Thanos Store Gateway pod labels
@@ -3162,7 +3162,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param ruler.nodeSelector Thanos Ruler node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -3172,7 +3172,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param ruler.podLabels Thanos Ruler pod labels
@@ -3684,7 +3684,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param receive.nodeSelector Thanos Receive node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -3694,7 +3694,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
 
       ## @param receive.statefulsetLabels Thanos Receive statefulset labels
@@ -4171,7 +4171,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/lightweight
+              - key: node-role.elfhosted.com/observability
                 operator: Exists
       ## @param receiveDistributor.nodeSelector Thanos Receive Distributor node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -4181,7 +4181,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/lightweight
+      - key: node-role.elfhosted.com/observability
         operator: Exists
         
       ## @param receiveDistributor.podLabels Thanos Receive Distributor pod labels

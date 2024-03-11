@@ -579,7 +579,7 @@ spec:
     # Eg:
     schedules:
       daily:
-        disabled: false
+        disabled: true
         schedule: "0 0 * * *" # midnight UTC
         useOwnerReferencesInBackup: false
         template:

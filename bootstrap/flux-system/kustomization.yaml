@@ -40,3 +40,21 @@ patches:
       - op: add
         path: /spec/template/spec/containers/0/args/0
         value: --watch-label-selector=!sharding.fluxcd.io/key  
+  # - target:
+  #     kind: Deployment
+  #     name: "(source-controller|kustomize-controller|helm-controller)"
+  #   patch: |
+  #     - op: add
+  #       path: /spec/template/spec/affinity
+  #       value:
+  #         nodeAffinity:
+  #           requiredDuringSchedulingIgnoredDuringExecution:
+  #             nodeSelectorTerms:
+  #             - matchExpressions:
+  #               - key: node-role.kubernetes.io/control-plane
+  #                 operator: Exists     
+  #     - op: add
+  #       path: /spec/template/spec/tolerations
+  #       value:                      
+  #         - key: node-role.kubernetes.io/control-plane
+  #           operator: Exists             
