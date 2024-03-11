@@ -75,3 +75,29 @@ spec:
         ports:
           http:
             port: 9696
+    additionalContainers:
+      setup-indexers: 
+        image: apteno/alpine-jq:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - >
+            echo "Waiting for Prowlarr to be ready...";
+            until curl -f -H "X-API-KEY: $PROWLARR_API_KEY" http://localhost:9696/api/v1/health; do
+              sleep 5;
+            done;
+            echo "Prowlarr is ready, setting up indexers...";
+            until curl -o prowlarr-indexers.json https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/prowlarr-indexers.json; do
+              echo "Failed to download indexers file. Retrying...";
+              sleep 3;
+            done;
+            jq -c '.[]' prowlarr-indexers.json | while read indexer; do
+              echo "Adding indexer named: $(echo $indexer | jq -r '.name')";
+              curl -H "Content-Type: application/json" -H "X-API-KEY: $PROWLARR_API_KEY" -X POST http://localhost:9696/api/v1/indexer -d "$indexer";
+            done;
+            echo "Indexers setup complete.";
+            sleep infinity;
+        envFrom:
+        - secretRef:
+            name: prowlarr-env
+        - secretRef:
+            name: mediafusion-env
