@@ -30,7 +30,7 @@ spec:
         unavailable: 1        
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-consumer
-      tag: rolling@sha256:5df0bc384eee2df2c58e9fb95272eb1a40828e62feee1413d132859bcb6e4521
+      tag: rolling@sha256:24983e36019a07148008bf11a5d156cf6e8784e7df8a99d2f7773b092f84207d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
