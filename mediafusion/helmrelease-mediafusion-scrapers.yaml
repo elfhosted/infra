@@ -31,7 +31,7 @@ spec:
       runAsUser: 568
       runAsGroup: 568
     automountServiceAccountToken: false
-    command: ["pipenv", "run", "dramatiq-gevent", "api.task"] 
+    command: ["pipenv", "run", "python", "-m", "api.scheduler"]
     controller:
       replicas: 1
       strategy: RollingUpdate
@@ -91,7 +91,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: true # necessary for probes
+        enabled: false # don't want probes
         ports:
           http:
-            port: 8000
+            port: 1234 # doesn't matter
