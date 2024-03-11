@@ -544,6 +544,17 @@ spec:
               {{- with .Values.config.snippets.extraRelabelConfigs }}
               {{- toYaml . | nindent 4 }}
               {{- end }}
+          - job_name: system
+            decompression:
+              enabled: true
+              initial_delay: 10s
+              format: gz
+            static_configs:
+            - targets:
+                - localhost
+              labels:
+                job: varlogs
+                __path__: /var/log/**.gz              
 
       # -- Config file contents for Promtail.
       # Must be configured as string.
