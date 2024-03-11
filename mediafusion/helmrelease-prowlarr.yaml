@@ -87,7 +87,7 @@ spec:
         ports:
           http:
             port: 9696
-    additionalContainers:
+    initContainers:
       config-setup:
         image: curlimages/curl:latest
         command: ["/bin/sh", "-c"]
@@ -109,7 +109,8 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: mediafusion-env
-                key: PROWLARR_API_KEY
+                key: PROWLARR_API_KEY                
+    additionalContainers:
       setup-indexers: 
         image: apteno/alpine-jq:latest
         command: ["/bin/sh", "-c"]
