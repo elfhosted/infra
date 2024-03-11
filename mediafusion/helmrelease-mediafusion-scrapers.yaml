@@ -21,7 +21,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
-      tag: 3.7.3@sha256:37c21eaf264d902c3f09c663297cbc8524d68bcc012d983491f236985a32f224
+      tag: 3.7.4@sha256:87c15876af36dcf098717f3d36743e8dc7890471efd904ee44cda1c0aaa48e6e
     securityContext:
       seccompProfile:
         type: RuntimeDefault
