@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tissue
+  namespace: torrentio
+  labels:
+    app.kubernetes.io/name: elf-cleaner  
+spec:
+  schedule: "0 0 31 02 *" # never run automatically
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: "tissue"
+            image: gabisonfire/knightcrawler-tissue:latest
+            envFrom:
+            - secretRef:
+                name: torrentio-env 
+            - configMapRef:
+                name: torrentio-env             
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 568
+              runAsGroup: 568
+              capabilities:
+                drop:
+                - ALL                
