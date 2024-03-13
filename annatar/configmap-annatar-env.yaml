@@ -13,8 +13,8 @@ data:
   JACKETT_MAX_RESULTS: "100"
   LOG_LEVEL: "error" # Avoid inadvertently logging API keys
   DISABLE_OTEL: "true"
-  # JACKETT_URL: # set in secret annatar-env
   # JACKETT_API_KEY: # set in secret annatar-env
   JACKETT_INDEXERS: yts,eztv,kickasstorrents-ws,thepiratebay,therarbg,torrentgalaxy,bitsearch,limetorrents,badasstorrents,yourbittorrent
+  JACKETT_URL: http://jackett:9117
   FORWARD_ORIGIN_IP: "true"
   ORIGIN_IP_HEADER: Cf-Connecting-Ip  
