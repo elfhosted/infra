@@ -1,0 +1,72 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  instances: 3
+
+  # Example of rolling update strategy:
+  # - unsupervised: automated update of the primary once all
+  #                 replicas have been upgraded (default)
+  # - supervised: requires manual supervision to perform
+  #               the switchover of the primary
+  primaryUpdateStrategy: unsupervised
+
+  # Persistent storage configuration
+  storage:
+    storageClass: topolvm-provisioner
+    size: 10Gi
+
+  monitoring:
+    enablePodMonitor: true
+                
+  superuserSecret:
+      name: cnpg-postgres-credentials
+
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  # Cluster was initially bootstrapped in the kube-prometheus-stack namespace, but (a) it broke, and (b) I moved it to the grafana namespace
+  # bootstrap:
+  #   initdb:
+  #     database: grafana
+  #     owner: grafana
+  #     secret:
+  #       name: app-secret
+
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:        
+        destinationPath: s3://cnpg/
+        endpointURL: "http://minio.minio:9000"
+        s3Credentials:
+          accessKeyId:
+            name: cnpg-minio-credentials
+            key: ACCESS_KEY_ID
+          secretAccessKey:
+            name: cnpg-minio-credentials
+            key: ACCESS_SECRET_KEY
+        wal:
+          compression: gzip
+          maxParallel: 8
+
+  backup:
+      # Volume snapshot backups
+      # volumeSnapshot:
+      #   className: ceph-block
+      # WAL archive
+      barmanObjectStore:        
+        destinationPath: s3://cnpg/
+        endpointURL: "http://minio.minio:9000"
+        s3Credentials:
+          accessKeyId:
+            name: cnpg-minio-credentials
+            key: ACCESS_KEY_ID
+          secretAccessKey:
+            name: cnpg-minio-credentials
+            key: ACCESS_SECRET_KEY
+        wal:
+          compression: gzip
+          maxParallel: 2      
