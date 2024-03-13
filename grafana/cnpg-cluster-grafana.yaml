@@ -15,7 +15,7 @@ spec:
 
   # Persistent storage configuration
   storage:
-    storageClass: topolvm-provisioner
+    storageClass: topolvm-provisioner-thin
     size: 10Gi
 
   monitoring:
