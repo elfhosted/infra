@@ -2237,7 +2237,7 @@ spec:
       persistence:
         ## @param compactor.persistence.enabled Enable data persistence using PVC(s) on Thanos Compactor pods
         ##
-        enabled: false
+        enabled: true
         ## @param compactor.persistence.defaultEmptyDir Defaults to emptyDir if persistence is disabled.
         ##
         defaultEmptyDir: true
@@ -2624,7 +2624,7 @@ spec:
       persistence:
         ## @param storegateway.persistence.enabled Enable data persistence using PVC(s) on Thanos Store Gateway pods
         ##
-        enabled: false
+        enabled: true
         ## @param storegateway.persistence.storageClass Specify the `storageClass` used to provision the volume
         ## If defined, storageClassName: <storageClass>
         ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -3860,7 +3860,7 @@ spec:
         ## If undefined (the default) or set to null, no storageClassName spec is
         ## set, choosing the default provisioner.
         ##
-        storageClass: ""
+        storageClass: "topolvm-provisioner-thin"
         ## @param receive.persistence.accessModes PVC Access Modes for data volume
         ##
         accessModes:
