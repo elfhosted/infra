@@ -16,7 +16,7 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: ceph-block-ssd
-    size: 20Gi
+    size: 30Gi
 
   monitoring:
     enablePodMonitor: true
