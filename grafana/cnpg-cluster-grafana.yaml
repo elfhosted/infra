@@ -60,21 +60,21 @@ spec:
           compression: gzip
           maxParallel: 8
 
-  backup:
-      # Volume snapshot backups
-      # volumeSnapshot:
-      #   className: ceph-block
-      # WAL archive
-      barmanObjectStore:        
-        destinationPath: s3://cnpg/
-        endpointURL: "http://minio.minio:9000"
-        s3Credentials:
-          accessKeyId:
-            name: cnpg-minio-credentials
-            key: ACCESS_KEY_ID
-          secretAccessKey:
-            name: cnpg-minio-credentials
-            key: ACCESS_SECRET_KEY
-        wal:
-          compression: gzip
-          maxParallel: 2      
+  # backup:
+  #     # Volume snapshot backups
+  #     # volumeSnapshot:
+  #     #   className: ceph-block
+  #     # WAL archive
+  #     barmanObjectStore:        
+  #       destinationPath: s3://cnpg/
+  #       endpointURL: "http://minio.minio:9000"
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: cnpg-minio-credentials
+  #           key: ACCESS_KEY_ID
+  #         secretAccessKey:
+  #           name: cnpg-minio-credentials
+  #           key: ACCESS_SECRET_KEY
+  #       wal:
+  #         compression: gzip
+  #         maxParallel: 2      
