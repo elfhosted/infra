@@ -27,8 +27,7 @@ spec:
     - key: "node-role.${dns_domain}/observability"
       operator: "Exists"
     nodeSelector:
-    - key: "node-role.${dns_domain}/observability"
-      operator: "Exists"             
+      node-role.${dns_domain}/observability": "true"
       
   superuserSecret:
       name: cnpg-postgres-credentials
