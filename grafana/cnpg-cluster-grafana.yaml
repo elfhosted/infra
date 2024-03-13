@@ -21,6 +21,15 @@ spec:
   monitoring:
     enablePodMonitor: true
                 
+  affinity:
+    podAntiAffinityType: required
+    tolerations:
+    - key: "node-role.${dns_domain}/observability"
+      operator: "Exists"
+    nodeSelector:
+    - key: "node-role.${dns_domain}/observability"
+      operator: "Exists"             
+      
   superuserSecret:
       name: cnpg-postgres-credentials
 
