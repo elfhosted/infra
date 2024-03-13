@@ -33,13 +33,13 @@ spec:
       runAsGroup: 568
       fsGroup: 568
     automountServiceAccountToken: false
-  resources:
-    requests:
-      cpu: 10m
-      memory: 64Mi
-    limits:
-      cpu: 600m
-      memory: 384Mi    
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        cpu: 600m
+        memory: 384Mi    
     controller:
       replicas: 2         
     ingress:
