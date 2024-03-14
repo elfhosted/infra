@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: elf-charts-dev
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: dev
+  timeout: 60s
+  url: https://github.com/geek-cookbook/elf-charts
