@@ -20,5 +20,3 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-vars
-      - kind: Secret
-        name: cluster-secret-vars-kubecost

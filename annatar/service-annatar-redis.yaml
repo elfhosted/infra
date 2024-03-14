@@ -8,7 +8,7 @@ metadata:
   annotations:
 spec:
   type: ClusterIP
-  clusterIP: 10.43.0.10
+  clusterIP: 10.43.0.13
   ports:
   - port: 6379
     targetPort: 6379
