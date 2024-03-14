@@ -65,3 +65,16 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi               
+      dot-local: 
+        enabled: true
+        type: custom
+        mountPath: /.local
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi               
