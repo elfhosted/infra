@@ -14,19 +14,19 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    storageClass: topolvm-provisioner-thin
-    size: 10Gi
+    storageClass: ceph-block-ssd
+    size: 20Gi
 
   monitoring:
     enablePodMonitor: true
                 
-  affinity:
-    podAntiAffinityType: required
-    tolerations:
-    - key: "node-role.${dns_domain}/observability"
-      operator: "Exists"
-    nodeSelector:
-      node-role.${dns_domain}/observability: "true"
+  # affinity:
+  #   podAntiAffinityType: required
+  #   tolerations:
+  #   - key: "node-role.${dns_domain}/observability"
+  #     operator: "Exists"
+  #   nodeSelector:
+  #     node-role.${dns_domain}/observability: "true"
       
 
   superuserSecret:
