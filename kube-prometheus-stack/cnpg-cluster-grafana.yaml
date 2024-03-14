@@ -37,7 +37,7 @@ spec:
           storage:
             name: velero-grafana-1-5j6sc
             kind: VolumeSnapshot
-            apiGroup: snapshot.storage.k8s.i
+            apiGroup: snapshot.storage.k8s.io
             
   backup:
       # Volume snapshot backups
