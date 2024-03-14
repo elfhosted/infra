@@ -993,9 +993,9 @@ spec:
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
     # -- Tolerations allow the scheduler to schedule pods with matching taints.
-    tolerations:
-    - key: node-role.elfhosted.com/observability
-      operator: Exists                
+    # tolerations:
+    # - key: node-role.elfhosted.com/observability
+    #   operator: Exists                
 
     # -- You can use topology spread constraints to control
     # how Pods are spread across your cluster among failure-domains.
