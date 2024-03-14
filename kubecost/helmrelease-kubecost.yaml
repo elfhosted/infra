@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: kubecost
-  namespace: kubecost-system
+  namespace: kubecost
 spec:
   chart:
     spec:
