@@ -13,14 +13,22 @@ spec:
   #               the switchover of the primary
   primaryUpdateStrategy: unsupervised
 
-  # Persistent storage configuration
   storage:
-    storageClass: ceph-block-ssd
-    size: 30Gi
+    storageClass: topolvm-provisioner-thin
+    size: 10Gi
 
   monitoring:
     enablePodMonitor: true
                 
+  affinity:
+    podAntiAffinityType: required
+    tolerations:
+    - key: "node-role.${dns_domain}/observability"
+      operator: "Exists"
+    nodeSelector:
+      node-role.${dns_domain}/observability: "true"
+      
+
   superuserSecret:
       name: cnpg-postgres-credentials
 
@@ -35,7 +43,7 @@ spec:
       recovery:
         volumeSnapshots:
           storage:
-            name: velero-grafana-1-5j6sc
+            name: velero-grafana-2-5xkcp
             kind: VolumeSnapshot
             apiGroup: snapshot.storage.k8s.io
             
