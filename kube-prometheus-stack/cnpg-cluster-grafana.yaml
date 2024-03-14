@@ -15,37 +15,29 @@ spec:
 
   storage:
     storageClass: ceph-block-ssd
-    size: 20Gi
+    size: 1Gi
 
   monitoring:
     enablePodMonitor: true
                 
-  # affinity:
-  #   podAntiAffinityType: required
-  #   tolerations:
-  #   - key: "node-role.${dns_domain}/observability"
-  #     operator: "Exists"
-  #   nodeSelector:
-  #     node-role.${dns_domain}/observability: "true"
+  affinity:
+    podAntiAffinityType: required
+    tolerations:
+    - key: "node-role.${dns_domain}/observability"
+      operator: "Exists"
+    nodeSelector:
+      node-role.${dns_domain}/observability: "true"
       
 
   superuserSecret:
       name: cnpg-postgres-credentials
 
-  # bootstrap:
-  #   initdb:
-  #     database: grafana
-  #     owner: grafana
-  #     secret:
-  #       name: app-secret
-
   bootstrap:
-      recovery:
-        volumeSnapshots:
-          storage:
-            name: velero-grafana-2-5xkcp
-            kind: VolumeSnapshot
-            apiGroup: snapshot.storage.k8s.io
+    initdb:
+      database: grafana
+      owner: grafana
+      secret:
+        name: app-secret
             
   backup:
       # Volume snapshot backups
