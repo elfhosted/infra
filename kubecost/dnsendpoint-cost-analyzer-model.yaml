@@ -2,7 +2,7 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: "cost-analyzer-model.infra.${dns_domain}"
-  namespace: kube-system
+  namespace: kubecost
 spec:
   endpoints:
   - dnsName: "cost-analyzer-model.infra.${dns_domain}"
