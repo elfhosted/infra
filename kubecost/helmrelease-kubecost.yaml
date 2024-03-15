@@ -2216,7 +2216,7 @@ spec:
     ## Module for measuring network costs
     ## Ref: https://github.com/kubecost/docs/blob/main/network-allocation.md
     networkCosts:
-      enabled: true
+      enabled: false
       image:
         repository: gcr.io/kubecost1/kubecost-network-costs
         tag: v0.17.3
