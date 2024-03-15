@@ -1,0 +1,18 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: annatar-jackett.${dns_domain}
+  namespace: annatar
+spec:
+  routes:
+    # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
+    - match: Host(`annatar-jackett.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: jackett
+          kind: Service
+          port: 9117
+      middlewares:  
+        - name: eruiluvatar-traefik-forward-auth
+          namespace: aa-eruiluvatar
+          

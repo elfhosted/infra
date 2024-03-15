@@ -25,7 +25,7 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      readOnlyRootFilesystem: false
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -37,9 +37,11 @@ spec:
       requests:
         cpu: 10m
         memory: 64Mi
+        ephemeral-storage: 50Mi
       limits:
         cpu: 600m
         memory: 384Mi    
+        ephemeral-storage: 100Mi
     controller:
       replicas: 2         
     ingress:
