@@ -2216,7 +2216,7 @@ spec:
     ## Module for measuring network costs
     ## Ref: https://github.com/kubecost/docs/blob/main/network-allocation.md
     networkCosts:
-      enabled: false
+      enabled: true
       image:
         repository: gcr.io/kubecost1/kubecost-network-costs
         tag: v0.17.3
@@ -2725,7 +2725,7 @@ spec:
       # googleAnalyticsTag: G-XXXXXXXXX
 
     serviceMonitor:  # the kubecost included prometheus uses scrapeConfigs and does not support service monitors. The following options assume an existing prometheus that supports serviceMonitors.
-      enabled: false
+      enabled: true
       additionalLabels: {}
       metricRelabelings: []
       relabelings: []
@@ -3132,19 +3132,19 @@ spec:
     #   # configurations will have no effect on metrics emitted such as
     #   # `node_ram_hourly_cost` or `node_cpu_hourly_cost`.
     #   # Ref: https://docs.kubecost.com/install-and-configure/install/provider-installations/air-gapped
-    #   customPricesEnabled: false
-    #   defaultModelPricing:
-    #     enabled: true
-    #     CPU: "28.0"
-    #     spotCPU: "4.86"
-    #     RAM: "3.09"
-    #     spotRAM: "0.65"
-    #     GPU: "693.50"
-    #     spotGPU: "225.0"
-    #     storage: "0.04"
-    #     zoneNetworkEgress: "0.01"
-    #     regionNetworkEgress: "0.01"
-    #     internetNetworkEgress: "0.12"
+      # customPricesEnabled: true
+      # defaultModelPricing:
+      #   enabled: true
+      #   CPU: "28.0"
+      #   spotCPU: "4.86"
+      #   RAM: "3.09"
+      #   spotRAM: "0.65"
+      #   GPU: "693.50"
+      #   spotGPU: "225.0"
+      #   storage: "0.04"
+      #   zoneNetworkEgress: "0.01"
+      #   regionNetworkEgress: "0.01"
+      #   internetNetworkEgress: "0.12"
     #   # The cluster profile represents a predefined set of parameters to use when calculating savings.
     #   # Possible values are: [ development, production, high-availability ]
     #   clusterProfile: production
