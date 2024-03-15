@@ -10,17 +10,31 @@
     dest: /etc/rancher/k3s/config.yaml
   notify: restart k3s
 
-# - name: install k3s on master[0]
-#   environment:
-#     INSTALL_K3S_EXEC: "server"
-#     K3S_TOKEN: "{{ k3s_token }}"
-#     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-#   shell: curl -sfL https://get.k3s.io |  sh -
-#   args: 
-#     creates: /usr/local/bin/k3s # only run this if k3s isn't already installed on master
-#   when: "groups['k3s_servers'][0] == inventory_hostname"
+- name: install k3s on master[0]
+  environment:
+    INSTALL_K3S_EXEC: "server"
+    K3S_TOKEN: "{{ k3s_token }}"
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: curl -sfL https://get.k3s.io |  sh -
+  args: 
+    creates: /usr/local/bin/k3s # only run this if k3s isn't already installed on master
+  when: "groups['k3s_servers'][0] == inventory_hostname"
 
-- name: install k3s on masters (now we have a HA API)
+- name: What is master[0]'s IP?
+  set_fact:
+    master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
+
+- name: install k3s on masters[1-n] using master[0] for K3S_URL
+  environment:
+     K3S_URL: "https://{{ master_ip }}:6443"
+     K3S_TOKEN: "{{ k3s_token }}"
+     INSTALL_K3S_EXEC: "server"
+     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: curl -sfL https://get.k3s.io | sh -
+  when: "groups['k3s_servers'][0] != inventory_hostname"
+  throttle: 1
+
+- name: Update k3s on all masters (now we have a HA API)
   environment:
      K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
      K3S_TOKEN: "{{ k3s_token }}"

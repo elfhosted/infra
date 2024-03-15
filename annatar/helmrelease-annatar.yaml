@@ -102,7 +102,7 @@ spec:
           timeoutSeconds: 1
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia
@@ -117,7 +117,8 @@ spec:
           LOC: de-frankfurt
           PORT_FORWARDING: "0"
           PORT_PERSIST: "1"
-          NFTABLES: "1"        
+          VPNDNS: "0"
+          NFTABLES: "1"
         securityContext:
           runAsUser: 0
           capabilities:
