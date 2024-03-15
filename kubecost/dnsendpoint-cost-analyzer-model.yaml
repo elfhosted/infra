@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "cost-analyzer-model.infra.${dns_domain}"
+  namespace: kube-system
+spec:
+  endpoints:
+  - dnsName: "cost-analyzer-model.infra.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "nginx-ingress.infra.${dns_domain}"
