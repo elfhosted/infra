@@ -165,7 +165,7 @@ spec:
           # -- CPU/Memory resource limits
           limits:
             cpu: '999m'
-            memory: '1Gi'
+            memory: '2Gi'
         # Startup probe configuration
         startupProbe:
           # -- Whether probe is enabled
@@ -251,7 +251,7 @@ spec:
         provider: custom
         # -- More information about these values here: https://www.opencost.io/docs/configuration/on-prem#custom-pricing-using-the-opencost-helm-chart
         costModel:
-          description: Modified pricing configuration.
+          description: ElfHosted Hetzner Pricing
           CPU: 3.5
           spotCPU: 0.006655
           RAM: 0.50
@@ -388,7 +388,7 @@ spec:
           # -- CPU/Memory resource limits
           limits:
             cpu: '999m'
-            memory: '1Gi'
+            memory: '2Gi'
         # used in the default.nginx.conf if you want to switch for using with Docker
         # apiServer: 0.0.0.0
         uiPort: 9090
