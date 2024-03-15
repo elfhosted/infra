@@ -52,7 +52,7 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 9117
+            port: 8191
     persistence:
       tmp: 
         enabled: true
