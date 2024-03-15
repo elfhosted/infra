@@ -14,12 +14,12 @@ spec:
         namespace: flux-system
   interval: 30m
   timeout: 10m
-  install:
-    remediation:
-      retries: -1 # keep trying to remediate
-  upgrade:
-    remediation:
-      retries: -1 # keep trying to remediate
+  # install:
+  #   remediation:
+  #     retries: -1 # keep trying to remediate
+  # upgrade:
+  #   remediation:
+  #     retries: -1 # keep trying to remediate
   releaseName: kubecost
   values:
     global:
@@ -2367,7 +2367,7 @@ spec:
     ## Kubecost Forecasting forecasts future cost patterns based on historical
     ## patterns observed by Kubecost.
     forecasting:
-      enabled: true
+      enabled: false
 
       # fullImageName overrides the default image construction logic. The exact
       # image provided (registry, image, tag) will be used for the forecasting
