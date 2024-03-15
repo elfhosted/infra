@@ -669,7 +669,7 @@ spec:
         paths: ["/"]
         pathType: ImplementationSpecific
         hosts:
-          - cost-analyzer-model.${dns_domain}
+          - cost-analyzer-model.infra.${dns_domain}
         tls: []
         #  - secretName: cost-analyzer-model-tls
         #    hosts:
@@ -705,7 +705,7 @@ spec:
       paths: ["/"]  # There's no need to route specifically to the pods-- we have an nginx deployed that handles routing
       pathType: ImplementationSpecific
       hosts:
-        - cost-analyzer.${dns_domain}
+        - cost-analyzer.infra.${dns_domain}
       tls: []
       #  - secretName: cost-analyzer-tls
       #    hosts:
