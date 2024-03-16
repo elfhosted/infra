@@ -95,12 +95,12 @@
   when: "inventory_hostname in groups['node_role_download_only']"  
   delegate_to: "{{ groups['controllers'][0] }}"    
 
-- name: label lightweight workers # no GPU, no heavy workloads
+- name: label observability workers # no GPU, no heavy workloads
   become: no
   shell: |
     kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/observability=true --overwrite
     kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/observability=true:NoSchedule  --overwrite
-  when: "inventory_hostname in groups['node_role_lightweight']"  
+  when: "inventory_hostname in groups['k3s_observability']"  
   delegate_to: "{{ groups['controllers'][0] }}"      
 
 - name: label app workers

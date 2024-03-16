@@ -34,15 +34,15 @@
   when: "groups['k3s_servers'][0] != inventory_hostname"
   throttle: 1
 
-- name: Update k3s on all masters (now we have a HA API)
-  environment:
-     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
-     K3S_TOKEN: "{{ k3s_token }}"
-     INSTALL_K3S_EXEC: "server"
-     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-  shell: curl -sfL https://get.k3s.io | sh -
-  # when: "groups['k3s_servers'][0] != inventory_hostname"
-  throttle: 1
+# - name: Update k3s on all masters (now we have a HA API)
+#   environment:
+#      K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
+#      K3S_TOKEN: "{{ k3s_token }}"
+#      INSTALL_K3S_EXEC: "server"
+#      INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+#   shell: curl -sfL https://get.k3s.io | sh -
+#   # when: "groups['k3s_servers'][0] != inventory_hostname"
+#   throttle: 1
 
 - name: setup kubectl auto-completion
   lineinfile:
