@@ -17,12 +17,12 @@ spec:
       sourceLabels:
         - service
     # Get rid of instance, method, pod and protocol
-    - action: labeldrop
-      sourceLabels:
-        - instance
-        - method
-        - pod
-        - protocol       
+    # - action: labeldrop
+    #   sourceLabels:
+    #     - instance
+    #     - method
+    #     - pod
+    #     - protocol       
   selector:
     matchLabels:
       app.kubernetes.io/name: traefik
