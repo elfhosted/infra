@@ -16,13 +16,9 @@ spec:
       regex: aa-.*
       sourceLabels:
         - service
-    # Get rid of instance, method, pod and protocol
+    # Get rid of instance, method, pod and protocol labels since we don't need them
     - action: labeldrop
-      sourceLabels:
-        - instance
-        - method
-        - pod
-        - protocol       
+      regex: (instance|method|pod|protocol)
   selector:
     matchLabels:
       app.kubernetes.io/name: traefik
