@@ -626,7 +626,11 @@ spec:
               - name: sdc
               - name: sdd
               - name: sde
+                config:
+                  deviceClass: ssd                   
               - name: sdf
+                config:
+                  deviceClass: ssd                   
           - name: hobbit02
             devices:
               - name: sda4
@@ -636,7 +640,11 @@ spec:
               - name: sdc
               - name: sdd
               - name: sde
-              - name: sdf          
+                config:
+                  deviceClass: ssd                   
+              - name: sdf   
+                config:
+                  deviceClass: ssd                          
           - name: hobbit03
             devices:
               - name: sda4
@@ -646,7 +654,11 @@ spec:
               - name: sdc
               - name: sdd
               - name: sde
+                config:
+                  deviceClass: ssd                   
               - name: sdf
+                config:
+                  deviceClass: ssd                   
 
       # The section for configuring management of daemon disruptions during upgrade or fencing.
       disruptionManagement:

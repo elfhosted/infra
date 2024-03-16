@@ -126,18 +126,6 @@ goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
 goblin05     ansible_host=10.0.42.65 cluster_nic=enp1s0.4000
 goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 
-
-[node_role_download]
-orc01
-orc02
-orc03
-
-[node_role_lightweight]
-gnome01
-gnome02
-gnome03
-gnome04
-
 [node_role_download_only]
 giant01
 giant02

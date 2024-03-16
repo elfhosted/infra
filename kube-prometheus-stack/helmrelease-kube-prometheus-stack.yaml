@@ -70,11 +70,11 @@ spec:
         k8sContainerMemorySwap: true
         k8sContainerResource: true
         k8sContainerMemoryWorkingSetBytes: true
-        k8sPodOwner: true
+        k8sPodOwner: false
         kubeApiserverAvailability: true
         kubeApiserverBurnrate: true
-        kubeApiserverHistogram: true
-        kubeApiserverSlos: true
+        kubeApiserverHistogram: false
+        kubeApiserverSlos: false
         kubeControllerManager: true
         kubelet: true
         kubeProxy: false
@@ -84,8 +84,8 @@ spec:
         kubernetesResources: true
         kubernetesStorage: true
         kubernetesSystem: true
-        kubeSchedulerAlerting: true
-        kubeSchedulerRecording: true
+        kubeSchedulerAlerting: false
+        kubeSchedulerRecording: false
         kubeStateMetrics: true
         network: true
         node: true
@@ -1564,7 +1564,7 @@ spec:
         enabled: true
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: ""
+        interval: "1m"
 
         ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
         ##
@@ -1811,7 +1811,7 @@ spec:
         enabled: true
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: ""
+        interval: "60s"
 
         ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
         ##
@@ -2049,7 +2049,7 @@ spec:
 
           ## Scrape interval. If not set, the Prometheus default scrape interval is used.
           ##
-          interval: ""
+          interval: "60s"
 
           ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
           ##
@@ -2182,7 +2182,7 @@ spec:
 
           ## Scrape interval. If not set, the Prometheus default scrape interval is used.
           ##
-          interval: "30s"
+          interval: "60s"
 
           ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
           ##

@@ -27,6 +27,23 @@
   - { import_role: { name: oidc }, tags: [ oidc], when: "groups['k3s_servers'][0] == inventory_hostname" }
   - { import_role: { name: backup }, tags: [ backup ] }
 
+
+- hosts: k3s_dwarves,k3s_agents,k3s_observability
+  gather_facts: no
+  become: yes
+
+  tasks: 
+  - { import_role: { name: node }, tags: [ node ] }
+  - { import_role: { name: k3s-agent }, tags: [ k3s-agent ] }
+  - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
+
+- hosts: k3s_dwarves
+  gather_facts: no
+  become: yes
+
+  tasks:     
+  - { import_role: { name: dwarf }, tags: [ dwarf ] }
+
 - hosts: controllers
   gather_facts: yes
 
@@ -45,19 +62,3 @@
   - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }
   - { import_role: { name: authentik }, tags: [ authentik ] }
   - { import_role: { name: tetragon }, tags: [ tetragon ] }
-
-- hosts: k3s_dwarves,k3s_agents,k3s_observability
-  gather_facts: no
-  become: yes
-
-  tasks: 
-  - { import_role: { name: node }, tags: [ node ] }
-  - { import_role: { name: k3s-agent }, tags: [ k3s-agent ] }
-  - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
-
-- hosts: k3s_dwarves
-  gather_facts: no
-  become: yes
-
-  tasks:     
-  - { import_role: { name: dwarf }, tags: [ dwarf ] }

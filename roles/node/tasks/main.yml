@@ -64,12 +64,6 @@
   when:
   - "inventory_hostname in groups['k3s_servers']"
 
-- name: Allow any incoming traffic in the cluster range
-  ufw:
-    direction: in
-    rule: "allow"
-    interface: "{{ cluster_nic }}"
-
 - name: Allow any incoming traffic from the cluster for host-network exposed services
   ufw:
     direction: in
@@ -111,6 +105,12 @@
     direction: in
     rule: "deny"
     interface: "{{ public_nic }}"    
+
+- name: Allow any incoming traffic on the cluster NIC
+  ufw:
+    direction: in
+    rule: "allow"
+    interface: "{{ cluster_nic }}"
 
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance

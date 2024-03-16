@@ -14,6 +14,7 @@
     src: "{{ tempdir.path }}/tetra-linux-{{ host_arch }}.tar.gz"
     dest: /usr/local/bin
     remote_src: yes
+  become: yes
 
 - name: "Clean up temporary dirs 🗑"
   file:

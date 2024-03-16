@@ -14,26 +14,26 @@ spec:
         namespace: flux-system
   interval: 30m
   timeout: 10m
-  install:
-    remediation:
-      retries: -1 # keep trying to remediate
-  upgrade:
-    remediation:
-      retries: -1 # keep trying to remediate
+  # install:
+  #   remediation:
+  #     retries: -1 # keep trying to remediate
+  # upgrade:
+  #   remediation:
+  #     retries: -1 # keep trying to remediate
   releaseName: kubecost
   values:
     global:
       # zone: cluster.local (use only if your DNS server doesn't live in the same zone as kubecost)
       prometheus:
         enabled: false  # If false, Prometheus will not be installed -- Warning: Before changing this setting, please read to understand this setting https://docs.kubecost.com/install-and-configure/install/custom-prom
-        fqdn: http://cost-analyzer-prometheus-server.default.svc  # example address of a prometheus to connect to. Include protocol (http:// or https://) Ignored if enabled: true
+        fqdn: http://prometheus-operated.kube-prometheus-stack:9090  # example address of a prometheus to connect to. Include protocol (http:// or https://) Ignored if enabled: true
         # insecureSkipVerify: false  # If true, kubecost will not check the TLS cert of prometheus
         # queryServiceBasicAuthSecretName: dbsecret # kubectl create secret generic dbsecret -n kubecost --from-file=USERNAME --from-file=PASSWORD
         # queryServiceBearerTokenSecretName: mcdbsecret  # kubectl create secret generic mcdbsecret -n kubecost --from-file=TOKEN
 
       grafana:
         enabled: false  # If false, Grafana will not be installed
-        domainName: cost-analyzer-grafana.default.svc  # example grafana domain Ignored if enabled: true
+        domainName: kube-prometheus-stack-grafana.kube-prometheus-stack:9093  # example grafana domain Ignored if enabled: true
         scheme: "http"  # http or https, for the domain name above.
         proxy: true  # If true, the kubecost frontend will route to your grafana through its service endpoint
         # fqdn: cost-analyzer-grafana.default.svc
@@ -658,8 +658,8 @@ spec:
 
       # creates an ingress directly to the model container, for API access
       ingress:
-        enabled: false
-        # className: nginx
+        enabled: true
+        className: nginx
         labels:
           # kubernetes.io/ingress.class: nginx
           # kubernetes.io/tls-acme: "true"
@@ -669,7 +669,7 @@ spec:
         paths: ["/"]
         pathType: ImplementationSpecific
         hosts:
-          - cost-analyzer-model.local
+          - cost-analyzer-model.infra.${dns_domain}
         tls: []
         #  - secretName: cost-analyzer-model-tls
         #    hosts:
@@ -695,7 +695,7 @@ spec:
     # Basic Kubecost ingress, more examples available at https://github.com/kubecost/docs/blob/main/ingress-examples.md
     ingress:
       enabled: true
-      # className: nginx
+      className: nginx
       labels:
         # kubernetes.io/ingress.class: nginx
         # kubernetes.io/tls-acme: "true"
@@ -705,7 +705,7 @@ spec:
       paths: ["/"]  # There's no need to route specifically to the pods-- we have an nginx deployed that handles routing
       pathType: ImplementationSpecific
       hosts:
-        - cost-analyzer.${dns_domainname}
+        - cost-analyzer.infra.${dns_domain}
       tls: []
       #  - secretName: cost-analyzer-tls
       #    hosts:
@@ -2367,7 +2367,7 @@ spec:
     ## Kubecost Forecasting forecasts future cost patterns based on historical
     ## patterns observed by Kubecost.
     forecasting:
-      enabled: true
+      enabled: false
 
       # fullImageName overrides the default image construction logic. The exact
       # image provided (registry, image, tag) will be used for the forecasting
@@ -2725,7 +2725,7 @@ spec:
       # googleAnalyticsTag: G-XXXXXXXXX
 
     serviceMonitor:  # the kubecost included prometheus uses scrapeConfigs and does not support service monitors. The following options assume an existing prometheus that supports serviceMonitors.
-      enabled: false
+      enabled: true
       additionalLabels: {}
       metricRelabelings: []
       relabelings: []
@@ -3132,19 +3132,19 @@ spec:
     #   # configurations will have no effect on metrics emitted such as
     #   # `node_ram_hourly_cost` or `node_cpu_hourly_cost`.
     #   # Ref: https://docs.kubecost.com/install-and-configure/install/provider-installations/air-gapped
-    #   customPricesEnabled: false
-    #   defaultModelPricing:
-    #     enabled: true
-    #     CPU: "28.0"
-    #     spotCPU: "4.86"
-    #     RAM: "3.09"
-    #     spotRAM: "0.65"
-    #     GPU: "693.50"
-    #     spotGPU: "225.0"
-    #     storage: "0.04"
-    #     zoneNetworkEgress: "0.01"
-    #     regionNetworkEgress: "0.01"
-    #     internetNetworkEgress: "0.12"
+      # customPricesEnabled: true
+      # defaultModelPricing:
+      #   enabled: true
+      #   CPU: "28.0"
+      #   spotCPU: "4.86"
+      #   RAM: "3.09"
+      #   spotRAM: "0.65"
+      #   GPU: "693.50"
+      #   spotGPU: "225.0"
+      #   storage: "0.04"
+      #   zoneNetworkEgress: "0.01"
+      #   regionNetworkEgress: "0.01"
+      #   internetNetworkEgress: "0.12"
     #   # The cluster profile represents a predefined set of parameters to use when calculating savings.
     #   # Possible values are: [ development, production, high-availability ]
     #   clusterProfile: production

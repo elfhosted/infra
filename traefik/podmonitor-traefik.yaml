@@ -10,6 +10,15 @@ spec:
   podMetricsEndpoints:
   - targetPort: 9100
     honorLabels: true  
+    metricRelabelings:
+    # We don't care about individual tenants endpoints (too. much. data)
+    - action: drop
+      regex: aa-.*
+      sourceLabels:
+        - service
+    # Get rid of instance, method, pod and protocol labels since we don't need them
+    - action: labeldrop
+      regex: (instance|method|pod|protocol)
   selector:
     matchLabels:
       app.kubernetes.io/name: traefik

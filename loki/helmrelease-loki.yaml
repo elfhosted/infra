@@ -597,7 +597,7 @@ spec:
       # ServiceMonitor configuration
       serviceMonitor:
         # -- If enabled, ServiceMonitor resources for Prometheus Operator are created
-        enabled: true
+        enabled: false
         # -- Namespace selector for ServiceMonitor resources
         namespaceSelector: {}
         # -- ServiceMonitor annotations
@@ -623,7 +623,7 @@ spec:
         # -- If defined, will create a MetricsInstance for the Grafana Agent Operator.
         metricsInstance:
           # -- If enabled, MetricsInstance resources for Grafana Agent Operator are created
-          enabled: true
+          enabled: false
           # -- MetricsInstance annotations
           annotations: {}
           # -- Additional MetricsInstance labels
@@ -636,7 +636,7 @@ spec:
       # It will create custom resources for GrafanaAgent, LogsInstance, and PodLogs to configure
       # scrape configs to scrape its own logs with the labels expected by the included dashboards.
       selfMonitoring:
-        enabled: true
+        enabled: false
         # -- Tenant to use for self monitoring
         tenant:
           # -- Name of the tenant
