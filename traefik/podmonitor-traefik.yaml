@@ -11,13 +11,13 @@ spec:
   - targetPort: 9100
     honorLabels: true  
     metricRelabelings:
-    # # We don't care about individual tenants endpoints (too. much. data)
-    # - action: drop
-    #   regex: aa-.*
-    #   sourceLabels:
-    #     - service
-    # Get rid of instance, method, pod and protocol
+    # We don't care about individual tenants endpoints (too. much. data)
     - action: drop
+      regex: aa-.*
+      sourceLabels:
+        - service
+    # Get rid of instance, method, pod and protocol
+    - action: labeldrop
       sourceLabels:
         - instance
         - method
