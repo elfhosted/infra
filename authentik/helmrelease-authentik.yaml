@@ -122,7 +122,7 @@ spec:
         # -- set the postgresql hostname to talk to
         # if unset and .Values.postgresql.enabled == true, will generate the default
         # @default -- `{{ .Release.Name }}-postgresql`
-        host: "{{ .Release.Name }}-postgresql"
+        host: "authentik-db-rw"
         # -- postgresql Database name
         # @default -- `authentik`
         name: "authentik"
@@ -298,7 +298,7 @@ spec:
       containerSecurityContext: {}
     postgresql:
       # -- enable the bundled bitnami postgresql chart
-      enabled: true
+      enabled: false
       postgresqlMaxConnections: 500
       postgresqlUsername: "authentik"
       postgresqlPassword: ""
