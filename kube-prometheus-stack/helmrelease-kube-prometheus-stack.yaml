@@ -1846,10 +1846,15 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
         ##
-        metricRelabelings: []
+        metricRelabelings:
         # - action: keep
         #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
         #   sourceLabels: [__name__]
+        # drop all metric series ending with _bucket and where le="10"
+        - source_labels: [__name__, le]
+          separator: _
+          regex: ".+_bucket_10"
+          action: "drop"        
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
