@@ -21,7 +21,7 @@ spec:
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
       tag: 3.7.5@sha256:2090df6403bd6cb2a2cda5a57ed11f940dcaa44818857c03a8db769f35cd1e7c
-    command: ["pipenv", "run", "dramatiq-gevent", "api.task"]
+    command: ["pipenv", "run", "dramatiq-gevent", "api.task", "-p", "2"]
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -34,11 +34,11 @@ spec:
     automountServiceAccountToken: false
     resources:
       requests:
-        memory: 6Gi
-        cpu: 1m
+        memory: 1Gi
+        cpu: 200m
       limits:
-        memory: 6Gi
-        cpu: 500m
+        memory: 1Gi
+        cpu: 200m
     controller:
       replicas: 1
       annotations:
@@ -105,9 +105,7 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 10Gi   
-    env:
-      PIPENV_MAX_SUBPROCESS: "2"                                                     
+                    storage: 10Gi                                                       
     envFrom:
     - secretRef:
         name: mediafusion-env 
