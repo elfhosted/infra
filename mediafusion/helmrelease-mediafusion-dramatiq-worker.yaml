@@ -105,7 +105,9 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 10Gi                                                        
+                    storage: 10Gi   
+    env:
+      PIPENV_MAX_SUBPROCESS: "2"                                                     
     envFrom:
     - secretRef:
         name: mediafusion-env 
