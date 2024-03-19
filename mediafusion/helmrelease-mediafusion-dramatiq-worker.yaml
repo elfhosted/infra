@@ -32,6 +32,13 @@ spec:
       runAsUser: 568
       runAsGroup: 568
     automountServiceAccountToken: false
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 1m
+      limits:
+        memory: 1Gi
+        cpu: 500m
     controller:
       replicas: 1
       annotations:
@@ -66,6 +73,7 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi   
+                  
       local: 
         enabled: true
         type: custom
