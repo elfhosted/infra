@@ -493,23 +493,23 @@ spec:
           annotations: {}
       ## When set to true, it won't check if Prometheus Operator CRDs are deployed
         disableAPICheck: true
-        serviceMonitor: false # we use podmonitors instead
-          # metricRelabelings:
-          #   - sourceLabels: [__name__]
-          #     separator: ;
-          #     regex: ^fluentd_output_status_buffer_(oldest|newest)_.+
-          #     replacement: $1
-          #     action: drop
-          # relabelings:
-          #   - sourceLabels: [__meta_kubernetes_pod_node_name]
-          #     separator: ;
-          #     regex: ^(.*)$
-          #     targetLabel: nodename
-          #     replacement: $1
-          #     action: replace
-          # jobLabel: traefik
-          # interval: 30s
-          # honorLabels: true
+        serviceMonitor:  # we use podmonitors instead
+          metricRelabelings:
+            - sourceLabels: [__name__]
+              separator: ;
+              regex: ^fluentd_output_status_buffer_(oldest|newest)_.+
+              replacement: $1
+              action: drop
+          relabelings:
+            - sourceLabels: [__meta_kubernetes_pod_node_name]
+              separator: ;
+              regex: ^(.*)$
+              targetLabel: nodename
+              replacement: $1
+              action: replace
+          jobLabel: traefik
+          interval: 30s
+          honorLabels: true
           # (Optional)
           # scrapeTimeout: 5s
           # honorTimestamps: true
