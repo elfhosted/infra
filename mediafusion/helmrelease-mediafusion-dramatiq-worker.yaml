@@ -34,10 +34,10 @@ spec:
     automountServiceAccountToken: false
     resources:
       requests:
-        memory: 1Gi
+        memory: 6Gi
         cpu: 1m
       limits:
-        memory: 1Gi
+        memory: 6Gi
         cpu: 500m
     controller:
       replicas: 1
