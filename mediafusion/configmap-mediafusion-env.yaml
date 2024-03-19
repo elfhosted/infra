@@ -8,7 +8,7 @@ data:
   ENABLE_TAMILMV_SEARCH_SCRAPER: "true"
   PROWLARR_IMMEDIATE_MAX_PROCESS: "3"
   PROWLARR_SEARCH_INTERVAL_HOUR: "24"
-  PROWLARR_URL: http://10.43.0.6:9696
+  PROWLARR_URL: http:/prowlarr:9696
   IS_SCRAP_FROM_TORRENTIO: "true"
-  TORRENTIO_URL: http://10.43.0.9
-  REDIS_URL: redis://10.43.0.7:6379
+  TORRENTIO_URL: http://elfhosted.torrentio
+  REDIS_URL: redis://redis-master:6379
