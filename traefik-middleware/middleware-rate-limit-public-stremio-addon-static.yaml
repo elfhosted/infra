@@ -1,0 +1,12 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rate-limit-public-stremio-addon
+  namespace: traefik
+spec:
+  rateLimit:
+    average: 10   # 10 request per source IP every ..
+    period:  10s  # Per-node, of which we have >10..
+    burst: 10     # Allow 10 requests before rate-limiting
+    sourceCriterion:
+      requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
