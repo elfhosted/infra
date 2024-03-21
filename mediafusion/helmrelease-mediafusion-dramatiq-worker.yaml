@@ -37,7 +37,7 @@ spec:
         memory: 1Gi
         cpu: 200m
       limits:
-        memory: 1Gi
+        memory: 2Gi
         cpu: 200m
     controller:
       replicas: 1
