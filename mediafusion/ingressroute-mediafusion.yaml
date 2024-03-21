@@ -14,6 +14,15 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon-static
           namespace: traefik
+    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/catalog/{else:.+}`)
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-public-stremio-addon-cached
+          namespace: traefik
     - match: Host(`mediafusion.${dns_domain}`)
       kind: Rule
       services:
