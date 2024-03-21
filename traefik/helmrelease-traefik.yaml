@@ -366,7 +366,7 @@ spec:
         ## Enable metrics on entry points. Default=true
         # addEntryPointsLabels: false
         ## Enable metrics on routers. Default=false
-        # addRoutersLabels: true
+        addRoutersLabels: true
         ## Enable metrics on services. Default=true
         # addServicesLabels: false
         ## Buckets for latency metrics. Default="0.1,0.3,1.2,5.0"
