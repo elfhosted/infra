@@ -5,8 +5,8 @@ metadata:
   namespace: traefik
 spec:
   rateLimit:
-    average: 10   # 10 request per source IP every ..
-    period:  10s  # Per-node, of which we have >10..
-    burst: 10     # Allow 10 requests before rate-limiting
+    average: 1   # 10 request per source IP every ..
+    period:  1s  # Per-node, of which we have >10..
+    burst: 1000  # Allow 100 requests before rate-limiting
     sourceCriterion:
       requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
