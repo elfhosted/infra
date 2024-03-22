@@ -18,3 +18,19 @@ data:
   JACKETT_URL: http://jackett:9117
   FORWARD_ORIGIN_IP: "true"
   ORIGIN_IP_HEADER: Cf-Connecting-Ip  
+
+  # PostgreSQL
+  POSTGRES_HOST: "pooler-torrentio.torrentio"
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: torrentio
+  POSTGRES_USERNAME: torrentio
+  # POSTGRES_PASSWORD  - set in secret
+  POSTGRES_DATABASE: torrentio
+  POSTGRES_DB: torrentio
+
+  # MongoDB
+  MONGODB_HOST: "mongodb.torrentio"
+  MONGODB_PORT: "27017"
+  MONGODB_DB: torrentio
+  MONGO_INITDB_ROOT_USERNAME: mongo
+  MONGO_INITDB_ROOT_PASSWORD: mongo  
