@@ -19,10 +19,10 @@ spec:
       name: traefik
       namespace: traefik
     # Always use the helmrelease to determine health too
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: traefik
-      namespace: traefik      
+    # - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    #   kind: HelmRelease
+    #   name: traefik
+    #   namespace: traefik      
   postBuild:
     substituteFrom:
       - kind: ConfigMap

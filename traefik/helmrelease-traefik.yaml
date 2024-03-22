@@ -12,8 +12,8 @@ spec:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
-  interval: 15m
-  timeout: 5m
+  interval: 30m
+  timeout: 10m
   releaseName: traefik
   values:
     # Default values for Traefik
