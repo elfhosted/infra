@@ -5,6 +5,15 @@ metadata:
   namespace: shluflix
 spec:
   routes:
+    - match: Host(`shluflix.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-public-stremio-addon-static
+          namespace: traefik  
     - match: Host(`shluflix.${dns_domain}`)
       kind: Rule
       services:
