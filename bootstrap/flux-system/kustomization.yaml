@@ -40,9 +40,33 @@ patches:
       - op: add
         path: /spec/template/spec/containers/0/args/0
         value: --watch-label-selector=!sharding.fluxcd.io/key  
-  # - target:
-  #     kind: Deployment
-  #     name: "(source-controller|kustomize-controller|helm-controller)"
+  - target:
+      kind: Deployment
+      name: "(source-controller|kustomize-controller|helm-controller)"
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/resources
+        value:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 300Mi
+  - target:
+      kind: Deployment
+      name: "(source-controller|kustomize-controller|helm-controller|notification-controller)"
+    patch: |
+      - op: add
+        path: /spec/template/spec/topologySpreadConstraints
+        value:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              topologyspread.elfhosted.com: elves
+
   #   patch: |
   #     - op: add
   #       path: /spec/template/spec/affinity

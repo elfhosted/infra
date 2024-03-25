@@ -972,7 +972,7 @@ spec:
     # -- The resources parameter defines CPU and memory requirements and limits for Traefik's containers.
     resources:
       requests:
-        cpu: 100m
+        cpu: 200m
         memory: "1Gi"
       limits:
         cpu: "6"
