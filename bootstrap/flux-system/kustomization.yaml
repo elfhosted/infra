@@ -45,7 +45,7 @@ patches:
       name: "(source-controller|kustomize-controller|helm-controller)"
     patch: |
       - op: add
-        path: /spec/template/spec/containers/resources
+        path: /spec/template/spec/containers/0/resources
         value:
           limits:
             cpu: 1
