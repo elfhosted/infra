@@ -72,7 +72,20 @@ spec:
         mountPath: /app/.next/cache
         volumeSpec:
           persistentVolumeClaim:
-            claimName: debridmediamanager                    
+            claimName: debridmediamanager     
+      npm: 
+        enabled: true
+        type: custom
+        mountPath: /.npm
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi                                 
       local: 
         enabled: true
         type: custom
