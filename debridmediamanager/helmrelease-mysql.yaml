@@ -128,7 +128,7 @@ spec:
       debug: false
     ## @param architecture MySQL architecture (`standalone` or `replication`)
     ##
-    architecture: replication
+    architecture: standalone
     ## MySQL Authentication parameters
     ##
     auth:
