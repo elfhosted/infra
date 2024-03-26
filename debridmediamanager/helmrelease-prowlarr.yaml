@@ -121,7 +121,7 @@ spec:
               sleep 5;
             done;
             echo "Prowlarr is ready, setting up indexers...";
-            until curl -o prowlarr-indexers.json https://raw.githubusercontent.com/mhdzumair/debridmediamanager/main/resources/json/prowlarr-indexers.json; do
+            until curl -o prowlarr-indexers.json https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/prowlarr-indexers.json; do
               echo "Failed to download indexers file. Retrying...";
               sleep 3;
             done;
