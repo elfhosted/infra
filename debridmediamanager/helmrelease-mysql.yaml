@@ -404,7 +404,7 @@ spec:
       ## @param primary.livenessProbe.successThreshold Success threshold for livenessProbe
       ##
       livenessProbe:
-        enabled: true
+        enabled: false
         initialDelaySeconds: 5
         periodSeconds: 10
         timeoutSeconds: 1
@@ -420,7 +420,7 @@ spec:
       ## @param primary.readinessProbe.successThreshold Success threshold for readinessProbe
       ##
       readinessProbe:
-        enabled: true
+        enabled: false
         initialDelaySeconds: 5
         periodSeconds: 10
         timeoutSeconds: 1
@@ -436,7 +436,7 @@ spec:
       ## @param primary.startupProbe.successThreshold Success threshold for startupProbe
       ##
       startupProbe:
-        enabled: true
+        enabled: false
         initialDelaySeconds: 15
         periodSeconds: 10
         timeoutSeconds: 1
