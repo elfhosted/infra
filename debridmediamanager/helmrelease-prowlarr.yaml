@@ -30,10 +30,12 @@ spec:
         type: RuntimeDefault
       runAsUser: 568
       runAsGroup: 568
-      fsGroup: 568
     automountServiceAccountToken: false
     controller:
       replicas: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "debridmediamanager-env"
+        secret.reloader.stakater.com/reload: "debridmediamanager-env"
     persistence:
       tmp: 
         enabled: true
@@ -42,6 +44,9 @@ spec:
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"              
               spec:
                 accessModes: [ "ReadWriteOnce" ]
                 storageClassName: "topolvm-provisioner-thin"
@@ -51,15 +56,27 @@ spec:
       config:
         enabled: true
         type: custom
-        mountPath: /config/
+        mountPath: /config
         volumeSpec:
-          persistentVolumeClaim:
-            claimName: prowlarr
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"         
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 10Gi         
       run: # used for s6-init with non-root
         enabled: true
         type: emptyDir
         mountPath: /run
         sizeLimit: 1Gi                                       
+    envFrom:
+    - secretRef:
+        name: debridmediamanager-env
     # resources:
     ingress:
       main:
@@ -70,3 +87,53 @@ spec:
         ports:
           http:
             port: 9696
+    initContainers:
+      config-setup:
+        image: curlimages/curl:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - >
+            until curl -o /config/config.xml https://raw.githubusercontent.com/mhdzumair/debridmediamanager/main/resources/xml/prowlarr-config.xml; do
+              echo "Failed to download config file. Retrying...";
+              sleep 3;
+            done;
+            echo "Config file downloaded successfully.";
+            sed -i 's/$PROWLARR_KEY/'"$PROWLARR_KEY"'/g' /config/config.xml;
+            chmod 664 /config/config.xml;
+            echo "Prowlarr config setup complete.";
+        volumeMounts:
+          - name: config
+            mountPath: /config
+        env:
+          - name: PROWLARR_KEY
+            valueFrom:
+              secretKeyRef:
+                name: debridmediamanager-env
+                key: PROWLARR_KEY                
+    additionalContainers:
+      setup-indexers: 
+        image: apteno/alpine-jq:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - >
+            echo "Waiting for Prowlarr to be ready...";
+            until curl -f -H "X-API-KEY: $PROWLARR_KEY" http://localhost:9696/api/v1/health; do
+              sleep 5;
+            done;
+            echo "Prowlarr is ready, setting up indexers...";
+            until curl -o prowlarr-indexers.json https://raw.githubusercontent.com/mhdzumair/debridmediamanager/main/resources/json/prowlarr-indexers.json; do
+              echo "Failed to download indexers file. Retrying...";
+              sleep 3;
+            done;
+            jq -c '.[]' prowlarr-indexers.json | while read indexer; do
+              echo "Adding indexer named: $(echo $indexer | jq -r '.name')";
+              curl -H "Content-Type: application/json" -H "X-API-KEY: $PROWLARR_KEY" -X POST http://localhost:9696/api/v1/indexer -d "$indexer";
+            done;
+            echo "Indexers setup complete.";
+            sleep infinity;
+        env:
+          - name: PROWLARR_KEY
+            valueFrom:
+              secretKeyRef:
+                name: debridmediamanager-env
+                key: PROWLARR_KEY
