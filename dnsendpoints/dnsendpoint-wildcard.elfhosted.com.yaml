@@ -10,6 +10,6 @@ spec:
     recordType: CNAME
     targets:
     - "traefik-ingress.${dns_domain}"     
-    providerSpecific:
-      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-        value: 'true'
+    # providerSpecific:
+    #   - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+    #     value: 'true'
