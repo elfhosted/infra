@@ -21,7 +21,7 @@ spec:
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
       tag: 3.7.5@sha256:647d599e8823cab37035536c7828e8673a06a47e0d3be992675debf32aa1bc07
-    command: ["pipenv", "run", "dramatiq-gevent", "api.task", "-p", "2"]
+    command: ["pipenv", "run", "dramatiq", "api.task", "-p", "2"]
     securityContext:
       seccompProfile:
         type: RuntimeDefault
