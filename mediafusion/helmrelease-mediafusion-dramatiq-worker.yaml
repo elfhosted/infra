@@ -111,7 +111,9 @@ spec:
         name: mediafusion-env 
     - configMapRef:
         name: mediafusion-env 
-
+    # specific to the dramatiq deployment
+    env:
+      scraper_proxy_url: http://proxybroker:8888
     # resources:
     ingress:
       main:
