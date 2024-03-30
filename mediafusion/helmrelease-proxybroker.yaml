@@ -15,13 +15,13 @@ spec:
   interval: 15m
   timeout: 5m
   releaseName: mediafusion
-  args: ["serve", "--host", "0.0.0.0", "--port", "8888", "--types", "HTTP", "HTTPS", "--lvl", "High", "--min-queue", "5"]  
   values:
     global:
       nameOverride: proxybroker
     image:
       repository: bluet/proxybroker2
       tag: latest
+    args: ["serve", "--host", "0.0.0.0", "--port", "8888", "--types", "HTTP", "HTTPS", "--lvl", "High", "--min-queue", "5"]  
     securityContext:
       seccompProfile:
         type: RuntimeDefault
