@@ -14,7 +14,7 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: mediafusion
+  releaseName: proxybroker
   values:
     global:
       nameOverride: proxybroker
@@ -33,7 +33,7 @@ spec:
       runAsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 10
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
