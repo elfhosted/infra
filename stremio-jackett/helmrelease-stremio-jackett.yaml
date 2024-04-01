@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: stremio-jackett-community
-  namespace: stremio-jackett-community
+  name: stremio-jackett
+  namespace: stremio-jackett
 spec:
   chart:
     spec:
@@ -14,15 +14,15 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: stremio-jackett-community
+  releaseName: stremio-jackett
   values:
     global:
-      nameOverride: stremio-jackett-community
+      nameOverride: stremio-jackett
     annotations:
-      configmap.reloader.stakater.com/reload: "stremio-jackett-community-env"
+      configmap.reloader.stakater.com/reload: "stremio-jackett-env"
     image:
-      repository: ghcr.io/geek-cookbook/stremio-jackett-community
-      tag: v3.0.8@sha256:c84f11f92aac3663fd3e1750140972b2eda21bc7f4a8647257be4f206280b32e
+      repository: ghcr.io/geek-cookbook/stremio-jackett
+      tag: v4.0.0@sha256:a5181d16e5883cea6920239b9e43962d18c89fc2086153c6576ff0f0e7c9dcc7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -40,7 +40,7 @@ spec:
         unavailable: 1
     envFrom:
     - configMapRef:
-        name: stremio-jackett-community-env
+        name: stremio-jackett-env
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
@@ -51,7 +51,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - stremio-jackett-community
+                - stremio-jackett
             topologyKey: "kubernetes.io/hostname"
     persistence:
       tmp: 
@@ -86,7 +86,7 @@ spec:
             tag: latest
         envFrom:
         - secretRef:
-            name: stremio-jackett-community-vpn
+            name: stremio-jackett-vpn
         env:
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
