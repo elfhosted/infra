@@ -18,6 +18,8 @@ spec:
   values:
     global:
       nameOverride: stremio-jackett-community
+    annotations:
+      configmap.reloader.stakater.com/reload: "stremio-jackett-community-env"
     image:
       repository: ghcr.io/geek-cookbook/stremio-jackett
       tag: v4.0.0@sha256:a5181d16e5883cea6920239b9e43962d18c89fc2086153c6576ff0f0e7c9dcc7
