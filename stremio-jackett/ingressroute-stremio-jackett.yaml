@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremio-jackett.${dns_domain}
+  namespace: stremio-jackett
+spec:
+  routes:
+    - match: Host(`stremio-jackett.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-public-stremio-addon-static
+          namespace: traefik  
+    - match: Host(`stremio-jackett.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: stremio-jackett
+          kind: Service
+          port: 3649
+      middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
