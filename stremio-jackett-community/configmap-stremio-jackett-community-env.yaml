@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stremio-jackett-community-env
+  namespace: stremio-jackett-community
+data:
+  COMMUNITY_VERSION: "true"
+  ADDON_ID: stremio-jackett-community.elfhosted.com
+  ADDON_NAME: Stremio-Jackett Community | ElfHosted
+  ADDON_ICON: https://elfhosted.com/images/stremio-jackett-elfhosted.png
+  CACHE_URL: http://stremio-jackett-cacher.stremio-jackett-cacher:8080
