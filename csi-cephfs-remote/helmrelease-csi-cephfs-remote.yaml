@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: ceph-csi-cephfs
-      version: 3.10.x
+      version: 3.11.x
       sourceRef:
         kind: HelmRepository
         name: ceph-csi
@@ -97,14 +97,14 @@ spec:
       registrar:
         image:
           repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
-          tag: v2.8.0
+          tag: v2.10.1
           pullPolicy: IfNotPresent
         resources: {}
 
       plugin:
         image:
           repository: quay.io/cephcsi/cephcsi
-          tag: v3.10.1
+          tag: v3.11.0
           pullPolicy: IfNotPresent
         resources: {}
 
@@ -180,7 +180,7 @@ spec:
       provisioner:
         image:
           repository: registry.k8s.io/sig-storage/csi-provisioner
-          tag: v3.5.0
+          tag: v3.6.4
           pullPolicy: IfNotPresent
         resources: {}
 
@@ -189,7 +189,7 @@ spec:
         enabled: true
         image:
           repository: registry.k8s.io/sig-storage/csi-attacher
-          tag: v4.3.0
+          tag: v4.5.1
           pullPolicy: IfNotPresent
         resources: {}
 
@@ -198,14 +198,14 @@ spec:
         enabled: true
         image:
           repository: registry.k8s.io/sig-storage/csi-resizer
-          tag: v1.8.0
+          tag: v1.10.1
           pullPolicy: IfNotPresent
         resources: {}
 
       snapshotter:
         image:
           repository: registry.k8s.io/sig-storage/csi-snapshotter
-          tag: v6.2.2
+          tag: v6.3.4
           pullPolicy: IfNotPresent
         resources: {}
 
