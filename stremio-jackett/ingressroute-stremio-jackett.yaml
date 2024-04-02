@@ -8,9 +8,9 @@ spec:
     - match: Host(`stremio-jackett.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
       kind: Rule
       services:
-        - name: mediafusion
+        - name: stremio-jackett
           kind: Service
-          port: 8000
+          port: 3000
       middlewares:  
         - name: chain-public-stremio-addon-static
           namespace: traefik  
@@ -19,7 +19,7 @@ spec:
       services:
         - name: stremio-jackett
           kind: Service
-          port: 3649
+          port: 3000
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
