@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: rabbitmq
-      version: 12.12.x
+      version: 12.15.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
