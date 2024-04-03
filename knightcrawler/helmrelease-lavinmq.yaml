@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: knightcrawler-debridcollector
+  name: lavinmq
   namespace: knightcrawler
 spec:
   chart:
@@ -14,17 +14,17 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: knightcrawler-debridcollector
+  releaseName: lavinmq
   values:
     global:
-      nameOverride: knightcrawler-debridcollector
+      nameOverride: lavinmq
     controller:
       annotations:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"   
         secret.reloader.stakater.com/reload: "knightcrawler-env"
     image:
-      repository: gabisonfire/knightcrawler-debrid-collector
-      tag: 2.0.21
+      repository: cloudamqp/lavinmq
+      tag: latest
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -40,7 +40,14 @@ spec:
         enabled: true
         mountPath: /tmp
         type: emptyDir
-        sizeLimit: 1Gi     
+        sizeLimit: 1Gi
+      var-lib-lavinmq:
+        enabled: true
+        type: custom
+        mountPath: /var/lib/lavinmq/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: lavinmq           
     envFrom:
     - secretRef:
         name: knightcrawler-env 
@@ -61,37 +68,11 @@ spec:
         enabled: false # necessary for probes     
       ports:
         http:
-          port: 9999 # bogus to satisfy chart           
-    # not sure how to health-check this yet
+          port: 5672
     probes:
       liveness:
-        enabled: false
+        enabled: true
       startup:
-        enabled: false
+        enabled: true
       readiness:
-        enabled: false   
-    addons:
-      vpn:
-        enabled: true # in case we ever need it
-        gluetun:
-          image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: knightcrawler-vpn
-        env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"        
-        securityContext:
-          runAsUser: 0
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config                        
+        enabled: true   
