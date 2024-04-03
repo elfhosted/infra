@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: knightcrawler-addon
+  namespace: knightcrawler
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: knightcrawler-addon
+  minAvailable: 1

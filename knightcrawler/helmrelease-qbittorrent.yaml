@@ -1,0 +1,99 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: knightcrawler
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: qbittorrent
+  values:
+    global:
+      nameOverride: qbittorrent
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "knightcrawler-env"   
+        secret.reloader.stakater.com/reload: "knightcrawler-env"
+    image:
+      repository: geek-cookbook/qbittorrent
+      tag: 4.6.3@sha256:b474ed66256fafd5451315d6a87b682cb97108a4827821290810fa3612ee5ac1
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+    automountServiceAccountToken: false
+    persistence:
+      tmp:
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        sizeLimit: 1Gi
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: qbittorrent        
+    resources:
+      requests: 
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 1
+        memory: 500Mi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true
+      ports:
+        http:
+          port: 8080
+    probes:
+      liveness:
+        enabled: true
+      startup:
+        enabled: true
+      readiness:
+        enabled: true   
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: knightcrawler-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"        
+          VPNDNS: "0"
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config                        
