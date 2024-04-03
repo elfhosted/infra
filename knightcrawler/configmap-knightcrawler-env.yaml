@@ -14,7 +14,7 @@ data:
   POSTGRES_DB: knightcrawler
 
   # Redis
-  REDIS_HOST: redis
+  REDIS_HOST: redis-master
   REDIS_PORT: "6379"
   REDIS_EXTRA: abortConnect=false,allowAdmin=true
 
