@@ -32,10 +32,6 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     controller:
-      replicas: 2
-      strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
       annotations:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"
     affinity:
