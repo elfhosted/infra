@@ -26,7 +26,7 @@ data:
 
       # Get a list of all customer PVCs excluding tmp (because it's ephemeral)
       PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -v tmp | cut -f1 -d' ')
-            
+
       for PVC in ${PVCS}
       do
         # Is PVC currently bound
@@ -34,7 +34,7 @@ data:
         if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'Used By:       <none>'); then
 
           kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
-              
+
           # if not, then does the PVC already have a timestamp?
           if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
@@ -72,5 +72,4 @@ data:
           kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-8d- --overwrite
         fi
       done
-    done    
-    
+    done
