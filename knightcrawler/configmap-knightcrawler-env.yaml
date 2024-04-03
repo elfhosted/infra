@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knightcrawler-env
+  namespace: knightcrawler
+data:
+  # PostgreSQL
+  POSTGRES_HOST: "pooler-knightcrawler"
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: knightcrawler
+  POSTGRES_USERNAME: knightcrawler
+  # POSTGRES_PASSWORD  - set in secret
+  POSTGRES_DATABASE: knightcrawler
+  POSTGRES_DB: knightcrawler
+
+  # Redis
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_EXTRA: abortConnect=false,allowAdmin=true
+
+  # AMQP
+  RABBITMQ_HOST: rabbitmq
+  RABBITMQ_USER: guest
+  RABBITMQ_PASSWORD: guest
+  RABBITMQ_CONSUMER_QUEUE_NAME: ingested
+  RABBITMQ_DURABLE: "true"
+  RABBITMQ_MAX_QUEUE_SIZE: "0"
+  RABBITMQ_MAX_PUBLISH_BATCH_SIZE: "500"
+  RABBITMQ_PUBLISH_INTERVAL_IN_SECONDS: "10"
+
+  # Metadata
+  METADATA_INSERT_BATCH_SIZE: "50000"
+
+  # Collectors
+  COLLECTOR_QBIT_ENABLED: "true"
+  COLLECTOR_DEBRID_ENABLED: "true"
+  # COLLECTOR_REAL_DEBRID_API_KEY: # Set in secret
+  QBIT_HOST: http://qbittorrent:8080
+  QBIT_TRACKERS_URL: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt
+
+  # Number of replicas for the qBittorrent collector and qBitTorrent client. Should be 0 or 1.
+  QBIT_REPLICAS: "1"
