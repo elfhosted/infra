@@ -16,7 +16,7 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 10Gi
+    size: 20Gi
 
   monitoring:
     enablePodMonitor: true
