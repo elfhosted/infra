@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: metadata
+  namespace: knightcrawler
+spec:
+  schedule: "0 0 1 * *" # run monthly on the 1st of the month
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          volumes:
+          - name: tmp
+            emptyDir: {}
+          containers:
+          - name: "metadata"
+            image: ghcr.io/geek-cookbook/knightcrawler-metadata:v2.0.21
+            envFrom:
+            - secretRef:
+                name: knightcrawler-env 
+            - configMapRef:
+                name: knightcrawler-env             
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 568
+              runAsGroup: 568
+              capabilities:
+                drop:
+                - ALL             
+            volumeMounts:
+            - name: tmp
+              mountPath: /tmp   
+            resources:
+              requests: 
+                cpu: 600m
+                memory: 800Mi
+              limits:
+                cpu: 1
+                memory: 1Gi

@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: metadata
+  namespace: knightcrawler
+spec:
+  schedule: "0 0 31 2 *" # run only manually
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: "metadata"
+            image: ghcr.io/geek-cookbook/knightcrawler-migrator:v2.0.21
+            envFrom:
+            - secretRef:
+                name: knightcrawler-env 
+            - configMapRef:
+                name: knightcrawler-env             
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 568
+              runAsGroup: 568
+              capabilities:
+                drop:
+                - ALL                
+            resources:
+              requests: 
+                cpu: 600m
+                memory: 800Mi
+              limits:
+                cpu: 1
+                memory: 1Gi
