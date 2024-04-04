@@ -19,8 +19,8 @@ spec:
     global:
       nameOverride: knightcrawler-addon
     image:
-      repository: gabisonfire/knightcrawler-addon
-      tag: 2.0.21
+      repository: ghcr.io/geek-cookbook/knightcrawler-addon
+      tag: v2.0.21
     securityContext:
       seccompProfile:
         type: RuntimeDefault
