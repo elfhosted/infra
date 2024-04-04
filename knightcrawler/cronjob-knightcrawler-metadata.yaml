@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: metadata
+  name: knightcrawler-metadata
   namespace: knightcrawler
 spec:
   schedule: "0 0 1 * *" # run monthly on the 1st of the month
