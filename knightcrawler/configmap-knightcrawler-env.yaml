@@ -19,9 +19,9 @@ data:
   REDIS_EXTRA: abortConnect=false,allowAdmin=true
 
   # AMQP
-  RABBITMQ_HOST: lavinmq
-  RABBITMQ_USER: guest
-  RABBITMQ_PASSWORD: guest
+  RABBITMQ_HOST: rabbitmq
+  RABBITMQ_USER: knightcrawler
+  RABBITMQ_PASSWORD: knightcrawler
   RABBITMQ_CONSUMER_QUEUE_NAME: ingested
   RABBITMQ_DURABLE: "true"
   RABBITMQ_MAX_QUEUE_SIZE: "0"
