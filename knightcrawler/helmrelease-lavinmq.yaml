@@ -64,9 +64,9 @@ spec:
     service:
       main:
         enabled: true 
-      ports:
-        http:
-          port: 5672
+        ports:
+          http:
+            port: 5672
     probes:
       liveness:
         enabled: true
