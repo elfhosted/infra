@@ -1134,7 +1134,7 @@ spec:
       ## e.g.:
       ## clusterIP: None
       ##
-      clusterIP: "10.43.0.2"
+      clusterIP: ""
       ## @param service.labels Service labels. Evaluated as a template
       ##
       labels: {}
