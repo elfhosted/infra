@@ -25,8 +25,8 @@ spec:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"   
         secret.reloader.stakater.com/reload: "knightcrawler-env"
     image:
-      repository: gabisonfire/knightcrawler-metadata
-      tag: 2.0.21
+      repository: ghcr.io/geek-cookbook/knightcrawler-metadata
+      tag: v2.0.21
     securityContext:
       seccompProfile:
         type: RuntimeDefault
