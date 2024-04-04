@@ -28,13 +28,10 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      readOnlyRootFilesystem: false
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
     automountServiceAccountToken: false
     persistence:
       tmp:
@@ -66,7 +63,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: false # necessary for probes     
+        enabled: true 
       ports:
         http:
           port: 5672
