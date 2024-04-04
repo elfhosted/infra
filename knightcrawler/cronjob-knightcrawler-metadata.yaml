@@ -13,7 +13,8 @@ spec:
           restartPolicy: Never
           volumes:
           - name: tmp
-            emptyDir: {}
+            emptyDir:
+              sizeLimit: 10Gi
           containers:
           - name: "metadata"
             image: ghcr.io/geek-cookbook/knightcrawler-metadata:v2.0.21
@@ -43,4 +44,4 @@ spec:
                 memory: 800Mi
               limits:
                 cpu: 1
-                memory: 1Gi
+                memory: 2Gi
