@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: qbitorrent-config
+  name: qbittorrent-config
   namespace: knightcrawler
 data:
-  qBittorent.conf: |
+  qBittorrent.conf: |
     [Application]
     FileLogger\Age=1
     FileLogger\AgeType=1
