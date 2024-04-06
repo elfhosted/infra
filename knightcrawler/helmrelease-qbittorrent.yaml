@@ -27,7 +27,7 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      readOnlyRootFilesystem: false # WIP
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -40,13 +40,14 @@ spec:
         mountPath: /downloads
         type: emptyDir
         sizeLimit: 1Gi
-      config:
-        enabled: true
-        type: custom
-        mountPath: /config/
+      qbittorrent-conf:
+        enabled: "true"
+        subPath: "qBittorrent.conf"
+        mountPath: /config/qBittorrent/qBittorrent.conf
+        type: "custom"
         volumeSpec:
-          persistentVolumeClaim:
-            claimName: qbittorrent
+          configMap:
+            name: qbittorrent-config          
     resources:
       requests: 
         cpu: 50m
