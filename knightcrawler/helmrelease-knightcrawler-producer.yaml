@@ -52,7 +52,7 @@ spec:
         memory: 100Mi
       limits:
         cpu: 1
-        memory: 500Mi
+        memory: 2Gi
     ingress:
       main:
         enabled: false
