@@ -78,7 +78,6 @@ spec:
       readiness:
         enabled: true   
   initContainers:
-    bootstrap: *bootstrap
     copy-example-config:
       image: busybox
       imagePullPolicy: IfNotPresent
