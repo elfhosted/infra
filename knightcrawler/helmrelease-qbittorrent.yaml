@@ -40,6 +40,11 @@ spec:
         mountPath: /downloads
         type: emptyDir
         sizeLimit: 1Gi
+      logs:
+        enabled: true
+        mountPath: /config/qBittorrent/logs/
+        type: emptyDir
+        sizeLimit: 1Gi
       qbittorrent-conf:
         enabled: "true"
         subPath: "qBittorrent.conf"
