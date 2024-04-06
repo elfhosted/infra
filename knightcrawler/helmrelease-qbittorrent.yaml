@@ -47,7 +47,7 @@ spec:
         mountPath: /config/
         volumeSpec:
           persistentVolumeClaim:
-            claimName: qbittorrent        
+            claimName: qbittorrent
     resources:
       requests: 
         cpu: 50m
@@ -61,9 +61,9 @@ spec:
     service:
       main:
         enabled: true
-      ports:
-        http:
-          port: 8080
+        ports:
+          http:
+            port: 8080
     probes:
       liveness:
         enabled: true

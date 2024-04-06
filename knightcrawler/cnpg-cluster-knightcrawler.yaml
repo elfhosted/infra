@@ -18,6 +18,14 @@ spec:
     storageClass: topolvm-provisioner-thin
     size: 20Gi
 
+  resources:
+    requests:
+      cpu: "1"
+      memory: 4Gi
+    limits:
+      cpu: "4"
+      memory: 10Gi
+      
   monitoring:
     enablePodMonitor: true
     customQueriesConfigMap:
