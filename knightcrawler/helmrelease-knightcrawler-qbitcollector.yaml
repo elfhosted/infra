@@ -86,11 +86,6 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi                          
-    env:
-      PORT: 7001
-      PUID: 10001
-      PGID: 10001
-      TENANT_NAME: KnightCrawler / knightcrawler
     envFrom:
     - secretRef:
         name: knightcrawler-env 
@@ -109,33 +104,15 @@ spec:
         enabled: false
     service:
       main:
-        enabled: true # necessary for probes
-        ports:
-          http:
-            port: 7001
-    qbitcollectors:
-      vpn:
-        enabled: true # in case we ever need it
-        gluetun:
-          image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: knightcrawler-vpn
-        env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"     
-          VPNDNS: "0"   
-        securityContext:
-          runAsUser: 0
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config             
+        enabled: false # necessary for probes     
+      ports:
+        http:
+          port: 9999 # bogus to satisfy chart           
+    # not sure how to health-check this yet
+    probes:
+      liveness:
+        enabled: false
+      startup:
+        enabled: false
+      readiness:
+        enabled: false   
