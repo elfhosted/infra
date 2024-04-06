@@ -10,7 +10,7 @@ spec:
       - "POST"
       - "OPTIONS"
     accessControlAllowOriginList:
-      - "https://app.strem.io"
+      - "*"
     accessControlMaxAge: 100
     addVaryHeader: true
     accessControlAllowHeaders:
