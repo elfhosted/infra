@@ -40,19 +40,20 @@ spec:
         mountPath: /downloads
         type: emptyDir
         sizeLimit: 1Gi
-      logs:
-        enabled: true
-        mountPath: /config/qBittorrent/logs/
-        type: emptyDir
-        sizeLimit: 1Gi
       qbittorrent-conf:
         enabled: "true"
         subPath: "qBittorrent.conf"
-        mountPath: /config/qBittorrent/qBittorrent.conf
         type: "custom"
         volumeSpec:
           configMap:
-            name: qbittorrent-config          
+            name: qbittorrent-config   
+    config:
+      enabled: true
+      type: custom
+      mountPath: /config/
+      volumeSpec:
+        persistentVolumeClaim:
+          claimName: qbittorrent                   
     resources:
       requests: 
         cpu: 50m
@@ -76,6 +77,28 @@ spec:
         enabled: true
       readiness:
         enabled: true   
+  initContainers:
+    bootstrap: *bootstrap
+    copy-example-config:
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command:
+      - /bin/bash
+      - -c
+      - |
+        set -x
+        set -e
+
+        cp /bootstrap/qBittorrent.conf /config/qBittorrent/
+      volumeMounts:
+      - mountPath: /config
+        name: config
+      - name: qbittorrent-conf
+        mountPath: "/bootstrap/"
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: true        
     addons:
       vpn:
         enabled: true # in case we ever need it
