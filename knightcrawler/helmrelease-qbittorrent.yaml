@@ -78,8 +78,8 @@ spec:
       readiness:
         enabled: true   
     initContainers:
-      copy-example-config:
-        image: busybox
+      setup-qbit-config:
+        image: ghcr.io/geek-cookbook/tooling:focal-20231211@sha256:dc2f0486426c126331240a32e9a88357b284fedd3b40236dc13f7a1877115da1
         imagePullPolicy: IfNotPresent
         command:
         - /bin/bash
