@@ -77,27 +77,27 @@ spec:
         enabled: true
       readiness:
         enabled: true   
-  initContainers:
-    copy-example-config:
-      image: busybox
-      imagePullPolicy: IfNotPresent
-      command:
-      - /bin/bash
-      - -c
-      - |
-        set -x
-        set -e
+    initContainers:
+      copy-example-config:
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
 
-        cp /bootstrap/qBittorrent.conf /config/qBittorrent/
-      volumeMounts:
-      - mountPath: /config
-        name: config
-      - name: qbittorrent-conf
-        mountPath: "/bootstrap/"
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
-        readOnlyRootFilesystem: true        
+          cp /bootstrap/qBittorrent.conf /config/qBittorrent/
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - name: qbittorrent-conf
+          mountPath: "/bootstrap/"
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: true        
     addons:
       vpn:
         enabled: true # in case we ever need it
