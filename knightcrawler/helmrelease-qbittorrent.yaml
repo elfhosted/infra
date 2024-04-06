@@ -20,10 +20,9 @@ spec:
       nameOverride: qbittorrent
     controller:
       annotations:
-        configmap.reloader.stakater.com/reload: "knightcrawler-env"   
-        secret.reloader.stakater.com/reload: "knightcrawler-env"
+        configmap.reloader.stakater.com/reload: "qbittorrent-config"   
     image:
-      repository: geek-cookbook/qbittorrent
+      repository: ghrc.io/geek-cookbook/qbittorrent
       tag: 4.6.3@sha256:b474ed66256fafd5451315d6a87b682cb97108a4827821290810fa3612ee5ac1
     securityContext:
       seccompProfile:
@@ -36,9 +35,9 @@ spec:
       runAsGroup: 568
     automountServiceAccountToken: false
     persistence:
-      tmp:
+      downloads:
         enabled: true
-        mountPath: /tmp
+        mountPath: /downloads
         type: emptyDir
         sizeLimit: 1Gi
       config:
