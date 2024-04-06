@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: knightcrawler-env
+  name: qbitorrent-config
   namespace: knightcrawler
 data:
   qBittorent.conf: |
