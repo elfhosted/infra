@@ -47,13 +47,13 @@ spec:
         volumeSpec:
           configMap:
             name: qbittorrent-config   
-    config:
-      enabled: true
-      type: custom
-      mountPath: /config/
-      volumeSpec:
-        persistentVolumeClaim:
-          claimName: qbittorrent                   
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: qbittorrent                   
     resources:
       requests: 
         cpu: 50m
