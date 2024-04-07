@@ -51,8 +51,8 @@ spec:
         cpu: 50m
         memory: 100Mi
       limits:
-        cpu: 1
-        memory: 2Gi
+        cpu: 4
+        memory: 4Gi
     ingress:
       main:
         enabled: false
