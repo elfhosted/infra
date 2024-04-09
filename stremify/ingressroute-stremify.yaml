@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stremify.${dns_domain}
+  namespace: stremify
+spec:
+  routes:
+    - match: Host(`stremify.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: stremify
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
