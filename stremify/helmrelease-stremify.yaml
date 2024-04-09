@@ -20,7 +20,7 @@ spec:
       nameOverride: stremify
     image:
       repository: ghcr.io/geek-cookbook/stremify
-      tag: rolling@sha256:bbba3d64fd20fecffec1266bc75c25dfdba987f274c53f03b06181f806e3661d
+      tag: rolling@sha256:0b2a5f9a31432ded5d908ce369750c66f016ed80427ce25d14352f731a10f554
     securityContext:
       seccompProfile:
         type: RuntimeDefault
