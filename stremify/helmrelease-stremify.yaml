@@ -38,7 +38,7 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 1
+      replicas: 2
       strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "stremify-env"
@@ -56,13 +56,6 @@ spec:
                 - stremify
             topologyKey: "kubernetes.io/hostname"
     persistence:
-      config:
-        enabled: true
-        type: custom
-        mountPath: /config/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: stremify
       tmp: 
         enabled: true
         type: custom
