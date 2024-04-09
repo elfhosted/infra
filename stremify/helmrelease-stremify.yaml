@@ -20,7 +20,7 @@ spec:
       nameOverride: stremify
     image:
       repository: ghcr.io/geek-cookbook/stremify
-      tag: rolling@sha256:cb4d06ef08ae73170dbdd7df98e37a5a4ee9d3c582378bdfa4d481f1332b0065
+      tag: rolling@sha256:bbba3d64fd20fecffec1266bc75c25dfdba987f274c53f03b06181f806e3661d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -64,10 +64,10 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/node/app/.output
-      nitro-dev: 
+      nitro: 
         enabled: true
         type: emptyDir
-        mountPath: /home/node/app/.nitro/dev
+        mountPath: /home/node/app/.nitro
     envFrom:
     - secretRef:
         name: stremify-env 
