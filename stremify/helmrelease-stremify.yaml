@@ -64,6 +64,10 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/node/app/.output
+      nitro-dev: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/node/app/.nitro/dev
     envFrom:
     - secretRef:
         name: stremify-env 
