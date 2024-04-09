@@ -58,17 +58,12 @@ spec:
     persistence:
       tmp: 
         enabled: true
-        type: custom
+        type: emptyDir
         mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi      
+      output: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/node/app/.output
     envFrom:
     - secretRef:
         name: stremify-env 
