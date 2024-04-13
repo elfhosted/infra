@@ -5,7 +5,7 @@ metadata:
   namespace: knightcrawler
 data:
   # PostgreSQL
-  POSTGRES_HOST: "pooler-knightcrawler"
+  POSTGRES_HOST: "pooler-knightcrawler-rw"
   POSTGRES_PORT: "5432"
   POSTGRES_USER: knightcrawler
   POSTGRES_USERNAME: knightcrawler

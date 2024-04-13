@@ -1,12 +1,11 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Pooler
 metadata:
-  name: pooler-knightcrawler
+  name: pooler-knightcrawler-rw
   namespace: knightcrawler
 spec:
   cluster:
     name: knightcrawler
-
   instances: 1
   type: rw
   pgbouncer:
