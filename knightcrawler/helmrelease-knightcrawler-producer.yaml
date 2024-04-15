@@ -41,6 +41,15 @@ spec:
         mountPath: /tmp
         type: emptyDir
         sizeLimit: 1Gi     
+      scrapers-json:
+        enabled: true
+        mountPath: /app/Configuration/scrapers.json
+        subPath: scrapers.json
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: knightcrawler-scrapers-json
+            optional: true        
     envFrom:
     - secretRef:
         name: knightcrawler-env 
