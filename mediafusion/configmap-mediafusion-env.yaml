@@ -14,3 +14,4 @@ data:
   TORRENTIO_URL: http://elfhosted.torrentio
   REDIS_URL: redis://redis-master:6379
   validate_tv_streams_in_db_crontab: "0 0 1 1 *"
+  is_public_instance: "true"
