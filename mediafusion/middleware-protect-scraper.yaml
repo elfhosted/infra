@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: protect-scraper
+  namespace: mediafusion
+spec:
+  ipWhiteList:
+    sourceRange:
+      - 127.0.0.1/32 # This will break all login until we deploy something better
