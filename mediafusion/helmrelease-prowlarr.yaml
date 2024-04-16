@@ -116,6 +116,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - >
+            cd /tmp
             echo "Waiting for Prowlarr to be ready...";
             until curl -f -H "X-API-KEY: $PROWLARR_API_KEY" http://localhost:9696/api/v1/health; do
               sleep 5;
@@ -131,6 +132,9 @@ spec:
             done;
             echo "Indexers setup complete.";
             sleep infinity;
+        volumeMounts:
+          - name: tmp
+            mountPath: /tmp            
         env:
           - name: PROWLARR_API_KEY
             valueFrom:
