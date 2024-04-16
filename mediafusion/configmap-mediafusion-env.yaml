@@ -5,7 +5,6 @@ metadata:
   namespace: mediafusion
 data:
   HOST_URL: https://mediafusion.${dns_domain}
-  ENABLE_TAMILMV_SEARCH_SCRAPER: "false"
   ENABLE_RATE_LIMIT: "false"
   PROWLARR_IMMEDIATE_MAX_PROCESS: "3"
   PROWLARR_SEARCH_INTERVAL_HOUR: "24"
@@ -16,3 +15,4 @@ data:
   validate_tv_streams_in_db_crontab: "0 0 1 1 *"
   is_public_instance: "true"
   prowlarr_immediate_max_process_time: "0"
+  validate_m3u8_urls_liveness: "false"
