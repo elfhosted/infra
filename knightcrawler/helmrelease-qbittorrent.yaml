@@ -86,7 +86,7 @@ spec:
           set -x
           set -e
 
-          cp /bootstrap/qBittorrent.conf /config/qBittorrent/
+          cp /bootstrap/qBittorrent.conf /config/
         volumeMounts:
         - mountPath: /config
           name: config

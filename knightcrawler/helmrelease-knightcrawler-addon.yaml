@@ -91,10 +91,7 @@ spec:
                   requests:
                     storage: 1Gi                          
     env:
-      PORT: 7001
-      PUID: 10001
-      PGID: 10001
-      TENANT_NAME: KnightCrawler / knightcrawler
+      TENANT_NAME: Community
     envFrom:
     - secretRef:
         name: knightcrawler-env 
@@ -116,7 +113,7 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 7001
+            port: 7000
     addons:
       vpn:
         enabled: true # in case we ever need it
