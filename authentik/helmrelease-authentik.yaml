@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2023.10.x
+      version: 2024.2.x
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -857,7 +857,7 @@ spec:
         # -- If defined, a repository for GeoIP images
         repository: ghcr.io/maxmind/geoipupdate
         # -- If defined, a tag for GeoIP images
-        tag: v6.0.0
+        tag: v6.1.0
         # -- If defined, an image digest for GeoIP images
         digest: ""
         # -- If defined, an imagePullPolicy for GeoIP images
