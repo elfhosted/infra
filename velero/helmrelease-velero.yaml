@@ -579,8 +579,8 @@ spec:
     # Eg:
     schedules:
       daily:
-        disabled: true
-        schedule: "0 0 * * *" # midnight UTC
+        disabled: false
+        schedule: "8 0 * * *" # 8AM UTC = 2h before main window
         useOwnerReferencesInBackup: false
         template:
           ttl: "240h"
