@@ -10,7 +10,7 @@ spec:
       services:
         - name: knightcrawler-addon
           kind: Service
-          port: 7001
+          port: 7000
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
