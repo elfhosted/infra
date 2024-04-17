@@ -319,7 +319,9 @@ spec:
 
       # -- envFrom to pass to the authentik server. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
-      # envFrom: [] # we use global envFrom
+      envFrom:
+      - secretRef:
+          name: authentik-secrets
         # - configMapRef:
         #     name: config-map-name
         # - secretRef:
@@ -704,7 +706,9 @@ spec:
 
       # -- envFrom to pass to the authentik worker. Does not apply to GeoIP
       # @default -- `[]` (See [values.yaml])
-      # envFrom: [] # We use a global envFrom
+      envFrom:
+      - secretRef:
+          name: authentik-secrets
         # - configMapRef:
         #     name: config-map-name
         # - secretRef:
