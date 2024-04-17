@@ -238,7 +238,7 @@ spec:
               memory: 128Mi
               cpu: 100m
             limits:
-              memory: 256Mi
+              memory: 1Gi
               cpu: 10
         - name : csi-resizer
           resource:
@@ -326,7 +326,7 @@ spec:
               memory: 128Mi
               cpu: 100m
             limits:
-              memory: 256Mi
+              memory: 1Gi
               cpu: 10
         - name : csi-resizer
           resource:
