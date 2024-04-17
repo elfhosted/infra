@@ -1,11 +1,11 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: knightcrawler-new.${dns_domain}
+  name: knightcrawler.${dns_domain}
   namespace: knightcrawler
 spec:
   routes:
-    - match: Host(`knightcrawler-new.${dns_domain}`)
+    - match: Host(`knightcrawler.${dns_domain}`)
       kind: Rule
       services:
         - name: knightcrawler-addon

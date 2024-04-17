@@ -1,11 +1,11 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "knightcrawler-new.${dns_domain}"
+  name: "knightcrawler.${dns_domain}"
   namespace: knightcrawler
 spec:
   endpoints:
-  - dnsName: "knightcrawler-new.${dns_domain}"
+  - dnsName: "knightcrawler.${dns_domain}"
     recordTTL: 180
     recordType: CNAME
     targets:
