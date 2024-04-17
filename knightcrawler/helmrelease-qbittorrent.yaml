@@ -49,9 +49,9 @@ spec:
             name: qbittorrent-config   
       config:
         enabled: true
-        mountPath: /config/
+        mountPath: /config/qBittorrent/
         type: emptyDir
-        sizeLimit: 1Gi              
+        sizeLimit: 10Gi              
     resources:
       requests: 
         cpu: 50m
