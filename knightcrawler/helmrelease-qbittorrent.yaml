@@ -49,11 +49,9 @@ spec:
             name: qbittorrent-config   
       config:
         enabled: true
-        type: custom
         mountPath: /config/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: qbittorrent                   
+        type: emptyDir
+        sizeLimit: 1Gi              
     resources:
       requests: 
         cpu: 50m
