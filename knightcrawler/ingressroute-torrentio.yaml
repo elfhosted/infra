@@ -1,11 +1,11 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: torrentio.${dns_domain}
+  name: torrentio-new.${dns_domain}
   namespace: knightcrawler
 spec:
   routes:
-    - match: Host(`torrentio.${dns_domain}`)
+    - match: Host(`torrentio-new.${dns_domain}`)
       kind: Rule
       services:
         - name: knightcrawler-addon

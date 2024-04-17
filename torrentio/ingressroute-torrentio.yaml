@@ -1,16 +1,16 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: knightcrawler-new.${dns_domain}
-  namespace: knightcrawler
+  name: torrentio.${dns_domain}
+  namespace: torrentio
 spec:
   routes:
-    - match: Host(`knightcrawler-new.${dns_domain}`)
+    - match: Host(`torrentio.${dns_domain}`)
       kind: Rule
       services:
-        - name: knightcrawler-addon
+        - name: torrentio-addon
           kind: Service
-          port: 7000
+          port: 7001
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
