@@ -575,7 +575,7 @@ spec:
 
       ingress:
         # -- enable an ingress resource for the authentik server
-        enabled: false
+        enabled: true
         # -- additional ingress annotations
         annotations: {}
         # -- additional ingress labels
