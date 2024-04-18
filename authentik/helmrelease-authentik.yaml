@@ -581,10 +581,10 @@ spec:
         # -- additional ingress labels
         labels: {}
         # -- defines which ingress controller will implement the resource
-        ingressClassName: ""
+        ingressClassName: "nginx"
         # -- List of ingress hosts
-        hosts: []
-          # - authentik.domain.tld
+        hosts:
+          - authentik.infra.${dns_domain}
 
         # -- List of ingress paths
         paths:
