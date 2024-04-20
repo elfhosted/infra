@@ -20,7 +20,7 @@ spec:
       nameOverride: torrentio-addon-internal
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-addon
-      tag: rolling@sha256:60fae8d1152d0a26429f3ba5982053369e7bba989d52cba1cb760174256b94a7
+      tag: v2.0.24@sha256:d1177ce22815c27b0f925992f87c47236d32b38021a13462e695d753c46d89bc
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -31,13 +31,6 @@ spec:
       runAsUser: 10001
       runAsGroup: 10001
     automountServiceAccountToken: false
-    controller:
-      replicas: 10
-      strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
-      annotations:
-        configmap.reloader.stakater.com/reload: "torrentio-env"
     tolerations:
     - key: node-role.elfhosted.com/storage
       operator: Exists 
@@ -47,55 +40,42 @@ spec:
           nodeSelectorTerms:
           - matchExpressions:
             - key: node-role.elfhosted.com/storage
-              operator: Exists
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - torrentio
-            topologyKey: "kubernetes.io/hostname"
+              operator: Exists    
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "knightcrawler-addon-env"
     persistence:
       tmp: 
         enabled: true
-        type: custom
-        mountPath: /.npm
-        volumeSpec:
-          emptyDir:
-            sizeLimit: 1Gi
+        mountPath: /tmp
+        type: emptyDir
+        sizeLimit: 1Gi
       npm: 
         enabled: true
-        type: custom
         mountPath: /.npm
-        volumeSpec:
-          emptyDir:
-            sizeLimit: 1Gi
+        type: emptyDir
+        sizeLimit: 1Gi 
       pm2: 
         enabled: true
-        type: custom
         mountPath: /.pm2
-        volumeSpec:
-          emptyDir:
-            sizeLimit: 1Gi                                 
+        type: emptyDir
+        sizeLimit: 1Gi                        
     env:
-      PORT: 7001
-      PUID: 10001
-      PGID: 10001
-      TENANT_NAME: Public
+      TENANT_NAME: Community
     envFrom:
     - secretRef:
-        name: torrentio-env 
+        name: knightcrawler-addon-env 
     - configMapRef:
-        name: torrentio-env 
+        name: knightcrawler-addon-env 
 
     resources:
       requests: 
-        cpu: 50m
-        memory: 100Mi
+        cpu: 30m
+        memory: 200Mi
       limits:
         cpu: 1
         memory: 500Mi
@@ -107,7 +87,7 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 7001
+            port: 7000
     addons:
       vpn:
         enabled: true # in case we ever need it
@@ -125,7 +105,8 @@ spec:
           LOC: de-frankfurt
           PORT_FORWARDING: "0"
           PORT_PERSIST: "1"
-          NFTABLES: "1"        
+          NFTABLES: "1"      
+          VPNDNS: "0"  
         securityContext:
           runAsUser: 0
           capabilities:
