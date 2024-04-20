@@ -48,6 +48,7 @@
                 mtu: 1400
                 addresses:
                   - {{ ansible_host }}/24
+                  - fd00:10:0:42:0::{{ ansible_host.split(".")[3] }}/118
                 routes:
                   - to: "10.0.40.0/22"
                     via: "10.0.42.1"
