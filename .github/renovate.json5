@@ -18,7 +18,7 @@
       "ignoreTests": true,
       "baseBranches": ["ci"],
       "packagePatterns": [ ".*" ],
-      "excludePackagePatterns": ["annatar","notknightcrawler-producer","notknightcrawler-consumer","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio", "shluflix", "stremify" ]
+      "excludePackagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio", "shluflix", "stremify" ]
     },
     { // auto-merge upstream app-level images
       "matchPackagePatterns": ["digest","patch"],
@@ -27,7 +27,7 @@
       "platformAutomerge": true,
       "ignoreTests": true,
       "baseBranches": ["main"],
-      "packagePatterns": ["annatar","notknightcrawler-producer","notknightcrawler-consumer","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio","shluflix", "stremify" ]
+      "packagePatterns": ["annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio","shluflix", "stremify" ]
     } 
   ]
 }
