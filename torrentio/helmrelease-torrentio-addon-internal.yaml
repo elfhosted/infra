@@ -20,7 +20,7 @@ spec:
       nameOverride: torrentio-addon-internal
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-addon
-      tag: rolling@sha256:60fae8d1152d0a26429f3ba5982053369e7bba989d52cba1cb760174256b94a7
+      tag: rolling@sha256:d1177ce22815c27b0f925992f87c47236d32b38021a13462e695d753c46d89bc
     securityContext:
       seccompProfile:
         type: RuntimeDefault
