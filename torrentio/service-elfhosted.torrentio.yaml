@@ -3,16 +3,16 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/name: traefik
-  name: elfhosted-mediafusion
+  name: elfhosted
   namespace: torrentio
 spec:
-  clusterIP: 10.43.0.9
+  clusterIP: 10.43.0.8
   ports:
   - name: http
     port: 80
     protocol: TCP
-    targetPort: 7001
+    targetPort: 7000
   selector:
-    app.kubernetes.io/name: torrentio-addon
+    app.kubernetes.io/name: knightcrawler-addon-internal
   sessionAffinity: None
   type: ClusterIP

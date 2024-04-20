@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: knightcrawler-addon-env
+  namespace: torrentio
+data:
+  # PostgreSQL
+  POSTGRES_HOST: "knightcrawler-rw.knightcrawler"
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: knightcrawler
+  POSTGRES_USERNAME: knightcrawler
+  # POSTGRES_PASSWORD  - set in secret
+  POSTGRES_DATABASE: knightcrawler
+  POSTGRES_DB: knightcrawler
+
+  # Redis
+  REDIS_HOST: redis-master.knightcrawler
+  REDIS_PORT: "6379"
+  REDIS_EXTRA: abortConnect=false,allowAdmin=true

@@ -10,7 +10,7 @@ data:
   PROWLARR_SEARCH_INTERVAL_HOUR: "24"
   PROWLARR_URL: http://prowlarr:9696
   IS_SCRAP_FROM_TORRENTIO: "true"
-  TORRENTIO_URL: http://elfhosted.torrentio
+  TORRENTIO_URL: http://knightcrawler-addon.knightcrawler:7000
   REDIS_URL: redis://redis-master:6379
   validate_tv_streams_in_db_crontab: "0 0 1 1 *"
   is_public_instance: "true"
