@@ -51,45 +51,18 @@ spec:
     persistence:
       tmp: 
         enabled: true
-        type: custom
-        mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi
+        type: emptyDir
+        sizeLimit: 1Gi
       npm: 
         enabled: true
-        type: custom
-        mountPath: /.npm
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
+        type: emptyDir
+        sizeLimit: 1Gi
       pm2: 
         enabled: true
-        type: custom
-        mountPath: /.pm2
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                          
+        type: emptyDir
+        sizeLimit: 1Gi                         
     env:
-      TENANT_NAME: Community
+      TENANT_NAME: Internal
     envFrom:
     - secretRef:
         name: knightcrawler-addon-env 
