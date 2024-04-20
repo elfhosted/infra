@@ -51,18 +51,21 @@ spec:
     persistence:
       tmp: 
         enabled: true
+        mountPath: /tmp
         type: emptyDir
         sizeLimit: 1Gi
       npm: 
         enabled: true
+        mountPath: /.npm
         type: emptyDir
-        sizeLimit: 1Gi
+        sizeLimit: 1Gi 
       pm2: 
         enabled: true
+        mountPath: /.pm2
         type: emptyDir
-        sizeLimit: 1Gi                         
+        sizeLimit: 1Gi                        
     env:
-      TENANT_NAME: Internal
+      TENANT_NAME: Community
     envFrom:
     - secretRef:
         name: knightcrawler-addon-env 
