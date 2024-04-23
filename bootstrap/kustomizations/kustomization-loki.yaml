@@ -40,4 +40,4 @@ spec:
       - kind: ConfigMap
         name: cluster-vars
       - kind: Secret
-        name: cluster-secret-vars-loki
+        name: cluster-secret-vars

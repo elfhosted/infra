@@ -51,6 +51,19 @@
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
 
+- name: Allow any routed traffic on the cluster NIC
+  ufw:
+    # direction: in
+    rule: "allow"
+    route: true
+    interface_in: "{{ cluster_nic }}"
+
+- name: Allow any incoming traffic on the cluster NIC
+  ufw:
+    direction: in
+    rule: "allow"
+    interface: "{{ cluster_nic }}"    
+
 - name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
   ufw:
     direction: in
@@ -104,13 +117,27 @@
   ufw:
     direction: in
     rule: "deny"
-    interface: "{{ public_nic }}"    
+    interface: "{{ public_nic }}"
+    log: "false"
 
-- name: Allow any incoming traffic on the cluster NIC
-  ufw:
-    direction: in
-    rule: "allow"
-    interface: "{{ cluster_nic }}"
+# Disable TCP segmentation offloading for Intel E1000 NICs only
+- when:
+  - ("inventory_hostname in groups['k3s_elves']") or 
+    ("inventory_hostname in groups['k3s_dwarves']") or 
+    ("inventory_hostname in groups['k3s_observability']")
+  block:
+
+  - name: Add systemd service to disable TCP segmentation offloading
+    template:
+      src: disable-tso.service.j2
+      dest: /etc/systemd/system/disable-tso.service
+
+  - name: Enable the disable-tso service
+    systemd:
+      name: disable-tso
+      enabled: yes
+      daemon_reload: yes
+      state: started
 
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance

@@ -4,6 +4,9 @@ k3s_servers
 k3s_agents
 k3s_dwarves
 k3s_observability
+k3s_giants  # 10Ge download nodes
+k3s_goblins # 10Ge ceph nodes
+k3s_elves   # customer workloads
 controllers
 egress_gateways
 
@@ -37,18 +40,13 @@ elf21        ansible_host=10.0.42.41 cluster_nic=eno1.4000 # 128GB
 elf22        ansible_host=10.0.42.42 cluster_nic=eno1.4000 # 128GB
 elf23        ansible_host=10.0.42.43 cluster_nic=eno1.4000 # 128GB
 elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
-elf25        ansible_host=10.0.42.45 cluster_nic=eno1.4000 # 128GB
-elf26        ansible_host=10.0.42.46 cluster_nic=eno1.4000 # 128GB
-elf27        ansible_host=10.0.42.47 cluster_nic=eno1.4000 # 128GB
-elf28        ansible_host=10.0.42.48 cluster_nic=eno1.4000 # 128GB
-elf29        ansible_host=10.0.42.49 cluster_nic=eno1.4000 # 128GB
-elf30        ansible_host=10.0.42.50 cluster_nic=eno1.4000 # 128GB
+# elf25        ansible_host=10.0.42.45 cluster_nic=eno1.4000 # 128GB
+# elf26        ansible_host=10.0.42.46 cluster_nic=eno1.4000 # 128GB
+# elf27        ansible_host=10.0.42.47 cluster_nic=eno1.4000 # 128GB
+# elf28        ansible_host=10.0.42.48 cluster_nic=eno1.4000 # 128GB
+# elf29        ansible_host=10.0.42.49 cluster_nic=eno1.4000 # 128GB
+# elf30        ansible_host=10.0.42.50 cluster_nic=eno1.4000 # 128GB
 
-
-
-giant01      ansible_host=10.0.42.51 cluster_nic=enp39s0.4000 # 10Gbps node
-giant02      ansible_host=10.0.42.52 cluster_nic=enp1s0.4000  # 10Gbps node
-giant03      ansible_host=10.0.42.53 cluster_nic=enp44s0.4000 # 10Gbps node
 
 [k3s_observability]
 # gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
@@ -118,23 +116,18 @@ dwarf07      ansible_host=10.0.42.87 cluster_nic=eno1.4000
 dwarf08      ansible_host=10.0.42.88 cluster_nic=eno1.4000
 dwarf09      ansible_host=10.0.42.89 cluster_nic=eno1.4000
 dwarf10      ansible_host=10.0.42.90 cluster_nic=eno1.4000
-goblin01     ansible_host=10.0.42.61 cluster_nic=eno1.4000
-goblin02     ansible_host=10.0.42.62 cluster_nic=eno1.4000
-goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
 
-goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
-goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
-goblin03     ansible_host=10.0.42.63 cluster_nic=eno1.4000
+[k3s_goblins]
 goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
 goblin05     ansible_host=10.0.42.65 cluster_nic=enp1s0.4000
 goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 
-[node_role_download_only]
+[k3s_giants]
 giant01
 giant02
 giant03
 
-[node_role_app]
+[k3s_elves]
 elf01
 elf02
 elf03
@@ -145,6 +138,20 @@ elf07
 elf08
 elf09
 elf10
+elf11
+elf12
+elf13
+elf14
+elf15
+elf16
+elf17
+elf18
+elf19
+elf20
+elf21
+elf22
+elf23
+elf24
 
 [controllers]
 tinkerbell   ansible_host=tinkerbell-public.elfhosted.com
