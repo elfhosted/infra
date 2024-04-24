@@ -2,7 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: cyberflix
-  namespace: cyberflix
+  namespace: dev-cyberflix
 spec:
   endpointSelector: {}
   ingress:
