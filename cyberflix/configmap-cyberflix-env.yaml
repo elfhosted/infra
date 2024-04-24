@@ -5,4 +5,4 @@ metadata:
   namespace: cyberflix
 data:
   APP_ENVIRONMENT: PROD
-  TMDB_CATALOG_PAGES: 180
+  TMDB_CATALOG_PAGES: "180"

@@ -41,7 +41,7 @@ spec:
       replicas: 2
       strategy: Recreate
       annotations:
-        configmap.reloader.stakater.com/reload: "cyberflix-env"
+        configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
         secret.reloader.stakater.com/reload: "cyberflix-env"
     affinity:
       podAntiAffinity:
@@ -73,6 +73,9 @@ spec:
         name: cyberflix-env 
     - configMapRef:
         name: cyberflix-env 
+    - configMapRef:
+        name: cyberflix-env-dev-overrides
+      optional: true        
     resources:
       requests:
         cpu: 1m
