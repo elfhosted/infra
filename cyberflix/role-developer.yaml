@@ -39,8 +39,9 @@ rules:
   - "*"
   resources:
   - configmaps
-  names:
+  resource_names:
   - cyberflix-env-dev-overrides
   verbs:
   - update
   - create
+  - delete
