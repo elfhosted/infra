@@ -20,6 +20,7 @@ rules:
   - pods/log
   - replicasets
   - replicationcontrollers
+  - secrets
   - services
   - statefulsets
   verbs:
@@ -34,11 +35,12 @@ rules:
   - pods
   verbs:
   - delete
-# and update configmaps for env vars
+# and update configmaps / secrets for env vars
 - apiGroups:
   - "*"
   resources:
   - configmaps
+  - secrets  
   resourceNames:
   - cyberflix-env-dev-overrides
   verbs:

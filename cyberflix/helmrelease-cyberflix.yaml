@@ -42,7 +42,7 @@ spec:
       strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
-        secret.reloader.stakater.com/reload: "cyberflix-env"
+        secret.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
@@ -71,6 +71,9 @@ spec:
     envFrom:
     - secretRef:
         name: cyberflix-env 
+    - secretRef:
+        name: cyberflix-env-dev-overrides
+        optional: true        
     - configMapRef:
         name: cyberflix-env 
     - configMapRef:
