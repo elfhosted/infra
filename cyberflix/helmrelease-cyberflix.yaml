@@ -38,7 +38,7 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 2
+      replicas: 1
       strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
@@ -75,7 +75,7 @@ spec:
         name: cyberflix-env 
     - configMapRef:
         name: cyberflix-env-dev-overrides
-      optional: true        
+        optional: true        
     resources:
       requests:
         cpu: 1m
