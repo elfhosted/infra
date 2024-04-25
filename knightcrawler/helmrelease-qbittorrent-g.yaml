@@ -1,0 +1,134 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbitcollector-g
+  namespace: knightcrawler
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: qbitcollector-g
+  values:
+    global:
+      nameOverride: qbitcollector-g
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "qbittorrent-config"   
+    image:
+      repository: ghcr.io/geek-cookbook/qbittorrent
+      tag: 4.6.3@sha256:b474ed66256fafd5451315d6a87b682cb97108a4827821290810fa3612ee5ac1
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false # WIP
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+    automountServiceAccountToken: false
+    persistence:
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        type: emptyDir
+        sizeLimit: 1Gi
+      qbittorrent-conf:
+        enabled: "true"
+        subPath: "qBittorrent.conf"
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: qbittorrent-config   
+      config:
+        enabled: true
+        mountPath: /config/qBittorrent/
+        type: emptyDir
+        sizeLimit: 10Gi              
+    resources:
+      requests: 
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 1
+        memory: 500Mi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            port: 8080
+    probes:
+      liveness:
+        enabled: true
+      startup:
+        enabled: true
+      readiness:
+        enabled: true   
+    initContainers:
+      setup-qbit-config:
+        image: ghcr.io/geek-cookbook/tooling:focal-20231211@sha256:dc2f0486426c126331240a32e9a88357b284fedd3b40236dc13f7a1877115da1
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          cp /bootstrap/qBittorrent.conf /config/
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - name: qbittorrent-conf
+          mountPath: "/bootstrap/"
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: true        
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: knightcrawler-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"        
+          VPNDNS: "0"
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config                        
