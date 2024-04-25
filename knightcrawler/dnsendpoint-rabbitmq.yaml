@@ -9,4 +9,4 @@ spec:
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "nginx-ingress.${dns_domain}"
+    - "nginx-ingress.infra.${dns_domain}"
