@@ -1,0 +1,120 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: knightcrawler-qbitcollector
+  namespace: knightcrawler
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: knightcrawler-qbitcollector-b
+  values:
+    global:
+      nameOverride: knightcrawler-qbitcollector-b
+    image:
+      repository: ghcr.io/geek-cookbook/knightcrawler-qbit-collector
+      tag: v2.0.24
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
+    automountServiceAccountToken: false
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "knightcrawler-env"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - knightcrawler
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      tmp: 
+        enabled: true
+        type: custom
+        mountPath: /tmp
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi
+      npm: 
+        enabled: true
+        type: custom
+        mountPath: /.npm
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi   
+      pm2: 
+        enabled: true
+        type: custom
+        mountPath: /.pm2
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi                          
+    envFrom:
+    - secretRef:
+        name: knightcrawler-env 
+    - configMapRef:
+        name: knightcrawler-env 
+    env:
+      QBIT_HOST: http://qbittorrent-b:8080
+
+    resources:
+      requests: 
+        cpu: 30m
+        memory: 200Mi
+      limits:
+        cpu: 1
+        memory: 500Mi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: false # necessary for probes     
+      ports:
+        http:
+          port: 9999 # bogus to satisfy chart           
+    # not sure how to health-check this yet
+    probes:
+      liveness:
+        enabled: false
+      startup:
+        enabled: false
+      readiness:
+        enabled: false   
