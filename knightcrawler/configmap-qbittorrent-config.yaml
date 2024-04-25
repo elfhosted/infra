@@ -21,13 +21,13 @@ data:
     [BitTorrent]
     Session\AnonymousModeEnabled=true
     Session\BTProtocol=TCP
-    Session\ConnectionSpeed=1500
+    Session\ConnectionSpeed=150
     Session\DefaultSavePath=/downloads/
     Session\ExcludedFileNames=
-    Session\MaxActiveCheckingTorrents=200
-    Session\MaxActiveDownloads=200
-    Session\MaxActiveTorrents=500
-    Session\MaxActiveUploads=500
+    Session\MaxActiveCheckingTorrents=20
+    Session\MaxActiveDownloads=20
+    Session\MaxActiveTorrents=50
+    Session\MaxActiveUploads=50
     Session\MaxConcurrentHTTPAnnounces=1000
     Session\MaxConnections=2000
     Session\Port=6881
