@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cloudnative-pg
-      version: 0.20.x
+      version: 0.21.x
       sourceRef:
         kind: HelmRepository
         name: cnpg
