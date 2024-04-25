@@ -21,8 +21,8 @@ data:
 
       # Delete any orphaned deployments / needs automated label updates first
       # VERSION=$(kubectl get helmreleases.helm.toolkit.fluxcd.io -n $NS -o json | jq -r .items[0].status.lastAttemptedRevision)
-	    # echo "helmrelease current version is [$VERSION], deleting any unrelated deployments..."
-	    # kubectl delete deployments.apps -n $NS -l myprecious.elfhosted.com/version!=$VERSION,app.kubernetes.io/name!=kubernetesdashboard,app!=mattermost
+      # echo "helmrelease current version is [$VERSION], deleting any unrelated deployments..."
+      # kubectl delete deployments.apps -n $NS -l myprecious.elfhosted.com/version!=$VERSION,app.kubernetes.io/name!=kubernetesdashboard,app!=mattermost
 
       # Get a list of all customer PVCs excluding tmp (because it's ephemeral)
       PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -v tmp | cut -f1 -d' ')
