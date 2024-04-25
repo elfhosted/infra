@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: knightcrawler-qbitcollector
+  name: knightcrawler-qbitcollector-b
   namespace: knightcrawler
 spec:
   chart:
