@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: qbitcollector-e
+  name: qbittorrent-e
   namespace: knightcrawler
 spec:
   chart:
@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: qbitcollector-e
+  releaseName: qbittorrent-e
   values:
     global:
-      nameOverride: qbitcollector-e
+      nameOverride: qbittorrent-e
     controller:
       annotations:
         configmap.reloader.stakater.com/reload: "qbittorrent-config"   
