@@ -61,7 +61,6 @@ spec:
         sizeLimit: 1Gi 
       pm2: 
         enabled: true
-        type: custom
         mountPath: /.pm2
         type: emptyDir
         sizeLimit: 1Gi                        
@@ -72,7 +71,6 @@ spec:
         name: knightcrawler-addon-env 
     - configMapRef:
         name: knightcrawler-addon-env 
-
     resources:
       requests: 
         cpu: 30m
