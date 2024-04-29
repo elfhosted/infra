@@ -418,7 +418,7 @@ spec:
           SSH_LISTEN_PORT: 2222 # rootless image
 
         database:
-          DB_TYPE: postgresql
+          DB_TYPE: postgres
           HOST: gitea
           NAME: gitea
           USER: gitea
