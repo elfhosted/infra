@@ -188,7 +188,10 @@ spec:
           paths:
             - path: /
               pathType: Prefix
-      tls: []
+      tls: 
+       - secretName: chart-example-tls # dummy, doesn't matter, just creates ROOT_URL
+         hosts:
+           - git.${dns_domain}
       #  - secretName: chart-example-tls
       #    hosts:
       #      - git.example.com
