@@ -441,6 +441,8 @@ spec:
             key: GITEA__DATABASE__PASSWD      
       - name: DISABLE_REGISTRATION
         value: "true"
+      - name: ENABLE_AUTO_REGISTRATION
+        value: "true"
       - name: REQUIRE_SIGNIN_VIEW
         value: "true"
 
