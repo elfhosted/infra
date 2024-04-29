@@ -68,6 +68,14 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/node/app/.nitro
+      db:
+        config:
+          enabled: true
+          type: custom
+          mountPath: /app/db/
+          volumeSpec:
+            persistentVolumeClaim:
+              claimName: dev-cyberflix          
     envFrom:
     - secretRef:
         name: cyberflix-env 

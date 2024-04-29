@@ -448,6 +448,10 @@ spec:
         value: "true"
       - name: REQUIRE_SIGNIN_VIEW
         value: "true"
+      - name: PROTOCOL
+        value: "https"
+      - name: ROOT_URL
+        value: https://git.${dns_domain}     
 
       ## @param gitea.podAnnotations Annotations for the Gitea pod
       podAnnotations: {}
