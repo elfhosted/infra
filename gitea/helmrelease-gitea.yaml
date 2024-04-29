@@ -184,7 +184,7 @@ spec:
         # kubernetes.io/ingress.class: nginx
         # kubernetes.io/tls-acme: "true"
       hosts:
-        - host: gitea.infra.${dns_domain}
+        - host: git.${dns_domain}
           paths:
             - path: /
               pathType: Prefix
@@ -401,7 +401,7 @@ spec:
       #     key:
       #     secret:
           existingSecret: gitea-oauth-credentials
-          autoDiscoverUrl: "http://authentik-server.authentik/application/o/gitea/.well-known/openid-configuration"
+          autoDiscoverUrl: "https://authentik.${dns_domain}/application/o/gitea/.well-known/openid-configuration"
           iconUrl: "https://goauthentik.io/img/icon.png"
           scopes: "email profile offline_access"
 
