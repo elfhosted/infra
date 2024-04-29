@@ -8,7 +8,7 @@ spec:
     - match: Host(`git.${dns_domain}`)
       kind: Rule
       services:
-        - name: gitea
+        - name: gitea-http
           kind: Service
           port: 3000
       middlewares:  
