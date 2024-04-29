@@ -419,7 +419,7 @@ spec:
 
         database:
           DB_TYPE: postgres
-          HOST: gitea
+          HOST: gitea-rw
           NAME: gitea
           USER: gitea
           # PASSWD: set in the GITEA__DATABASE__PASSWD var
