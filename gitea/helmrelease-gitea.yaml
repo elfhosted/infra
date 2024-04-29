@@ -286,9 +286,9 @@ spec:
       claimName: gitea-shared-storage
       size: 10Gi
       accessModes:
-        - ReadWriteOnce
+        - ReadWriteMany
       labels: {}
-      storageClass: ceph-block-ssd
+      storageClass: ceph-filesystem-ssd
       subPath:
       volumeName: ""
       annotations:
