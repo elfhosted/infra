@@ -439,6 +439,10 @@ spec:
           secretKeyRef:
             name: gitea-env
             key: GITEA__DATABASE__PASSWD      
+      - name: DISABLE_REGISTRATION
+        value: "true"
+      - name: REQUIRE_SIGNIN_VIEW
+        value: "true"
 
       ## @param gitea.podAnnotations Annotations for the Gitea pod
       podAnnotations: {}
