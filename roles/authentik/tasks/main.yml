@@ -190,7 +190,7 @@
       - name: gitea
         secret: "{{ authentik_gitea_client_secret }}"
         redirect_uris: |
-          https://git.{{ dns_domain }}/oauth_callback
+          https://git.{{ dns_domain }}/user/oauth2/authentik/callback
         icon: https://infra.{{ dns_domain }}/assets/png/gitea.png                
     loop_control:
       loop_var: provider

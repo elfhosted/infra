@@ -416,6 +416,10 @@ spec:
         server:
           SSH_PORT: 22 # rootful image
           SSH_LISTEN_PORT: 2222 # rootless image
+          PROTOCOL: https
+
+        service:
+          DISABLE_REGISTRATION: "true"
 
         database:
           DB_TYPE: postgres
