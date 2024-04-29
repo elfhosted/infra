@@ -395,18 +395,18 @@ spec:
 
       # Either specify inline `key` and `secret` or refer to them via `existingSecret`
       ## @param gitea.oauth OAuth configuration
-      oauth:
-        - name: 'authentik'
-          provider:
-          key:
-          secret:
-          existingSecret: gitea-oauth-credentials
-          autoDiscoverUrl:
-          useCustomUrls:
-          customAuthUrl:
-          customTokenUrl:
-          customProfileUrl:
-          customEmailUrl:
+      # oauth:
+      #   - name: 'authentik'
+      #     provider:
+      #     key:
+      #     secret:
+      #     existingSecret: gitea-oauth-credentials
+      #     autoDiscoverUrl:
+      #     useCustomUrls:
+      #     customAuthUrl:
+      #     customTokenUrl:
+      #     customProfileUrl:
+      #     customEmailUrl:
 
       ## @param gitea.config.server.SSH_PORT SSH port for rootlful Gitea image
       ## @param gitea.config.server.SSH_LISTEN_PORT SSH port for rootless Gitea image
