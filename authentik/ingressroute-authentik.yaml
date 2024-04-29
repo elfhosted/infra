@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authentik.${dns_domain}
+  namespace: authentik
+spec:
+  routes:
+    - match: Host(`authentik.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: authentik-server
+          kind: Service
+          port: 80
+      middlewares:  
+        - name: error-pages
+          namespace: traefik   
