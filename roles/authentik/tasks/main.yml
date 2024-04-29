@@ -186,7 +186,12 @@
         secret: "{{ authentik_minio_client_secret }}"
         redirect_uris: |
           https://minio-console.infra.{{ dns_domain }}/oauth_callback
-        icon: https://infra.{{ dns_domain }}/assets/png/minio.png        
+        icon: https://infra.{{ dns_domain }}/assets/png/minio.png     
+      - name: gitea
+        secret: "{{ authentik_gitea_client_secret }}"
+        redirect_uris: |
+          https://git.{{ dns_domain }}/oauth_callback
+        icon: https://infra.{{ dns_domain }}/assets/png/gitea.png                
     loop_control:
       loop_var: provider
 

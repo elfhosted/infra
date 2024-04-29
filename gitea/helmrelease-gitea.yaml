@@ -395,18 +395,16 @@ spec:
 
       # Either specify inline `key` and `secret` or refer to them via `existingSecret`
       ## @param gitea.oauth OAuth configuration
-      # oauth:
-      #   - name: 'authentik'
-      #     provider:
+      oauth:
+        - name: 'authentik'
+          provider: "openidConnect"
       #     key:
       #     secret:
-      #     existingSecret: gitea-oauth-credentials
-      #     autoDiscoverUrl:
-      #     useCustomUrls:
-      #     customAuthUrl:
-      #     customTokenUrl:
-      #     customProfileUrl:
-      #     customEmailUrl:
+          existingSecret: gitea-oauth-credentials
+          autoDiscoveryUrl: "http://authentik-server.authentik/application/o/gitea/.well-known/openid-configuration"
+          iconUrl: "https://goauthentik.io/img/icon.png"
+          scopes: "email profile offline_access"          
+        - name: "authentik"
 
       ## @param gitea.config.server.SSH_PORT SSH port for rootlful Gitea image
       ## @param gitea.config.server.SSH_LISTEN_PORT SSH port for rootless Gitea image
