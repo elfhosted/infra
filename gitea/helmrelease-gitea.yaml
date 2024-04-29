@@ -423,7 +423,7 @@ spec:
           NAME: gitea
           USER: gitea
           # PASSWD: set in the GITEA__DATABASE__PASSWD var
-          SCHEMA: public          
+          # SCHEMA: public          
       #
       #  security:
       #    PASSWORD_COMPLEXITY: spec
