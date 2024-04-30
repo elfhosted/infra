@@ -166,6 +166,49 @@
       minio_propertymapping_pk: "{{ _new_minio_propertymapping.json.pk }}"
     when: not _existing_minio_propertymapping.json.results        
 
+  - name: "Do we already have a property mapping for gitea?"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?name=gitea"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _existing_gitea_propertymapping
+
+  - name: set the propertymapping pk value
+    set_fact:
+      gitea_propertymapping_pk: "{{ _existing_gitea_propertymapping.json.results[0].pk }}"
+    when: _existing_gitea_propertymapping.json.results
+
+  - name: "create gitea property mapping"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      body:
+        name: "gitea"
+        expression: |
+          gitea_claims = {}
+          if request.user.ak_groups.filter(name="access-git").exists():
+              gitea_claims["gitea"]= "user"
+          if request.user.ak_groups.filter(name="admin-git").exists():
+              gitea_claims["gitea"]= "admin"
+          if request.user.ak_groups.filter(name="restricted-git").exists():
+              gitea_claims["gitea"]= "restricted"
+          return gitea_claims
+        scope_name: "gitea"
+      status_code: 201
+    when: not _existing_gitea_propertymapping.json.results
+    register: _new_gitea_propertymapping 
+    
+  - name: set the gitea propertymapping pk value
+    set_fact:
+      gitea_propertymapping_pk: "{{ _new_gitea_propertymapping.json.pk }}"
+    when: not _existing_gitea_propertymapping.json.results        
+
   - name: create oauth providers
     include_tasks: authentik_oauth_provider_application.yml
     with_items:
@@ -271,6 +314,9 @@
       - admin-kubernetes
       - admin-grafana
       - admin-minio
+      - admin-git
+      - access-git
+      - restricted-git
     loop_control:
       loop_var: group
 
