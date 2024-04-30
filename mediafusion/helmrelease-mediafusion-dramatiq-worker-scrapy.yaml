@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: mediafusion-dramatiq-worker
+  name: mediafusion-dramatiq-worker-scrapy
   namespace: mediafusion
 spec:
   chart:
