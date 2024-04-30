@@ -66,17 +66,17 @@ spec:
     persistence:
       tmp:
         enabled: true
-        mountPath: /config/qBittorrent/
+        mountPath: /tmp
         type: emptyDir
         sizeLimit: 10Gi   
       local:
         enabled: true
-        mountPath: /config/qBittorrent/
+        mountPath: /.local
         type: emptyDir
         sizeLimit: 10Gi   
       scrapy:
         enabled: true
-        mountPath: /config/qBittorrent/
+        mountPath: /mediafusion/.scrapy
         type: emptyDir
         sizeLimit: 10Gi            
     envFrom:
