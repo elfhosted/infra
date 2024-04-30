@@ -416,10 +416,12 @@ spec:
         server:
           SSH_PORT: 22 # rootful image
           SSH_LISTEN_PORT: 2222 # rootless image
-          PROTOCOL: https
+          ROOT_URL: https://git.${dns_domain}
 
         service:
           DISABLE_REGISTRATION: "true"
+          ENABLE_AUTO_REGISTRATION: "true"
+          REQUIRE_SIGNIN_VIEW: "true"
 
         database:
           DB_TYPE: postgres
@@ -446,16 +448,7 @@ spec:
           secretKeyRef:
             name: gitea-env
             key: GITEA__DATABASE__PASSWD      
-      - name: DISABLE_REGISTRATION
-        value: "true"
-      - name: ENABLE_AUTO_REGISTRATION
-        value: "true"
-      - name: REQUIRE_SIGNIN_VIEW
-        value: "true"
-      - name: PROTOCOL
-        value: "https"
-      - name: ROOT_URL
-        value: https://git.${dns_domain}     
+
 
       ## @param gitea.podAnnotations Annotations for the Gitea pod
       podAnnotations: {}
