@@ -93,7 +93,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: true
+        enabled: false
         ports:
           http:
             port: 9191 # the metrics port
