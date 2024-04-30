@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: kured-gnomes
+  name: kured-fairies
   namespace: kured-system
 spec:
   chart:
@@ -20,7 +20,7 @@ spec:
   upgrade:
     remediation:
       retries: -1 # keep trying to remediate
-  releaseName: kured-gnomes
+  releaseName: kured-fairies
   values:
     image:
       repository: ghcr.io/kubereboot/kured
@@ -55,7 +55,7 @@ spec:
       alertFilterRegexp: "(Watchdog|RebootRequired|CPUThrottlingHigh|InfoInhibitor|KubeJobFailed|PersistentVolumeUsageCritical|PersistentVolumeUsageNearFull)"      # alert names to ignore when checking for active alerts
       alertFiringOnly: true     # only consider firing alerts when checking for active alerts
       blockingPodSelector: []       # label selector identifying pods whose presence should prevent reboots
-      endTime: "22:00"              # 6am EST
+      endTime: "21:00"              # 6am EST
       lockAnnotation: ""            # annotation in which to record locking node (default "weave.works/kured-node-lock")
       period: ""                    # reboot check period (default 1h0m0s)
       forceReboot: false            # force a reboot even if the drain fails or times out (default: false)
@@ -76,7 +76,7 @@ spec:
       messageTemplateDrain: ""      # slack message template when notifying about a node being drained (default "Draining node %s")
       messageTemplateReboot: ""     # slack message template when notifying about a node being rebooted (default "Rebooted node %s")
       messageTemplateUncordon: ""   # slack message template when notifying about a node being uncordoned (default "Node %s rebooted & uncordoned successfully!")
-      startTime: "21:00"            # 4am EST
+      startTime: "20:00"            # 4am EST
       timeZone: "Pacific/Auckland"  # time-zone to use (valid zones from "time" golang package)
       annotateNodes: false          # enable 'weave.works/kured-reboot-in-progress' and 'weave.works/kured-most-recent-reboot-needed' node annotations to signify kured reboot operations
       lockReleaseDelay: 0           # hold lock after reboot by this amount of time (default 0, disabled)
@@ -146,22 +146,18 @@ spec:
 
     priorityClassName: "cluster-low"
 
-    # run on elves, gnomes, and giants, but not dwarves or goblins
     tolerations:
-    - key: node-role.elfhosted.com/observability
-      operator: Exists    
-    # - key: node-role.elfhosted.com/download-only
-    #   operator: Exists          
-    # - key: node-role.kubernetes.io/control-plane
-    #   operator: Exists
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
 
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: node-role.elfhosted.com/observability
+            - key: node-role.kubernetes.io/control-plane
               operator: Exists    
+
 
     nodeSelector:
       kubernetes.io/os: linux
