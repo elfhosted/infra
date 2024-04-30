@@ -64,55 +64,21 @@ spec:
                 - mediafusion
             topologyKey: "kubernetes.io/hostname"
     persistence:
-      tmp: 
+      tmp:
         enabled: true
-        type: custom
-        mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
-                  
-      local: 
+        mountPath: /config/qBittorrent/
+        type: emptyDir
+        sizeLimit: 10Gi   
+      local:
         enabled: true
-        type: custom
-        mountPath: /.local
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi    
-      scrapy: 
+        mountPath: /config/qBittorrent/
+        type: emptyDir
+        sizeLimit: 10Gi   
+      scrapy:
         enabled: true
-        type: custom
-        mountPath: /mediafusion/.scrapy
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 10Gi                                                       
+        mountPath: /config/qBittorrent/
+        type: emptyDir
+        sizeLimit: 10Gi            
     envFrom:
     - secretRef:
         name: mediafusion-env 
