@@ -20,7 +20,7 @@ spec:
       # - --storage-timestamp-tolerance 1s
     replicaCount: 1
     strategy:
-      type: RollingUpdate
+      type: Recreate
     image:
       repository: ghcr.io/helm/chartmuseum
       tag: v0.15.0
