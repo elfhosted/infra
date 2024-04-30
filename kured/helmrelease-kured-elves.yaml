@@ -41,12 +41,7 @@ spec:
 
     extraEnvVars:
     - name: notifyUrl
-      valueFrom:
-        secretKeyRef:
-          name: kured-config
-          key: notifyUrl
-    #  - name: regularEnvVariable
-    #    value: 123
+      value: ${discord_webhook_infra_alerts}
 
     configuration:
       metricsHost: ""               # host where metrics will listen
@@ -70,13 +65,13 @@ spec:
       rebootCommand: "/bin/systemctl reboot"  # command to run when a reboot is required by the sentinel
       rebootDelay: ""               # add a delay after drain finishes but before the reboot command is issued
       slackChannel: ""              # slack channel for reboot notifications
-      slackHookUrl: "${discord_webhook_infra_alerts}"              # slack hook URL for reboot notifications
+      slackHookUrl: ""              # slack hook URL for reboot notifications
       slackUsername: ""             # slack username for reboot notifications (default "kured")
       notifyUrl: ""                 # notification URL with the syntax as follows: https://containrrr.dev/shoutrrr/services/overview/
       messageTemplateDrain: ""      # slack message template when notifying about a node being drained (default "Draining node %s")
       messageTemplateReboot: ""     # slack message template when notifying about a node being rebooted (default "Rebooted node %s")
       messageTemplateUncordon: ""   # slack message template when notifying about a node being uncordoned (default "Node %s rebooted & uncordoned successfully!")
-      startTime: "21:00"            # 4am EST
+      startTime: "22:00"            # 4am EST
       timeZone: "Pacific/Auckland"  # time-zone to use (valid zones from "time" golang package)
       annotateNodes: false          # enable 'weave.works/kured-reboot-in-progress' and 'weave.works/kured-most-recent-reboot-needed' node annotations to signify kured reboot operations
       lockReleaseDelay: 0           # hold lock after reboot by this amount of time (default 0, disabled)
