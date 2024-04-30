@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: kured
+  name: kured-gnomes
   namespace: kured-system
 spec:
   chart:
@@ -20,7 +20,7 @@ spec:
   upgrade:
     remediation:
       retries: -1 # keep trying to remediate
-  releaseName: kured
+  releaseName: kured-gnomes
   values:
     image:
       repository: ghcr.io/kubereboot/kured
@@ -55,7 +55,7 @@ spec:
       alertFilterRegexp: "(Watchdog|RebootRequired|CPUThrottlingHigh|InfoInhibitor|KubeJobFailed|PersistentVolumeUsageCritical|PersistentVolumeUsageNearFull)"      # alert names to ignore when checking for active alerts
       alertFiringOnly: true     # only consider firing alerts when checking for active alerts
       blockingPodSelector: []       # label selector identifying pods whose presence should prevent reboots
-      endTime: "23:00"              # 6am EST
+      endTime: "22:00"              # 6am EST
       lockAnnotation: ""            # annotation in which to record locking node (default "weave.works/kured-node-lock")
       period: ""                    # reboot check period (default 1h0m0s)
       forceReboot: false            # force a reboot even if the drain fails or times out (default: false)
@@ -63,8 +63,8 @@ spec:
       drainPodSelector: ""          # only drain pods with labels matching the selector (default: '', all pods)
       drainTimeout: ""              # timeout after which the drain is aborted (default: 0, infinite time)
       skipWaitForDeleteTimeout: ""  # when time is greater than zero, skip waiting for the pods whose deletion timestamp is older than N seconds while draining a node (default: 0)
-      prometheusUrl: "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090"          # Prometheus instance to probe for active alerts
-      rebootDays: [mo,tu,we,th,fr,sat]  # only reboot on these days (default [su,mo,tu,we,th,fr,sa])
+      # prometheusUrl: "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090"          # Prometheus instance to probe for active alerts
+      # rebootDays: [mo,tu,we,th,fr,sat]  # only reboot on these days (default [su,mo,tu,we,th,fr,sa])
       rebootSentinel: ""            # path to file whose existence signals need to reboot (default "/var/run/reboot-required")
       rebootSentinelCommand: ""     # command for which a successful run signals need to reboot (default ""). If non-empty, sentinel file will be ignored.
       rebootCommand: "/bin/systemctl reboot"  # command to run when a reboot is required by the sentinel
@@ -76,11 +76,11 @@ spec:
       messageTemplateDrain: ""      # slack message template when notifying about a node being drained (default "Draining node %s")
       messageTemplateReboot: ""     # slack message template when notifying about a node being rebooted (default "Rebooted node %s")
       messageTemplateUncordon: ""   # slack message template when notifying about a node being uncordoned (default "Node %s rebooted & uncordoned successfully!")
-      startTime: "22:00"            # 4am EST
+      startTime: "21:00"            # 4am EST
       timeZone: "Pacific/Auckland"  # time-zone to use (valid zones from "time" golang package)
       annotateNodes: false          # enable 'weave.works/kured-reboot-in-progress' and 'weave.works/kured-most-recent-reboot-needed' node annotations to signify kured reboot operations
       lockReleaseDelay: 0           # hold lock after reboot by this amount of time (default 0, disabled)
-      preferNoScheduleTaint: ""     # Taint name applied during pending node reboot (to prevent receiving additional pods from other rebooting nodes). Disabled by default. Set e.g. to "weave.works/kured-node-reboot" to enable tainting.
+      preferNoScheduleTaint: "weave.works/kured-node-reboot"     # Taint name applied during pending node reboot (to prevent receiving additional pods from other rebooting nodes). Disabled by default. Set e.g. to "weave.works/kured-node-reboot" to enable tainting.
       logFormat: "text"             # log format specified as text or json, defaults to text
       preRebootNodeLabels: []       # labels to add to nodes before cordoning (default [])
       postRebootNodeLabels: []      # labels to add to nodes after uncordoning (default [])
@@ -146,11 +146,22 @@ spec:
 
     priorityClassName: "cluster-low"
 
+    # run on elves, gnomes, and giants, but not dwarves or goblins
     tolerations:
-    - key: node-role.kubernetes.io/control-plane
-      operator: Exists
+    - key: node-role.elfhosted.com/observability
+      operator: Exists    
+    # - key: node-role.elfhosted.com/download-only
+    #   operator: Exists          
+    # - key: node-role.kubernetes.io/control-plane
+    #   operator: Exists
 
-    affinity: {}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/observability
+              operator: Exists    
 
     nodeSelector:
       kubernetes.io/os: linux
