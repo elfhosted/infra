@@ -87,6 +87,25 @@ spec:
         ports:
           http:
             port: 9696
+    probeSelector:
+      liveness:
+        # -- Enable the liveness probe
+        enabled: true
+        # -- Set this to `true` if you wish to specify your own livenessProbe
+        custom: true
+        # -- The spec field contains the values for the default livenessProbe.
+        # If you selected `custom: true`, this field holds the definition of the livenessProbe.
+        # @default -- See below
+        spec:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'curl -H "X-API-KEY: $PROWLARR_API_KEY" http://localhost:9696/api/v1/health'
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          failureThreshold: 5
+          timeoutSeconds: 10
     initContainers:
       config-setup:
         image: curlimages/curl:latest
