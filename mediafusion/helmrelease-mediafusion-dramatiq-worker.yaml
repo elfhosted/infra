@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
-      tag: 3.8.3@sha256:207d8597ed53a7470415d4d24e25dadd536417ba3e490d39d361cacc3c77862d
+      tag: 3.8.4@sha256:197ce3565d2e676b06593a23241c016d317ee3879fb671e596e906e3ff5de813
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1"]
     securityContext:
       seccompProfile:
@@ -38,7 +38,7 @@ spec:
         memory: 1Gi
         cpu: 1
     controller:
-      replicas: 10
+      replicas: 8
       annotations:
         configmap.reloader.stakater.com/reload: "mediafusion-env"
         secret.reloader.stakater.com/reload: "mediafusion-env"
@@ -93,7 +93,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: false
+        enabled: true
         ports:
           http:
             port: 9191 # the metrics port

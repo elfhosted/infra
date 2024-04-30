@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: mediafusion
+  name: mediafusion-dramatiq-worker
   namespace: mediafusion
 spec:
   chart:
@@ -14,13 +14,14 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: mediafusion
+  releaseName: mediafusion-dramatiq-worker
   values:
     global:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
       tag: 3.8.4@sha256:197ce3565d2e676b06593a23241c016d317ee3879fb671e596e906e3ff5de813
+    command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1", "--queues", "scrapy"]
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -29,15 +30,28 @@ spec:
       seccompProfile:
         type: RuntimeDefault
     automountServiceAccountToken: false
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 200m
+      limits:
+        memory: 1Gi
+        cpu: 1
     controller:
-      replicas: 10
-      strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
+      replicas: 2
       annotations:
         configmap.reloader.stakater.com/reload: "mediafusion-env"
         secret.reloader.stakater.com/reload: "mediafusion-env"
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists 
     affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -50,54 +64,39 @@ spec:
                 - mediafusion
             topologyKey: "kubernetes.io/hostname"
     persistence:
-      tmp: 
+      tmp:
         enabled: true
-        type: custom
         mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
-      local: 
+        type: emptyDir
+        sizeLimit: 10Gi   
+      local:
         enabled: true
-        type: custom
         mountPath: /.local
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                                            
+        type: emptyDir
+        sizeLimit: 10Gi   
+      scrapy:
+        enabled: true
+        mountPath: /mediafusion/.scrapy
+        type: emptyDir
+        sizeLimit: 10Gi            
     envFrom:
     - secretRef:
         name: mediafusion-env 
     - configMapRef:
         name: mediafusion-env 
-
+    # specific to the dramatiq deployment
+    env:
+      scraper_proxy_url: http://proxybroker:8888
     # resources:
     ingress:
       main:
         enabled: false
     service:
       main:
-        enabled: true # necessary for probes
+        enabled: true
         ports:
           http:
-            port: 8000
+            port: 9191 # the metrics port
     addons:
       vpn:
         enabled: true # in case we ever need it
@@ -123,4 +122,4 @@ spec:
             add:
               - NET_ADMIN
               - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config             
+        config: # We have to set this to null so that we can override with our own config                   
