@@ -127,11 +127,10 @@ spec:
         enabled: false
     service:
       main:
-        enabled: false # don't want probes
+        enabled: true
         ports:
           http:
-            port: 1234 # doesn't matter
-
+            port: 9191 # the metrics port
     addons:
       vpn:
         enabled: true # in case we ever need it
