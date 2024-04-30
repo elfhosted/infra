@@ -57,7 +57,7 @@ spec:
       blockingPodSelector: []       # label selector identifying pods whose presence should prevent reboots
       endTime: "23:00"              # 6am EST
       lockAnnotation: ""            # annotation in which to record locking node (default "weave.works/kured-node-lock")
-      period: ""                    # reboot check period (default 1h0m0s)
+      period: "5m"                  # reboot check period (default 1h0m0s)
       forceReboot: false            # force a reboot even if the drain fails or times out (default: false)
       drainGracePeriod: ""          # time in seconds given to each pod to terminate gracefully, if negative, the default value specified in the pod will be used (default: -1)
       drainPodSelector: ""          # only drain pods with labels matching the selector (default: '', all pods)
