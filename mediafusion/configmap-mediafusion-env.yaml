@@ -16,3 +16,5 @@ data:
   is_public_instance: "true"
   prowlarr_immediate_max_process_time: "0"
   validate_m3u8_urls_liveness: "false"
+  addon_name: "MediaFusion | ElfHosted"
+  logo_url: https://mediafusion.elfhosted.com/static/images/mediafusion-elfhosted-logo.png

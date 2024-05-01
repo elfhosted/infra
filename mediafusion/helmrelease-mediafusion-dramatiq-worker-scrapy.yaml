@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
-      tag: 3.8.4@sha256:197ce3565d2e676b06593a23241c016d317ee3879fb671e596e906e3ff5de813
+      tag: 3.8.5@sha256:4a5fd29376ad40cf91ca7f58b6ddfd5a0ab8185c485b0492c908bdec1af7dab0
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1", "--queues", "scrapy"]
     securityContext:
       seccompProfile:
@@ -84,16 +84,13 @@ spec:
         name: mediafusion-env 
     - configMapRef:
         name: mediafusion-env 
-    # specific to the dramatiq deployment
-    env:
-      scraper_proxy_url: http://proxybroker:8888
-    # resources:
+
     ingress:
       main:
         enabled: false
     service:
       main:
-        enabled: false
+        enabled: true
         ports:
           http:
             port: 9191 # the metrics port
