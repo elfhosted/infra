@@ -10,7 +10,6 @@ spec:
   podMetricsEndpoints:
   - targetPort: http
     honorLabels: true  
-    metricRelabelings:
   selector:
     matchLabels:
       app.kubernetes.io/name: mediafusion-dramatiq-worker-scrapy
