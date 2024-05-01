@@ -20,7 +20,7 @@ spec:
       nameOverride: cyberflix
     image:
       repository: ghcr.io/geek-cookbook/cyberflix-server
-      tag: rolling@sha256:5a43720d218b693c76a15630a95c99289724eb45a326a631ca572fa280c8b12d
+      tag: rolling@sha256:dcbc48caff3ec59c91ababfa0e2b20fa78befc880de670ab9b0e83931c79bec7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -38,8 +38,8 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 2
-      strategy: RollingUpdate
+      replicas: 1
+      strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
         secret.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
@@ -68,10 +68,14 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/node/app/.nitro
-      db: 
-        enabled: true
-        type: emptyDir
-        mountPath: /app/db            
+      db:
+        config:
+          enabled: true
+          type: custom
+          mountPath: /app/db/
+          volumeSpec:
+            persistentVolumeClaim:
+              claimName: cyberflix           
     envFrom:
     - secretRef:
         name: cyberflix-env 
