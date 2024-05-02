@@ -11,8 +11,5 @@ spec:
         - name: webhook-receiver
           kind: Service
           port: 80
-      middlewares:
-        - name: rate-limit-flux-webhook    
-
   tls:
     secretName: letsencrypt-wildcard-cert-${dns_domain}
