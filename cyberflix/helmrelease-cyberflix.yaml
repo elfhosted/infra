@@ -20,7 +20,7 @@ spec:
       nameOverride: cyberflix
     image:
       repository: ghcr.io/geek-cookbook/cyberflix-server
-      tag: rolling@sha256:16af7f18212aeaad7d7ff49c3c5de65afced42d2d99f4dae61ff8b7d7de1b840
+      tag: rolling@sha256:dcbc48caff3ec59c91ababfa0e2b20fa78befc880de670ab9b0e83931c79bec7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
