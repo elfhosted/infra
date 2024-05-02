@@ -1010,6 +1010,8 @@ spec:
       - key: node-role.elfhosted.com/observability
         operator: Exists
 
+      replicas: 2
+      
       ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
       ##
       forceDeployDatasources: false
