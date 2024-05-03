@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cyberflix
+  name: dev-cyberflix
   namespace: dev-cyberflix
 spec:
   chart:
@@ -69,13 +69,12 @@ spec:
         type: emptyDir
         mountPath: /home/node/app/.nitro
       db:
-        config:
-          enabled: true
-          type: custom
-          mountPath: /app/db/
-          volumeSpec:
-            persistentVolumeClaim:
-              claimName: dev-cyberflix          
+        enabled: true
+        type: custom
+        mountPath: /app/db/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: dev-cyberflix          
     envFrom:
     - secretRef:
         name: cyberflix-env 
