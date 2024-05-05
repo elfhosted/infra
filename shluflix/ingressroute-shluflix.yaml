@@ -8,7 +8,7 @@ spec:
     - match: Host(`shluflix.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
       kind: Rule
       services:
-        - name: mediafusion
+        - name: shluflix
           kind: Service
           port: 8000
       middlewares:  
