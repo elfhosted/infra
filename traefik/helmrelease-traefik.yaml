@@ -319,7 +319,7 @@ spec:
         # format: json
         # By default, the level is set to ERROR.
         # -- Alternative logging levels are DEBUG, PANIC, FATAL, ERROR, WARN, and INFO.
-        level: WARN
+        level: ERROR
       access:
         # -- To enable access logs
         enabled: false
