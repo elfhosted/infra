@@ -20,7 +20,7 @@ spec:
       nameOverride: knightcrawler-addon-internal
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-addon
-      tag: v2.0.26@sha256:f5ab248e8396b6cdace277e365b0c2f4ac55d8f6487874087cd91ace1c66e20f
+      tag: v2.0.26@sha256:f98af7cbe03c36e3beef8968cad15803b8896927cae3427d1c1fbbf972aa50ab
     securityContext:
       seccompProfile:
         type: RuntimeDefault
