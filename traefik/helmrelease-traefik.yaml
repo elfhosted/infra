@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 26.x.x
+      version: 27.x.x
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -23,7 +23,7 @@ spec:
       # -- Traefik image repository
       repository: traefik
       # -- defaults to appVersion
-      tag: ""
+      tag: "v2.11.2"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
 
@@ -138,13 +138,12 @@ spec:
       # This value is no longer used, set the image.tag to a semver higher than 3.0, e.g. "v3.0.0-beta3"
       # v3:
       # -- Enable traefik version 3
-      #  enabled: false
-      plugins: {}
-        # seems to generate more load than it's worth
-        # traefik-themepark:
-        #   moduleName: github.com/packruler/traefik-themepark
-        #   version: v1.3.1
 
+      # -- Enable traefik experimental plugins
+      plugins: {}
+      # demo:
+      #   moduleName: github.com/traefik/plugindemo
+      #   version: v0.2.1
       kubernetesGateway:
         # -- Enable traefik experimental GatewayClass CRD
         enabled: false
@@ -593,9 +592,6 @@ spec:
     # All available options available on https://docs.traefik.io/reference/static-configuration/cli/
     ## Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress.ingressclass=traefik-internal,--log.level=DEBUG}"`
     additionalArguments: []
-    # - "--providers.kubernetesCRD.allowEmptyServices=true" # makes the 503 vs 404 magic work
-    # # - "--providers.kubernetescrd.allowCrossNamespace=true" # so that we can globally apply middleware for theme-park
-
     #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
     #  - "--log.level=DEBUG"
 
@@ -804,7 +800,6 @@ spec:
         # service by default as well.
         exposeInternal: false
 
-
     # -- TLS Options are created as TLSOption CRDs
     # https://doc.traefik.io/traefik/https/tls/#tls-options
     # When using `labelSelector`, you'll need to set labels on tlsOption accordingly.
@@ -814,7 +809,7 @@ spec:
     #     labels: {}
     #     sniStrict: true
     #     preferServerCipherSuites: true
-    #   customOptions:
+    #   custom-options:
     #     labels: {}
     #     curvePreferences:
     #       - CurveP521
