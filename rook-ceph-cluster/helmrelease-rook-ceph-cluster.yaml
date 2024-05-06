@@ -411,7 +411,7 @@ spec:
             memory: "50Mi"
         mgr-sidecar:
           limits:
-            cpu: "500m"
+            cpu: "2"
             memory: "100Mi"
           requests:
             cpu: "100m"
