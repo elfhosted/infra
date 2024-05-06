@@ -11,5 +11,3 @@ spec:
         - name: actions-runner-controller-github-webhook-server
           kind: Service
           port: 80
-  tls:
-    secretName: letsencrypt-wildcard-cert-${dns_domain}   
