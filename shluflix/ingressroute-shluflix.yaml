@@ -10,7 +10,7 @@ spec:
       services:
         - name: shluflix
           kind: Service
-          port: 8000
+          port: 3649
       middlewares:  
         - name: chain-public-stremio-addon-static
           namespace: traefik  
