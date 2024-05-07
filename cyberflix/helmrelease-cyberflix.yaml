@@ -19,8 +19,8 @@ spec:
     global:
       nameOverride: cyberflix
     image:
-      repository: ghcr.io/geek-cookbook/cyberflix-server
-      tag: rolling@sha256:dcbc48caff3ec59c91ababfa0e2b20fa78befc880de670ab9b0e83931c79bec7
+      repository: ghcr.io/geek-cookbook/cyberflix-server-develop
+      tag: rolling@sha256:29371e133f5526b6ef01061ff4bbe641d988d171287e2c98e38a7c1d84f15283
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -37,6 +37,7 @@ spec:
         drop:
         - ALL        
     automountServiceAccountToken: false
+    command: [ "/bin/sleep", "1h" ]
     controller:
       replicas: 1
       strategy: Recreate
