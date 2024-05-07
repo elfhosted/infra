@@ -23,7 +23,7 @@ spec:
         configmap.reloader.stakater.com/reload: "qbittorrent-config"   
     image:
       repository: ghcr.io/geek-cookbook/qbittorrent
-      tag: 4.6.3@sha256:b474ed66256fafd5451315d6a87b682cb97108a4827821290810fa3612ee5ac1
+      tag: 4.6.4@sha256:d0a13275eb78088e1f20a1d846580cfe4c6625164084d805d54f6ad8e6ab2490
     securityContext:
       seccompProfile:
         type: RuntimeDefault
