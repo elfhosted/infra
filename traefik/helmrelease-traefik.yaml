@@ -17,7 +17,7 @@ spec:
   upgrade:
     crds: CreateReplace            
   interval: 30m
-  timeout: 10m
+  timeout: 11m
   releaseName: traefik
   values:
     # Default values for Traefik
