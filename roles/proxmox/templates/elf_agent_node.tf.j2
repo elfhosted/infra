@@ -3,8 +3,8 @@ resource "proxmox_vm_qemu" "{{ inventory_hostname_short }}" {
     target_node = "{{ proxmox_node }}"
     clone = "template-elfhosted-{{ proxmox_node }}"
     os_type = "cloud-init"
-    ipconfig0 = "ip={{ ansible_host }}/24,gw={{ proxmox_vlan_gateway }}"  
-    ipconfig1 = "ip={{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}/24"
+    ipconfig0 = "ip={{ ansible_host }}/24,ip6=fd00:192:168:40:0::{{ ansible_host.split(".")[3] }}/118,gw={{ proxmox_vlan_gateway }}"  
+    ipconfig1 = "ip={{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}/24,ip6=fd00:192:168:41:0::{{ ansible_host.split(".")[3] }}/118"
     nameserver = "1.1.1.1"  
     memory = {{ proxmox_vm_ram }}
     cores = 12
