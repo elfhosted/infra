@@ -37,7 +37,6 @@ spec:
         drop:
         - ALL        
     automountServiceAccountToken: false
-    command: [ "/bin/sleep", "1h" ]
     controller:
       replicas: 1
       strategy: Recreate
