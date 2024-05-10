@@ -16,6 +16,7 @@ spec:
   timeout: 5m
   releaseName: qbittorrent-b
   values:
+    replicas: 0
     global:
       nameOverride: qbittorrent-b
     controller:

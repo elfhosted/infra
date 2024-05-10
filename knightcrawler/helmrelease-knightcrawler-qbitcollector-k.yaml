@@ -16,6 +16,7 @@ spec:
   timeout: 5m
   releaseName: knightcrawler-qbitcollector-k
   values:
+    replicas: 0
     global:
       nameOverride: knightcrawler-qbitcollector-k
     image:
