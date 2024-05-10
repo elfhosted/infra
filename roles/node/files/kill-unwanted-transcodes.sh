@@ -16,4 +16,4 @@ ps aux | grep Plex | grep -- -codec | grep -v vaapi | grep -vE "grep|eae|dca|cop
 ps aux | grep Plex | grep "codec:v" | grep "h264" | grep -vE "grep|eae|dca|copy" | grep -iE "2160p|4K" | awk '{print $2}' | xargs --no-run-if-empty kill -9
 
 # # kill h264 ffmpeg transcodes not using the GPU (i.e., unconfigured jellyfin users)
-ps aux | grep ffmpeg | grep "codec:v" | grep "h264" | grep -v grep | grep -v vaapi | awk '{print $2}' | xargs --no-run-if-empty kill -9
+ps aux | grep ffmpeg | grep "codec:v" | grep "h264" | grep -v grep | grep -vE "vaapi|ffprobe" | awk '{print $2}' | xargs --no-run-if-empty kill -9
