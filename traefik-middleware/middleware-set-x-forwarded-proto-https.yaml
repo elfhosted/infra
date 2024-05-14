@@ -7,3 +7,5 @@ spec:
   headers:
     customRequestHeaders:
       X-Forwarded-Proto: "https"
+      Connection: keep-alive, Upgrade
+      Upgrade: WebSocket      
