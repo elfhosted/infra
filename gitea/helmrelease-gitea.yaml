@@ -39,17 +39,17 @@ spec:
       #   - example.com
 
     ## @param replicaCount number of replicas for the deployment
-    replicaCount: 2
+    replicaCount: 1
 
     ## @section strategy
     ## @param strategy.type strategy type
     ## @param strategy.rollingUpdate.maxSurge maxSurge
     ## @param strategy.rollingUpdate.maxUnavailable maxUnavailable
     strategy:
-      type: "RollingUpdate"
-      rollingUpdate:
-        maxSurge: "100%"
-        maxUnavailable: 0
+      type: "Recreate"
+      # rollingUpdate:
+      #   maxSurge: "100%"
+      #   maxUnavailable: 0
 
     ## @param clusterDomain cluster domain
     clusterDomain: cluster.local
@@ -289,9 +289,9 @@ spec:
       claimName: gitea-shared-storage
       size: 10Gi
       accessModes:
-        - ReadWriteMany
+        - ReadWriteOnce
       labels: {}
-      storageClass: ceph-filesystem-ssd
+      storageClass: ceph-block-ssd
       subPath:
       volumeName: ""
       annotations:
