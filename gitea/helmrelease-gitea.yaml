@@ -39,7 +39,7 @@ spec:
       #   - example.com
 
     ## @param replicaCount number of replicas for the deployment
-    replicaCount: 1
+    replicaCount: 2
 
     ## @section strategy
     ## @param strategy.type strategy type
@@ -523,7 +523,7 @@ spec:
     ## @param redis-cluster.cluster.nodes Number of redis cluster master nodes
     ## @param redis-cluster.cluster.replicas Number of redis cluster master node replicas
     redis-cluster:
-      enabled: true
+      enabled: false
       usePassword: false
       cluster:
         nodes: 3 # default: 6
