@@ -12,5 +12,5 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-public-stremio-addon
+        - name: chain-public-stremio-addon-cached
           namespace: traefik
