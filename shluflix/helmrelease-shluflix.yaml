@@ -20,7 +20,7 @@ spec:
       nameOverride: shluflix
     image:
       repository: ghcr.io/geek-cookbook/shluflix
-      tag: rolling@sha256:6e4fafbe7e3888ff3212dfa771855272600b32d8dd50f9417202e892db424442
+      tag: rolling@sha256:d34254442091430e9559fd7ace2cc756c1b2be644aff15306803d9da38784eb6
     securityContext:
       seccompProfile:
         type: RuntimeDefault
