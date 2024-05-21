@@ -19,8 +19,8 @@ spec:
     global:
       nameOverride: peertube
     image:
-      repository: ghcr.io/geek-cookbook/peertube-server
-      tag: rolling@sha256:b1338f46a87cddc0d5a18ba8b841ae5271bdbf124a0c89e0a3cd85ecef0018bd
+      repository: chocobozzz/peertube
+      tag: v6.1.0-bookworm
     securityContext:
       seccompProfile:
         type: RuntimeDefault
