@@ -88,11 +88,11 @@ spec:
         volumeSpec:
           persistentVolumeClaim:
             claimName: peertube-config  
-    render-device:
-      enabled: "true"
-      type: hostPath
-      hostPath: "/dev/dri/renderD128"
-      mountPath: "/dev/dri/renderD128"                      
+      render-device:
+        enabled: "true"
+        type: hostPath
+        hostPath: "/dev/dri/renderD128"
+        mountPath: "/dev/dri/renderD128"                      
     envFrom:
     - secretRef:
         name: peertube-env 
