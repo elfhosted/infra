@@ -32,7 +32,7 @@ data:
   # Default to Postfix service name "postfix" in docker-compose.yml
   # May be the hostname of your Custom SMTP server
   PEERTUBE_SMTP_HOSTNAME: smtp.eu.mailgun.org
-  PEERTUBE_SMTP_PORT: "465"
+  PEERTUBE_SMTP_PORT: "587"
   PEERTUBE_SMTP_FROM: peertube@mg.elfhosted.com
   PEERTUBE_SMTP_TLS: "false"
   PEERTUBE_SMTP_DISABLE_STARTTLS: "false"
