@@ -43,6 +43,8 @@ data:
 
   #PEERTUBE_LOG_LEVEL: info
 
+  PEERTUBE_REDIS_HOSTNAME: redis-master
+  
   # /!\ Prefer to use the PeerTube admin interface to set the following configurations /!\
   PEERTUBE_SIGNUP_ENABLED: "false"
   PEERTUBE_TRANSCODING_ENABLED: "true"
