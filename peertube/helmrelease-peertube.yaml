@@ -67,10 +67,10 @@ spec:
     #     enabled: true
     #     type: emptyDir
     #     mountPath: /home/node/app/.output
-    #   nitro: 
-    #     enabled: true
-    #     type: emptyDir
-    #     mountPath: /home/node/app/.nitro
+      cache-yarn: 
+        enabled: true
+        type: emptyDir
+        mountPath: /.cache/yarn
       storage:
         enabled: true
         type: custom
@@ -120,12 +120,37 @@ spec:
         ports:
           http:
             port: 9000
-
-# livenessProbe:
-#   httpGet:
-#     path: /api/v1/ping
-#     port: http
-# readinessProbe:
-#   httpGet:
-#     path: /api/v1/ping
-#     port: http
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      readiness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      startup:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
