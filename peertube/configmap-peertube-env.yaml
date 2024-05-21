@@ -45,7 +45,6 @@ data:
 
   PEERTUBE_REDIS_HOSTNAME: redis-headless
   PEERTUBE_REDIS_PORT: "6379"
-  PEERTUBE_REDIS_AUTH: "false"
 
   # /!\ Prefer to use the PeerTube admin interface to set the following configurations /!\
   PEERTUBE_SIGNUP_ENABLED: "false"
