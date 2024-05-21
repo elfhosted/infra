@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: peertube
     image:
-      repository: chocobozzz/peertube
+      repository: ghcr.io/geek-cookbook/peertube
       tag: v6.1.0-bookworm
     securityContext:
       seccompProfile:
