@@ -105,3 +105,12 @@ spec:
         ports:
           http:
             port: 9000
+
+# livenessProbe:
+#   httpGet:
+#     path: /api/v1/ping
+#     port: http
+# readinessProbe:
+#   httpGet:
+#     path: /api/v1/ping
+#     port: http
