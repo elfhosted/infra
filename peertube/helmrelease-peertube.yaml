@@ -25,12 +25,15 @@ spec:
       seccompProfile:
         type: RuntimeDefault
       readOnlyRootFilesystem: true
+      privileged: true # needed for transcoding
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
+      supplementalGroups:
+      - 109      
       allowPrivilegeEscalation: false
       runAsNonRoot: true
       capabilities:
@@ -81,7 +84,12 @@ spec:
         mountPath: /config
         volumeSpec:
           persistentVolumeClaim:
-            claimName: peertube-config            
+            claimName: peertube-config  
+    render-device:
+      enabled: "true"
+      type: hostPath
+      hostPath: "/dev/dri/renderD128"
+      mountPath: "/dev/dri/renderD128"                      
     envFrom:
     - secretRef:
         name: peertube-env 
