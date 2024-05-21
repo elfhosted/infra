@@ -59,18 +59,14 @@ spec:
                 - peertube
             topologyKey: "kubernetes.io/hostname"
     persistence:
-    #   tmp: 
-    #     enabled: true
-    #     type: emptyDir
-    #     mountPath: /tmp
-    #   output: 
-    #     enabled: true
-    #     type: emptyDir
-    #     mountPath: /home/node/app/.output
-      cache-yarn: 
+      tmp: 
         enabled: true
         type: emptyDir
-        mountPath: /.cache/yarn
+        mountPath: /tmp
+      cache: 
+        enabled: true
+        type: emptyDir
+        mountPath: /.cache
       storage:
         enabled: true
         type: custom
