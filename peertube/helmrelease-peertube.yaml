@@ -71,6 +71,13 @@ spec:
     #     enabled: true
     #     type: emptyDir
     #     mountPath: /home/node/app/.nitro
+      storage:
+        enabled: true
+        type: custom
+        mountPath: /app/storage
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: peertube-storage
       data:
         enabled: true
         type: custom
