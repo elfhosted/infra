@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 7.3.x
+      version: 7.2.x # bumping this causes CRD issues, needs a debug
       sourceRef:
         kind: HelmRepository
         name: bitnami
