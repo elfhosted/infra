@@ -8,4 +8,4 @@ metadata:
     sharding.fluxcd.io/key: shard-s  
 spec:
   interval: 1m
-  url: url: oci://ghcr.io/geek-cookbook/elf-charts
+  url: oci://ghcr.io/geek-cookbook/elf-charts

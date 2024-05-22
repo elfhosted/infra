@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: url: oci://ghcr.io/geek-cookbook/elf-charts
+  url: oci://ghcr.io/geek-cookbook/elf-charts
