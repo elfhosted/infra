@@ -1,0 +1,12 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: elfhosted-shard-r
+  namespace: flux-system
+  labels:
+    sharding.fluxcd.io/key: shard-r  
+spec:
+  interval: 15m
+  type: oci
+  url: oci://ghcr.io/geek-cookbook/elf-charts
