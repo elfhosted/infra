@@ -6,4 +6,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: http://chartmuseum.chartmuseum:8080
+  url: url: oci://ghcr.io/geek-cookbook/elf-charts
