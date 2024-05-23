@@ -8,4 +8,4 @@ spec:
   ref:
     branch: dev
   timeout: 60s
-  url: https://github.com/geek-cookbook/elf-charts
+  url: https://github.com/elfhosted/charts

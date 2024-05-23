@@ -154,7 +154,7 @@ data:
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elf-charts"              
+            url: "https://github.com/elfhosted/charts"              
           - name: "Containers"
             # subtitle: ""
             icon: "fab fa-github"
