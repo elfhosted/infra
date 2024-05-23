@@ -35,4 +35,4 @@ spec:
       - kind: ConfigMap
         name: cluster-vars
       - kind: Secret
-        name: cluster-secret-vars-thanos
+        name: cluster-secret-vars

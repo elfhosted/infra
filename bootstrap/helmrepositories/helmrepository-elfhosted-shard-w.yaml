@@ -7,5 +7,6 @@ metadata:
   labels:
     sharding.fluxcd.io/key: shard-w  
 spec:
-  interval: 1m
-  url: http://chartmuseum.chartmuseum:8080
+  interval: 15m
+  type: oci
+  url: oci://ghcr.io/geek-cookbook/elf-charts

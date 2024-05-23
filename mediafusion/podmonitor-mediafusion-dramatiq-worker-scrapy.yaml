@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: mediafusion-dramatiq-worker-scrapy
+  namespace: mediafusion
+spec:
+  namespaceSelector:
+    matchNames:
+      - mediafusion
+  podMetricsEndpoints:
+  - targetPort: http
+    honorLabels: true  
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mediafusion-dramatiq-worker-scrapy

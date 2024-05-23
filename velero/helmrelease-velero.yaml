@@ -505,10 +505,10 @@ spec:
     # Whether to create backupstoragelocation crd, if false => do not create a default backup location
     backupsEnabled: true
     # Whether to create volumesnapshotlocation crd, if false => disable snapshot feature
-    snapshotsEnabled: true
+    snapshotsEnabled: false
 
     # Whether to deploy the node-agent daemonset.
-    deployNodeAgent: false
+    deployNodeAgent: true
 
     nodeAgent:
       podVolumePath: /var/lib/kubelet/pods
@@ -580,12 +580,13 @@ spec:
     schedules:
       daily:
         disabled: true
-        schedule: "0 0 * * *" # midnight UTC
+        schedule: "8 0 * * *" # 8AM UTC = 2h before main window
         useOwnerReferencesInBackup: false
         template:
           ttl: "240h"
           storageLocation: b2
-          includedNamespaces: [] # cover all namespaces
+          includedNamespaces:  # [] # cover all namespaces
+          - aa-funkypenguin
 
     # Velero ConfigMaps.
     # Eg:

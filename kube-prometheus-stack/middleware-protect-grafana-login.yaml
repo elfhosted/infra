@@ -4,6 +4,6 @@ metadata:
   name: protect-grafana-login
   namespace: kube-prometheus-stack
 spec:
-  ipWhiteList:
+  ipAllowList:
     sourceRange:
       - 127.0.0.1/32 # This will break all login until we deploy something better

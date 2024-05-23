@@ -21,7 +21,7 @@ spec:
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
       tag: 3.9.2@sha256:d9085f2c1c89e403c1b7187fc4d259d14b28c67097b8b2cb2875d73eb755b061
-    command: ["pipenv", "run", "dramatiq", "api.task", "-p", "2"]
+    command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1"]
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -29,22 +29,29 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 568
-      runAsGroup: 568
     automountServiceAccountToken: false
     resources:
       requests:
-        memory: 1Gi
+        memory: 512Mi
         cpu: 200m
       limits:
-        memory: 4Gi
-        cpu: 4
+        memory: 1Gi
+        cpu: 1
     controller:
-      replicas: 3
+      replicas: 8
       annotations:
         configmap.reloader.stakater.com/reload: "mediafusion-env"
         secret.reloader.stakater.com/reload: "mediafusion-env"
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists 
     affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -57,74 +64,35 @@ spec:
                 - mediafusion
             topologyKey: "kubernetes.io/hostname"
     persistence:
-      tmp: 
+      tmp:
         enabled: true
-        type: custom
         mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
-                  
-      local: 
+        type: emptyDir
+        sizeLimit: 10Gi   
+      local:
         enabled: true
-        type: custom
         mountPath: /.local
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi    
-      scrapy: 
+        type: emptyDir
+        sizeLimit: 10Gi   
+      scrapy:
         enabled: true
-        type: custom
         mountPath: /mediafusion/.scrapy
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 10Gi                                                       
+        type: emptyDir
+        sizeLimit: 10Gi            
     envFrom:
     - secretRef:
         name: mediafusion-env 
     - configMapRef:
         name: mediafusion-env 
-    # specific to the dramatiq deployment
-    env:
-      scraper_proxy_url: http://proxybroker:8888
-    # resources:
     ingress:
       main:
         enabled: false
     service:
       main:
-        enabled: false # don't want probes
+        enabled: true
         ports:
           http:
-            port: 1234 # doesn't matter
-
+            port: 9191 # the metrics port
     addons:
       vpn:
         enabled: true # in case we ever need it

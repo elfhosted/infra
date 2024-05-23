@@ -1,0 +1,115 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: knightcrawler-addon-internal
+  namespace: torrentio
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: knightcrawler-addon-internal
+  values:
+    global:
+      nameOverride: knightcrawler-addon-internal
+    image:
+      repository: ghcr.io/geek-cookbook/knightcrawler-addon
+      tag: v2.0.26@sha256:03f0856d58384e96f5301e08f372867c7ce409ea9246dfb88c16d508206c1b5a
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
+    automountServiceAccountToken: false
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists 
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists    
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "knightcrawler-addon-env"
+    persistence:
+      tmp: 
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        sizeLimit: 1Gi
+      npm: 
+        enabled: true
+        mountPath: /.npm
+        type: emptyDir
+        sizeLimit: 1Gi 
+      pm2: 
+        enabled: true
+        mountPath: /.pm2
+        type: emptyDir
+        sizeLimit: 1Gi                        
+    env:
+      TENANT_NAME: Community
+    envFrom:
+    - secretRef:
+        name: knightcrawler-addon-env 
+    - configMapRef:
+        name: knightcrawler-addon-env 
+    resources:
+      requests: 
+        cpu: 30m
+        memory: 200Mi
+      limits:
+        cpu: 1
+        memory: 500Mi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 7000
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: torrentio-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"      
+          VPNDNS: "0"  
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config             

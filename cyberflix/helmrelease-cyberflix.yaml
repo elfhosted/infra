@@ -1,0 +1,106 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: cyberflix
+  namespace: cyberflix
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: cyberflix
+  values:
+    global:
+      nameOverride: cyberflix
+    image:
+      repository: ghcr.io/geek-cookbook/cyberflix-server
+      tag: rolling@sha256:b1338f46a87cddc0d5a18ba8b841ae5271bdbf124a0c89e0a3cd85ecef0018bd
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      capabilities:
+        drop:
+        - ALL        
+    automountServiceAccountToken: false
+    controller:
+      replicas: 1
+      strategy: Recreate
+      annotations:
+        configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
+        secret.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - cyberflix
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp
+      output: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/node/app/.output
+      nitro: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/node/app/.nitro
+      db:
+        enabled: true
+        type: custom
+        mountPath: /app/db/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: cyberflix           
+    envFrom:
+    - secretRef:
+        name: cyberflix-env 
+    - secretRef:
+        name: cyberflix-env-dev-overrides
+        optional: true        
+    - configMapRef:
+        name: cyberflix-env 
+    - configMapRef:
+        name: cyberflix-env-dev-overrides
+        optional: true        
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+        ephemeral-storage: 50Mi
+      limits:
+        cpu: 1
+        memory: 1Gi
+        ephemeral-storage: 100Mi        
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8000

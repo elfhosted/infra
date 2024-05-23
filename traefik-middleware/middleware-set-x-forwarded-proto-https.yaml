@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: set-x-forwarded-proto-https
+  namespace: traefik
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+      Connection: keep-alive, Upgrade
+      # Upgrade: WebSocket      

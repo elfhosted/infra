@@ -13,7 +13,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: "metadata"
-            image: ghcr.io/geek-cookbook/knightcrawler-migrator:v2.0.21
+            image: ghcr.io/geek-cookbook/knightcrawler-migrator:v2.0.24
             envFrom:
             - secretRef:
                 name: knightcrawler-env 

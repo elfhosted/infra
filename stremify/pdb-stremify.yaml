@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: stremify
+  namespace: stremify
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: stremify
+  minAvailable: 1

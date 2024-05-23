@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stremify-env
+  namespace: stremify
+data:
+  scrape_english: "true"
+  foreign_provider_languages: "de,it,fr,es"

@@ -4,8 +4,6 @@ metadata:
   name: kube-prometheus-stack
   namespace: flux-system
 spec:
-  dependsOn:
-  - name: "topolvm--topolvm-system"
   interval: 15m
   path: ./kube-prometheus-stack
   prune: true # remove any elements later removed from the above path
@@ -27,6 +25,4 @@ spec:
       - kind: ConfigMap
         name: cluster-vars
       - kind: Secret
-        name: cluster-secret-vars-thanos
-      - kind: Secret
-        name: cluster-secret-vars-grafana        
+        name: cluster-secret-vars

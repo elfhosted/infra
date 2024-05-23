@@ -84,8 +84,8 @@
   shell: |
     kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true --overwrite
     kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true:NoSchedule  --overwrite
-  when: "inventory_hostname in groups['node_role_download_only']"  
-  delegate_to: "{{ groups['controllers'][0] }}"    
+  when: "inventory_hostname in groups['k3s_giants']"  
+  delegate_to: "{{ groups['controllers'][0] }}"
 
 - name: label observability workers # no GPU, no heavy workloads
   become: no
@@ -98,5 +98,5 @@
 - name: label app workers
   become: no
   shell: kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/app=true
-  when: "inventory_hostname in groups['node_role_app']"  
+  when: "inventory_hostname in groups['k3s_elves']"  
   delegate_to: "{{ groups['controllers'][0] }}"  

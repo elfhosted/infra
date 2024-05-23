@@ -1,0 +1,152 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: peertube
+  namespace: peertube
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: peertube
+  values:
+    global:
+      nameOverride: peertube
+    image:
+      repository: ghcr.io/geek-cookbook/peertube
+      tag: v6.1.0-bookworm
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+      privileged: true # needed for transcoding
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      supplementalGroups:
+      - 109      
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      capabilities:
+        drop:
+        - ALL        
+    automountServiceAccountToken: false
+    controller:
+      replicas: 1
+      strategy: Recreate
+      annotations:
+        configmap.reloader.stakater.com/reload: "peertube-env"
+        secret.reloader.stakater.com/reload: "peertube-env"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - peertube
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp
+      cache: 
+        enabled: true
+        type: emptyDir
+        mountPath: /.cache
+      storage:
+        enabled: true
+        type: custom
+        mountPath: /app/storage
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: peertube-storage
+      data:
+        enabled: true
+        type: custom
+        mountPath: /data
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: peertube-data
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: peertube-config  
+      render-device:
+        enabled: "true"
+        type: hostPath
+        hostPath: "/dev/dri/renderD128"
+        mountPath: "/dev/dri/renderD128"                      
+    envFrom:
+    - secretRef:
+        name: peertube-env 
+    - configMapRef:
+        name: peertube-env 
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+        ephemeral-storage: 100Mi
+      limits:
+        cpu: 2
+        memory: 4Gi
+        ephemeral-storage: 1Gi        
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 9000
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      readiness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      startup:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /api/v1/ping
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10

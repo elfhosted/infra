@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: mediafusion-dramatiq-worker
+  namespace: mediafusion
+spec:
+  jobLabel: prometheus-job-label
+  endpoints:
+    - port: http
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+      - mediafusion
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mediafusion-dramatiq-worker

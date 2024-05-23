@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: aa-marcojoao-kubernetes-dashboard-developer
+  namespace: dev-cyberflix
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: aa-marcojoao
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer

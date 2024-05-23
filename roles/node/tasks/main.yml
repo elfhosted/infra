@@ -15,10 +15,10 @@
     - vnstat
     - jnettop
 
-- name: remove hwe kernel (doesn't play nice)
-  apt:
-    name: linux-generic-hwe-22.04
-    state: absent
+# - name: remove hwe kernel (doesn't play nice)
+#   apt:
+#     name: linux-generic-hwe-22.04
+#     state: absent
 
 - name: install yq via snap
   snap:
@@ -50,6 +50,19 @@
   with_items:
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
+
+- name: Allow any routed traffic on the cluster NIC
+  ufw:
+    # direction: in
+    rule: "allow"
+    route: true
+    interface_in: "{{ cluster_nic }}"
+
+- name: Allow any incoming traffic on the cluster NIC
+  ufw:
+    direction: in
+    rule: "allow"
+    interface: "{{ cluster_nic }}"    
 
 - name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
   ufw:
@@ -104,13 +117,9 @@
   ufw:
     direction: in
     rule: "deny"
-    interface: "{{ public_nic }}"    
-
-- name: Allow any incoming traffic on the cluster NIC
-  ufw:
-    direction: in
-    rule: "allow"
-    interface: "{{ cluster_nic }}"
+    interface: "{{ public_nic }}"
+    log: "false"
+  when: public_nic not in "eth1" # NICs work differently in ci
 
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance
@@ -195,7 +204,7 @@
     state: restarted
     enabled: yes
 
-- name: remove HWE kernel
-  shell: |
-    apt remove -y --purge linux-generic-hwe-22.04
-    apt remove -y --purge linux-hwe-* linux-modules-6* linux-modules-6* linux-modules-6*
+# - name: remove HWE kernel
+#   shell: |
+#     apt remove -y --purge linux-generic-hwe-22.04
+#     apt remove -y --purge linux-hwe-* linux-modules-6* linux-modules-6* linux-modules-6*

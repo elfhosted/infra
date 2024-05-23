@@ -1,6 +1,6 @@
 # This is global beautiful error pages step 2.. after the ingress has configured a default backend, any
 # unmatched routes will be forwarded to this one, which will then send the error to the middleware...
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: error-pages.${dns_domain}

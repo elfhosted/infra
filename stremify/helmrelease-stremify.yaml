@@ -1,0 +1,93 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: stremify
+  namespace: stremify
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: stremify
+  values:
+    global:
+      nameOverride: stremify
+    image:
+      repository: ghcr.io/geek-cookbook/stremify
+      tag: rolling@sha256:0b2a5f9a31432ded5d908ce369750c66f016ed80427ce25d14352f731a10f554
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
+      capabilities:
+        drop:
+        - ALL        
+    automountServiceAccountToken: false
+    controller:
+      replicas: 2
+      strategy: Recreate
+      annotations:
+        configmap.reloader.stakater.com/reload: "stremify-env"
+        secret.reloader.stakater.com/reload: "stremify-env"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - stremify
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp
+      output: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/node/app/.output
+      nitro: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/node/app/.nitro
+    envFrom:
+    - secretRef:
+        name: stremify-env 
+    - configMapRef:
+        name: stremify-env 
+    resources:
+      requests:
+        cpu: 1m
+        memory: 50Mi
+        ephemeral-storage: 50Mi
+      limits:
+        cpu: 1
+        memory: 512Mi
+        ephemeral-storage: 100Mi        
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 3000

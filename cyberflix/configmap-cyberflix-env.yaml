@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cyberflix-env
+  namespace: cyberflix
+data:
+  APP_ENVIRONMENT: PROD
+  TMDB_CATALOG_PAGES: "180"
+  SPONSOR: |
+
+    This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of CyberFlix, for the Stremio Community - Enjoy! <A HREF="https://status.elfhosted.com/history/stremio-cyber-flix-addon"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgeek-cookbook%2Felfhosted-upptime%2Fmaster%2Fapi%2Fstremio-cyber-flix-addon%2Fuptime.json" alt="Uptime Badge"></A>
+    <br/><br/><A HREF="https://elfhosted.com">ElfHosted</A> is an <A HREF="https://elfhosted.com/open/">open-source</A> PaaS built and run by <A HREF="https://geek-cookbook.funkypenguin.co.nz">geeks</A>, which self-hosts <A HREF="https://elfhosted.com/guides/media/">your favorite streaming apps</A> for you automatically and easily.
+    <br/><br/>Why use <A HREF="https://elfhosted.com/stremio-addons/">ElfHosted Stremio addons</A>?
+    <p>
+            ✅ Highly-available, <A HREF="https://elfhosted.com/open/">open-source</A> infrastructure<br/>
+            ✅ Active, friendly support in <A HREF="https://www.reddit.com/r/ElfHosted/">r/ElfHosted</A>and <A HREF="https://discord.elfhosted.com">Discord</A><br/>
+            ✅ Geek out over <A HREF="https://fnky.nz/grafana-cyberflix">public performance metrics</A><br/>
+    </p>

@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: git.${dns_domain}
+  namespace: gitea
+spec:
+  routes:
+    - match: Host(`git.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: gitea-http
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: error-pages
+          namespace: traefik   

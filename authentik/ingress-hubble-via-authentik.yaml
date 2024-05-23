@@ -11,7 +11,7 @@ spec:
       paths:
       - backend:
           service:
-            name: authentik
+            name: authentik-server
             port:
               name: http
         path: /

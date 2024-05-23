@@ -54,11 +54,7 @@ spec:
     #   -- Enable Verbose mode (log request and responses)
     #  VERBOSE: "ON"
     #   -- Discord Webhook - Can be used from envValueFrom secrets
-      DISCORD_WEBHOOK:
-        valueFrom:
-          secretKeyRef:
-            name: alertmanager-discord-secret
-            key: DISCORD_WEBHOOK_INFRASTRUCTURE
+      DISCORD_WEBHOOK: ${discord_webhook_infra_alerts}
 
     # -- Configures service settings for the chart. Normally this does not need to be modified.
     service:

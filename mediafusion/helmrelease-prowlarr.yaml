@@ -32,7 +32,7 @@ spec:
       runAsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 10
+      replicas: 5
       annotations:
         configmap.reloader.stakater.com/reload: "prowlarr-env"
         secret.reloader.stakater.com/reload: "prowlarr-env"
@@ -87,6 +87,25 @@ spec:
         ports:
           http:
             port: 9696
+    probeSelector:
+      liveness:
+        # -- Enable the liveness probe
+        enabled: true
+        # -- Set this to `true` if you wish to specify your own livenessProbe
+        custom: true
+        # -- The spec field contains the values for the default livenessProbe.
+        # If you selected `custom: true`, this field holds the definition of the livenessProbe.
+        # @default -- See below
+        spec:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'curl -H "X-API-KEY: $PROWLARR_API_KEY" http://localhost:9696/api/v1/health'
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          failureThreshold: 5
+          timeoutSeconds: 10
     initContainers:
       config-setup:
         image: curlimages/curl:latest
@@ -116,6 +135,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - >
+            cd /tmp
             echo "Waiting for Prowlarr to be ready...";
             until curl -f -H "X-API-KEY: $PROWLARR_API_KEY" http://localhost:9696/api/v1/health; do
               sleep 5;
@@ -131,6 +151,9 @@ spec:
             done;
             echo "Indexers setup complete.";
             sleep infinity;
+        volumeMounts:
+          - name: tmp
+            mountPath: /tmp            
         env:
           - name: PROWLARR_API_KEY
             valueFrom:

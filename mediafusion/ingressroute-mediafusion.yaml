@@ -1,10 +1,20 @@
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: mediafusion.${dns_domain}
   namespace: mediafusion
 spec:
   routes:
+    # - match: Host(`mediafusion.${dns_domain}`) && Path(`/scraper`)
+    #   kind: Rule
+    #   services:
+    #     - name: mediafusion
+    #       kind: Service
+    #       port: 8000
+    #   middlewares:  
+    #     - name: error-pages
+    #       namespace: traefik
+    #     - name: protect-scraper # just prevent external access altogether, for now
     - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider`) || PathPrefix(`/poster`) || PathPrefix(`/configure`))
       kind: Rule
       services:
