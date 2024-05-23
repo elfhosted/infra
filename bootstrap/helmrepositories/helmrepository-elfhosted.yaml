@@ -7,4 +7,4 @@ metadata:
 spec:
   interval: 15m
   type: oci
-  url: oci://ghcr.io/geek-cookbook/elf-charts
+  url: oci://ghcr.io/elfhosted/charts
