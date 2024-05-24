@@ -7,9 +7,9 @@ data:
   TRUST_PROXY: "true"
   DATA_FOLDER: /config
   WELCOME_MESSAGE: |
-    ![](https://elfhosted.com/images/davio_logo.jpg)
+    ![](https://elfhosted.com/images/logo.png)
 
-    This is a public, [ElfHosted](https://elfhosted.com/) instance of [davio](https://github.com/arvida42/davio) for the Stremio community - Enjoy! (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/traefik-middleware/middleware-rate-limit-hosted-stremio-addon.yaml) apply*)
+    This is a public, [ElfHosted](https://elfhosted.com/) instance of [Davio](https://github.com/arvida42/davio) for the Stremio community - Enjoy! (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/traefik-middleware/middleware-rate-limit-hosted-stremio-addon.yaml) apply*)
 
     ElfHosted is an [open-source](https://elfhosted.com/open/) PaaS built and run by [geeks](https://geek-cookbook.funkypenguin.co.nz), which self-hosts your [favorite streaming apps](https://elfhosted.com/guides/media/) for you, automatically and easily. 
 
@@ -26,5 +26,5 @@ data:
     * ✅ Geek out over [public performance metrics](https://fnky.nz/grafana-davio)
 
   ADDON_ID: davio.elfhosted.com  
-  ADDON_NAME: Davio | ElfHosted
-  ADDON_ICON: https://elfhosted.com/images/davio_logo.jpg
+  ADDON_NAME: ElfHosted Davio |
+  ADDON_ICON: https://elfhosted.com/images/davio.png
