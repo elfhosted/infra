@@ -16,7 +16,8 @@ data:
     Possible interesting use-cases for Davio:
 
     * 📺 Stream your WebDAV-compatible Debrid content via Stremio
-    * 🤯 [Mount rclone-compatible storage](https://store.elfhosted.com/product-category/storage) (*Dropbox, Google Drive, SSH, SMB, etc*), expose it via [WebDAV](https://store.elfhosted.com/product/webdav-access-plus), and stream it with Stremio!
+    * 🧠 Stream your ElfHosted-managed media from [ElfStorage](https://store.elfhosted.com/product/elfstorage) via Stremio
+    * 🤯 [Mount any rclone-compatible storage](https://store.elfhosted.com/product-category/storage) (*Dropbox, Google Drive, SSH, SMB, etc*), expose it via [WebDAV](https://store.elfhosted.com/product/webdav-access-plus), and stream it with Stremio!
 
     #### Why use [ElfHosted Stremio addons](https://elfhosted.com/stremio-addons/)?
 
