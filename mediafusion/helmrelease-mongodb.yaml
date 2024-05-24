@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: mongodb
-      version: 14.8.x
+      version: 14.13.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -275,7 +275,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/nginx
-        tag: 1.25.3-debian-11-r4
+        tag: 1.25.4-debian-11-r4
         digest: ""
         pullPolicy: IfNotPresent
         ## Optionally specify an array of imagePullSecrets.
@@ -855,7 +855,7 @@ spec:
         image:
           registry: docker.io
           repository: bitnami/kubectl
-          tag: 1.29.0-debian-11-r2
+          tag: 1.29.2-debian-11-r2
           digest: ""
           ## Specify a imagePullPolicy
           ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
