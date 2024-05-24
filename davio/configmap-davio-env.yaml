@@ -13,10 +13,10 @@ data:
 
     ElfHosted is an [open-source](https://elfhosted.com/open/) PaaS built and run by [geeks](https://geek-cookbook.funkypenguin.co.nz), which self-hosts your [favorite streaming apps](https://elfhosted.com/guides/media/) for you, automatically and easily. 
 
-    Possible use-cases for Davio:
+    Possible interesting use-cases for Davio:
 
     * 📺 Stream your WebDAV-compatible Debrid content via Stremio
-    * 🤯 [Mount rclone-compatible storage](https://store.elfhosted.com/product-category/storage) (*Dropbox, Google Drive, SSH, SMB, etc*), expose it via [WebDAV]https://store.elfhosted.com/product/webdav-access-plus), and stream it with Stremio!
+    * 🤯 [Mount rclone-compatible storage](https://store.elfhosted.com/product-category/storage) (*Dropbox, Google Drive, SSH, SMB, etc*), expose it via [WebDAV](https://store.elfhosted.com/product/webdav-access-plus), and stream it with Stremio!
 
     #### Why use [ElfHosted Stremio addons](https://elfhosted.com/stremio-addons/)?
 
