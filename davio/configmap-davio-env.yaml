@@ -7,13 +7,16 @@ data:
   TRUST_PROXY: "true"
   DATA_FOLDER: /config
   WELCOME_MESSAGE: |
-    ![](https://elfhosted.com/images/logo.png)
+    ![](https://elfhosted.com/images/davio_logo.jpg)
 
     This is a public, [ElfHosted](https://elfhosted.com/) instance of [davio](https://github.com/arvida42/davio) for the Stremio community - Enjoy! (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/traefik-middleware/middleware-rate-limit-hosted-stremio-addon.yaml) apply*)
 
     ElfHosted is an [open-source](https://elfhosted.com/open/) PaaS built and run by [geeks](https://geek-cookbook.funkypenguin.co.nz), which self-hosts your [favorite streaming apps](https://elfhosted.com/guides/media/) for you, automatically and easily. 
 
-    Individual, [hosted davio instances are available](https://store.elfhosted.com/product/davio/) (*say, if you need to add your private trackers*) from $0.05/day, with [$10 free credit](https://elfhosted.com/how-to/spend-elfbuckz/) for [new accounts](https://store.elfhosted.com/my-account/).
+    Possible use-cases for Davio:
+
+    * 📺 Stream your WebDAV-compatible Debrid content via Stremio
+    * 🤯 [Mount rclone-compatible storage](https://store.elfhosted.com/product-category/storage) (*Dropbox, Google Drive, SSH, SMB, etc*), expose it via [WebDAV]https://store.elfhosted.com/product/webdav-access-plus), and stream it with Stremio!
 
     #### Why use [ElfHosted Stremio addons](https://elfhosted.com/stremio-addons/)?
 
