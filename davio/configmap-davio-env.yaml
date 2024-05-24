@@ -7,7 +7,7 @@ data:
   TRUST_PROXY: "true"
   DATA_FOLDER: /config
   WELCOME_MESSAGE: |
-    ![](https://elfhosted.com/images/davio_logo.jpg)
+    ![](https://elfhosted.com/images/logo.png)
 
     This is a public, [ElfHosted](https://elfhosted.com/) instance of [davio](https://github.com/arvida42/davio) for the Stremio community - Enjoy! (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/traefik-middleware/middleware-rate-limit-hosted-stremio-addon.yaml) apply*)
 
