@@ -555,8 +555,10 @@ spec:
           memory: 1024Mi
 
       # Tolerations to use for the node-agent daemonset. Optional.
-      tolerations: []
-
+      tolerations:
+      - key: node-role.elfhosted.com/storage-1g
+        operator: Exists  
+    
       # Annotations to set for the node-agent daemonset. Optional.
       annotations: {}
 
@@ -599,7 +601,13 @@ spec:
       nodeSelector: {}
 
       # Affinity to use with node-agent daemonset. Optional.
-      affinity: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.elfhosted.com/storage-1g
+                operator: Exists  
 
       # DNS configuration to use for the node-agent daemonset. Optional.
       dnsConfig: {}
@@ -641,7 +649,23 @@ spec:
     #         readOnlyRootFilesystem: true
     #         runAsUser: 1001
     #         runAsGroup: 999
-    configMaps: {}
+    configMaps:
+      node-agent-config:
+        data: |
+          {
+              "loadAffinity": [
+                  {
+                      "nodeSelector": {
+                          "matchLabels": {
+                              "node-role.elfhosted.com/storage-1g": "true"
+                          }
+                      }
+                  }
+              ]
+              "loadConcurrency": {
+                      "globalConfig": 2
+                  }              
+          }        
 
     ##
     ## End of additional Velero resource settings.
