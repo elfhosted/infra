@@ -94,7 +94,7 @@ spec:
     resources:
       requests:
         cpu: 500m
-        memory: 1024i
+        memory: 1024Mi
       limits:
         cpu: 1000m
         memory: 5120Mi
@@ -548,10 +548,10 @@ spec:
       # https://velero.io/docs/v1.6/customize-installation/#customize-resource-requests-and-limits
       resources:
         requests:
-          cpu: 500m
+          cpu: 1m
           memory: 512Mi
         limits:
-          cpu: 1000m
+          cpu: 500m
           memory: 1024Mi
 
       # Tolerations to use for the node-agent daemonset. Optional.
