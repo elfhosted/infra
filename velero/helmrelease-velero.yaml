@@ -608,7 +608,7 @@ spec:
     # Eg:
     schedules:
       daily:
-        disabled: true
+        disabled: false
         schedule: "8 0 * * *" # 8AM UTC = 2h before main window
         useOwnerReferencesInBackup: false
         template:
