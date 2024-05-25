@@ -454,7 +454,7 @@ spec:
       # How long to wait on persistent volumes and namespaces to terminate during a restore before timing out. Default: 10m
       terminatingResourceTimeout:
       # Bool flag to configure Velero server to move data by default for all snapshots supporting data movement. Default: false
-      defaultSnapshotMoveData:
+      defaultSnapshotMoveData: true
       # Comma separated list of velero feature flags. default: empty
       # features: EnableCSI
       features: EnableCSI
