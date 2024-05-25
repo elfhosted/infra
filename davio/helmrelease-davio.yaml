@@ -20,7 +20,7 @@ spec:
       nameOverride: davio
     image:
       repository: ghcr.io/geek-cookbook/davio
-      tag: v1.0.0@sha256:9a45e792fb1c6f17396cc0fcb13b795fe4727732d87b26cd285aea6439b2ed70
+      tag: v1.0.1@sha256:1956f6184cccb1ded9eab8300e8ad94442371cb622e83bf2342306b7f7693842
     securityContext:
       seccompProfile:
         type: RuntimeDefault
