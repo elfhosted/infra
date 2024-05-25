@@ -649,25 +649,25 @@ spec:
     #         readOnlyRootFilesystem: true
     #         runAsUser: 1001
     #         runAsGroup: 999
-    configMaps:
-      node-agent-config:
-        labels:
-          placeholder: ""
-        data: |
-          {
-              "loadAffinity": [
-                  {
-                      "nodeSelector": {
-                          "matchLabels": {
-                              "node-role.elfhosted.com/storage-1g": "true"
-                          }
-                      }
-                  }
-              ]
-              "loadConcurrency": {
-                      "globalConfig": 2
-                  }              
-          }        
+    configMaps: {}
+      # node-agent-config:
+      #   labels:
+      #     placeholder: ""
+      #   data: |
+      #     {
+      #         "loadAffinity": [
+      #             {
+      #                 "nodeSelector": {
+      #                     "matchLabels": {
+      #                         "node-role.elfhosted.com/storage-1g": "true"
+      #                     }
+      #                 }
+      #             }
+      #         ]
+      #         "loadConcurrency": {
+      #                 "globalConfig": 2
+      #             }              
+      #     }        
 
     ##
     ## End of additional Velero resource settings.
