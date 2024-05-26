@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
-      tag: 3.9.3@sha256:6961a45ab3a0212e77f3dd7df4cb822e7ab8611995e24fad40394a71c3982f57
+      tag: 3.9.2@sha256:d9085f2c1c89e403c1b7187fc4d259d14b28c67097b8b2cb2875d73eb755b061
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1"]
     securityContext:
       seccompProfile:
@@ -42,16 +42,16 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "mediafusion-env"
         secret.reloader.stakater.com/reload: "mediafusion-env"
-    # tolerations:
-    # - key: node-role.elfhosted.com/storage
-    #   operator: Exists 
-    # affinity:
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #       - matchExpressions:
-    #         - key: node-role.elfhosted.com/storage
-    #           operator: Exists
+    tolerations:
+    - key: node-role.elfhosted.com/storage
+      operator: Exists 
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/storage
+              operator: Exists
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
