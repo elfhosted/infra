@@ -601,13 +601,13 @@ spec:
       nodeSelector: {}
 
       # Affinity to use with node-agent daemonset. Optional.
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/storage-1g
-                operator: Exists  
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: node-role.elfhosted.com/storage-1g
+      #           operator: Exists  
 
       # DNS configuration to use for the node-agent daemonset. Optional.
       dnsConfig: {}
