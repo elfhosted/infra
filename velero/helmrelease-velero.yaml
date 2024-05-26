@@ -556,7 +556,7 @@ spec:
 
       # Tolerations to use for the node-agent daemonset. Optional.
       tolerations:
-      - key: node-role.elfhosted.com/storage-1g
+      - key: node-role.elfhosted.com/storage
         operator: Exists  
     
       # Annotations to set for the node-agent daemonset. Optional.
