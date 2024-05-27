@@ -560,7 +560,8 @@ spec:
         operator: Exists  
     
       # Annotations to set for the node-agent daemonset. Optional.
-      annotations: {}
+      annotations:
+        configmap.reloader.stakater.com/reload: "node-agent-configs"
 
       # labels to set for the node-agent daemonset. Optional.
       labels: {}
