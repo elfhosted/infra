@@ -1,0 +1,142 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: debrid-media-manager-scrapers
+  namespace: debridmediamanager
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: debridmediamanager-scrapers
+  values:
+    global:
+      nameOverride: debridmediamanager-scrapers
+    image:
+      repository: ghcr.io/geek-cookbook/debrid-media-manager-scrapers
+      tag: 4.0.1@sha256:ccf7d0faff1b500de02bc0a8e7f90d47430d9ddbbc37bd47dec7dbea4493355d
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+    automountServiceAccountToken: false
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "debridmediamanager-env"
+        secret.reloader.stakater.com/reload: "debridmediamanager-env"
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - debridmediamanager
+            topologyKey: "kubernetes.io/hostname"
+    persistence:
+      npm: 
+        enabled: true
+        type: custom
+        mountPath: /.npm
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi       
+      tmp: 
+        enabled: true
+        type: custom
+        mountPath: /tmp
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi   
+      cache:
+        enabled: true
+        type: custom
+        mountPath: /app/.next/cache
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: debridmediamanager                    
+      local: 
+        enabled: true
+        type: custom
+        mountPath: /.local
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi                                            
+    envFrom:
+    - secretRef:
+        name: debridmediamanager-env 
+    - configMapRef:
+        name: debridmediamanager-env 
+
+    # resources:
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 3000
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: debridmediamanager-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"        
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config             
