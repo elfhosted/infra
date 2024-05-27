@@ -22,7 +22,7 @@ spec:
       configmap.reloader.stakater.com/reload: "stremio-jackett-env"
     image:
       repository: ghcr.io/geek-cookbook/stremio-jackett
-      tag: v4.1.5@sha256:6e4f4314b1392d0f5e4b1edbde19d5e8aaafc949e77e2d5e07e9269645d1c544
+      tag: v4.1.6@sha256:f396624f5be314eb7d46432835fb3bc3cf3572e242ea78d54a24db0239638d71
     securityContext:
       seccompProfile:
         type: RuntimeDefault
