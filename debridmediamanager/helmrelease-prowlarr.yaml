@@ -20,7 +20,7 @@ spec:
       nameOverride: prowlarr
     image:
       repository: ghcr.io/geek-cookbook/prowlarr-nightly
-      tag: 1.14.1.4289
+      tag: 1.18.0.4532
     securityContext:
       seccompProfile:
         type: RuntimeDefault
