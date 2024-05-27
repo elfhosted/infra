@@ -20,7 +20,7 @@ spec:
       nameOverride: xtremio
     image:
       repository: ghcr.io/geek-cookbook/xtremio
-      tag: rolling@sha256:bcf77b3d240ef2a6dfe459e59ca4955a1a5f344bf93690f44decd545bb026e10
+      tag: rolling@sha256:d95609bb1eb1279710bcc68bd747b8940d6f77968f4b2c7b68325f6caf33cdf1
     securityContext:
       seccompProfile:
         type: RuntimeDefault
