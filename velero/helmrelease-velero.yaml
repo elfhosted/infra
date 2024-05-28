@@ -624,8 +624,7 @@ spec:
           ttl: "240h"
           storageLocation: b2
           includedNamespaces:  # [] # cover all namespaces
-          - aa-funkypenguin
-          - mediafusion
+          - cert-manager # placeholder, no PVCs
 
     # Velero ConfigMaps.
     # Eg:
