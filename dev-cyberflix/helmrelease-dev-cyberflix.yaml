@@ -20,7 +20,7 @@ spec:
       nameOverride: dev-cyberflix
     image:
       repository: ghcr.io/geek-cookbook/cyberflix-server-develop
-      tag: rolling@sha256:e4685830dc0fb4b4f7b6877be90ed0b5fe29cce24157b153355d49dd228a9fd3
+      tag: rolling@sha256:04cf9dec63f72740baccacbf148f6f0d1fa062e7c3f9c43aee0aaac0eb39bfb7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
