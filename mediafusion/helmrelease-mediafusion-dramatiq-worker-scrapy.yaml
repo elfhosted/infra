@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/geek-cookbook/mediafusion
-      tag: 3.9.3@sha256:1ecfd05b8ed4d28365bb62cf7af34a05af485f5bab3b0eb83615ebf4197d0806
+      tag: 3.9.4@sha256:bc4b393218ea6e0a8198c85fcab4323d4a03c982de4af380c1910e7a1d320968
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1", "--queues", "scrapy"]
     securityContext:
       seccompProfile:
