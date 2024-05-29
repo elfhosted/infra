@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: debridmediamanager
+  name: debrid-media-manager-scrapers
   namespace: debridmediamanager
 spec:
   chart:
@@ -14,13 +14,13 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: debridmediamanager
+  releaseName: debridmediamanager-scrapers
   values:
     global:
-      nameOverride: debridmediamanager
+      nameOverride: debridmediamanager-scrapers
     image:
-      repository: ghcr.io/geek-cookbook/debrid-media-manager
-      tag: 4.0.1@sha256:f02d2e02b527b159fedb878017f00730eebb883a9784d0d9df775566502e9d47
+      repository: ghcr.io/geek-cookbook/debrid-media-manager-scrapers
+      tag: 4.0.1@sha256:ccf7d0faff1b500de02bc0a8e7f90d47430d9ddbbc37bd47dec7dbea4493355d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -117,7 +117,7 @@ spec:
             port: 3000
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: thrnz/docker-wireguard-pia

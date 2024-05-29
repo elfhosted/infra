@@ -454,7 +454,7 @@ spec:
       # How long to wait on persistent volumes and namespaces to terminate during a restore before timing out. Default: 10m
       terminatingResourceTimeout:
       # Bool flag to configure Velero server to move data by default for all snapshots supporting data movement. Default: false
-      defaultSnapshotMoveData:
+      defaultSnapshotMoveData: true
       # Comma separated list of velero feature flags. default: empty
       # features: EnableCSI
       features: EnableCSI
@@ -555,10 +555,13 @@ spec:
           memory: 1024Mi
 
       # Tolerations to use for the node-agent daemonset. Optional.
-      tolerations: []
-
+      tolerations:
+      - key: node-role.elfhosted.com/storage
+        operator: Exists  
+    
       # Annotations to set for the node-agent daemonset. Optional.
-      annotations: {}
+      annotations:
+        configmap.reloader.stakater.com/reload: "node-agent-configs"
 
       # labels to set for the node-agent daemonset. Optional.
       labels: {}
@@ -599,7 +602,13 @@ spec:
       nodeSelector: {}
 
       # Affinity to use with node-agent daemonset. Optional.
-      affinity: {}
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: node-role.elfhosted.com/storage-1g
+      #           operator: Exists  
 
       # DNS configuration to use for the node-agent daemonset. Optional.
       dnsConfig: {}
@@ -608,15 +617,14 @@ spec:
     # Eg:
     schedules:
       daily:
-        disabled: true
+        disabled: false
         schedule: "8 0 * * *" # 8AM UTC = 2h before main window
         useOwnerReferencesInBackup: false
         template:
           ttl: "240h"
           storageLocation: b2
           includedNamespaces:  # [] # cover all namespaces
-          - aa-funkypenguin
-          - mediafusion
+          - cert-manager # placeholder, no PVCs
 
     # Velero ConfigMaps.
     # Eg:
@@ -642,6 +650,24 @@ spec:
     #         runAsUser: 1001
     #         runAsGroup: 999
     configMaps: {}
+      # node-agent-config:
+      #   labels:
+      #     placeholder: ""
+      #   data: |
+      #     {
+      #         "loadAffinity": [
+      #             {
+      #                 "nodeSelector": {
+      #                     "matchLabels": {
+      #                         "node-role.elfhosted.com/storage-1g": "true"
+      #                     }
+      #                 }
+      #             }
+      #         ]
+      #         "loadConcurrency": {
+      #                 "globalConfig": 2
+      #             }              
+      #     }        
 
     ##
     ## End of additional Velero resource settings.

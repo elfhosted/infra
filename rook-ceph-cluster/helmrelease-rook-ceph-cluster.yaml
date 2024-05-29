@@ -336,7 +336,7 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.${dns_domain}/storage
+                  - key: node-role.${dns_domain}/storage-10g
                     operator: Exists     
           tolerations:
           - key: node-role.${dns_domain}/storage
