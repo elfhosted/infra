@@ -147,7 +147,7 @@ data:
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elf-infra"  
+            url: "https://github.com/elfhosted/infra"  
           - name: "Charts"
             subtitle: "Helm Charts"
             icon: "fab fa-github"
