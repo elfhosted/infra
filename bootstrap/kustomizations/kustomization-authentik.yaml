@@ -25,10 +25,6 @@ spec:
       namespace: authentik    
     - apiVersion: apps/v1
       kind: StatefulSet
-      name: authentik-postgresql
-      namespace: authentik
-    - apiVersion: apps/v1
-      kind: StatefulSet
       name: authentik-redis-master
       namespace: authentik   
     # Always use the helmrelease to determine health too
