@@ -95,10 +95,10 @@ spec:
       config: |
         {
           "platform": "github",
-          "repositories": ["elfhosted/charts","geek-cookbook/elf-infra"],
+          "repositories": ["elfhosted/charts","elfhosted/infra","elfhosted/myprecious"],
           "dryRun": false,
           "printConfig": false,
-          "autodiscoverFilter": ["elfhosted/charts","geek-cookbook/elf-infra"],
+          "autodiscoverFilter": ["elfhosted/charts","elfhosted/infra","elfhosted/myprecious"],
           "allowedPostUpgradeCommands": ["./scripts/bump-myprecious.sh"]
         }
 
