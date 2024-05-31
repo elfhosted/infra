@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: buffer-2gb
+  namespace: traefik
+spec:
+  buffering:
+    maxRequestBodyBytes: 2000000000 # 2GB
+    memRequestBodyBytes: 20000000 # buffer to disk after 20MB
