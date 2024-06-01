@@ -102,5 +102,13 @@
       body:
         url: "{{ authentik_login_background }}"
 
-
-
+  - name: "Update auth flow background"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-provider-authorization-explicit-consent/set_background_url/"
+      method: POST
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+      body:
+        url: "{{ authentik_login_background }}"
