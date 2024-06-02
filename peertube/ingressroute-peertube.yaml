@@ -11,6 +11,4 @@ spec:
         - name: peertube
           kind: Service
           port: 9000
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
+
