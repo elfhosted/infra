@@ -143,8 +143,8 @@ spec:
             chmod +x /config/sidecar-config.sh;
             /config/sidecar-config.sh
         volumeMounts:
-          - name: tmp
-            mountPath: /tmp            
+          - name: config
+            mountPath: /config            
         env:
           - name: PROWLARR_API_KEY
             valueFrom:
@@ -153,3 +153,29 @@ spec:
                 key: PROWLARR_API_KEY
           - name: FLARESOLVERR_HOST
             value: "http://flaresolverr:8191/"                
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: mediafusion-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"       
+          VPNDNS: "0" 
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config                   
