@@ -112,6 +112,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - >
+            set -x;
             until curl -o /config/init-container.sh https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/deployment/k8s/init-container.sh; do
               echo "Failed to download script file. Retrying...";
               sleep 3;
@@ -151,4 +152,4 @@ spec:
                 name: mediafusion-env
                 key: PROWLARR_API_KEY
           - name: FLARESOLVERR_HOST
-            value: "http://flaresolverr:8191/"                      
+            value: "http://flaresolverr:8191/"                
