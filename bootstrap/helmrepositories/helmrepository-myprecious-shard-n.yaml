@@ -2,11 +2,10 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: elfhosted-shard-u
+  name: myprecious-shard-n
   namespace: flux-system
   labels:
-    sharding.fluxcd.io/key: shard-u  
+    sharding.fluxcd.io/key: shard-n  
 spec:
   interval: 15m
-  type: oci
-  url: oci://ghcr.io/elfhosted/charts
+  url: https://elfhosted.github.io/myprecious/
