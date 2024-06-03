@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: mediafusion
     image:
-      repository: ghcr.io/geek-cookbook/mediafusion
+      repository: ghcr.io/elfhosted/mediafusion
       tag: 3.9.5@sha256:7141938f724b014daee621d38a20549b6d0649f9ddaf9dd8c8db18609a0c5557
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1"]
     securityContext:
