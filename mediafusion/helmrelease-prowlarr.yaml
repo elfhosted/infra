@@ -112,14 +112,12 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - >
-            until curl -o /config/config.xml https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/xml/prowlarr-config.xml; do
-              echo "Failed to download config file. Retrying...";
+            until curl -o /config/init-container.sh https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/deployment/k8s/init-container.sh; do
+              echo "Failed to download script file. Retrying...";
               sleep 3;
             done;
-            echo "Config file downloaded successfully.";
-            sed -i 's/$PROWLARR_API_KEY/'"$PROWLARR_API_KEY"'/g' /config/config.xml;
-            chmod 664 /config/config.xml;
-            echo "Prowlarr config setup complete.";
+            chmod +x /config/init-container.sh;
+            /config/init-container.sh
         volumeMounts:
           - name: config
             mountPath: /config
@@ -128,29 +126,21 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: mediafusion-env
-                key: PROWLARR_API_KEY                
+                key: PROWLARR_API_KEY   
+          - name: FLARESOLVERR_HOST
+            value: "http://flaresolverr:8191/"                             
     additionalContainers:
       setup-indexers: 
         image: apteno/alpine-jq:latest
         command: ["/bin/sh", "-c"]
         args:
           - >
-            cd /tmp
-            echo "Waiting for Prowlarr to be ready...";
-            until curl -f -H "X-API-KEY: $PROWLARR_API_KEY" http://localhost:9696/api/v1/health; do
-              sleep 5;
-            done;
-            echo "Prowlarr is ready, setting up indexers...";
-            until curl -o prowlarr-indexers.json https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/resources/json/prowlarr-indexers.json; do
-              echo "Failed to download indexers file. Retrying...";
+            until curl -o /config/sidecar-config.sh https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/deployment/k8s/sidecar-config.sh; do
+              echo "Failed to download script file. Retrying...";
               sleep 3;
             done;
-            jq -c '.[]' prowlarr-indexers.json | while read indexer; do
-              echo "Adding indexer named: $(echo $indexer | jq -r '.name')";
-              curl -H "Content-Type: application/json" -H "X-API-KEY: $PROWLARR_API_KEY" -X POST http://localhost:9696/api/v1/indexer -d "$indexer";
-            done;
-            echo "Indexers setup complete.";
-            sleep infinity;
+            chmod +x /config/sidecar-config.sh;
+            /config/sidecar-config.sh
         volumeMounts:
           - name: tmp
             mountPath: /tmp            
@@ -160,3 +150,5 @@ spec:
               secretKeyRef:
                 name: mediafusion-env
                 key: PROWLARR_API_KEY
+          - name: FLARESOLVERR_HOST
+            value: "http://flaresolverr:8191/"                      
