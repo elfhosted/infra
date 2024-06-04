@@ -119,7 +119,6 @@ spec:
             done;
             chmod +x /config/init-container.sh;
             /config/init-container.sh
-            sed -i  "s|<AuthenticationMethod>None</AuthenticationMethod>|<AuthenticationMethod>External</AuthenticationMethod>|" /config/config.xml
         volumeMounts:
           - name: config
             mountPath: /config
