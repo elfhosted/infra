@@ -8,7 +8,7 @@ spec:
     - match: Host(`mediafusion-prowlarr.${dns_domain}`)
       kind: Rule
       services:
-        - name: mediafusion
+        - name: prowlarr
           kind: Service
           port: 9696
       middlewares:
