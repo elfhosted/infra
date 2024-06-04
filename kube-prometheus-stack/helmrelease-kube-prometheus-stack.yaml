@@ -3736,11 +3736,11 @@ spec:
 
         ## How long to retain metrics
         ##
-        retention: 10d
+        retention: ${prometheus_retention}
 
         ## Maximum size of metrics
         ##
-        retentionSize: "${prometheus_storage}GB"
+        retentionSize: "${prometheus_retentionsize}"
 
         ## Allow out-of-order/out-of-bounds samples ingested into Prometheus for a specified duration
         ## See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#tsdb
@@ -3758,7 +3758,7 @@ spec:
         ## Number of replicas of each shard to deploy for a Prometheus deployment.
         ## Number of replicas multiplied by shards is the total number of Pods created.
         ##
-        replicas: 1
+        replicas: 2
 
         ## EXPERIMENTAL: Number of shards to distribute targets onto.
         ## Number of replicas multiplied by shards is the total number of Pods created.
@@ -3850,7 +3850,7 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: ${prometheus_storage}Gi
+                    storage: ${prometheus_pvc_storage}
 
           # volumeClaimTemplate:
           #   spec:

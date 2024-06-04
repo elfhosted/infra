@@ -13,7 +13,9 @@ data:
   k3s_server_endpoint_1: 192.168.41.11
   k3s_server_endpoint_2: 192.168.41.12
   k3s_server_endpoint_3: 192.168.41.13
-  prometheus_storage: '10' # don't append a unit here
+  prometheus_retentionsize: '5GB'
+  prometheus_retention: "4"   # enough to chart a month's progress with some headroom
+  prometheus_pvc_storage: '6Gi'  
   minio_storage: '100Gi'
   rook_ceph_osd_ram: 2Gi
   rook_ceph_mds_ram: 1Gi
