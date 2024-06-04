@@ -13,7 +13,9 @@ data:
   k3s_server_endpoint_1: 10.0.42.11
   k3s_server_endpoint_2: 10.0.42.12
   k3s_server_endpoint_3: 10.0.42.13
-  prometheus_storage: '500' # don't append a unit here
+  prometheus_retentionsize: '500GB'
+  prometheus_retention: "40"   # enough to chart a month's progress with some headroom
+  prometheus_pvc_storage: '550Gi'
   minio_storage: '500Gi'
   rook_ceph_osd_ram: 6500Mi
   rook_ceph_mds_ram: 12Gi
