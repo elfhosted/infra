@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mediafusion-prowlarr.${dns_domain}
+  namespace: mediafusion
+spec:
+  routes:
+    - match: Host(`mediafusion-prowlarr.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 9696
+      middlewares:
+      - name: mhdzumair-traefik-forward-auth
+        namespace: aa-mdhzumair
