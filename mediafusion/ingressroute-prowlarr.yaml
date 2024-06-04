@@ -13,4 +13,4 @@ spec:
           port: 9696
       middlewares:
       - name: mhdzumair-traefik-forward-auth
-        namespace: aa-mdhzumair
+        namespace: aa-mhdzumair
