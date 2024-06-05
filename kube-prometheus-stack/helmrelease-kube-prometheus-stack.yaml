@@ -3740,7 +3740,7 @@ spec:
 
         ## Maximum size of metrics
         ##
-        retentionSize: "${prometheus_retentionsize}"
+        retentionSize: "${prometheus_retention_size}"
 
         ## Allow out-of-order/out-of-bounds samples ingested into Prometheus for a specified duration
         ## See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#tsdb
