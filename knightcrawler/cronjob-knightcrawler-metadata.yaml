@@ -17,7 +17,7 @@ spec:
               sizeLimit: 10Gi
           containers:
           - name: "metadata"
-            image: ghcr.io/geek-cookbook/knightcrawler-metadata:v2.0.24
+            image: ghcr.io/elfhosted/knightcrawler-metadata:v2.0.24
             envFrom:
             - secretRef:
                 name: knightcrawler-env 
