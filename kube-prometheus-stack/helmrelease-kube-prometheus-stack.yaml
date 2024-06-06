@@ -1003,11 +1003,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/observability
+              - key: node-role.${dns_domain}/observability
                 operator: Exists
                 
       tolerations:
-      - key: node-role.elfhosted.com/observability
+      - key: node-role.${dns_domain}/observability
         operator: Exists
 
       replicas: 2
@@ -2199,7 +2199,7 @@ spec:
     prometheus-node-exporter:
 
       tolerations:
-      - key: node-role.elfhosted.com/observability
+      - key: node-role.${dns_domain}/observability
         operator: Exists   
       - key: node-role.${dns_domain}/storage
         operator: Exists      
@@ -2599,10 +2599,10 @@ spec:
               requiredDuringSchedulingIgnoredDuringExecution:
                 nodeSelectorTerms:
                 - matchExpressions:
-                  - key: node-role.elfhosted.com/observability
+                  - key: node-role.${dns_domain}/observability
                     operator: Exists        
           tolerations:
-          - key: node-role.elfhosted.com/observability
+          - key: node-role.${dns_domain}/observability
             operator: Exists      
 
           ## SecurityContext holds pod-level security attributes and common container settings.
@@ -2854,7 +2854,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
       tolerations:
-      - key: node-role.elfhosted.com/observability
+      - key: node-role.${dns_domain}/observability
         operator: Exists    
 
       # ## Assign custom affinity rules to the prometheus operator
@@ -2865,7 +2865,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.elfhosted.com/observability
+              - key: node-role.${dns_domain}/observability
                 operator: Exists
       dnsConfig: {}
         # nameservers:
@@ -3534,7 +3534,7 @@ spec:
         ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
         ##
         tolerations:
-        - key: node-role.elfhosted.com/observability
+        - key: node-role.${dns_domain}/observability
           operator: Exists
 
         ## If specified, the pod's topology spread constraints.
@@ -3809,7 +3809,7 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
               - matchExpressions:
-                - key: node-role.elfhosted.com/observability
+                - key: node-role.${dns_domain}/observability
                   operator: Exists
 
         ## The remote_read spec configuration for Prometheus.
