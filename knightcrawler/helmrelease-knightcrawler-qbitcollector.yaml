@@ -20,7 +20,7 @@ spec:
       nameOverride: knightcrawler-qbitcollector
     image:
       repository: ghcr.io/elfhosted/knightcrawler-qbit-collector
-      tag: v2.0.26@sha256:691f89b1346f1edc72b872243837728be5ad411691eeeeb6ec3a886de2aa5546
+      tag: v2.0.26@sha256:bca86c05b041086861d5e03a7eaaa3000b51c32f3b7be11b8e526f4ab0658cbe
     securityContext:
       seccompProfile:
         type: RuntimeDefault
