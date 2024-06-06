@@ -20,7 +20,7 @@ spec:
       nameOverride: knightcrawler-qbitcollector
     image:
       repository: ghcr.io/geek-cookbook/knightcrawler-qbit-collector
-      tag: v2.0.26
+      tag: v2.0.26@sha256:691f89b1346f1edc72b872243837728be5ad411691eeeeb6ec3a886de2aa5546
     securityContext:
       seccompProfile:
         type: RuntimeDefault
