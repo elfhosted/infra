@@ -3850,7 +3850,8 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: ${prometheus_pvc_storage}
+                    # storage: ${prometheus_pvc_storage}
+                    storage: 100Gi
 
           # volumeClaimTemplate:
           #   spec:
