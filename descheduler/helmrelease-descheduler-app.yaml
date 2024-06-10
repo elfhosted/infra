@@ -138,12 +138,12 @@ spec:
             nodeResourceUtilizationThresholds:
               useDeviationThresholds: true # percentage of the mean. Since cpu/mem is based on requests, not actual usage, it's not much use. However, pod count is a useful metric to balance on
               thresholds:
-                cpu: 3
-                memory: 3
+                # cpu: 3
+                # memory: 3
                 pods: 3
               targetThresholds:
-                cpu: 3
-                memory: 3
+                # cpu: 3
+                # memory: 3
                 pods: 3
 
     priorityClassName: system-cluster-critical # don't deschedule yourself
