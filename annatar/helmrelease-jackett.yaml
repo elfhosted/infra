@@ -20,7 +20,7 @@ spec:
       nameOverride: jackett
     image:
       repository: ghcr.io/geek-cookbook/jackett
-      tag: 0.21.1802
+      tag: 0.21.2831
     securityContext:
       seccompProfile:
         type: RuntimeDefault
