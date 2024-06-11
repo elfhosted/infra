@@ -66,6 +66,34 @@ patches:
           labelSelector:
             matchLabels:
               topologyspread.elfhosted.com: elves
+  # Per https://fluxcd.io/flux/installation/configuration/vertical-scaling/#enable-in-memory-kustomize-builds
+  - target:
+      kind: Deployment
+      name: kustomize-controller                
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --concurrent=20
+      - op: replace
+        path: /spec/template/spec/volumes/0
+        value:
+          name: temp
+          emptyDir:
+            medium: Memory   
+  # Per https://fluxcd.io/flux/installation/configuration/vertical-scaling/#enable-helm-repositories-caching
+  - patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --helm-cache-max-size=10
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --helm-cache-ttl=60m
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --helm-cache-purge-interval=5m      
+    target:
+      kind: Deployment
+      name: source-controller                       
 
   #   patch: |
   #     - op: add
