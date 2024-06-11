@@ -27,7 +27,7 @@ spec:
       # -- Traefik image repository
       repository: traefik
       # -- defaults to appVersion
-      tag: "v2.11.2"
+      tag: "v2.11.4"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
 
@@ -589,6 +589,7 @@ spec:
     - "--global.checknewversion"
     - "--global.sendanonymoususage"
     - "--api.insecure=true" # for the dashboard to be exposed via nginx ingress
+    - "--providers.kubernetescrd.throttleduration=60s" # does this mean 60s refresh on ingresses? (if so, fantastic!)
 
     #
     # Configure Traefik static configuration
