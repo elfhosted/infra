@@ -48,11 +48,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           limits:
-            cpu: 1
+            cpu: 500m
             memory: 2Gi
           requests:
-            cpu: 500m
-            memory: 300Mi
+            cpu: 1m
+            memory: 64Mi
   - target:
       kind: Deployment
       name: "(source-controller|kustomize-controller|helm-controller|notification-controller)"
