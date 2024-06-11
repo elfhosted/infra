@@ -84,7 +84,7 @@ patches:
   - patch: |
       - op: add
         path: /spec/template/spec/containers/0/args/-
-        value: --helm-cache-max-size=10
+        value: --helm-cache-max-size=100
       - op: add
         path: /spec/template/spec/containers/0/args/-
         value: --helm-cache-ttl=60m
