@@ -1,7 +1,7 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
 kind: Receiver
 metadata:
-  name: elf-charts-dev
+  name: myprecious-dev
   namespace: flux-system
 spec:
   type: github
@@ -12,4 +12,4 @@ spec:
     name: webhook-token
   resources:
     - kind: GitRepository
-      name: elf-charts-dev
+      name: myprecious-dev
