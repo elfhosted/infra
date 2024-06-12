@@ -5,4 +5,4 @@ metadata:
   namespace: redbot
 data:
   PREFIX: .
-  PUID: 568
+  PUID: "568"
