@@ -28,11 +28,11 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
+      # runAsUser: 568
+      # runAsGroup: 568
+      # fsGroup: 568
       allowPrivilegeEscalation: false
-      runAsNonRoot: true
+      # runAsNonRoot: true
       capabilities:
         drop:
         - ALL        
