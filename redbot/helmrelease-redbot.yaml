@@ -24,7 +24,7 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      # readOnlyRootFilesystem: true
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
