@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: traefik
+  name: elfhosted-internal
+  namespace: torrentio
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 7000
+  selector:
+    app.kubernetes.io/name: knightcrawler-addon-internal
+  sessionAffinity: None
+  type: ClusterIP

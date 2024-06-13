@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elfhosted-internal
+  namespace: mediafusion
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app.kubernetes.io/name: mediafusion
+  sessionAffinity: None
+  type: ClusterIP
