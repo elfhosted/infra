@@ -80,3 +80,6 @@ patches:
       - op: add
         path: /spec/template/spec/containers/0/args/-
         value: --watch-label-selector=sharding.fluxcd.io/key=shard-a
+      - op: add
+        path: /spec/template/metadata/labels/topologyspread.elfhosted.com
+        value: elves

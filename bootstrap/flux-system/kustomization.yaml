@@ -48,11 +48,11 @@ patches:
         path: /spec/template/spec/containers/0/resources
         value:
           limits:
-            cpu: 1
+            cpu: 250m
             memory: 2Gi
           requests:
-            cpu: 500m
-            memory: 300Mi
+            cpu: 1m
+            memory: 64Mi
   - target:
       kind: Deployment
       name: "(source-controller|kustomize-controller|helm-controller|notification-controller)"
@@ -66,6 +66,34 @@ patches:
           labelSelector:
             matchLabels:
               topologyspread.elfhosted.com: elves
+  # Per https://fluxcd.io/flux/installation/configuration/vertical-scaling/#enable-in-memory-kustomize-builds
+  - target:
+      kind: Deployment
+      name: kustomize-controller                
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --concurrent=20
+      - op: replace
+        path: /spec/template/spec/volumes/0
+        value:
+          name: temp
+          emptyDir:
+            medium: Memory   
+  # Per https://fluxcd.io/flux/installation/configuration/vertical-scaling/#enable-helm-repositories-caching
+  - patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --helm-cache-max-size=100
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --helm-cache-ttl=60m
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --helm-cache-purge-interval=5m      
+    target:
+      kind: Deployment
+      name: source-controller                       
 
   #   patch: |
   #     - op: add

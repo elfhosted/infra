@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elfhosted-internal
+  namespace: knightcrawler
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 7000
+  selector:
+    app.kubernetes.io/name: knightcrawler-addon
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,12 +1,24 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "traefik-ingress.${dns_domain}"
+  name: "previous-traefik-ingress.${dns_domain}"
   namespace: traefik
 spec:
   endpoints:
-  - dnsName: "traefik-ingress.${dns_domain}"
+  - dnsName: "previous-traefik-ingress.${dns_domain}"
     recordTTL: 180
-    recordType: A
+    recordType: CNAME
+    providerSpecific:
+      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+        value: 'true'
     targets:
-    - ${traefik_ingress_dns_ip} # LB / pfsense directs this to ${cluster_nic_class_c}.101
+    - elf01.elfhosted.com
+    - elf02.elfhosted.com
+    - elf03.elfhosted.com
+    - elf04.elfhosted.com
+    - elf05.elfhosted.com
+    - elf06.elfhosted.com
+    - elf07.elfhosted.com
+    - elf08.elfhosted.com
+    - elf09.elfhosted.com
+    - elf10.elfhosted.com
