@@ -1007,8 +1007,8 @@ spec:
               # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
               name: data0
               parameters:
-                # pg_num: '1024' # create the pool with a pre-configured placement group number
-                # pgp_num: '1024' # this should at least match `pg_num` so that all PGs are used
+                pg_num: '256' # create the pool with a pre-configured placement group number
+                pgp_num: '256' # this should at least match `pg_num` so that all PGs are used
               deviceClass: ssd
           metadataServer:
             activeCount: 1
