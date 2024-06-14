@@ -100,3 +100,9 @@
   shell: kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/app=true
   when: "inventory_hostname in groups['k3s_elves']"  
   delegate_to: "{{ groups['controllers'][0] }}"  
+
+- name: label 10g storage nodes
+  become: no
+  shell: kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/storage-10g=true
+  when: "inventory_hostname in groups['k3s_goblins']"  
+  delegate_to: "{{ groups['controllers'][0] }}"    
