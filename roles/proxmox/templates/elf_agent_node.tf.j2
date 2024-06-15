@@ -7,7 +7,7 @@ resource "proxmox_vm_qemu" "{{ inventory_hostname_short }}" {
     ipconfig1 = "ip={{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}/24,ip6=fd00:192:168:41:0::{{ ansible_host.split(".")[3] }}/118"
     nameserver = "1.1.1.1"  
     memory = {{ proxmox_vm_ram }}
-    cores = 12
+    cores = 24
     ciuser = "{{ admin_ssh_user }}"
     vmid = "{{ proxmox_id }}"
     sshkeys = <<EOF
