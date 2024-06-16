@@ -935,8 +935,8 @@ spec:
                 pgp_num: '4096' # this should at least match `pg_num` so that all PGs are used              
             - name: ec-8-2
               erasureCoded:
-                dataChunks: 8
-                codingChunks: 2
+                dataChunks: ${ceph_ec_data_chunks}
+                codingChunks: $(ceph_ec_coding_chunks}
               deviceClass: hdd          
           metadataServer:
             activeCount: 1
