@@ -6,15 +6,14 @@ metadata:
 data:
   HOST_URL: https://mediafusion.${dns_domain}
   ENABLE_RATE_LIMIT: "false"
-  PROWLARR_IMMEDIATE_MAX_PROCESS: "3"
   PROWLARR_URL: http://prowlarr:9696
   IS_SCRAP_FROM_TORRENTIO: "true"
   TORRENTIO_URL: http://knightcrawler-addon.knightcrawler:7000
   REDIS_URL: redis://redis-master:6379
   PROWLARR_SEARCH_INTERVAL_HOUR: "72"
-  validate_tv_streams_in_db_crontab: "0 0 1 1 *"
   is_public_instance: "true"
   prowlarr_immediate_max_process_time: "0"
   validate_m3u8_urls_liveness: "false"
+  worker_max_tasks_per_child: "30"
   addon_name: "MediaFusion | ElfHosted"
   logo_url: https://mediafusion.elfhosted.com/static/images/mediafusion-elfhosted-logo.png
