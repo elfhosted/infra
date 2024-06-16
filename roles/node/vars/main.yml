@@ -1,6 +1,6 @@
 # This dictionary is used to apply sysctl settings to the nodes
 sysctl_config:
-  fs.inotify.max_user_watches: 4194304  # Due to how streamers like to watch for fs changes
+  fs.inotify.max_user_watches: 16777216  # Due to how streamers like to watch for fs changes
   fs.inotify.max_user_instances: 1024    # Due to how streamers like to watch for fs changes
 
   # Lazily took these from https://discord.com/channels/396055506072109067/396055506663374849/1180940177322037359

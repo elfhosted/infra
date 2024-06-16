@@ -19,6 +19,8 @@ data:
   minio_storage: '500Gi'
   rook_ceph_osd_ram: 6500Mi
   rook_ceph_mds_ram: 12Gi
+  ceph_ec_data_chunks: "8"
+  ceph_ec_coding_chunks: "2"
   dashboard_background: production.jpg  
   hetzner_auction_hunter_cron: 0 * * * * # run hourly
   k3s_version: v1.28.4+k3s2

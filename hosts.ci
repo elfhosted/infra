@@ -2,6 +2,7 @@
 k3s_servers
 k3s_agents
 k3s_dwarves
+k3s_goblins
 k3s_observability
 proxmox_servers
 controllers
@@ -48,6 +49,12 @@ sprite03
 hobbit01      ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:54:00:40:00:81
 hobbit02      ansible_host=192.168.40.82 cluster_nic=eth1 proxmox_id=408 mac=52:54:00:40:00:82
 hobbit03      ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54:00:40:00:83
+
+[k3s_goblins] # so that we can run MDSs
+hobbit01      ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:54:00:40:00:81
+hobbit02      ansible_host=192.168.40.82 cluster_nic=eth1 proxmox_id=408 mac=52:54:00:40:00:82
+hobbit03      ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54:00:40:00:83
+
 
 [k3s_observability]
 
