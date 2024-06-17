@@ -936,7 +936,7 @@ spec:
             - name: ec-8-2
               erasureCoded:
                 dataChunks: "${ceph_ec_data_chunks}"
-                codingChunks: "$(ceph_ec_coding_chunks}"
+                codingChunks: "${ceph_ec_coding_chunks}"
               deviceClass: hdd          
           metadataServer:
             activeCount: 1
