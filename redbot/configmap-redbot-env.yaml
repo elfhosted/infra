@@ -6,3 +6,4 @@ metadata:
 data:
   PREFIX: .
   PUID: "568"
+  EXTRA_ARGS: "--debug"
