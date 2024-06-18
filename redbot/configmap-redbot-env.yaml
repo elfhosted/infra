@@ -4,6 +4,6 @@ metadata:
   name: redbot-env
   namespace: redbot
 data:
-  PREFIX: .
+  PREFIX: !
   PUID: "568"
   EXTRA_ARGS: "--debug"
