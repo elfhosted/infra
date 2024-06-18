@@ -548,7 +548,13 @@ spec:
     ## @param podAnnotations MongoDB(&reg;) Pod annotations
     ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
     ##
-    podAnnotations: {}
+    podAnnotations:
+      backup.velero.io/backup-volumes: backup
+      pre.hook.backup.velero.io/command: '["/bin/bash", "-c", "mongodump --uri mongodb://mediafusion:mediafusion@localhost:27017/mediafusion -o /scratch"]'
+      pre.hook.backup.velero.io/timeout: 5m
+      # post.hook.restore.velero.io/exec-timeout: 5m
+      # post.hook.restore.velero.io/command: '["/bin/bash", "-c", "[ -f \"/scratch/backup.psql\" ] && sleep 1m && PGPASSWORD=$POSTGRES_PASSWORD pg_restore -U $POSTGRES_USER -d $POSTGRES_USER --clean < /scratch/backup.psql && rm -f /scratch/backup.psql;"]'
+
     ## @param priorityClassName Name of the existing priority class to be used by MongoDB(&reg;) pod(s)
     ## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
     ##
@@ -733,13 +739,19 @@ spec:
     ##     mountPath: /usr/share/extras
     ##     readOnly: true
     ##
-    extraVolumeMounts: []
+    extraVolumeMounts:
+      - name: backup
+        mountPath: /scratch
     ## @param extraVolumes Optionally specify extra list of additional volumes to the MongoDB(&reg;) statefulset
     ## extraVolumes:
     ##   - name: extras
     ##     emptyDir: {}
     ##
-    extraVolumes: []
+    extraVolumes:
+      - name: backup
+        emptyDir:
+          sizeLimit: 5Gi
+
     ## MongoDB(&reg;) Pod Disruption Budget configuration
     ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
     ##

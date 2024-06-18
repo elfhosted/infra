@@ -454,7 +454,7 @@ spec:
       # How long to wait on persistent volumes and namespaces to terminate during a restore before timing out. Default: 10m
       terminatingResourceTimeout:
       # Bool flag to configure Velero server to move data by default for all snapshots supporting data movement. Default: false
-      defaultSnapshotMoveData: true
+      defaultSnapshotMoveData: false
       # Comma separated list of velero feature flags. default: empty
       # features: EnableCSI
       features: EnableCSI
@@ -616,7 +616,7 @@ spec:
     # Backup schedules to create.
     # Eg:
     schedules:
-      daily:
+      daily-local-snap:
         disabled: false
         schedule: "8 0 * * *" # 8AM UTC = 2h before main window
         useOwnerReferencesInBackup: false
@@ -624,7 +624,8 @@ spec:
           ttl: "240h"
           storageLocation: b2
           includedNamespaces:  # [] # cover all namespaces
-          - cert-manager # placeholder, no PVCs
+          - mediafusion
+          - aa-funkypenguin
 
     # Velero ConfigMaps.
     # Eg:

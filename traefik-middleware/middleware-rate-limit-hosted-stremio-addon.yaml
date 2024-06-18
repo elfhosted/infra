@@ -5,4 +5,4 @@ metadata:
   namespace: traefik
 spec:
   inFlightReq:
-    amount: 1 # Allow one inflight request at-a-time, no other rate-limits
+    amount: 10 # Allow 10 inflight request at-a-time, no other rate-limits

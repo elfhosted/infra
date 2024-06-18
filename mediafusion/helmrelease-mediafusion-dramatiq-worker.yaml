@@ -16,8 +16,8 @@ spec:
   timeout: 5m
   releaseName: mediafusion-dramatiq-worker
   values:
-    global:
-      nameOverride: mediafusion
+    # global:
+    #   nameOverride: mediafusion
     image:
       repository: ghcr.io/elfhosted/mediafusion
       tag: 3.9.7@sha256:a7ac056cc830689300c6a2f86709e924af1f244e3369b00fe58e84638cca1a51
