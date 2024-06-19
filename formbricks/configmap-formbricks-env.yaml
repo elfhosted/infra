@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: formbricks-env
+  namespace: formbricks
+data:
+  WEBAPP_URL: https://feedback.${dns_domain}
+  MAIL_FROM: formbricks@mg.elfhosted.com
+  SMTP_HOST: smtp.eu.mailgun.org
+  SMTP_PORT: 587
+  SMTP_USER: formbricks@mg.elfhosted.com
+  UPLOADS_DIR: /data
+  PRIVACY_URL: https://elfhosted.com/legal/privacy-policy/
+  TERMS_URL: https://elfhosted.com/legal/terms-of-service/

@@ -49,6 +49,7 @@ elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
 # elf30        ansible_host=10.0.42.50 cluster_nic=eno1.4000 # 128GB
 
 ranger01     ansible_host=10.0.42.111 cluster_nic=eno1.4000 # 128GB
+ranger02     ansible_host=10.0.42.112 cluster_nic=eno1.4000 # 128GB
 
 [k3s_observability]
 # gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
@@ -141,6 +142,7 @@ giant03
 
 [k3s_rangers]
 ranger01
+ranger02
 
 [k3s_elves]
 elf01
