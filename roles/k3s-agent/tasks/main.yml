@@ -87,6 +87,14 @@
   when: "inventory_hostname in groups['k3s_giants']"  
   delegate_to: "{{ groups['controllers'][0] }}"
 
+- name: label dedicated workers # 25% shared between tenants
+  become: no
+  shell: |
+    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/dedicated=true --overwrite
+    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/dedicated=true:NoSchedule  --overwrite
+  when: "inventory_hostname in groups['k3s_rangers']"  
+  delegate_to: "{{ groups['controllers'][0] }}"  
+
 - name: label observability workers # no GPU, no heavy workloads
   become: no
   shell: |

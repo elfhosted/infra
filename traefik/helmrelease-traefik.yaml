@@ -996,6 +996,8 @@ spec:
     tolerations:
     - key: node-role.elfhosted.com/download-only
       operator: Exists
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists      
 
     # -- You can use topology spread constraints to control
     # how Pods are spread across your cluster among failure-domains.

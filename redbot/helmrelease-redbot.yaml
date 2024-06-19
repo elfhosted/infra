@@ -44,6 +44,19 @@ spec:
         configmap.reloader.stakater.com/reload: "redbot-env"
         secret.reloader.stakater.com/reload: "redbot-env"
     persistence:
+      tmp: 
+        enabled: true
+        type: custom
+        mountPath: /tmp
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi    
       config:
         enabled: true
         type: custom
