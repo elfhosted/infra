@@ -5,7 +5,7 @@
     template:
       src: installimage-elf.conf.j2
       dest: /tmp/installimage.conf
-    when: "inventory_hostname in groups['k3s_agents']"  
+    when: "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_rangers']"  
 
   - name: Copy installimage template to gnome in rescue mode
     template:
@@ -59,6 +59,9 @@
       upgrade: yes
       update_cache: yes
       cache_valid_time: 86400 #One day
+
+  - name: Install HWE kernel
+    apt: pkg=linux-generic-hwe-22.04
 
   - name: Reboot target, wait for it to come back
     reboot:

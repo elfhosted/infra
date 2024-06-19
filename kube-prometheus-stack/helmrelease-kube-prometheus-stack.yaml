@@ -2207,6 +2207,8 @@ spec:
         operator: Exists
       - key: node-role.${dns_domain}/download
         operator: Exists
+      - key: node-role.${dns_domain}/dedicated
+        operator: Exists        
     
       extraHostVolumeMounts:
       - name: text-file-collector

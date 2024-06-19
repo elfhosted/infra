@@ -17,6 +17,9 @@ spec:
     - prepare
     - k3s-server # wait for the k3s-server plan to apply
   tolerations:
+  - key: "node-role.${dns_domain}/dedicated"
+    operator: "Exists"
+    effect: "NoSchedule"
   - key: "node-role.${dns_domain}/download-only"
     operator: "Exists"
     effect: "NoSchedule"

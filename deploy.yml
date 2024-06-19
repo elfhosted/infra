@@ -28,14 +28,14 @@
   - { import_role: { name: backup }, tags: [ backup ] }
 
 
-- hosts: k3s_dwarves,k3s_agents,k3s_observability
+- hosts: k3s_dwarves,k3s_agents,k3s_observability,k3s_rangers
   gather_facts: no
   become: yes
 
   tasks: 
   - { import_role: { name: node }, tags: [ node ] }
   - { import_role: { name: k3s-agent }, tags: [ k3s-agent ] }
-  - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
+  # - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
 
 - hosts: k3s_dwarves
   gather_facts: no
