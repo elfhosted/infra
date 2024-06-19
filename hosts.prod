@@ -7,6 +7,7 @@ k3s_observability
 k3s_giants  # 10Ge download nodes
 k3s_goblins # 10Ge ceph nodes
 k3s_elves   # customer workloads
+k3s_rangers # dedicated customer nodes
 controllers
 egress_gateways
 
@@ -47,6 +48,7 @@ elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
 # elf29        ansible_host=10.0.42.49 cluster_nic=eno1.4000 # 128GB
 # elf30        ansible_host=10.0.42.50 cluster_nic=eno1.4000 # 128GB
 
+ranger01     ansible_host=10.0.42.111 cluster_nic=eno1.4000 # 128GB
 
 [k3s_observability]
 # gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
@@ -103,6 +105,16 @@ goblin04-public.elfhosted.com
 goblin05-public.elfhosted.com
 goblin06-public.elfhosted.com
 
+ranger01-public.elfhosted.com
+ranger02-public.elfhosted.com
+ranger03-public.elfhosted.com
+ranger04-public.elfhosted.com
+ranger05-public.elfhosted.com
+ranger06-public.elfhosted.com
+ranger07-public.elfhosted.com
+ranger08-public.elfhosted.com
+ranger09-public.elfhosted.com
+ranger10-public.elfhosted.com
 
 
 [k3s_dwarves]
@@ -126,6 +138,9 @@ goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 giant01
 giant02
 giant03
+
+[k3s_rangers]
+ranger01
 
 [k3s_elves]
 elf01

@@ -180,12 +180,12 @@ spec:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
           operator: Exists
-        - key: node-role.${dns_domain}/download
-          effect: NoSchedule
-          operator: Exists  
         - key: node-role.${dns_domain}/download-only
           effect: NoSchedule
-          operator: Exists      
+          operator: Exists   
+        - key: node-role.${dns_domain}/dedicated
+          effect: NoSchedule
+          operator: Exists                
         - key: node-role.${dns_domain}/observability
           effect: NoSchedule
           operator: Exists                                 
@@ -315,7 +315,7 @@ spec:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
           operator: Exists
-        - key: node-role.${dns_domain}/download
+        - key: node-role.${dns_domain}/dedicated
           effect: NoSchedule
           operator: Exists      
         - key: node-role.${dns_domain}/download-only
@@ -323,7 +323,8 @@ spec:
           operator: Exists       
         - key: node-role.${dns_domain}/observability
           effect: NoSchedule
-          operator: Exists                                 
+          operator: Exists   
+                                        
 
       # node.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
