@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: jackett
     image:
-      repository: ghcr.io/geek-cookbook/jackett
+      repository: ghcr.io/elfhosted/jackett
       tag: 0.21.2831
     securityContext:
       seccompProfile:
