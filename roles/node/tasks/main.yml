@@ -4,6 +4,7 @@
     update_cache: true
   vars:
     packages:
+    - ufw
     - unattended-upgrades
     - tuned
     - iperf3
@@ -14,11 +15,7 @@
     - intel-gpu-tools
     - vnstat
     - jnettop
-
-# - name: remove hwe kernel (doesn't play nice)
-#   apt:
-#     name: linux-generic-hwe-22.04
-#     state: absent
+    - linux-generic-hwe-22.04
 
 - name: install yq via snap
   snap:
