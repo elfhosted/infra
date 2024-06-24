@@ -2523,12 +2523,12 @@ spec:
 
       # -- startup offers way to customize startup nodeinit script (pre and post position)
       startup:
-      preScript: ""
-      postScript: ""
+        preScript: ""
+        postScript: ""
       # -- prestop offers way to customize prestop nodeinit script (pre and post position)
       prestop:
-      preScript: ""
-      postScript: ""
+        preScript: ""
+        postScript: ""
 
     preflight:
       # -- Enable Cilium pre-flight resources (required for upgrade)
