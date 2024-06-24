@@ -13,6 +13,8 @@ data:
   k3s_server_endpoint_1: 10.0.42.11
   k3s_server_endpoint_2: 10.0.42.12
   k3s_server_endpoint_3: 10.0.42.13
+  k8s_ha_api_ip: 10.0.40.4
+  k8s_ha_api_port: 6443
   prometheus_retentionsize: '500GB'
   prometheus_retention: "40d"   # enough to chart a month's progress with some headroom
   prometheus_pvc_storage: 500Gi
