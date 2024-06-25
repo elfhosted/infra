@@ -92,8 +92,8 @@ spec:
         memory: 512Mi
         ephemeral-storage: 50Mi
       limits:
-        cpu: 1
-        memory: 1Gi
+        cpu: 4
+        memory: 2Gi
         ephemeral-storage: 100Mi        
     ingress:
       main:
@@ -122,8 +122,11 @@ spec:
           set -x
           set -e
 
-          # Copy the baked-in DB into the volume
-          cp /app/db/* /db/   
+          # the volume is empty
+          if [ -z "$(ls -A /db)" ]; then
+            # Copy the baked-in DB into the volume
+            cp /app/db/* /db/   
+          fi
         volumeMounts:        
         - mountPath: /db
           name: db
