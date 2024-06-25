@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   interval: 24h
   timeout: 5m
-  releaseName: fnky-shlink
+  releaseName: shlink
   values:
     #
     # IMPORTANT NOTE
