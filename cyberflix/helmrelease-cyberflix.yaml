@@ -126,5 +126,5 @@ spec:
           cp /app/db/* /db/   
         volumeMounts:        
         - mountPath: /db
-          name: config
+          name: db
        
