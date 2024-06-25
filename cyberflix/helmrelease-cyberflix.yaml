@@ -104,12 +104,13 @@ spec:
         ports:
           http:
             port: 8000
-    startupProbe:
-      httpGet:
-        path: /healthz
-        port: liveness-port
-      failureThreshold: 30
-      periodSeconds: 10
+    probes:
+      startupProbe:
+        httpGet:
+          path: /healthz
+          port: liveness-port
+        failureThreshold: 30
+        periodSeconds: 10
     initContainers:
       setup:
         image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:19b2e86d12bf5526082d3e687d6d2af8ca18eebe8498955c56933e5179eda091
