@@ -4,5 +4,7 @@ metadata:
   name: stremify-env
   namespace: stremify
 data:
-  scrape_english: "true"
+  scrape_built_in: "true"
+  cache: "true"
+  disable_same_ip_embeds: "true"
   foreign_provider_languages: "de,it,fr,es"
