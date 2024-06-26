@@ -197,6 +197,25 @@
     src: logrotate.conf
     dest: /etc/logrotate.conf
 
+- name: ensure resolveconf systemd directory exists
+  file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+
+- name: add cluster DNS to /etc/systemd/resolved.conf.d/dns_servers.conf
+  copy:
+    dest: /etc/systemd/resolved.conf.d/dns_servers.conf
+    content: |
+      [Resolve]
+      DNS=10.43.0.10
+      Domains=svc.cluster.local
+
+- name: restart systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: restarted
+    enabled: yes
+
 - name: restart rsyslog
   systemd:
     name: rsyslog

@@ -1,0 +1,8 @@
+- hosts: k3s_servers
+  roles:
+  - role: artis3n.tailscale
+    vars:
+      # Example pulling the API key from the env vars on the host running Ansible
+      tailscale_authkey: "{{ tailscale_key }}"
+  tasks:
+  - { import_role: { name: node }, tags: [ node ] }

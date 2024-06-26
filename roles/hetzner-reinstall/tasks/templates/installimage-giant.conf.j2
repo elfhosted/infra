@@ -1,0 +1,19 @@
+DRIVE1 /dev/sda
+DRIVE2 /dev/sdb
+
+SWRAID 1
+
+SWRAIDLEVEL 0
+
+HOSTNAME {{ inventory_hostname_short}}
+
+
+USE_KERNEL_MODE_SETTING yes
+
+PART /boot  ext3     1024M
+PART lvm    vg0       all
+
+LV vg0   root   /        ext4         64G
+LV vg0   var-lib   /var/lib    xfs          500G
+
+IMAGE /root/.oldroot/nfs/install/../images/Ubuntu-2204-jammy-amd64-base.tar.gz

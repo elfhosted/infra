@@ -1,6 +1,3 @@
----
-
-# If we have any proxmox hosts, then use them to create the necessary VMs
 - hosts: proxmox_servers:proxmox_vms
   gather_facts: no # because the nodes aren't up yet
 
@@ -62,3 +59,4 @@
   - { import_role: { name: grafana-dashboards }, tags: [ grafana-dashboards ] }
   - { import_role: { name: authentik }, tags: [ authentik ] }
   - { import_role: { name: tetragon }, tags: [ tetragon ] }
+

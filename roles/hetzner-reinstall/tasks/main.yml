@@ -19,6 +19,12 @@
       dest: /tmp/installimage.conf
     when: "inventory_hostname in groups['k3s_servers']"  
 
+  - name: Copy installimage template to giant in rescue mode
+    template:
+      src: installimage-giant.conf.j2
+      dest: /tmp/installimage.conf
+    when: "inventory_hostname in groups['k3s_giants']"  
+
   - name: Copy installimage template to node in rescue mode
     template:
       src: installimage-osd.conf.j2
@@ -63,13 +69,13 @@
   - name: Install HWE kernel
     apt: pkg=linux-generic-hwe-22.04
 
-  - name: Reboot target, wait for it to come back
-    reboot:
-      reboot_timeout: 300 # wait up to 5 min
+  # - name: Reboot target, wait for it to come back
+  #   reboot:
+  #     reboot_timeout: 300 # wait up to 5 min
 
-  - name: Confirm node is available
-    wait_for_connection: 
-      delay: 60
+  # - name: Confirm node is available
+  #   wait_for_connection: 
+  #     delay: 60
 
 
 # - name: Set server's name to foo.example.com
