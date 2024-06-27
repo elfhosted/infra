@@ -60,6 +60,26 @@
   become: yes
   when: "inventory_hostname in groups['k3s_dwarves']"
 
+- name: install k3s on giants (tainted)
+  environment:
+    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
+    K3S_TOKEN: "{{ k3s_token }}"
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    INSTALL_K3S_EXEC="agent \
+      --flannel-iface={{ cluster_nic }} \
+      --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
+      --prefer-bundled-bin \
+      --node-taint node-role.{{ dns_domain }}/download-only=true:NoSchedule \
+      --node-label node-role.{{ dns_domain }}/download-only=true" \
+    sh -
+  # args:
+    # creates: /usr/local/bin/k3s
+  register: workers_install_result
+  become: yes
+  when: "inventory_hostname in groups['k3s_giants']"
+
 - name: install k3s on gnomes (tainted)
   environment:
     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
@@ -79,13 +99,13 @@
   become: yes
   when: "inventory_hostname in groups['k3s_observability']"  
 
-- name: label download-only workers # free ingress traffic, metered egress
-  become: no
-  shell: |
-    kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true --overwrite
-    kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true:NoSchedule  --overwrite
-  when: "inventory_hostname in groups['k3s_giants']"  
-  delegate_to: "{{ groups['controllers'][0] }}"
+# - name: label download-only workers # free ingress traffic, metered egress
+#   become: no
+#   shell: |
+#     kubectl label node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true --overwrite
+#     kubectl taint node {{ inventory_hostname_short }} node-role.{{ dns_domain }}/download-only=true:NoSchedule  --overwrite
+#   when: "inventory_hostname in groups['k3s_giants']"  
+#   delegate_to: "{{ groups['controllers'][0] }}"
 
 - name: label dedicated workers # 25% shared between tenants
   become: no

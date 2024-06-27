@@ -148,7 +148,7 @@
     thinpool: thinpool
     size: 100%FREE  
   when: 
-  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers'] or inventory_hostname in groups['k3s_observability'] or inventory_hostname in groups['k3s_rangers']"
+  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers'] or inventory_hostname in groups['k3s_observability'] or inventory_hostname in groups['k3s_rangers'] or inventory_hostname in groups['k3s_giants']"
   ignore_errors: true # so we can run it multiple times
 
 - name: copy scripts
@@ -185,7 +185,7 @@
     hour: "*"
     job: "/usr/local/bin/kill-unwanted-transcodes.sh"
   when:
-  - "inventory_hostname in groups['k3s_elves']"    
+  - "inventory_hostname in groups['k3s_elves'] or inventory_hostname in groups['k3s_giants']"
 
 - name: ignore irrelevant logs via rsyslog
   copy:
