@@ -15,7 +15,7 @@ spec:
 
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 2Gi
+    size: 5Gi
 
   resources:
     requests:
@@ -41,17 +41,18 @@ spec:
       name: cnpg-postgres-credentials
 
   bootstrap:
-    # initdb:
-    #   database: grafana
-    #   owner: grafana
-    #   secret:
-    #     name: app-secret
-    recovery:
-      source: clusterBackup    
-
-  externalClusters:
-    - name: clusterBackup
-      barmanObjectStore:
+    initdb:
+      database: grafana
+      owner: grafana
+      secret:
+        name: app-secret
+            
+  backup:
+      # Volume snapshot backups
+      volumeSnapshot:
+        className: ceph-block
+      # WAL archive
+      barmanObjectStore:        
         destinationPath: s3://cnpg/
         endpointURL: "http://minio.minio:9000"
         s3Credentials:
@@ -62,23 +63,5 @@ spec:
             name: cnpg-minio-credentials
             key: ACCESS_SECRET_KEY
         wal:
-          maxParallel: 8      
-            
-  # backup:
-  #     # Volume snapshot backups
-  #     volumeSnapshot:
-  #       className: ceph-block
-  #     # WAL archive
-  #     barmanObjectStore:        
-  #       destinationPath: s3://cnpg/
-  #       endpointURL: "http://minio.minio:9000"
-  #       s3Credentials:
-  #         accessKeyId:
-  #           name: cnpg-minio-credentials
-  #           key: ACCESS_KEY_ID
-  #         secretAccessKey:
-  #           name: cnpg-minio-credentials
-  #           key: ACCESS_SECRET_KEY
-  #       wal:
-  #         compression: gzip
-  #         maxParallel: 2      
+          compression: gzip
+          maxParallel: 2      
