@@ -110,4 +110,7 @@ patches:
         path: /spec/template/spec/tolerations
         value:                      
           - key: node-role.kubernetes.io/dedicated
-            operator: Exists             
+            operator: Exists
+    target:
+      kind: Deployment
+      name: "(source-controller|kustomize-controller|helm-controller)"            
