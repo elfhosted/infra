@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: rolling@sha256:6de715b93df17823857a8360d1c9285086213acbc83c4e464523ba942ddeb603
+      tag: rolling@sha256:6e13c31d027d6efe0625b8b4ed11216b51c5e898f0c469fd96d41aabc08b267a
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -49,7 +49,15 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 8000              
+            port: 8000   
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: comet                      
     addons:
       vpn:
         enabled: true # in case we ever need it

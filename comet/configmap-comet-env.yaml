@@ -13,7 +13,7 @@ data:
   FASTAPI_WORKERS: "1"
   CUSTOM_HEADER_HTML: |
 
-    This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of https://github.com/g0ldyy/comet
+    This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of <A HREF="https://github.com/g0ldyy/comet">Comet</A>
     , for the Stremio Community - Enjoy! <A HREF="https://status.elfhosted.com/history/stremio-comet-addon"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgeek-cookbook%2Felfhosted-upptime%2Fmaster%2Fapi%2Fstremio-comet-addon%2Fuptime.json" alt="Uptime Badge"></A>
     <br/><br/><A HREF="https://elfhosted.com">ElfHosted</A> is an <A HREF="https://elfhosted.com/open/">open-source</A> PaaS built and run by <A HREF="https://geek-cookbook.funkypenguin.co.nz">geeks</A>, which self-hosts <A HREF="https://elfhosted.com/guides/media/">your favorite streaming apps</A> for you automatically and easily.
     <br/><br/>Why use <A HREF="https://elfhosted.com/stremio-addons/">ElfHosted Stremio addons</A>?
