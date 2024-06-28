@@ -26,3 +26,12 @@ spec:
           rules:
             dns:
               - matchPattern: "*"
+
+    # Allow prowlarr to talk to flaresolverr
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: flaresolverr
+          k8s:io.kubernetes.pod.namespace: flaresolverr  
+      toPorts:
+        - ports:
+            - port: "9117"

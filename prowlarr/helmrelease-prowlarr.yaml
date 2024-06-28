@@ -113,7 +113,7 @@ spec:
         args:
           - >
             set -x;
-            until curl -o /config/init-container.sh https://raw.githubusercontent.com/mhdzumair/prowlarr/main/deployment/k8s/init-container.sh; do
+            until curl -o /config/init-container.sh https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/deployment/k8s/init-container.sh; do
               echo "Failed to download script file. Retrying...";
               sleep 3;
             done;
@@ -129,14 +129,14 @@ spec:
                 name: prowlarr-env
                 key: PROWLARR_API_KEY   
           - name: FLARESOLVERR_HOST
-            value: "http://flaresolverr:8191/"                             
+            value: "http://flaresolverr.flaresolverr:8191/"                             
     additionalContainers:
       setup-indexers: 
         image: apteno/alpine-jq:latest
         command: ["/bin/sh", "-c"]
         args:
           - >
-            until curl -o /config/sidecar-config.sh https://raw.githubusercontent.com/mhdzumair/prowlarr/main/deployment/k8s/sidecar-config.sh; do
+            until curl -o /config/sidecar-config.sh https://raw.githubusercontent.com/mhdzumair/MediaFusion/main/deployment/k8s/sidecar-config.sh; do
               echo "Failed to download script file. Retrying...";
               sleep 3;
             done;
@@ -152,7 +152,7 @@ spec:
                 name: prowlarr-env
                 key: PROWLARR_API_KEY
           - name: FLARESOLVERR_HOST
-            value: "http://flaresolverr:8191/"                
+            value: "http://flaresolverr.flaresolverr:8191/"                
     addons:
       vpn:
         enabled: true # in case we ever need it
