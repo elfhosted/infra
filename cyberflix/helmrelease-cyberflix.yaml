@@ -38,7 +38,7 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 1
+      replicas: 4
       strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
@@ -68,13 +68,17 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/node/app/.nitro
-      db:
+      db: 
         enabled: true
-        type: custom
-        mountPath: /app/db/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: cyberflix           
+        type: emptyDir
+        mountPath: /app/db        
+      # db:
+      #   enabled: true
+      #   type: custom
+      #   mountPath: /app/db/
+      #   volumeSpec:
+      #     persistentVolumeClaim:
+      #       claimName: cyberflix           
     envFrom:
     - secretRef:
         name: cyberflix-env 
@@ -92,9 +96,9 @@ spec:
         memory: 512Mi
         ephemeral-storage: 50Mi
       limits:
-        cpu: 4
+        cpu: 4 # never gets here because it's single-threaded
         memory: 2Gi
-        ephemeral-storage: 100Mi        
+        ephemeral-storage: 1Gi        
     ingress:
       main:
         enabled: false
