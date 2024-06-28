@@ -104,12 +104,12 @@ patches:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
               - matchExpressions:
-                - key: node-role.kubernetes.io/dedicated
+                - key: node-role.elfhosted.com/dedicated
                   operator: Exists     
       - op: add
         path: /spec/template/spec/tolerations
         value:                      
-          - key: node-role.kubernetes.io/dedicated
+          - key: node-role.elfhosted.com/dedicated
             operator: Exists
     target:
       kind: Deployment
