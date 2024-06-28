@@ -17,7 +17,7 @@ spec:
               sizeLimit: 10Gi
           containers:
           - name: "metadata"
-            image: ghcr.io/elfhosted/knightcrawler-metadata:v2.0.26@sha256:bce148b1a3ac37db014f1bd580260a2ed01a03168ed808da84334a30d0837d80
+            image: ghcr.io/elfhosted/knightcrawler-metadata:v2.0.26@sha256:d1c158667156b0d57c66ded31a943f281d1dba39f6987c889d8d761a0eb855ad
             envFrom:
             - secretRef:
                 name: knightcrawler-env 
