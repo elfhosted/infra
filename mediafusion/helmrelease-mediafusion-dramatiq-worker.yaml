@@ -20,7 +20,7 @@ spec:
     #   nameOverride: mediafusion
     image:
       repository: ghcr.io/elfhosted/mediafusion
-      tag: 3.9.7@sha256:fa3f1ccad908c082591dab7e10d95f59a6c247ea1c6ca278beb68e222368b65f
+      tag: 3.9.7@sha256:da0a299f93b9f586c519e798dec68b6d9d359105f8708372f08e168d912ca43b
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1"]
     securityContext:
       seccompProfile:
