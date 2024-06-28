@@ -20,7 +20,7 @@ spec:
       nameOverride: knightcrawler-addon
     image:
       repository: ghcr.io/elfhosted/knightcrawler-addon
-      tag: v2.0.26@sha256:9c65efc83afb89d0d8952a40ae2596bf7cd6004e2f4caa664b6b69676a0490fc
+      tag: v2.0.26@sha256:f189740336da024c411c74402387cf39d9903191a9fec38cbf0e12e6f6d84d40
     securityContext:
       seccompProfile:
         type: RuntimeDefault
