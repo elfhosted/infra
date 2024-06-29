@@ -52,7 +52,22 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 8191
+            port: 3000
+    probeSelector:
+      liveness:
+        # -- Enable the liveness probe
+        enabled: true
+        custom: true
+        spec:
+          exec:
+            command:
+              - sh
+              - -c
+              - 'curl http://127.0.0.1:3000/json/version'
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          failureThreshold: 5
+          timeoutSeconds: 10
     persistence:
       tmp: 
         enabled: true
