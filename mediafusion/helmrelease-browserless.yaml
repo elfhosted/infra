@@ -46,7 +46,10 @@ spec:
       replicas: 1
     ingress:
       main:
-        enabled: false 
+        enabled: false
+    env:
+      - name: TIMEOUT
+        value: "'-1'"
     service:
       main:
         enabled: true # necessary for probes
