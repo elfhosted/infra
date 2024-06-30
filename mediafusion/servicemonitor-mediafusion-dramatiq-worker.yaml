@@ -10,7 +10,7 @@ spec:
       path: /metrics
   namespaceSelector:
     matchNames:
-      - mediafusion
+      - notmediafusion
   selector:
     matchLabels:
       app.kubernetes.io/name: mediafusion-dramatiq-worker
