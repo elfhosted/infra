@@ -5,7 +5,7 @@ metadata:
   namespace: mediafusion
 data:
   HOST_URL: https://mediafusion.${dns_domain}
-  ENABLE_RATE_LIMIT: "false"
+  ENABLE_RATE_LIMIT: "true" # until we understand how to make riven play nice
   PROWLARR_URL: http://prowlarr:9696
   IS_SCRAP_FROM_TORRENTIO: "true"
   TORRENTIO_URL: http://knightcrawler-addon.knightcrawler:7000
