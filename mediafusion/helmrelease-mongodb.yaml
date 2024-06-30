@@ -670,8 +670,9 @@ spec:
     ## @param startupProbe.failureThreshold Failure threshold for startupProbe
     ## @param startupProbe.successThreshold Success threshold for startupProbe
     ##
+    # up to 10 min startup probe
     startupProbe:
-      enabled: false
+      enabled: true
       initialDelaySeconds: 5
       periodSeconds: 20
       timeoutSeconds: 10
