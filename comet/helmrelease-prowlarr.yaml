@@ -129,7 +129,7 @@ spec:
                 name: prowlarr-env
                 key: PROWLARR_API_KEY   
           - name: FLARESOLVERR_HOST
-            value: "http://flaresolverr.flaresolverr:8191/"                             
+            value: "http://flaresolverr:8191/"                             
     additionalContainers:
       setup-indexers: 
         image: apteno/alpine-jq:latest
@@ -152,7 +152,7 @@ spec:
                 name: prowlarr-env
                 key: PROWLARR_API_KEY
           - name: FLARESOLVERR_HOST
-            value: "http://flaresolverr.flaresolverr:8191/"                
+            value: "http://flaresolverr:8191/"                
     addons:
       vpn:
         enabled: true # in case we ever need it
