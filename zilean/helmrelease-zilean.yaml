@@ -1,0 +1,75 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zilean
+  namespace: zilean
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: zilean
+  values:
+    global:
+      nameOverride: zilean
+    image:
+      repository: ghcr.io/elfhosted/zilean
+      tag: rolling@sha256:02794d8d3e5f121a2fa3650028a5d62426792b5407d683eb138eaee7c02ff4df
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - zilean
+        topologyKey: "kubernetes.io/hostname"      
+    automountServiceAccountToken: false
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+    ingress:
+      main:
+        enabled: false 
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8181   
+    persistence:
+      data: 
+        enabled: true
+        type: custom
+        mountPath: /app/data
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              metadata:
+                labels:
+                  velero.io/exclude-from-backup: "true"              
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi   
