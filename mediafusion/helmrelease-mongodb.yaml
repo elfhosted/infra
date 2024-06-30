@@ -617,18 +617,13 @@ spec:
     ## @param resources.requests The requested resources for MongoDB(&reg;) containers
     ##
     resources:
-      ## Example:
-      ## limits:
-      ##    cpu: 100m
-      ##    memory: 128Mi
-      ##
-      limits: {}
-      ## Examples:
-      ## requests:
-      ##    cpu: 100m
-      ##    memory: 128Mi
-      ##
-      requests: {}
+      limits:
+         cpu: 2
+         memory: 8Gi
+      requests:
+         cpu: 1
+         memory: 6Gi
+
     ## @param containerPorts.mongodb MongoDB(&reg;) container port
     ##
     containerPorts:
