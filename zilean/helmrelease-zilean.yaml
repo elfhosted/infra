@@ -31,16 +31,16 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: app.kubernetes.io/name
-            operator: In
-            values:
-            - zilean
-        topologyKey: "kubernetes.io/hostname"      
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - zilean
+          topologyKey: "kubernetes.io/hostname"      
     automountServiceAccountToken: false
     controller:
       replicas: 2
