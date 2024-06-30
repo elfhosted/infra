@@ -8,7 +8,7 @@ spec:
   path: fsn/bootstrap
   dependsOn:
   - name: sealed-secrets
-  prune: true # remove any elements later removed from the above path
+  prune: false # remove any elements later removed from the above path
   timeout: 10m # if not set, this defaults to interval duration, which is 1h
   sourceRef:
     kind: GitRepository

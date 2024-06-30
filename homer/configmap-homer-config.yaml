@@ -140,7 +140,7 @@ data:
             tag: "github"
             # # Optional tagstyle
             # tagstyle: "is-success"
-            url: "https://github.com/geek-cookbook/elfhosted-tenants"          
+            url: "https://github.com/elfhosted/tenants"          
           - name: "Flux"
             subtitle: "GitOps Deployments"
             icon: "fab fa-github"
