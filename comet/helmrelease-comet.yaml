@@ -55,7 +55,7 @@ spec:
       config:
         enabled: true
         type: custom
-        mountPath: /config
+        mountPath: /app/data
         volumeSpec:
           persistentVolumeClaim:
             claimName: comet    
