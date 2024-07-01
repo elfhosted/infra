@@ -63,29 +63,22 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /.cache                              
-    addons:
-      vpn:
-        enabled: false # in case we ever need it
-        gluetun:
-          image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: comet-vpn
-        env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"       
-          VPNDNS: "0" 
+    additionalContainers:
+      warp:
+        image: ghcr.io/elfhosted/warp:rolling@sha256:9b7e2e5da5b1caab6bb1a4e450fc1a2cc7c99f162325901656d5bc9104439eb6
         securityContext:
-          runAsUser: 0
+          runAsUser: 1000
+          runAsGroup: 1000
+          privileged: false
           capabilities:
             add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config                   
+            - NET_ADMIN    
+          sysctls:
+          - name: net.ipv6.conf.all.disable_ipv6
+            value: "0"
+          - name: net.ipv4.conf.all.src_valid_mark
+            value: "1"
+        volumeMounts:
+        - mountPath: /data
+          subPath: warp
+          name: config      
