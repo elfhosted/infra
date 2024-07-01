@@ -6,7 +6,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: kubernetes-dashboard
-  namespace: aa-eruiluvatar
+  namespace: aa-bamb0uu
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
