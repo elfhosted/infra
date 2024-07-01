@@ -4,9 +4,9 @@ metadata:
   name: comet-env
   namespace: comet
 data:
-  INDEXER_MANAGER_TYPE: prowlarr
-  INDEXER_MANAGER_URL: http://prowlarr:9696
-  INDEXER_MANAGER_INDEXERS: '["EZTV","The Pirate Bay","LimeTorrents","Badass Torrents","YourBittorrent"]'
+  INDEXER_MANAGER_TYPE: jackett
+  INDEXER_MANAGER_URL: http://jackett:9117
+  INDEXER_MANAGER_INDEXERS: '["Badass Torrents","BitSearch","EZTV","kickasstorrents.ws","LimeTorrents","The Pirate Bay","TheRARBG","TorrentGalaxy","YourBittorrent","YTS"]'
   GET_TORRENT_TIMEOUT: "5"
   INDEXER_MANAGER_TIMEOUT: "30"
   FASTAPI_WORKERS: "1"
