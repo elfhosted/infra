@@ -6,7 +6,7 @@ metadata:
 data:
   INDEXER_MANAGER_TYPE: prowlarr
   INDEXER_MANAGER_URL: http://prowlarr:9696
-  INDEXER_MANAGER_INDEXERS: '["TheRARBG","iDope","1337x"]'
+  INDEXER_MANAGER_INDEXERS: '["EZTV","The Pirate Bay","LimeTorrents","Badass Torrents","YourBittorrent"]'
   GET_TORRENT_TIMEOUT: "5"
   INDEXER_MANAGER_TIMEOUT: "30"
   FASTAPI_WORKERS: "1"
@@ -19,7 +19,7 @@ data:
     </BR><A HREF="https://elfhosted.com">ElfHosted</A> is an <A HREF="https://elfhosted.com/open/">open-source</A> PaaS built and run by a <A HREF="https://discord.elfhosted.com">friendly community of geeks</A>, which self-hosts <A HREF="https://elfhosted.com/guides/media/">your favorite streaming apps</A> for you, automatically and easily. 
     </P>
     <P>
-      Individual, hosted premium <A HREF="https://store.elfhosted.com/product/comet-jackett-bundle">Comet+Jackett</A> / <A HREF="https://store.elfhosted.com/product/comet-prowlarr-bundle">Comet+Prowlarr</A> instances are available (<I>say, if you need extra indexers, or a higher rate-limit</I>) from $0.50/day, with <A HREF="https://elfhosted.com/how-to/spend-elfbuckz/">$10 free credit</A> for <A HREF="https://store.elfhosted.com/my-account/">new accounts</A>.
+      Individual, hosted premium <A HREF="https://store.elfhosted.com/product/comet">Comet</A>, <A HREF="https://store.elfhosted.com/product/comet-jackett-bundle">Comet+Jackett</A> / <A HREF="https://store.elfhosted.com/product/comet-prowlarr-bundle">Comet+Prowlarr</A> instances are available (<I>say, if you need extra indexers, or a higher rate-limit</I>) from $0.50/day, with <A HREF="https://elfhosted.com/how-to/spend-elfbuckz/">$10 free credit</A> for <A HREF="https://store.elfhosted.com/my-account/">new accounts</A>.
     </P>
     <h3>Why use <A HREF="https://elfhosted.com/stremio-addons/">ElfHosted "Premium" Stremio addons</A>?</h3>
               <p style="text-align: justify;">
