@@ -24,7 +24,7 @@ spec:
         secret.reloader.stakater.com/reload: "knightcrawler-env"
     image:
       repository: ghcr.io/elfhosted/knightcrawler-producer
-      tag: v2.0.26@sha256:0c172d710bd6d3f273088247bed9af81b490419605fe8ded79b9cf51103b49a3
+      tag: v2.0.27@sha256:00d989a7f18bcdc6418917eb78283796095154ebb8aec9746db982171de7cc9f
     securityContext:
       seccompProfile:
         type: RuntimeDefault
