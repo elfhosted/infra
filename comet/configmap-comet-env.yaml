@@ -4,6 +4,7 @@ metadata:
   name: comet-env
   namespace: comet
 data:
+  ZILEAN_URL: http://zilean/zilean:8181
   INDEXER_MANAGER_TYPE: jackett
   INDEXER_MANAGER_URL: http://jackett:9117
   INDEXER_MANAGER_INDEXERS: '["badasstorrents","bitsearch","eztv","kickasstorrents-ws","limetorrents","thepiratebay","therarbg","torrentgalaxy","yourbittorrent","yts"]'
