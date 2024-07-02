@@ -5,7 +5,7 @@ metadata:
   namespace: plex-token-generator
 spec:
   routes:
-    - match: Host(`speed.${dns_domain}`)
+    - match: Host(`plex-token-generator.${dns_domain}`)
       kind: Rule
       services:
         - name: plex-token-generator
