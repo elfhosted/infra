@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: plex-token-generator
     image:
-      repository: elfhosted/plex-token-generator
+      repository: ghcr.io/elfhosted/plex-token-generator
       tag: rolling@sha256:ed2caf4c3f84bb74d30cd31c2e4d9aea56426702a9b7987438932d574d6df0e5
     securityContext:
       seccompProfile:
