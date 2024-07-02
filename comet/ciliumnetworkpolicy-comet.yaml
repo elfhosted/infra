@@ -30,11 +30,11 @@ spec:
     # Allow comet to talk to prowlarr
     - toEndpoints:
       - matchLabels:
-          app.kubernetes.io/name: prowlarr
-          k8s:io.kubernetes.pod.namespace: prowlarr  
+          app.kubernetes.io/name: zilean
+          k8s:io.kubernetes.pod.namespace: zilean  
       toPorts:
         - ports:
-            - port: "9696"
+            - port: "8181"
 
     # Allow to Kube DNS
     - toEndpoints:
