@@ -30,17 +30,17 @@ elf10        ansible_host=10.0.42.30 cluster_nic=eno1.4000 # 128GB
 elf11        ansible_host=10.0.42.31 cluster_nic=eno1.4000 # 128GB
 elf12        ansible_host=10.0.42.32 cluster_nic=eno1.4000 # 128GB
 elf13        ansible_host=10.0.42.33 cluster_nic=eno1.4000 # 128GB
-elf14        ansible_host=10.0.42.34 cluster_nic=eno1.4000 # 128GB
-elf15        ansible_host=10.0.42.35 cluster_nic=eno1.4000 # 128GB
-elf16        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
-elf17        ansible_host=10.0.42.37 cluster_nic=eno1.4000 # 128GB
-elf18        ansible_host=10.0.42.38 cluster_nic=eno1.4000 # 128GB
-elf19        ansible_host=10.0.42.39 cluster_nic=eno1.4000 # 128GB
-elf20        ansible_host=10.0.42.40 cluster_nic=eno1.4000 # 128GB
-elf21        ansible_host=10.0.42.41 cluster_nic=eno1.4000 # 128GB
-elf22        ansible_host=10.0.42.42 cluster_nic=eno1.4000 # 128GB
-elf23        ansible_host=10.0.42.43 cluster_nic=eno1.4000 # 128GB
-elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
+# elf14        ansible_host=10.0.42.34 cluster_nic=eno1.4000 # 128GB
+# elf15        ansible_host=10.0.42.35 cluster_nic=eno1.4000 # 128GB
+# elf16        ansible_host=10.0.42.36 cluster_nic=eno1.4000 # 128GB
+# elf17        ansible_host=10.0.42.37 cluster_nic=eno1.4000 # 128GB
+# elf18        ansible_host=10.0.42.38 cluster_nic=eno1.4000 # 128GB
+# elf19        ansible_host=10.0.42.39 cluster_nic=eno1.4000 # 128GB
+# elf20        ansible_host=10.0.42.40 cluster_nic=eno1.4000 # 128GB
+# elf21        ansible_host=10.0.42.41 cluster_nic=eno1.4000 # 128GB
+# elf22        ansible_host=10.0.42.42 cluster_nic=eno1.4000 # 128GB
+# elf23        ansible_host=10.0.42.43 cluster_nic=eno1.4000 # 128GB
+# elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
 # elf25        ansible_host=10.0.42.45 cluster_nic=eno1.4000 # 128GB
 # elf26        ansible_host=10.0.42.46 cluster_nic=eno1.4000 # 128GB
 # elf27        ansible_host=10.0.42.47 cluster_nic=eno1.4000 # 128GB
@@ -51,6 +51,8 @@ elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
 ranger01     ansible_host=10.0.42.111 cluster_nic=eno1.4000 # 128GB
 ranger02     ansible_host=10.0.42.112 cluster_nic=eno1.4000 # 128GB
 ranger03     ansible_host=10.0.42.113 cluster_nic=eno1.4000 # 128GB
+ranger04     ansible_host=10.0.42.114 cluster_nic=eno1.4000 # 128GB
+ranger05     ansible_host=10.0.42.115 cluster_nic=eno1.4000 # 128GB
 
 
 [k3s_observability]
@@ -158,6 +160,8 @@ giant03      ansible_host=10.0.42.53 cluster_nic=enp44s0.4000
 ranger01
 ranger02
 ranger03
+ranger04
+ranger05
 
 [k3s_elves]
 elf01
