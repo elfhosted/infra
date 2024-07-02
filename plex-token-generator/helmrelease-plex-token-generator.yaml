@@ -29,6 +29,11 @@ spec:
       seccompProfile:
         type: RuntimeDefault
     automountServiceAccountToken: false
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp    
     controller:
       replicas: 2
       strategy: RollingUpdate
