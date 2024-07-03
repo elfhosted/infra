@@ -10,7 +10,7 @@ data:
   INDEXER_MANAGER_TYPE: jackett
   INDEXER_MANAGER_URL: http://jackett:9117
   DEBRID_PROXY_URL:
-  INDEXER_MANAGER_INDEXERS: '["badasstorrents","bitsearch","eztv","kickasstorrents-ws","limetorrents","thepiratebay","therarbg","torrentgalaxy","yourbittorrent","yts"]'
+  INDEXER_MANAGER_INDEXERS: '["badasstorrents","bitsearch","eztv","kickasstorrents-ws","limetorrents","thepiratebay","therarbg","yts"]'
   GET_TORRENT_TIMEOUT: "5"
   INDEXER_MANAGER_TIMEOUT: "30"
   FASTAPI_WORKERS: "5"
