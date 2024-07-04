@@ -75,7 +75,7 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 1Gi      
+                    storage: 10Gi      
     envFrom:
     - secretRef:
         name: jackettio-env 
@@ -99,3 +99,25 @@ spec:
         ports:
           http:
             port: 4000
+    initContainers:
+      setup:
+        image: ghcr.io/geek-cookbook/tooling:focal-20230624@sha256:3a43385968a692fd1ec02bffdea62ddb888e48cb3b883332aa98b1747f4a532b
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          # Clean up old torrents
+          if [ -d "/config/torrents" ]; then
+            rm -rf "/config/torrents"
+            ln -sf /tmp '/config/torrents'
+          fi
+
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /tmp
+          name: tmp        
