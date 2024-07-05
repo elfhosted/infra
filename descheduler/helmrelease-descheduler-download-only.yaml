@@ -109,7 +109,7 @@ spec:
           enabled: true
           params:
             nodeResourceUtilizationThresholds:
-              useDeviationThresholds: true # not as much use when we have 2 nodes
+              useDeviationThresholds: true
               thresholds:
                 cpu: 1
                 memory: 1
