@@ -36,4 +36,5 @@ data:
     git add .
     git commit -m "Tenant cleaner cleans tenants!" .
 
+    git pull
     git push --set-upstream origin
