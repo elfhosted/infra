@@ -6,3 +6,4 @@
       tailscale_authkey: "{{ tailscale_key }}"
   tasks:
   - { import_role: { name: node }, tags: [ node ] }
+  - { import_role: { name: k3s-server }, tags: [ k3s-server ] }  
