@@ -26,9 +26,9 @@ data:
         sleep $((0 + RANDOM % 10)); # avoid races
     done
     git config --global --add safe.directory elfhosted-tenants
-    cd elfhosted-tenants
+    cd elfhosted-tenants/fsn/
 
-    ./scripts/tenant-cleaner.sh
+    ../scripts/tenant-cleaner.sh
 
 
     git add .
