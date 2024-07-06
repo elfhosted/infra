@@ -177,7 +177,7 @@ spec:
 
     ## StorageClass resource example:
     storageClass:
-      create: true
+      create: false # don't need this
       name: nfs-csi
       annotations:
         storageclass.kubernetes.io/is-default-class: "false"
