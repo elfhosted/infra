@@ -31,6 +31,11 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
+      sysctls:
+      - name: net.ipv6.conf.all.disable_ipv6
+        value: "0"
+      - name: net.ipv4.conf.all.src_valid_mark
+        value: "1"      
     automountServiceAccountToken: false
     controller:
       replicas: 1
@@ -73,11 +78,6 @@ spec:
           capabilities:
             add:
             - NET_ADMIN    
-          sysctls:
-          - name: net.ipv6.conf.all.disable_ipv6
-            value: "0"
-          - name: net.ipv4.conf.all.src_valid_mark
-            value: "1"
         envFrom:
         - secretRef:
             name: comet-env            
