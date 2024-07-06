@@ -17,6 +17,27 @@
     - jnettop
     - linux-generic-hwe-22.04
 
+- name: Add VLAN 4000
+  ansible.builtin.blockinfile:
+    path: /etc/netplan/01-netcfg.yaml
+    block: |
+      # For the vSwitch
+        vlans:
+            {{ cluster_nic }}:
+              id: 4000
+              link: {{ cluster_nic.split(".")[0] }}
+              mtu: 1400
+              addresses:
+                - {{ ansible_host }}/24
+                - fd00:10:0:42:0::{{ ansible_host.split(".")[3] }}/118
+              routes:
+                - to: "10.0.40.0/22"
+                  via: "10.0.42.1"
+                # Prevent leaking SMB requests towards service IPs
+                - to: "10.43.0.0/16"
+                  via: "10.0.42.1"   
+  notify: netplan apply  
+                  
 - name: install yq via snap
   snap:
     name: yq

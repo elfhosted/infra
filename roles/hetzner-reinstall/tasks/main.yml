@@ -58,6 +58,9 @@
                 routes:
                   - to: "10.0.40.0/22"
                     via: "10.0.42.1"
+                  # Prevent leaking SMB requests towards service IPs
+                  - to: "10.43.0.0/16"
+                    via: "10.0.42.1"                    
 
   - name: Update and upgrade apt packages
     become: true
