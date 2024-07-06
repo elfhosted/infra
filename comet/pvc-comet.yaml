@@ -7,8 +7,8 @@ metadata:
     helm.sh/resource-policy: keep
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
-  storageClassName: ceph-block-ssd
+  storageClassName: ceph-filesystem-ssd
