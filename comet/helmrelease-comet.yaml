@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v1.8.1@sha256:f6963d3652397334b70afba33cb6d555530969d982333843665944f389aa6820
+      tag: v1.9.0@sha256:2510efc26d1585b897cfc11e81fb4190933eb28125c0c44154c7a78b1984e476
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -40,6 +40,7 @@ spec:
     automountServiceAccountToken: false
     controller:
       replicas: 2
+      strategy: RollingUpdate
       annotations:
         configmap.reloader.stakater.com/reload: "comet-env"
         secret.reloader.stakater.com/reload: "comet-env"
