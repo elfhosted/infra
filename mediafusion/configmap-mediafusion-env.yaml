@@ -13,7 +13,7 @@ data:
   PROWLARR_SEARCH_INTERVAL_HOUR: "72"
   is_public_instance: "true"
   prowlarr_immediate_max_process_time: "0"
-  validate_m3u8_urls_liveness: "false"
+  validate_m3u8_urls_liveness: "true"
   worker_max_tasks_per_child: "30"
   addon_name: "MediaFusion | ElfHosted"
   logo_url: https://mediafusion.elfhosted.com/static/images/mediafusion-elfhosted-logo.png
