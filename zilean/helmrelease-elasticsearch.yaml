@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: zilean
+  name: elasticsearch
   namespace: zilean
 spec:
   chart:
@@ -14,13 +14,13 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: zilean
+  releaseName: elasticsearch
   values:
     global:
-      nameOverride: zilean
+      nameOverride: elasticsearch
     image:
-      repository: ghcr.io/elfhosted/zilean
-      tag: v1.2.9@sha256:f6348623ab72d3fed1c68bbdee0defb7bc392138e1d0ffc6c2e3429dcf35d698
+      repository: elasticsearch
+      tag: 8.14.1@sha256:ff3998ab3d8a84984e5298d33d01a174fc5f8abed15ad58d0a54364fc63d68d9
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -31,24 +31,11 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app.kubernetes.io/name
-              operator: In
-              values:
-              - zilean
-          topologyKey: "kubernetes.io/hostname"      
-    automountServiceAccountToken: false
     env:
-      Zilean__ElasticSearch__Url: http://elasticsearch:9200
-    controller:
-      replicas: 2
-      strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
+      ES_SETTING_DISCOVERY_TYPE: single-node
+      ES_SETTING_XPACK_SECURITY_ENABLED: "false"
+      ES_SETTING_BOOTSTRAP_MEMORY__LOCK: "true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"      
     ingress:
       main:
         enabled: false 
@@ -57,12 +44,12 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 8181   
+            port: 9200   
     persistence:
       config:
         enabled: true
         type: custom
-        mountPath: /app/data
+        mountPath: /usr/share/elasticsearch/data
         volumeSpec:
           persistentVolumeClaim:
-            claimName: zilean    
+            claimName: elasticsearch    
