@@ -45,7 +45,7 @@ spec:
     env:
       Zilean__ElasticSearch__Url: http://elasticsearch:9200
     controller:
-      replicas: 2
+      replicas: 1
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
