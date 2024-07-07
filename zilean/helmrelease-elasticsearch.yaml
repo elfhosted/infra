@@ -28,6 +28,9 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
+    deploymentStrategy:
+      type: Recreate
+      rollingUpdate: null        
     env:
       ES_SETTING_DISCOVERY_TYPE: single-node
       ES_SETTING_XPACK_SECURITY_ENABLED: "false"
