@@ -29,6 +29,7 @@ spec:
         type: RuntimeDefault
       readOnlyRootFilesystem: false
     podSecurityContext:
+      fsGroup: 1000
       seccompProfile:
         type: RuntimeDefault
     deploymentStrategy:
