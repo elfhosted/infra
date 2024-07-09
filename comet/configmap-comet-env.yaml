@@ -22,7 +22,7 @@ data:
     </BR><A HREF="https://elfhosted.com">ElfHosted</A> is an <A HREF="https://elfhosted.com/open/">open-source</A> PaaS built and run by a <A HREF="https://discord.elfhosted.com">friendly community of geeks</A>, which self-hosts <A HREF="https://elfhosted.com/guides/media/">your favorite streaming apps</A> for you, automatically and easily. 
     </P>
     <P>
-      Individual, hosted premium <A HREF="https://store.elfhosted.com/product/comet">Comet</A>, <A HREF="https://store.elfhosted.com/product/comet-jackett-bundle">Comet+Jackett</A> / <A HREF="https://store.elfhosted.com/product/comet-prowlarr-bundle">Comet+Prowlarr</A> instances are available (<I>say, if you need extra indexers, or a higher rate-limit</I>).
+      Individual, hosted premium <A HREF="https://store.elfhosted.com/product/comet">Comet</A>, <A HREF="https://store.elfhosted.com/product/bundle-comet-jackett">Comet+Jackett</A> / <A HREF="https://store.elfhosted.com/product/bundle-comet-prowlarr">Comet+Prowlarr</A> instances are available with Proxy Streaming, higher rate-limits, and custom indexer support.
     </P>
     <P>
       Unique among Stremio addons, Comet can <B>proxy</B> your streaming, so that you can use one RealDebrid account with Stremio from multiple locations, simultaneously! (<A HREF="https://store.elfhosted.com/product/comet-proxy-streaming-addon">addon</A> required)
