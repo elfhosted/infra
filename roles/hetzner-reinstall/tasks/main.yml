@@ -5,7 +5,7 @@
     template:
       src: installimage-elf.conf.j2
       dest: /tmp/installimage.conf
-    when: "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_rangers']"  
+    when: "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_rangers'] or  inventory_hostname in groups['k3s_hobbits']"
 
   - name: Copy installimage template to gnome in rescue mode
     template:
