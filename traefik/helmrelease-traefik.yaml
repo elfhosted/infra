@@ -994,8 +994,6 @@ spec:
     nodeSelector: {}
     # -- Tolerations allow the scheduler to schedule pods with matching taints.
     tolerations:
-    - key: node-role.elfhosted.com/download-only
-      operator: Exists
     - key: node-role.elfhosted.com/dedicated
       operator: Exists   
     - key: node-role.elfhosted.com/hobbit
