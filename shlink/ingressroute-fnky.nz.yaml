@@ -8,7 +8,7 @@ spec:
     - match: Host(`fnky.nz`)
       kind: Rule
       services:
-        - name: fnky-shlink
+        - name: shlink
           kind: Service
           port: 8080
   tls:

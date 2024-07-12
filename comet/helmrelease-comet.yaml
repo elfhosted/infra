@@ -1,0 +1,88 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: comet
+  namespace: comet
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: comet
+  values:
+    global:
+      nameOverride: comet
+    image:
+      repository: ghcr.io/elfhosted/comet
+      tag: v1.14.1@sha256:edbfe64c1aae1fe1e153ddc8e38b7b4f6be6771158abd026ea24fb63597d7c62
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      # enabling these gets me messages about forbidden sysctls. how did this ever work?
+      # sysctls:
+      # - name: net.ipv6.conf.all.disable_ipv6
+      #   value: "0"
+      # - name: net.ipv4.conf.all.src_valid_mark
+      #   value: "1"      
+    automountServiceAccountToken: false
+    controller:
+      replicas: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "comet-env"
+        secret.reloader.stakater.com/reload: "comet-env"
+    envFrom:
+    - configMapRef:
+        name: comet-env
+    - secretRef:
+        name: comet-env
+    ingress:
+      main:
+        enabled: false 
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8000   
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /app/data
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: comet    
+      cache: 
+        enabled: true
+        type: emptyDir
+        mountPath: /.cache                              
+    additionalContainers:
+      warp:
+        image: ghcr.io/elfhosted/warp:rolling@sha256:9b7e2e5da5b1caab6bb1a4e450fc1a2cc7c99f162325901656d5bc9104439eb6
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          privileged: false
+          capabilities:
+            add:
+            - NET_ADMIN    
+        envFrom:
+        - secretRef:
+            name: comet-env            
+        volumeMounts:
+        - mountPath: /data
+          subPath: warp
+          name: config      

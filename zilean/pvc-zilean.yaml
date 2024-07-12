@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: formbricks
-  namespace: formbricks
+  name: zilean
+  namespace: zilean
   annotations:
     helm.sh/resource-policy: keep
 spec:

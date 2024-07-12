@@ -1,0 +1,18 @@
+- hosts: k3s_servers
+  roles:
+  - role: artis3n.tailscale
+    vars:
+      # Example pulling the API key from the env vars on the host running Ansible
+      tailscale_authkey: "{{ tailscale_key }}"
+  tasks:
+
+  - name: set host architecture
+    set_fact:
+      host_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' if ansible_architecture == 'aarch64' else ansible_architecture }}"
+    tags: always
+
+  - { import_role: { name: node }, tags: [ node ] }
+  - { import_role: { name: k3s-server-experiment }, tags: [ k3s-server-experiment ] }  
+  - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }    
+  - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
+  - { import_role: { name: flux }, tags: [ flux ] }    

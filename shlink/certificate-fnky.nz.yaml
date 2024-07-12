@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: fnky.nz
-  namespace: aa-fnky
+  namespace: shlink
 spec:
   secretName: fnky.nz-tls
   issuerRef:

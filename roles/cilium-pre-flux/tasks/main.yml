@@ -27,6 +27,8 @@
   command: helm repo update
 
 - name: Install cilium via helm (without servicemonitors since we don't have the CRD yet)
+  environment: 
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   command: helm upgrade --install cilium cilium/cilium --version {{ packages.cilium.version }} \
     --namespace kube-system \
     -f /tmp/cilium-values.yaml \

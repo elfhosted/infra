@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: formbricks
-  namespace: formbricks
+  name: jackett
+  namespace: comet
 spec:
   chart:
     spec:
@@ -14,14 +14,13 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: formbricks
+  releaseName: jackett
   values:
     global:
-      nameOverride: formbricks
+      nameOverride: jackett
     image:
-      registry: ghcr.io
-      repository: formbricks/formbricks
-      tag: v2.1.1@sha256:dbdcc0ef293afea1bd06a26cf5b24ab78cdac0e9a896ca5073a628a3b50a13f1
+      repository: ghcr.io/elfhosted/jackett
+      tag: 0.22.320
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -29,36 +28,20 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      # runAsUser: 568
-      # runAsGroup: 568
-      # fsGroup: 568
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
     automountServiceAccountToken: false
-    resources:
-      requests:
-        cpu: 10m
-        memory: 64Mi
-      limits:
-        cpu: 1
-        memory: 1Gi    
     controller:
-      replicas: 1      
-    ingress:
-      main:
-        enabled: false 
-    service:
-      main:
-        enabled: true # necessary for probes
-        ports:
-          http:
-            port: 3000
+      replicas: 1
     persistence:
       config:
         enabled: true
         type: custom
-        mountPath: /data/
+        mountPath: /config/
         volumeSpec:
           persistentVolumeClaim:
-            claimName: formbricks    
+            claimName: jackett
       tmp: 
         enabled: true
         type: custom
@@ -71,5 +54,13 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 1Gi               
-          
+                    storage: 1Gi              
+    ingress:
+      main:
+        enabled: false 
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 9117

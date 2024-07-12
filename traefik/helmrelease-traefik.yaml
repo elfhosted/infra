@@ -994,10 +994,10 @@ spec:
     nodeSelector: {}
     # -- Tolerations allow the scheduler to schedule pods with matching taints.
     tolerations:
-    - key: node-role.elfhosted.com/download-only
-      operator: Exists
     - key: node-role.elfhosted.com/dedicated
-      operator: Exists      
+      operator: Exists   
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists            
 
     # -- You can use topology spread constraints to control
     # how Pods are spread across your cluster among failure-domains.

@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   interval: 24h
   timeout: 5m
-  releaseName: fnky-shlink
+  releaseName: shlink
   values:
     #
     # IMPORTANT NOTE
@@ -51,7 +51,7 @@ spec:
       DB_DRIVER: mysql
       DB_USER: shlink
       DB_PASSWORD: shlink-pass
-      DB_HOST: fnky-shlink-mariadb
+      DB_HOST: shlink-mariadb
       DB_PORT: 3306
       REDIRECT_STATUS_CODE: 302 # temporary, this might risk going offline
       REDIRECT_CACHE_LIFETIME: 30 # default value for 301s (which we're not currently using)

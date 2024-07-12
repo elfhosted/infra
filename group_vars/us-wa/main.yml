@@ -1,0 +1,10 @@
+cluster_nic_class_c: 10.0.42
+dns_domain: us-wa.elfhosted.com
+k8s_ha_api_ip: 100.93.110.91 # yankee01
+k8s_ha_api_port: 6443
+flux_repo_branch: main
+authentik_login_background: https://images.unsplash.com/photo-1608096275182-337284e623bd?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=karsten-winegeart-qbadM0DNF8Y-unsplash.jpg
+
+
+firewall:
+  admin_source: "{{ vault_admin_source }}"

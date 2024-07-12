@@ -95,18 +95,22 @@ patches:
       kind: Deployment
       name: source-controller                       
 
-  #   patch: |
-  #     - op: add
-  #       path: /spec/template/spec/affinity
-  #       value:
-  #         nodeAffinity:
-  #           requiredDuringSchedulingIgnoredDuringExecution:
-  #             nodeSelectorTerms:
-  #             - matchExpressions:
-  #               - key: node-role.kubernetes.io/control-plane
-  #                 operator: Exists     
-  #     - op: add
-  #       path: /spec/template/spec/tolerations
-  #       value:                      
-  #         - key: node-role.kubernetes.io/control-plane
-  #           operator: Exists             
+  # Let flux run on the rangers, because it only really needs resource during maint anyway
+  - patch: |
+      - op: add
+        path: /spec/template/spec/affinity
+        value:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.elfhosted.com/dedicated
+                  operator: Exists     
+      - op: add
+        path: /spec/template/spec/tolerations
+        value:                      
+          - key: node-role.elfhosted.com/dedicated
+            operator: Exists
+    target:
+      kind: Deployment
+      name: "(source-controller|kustomize-controller|helm-controller)"            

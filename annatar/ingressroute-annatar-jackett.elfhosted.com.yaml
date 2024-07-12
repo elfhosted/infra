@@ -13,6 +13,6 @@ spec:
           kind: Service
           port: 9117
       middlewares:  
-        - name: eruiluvatar-traefik-forward-auth
-          namespace: aa-eruiluvatar
+        - name: bamb0uu-traefik-forward-auth
+          namespace: aa-bamb0uu
           

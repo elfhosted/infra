@@ -58,7 +58,7 @@ spec:
           set -e
 
           gh auth setup-git
-          gh repo clone geek-cookbook/elfhosted-tenants /repo/
+          gh repo clone elfhosted/tenants /repo/
           git config --global --add safe.directory /repo
 
         volumeMounts:

@@ -11,27 +11,30 @@ data:
     git config --global user.name "Elfbot"
     git config --global user.email "elfbot@elfhosted.com"
     git config --global pull.rebase true
-    git config --global --add safe.directory /repo
+
+    # Get rclone on first startup, if we don't have it
+    if [[ ! -f /tmp/rclone ]]; then
+        cd /tmp
+        curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+        unzip rclone-current-linux-amd64.zip
+        mv rclone-*-linux-amd64/rclone /tmp/
+    fi
 
     # set -x
     # set -e
 
     gh auth setup-git
 
-
     TEMPDIR=$(mktemp -d)
     cd $TEMPDIR
-    until gh repo clone geek-cookbook/elfhosted-tenants  -- --depth=1
-    do
-        sleep $((0 + RANDOM % 10)); # avoid races
-    done
-    git config --global --add safe.directory elfhosted-tenants
-    cd elfhosted-tenants
+    gh repo clone elfhosted/tenants -- --depth=1
+    git config --global --add safe.directory tenants
+    cd tenants/fsn/
 
-    ./scripts/tenant-cleaner.sh
-
+    ../scripts/process-all-customers.sh
 
     git add .
     git commit -m "Tenant cleaner cleans tenants!" .
 
+    git pull
     git push --set-upstream origin

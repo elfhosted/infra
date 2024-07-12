@@ -1,0 +1,50 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: comet
+  namespace: comet
+spec:
+  endpointSelector: {}
+  ingress:
+    # Allow from any pods in this namespace
+    - fromEndpoints:
+        - {}
+
+    # Allow from Traefik to exposed port only
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/name: traefik
+            io.kubernetes.pod.namespace: traefik
+      toPorts:
+        - ports:
+            - port: "8000"
+  egress:
+    # Allow to the world
+    - toEntities:
+        - world
+
+    # Allow to any pods in this namespace
+    - toEndpoints:
+        - {}
+
+    # Allow comet to talk to prowlarr
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: zilean
+          k8s:io.kubernetes.pod.namespace: zilean  
+      toPorts:
+        - ports:
+            - port: "8181"
+
+    # Allow to Kube DNS
+    - toEndpoints:
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"

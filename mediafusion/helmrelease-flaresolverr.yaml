@@ -43,7 +43,7 @@ spec:
         memory: 384Mi    
         ephemeral-storage: 100Mi
     controller:
-      replicas: 3   
+      replicas: 1
     ingress:
       main:
         enabled: false 

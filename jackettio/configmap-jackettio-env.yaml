@@ -14,11 +14,11 @@ data:
 
     ElfHosted is an [open-source](https://elfhosted.com/open/) PaaS built and run by [geeks](https://geek-cookbook.funkypenguin.co.nz), which self-hosts your [favorite streaming apps](https://elfhosted.com/guides/media/) for you, automatically and easily. 
 
-    Individual, [hosted Jackettio instances are available](https://store.elfhosted.com/product/jackettio/) (*say, if you need to add your private trackers*) from $0.05/day, with [$10 free credit](https://elfhosted.com/how-to/spend-elfbuckz/) for [new accounts](https://store.elfhosted.com/my-account/).
+    Individual, [hosted Jackettio instances are available](https://store.elfhosted.com/product/jackettio/) (*say, if you need to add your private trackers*).
 
     #### Why use [ElfHosted Stremio addons](https://elfhosted.com/stremio-addons/)?
 
-    * ✅ [Highly-available](https://status.elfhosted.com/history/public-jackettio-stremio-addon), [open-source](https://elfhosted.com/open/) infrastructure / ![](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fgeek-cookbook%2Felfhosted-upptime%2Fmaster%2Fapi%2Fpublic-jackettio-stremio-addon%2Fuptime.json)
+    * ✅ [Highly-available](https://status.elfhosted.com/history/public-jackettio-stremio-addon), [open-source](https://elfhosted.com/open/) infrastructure / ![](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Felfhosted%2Fstatus.elfhosted.com%2Fmaster%2Fapi%2Fjackettio-stremio-addon%2Fuptime.json)
     * ✅ Active contributors to r/StremioAddons subreddit and Discord
     * ✅ Geek out over [public performance metrics](https://fnky.nz/grafana-jackettio)
 

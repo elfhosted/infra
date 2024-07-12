@@ -13,4 +13,4 @@ spec:
   secretRef:
     name: tenants
   timeout: 60s
-  url: https://github.com/geek-cookbook/elfhosted-tenants
+  url: https://github.com/elfhosted/tenants

@@ -425,8 +425,14 @@ spec:
 
       nodeSelector: {}
 
-      tolerations: []
-
+      tolerations:
+      - key: "node-role.${dns_domain}/dedicated"
+        operator: "Exists"
+        effect: "NoSchedule" 
+      - key: "node-role.${dns_domain}/hobbit"
+        operator: "Exists"
+        effect: "NoSchedule"       
+        
       annotations: {}
 
       affinity: {}

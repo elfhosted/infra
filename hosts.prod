@@ -8,6 +8,7 @@ k3s_giants  # 10Ge download nodes
 k3s_goblins # 10Ge ceph nodes
 k3s_elves   # customer workloads
 k3s_rangers # dedicated customer nodes
+k3s_hobbits # lightweight rangers
 controllers
 egress_gateways
 
@@ -38,9 +39,9 @@ elf18        ansible_host=10.0.42.38 cluster_nic=eno1.4000 # 128GB
 elf19        ansible_host=10.0.42.39 cluster_nic=eno1.4000 # 128GB
 elf20        ansible_host=10.0.42.40 cluster_nic=eno1.4000 # 128GB
 elf21        ansible_host=10.0.42.41 cluster_nic=eno1.4000 # 128GB
-elf22        ansible_host=10.0.42.42 cluster_nic=eno1.4000 # 128GB
-elf23        ansible_host=10.0.42.43 cluster_nic=eno1.4000 # 128GB
-elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
+# elf22        ansible_host=10.0.42.42 cluster_nic=eno1.4000 # 128GB
+# elf23        ansible_host=10.0.42.43 cluster_nic=eno1.4000 # 128GB
+# elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
 # elf25        ansible_host=10.0.42.45 cluster_nic=eno1.4000 # 128GB
 # elf26        ansible_host=10.0.42.46 cluster_nic=eno1.4000 # 128GB
 # elf27        ansible_host=10.0.42.47 cluster_nic=eno1.4000 # 128GB
@@ -50,6 +51,16 @@ elf24        ansible_host=10.0.42.44 cluster_nic=eno1.4000 # 128GB
 
 ranger01     ansible_host=10.0.42.111 cluster_nic=eno1.4000 # 128GB
 ranger02     ansible_host=10.0.42.112 cluster_nic=eno1.4000 # 128GB
+ranger03     ansible_host=10.0.42.113 cluster_nic=eno1.4000 # 128GB
+ranger04     ansible_host=10.0.42.114 cluster_nic=eno1.4000 # 128GB
+ranger05     ansible_host=10.0.42.115 cluster_nic=eno1.4000 # 128GB
+
+hobbit01     ansible_host=10.0.42.151 cluster_nic=eno1.4000 # 128GB
+hobbit02     ansible_host=10.0.42.152 cluster_nic=eno1.4000 # 128GB
+hobbit03     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
+hobbit04     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
+hobbit05     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
+
 
 [k3s_observability]
 # gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
@@ -117,6 +128,18 @@ ranger08-public.elfhosted.com
 ranger09-public.elfhosted.com
 ranger10-public.elfhosted.com
 
+giant01-public.elfhosted.com
+giant02-public.elfhosted.com
+giant03-public.elfhosted.com
+giant04-public.elfhosted.com
+giant05-public.elfhosted.com
+giant06-public.elfhosted.com
+giant07-public.elfhosted.com
+giant08-public.elfhosted.com
+giant09-public.elfhosted.com
+giant10-public.elfhosted.com
+
+
 
 [k3s_dwarves]
 dwarf01      ansible_host=10.0.42.81 cluster_nic=eno1.4000
@@ -136,13 +159,29 @@ goblin05     ansible_host=10.0.42.65 cluster_nic=enp1s0.4000
 goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 
 [k3s_giants]
-giant01
-giant02
-giant03
+giant01      ansible_host=10.0.42.51 cluster_nic=enp39s0.4000
+giant02      ansible_host=10.0.42.52 cluster_nic=enp1s0.4000
+giant03      ansible_host=10.0.42.53 cluster_nic=enp44s0.4000
+
 
 [k3s_rangers]
 ranger01
 ranger02
+ranger03
+ranger04
+ranger05
+
+[k3s_hobbits]
+hobbit01
+hobbit02
+hobbit03
+hobbit04
+hobbit05
+hobbit06
+hobbit07
+hobbit08
+hobbit09
+hobbit10
 
 [k3s_elves]
 elf01

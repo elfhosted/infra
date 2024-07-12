@@ -99,3 +99,10 @@ spec:
                   operator: In
                   values:
                     - "true"
+    tolerations:
+    - key: node-role.${dns_domain}/dedicated
+      effect: NoSchedule
+      operator: Exists  
+    - key: node-role.${dns_domain}/hobbit
+      effect: NoSchedule
+      operator: Exists                         
