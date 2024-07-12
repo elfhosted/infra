@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v1.13.0@sha256:dc3adff20679f449970d060559995bba071442d3a661cf3b7bef47e4f1a06b0f
+      tag: v1.14.0@sha256:e3abd0ae6e7a98e1b8a30f6e9df2a3e7ac1bd7200baba110bbb01130f1e613f6
     securityContext:
       seccompProfile:
         type: RuntimeDefault
