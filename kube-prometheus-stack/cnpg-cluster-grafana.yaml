@@ -48,10 +48,10 @@ spec:
     #     name: app-secret
 
     recovery:
-      source: clusterBackup
+      source: grafana
 
   externalClusters:
-  - name: clusterBackup
+  - name: grafana
     barmanObjectStore:        
       destinationPath: s3://cnpg/
       endpointURL: "http://minio.minio:9000"
