@@ -1,0 +1,29 @@
+kube-apiserver-arg:
+- "oidc-issuer-url=https://authentik.infra.{{ dns_domain }}/application/o/kube-apiserver/"
+- "oidc-client-id=kube-apiserver"
+- "oidc-username-claim=email"
+- "oidc-groups-claim=groups"
+- "oidc-groups-prefix=oidc:"
+- "oidc-username-prefix=oidc:"
+kube-controller-manager-arg:
+- "bind-address=0.0.0.0"
+- "node-cidr-mask-size=22"
+kube-scheduler-arg:
+- "bind-address=0.0.0.0"
+kubelet-arg:
+- "max-pods=500"
+etcd-expose-metrics: true
+flannel-iface: "{{ cluster_nic }}"
+flannel-backend: none
+disable-network-policy: true
+disable-kube-proxy: true
+cluster-init: true
+disable: 
+- "traefik"
+- "servicelb"
+- "local-storage"
+node-taint:
+  - node-role.kubernetes.io/control-plane=true:NoSchedule
+tls-san: 
+etcd-arg:
+- "quota-backend-bytes=8589934592" # 8GB
