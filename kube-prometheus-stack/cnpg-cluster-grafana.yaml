@@ -48,24 +48,8 @@ spec:
     #     name: app-secret
 
     recovery:
-      source: grafana
-
-  externalClusters:
-  - name: grafana
-    barmanObjectStore:        
-      destinationPath: s3://cnpg/
-      endpointURL: "http://minio.minio:9000"
-      s3Credentials:
-        accessKeyId:
-          name: cnpg-minio-credentials
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: cnpg-minio-credentials
-          key: ACCESS_SECRET_KEY
-      wal:
-        compression: gzip
-        maxParallel: 2   
-            
+      backup: 
+        name: backup-grafana-20240709000000            
 
   backup:
       # Volume snapshot backups
