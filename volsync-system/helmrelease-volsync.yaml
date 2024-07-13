@@ -10,7 +10,7 @@ spec:
       version: 0.9.1
       sourceRef:
         kind: HelmRepository
-        name: volsync
+        name: backube
         namespace: flux-system
   interval: 15m
   timeout: 5m
