@@ -23,7 +23,8 @@ spec:
     copyMethod: Clone
     # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
     storageClassName: topolvm-provisioner-thin
-    accessModes: ReadWriteOnce
+    accessModes: 
+    - ReadWriteOnce
     # cache using topolvm
     cacheCapacity: 20Gi
     # The VSC to use if the copy method is Snapshot (default if omitted)
