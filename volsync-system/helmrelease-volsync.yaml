@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: volsync
-      version: 0.9.1
+      version: 0.9.x
       sourceRef:
         kind: HelmRepository
         name: backube
@@ -86,8 +86,8 @@ spec:
 
     resources:
       limits:
-        cpu: 1000m
-        memory: 1Gi
+        cpu: 10
+        memory: 10Gi
       requests:
         cpu: 100m
         memory: 64Mi
