@@ -8,7 +8,8 @@ spec:
   sourcePVC: redbot
   trigger:
     # Take a backup every 30 minutes
-    schedule: "*/30 * * * *"
+    # schedule: "*/30 * * * *"
+    manual: david-1
   restic:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 2
@@ -16,11 +17,7 @@ spec:
     repository: redbot-restic-config
     # Retention policy for backups
     retain:
-      hourly: 6
-      daily: 5
-      weekly: 4
-      monthly: 2
-      yearly: 1
+      daily: 1
     # Clone the source volume prior to taking a backup to ensure a
     # point-in-time image.
     copyMethod: Clone
