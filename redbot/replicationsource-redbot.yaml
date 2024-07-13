@@ -20,7 +20,7 @@ spec:
       daily: 2
     # Clone the source volume prior to taking a backup to ensure a
     # point-in-time image.
-    copyMethod: Clone
+    copyMethod: Snapshot
     # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
     # storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
