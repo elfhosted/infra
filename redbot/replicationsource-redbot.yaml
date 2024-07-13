@@ -22,7 +22,7 @@ spec:
     # point-in-time image.
     copyMethod: Clone
     # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
-    # storageClassName: topolvm-provisioner-thin
+    storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
