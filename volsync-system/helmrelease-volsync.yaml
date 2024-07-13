@@ -1,0 +1,99 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: volsync
+  namespace: volsync-system
+spec:
+  chart:
+    spec:
+      chart: volsync
+      version: 0.9.1
+      sourceRef:
+        kind: HelmRepository
+        name: volsync
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: volsync
+  values:
+    # Default values for volsync.
+    replicaCount: 1
+
+    image:
+      repository: quay.io/backube/volsync
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+      # Directly specifies the SHA hash of the container image to deploy
+      image: ""
+    rclone:
+      repository: quay.io/backube/volsync
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+      image: ""
+    restic:
+      repository: quay.io/backube/volsync
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+      image: ""
+    rsync:
+      repository: quay.io/backube/volsync
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+      image: ""
+    rsync-tls:
+      repository: quay.io/backube/volsync
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+      image: ""
+    syncthing:
+      repository: quay.io/backube/volsync
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+      image: ""
+
+    manageCRDs: true
+
+    metrics:
+      # Disable auth checks when scraping metrics (allow anyone to scrape)
+      disableAuth: false
+
+    imagePullSecrets: []
+    nameOverride: ""
+    fullnameOverride: ""
+
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    podAnnotations: {}
+    podLabels: {}
+
+    # Default security context values are in deployment-controller.yaml
+    podSecurityContext: {}
+
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
