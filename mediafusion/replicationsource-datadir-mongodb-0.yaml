@@ -1,0 +1,32 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: datadir-mongodb-0
+  namespace: mediafusion
+spec:
+  # The PVC to be backed up
+  sourcePVC: redbot
+  trigger:
+    # Take a backup every 30 minutes
+    schedule: "0 9 * * *"
+    manual: tbc
+  restic:
+    # Prune the repository (repack to free space) every 2 weeks
+    pruneIntervalDays: 7
+    # Name of the Secret with the connection information
+    repository: datadir-mongodb-0-restic-config
+    # Retention policy for backups
+    retain:
+      daily: 7
+    # Clone the source volume prior to taking a backup to ensure a
+    # point-in-time image.
+    copyMethod: Snapshot
+    # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
+    # storageClassName: topolvm-provisioner-thin
+    cacheStorageClassName: topolvm-provisioner-thin
+    # accessModes: 
+    # - ReadWriteOnce
+    # cache using topolvm
+    cacheCapacity: 10Gi
+    # The VSC to use if the copy method is Snapshot (default if omitted)
+    volumeSnapshotClassName: ceph-block

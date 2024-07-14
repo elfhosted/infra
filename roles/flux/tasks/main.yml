@@ -37,6 +37,12 @@
     --toleration-keys node-role.kubernetes.io/control-plane
   ignore_errors: true
 
+- name: Install flux components
+  shell: flux install \
+    --version=v{{ packages.flux.version }} \
+    --toleration-keys node-role.kubernetes.io/control-plane \
+    --export > bootstrap/flux-system/manifests/gotk-components.yaml
+
 # # We create the flux-system source here becasue it avoids us having to store credentials in the flux repo
 - name: add flux-system git source
   shell: |
