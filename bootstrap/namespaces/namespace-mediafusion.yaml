@@ -2,4 +2,5 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: mediafusion
-
+  annotations:
+    volsync.backube/privileged-movers: "true"    
