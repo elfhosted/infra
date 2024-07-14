@@ -5,7 +5,7 @@ metadata:
   namespace: mediafusion
 spec:
   # The PVC to be backed up
-  sourcePVC: redbot
+  sourcePVC: datadir-mongodb-0
   trigger:
     # Take a backup every 30 minutes
     schedule: "0 9 * * *"
