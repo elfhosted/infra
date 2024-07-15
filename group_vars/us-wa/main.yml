@@ -1,5 +1,5 @@
 cluster_nic_class_c: 10.0.42
-dns_domain: us-wa.elfhosted.com
+dns_domain: elfhosted.us
 k8s_ha_api_ip: 100.93.110.91 # yankee01
 k8s_ha_api_port: 6443
 flux_repo_branch: main
