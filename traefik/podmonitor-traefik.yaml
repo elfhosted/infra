@@ -13,12 +13,12 @@ spec:
     metricRelabelings:
     # We don't care about individual tenants endpoints (too. much. data)
     - action: drop
-      regex: (aa-)
+      regex: aa-
       sourceLabels:
         - service
     # Get rid of instance, method, pod and protocol labels since we don't need them
     - action: labeldrop
-      regex: (instance|method|pod|protocol)
+      regex: (instance|method|pod|protocol|code|nodename|service) # we only want to keep router
   selector:
     matchLabels:
       app.kubernetes.io/name: traefik
