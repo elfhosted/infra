@@ -13,6 +13,7 @@
 
   - { import_role: { name: node }, tags: [ node ] }
   - { import_role: { name: k3s-server-experiment }, tags: [ k3s-server-experiment ] }  
+  - { import_role: { name: controller }, tags: [ controller ] }
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }    
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
   - { import_role: { name: flux }, tags: [ flux ] }    

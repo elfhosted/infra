@@ -1254,7 +1254,7 @@ spec:
           root_url: https://grafana.infra.${dns_domain}      
         auth.generic_oauth:
           enabled: true
-          allow_sign_up: false
+          allow_sign_up: true
           name: authentik
           auto_login: false
           client_id: grafana

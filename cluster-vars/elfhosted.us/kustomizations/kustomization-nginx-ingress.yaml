@@ -1,11 +1,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: annatar
+  name: nginx-ingress-controller
   namespace: flux-system
 spec:
   interval: 15m
-  path: annatar
+  path: ./nginx-ingress-controller
+  dependsOn:
+  - name: external-dns  
   prune: true # remove any elements later removed from the above path
   timeout: 10m # if not set, this defaults to interval duration, which is 1h
   sourceRef:
@@ -14,12 +16,14 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
-      name: annatar
-      namespace: annatar 
+      name: nginx-ingress-controller
+      namespace: nginx-ingress-controller
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: nginx-ingress-controller
+      namespace: nginx-ingress-controller        
   postBuild:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-vars
-      - kind: Secret
-        name: cluster-secret-vars   
-   

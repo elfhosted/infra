@@ -25,5 +25,6 @@ yankee01-public.elfhosted.com
 yankee01
 
 [controllers]
-yankee01   ansible_host=yankee01-public.elfhosted.com
+yankee01   ansible_host=yankee01.elfhosted.com
+# yankee01   ansible_host=yankee01-public.elfhosted.com
 
