@@ -12,7 +12,7 @@ data:
   k3s_server_endpoint_2: 192.168.41.12
   k3s_server_endpoint_3: 192.168.41.13
   k8s_ha_api_ip: 100.93.110.91 # yankee01, for now
-  k8s_ha_api_port: "8443"  
+  k8s_ha_api_port: "6443"  
   prometheus_retentionsize: '5GB'
   prometheus_retention: "4d"   # enough to chart a month's progress with some headroom
   prometheus_pvc_storage: 6Gi
