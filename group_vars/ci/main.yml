@@ -22,9 +22,8 @@ authentik_login_background: https://images.unsplash.com/photo-1608096275202-85fd
 
 pod_cidr_v4: 10.3.0.0/15
 service_cidr_v4: 10.44.0.0/16
-pod_cidr:v6: fd01::/104  
-node-taint:
-  - node-role.kubernetes.io/control-plane=true:NoSchedule
+pod_cidr_v6: fd01::/104  
+k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
 
 firewall:
   admin_source: 

@@ -50,3 +50,10 @@
     regexp: 'source <\(kubectl completion bash\)'
     line: source <(kubectl completion bash)
     create: yes
+
+- name: Remove executable from k3s-uninstall.sh script for safety
+  ansible.builtin.file:
+    path: /usr/local/bin/k3s-uninstall.sh
+    owner: root
+    group: root
+    mode: '0600'

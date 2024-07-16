@@ -1,3 +1,10 @@
+- hosts: proxmox_servers:proxmox_vms
+  gather_facts: no # because the nodes aren't up yet
+
+  tasks: 
+  - { import_role: { name: proxmox }, tags: [ proxmox ] }
+  - { import_role: { name: proxmox-controller }, tags: [ proxmox-controller ] }  
+
 - hosts: k3s_servers
   roles:
   - role: artis3n.tailscale
@@ -12,7 +19,7 @@
     tags: always
 
   - { import_role: { name: node }, tags: [ node ] }
-  - { import_role: { name: k3s-server-experiment }, tags: [ k3s-server-experiment ] }  
+  - { import_role: { name: k3s-server }, tags: [ k3s-server ] }  
   - { import_role: { name: controller }, tags: [ controller ] }
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }    
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  

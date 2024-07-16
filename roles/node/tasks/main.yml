@@ -38,7 +38,8 @@
                 # Prevent leaking SMB requests towards service IPs
                 - to: "10.43.0.0/16"
                   via: "10.0.42.1"   
-  notify: netplan apply  
+  notify: netplan apply
+  ignore_errors: true # some clusters don't have vlans
                   
 - name: install yq via snap
   snap:
@@ -101,7 +102,7 @@
   ufw:
     direction: in
     rule: "allow"
-    src: "10.2.0.0/15"
+    src: "{{ pod_cidr_v4 }}"
     port: "{{ item.port }}"
     proto: "{{ item.proto }}"
   with_items:
@@ -118,12 +119,6 @@
     - { port: "8080", proto: "tcp" }  # kured
     - { port: "7472", proto: "tcp" }  # metallb 
     - { port: "4244", proto: "tcp" }  # hubble     
-
-- name: Allow any incoming traffic into the ceph cluster network
-  ufw:
-    direction: in
-    rule: "allow"
-    src: 10.0.44.0/24
 
 - name: Determine public NIC name (step 1/2)
   set_fact: 

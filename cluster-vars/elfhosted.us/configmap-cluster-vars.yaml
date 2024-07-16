@@ -25,4 +25,4 @@ data:
   k3s_version: v1.28.4+k3s2
   pod_cidr_v4: 10.3.0.0/15
   service_cidr_v4: 10.44.0.0/16 # this is also the k3s default
-  pod_cidr:v6: fd01::/104  
+  pod_cidr_v6: fd01::/104  
