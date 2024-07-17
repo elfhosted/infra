@@ -2,7 +2,7 @@
 
 This repository contains the flux / ansible components of the [ElfHosted](https://elfhosted.com) app hosting platform.
 
-ElfHosted is @funkypenguin's built-in-public platform offering hosting of [popular open-source apps](https://elfhosted.com/apps/) on daily subscriptions, with rates starting at $0.05/day.
+ElfHosted is @funkypenguin's built-in-public platform offering polished and integrated hosting of [popular open-source apps](https://elfhosted.com/apps/).
 
 # What can I do with it?
 
