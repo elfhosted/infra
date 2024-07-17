@@ -5,5 +5,5 @@ metadata:
   namespace: traefik
 spec:
   redirectRegex:
-    regex: ^.*proxy_stream
+    regex: ^.*proxy_stream.*
     replacement: https://elfhosted.com/assets/proxy-streaming-requires-addon-mediafusion.mp4
