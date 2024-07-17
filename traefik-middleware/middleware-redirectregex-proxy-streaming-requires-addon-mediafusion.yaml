@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirectregex-proxy-streaming-requires-addon-mediafusion
+  namespace: traefik
+spec:
+  redirectRegex:
+    regex: ^.*proxy_stream
+    replacement: https://elfhosted.com/assets/proxy-streaming-requires-addon-mediafusion.mp4
