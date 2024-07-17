@@ -23,12 +23,14 @@ disable:
 - "traefik"
 - "servicelb"
 - "local-storage"
-{% if node_taint is defined %}
+{% if k3s_node_taint is defined %}
 node-taint: 
 - {{ k3s_node_taint }}
 {% endif %}
+{% if cluster_nic_class_c is defined %}
 tls-san: 
   - "{{ cluster_nic_class_c }}.{{ ansible_host.split(".")[3] }}"
   - "{{ k8s_ha_api_ip }}"
+{% endif %}
 etcd-arg:
 - "quota-backend-bytes=8589934592" # 8GB

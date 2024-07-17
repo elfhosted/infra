@@ -17,6 +17,8 @@
     - jnettop
     - linux-generic-hwe-22.04
     - nfs-common
+    - open-iscsi
+    
   ignore_errors: true # sometimes apt is locked    
 
 - name: Add VLAN 4000
@@ -45,6 +47,7 @@
   snap:
     name: yq
   when: "inventory_hostname in groups['k3s_servers']"  
+  ignore_errors: true # sometimes snap has issues
 
 - name: Allow admin SSH sources to this host
   ufw:

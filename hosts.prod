@@ -61,6 +61,11 @@ hobbit02     ansible_host=10.0.42.152 cluster_nic=eno1.4000 # 128GB
 hobbit03     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
 hobbit04     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
 hobbit05     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
+hobbit06     ansible_host=10.0.42.156 cluster_nic=eno1.4000 # 128GB
+hobbit07     ansible_host=10.0.42.157 cluster_nic=eno1.4000 # 128GB
+hobbit08     ansible_host=10.0.42.158 cluster_nic=eno1.4000 # 128GB
+hobbit09     ansible_host=10.0.42.159 cluster_nic=eno1.4000 # 128GB
+hobbit10     ansible_host=10.0.42.160 cluster_nic=eno1.4000 # 128GB
 
 
 [k3s_observability]

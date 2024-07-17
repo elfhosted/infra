@@ -6,11 +6,13 @@
   - { import_role: { name: proxmox-controller }, tags: [ proxmox-controller ] }  
 
 - hosts: k3s_servers
+  become: yes
   roles:
   - role: artis3n.tailscale
     vars:
       # Example pulling the API key from the env vars on the host running Ansible
       tailscale_authkey: "{{ tailscale_key }}"
+      tailscale_args: "--accept-dns=false" # don't want tailscale messing up our kube dns
   tasks:
 
   - name: set host architecture
@@ -19,7 +21,7 @@
     tags: always
 
   - { import_role: { name: node }, tags: [ node ] }
-  - { import_role: { name: k3s-server }, tags: [ k3s-server ] }  
+  - { import_role: { name: k3s-server-experiment }, tags: [ k3s-server-experiment ] }  
   - { import_role: { name: controller }, tags: [ controller ] }
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }    
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  

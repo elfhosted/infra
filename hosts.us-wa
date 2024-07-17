@@ -11,10 +11,10 @@ k3s_rangers # dedicated customer nodes
 controllers
 
 [k3s_servers]
-yankee01     ansible_host=100.121.126.49 cluster_nic=tailscale0
+yankee01     ansible_host=100.93.110.91 cluster_nic=tailscale0
 
 [k3s_agents]
-yankee01     ansible_host=100.121.126.49 cluster_nic=tailscale0
+yankee01     ansible_host=100.93.110.91 cluster_nic=tailscale0
 
 # We use these for doing automated hetzner installimage reinstalls
 # There's no DNS here but these are saved entries in my .ssh/config
@@ -25,6 +25,6 @@ yankee01-public.elfhosted.com
 yankee01
 
 [controllers]
-yankee01   ansible_host=yankee01.elfhosted.com
+yankee01   ansible_host=100.93.110.91 cluster_nic=tailscale0
 # yankee01   ansible_host=yankee01-public.elfhosted.com
 
