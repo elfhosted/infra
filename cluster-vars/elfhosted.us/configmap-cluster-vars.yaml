@@ -6,8 +6,8 @@ metadata:
 data:
   dns_domain: elfhosted.us
   cluster_nic_class_c: 192.168.41
-  nginx_ingress_ip: 192.168.41.100
-  traefik_ingress_dns_ip: 192.168.41.101
+  nginx_ingress_ip: 100.93.110.91 # yankee01 via tailscale
+  traefik_ingress_dns_ip: 66.23.193.248 # yankee01, for now
   k3s_server_endpoint_1: 192.168.41.11
   k3s_server_endpoint_2: 192.168.41.12
   k3s_server_endpoint_3: 192.168.41.13
