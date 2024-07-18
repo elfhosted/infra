@@ -64,7 +64,7 @@ spec:
         mountPath: /app/data
         volumeSpec:
           persistentVolumeClaim:
-            claimName: comet    
+            claimName: comet-block   
       cache: 
         enabled: true
         type: emptyDir
