@@ -57,6 +57,10 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp
+      app: 
+        enabled: true
+        type: emptyDir
+        mountPath: /app        
       logs: 
         enabled: true
         type: emptyDir
