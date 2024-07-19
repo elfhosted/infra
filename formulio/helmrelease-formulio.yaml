@@ -24,7 +24,7 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      readOnlyRootFilesystem: false
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -56,11 +56,7 @@ spec:
       tmp: 
         enabled: true
         type: emptyDir
-        mountPath: /tmp
-      app: 
-        enabled: true
-        type: emptyDir
-        mountPath: /app        
+        mountPath: /tmp       
       logs: 
         enabled: true
         type: emptyDir
