@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: formulio
+  namespace: formulio
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: formulio
+  minAvailable: 1
