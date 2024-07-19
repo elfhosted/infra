@@ -10,7 +10,7 @@ spec:
       services:
         - name: formulio
           kind: Service
-          port: 3000
+          port: 8000
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
