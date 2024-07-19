@@ -20,7 +20,7 @@ spec:
       nameOverride: formulio
     image:
       repository: ghcr.io/elfhosted/formulio
-      tag: rolling@sha256:988cbe4d350c79ea7ca650cb4ec7647b97bbe99324f942ba6033194e14edc7af
+      tag: rolling@sha256:022c7aa11bc66784ad3c6bc28550acd80827a633abb20e4f853b48c8e942546b
     securityContext:
       seccompProfile:
         type: RuntimeDefault
