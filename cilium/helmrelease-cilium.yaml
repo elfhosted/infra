@@ -2265,7 +2265,7 @@ spec:
         suffix: ""
 
       # -- Number of replicas to run for the cilium-operator deployment
-      replicas: 2
+      replicas: ${ha_replica_count}
 
       # -- The priority class to use for cilium-operator
       priorityClassName: ""

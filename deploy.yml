@@ -6,7 +6,7 @@
   - { import_role: { name: proxmox-controller }, tags: [ proxmox-controller ] }  
 
 - hosts: k3s_servers
-  gather_facts: no
+  gather_facts: yes
   become: yes
 
   vars:
@@ -15,6 +15,13 @@
             {% for master in groups["k3s_servers"] %}
             server k8s-api-{{ hostvars[master]["inventory_hostname_short"]}} {{ cluster_nic_class_c }}.{{ hostvars[master]["ansible_host"].split(".")[3] }}:6443 check
             {% endfor %} 
+
+  roles:
+  - role: artis3n.tailscale
+    vars:
+      # Example pulling the API key from the env vars on the host running Ansible
+      tailscale_authkey: "{{ tailscale_key }}"
+      tailscale_args: "--accept-dns=false" # don't want tailscale messing up our kube dns
 
   tasks:
   - { import_role: { name: node }, tags: [ node ] }
@@ -26,8 +33,15 @@
 
 
 - hosts: k3s_dwarves,k3s_agents,k3s_observability,k3s_rangers,k3s_giants,k3s_hobbits
-  gather_facts: no
+  gather_facts: yes
   become: yes
+
+  roles:
+  - role: artis3n.tailscale
+    vars:
+      # Example pulling the API key from the env vars on the host running Ansible
+      tailscale_authkey: "{{ tailscale_key }}"
+      tailscale_args: "--accept-dns=false" # don't want tailscale messing up our kube dns  
 
   tasks: 
   - { import_role: { name: node }, tags: [ node ] }
@@ -35,7 +49,7 @@
   # - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
 
 - hosts: k3s_dwarves
-  gather_facts: no
+  gather_facts: yes
   become: yes
 
   tasks:     

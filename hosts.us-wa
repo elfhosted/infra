@@ -24,6 +24,9 @@ yankee01-public.elfhosted.com
 [k3s_elves]
 yankee01
 
+[k3s_rangers]
+[k3s_hobbits]
+
 [controllers]
 yankee01   ansible_host=100.93.110.91 cluster_nic=tailscale0
 # yankee01   ansible_host=yankee01-public.elfhosted.com

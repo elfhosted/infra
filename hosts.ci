@@ -61,7 +61,8 @@ hobbit03      ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:
 [node_role_download]
 sprite01
 
-[k3s_giants]
+[k3s_rangers]
+[k3s_hobbits]
 
 [node_role_app]
 sprite02
