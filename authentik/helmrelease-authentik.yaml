@@ -232,7 +232,7 @@ spec:
       name: server
 
       # -- The number of server pods to run
-      replicas: 2
+      replicas: ${ha_replica_count}
 
       ## authentik server Horizontal Pod Autoscaler
       autoscaling:
@@ -617,7 +617,7 @@ spec:
       name: worker
 
       # -- The number of worker pods to run
-      replicas: 2
+      replicas: ${ha_replica_count}
 
       ## authentik worker Horizontal Pod Autoscaler
       autoscaling:
