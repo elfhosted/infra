@@ -29,3 +29,4 @@ data:
   pod_cidr_v4: 10.4.0.0/15
   service_cidr_v4: 10.45.0.0/16 # this is also the k3s default
   pod_cidr_v6: fd02::/104
+  ha_replica_count: 2 # for ha-enabled deployments like topolvm
