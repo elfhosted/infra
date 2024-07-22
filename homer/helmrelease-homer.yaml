@@ -23,7 +23,7 @@ spec:
     controller:
       annotations:
         configmap.reloader.stakater.com/reload: "homer-config" # Reload the deployment every time the yaml config changes
-      replicas: 2
+      replicas: ${ha_replica_count}
       strategy: RollingUpdate              
 
     tolerations:
