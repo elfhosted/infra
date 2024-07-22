@@ -4,7 +4,7 @@ metadata:
   name: authentik-db
   namespace: authentik
 spec:
-  instances: 3
+  instances: ${ha_replica_count}
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
