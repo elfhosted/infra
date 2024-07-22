@@ -401,7 +401,7 @@ spec:
     # CSI controller service
     controller:
       # controller.replicaCount -- Number of replicas for CSI controller service.
-      replicaCount: 2
+      replicaCount: ${ha_replica_count}
 
       # controller.args -- Arguments to be passed to the command.
       args: []
