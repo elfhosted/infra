@@ -4,7 +4,6 @@ k3s_servers
 k3s_agents
 k3s_dwarves
 k3s_observability
-k3s_giants  # 10Ge download nodes
 k3s_goblins # 10Ge ceph nodes
 k3s_elves   # customer workloads
 k3s_rangers # dedicated customer nodes
@@ -163,12 +162,6 @@ dwarf10      ansible_host=10.0.42.90 cluster_nic=eno1.4000
 goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
 goblin05     ansible_host=10.0.42.65 cluster_nic=enp1s0.4000
 goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
-
-[k3s_giants]
-giant01      ansible_host=10.0.42.51 cluster_nic=enp39s0.4000
-giant02      ansible_host=10.0.42.52 cluster_nic=enp1s0.4000
-giant03      ansible_host=10.0.42.53 cluster_nic=enp44s0.4000
-
 
 [k3s_rangers]
 ranger01

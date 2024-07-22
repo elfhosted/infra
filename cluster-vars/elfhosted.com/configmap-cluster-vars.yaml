@@ -26,7 +26,7 @@ data:
   dashboard_background: production.jpg  
   hetzner_auction_hunter_cron: 0 * * * * # run hourly
   k3s_version: v1.28.4+k3s2
-  pod_cidr_v4: 10.4.0.0/15
-  service_cidr_v4: 10.45.0.0/16 # this is also the k3s default
-  pod_cidr_v6: fd02::/104
+  pod_cidr_v4: 10.2.0.0/15
+  service_cidr_v4: 10.43.0.0/16 # this is also the k3s default
+  pod_cidr_v6: fd00::/104
   ha_replica_count: "2" # for ha-enabled deployments like topolvm

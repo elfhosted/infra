@@ -23,7 +23,7 @@ data:
   ceph_ec_coding_chunks: "1"
   dashboard_background: development.jpg
   k3s_version: v1.28.4+k3s2
-  pod_cidr_v4: 10.3.0.0/15
-  service_cidr_v4: 10.44.0.0/16 # this is also the k3s default
-  pod_cidr_v6: fd01::/104  
+  pod_cidr_v4: 10.6.0.0/15
+  service_cidr_v4: 10.45.0.0/16
+  pod_cidr_v6: fd02::/104  
   ha_replica_count: "1" # for ha-enabled deployments like topolvm - we only have 1 node currently

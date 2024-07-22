@@ -4,7 +4,6 @@ k3s_servers
 k3s_agents
 k3s_dwarves
 k3s_observability
-k3s_giants  # 10Ge download nodes
 k3s_goblins # 10Ge ceph nodes
 k3s_elves   # customer workloads
 k3s_rangers # dedicated customer nodes

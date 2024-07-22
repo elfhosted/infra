@@ -32,7 +32,22 @@
   - { import_role: { name: backup }, tags: [ backup ] }
 
 
-- hosts: k3s_dwarves,k3s_agents,k3s_observability,k3s_rangers,k3s_giants,k3s_hobbits
+# We need this to get flux in before k3s-agent
+- hosts: controllers
+  gather_facts: yes
+
+  tasks: 
+
+  - name: set host architecture
+    set_fact:
+      host_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' if ansible_architecture == 'aarch64' else ansible_architecture }}"
+    tags: always
+
+  - { import_role: { name: controller }, tags: [ controller ] }
+  - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] } 
+
+# Now install workers
+- hosts: k3s_dwarves,k3s_agents,k3s_observability,k3s_rangers,k3s_hobbits
   gather_facts: yes
   become: yes
 
@@ -48,12 +63,6 @@
   - { import_role: { name: k3s-agent }, tags: [ k3s-agent ] }
   # - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
 
-- hosts: k3s_dwarves
-  gather_facts: yes
-  become: yes
-
-  tasks:     
-  - { import_role: { name: dwarf }, tags: [ dwarf ] }
 
 - hosts: controllers
   gather_facts: yes
@@ -65,8 +74,6 @@
       host_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' if ansible_architecture == 'aarch64' else ansible_architecture }}"
     tags: always
 
-  - { import_role: { name: controller }, tags: [ controller ] }
-  - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }  
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
   - { import_role: { name: velero }, tags: [ velero ] }
   - { import_role: { name: flux }, tags: [ flux ] }  
