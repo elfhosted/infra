@@ -14,7 +14,7 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   storage:
-    storageClass: ceph-block-ssd
+    storageClass: topolvm-provisioner-thin
     size: 10Gi
 
   monitoring:
