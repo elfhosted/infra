@@ -63,7 +63,7 @@ spec:
         mountPath: /var/log/gunicorn        
     resources:
       requests:
-        cpu: 1m
+        cpu: 100m
         memory: 50Mi
         ephemeral-storage: 50Mi
       limits:
