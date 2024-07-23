@@ -27,3 +27,7 @@ data:
   service_cidr_v4: 10.45.0.0/16
   pod_cidr_v6: fd02::/104  
   ha_replica_count: "1" # for ha-enabled deployments like topolvm - we only have 1 node currently
+  storageclass_rwx_name: topolvm-provisioner-thin
+  storageclass_rwx_accessMode: ReadWriteOnce
+  storageclass_rwo_name: topolvm-provisioner-thin
+  storageclass_rwo_accessMode: ReadWriteOnce

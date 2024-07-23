@@ -30,3 +30,7 @@ data:
   service_cidr_v4: 10.44.0.0/16 # this is also the k3s default
   pod_cidr_v6: fd01::/104  
   ha_replica_count: "2" # for ha-enabled deployments like topolvm
+  storageclass_rwx_name: ceph-filesystem-ssd
+  storageclass_rwx_accessMode: ReadWriteMany
+  storageclass_rwo_name: ceph-block-ssd
+  storageclass_rwo_accessMode: ReadWriteOnce    
