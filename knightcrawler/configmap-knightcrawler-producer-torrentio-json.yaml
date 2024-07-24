@@ -4,7 +4,7 @@ metadata:
   name: knightcrawler-producer-torrentio-json
   namespace: knightcrawler
 data:
-  torrentio.json:
+  torrentio.json: |
     {
       "TorrentioConfiguration": {
         "Instances": [
