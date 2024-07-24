@@ -12,11 +12,11 @@ data:
             "Name": "Official",
             "Url": "https://torrentio.strem.fun",
             "RateLimit": {
-              "RequestLimit": 36,
-              "IntervalInSeconds": 3600,
-              "BatchSize": 300,
+              "RequestLimit": 3600,
+              "IntervalInSeconds": 300,
+              "BatchSize": 3000,
               "ExceptionLimit": 5,
-              "ExceptionIntervalInSeconds": 300
+              "ExceptionIntervalInSeconds": 30
             }
           }
         ]
