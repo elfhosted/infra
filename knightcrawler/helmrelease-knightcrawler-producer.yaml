@@ -49,7 +49,16 @@ spec:
         volumeSpec:
           configMap:
             name: knightcrawler-scrapers-json
-            optional: true        
+            optional: true
+      torrentio-json:
+        enabled: true
+        mountPath: /app/Configuration/torrentio.json
+        subPath: torrentio.json
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: knightcrawler-producer-torrentio-json
+            optional: true            
     envFrom:
     - secretRef:
         name: knightcrawler-env 
