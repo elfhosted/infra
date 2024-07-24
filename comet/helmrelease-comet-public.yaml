@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: comet-standalone
+  name: comet-public
   namespace: comet
 spec:
   chart:
@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: comet-standalone
+  releaseName: comet-public
   values:
     global:
-      nameOverride: comet-standalone
+      nameOverride: comet-public
     image:
       repository: ghcr.io/elfhosted/comet
       tag: v1.21.1@sha256:d5f5d987d2c922f50286252cd21636389559109d5adc87f304d0554aeaa248a7
