@@ -12,6 +12,6 @@ spec:
     protocol: TCP
     targetPort: 8000
   selector:
-    app.kubernetes.io/name: comet-riven
+    app.kubernetes.io/name: comet
   sessionAffinity: None
   type: ClusterIP
