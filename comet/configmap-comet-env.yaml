@@ -13,7 +13,7 @@ data:
   INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
   GET_TORRENT_TIMEOUT: "5"
   INDEXER_MANAGER_TIMEOUT: "30"
-  FASTAPI_WORKERS: "5"
+  FASTAPI_WORKERS: "50"
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
