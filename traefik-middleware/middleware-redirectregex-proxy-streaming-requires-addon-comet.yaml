@@ -4,15 +4,16 @@ metadata:
   name: redirectregex-proxy-streaming-requires-addon-comet
   namespace: traefik
 spec:
-  # redirectRegex:
-  #   regex: ^.*playback.*
-  #   replacement: https://elfhosted.com/assets/proxy-streaming-requires-addon-comet.mp4
-  errors:
-    status:
-      - "206"
-    service:
-      # Just to break streaming until we can come up with a better solution
-      name: openspeedtest
-      namespace: openspeedtest
-      port: 3000
-    query: "/oauth2/start"  
+  redirectRegex:
+    # regex: ^.*playback.*
+    regex: ^.*/2$
+    replacement: https://elfhosted.com/assets/proxy-streaming-requires-addon-comet.mp4
+  # errors:
+  #   status:
+  #     - "206"
+  #   service:
+  #     # Just to break streaming until we can come up with a better solution
+  #     name: openspeedtest
+  #     namespace: openspeedtest
+  #     port: 3000
+  #   query: "/oauth2/start"  
