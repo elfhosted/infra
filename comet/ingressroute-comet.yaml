@@ -8,7 +8,7 @@ spec:
     - match: Host(`comet.${dns_domain}`)
       kind: Rule
       services:
-        - name: comet-public
+        - name: comet
           kind: Service
           port: 8000
       middlewares:  
