@@ -781,7 +781,8 @@ spec:
           http: 80
         ## @param defaultBackend.service.annotations Annotations for the default backend service
         ##
-        annotations: {}
+        annotations:
+          tailscale.com/expose: "true"        
       ## Default backend Pod Disruption Budget configuration
       ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
       ##
