@@ -32,5 +32,7 @@ data:
   ha_replica_count: "2" # for ha-enabled deployments like topolvm
   storageclass_rwx_name: ceph-filesystem-ssd
   storageclass_rwx_accessMode: ReadWriteMany
+  storageclass_rwx_volumeSnapshotClassName: ceph-filesystem
   storageclass_rwo_name: ceph-block-ssd
-  storageclass_rwo_accessMode: ReadWriteOnce    
+  storageclass_rwo_accessMode: ReadWriteOnce  
+  storageclass_rwo_volumeSnapshotClassName: ceph-block
