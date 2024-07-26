@@ -25,4 +25,5 @@
   - { import_role: { name: controller }, tags: [ controller ] }
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }    
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
-  - { import_role: { name: flux }, tags: [ flux ] }    
+  - { import_role: { name: flux }, tags: [ flux ] }
+  - { import_role: { name: authentik }, tags: [ authentik ] }  
