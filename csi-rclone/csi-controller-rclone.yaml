@@ -44,7 +44,7 @@ spec:
               mountPath: /csi
         - name: rclone
           image: dvcrn/csi-rclone-reloaded:v1.4.0
-          args :
+          args:
             - "/bin/csi-rclone-plugin"
             - "--nodeid=$(NODE_ID)"
             - "--endpoint=$(CSI_ENDPOINT)"
