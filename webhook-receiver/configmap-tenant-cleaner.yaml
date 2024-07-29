@@ -47,11 +47,11 @@ data:
       fi
     done
 
-    git pull
-    git checkout -b clean-kustomizations
+    # git pull
+    # git checkout -b clean-kustomizations
 
-    git add .
-    git commit -m "Tenant cleaner cleans tenants!" .
+    # git add .
+    # git commit -m "Tenant cleaner cleans tenants!" .
 
-    git push --set-upstream origin clean-kustomizations
-    gh pr create --title 'Tenant cleaner cleans up!' --base main --body 'Tenant cleaner cleans up!' --assignee funkypenguin
+    # git push --set-upstream origin clean-kustomizations
+    # gh pr create --title 'Tenant cleaner cleans up!' --base main --body 'Tenant cleaner cleans up!' --assignee funkypenguin
