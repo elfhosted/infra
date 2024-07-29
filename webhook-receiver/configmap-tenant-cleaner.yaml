@@ -47,6 +47,8 @@ data:
       fi
     done
 
+    sleep 23h
+    
     # git pull
     # git checkout -b clean-kustomizations
 
