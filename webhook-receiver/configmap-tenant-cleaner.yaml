@@ -33,8 +33,21 @@ data:
 
     ../scripts/process-all-customers.sh
 
-    git add .
-    git commit -m "Tenant cleaner cleans tenants!" .
+    # clean out unused namespaces / kustomizations
+    for NS in $(grep name bootstrap/namespaces/namespace-*.yaml | awk -s '{print $3}'); do
+      PVCs=$(kubectl get pvc -n $NS)
+      if [[ "$PVCs" == "No resources found in $NS namespace" ]]; then
+        # it's empty, we can delete it
+        TENANT="${FILENAME#*aa-}"
+        rm bootstrap/namespaces/namespaces-$TENANT.yaml
+        rm bootstrap/kustomizations/kustomization-$TENANT.yaml
+        rm -rf tenants $NS
+      fi
+    done
 
-    git pull
-    git push --set-upstream origin
+    sleep 1h
+    # git add .
+    # git commit -m "Tenant cleaner cleans tenants!" .
+
+    # git pull
+    # git push --set-upstream origin

@@ -17,10 +17,11 @@ spec:
             app.kubernetes.io/name: tenant-cleaner
         spec:
           restartPolicy: Never
+          serviceAccountName: tenant-cleaner
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
+            image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
