@@ -21,7 +21,7 @@ spec:
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
+            image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1@sha256:72e7e77f8091b66930e3b72d6ad688c6ecd1c574eef2bfc21e2b44511bcfa558
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
