@@ -6,7 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/name: tenant-cleaner  
 spec:
-  schedule: "0 * 31 2 *" # don't run
+  schedule: "55 21 * * *" # run daily 5 min before maintenance
+  timeZone: Pacific/Auckland
   concurrencyPolicy: Forbid # no more than one instance
   startingDeadlineSeconds: 60
   jobTemplate:
