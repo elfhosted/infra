@@ -52,7 +52,7 @@ spec:
         
     initContainers:
       pull-repo:
-        image: ghcr.io/elfhosted/webhook-receiver:2.8.1@2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
+        image: ghcr.io/elfhosted/webhook-receiver:2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
         command:
         - /bin/sh
         - -c
