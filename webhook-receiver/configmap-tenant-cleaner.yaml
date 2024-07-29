@@ -31,21 +31,21 @@ data:
     git config --global --add safe.directory tenants
     cd tenants/fsn/
 
+    sleep 1h
+
     ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
-    for NS in $(grep name bootstrap/namespaces/namespace-*.yaml | awk -s '{print $3}'); do
-      PVCs=$(kubectl get pvc -n $NS)
-      if [[ "$PVCs" == "No resources found in $NS namespace" ]]; then
+    for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
+      PVCs=$(kubectl get pvc -n aa-${TENANT})
+      if [[ "$PVCs" == "No resources found in aa-${TENANT} namespace" ]]; then
         # it's empty, we can delete it
-        TENANT="${FILENAME#*aa-}"
         rm bootstrap/namespaces/namespaces-$TENANT.yaml
         rm bootstrap/kustomizations/kustomization-$TENANT.yaml
         rm -rf tenants $NS
       fi
     done
 
-    sleep 1h
     # git add .
     # git commit -m "Tenant cleaner cleans tenants!" .
 

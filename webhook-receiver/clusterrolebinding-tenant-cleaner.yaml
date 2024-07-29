@@ -5,7 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: tenant-cleaner
-  namespace: tenant-cleaner
+  namespace: webhook-receiver
 roleRef:
   kind: ClusterRole
   name: tenant-cleaner
