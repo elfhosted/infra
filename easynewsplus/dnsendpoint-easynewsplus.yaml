@@ -1,0 +1,15 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "easynewsplus.${dns_domain}"
+  namespace: easynewsplus
+spec:
+  endpoints:
+  - dnsName: "easynewsplus.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "traefik-ingress.${dns_domain}"
+    providerSpecific:
+      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+        value: 'true'    

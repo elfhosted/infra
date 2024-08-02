@@ -1,0 +1,26 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: easynewsplus.${dns_domain}
+  namespace: easynewsplus
+spec:
+  routes:
+    - match: Host(`easynewsplus.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
+      kind: Rule
+      services:
+        - name: easynewsplus
+          kind: Service
+          port: 1337
+      middlewares:  
+        - name: chain-public-stremio-addon-static
+          namespace: traefik  
+    - match: Host(`easynewsplus.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: easynewsplus
+          kind: Service
+          port: 1337
+      middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
+

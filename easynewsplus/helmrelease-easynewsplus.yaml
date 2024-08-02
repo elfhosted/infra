@@ -1,0 +1,88 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: easynewsplus
+  namespace: easynewsplus
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: easynewsplus
+  values:
+    global:
+      nameOverride: easynewsplus
+    image:
+      repository: ghcr.io/elfhosted/stremio-easynews-addon
+      tag: rolling@sha256:4a1dfe0d6be3fef68d6af8dc90df65fe9a7739ef144d755d09038ea85a9e2d79
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
+    automountServiceAccountToken: false
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - easynewsplus
+            topologyKey: "kubernetes.io/hostname"
+    # persistence:
+    #   tmp: 
+    #     enabled: true
+    #     type: custom
+    #     mountPath: /tmp
+    #     volumeSpec:
+    #       ephemeral:
+    #         volumeClaimTemplate:
+    #           spec:
+    #             accessModes: [ "ReadWriteOnce" ]
+    #             storageClassName: "topolvm-provisioner-thin"
+    #             resources:
+    #               requests:
+    #                 storage: 1Gi   
+    #   npm: 
+    #     enabled: true
+    #     type: custom
+    #     mountPath: /.npm
+    #     volumeSpec:
+    #       ephemeral:
+    #         volumeClaimTemplate:
+    #           spec:
+    #             accessModes: [ "ReadWriteOnce" ]
+    #             storageClassName: "topolvm-provisioner-thin"
+    #             resources:
+    #               requests:
+    #                 storage: 1Gi                                           
+
+    # resources:
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 1337
