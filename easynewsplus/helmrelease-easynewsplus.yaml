@@ -20,7 +20,7 @@ spec:
       nameOverride: easynewsplus
     image:
       repository: ghcr.io/elfhosted/stremio-easynews-addon
-      tag: rolling@sha256:8590a3f7393dda6fb0332c4ba007ff980136f9086eda74e9643c2bd90eb9f3e8
+      tag: 1.2.0@sha256:e9279d51581f0e993f4527b6984d52130022d81c594c00b9d6d594a0fc8a7d74
     securityContext:
       seccompProfile:
         type: RuntimeDefault
