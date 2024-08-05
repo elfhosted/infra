@@ -104,6 +104,11 @@ spec:
           failureThreshold: 3
           periodSeconds: 10
           timeoutSeconds: 1
+    resources:
+      requests:
+        cpu: 500m
+      limits:
+        cpu: 500m
     addons:
       vpn:
         enabled: true # in case we ever need it
