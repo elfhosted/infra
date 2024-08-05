@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: app-template
+      chart: cloudflare-exporter
       version: 0.2.1
       sourceRef:
         kind: HelmRepository
