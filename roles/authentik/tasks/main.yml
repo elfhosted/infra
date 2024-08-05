@@ -274,6 +274,10 @@
         external_host: https://infra.{{ dns_domain }}
         internal_host: http://homer.homer.svc.cluster.local:8080
         host: infra.${dns_domain}
+      - name: seonaut
+        external_host: https://seonaut.infra.{{ dns_domain }}
+        internal_host: http://seonaut.seonaut.svc.cluster.local:9000
+        host: seonaut.infra.${dns_domain}        
       - name: hubble
         external_host: https://hubble.infra.{{ dns_domain }}
         internal_host: http://hubble-ui.kube-system.svc.cluster.local:80
