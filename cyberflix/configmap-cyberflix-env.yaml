@@ -8,7 +8,7 @@ data:
   TMDB_CATALOG_PAGES: "180"
   SPONSOR: |
 
-    This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of CyberFlix, for the Stremio Community - Enjoy! <A HREF="https://status.elfhosted.com/history/stremio-cyber-flix-addon"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Felfhosted%2Fstatus.elfhosted.com%2Fmaster%2Fapi%2Fstremio-cyber-flix-addon%2Fuptime.json" alt="Uptime Badge"></A>
+    This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of CyberFlix, for the Stremio Community - Enjoy! ❤️ (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/traefik-middleware/middleware-rate-limit-hosted-stremio-addon.yaml) apply*)
     <br/><br/>What is ElfHosted?
     
     <p><a href="https://elfhosted.com/">ElfHosted</a> is an <a href="https://elfhosted.com/open/">open-source</a> platform for <A HREF="https://elfhosted.com/guides/media/">"self-hosting" Plex with Real Debrid</A> (<I>using <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/">plex_debrid</A>, <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-riven/">Riven</A>, or <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-radarr-sonarr-prowlarr/">Radarr & Sonarr</A></I>), and your <a href="https://elfhosted.com/apps/">awesome self-hosted apps</a>, automatically and easily.</p>
