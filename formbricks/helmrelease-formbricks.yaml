@@ -21,7 +21,7 @@ spec:
     image:
       registry: ghcr.io
       repository: formbricks/formbricks
-      tag: v2.1.1@sha256:dbdcc0ef293afea1bd06a26cf5b24ab78cdac0e9a896ca5073a628a3b50a13f1
+      tag: v2.4.0
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -29,9 +29,9 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      # runAsUser: 568
-      # runAsGroup: 568
-      # fsGroup: 568
+      runAsUser: 1001
+      runAsGroup: 65533
+      fsGroup: 1001
     automountServiceAccountToken: false
     resources:
       requests:

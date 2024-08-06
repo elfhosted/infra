@@ -12,3 +12,4 @@ data:
   UPLOADS_DIR: /data
   PRIVACY_URL: https://elfhosted.com/legal/privacy-policy/
   TERMS_URL: https://elfhosted.com/legal/terms-of-service/
+  DEFAULT_BRAND_COLOR: '#50762E'
