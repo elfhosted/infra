@@ -20,7 +20,7 @@ spec:
       nameOverride: annatar
     image:
       repository: ghcr.io/elfhosted/annatar
-      tag: rolling@sha256:35891ab73e94dfac776049c79952920598a501e010baabe5d8c48934ae24bfdc
+      tag: rolling@sha256:a5b7a1e3cc8975d75cc80135121c13a30d4a0e2a098f8e6b9e3e0fa571224b17
     securityContext:
       seccompProfile:
         type: RuntimeDefault
