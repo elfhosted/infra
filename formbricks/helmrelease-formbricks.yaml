@@ -64,17 +64,12 @@ spec:
             claimName: formbricks    
       tmp: 
         enabled: true
-        type: custom
+        type: emptyDir
         mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi               
+      nextjs: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/nextjs
     envFrom:
     - secretRef:
         name: formbricks-env 
