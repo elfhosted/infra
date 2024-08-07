@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: librespeed
+  name: librespeed-backend
   namespace: librespeed
 spec:
   chart:
