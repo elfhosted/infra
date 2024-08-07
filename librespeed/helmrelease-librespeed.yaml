@@ -1,0 +1,69 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: librespeed
+  namespace: librespeed
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: librespeed
+  values:
+    global:
+      nameOverride: librespeed
+    image:
+      repository: ghcr.io/librespeed/speedtest
+      tag: latest@sha256:67cc269e69ac2c2f38b2561c796bd59a524c8512a6768afc3e2f6f924f8bb425
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - librespeed
+          topologyKey: "kubernetes.io/hostname"      
+    automountServiceAccountToken: false
+    controller:
+      type: daemonset # we want run a dual node everywhere
+    ingress:
+      main:
+        enabled: false 
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8181   
+    envFrom:
+    - secretRef:
+        name: librespeed-env 
+    - configMapRef:
+        name: librespeed-env          
+    persistence: 
+      config:
+        enabled: "true"
+        mountPath: "/servers.json"
+        subPath: "servers.json"
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: servers-json           

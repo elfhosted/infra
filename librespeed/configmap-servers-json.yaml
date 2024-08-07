@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: servers-json
+  namespace: librespeed
+data:
+  servers.json: |
+    [
+        {
+            "name": "elfhosted.com",
+            "server" :"//librespeed.elfhosted.com/",
+            "dlURL" :"garbage.php",
+            "ulURL" :"empty.php",
+            "pingURL" :"empty.php",
+            "getIpURL" :"getIP.php"
+        },
+        {
+            "name": "Friendly name for Server 2",
+            "server" :"https://server2.mydomain.com/",
+            "dlURL" :"garbage.php",
+            "ulURL" :"empty.php",
+            "pingURL" :"empty.php",
+            "getIpURL" :"getIP.php"
+        },
+        //...more servers...
+    ]

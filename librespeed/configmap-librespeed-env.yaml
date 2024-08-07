@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: librespeed-env
+  namespace: librespeed
+data:
+  TITLE: Speed Test | ElfHosted
+  TELEMETRY: "true"
+  ENABLE_ID_OBFUSCATION: "true"
+  DB_TYPE: "mysql"
+  DB_HOSTNAME: mysql
+  DB_PORT: "3306"
+  DB_NAME: mysql
+  DB_USERNAME: librespeed
+  DB_PASSWORD: librespeed
+  MODE: dual
+  EMAIL: legolas@elfhosted.com
+  WEBPORT: 8000
