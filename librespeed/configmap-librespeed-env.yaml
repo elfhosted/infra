@@ -13,6 +13,5 @@ data:
   DB_NAME: mysql
   DB_USERNAME: librespeed
   DB_PASSWORD: librespeed
-  MODE: backend
   EMAIL: legolas@elfhosted.com
   WEBPORT: "8000"

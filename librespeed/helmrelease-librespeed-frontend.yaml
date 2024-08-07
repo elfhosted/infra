@@ -51,6 +51,8 @@ spec:
         ports:
           http:
             port: 8000   
+    env:
+      MODE: frontend            
     envFrom:
     - secretRef:
         name: librespeed-env 
