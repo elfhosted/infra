@@ -15,4 +15,4 @@ data:
   DB_PASSWORD: librespeed
   MODE: dual
   EMAIL: legolas@elfhosted.com
-  WEBPORT: 8000
+  WEBPORT: "8000"
