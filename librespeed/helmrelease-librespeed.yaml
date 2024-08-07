@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: librespeed
+  releaseName: librespeed-backend
   values:
     global:
-      nameOverride: librespeed
+      nameOverride: librespeed-backend
     image:
       repository: ghcr.io/librespeed/speedtest
       tag: latest@sha256:67cc269e69ac2c2f38b2561c796bd59a524c8512a6768afc3e2f6f924f8bb425
@@ -30,17 +30,7 @@ spec:
         type: RuntimeDefault
       runAsUser: 568
       runAsGroup: 568
-      fsGroup: 568
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app.kubernetes.io/name
-              operator: In
-              values:
-              - librespeed
-          topologyKey: "kubernetes.io/hostname"      
+      fsGroup: 568    
     automountServiceAccountToken: false
     controller:
       type: daemonset # we want run a dual node everywhere
@@ -54,24 +44,16 @@ spec:
         enabled: false 
     service:
       main:
-        enabled: true # necessary for probes
+        enabled: false # we need our own with local policy
         ports:
           http:
-            port: 8181   
+            port: 8000   
     envFrom:
     - secretRef:
         name: librespeed-env 
     - configMapRef:
         name: librespeed-env          
-    persistence: 
-      config:
-        enabled: "true"
-        mountPath: "/servers.json"
-        subPath: "servers.json"
-        type: "custom"
-        volumeSpec:
-          configMap:
-            name: servers-json           
+    persistence:        
       database:
         enabled: true
         mountPath: /database
