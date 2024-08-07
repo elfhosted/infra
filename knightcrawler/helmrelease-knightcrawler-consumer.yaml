@@ -30,7 +30,7 @@ spec:
         unavailable: 1        
     image:
       repository: ghcr.io/elfhosted/knightcrawler-consumer
-      tag: v2.0.27@sha256:a24274e6e07506ca7f2ca3e97f5142069e1ce216a6df31dcdd0cdd97f6c5cdb3
+      tag: v2.0.27@sha256:f9eb46f4f9b7064afa691fd4169423923efad4eace4372a90a85a9ca769afcd6
     securityContext:
       seccompProfile:
         type: RuntimeDefault
