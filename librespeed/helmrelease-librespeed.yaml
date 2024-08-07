@@ -67,3 +67,8 @@ spec:
         volumeSpec:
           configMap:
             name: servers-json           
+      database:
+        enabled: true
+        mountPath: /database
+        type: emptyDir
+        sizeLimit: 10Gi               
