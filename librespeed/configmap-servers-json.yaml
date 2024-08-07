@@ -7,16 +7,16 @@ data:
   servers.json: |
     [
         {
-            "name": "elfhosted.com",
-            "server" :"//librespeed.elfhosted.com/",
+            "name": "hobbit01.elfhosted.com",
+            "server" :"//hobbit01-speed.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Friendly name for Server 2",
-            "server" :"https://server2.mydomain.com/",
+            "name": "hobbit02.elfhosted.com",
+            "server" :"//hobbit02-speed.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
