@@ -47,7 +47,7 @@ spec:
         enabled: false 
     service:
       main:
-        enabled: false # we need our own with local policy
+        enabled: true
         ports:
           http:
             port: 8000   
