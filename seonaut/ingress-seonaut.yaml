@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: seonaut.infra.${dns_domain}
-  namespace: authentik
+  namespace: seonaut
 spec:
   ingressClassName: nginx
   rules:
@@ -11,7 +11,7 @@ spec:
       paths:
       - backend:
           service:
-            name: authentik-server
+            name: seonaut
             port:
               name: http
         path: /
