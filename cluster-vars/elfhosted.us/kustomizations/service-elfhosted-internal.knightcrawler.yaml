@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    tailscale.com/tailnet-fqdn: knightcrawler-elfhosted-internal.tail5bd7d1.ts.net
+    tailscale.com/tailnet-fqdn: knightcrawler-elfhosted-internal-elfhosted-com.tail5bd7d1.ts.net
   name: elfhosted-internal
   namespace: knightcrawler
 spec:
