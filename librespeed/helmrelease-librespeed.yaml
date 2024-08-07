@@ -44,6 +44,11 @@ spec:
     automountServiceAccountToken: false
     controller:
       type: daemonset # we want run a dual node everywhere
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists   
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists      
     ingress:
       main:
         enabled: false 
@@ -71,4 +76,4 @@ spec:
         enabled: true
         mountPath: /database
         type: emptyDir
-        sizeLimit: 10Gi               
+        sizeLimit: 1Gi               
