@@ -1,15 +1,15 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: librespeed.${dns_domain}
+  name: librespeed-backend.${dns_domain}
   namespace: librespeed
 spec:
   routes:
-    - match: Host(`speed.${dns_domain}`)
+    - match: HostRegexp(`{subdomain:[a-z0-9]+}-speed.${dns_domain}`)
       kind: Rule
       services:
-        - name: librespeed
+        - name: librespeed-backend
           kind: Service
-          port: 3000
+          port: 8000
       middlewares:
         - name: librespeed-buffer

@@ -27,10 +27,7 @@ spec:
       readOnlyRootFilesystem: false
     podSecurityContext:
       seccompProfile:
-        type: RuntimeDefault
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568    
+        type: RuntimeDefault  
     automountServiceAccountToken: false
     controller:
       type: daemonset # we want run a dual node everywhere
