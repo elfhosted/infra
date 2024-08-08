@@ -5,7 +5,7 @@ metadata:
   namespace: knightcrawler
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: elfhosted-internal-knightcrawler-elfhosted-com
+    tailscale.com/hostname: elfhosted-internal-knightcrawler-${tailscale_suffix}
 spec:
   ports:
   - name: http

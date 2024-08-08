@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: elfhosted-internal
   namespace: mediafusion
-  annotations:
-    tailscale.com/expose: "true"  
+  # annotations:
+  #   tailscale.com/expose: "true"
+  #   tailscale.com/hostname: elfhosted-internal-knightcrawler-${tailscale_suffix}
 spec:
   ports:
   - name: http
