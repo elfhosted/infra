@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: elfhosted-internal
   namespace: zilean
-  # annotations:
-  #   tailscale.com/expose: "true"
-  #   tailscale.com/hostname: elfhosted-internal-knightcrawler-${tailscale_suffix}spec:
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: elfhosted-internal-knightcrawler-${tailscale_suffix}
+spec:
   ports:
   - name: http
     port: 80
