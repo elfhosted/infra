@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: elfhosted-internal
   namespace: knightcrawler
-  # annotations:
-  #   tailscale.com/expose: "true"
-  #   tailscale.com/hostname: elfhosted-internal-knightcrawler-elfhosted-com
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: elfhosted-internal-knightcrawler-elfhosted-com
 spec:
   ports:
   - name: http
