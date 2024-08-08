@@ -7,6 +7,7 @@ metadata:
   #   replicator.v1.mittwald.de/replicate-to: "*"
 data:
   dns_domain: ci-elfhosted.com
+  tailscale_suffix: ci-elfhosted-com
   cluster_nic_class_c: 192.168.41
   nginx_ingress_ip: 192.168.41.100
   traefik_ingress_dns_ip: 192.168.41.101

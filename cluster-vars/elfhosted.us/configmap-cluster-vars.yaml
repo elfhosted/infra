@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 data:
   dns_domain: elfhosted.us
+  tailscale_suffix: elfhosted-us
   cluster_nic_class_c: 192.168.41
   nginx_ingress_ip: 100.126.71.110 # Provided by tailscale in elfhosted.us
   traefik_ingress_dns_ip: 66.23.193.248 # yankee01, for now
