@@ -20,7 +20,7 @@ spec:
       nameOverride: peertube
     image:
       repository: ghcr.io/geek-cookbook/peertube
-      tag: v6.1.0-bookworm
+      tag: v6.2.1-bookworm@sha256:2b9a9311426a5eb76befc1a6a4a9d12a50114e39072fc80b89fe7ba4a8a5fca0
     securityContext:
       seccompProfile:
         type: RuntimeDefault
