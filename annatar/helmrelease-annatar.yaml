@@ -32,7 +32,7 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     controller:
-      replicas: 2
+      replicas: 4
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -106,9 +106,9 @@ spec:
           timeoutSeconds: 1
     resources:
       requests:
-        cpu: 500m
+        cpu: 100m
       limits:
-        cpu: 500m
+        cpu: 1
     addons:
       vpn:
         enabled: true # in case we ever need it
