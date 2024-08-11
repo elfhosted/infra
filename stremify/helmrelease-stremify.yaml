@@ -91,37 +91,37 @@ spec:
         ports:
           http:
             port: 3000
-    probes:
-      liveness:
-        custom: true
-        enabled: true
-        spec:
-          failureThreshold: 5
-          httpGet:
-            path: /
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10            
-      readiness:
-        custom: true
-        enabled: true
-        spec:
-          failureThreshold: 5
-          httpGet:
-            path: /
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10
-      startup:
-        custom: true
-        enabled: true
-        spec:
-          failureThreshold: 5
-          httpGet:
-            path: /
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 10
+    # probes:
+    #   liveness:
+    #     custom: true
+    #     enabled: true
+    #     spec:
+    #       failureThreshold: 5
+    #       httpGet:
+    #         path: /
+    #         port: 3000
+    #       initialDelaySeconds: 30
+    #       periodSeconds: 10
+    #       timeoutSeconds: 10            
+    #   readiness:
+    #     custom: true
+    #     enabled: true
+    #     spec:
+    #       failureThreshold: 5
+    #       httpGet:
+    #         path: /
+    #         port: 3000
+    #       initialDelaySeconds: 30
+    #       periodSeconds: 10
+    #       timeoutSeconds: 10
+    #   startup:
+    #     custom: true
+    #     enabled: true
+    #     spec:
+    #       failureThreshold: 5
+    #       httpGet:
+    #         path: /
+    #         port: 3000
+    #       initialDelaySeconds: 30
+    #       periodSeconds: 10
+    #       timeoutSeconds: 10
