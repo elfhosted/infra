@@ -27,7 +27,36 @@ spec:
         secret.reloader.stakater.com/reload: "knightcrawler-env"
       strategy: RollingUpdate
       rollingUpdate:
-        unavailable: 1        
+        unavailable: 1     
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - knightcrawler-consumer
+            topologyKey: "kubernetes.io/hostname"              
     image:
       repository: ghcr.io/elfhosted/knightcrawler-consumer
       tag: v2.0.27@sha256:f9eb46f4f9b7064afa691fd4169423923efad4eace4372a90a85a9ca769afcd6

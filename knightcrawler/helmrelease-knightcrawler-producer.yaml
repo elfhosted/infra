@@ -22,6 +22,24 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"   
         secret.reloader.stakater.com/reload: "knightcrawler-env"
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists           
     image:
       repository: ghcr.io/elfhosted/knightcrawler-producer
       tag: v2.0.27@sha256:b14918e68f8d12bf4588ad496d4e360fef24d50a6a819ff25b09382c76f99e26

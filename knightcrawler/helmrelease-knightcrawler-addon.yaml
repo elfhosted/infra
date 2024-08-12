@@ -38,7 +38,24 @@ spec:
         unavailable: 1
       annotations:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -48,8 +65,8 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - knightcrawler
-            topologyKey: "kubernetes.io/hostname"
+                - knightcrawler-addon
+            topologyKey: "kubernetes.io/hostname"   
     persistence:
       tmp: 
         enabled: true
