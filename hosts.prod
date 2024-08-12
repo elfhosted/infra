@@ -54,6 +54,10 @@ ranger03     ansible_host=10.0.42.113 cluster_nic=eno1.4000 # 128GB
 ranger04     ansible_host=10.0.42.114 cluster_nic=eno1.4000 # 128GB
 ranger05     ansible_host=10.0.42.115 cluster_nic=eno1.4000 # 128GB
 ranger06     ansible_host=10.0.42.116 cluster_nic=eno1.4000 # 128GB
+ranger07     ansible_host=10.0.42.117 cluster_nic=eno1.4000 # 128GB
+ranger08     ansible_host=10.0.42.118 cluster_nic=eno1.4000 # 128GB
+ranger09     ansible_host=10.0.42.119 cluster_nic=eno1.4000 # 128GB
+ranger10     ansible_host=10.0.42.120 cluster_nic=eno1.4000 # 128GB
 
 hobbit01     ansible_host=10.0.42.151 cluster_nic=eno1.4000 # 128GB
 hobbit02     ansible_host=10.0.42.152 cluster_nic=eno1.4000 # 128GB

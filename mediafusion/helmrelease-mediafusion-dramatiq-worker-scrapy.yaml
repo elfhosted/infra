@@ -33,7 +33,7 @@ spec:
     resources:
       requests:
         memory: 512Mi
-        cpu: 200m
+        cpu: 1m
       limits:
         memory: 1Gi
         cpu: 1
@@ -43,14 +43,14 @@ spec:
         configmap.reloader.stakater.com/reload: "mediafusion-env"
         secret.reloader.stakater.com/reload: "mediafusion-env"
     tolerations:
-    - key: node-role.elfhosted.com/storage
+    - key: node-role.elfhosted.com/dedicated
       operator: Exists 
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: node-role.elfhosted.com/storage
+            - key: node-role.elfhosted.com/dedicated
               operator: Exists
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
