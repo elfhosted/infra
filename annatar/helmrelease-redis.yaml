@@ -399,7 +399,19 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## NOTE: `master.podAffinityPreset`, `master.podAntiAffinityPreset`, and `master.nodeAffinityPreset` will be ignored when it's set
       ##
-      affinity: {}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.elfhosted.com/dedicated
+                operator: Exists   
+          - weight: 100
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.elfhosted.com/hobbit
+                operator: Exists                  
       ## @param master.nodeSelector Node labels for Redis&reg; master pods assignment
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
       ##
@@ -407,7 +419,12 @@ spec:
       ## @param master.tolerations Tolerations for Redis&reg; master pods assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations: []
+      tolerations:
+      - key: node-role.elfhosted.com/dedicated
+        operator: Exists     
+      - key: node-role.elfhosted.com/hobbit
+        operator: Exists                     
+
       ## @param master.topologySpreadConstraints Spread Constraints for Redis&reg; master pod assignment
       ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
       ## E.g.
