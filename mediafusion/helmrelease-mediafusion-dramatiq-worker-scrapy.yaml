@@ -16,8 +16,8 @@ spec:
   timeout: 5m
   releaseName: mediafusion-dramatiq-worker-scrapy
   values:
-    # global:
-    #   nameOverride: mediafusion
+    global:
+      nameOverride: mediafusion-dramatiq-worker-scrapy
     image:
       repository: ghcr.io/elfhosted/mediafusion
       tag: 3.9.15@sha256:78dfdac61e1870bcae7e8bf5d35dc3ebb468df28fab7ea4aa10c9642ce145707
@@ -44,14 +44,22 @@ spec:
         secret.reloader.stakater.com/reload: "mediafusion-env"
     tolerations:
     - key: node-role.elfhosted.com/dedicated
-      operator: Exists 
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
       nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
           nodeSelectorTerms:
           - matchExpressions:
             - key: node-role.elfhosted.com/dedicated
-              operator: Exists
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -61,7 +69,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - mediafusion
+                - mediafusion-dramatiq-worker-scrapy
             topologyKey: "kubernetes.io/hostname"
     persistence:
       tmp:

@@ -16,8 +16,8 @@ spec:
   timeout: 5m
   releaseName: mediafusion-dramatiq-worker
   values:
-    # global:
-    #   nameOverride: mediafusion
+    global:
+      nameOverride: mediafusion-dramatiq-worker
     image:
       repository: ghcr.io/elfhosted/mediafusion
       tag: 3.9.15@sha256:78dfdac61e1870bcae7e8bf5d35dc3ebb468df28fab7ea4aa10c9642ce145707
@@ -69,7 +69,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - mediafusion
+                - mediafusion-dramatiq-worker
             topologyKey: "kubernetes.io/hostname"
     persistence:
       tmp:
