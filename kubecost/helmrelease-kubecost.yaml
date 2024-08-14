@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cost-analyzer
-      version: 2.1.x
+      version: 2.3.x
       sourceRef:
         kind: HelmRepository
         name: kubecost
@@ -53,7 +53,7 @@ spec:
         prometheusServerEndpoint: http://localhost:8085/  # The prometheus service endpoint used by kubecost. The calls are forwarded through the GMP Prom proxy side car to the GMP database.
         gmpProxy:
           enabled: false
-          image: gke.gcr.io/prometheus-engine/frontend:v0.4.1-gke.0  # GMP Prometheus proxy image that serve as an endpoint to query metrics from GMP
+          image: gke.gcr.io/prometheus-engine/frontend:v0.7.4-gke.0  # GMP Prometheus proxy image that serve as an endpoint to query metrics from GMP
           imagePullPolicy: Always
           name: gmp-proxy
           port: 8085
@@ -875,7 +875,7 @@ spec:
         ##
         image:
           repository: quay.io/prometheus/prometheus
-          tag: v2.50.1
+          tag: v2.54.0
           pullPolicy: IfNotPresent
 
         ## prometheus server priorityClassName
@@ -1572,7 +1572,7 @@ spec:
           ##
           image:
             repository: quay.io/prometheus-operator/prometheus-config-reloader
-            tag: v0.72.0
+            tag: v0.76.0
             pullPolicy: IfNotPresent
 
           ## Additional configmap-reload container arguments
@@ -1612,7 +1612,7 @@ spec:
           ##
           image:
             repository: quay.io/prometheus-operator/prometheus-config-reloader
-            tag: v0.72.0
+            tag: v0.76.0
             pullPolicy: IfNotPresent
 
           ## Additional configmap-reload container arguments
@@ -1668,7 +1668,7 @@ spec:
         ##
         image:
           repository: prom/node-exporter
-          tag: v1.7.0
+          tag: v1.8.2
           pullPolicy: IfNotPresent
 
         ## node-exporter priorityClassName
@@ -1795,7 +1795,7 @@ spec:
         ##
         image:
           repository: prom/pushgateway
-          tag: v1.6.2
+          tag: v1.9.0
           pullPolicy: IfNotPresent
 
         ## pushgateway priorityClassName
@@ -2219,7 +2219,7 @@ spec:
       enabled: false
       image:
         repository: gcr.io/kubecost1/kubecost-network-costs
-        tag: v0.17.3
+        tag: v0.17.4
       imagePullPolicy: Always
       updateStrategy:
         type: RollingUpdate
@@ -2637,7 +2637,7 @@ spec:
       enabled: false
       image:
         repository: gcr.io/kubecost1/cluster-controller
-        tag: v0.15.2
+        tag: v0.16.7
       imagePullPolicy: Always
       ## PriorityClassName
       ## Ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
@@ -2806,7 +2806,7 @@ spec:
       ## Container image settings for the Grafana deployment
       image:
         repository: grafana/grafana
-        tag: 10.3.4
+        tag: 10.4.7
         pullPolicy: IfNotPresent
 
         ## Optionally specify an array of imagePullSecrets.
@@ -3000,7 +3000,7 @@ spec:
       sidecar:
         image:
           repository: kiwigrid/k8s-sidecar
-          tag: 1.26.0
+          tag: 1.27.5
           pullPolicy: IfNotPresent
         resources: {}
         dashboards:
