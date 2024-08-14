@@ -85,6 +85,6 @@ spec:
     #     volumeSpec:
     #       persistentVolumeClaim:
     #         claimName: zilean
-      envFrom:
-      - secretRef:
-          name: zilean-env                   
+    envFrom:
+    - secretRef:
+        name: zilean-env                   
