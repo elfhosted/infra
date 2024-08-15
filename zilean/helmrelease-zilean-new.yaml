@@ -77,14 +77,14 @@ spec:
         ports:
           http:
             port: 8181   
-    # persistence:
-    #   config:
-    #     enabled: true
-    #     type: custom
-    #     mountPath: /app/data
-    #     volumeSpec:
-    #       persistentVolumeClaim:
-    #         claimName: zilean
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /app/data
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: zilean-1-5
     envFrom:
     - secretRef:
         name: zilean-env                   
