@@ -62,8 +62,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"    
     automountServiceAccountToken: false
     env:
-      Zilean__ElasticSearch__Url: http://elasticsearch:9200
-      Zilean__Dmm__MinimumScoreMatch: "40"
+      Zilean__Dmm__MinimumScoreMatch: "0.4"
     controller:
       replicas: 1
       strategy: RollingUpdate
@@ -85,4 +84,7 @@ spec:
         mountPath: /app/data
         volumeSpec:
           persistentVolumeClaim:
-            claimName: zilean    
+            claimName: zilean-1-5
+    envFrom:
+    - secretRef:
+        name: zilean-env                   
