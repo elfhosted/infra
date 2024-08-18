@@ -72,20 +72,7 @@ spec:
                 storageClassName: "topolvm-provisioner-thin"
                 resources:
                   requests:
-                    storage: 1Gi
-      config: 
-        enabled: true
-        type: custom
-        mountPath: /config
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                        
+                    storage: 1Gi                
     resources:
       requests:
         cpu: 1m
@@ -103,4 +90,4 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 4000
+            port: 3000
