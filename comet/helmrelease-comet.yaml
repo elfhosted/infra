@@ -45,7 +45,7 @@ spec:
         configmap.reloader.stakater.com/reload: "comet-env"
         secret.reloader.stakater.com/reload: "comet-env"
     volumeClaimTemplates:
-    - name: cache
+    - name: config
       mountPath: /app/data
       accessMode: "ReadWriteOnce"
       size: 1Gi
