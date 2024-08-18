@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: stremio-ratings
     image:
-      repository: ghcr.io/geek-cookbook/stremio-rating-addon
+      repository: ghcr.io/elfhosted/stremio-rating-addon
       tag: rolling@sha256:f3d908b484c2da8e3fd201e14df9f8d69a9cc3561593642a250b3ab69eafd2f6
     securityContext:
       seccompProfile:
