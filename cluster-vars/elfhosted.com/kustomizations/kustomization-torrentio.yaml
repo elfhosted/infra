@@ -11,15 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: infra
-  healthChecks:
-    - apiVersion: apps/v1
-      kind: StatefulSet
-      name: mongodb
-      namespace: torrentio   
-    - apiVersion: apps/v1
-      kind: Deployment
-      name: torrentio-addon
-      namespace: torrentio 
   postBuild:
     substituteFrom:
       - kind: ConfigMap
