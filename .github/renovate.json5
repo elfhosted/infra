@@ -27,7 +27,7 @@
       "platformAutomerge": true,
       "ignoreTests": true,
       "baseBranches": ["main"],
-      "packagePatterns": [ "flaresolverr", "stremio-easynews-addon", "comet", "formulio", "zilean", "prowlarr-nightly", "jackett", "davio", "annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio","shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev" ]
+      "packagePatterns": [ "flaresolverr", "stremio-easynews-addon", "comet", "formulio", "zilean", "prowlarr-nightly", "jackett", "davio", "annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio","shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev", "stremio-rating-addon" ]
     } 
   ]
 }
