@@ -99,3 +99,22 @@ spec:
         name: stremio-ratings-env 
     # - configMapRef:
     #     name: davio-env 
+    initContainers:
+      setup:
+        image: ghcr.io/elfhosted/stremio-rating-addon:rolling@sha256:f3d908b484c2da8e3fd201e14df9f8d69a9cc3561593642a250b3ab69eafd2f6
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          # the volume is empty
+          if [ -z "$(ls -A /assets)" ]; then
+            # Copy the baked-in DB into the volume
+            cp //usr/src/app/assets/* /assets/   
+          fi
+        volumeMounts:        
+        - mountPath: /assets
+          name: assets    
