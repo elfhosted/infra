@@ -63,10 +63,10 @@ spec:
       #   volumeSpec:
       #     persistentVolumeClaim:
       #       claimName: stremio-ratings
-      tmp: 
+      assets: 
         enabled: true
         type: custom
-        mountPath: /tmp
+        mountPath: /usr/src/app/assets
         volumeSpec:
           ephemeral:
             volumeClaimTemplate:
