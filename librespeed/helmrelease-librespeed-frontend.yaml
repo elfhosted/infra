@@ -20,7 +20,7 @@ spec:
       nameOverride: librespeed-frontend
     image:
       repository: ghcr.io/librespeed/speedtest
-      tag: latest@sha256:67cc269e69ac2c2f38b2561c796bd59a524c8512a6768afc3e2f6f924f8bb425
+      tag: latest@sha256:c9723cbc4a083f0190b25fbd1274427906f13ea58101790e8f9ae155749ff170
     controller:
       replicas: 2
       strategy: RollingUpdate
