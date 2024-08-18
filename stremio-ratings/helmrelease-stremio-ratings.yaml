@@ -40,9 +40,6 @@ spec:
     controller:
       replicas: 2
       strategy: RollingUpdate
-      annotations:
-        configmap.reloader.stakater.com/reload: "stremio-ratings-env"
-        secret.reloader.stakater.com/reload: "stremio-ratings-env"
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
@@ -89,11 +86,6 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi                        
-    envFrom:
-    - secretRef:
-        name: stremio-ratings-env 
-    - configMapRef:
-        name: stremio-ratings-env 
     resources:
       requests:
         cpu: 1m
