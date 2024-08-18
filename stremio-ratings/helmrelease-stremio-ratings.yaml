@@ -20,7 +20,7 @@ spec:
       nameOverride: stremio-ratings
     image:
       repository: ghcr.io/elfhosted/stremio-rating-addon
-      tag: rolling@sha256:f3d908b484c2da8e3fd201e14df9f8d69a9cc3561593642a250b3ab69eafd2f6
+      tag: rolling@sha256:28db698c5b4ad1a8cf22f23adbef893ba0f5b32043e2d08ae2525a70e933160f
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -101,7 +101,7 @@ spec:
     #     name: davio-env 
     initContainers:
       setup:
-        image: ghcr.io/elfhosted/stremio-rating-addon:rolling@sha256:f3d908b484c2da8e3fd201e14df9f8d69a9cc3561593642a250b3ab69eafd2f6
+        image: ghcr.io/elfhosted/stremio-rating-addon:rolling@sha256:28db698c5b4ad1a8cf22f23adbef893ba0f5b32043e2d08ae2525a70e933160f
         imagePullPolicy: IfNotPresent
         command:
         - /bin/bash
