@@ -43,7 +43,24 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "stremio-ratings-env"
         secret.reloader.stakater.com/reload: "stremio-ratings-env"      
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -53,7 +70,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - stremio-ratings
+                - annatar
             topologyKey: "kubernetes.io/hostname"        
     resources:
       requests:
