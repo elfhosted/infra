@@ -56,26 +56,12 @@ spec:
                 - stremio-ratings
             topologyKey: "kubernetes.io/hostname"
     persistence:
-      # config:
-      #   enabled: true
-      #   type: custom
-      #   mountPath: /config/
-      #   volumeSpec:
-      #     persistentVolumeClaim:
-      #       claimName: stremio-ratings
-      assets: 
+      shared:
         enabled: true
-        type: custom
-        mountPath: /usr/src/app/assets
+        mountPath: /shared
+        type: emptyDir
         volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                
+          medium: Memory           
     resources:
       requests:
         cpu: 1m
@@ -118,3 +104,65 @@ spec:
         volumeMounts:        
         - mountPath: /assets
           name: assets    
+    setup-warp:
+      image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+      imagePullPolicy: IfNotPresent
+      command:
+      - /bin/bash
+      - -c
+      - |
+        set -x
+
+        cd /shared
+
+        # Create cloudflare account
+        wgcf register --accept-tos
+
+        # Create gluetun config
+        wgcf generate -p /shared/wg0.conf
+
+        # grab the values from the profile and put them into env vars for gluetun to consume
+        echo "export WIREGUARD_PRIVATE_KEY=$(grep PrivateKey /shared/wg0.conf | cut -f3 -d' ')" > /shared/env
+        echo "export WIREGUARD_PUBLIC_KEY=$(grep PublicKey /shared/wg0.conf | cut -f3 -d' ')" >> /shared/env
+        echo "export WIREGUARD_ADDRESSES=$(grep Address /shared/wg0.conf | grep '/32' | cut -f3 -d' ')" >> /shared/env
+
+        echo "export VPN_ENDPOINT_IP=$(dig +short dig +short engage.cloudflareclient.com)" >> /shared/env
+
+      volumeMounts:
+      - mountPath: /shared
+        name: shared
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        readOnlyRootFilesystem: false     
+  addons:
+    vpn:
+      enabled: true # in case we ever need it
+      gluetun:
+        image:
+          repository: ghcr.io/elfhosted/gluetun
+          tag: 3.39.0@sha256:198b5473cc2a48a3f38ab3a5d9e1316a6cc2b93f2b856c1cfc232713d03ce077
+      env:
+        IPTABLES_BACKEND: nft
+        KILLSWITCH: "true"
+        LOCAL_NETWORK: 10.0.0.0/8
+        NFTABLES: "1"    
+        VPNDNS: "0"            
+        HTTP_CONTROL_SERVER_PORT: "8000"
+        HTTP_CONTROL_SERVER_ADDRESS: ":8000"
+        VPN_TYPE: wireguard
+        VPN_SERVICE_PROVIDER: custom
+        FIREWALL_INPUT_PORTS: "3000"
+        WIREGUARD_MTU: "1280"
+        VPN_ENDPOINT_PORT: "2408"
+        DOT: "off"
+      securityContext:
+        runAsUser: 0
+        capabilities:
+          add:
+            - NET_ADMIN
+            - SYS_MODULE
+      config: # We have to set this to null so that we can override with our own config
+      volumeMounts:
+      - mountPath: /shared
+        name: shared          
