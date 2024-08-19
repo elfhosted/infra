@@ -19,8 +19,8 @@ spec:
     global:
       nameOverride: annatar
     image:
-      repository: ghcr.io/geek-cookbook/annatar
-      tag: v0.12.8@sha256:c8838cc4be0195f8b40b1271fba5bcb26f566d79c64460a024c09266c0129ced
+      repository: ghcr.io/elfhosted/annatar
+      tag: rolling@sha256:752a687a08609790790c23db67527df5b305dfe703ea9e5e5772ef2435ecd799
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -32,14 +32,31 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     controller:
-      replicas: 2
+      replicas: 4
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
       annotations:
         secret.reloader.stakater.com/reload: "annatar-env"
         configmap.reloader.stakater.com/reload: "annatar-env"
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -50,7 +67,7 @@ spec:
                 operator: In
                 values:
                 - annatar
-            topologyKey: "kubernetes.io/hostname"
+            topologyKey: "kubernetes.io/hostname"    
     persistence:
       tmp: 
         enabled: true
@@ -104,6 +121,11 @@ spec:
           failureThreshold: 3
           periodSeconds: 10
           timeoutSeconds: 1
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        cpu: 1
     addons:
       vpn:
         enabled: true # in case we ever need it
@@ -117,7 +139,7 @@ spec:
         env:
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOCAL_NETWORK: 10.0.0.0/8
           LOC: de-frankfurt
           PORT_FORWARDING: "0"
           PORT_PERSIST: "1"

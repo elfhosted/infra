@@ -18,7 +18,7 @@
       "ignoreTests": true,
       "baseBranches": ["ci"],
       "packagePatterns": [ ".*" ],
-    "excludePackagePatterns": [ "prowlarr-nightly", "comet", "zilean", "jackett", "davio", "annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio", "shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev" ]
+    "excludePackagePatterns": [ "prowlarr-nightly", "stremio-easynews-addon", "comet", "formulio", "zilean", "jackett", "davio", "annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio", "shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev" ]
     },
     { // auto-merge upstream app-level images
       "matchPackagePatterns": ["digest","patch"],
@@ -27,7 +27,7 @@
       "platformAutomerge": true,
       "ignoreTests": true,
       "baseBranches": ["main"],
-      "packagePatterns": [ "flaresolverr","comet", "zilean", "prowlarr-nightly", "jackett", "davio", "annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio","shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev" ]
+      "packagePatterns": [ "flaresolverr", "stremio-easynews-addon", "comet", "formulio", "zilean", "prowlarr-nightly", "jackett", "davio", "annatar","knightcrawler-producer","knightcrawler-consumer","knightcrawler-addon","stremio-jackett-cacher","xtremio","mediafusion", "stremio-jackett","jackettio","shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev", "stremio-rating-addon" ]
     } 
   ]
 }

@@ -781,7 +781,7 @@ spec:
           http: 80
         ## @param defaultBackend.service.annotations Annotations for the default backend service
         ##
-        annotations: {}
+        annotations: {} 
       ## Default backend Pod Disruption Budget configuration
       ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
       ##
@@ -826,7 +826,8 @@ spec:
       ## This can be used to set the LoadBalancer service type to internal only.
       ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
       ##
-      annotations: {}
+      annotations:
+        tailscale.com/expose: "true"
       ## @param service.labels Labels for controller service
       ##
       labels: {}

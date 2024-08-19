@@ -31,19 +31,38 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app.kubernetes.io/name
-              operator: In
-              values:
-              - zilean
-          topologyKey: "kubernetes.io/hostname"      
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - zilean
+            topologyKey: "kubernetes.io/hostname"    
     automountServiceAccountToken: false
     env:
-      Zilean__ElasticSearch__Url: http://elasticsearch:9200
+      Zilean__Dmm__MinimumScoreMatch: "0.4"
     controller:
       replicas: 1
       strategy: RollingUpdate
@@ -65,4 +84,7 @@ spec:
         mountPath: /app/data
         volumeSpec:
           persistentVolumeClaim:
-            claimName: zilean    
+            claimName: zilean-1-5
+    envFrom:
+    - secretRef:
+        name: zilean-env                   

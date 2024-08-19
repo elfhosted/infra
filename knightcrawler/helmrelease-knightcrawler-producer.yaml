@@ -22,6 +22,24 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"   
         secret.reloader.stakater.com/reload: "knightcrawler-env"
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists           
     image:
       repository: ghcr.io/elfhosted/knightcrawler-producer
       tag: v2.0.27@sha256:b14918e68f8d12bf4588ad496d4e360fef24d50a6a819ff25b09382c76f99e26
@@ -49,7 +67,16 @@ spec:
         volumeSpec:
           configMap:
             name: knightcrawler-scrapers-json
-            optional: true        
+            optional: true
+      torrentio-json:
+        enabled: true
+        mountPath: /app/Configuration/torrentio.json
+        subPath: torrentio.json
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: knightcrawler-producer-torrentio-json
+            optional: true            
     envFrom:
     - secretRef:
         name: knightcrawler-env 
@@ -92,7 +119,7 @@ spec:
         env:
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOCAL_NETWORK: 10.0.0.0/8
           LOC: de-frankfurt
           PORT_FORWARDING: "0"
           PORT_PERSIST: "1"

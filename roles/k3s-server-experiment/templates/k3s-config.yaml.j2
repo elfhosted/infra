@@ -11,19 +11,24 @@ kube-controller-manager-arg:
 kube-scheduler-arg:
 - "bind-address=0.0.0.0"
 kubelet-arg:
-- "max-pods=500"
+- "max-pods=1000"
 etcd-expose-metrics: true
-flannel-iface: "{{ cluster_nic }}"
+# flannel-iface: "{{ cluster_nic }}"
+service-cidr: "{{ service_cidr_v4 }}"
 flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
 cluster-init: true
+# node-ip: {{ ansible_host }}
+node-external-ip: {{ ansible_host }}
 disable: 
 - "traefik"
 - "servicelb"
 - "local-storage"
-node-taint:
-  - node-role.kubernetes.io/control-plane=true:NoSchedule
+{% if k3s_node_taint is defined %}
+node-taint: 
+- {{ k3s_node_taint }}
+{% endif %}
 tls-san: 
 etcd-arg:
 - "quota-backend-bytes=8589934592" # 8GB

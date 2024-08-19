@@ -13,21 +13,21 @@ data:
   INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
   GET_TORRENT_TIMEOUT: "5"
   INDEXER_MANAGER_TIMEOUT: "30"
-  FASTAPI_WORKERS: "5"
+  FASTAPI_WORKERS: "50"
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
     <P>
       This is a free community instance, enjoy! ❤️ </BR>(<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)</BR>
-    </BR><A HREF="https://elfhosted.com">ElfHosted</A> is an <A HREF="https://elfhosted.com/open/">open-source</A> PaaS built and run by a <A HREF="https://discord.elfhosted.com">friendly community of geeks</A>, which self-hosts <A HREF="https://elfhosted.com/guides/media/">your favorite streaming apps</A> for you, automatically and easily. 
     </P>
-    <P>
-      Individual, hosted premium <A HREF="https://store.elfhosted.com/product/comet">Comet</A>, <A HREF="https://store.elfhosted.com/product/bundle-comet-jackett">Comet+Jackett</A> / <A HREF="https://store.elfhosted.com/product/bundle-comet-prowlarr">Comet+Prowlarr</A> instances are available with Proxy Streaming (<I>stream from RealDebrid from multiple IPs simultaneously</I>), higher rate-limits, and custom indexer support.
-    </P>
-    <h3>Why use <A HREF="https://elfhosted.com/stremio-addons/">ElfHosted "Premium" Stremio addons</A>?</h3>
-              <p style="text-align: justify;">
-                    ❤️ 30% of your subscription goes directly to the addon developer</br>
-                    ✋ Dedicated <A HREF="https://discord.gg/funky-penguin-396055506072109067">#elf-comet</A> support channel in Discord</br>
-                    ✅ Highly-available, <A HREF="https://elfhosted.com/open/">open-source</A> infrastructure  / <A HREF="https://status.elfhosted.com/history/comet-stremio-addon"><IMG SRC="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Felfhosted%2Fstatus.elfhosted.com%2Fmaster%2Fapi%2Fcomet-stremio-addon%2Fuptime.json"></A><br/>
-                    📊 Geek out over <A HREF="https://fnky.nz/grafana-comet">public performance metrics</A><br/>
-              </p>		
+             <h3>What is ElfHosted?</h3>
+             <div>
+      <p><a href="https://elfhosted.com/">ElfHosted</a> is an <a href="https://elfhosted.com/open/">open-source</a> platform for <A HREF="https://elfhosted.com/guides/media/">"self-hosting" Plex with Real Debrid</A> (<I>using <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/">plex_debrid</A>, <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-riven/">Riven</A>, or <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-radarr-sonarr-prowlarr/">Radarr & Sonarr</A></I>), and your <a href="https://elfhosted.com/apps/">awesome self-hosted apps</a>, automatically and easily.</p>
+      <p>We support the Stremio community (<A HREf="https://reddit.com/r/StremioAddons">Reddit</A> / <A HREF="https://discord.gg/zNRf6YF">Discord</A>) by providing free hosting for some of the <A HREF="https://elfhosted.com/stremio-addons/">best Stremio Addons</A>, including those which enable you to:</p>
+            </div>	
+      👨‍👩‍👦‍👦 <A HREF="https://elfhosted.com/app/comet/">Share your Real Debrid / Stremio from multiple locations at once</A> (<I>Comet</I>)
+      <br/>🎁 Watch your paid <A HREF="https://elfhosted.com/app/xtremio/">IPTV with Stremio</A> (<I>Xtremio</I>)
+      <br/>📺 Install a <A HREF="https://elfhosted.com/app/mediafusion/">Stremio Live TV addon</A> (<I>MediaFusion</I>)
+      <br/>🏈 Watch recorded / live <A HREF="https://elfhosted.com/app/mediafusion/">sports with Stremio</A> (<I>MediaFusion</I>)
+
+             </div>	

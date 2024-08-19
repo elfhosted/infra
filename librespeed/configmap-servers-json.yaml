@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: servers-json
+  namespace: librespeed
+data:
+  servers.json: |
+    [
+        {
+            "name": "hobbit01.elfhosted.com",
+            "server" :"//hobbit01-speed.elfhosted.com/",
+            "dlURL" :"garbage.php",
+            "ulURL" :"empty.php",
+            "pingURL" :"empty.php",
+            "getIpURL" :"getIP.php"
+        },
+        {
+            "name": "hobbit02.elfhosted.com",
+            "server" :"//hobbit02-speed.elfhosted.com/",
+            "dlURL" :"garbage.php",
+            "ulURL" :"empty.php",
+            "pingURL" :"empty.php",
+            "getIpURL" :"getIP.php"
+        },
+        //...more servers...
+    ]

@@ -232,7 +232,7 @@ spec:
       name: server
 
       # -- The number of server pods to run
-      replicas: 2
+      replicas: ${ha_replica_count}
 
       ## authentik server Horizontal Pod Autoscaler
       autoscaling:
@@ -617,7 +617,7 @@ spec:
       name: worker
 
       # -- The number of worker pods to run
-      replicas: 2
+      replicas: ${ha_replica_count}
 
       ## authentik worker Horizontal Pod Autoscaler
       autoscaling:
@@ -954,7 +954,16 @@ spec:
         enabled: true
         existingSecret: authentik-secrets
         existingSecretPasswordKey: AUTHENTIK_REDIS__PASSWORD
-
+      master:
+        persistence:
+          storageClass: "${storageclass_rwo_name}"
+          ## @param master.persistence.accessModes Persistent Volume access modes
+          ##
+          accessModes:
+            - ReadWriteOnce
+          ## @param master.persistence.size Persistent Volume size
+          ##
+          size: 8Gi      
 
     # -- additional resources to deploy. Those objects are templated.
     additionalObjects: []

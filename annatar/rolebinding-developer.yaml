@@ -7,6 +7,9 @@ subjects:
 - kind: ServiceAccount
   name: kubernetes-dashboard
   namespace: aa-bamb0uu
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: aa-leo1305
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role

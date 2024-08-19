@@ -17,6 +17,9 @@ spec:
   releaseName: webhook-receiver
   values:
     replicaCount: 2
+    image: 
+      repository: ghcr.io/elfhosted/webhook-receiver
+      tag: 2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
     persistence:
       config:
         enabled: "true"
@@ -49,7 +52,7 @@ spec:
         
     initContainers:
       pull-repo:
-        image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
+        image: ghcr.io/elfhosted/webhook-receiver:2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
         command:
         - /bin/sh
         - -c

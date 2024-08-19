@@ -7,6 +7,9 @@ subjects:
 - kind: ServiceAccount
   name: kubernetes-dashboard
   namespace: aa-mhdzumair
+- kind: ServiceAccount
+  name: filebrowser
+  namespace: aa-mhdzumair  
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role

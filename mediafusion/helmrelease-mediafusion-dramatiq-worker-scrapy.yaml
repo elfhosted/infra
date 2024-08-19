@@ -16,8 +16,8 @@ spec:
   timeout: 5m
   releaseName: mediafusion-dramatiq-worker-scrapy
   values:
-    # global:
-    #   nameOverride: mediafusion
+    global:
+      nameOverride: mediafusion-dramatiq-worker-scrapy
     image:
       repository: ghcr.io/elfhosted/mediafusion
       tag: 3.9.16@sha256:75e12716415faeddda69649e25391299887916d487b7eceaeeb3722397204a6c
@@ -33,7 +33,7 @@ spec:
     resources:
       requests:
         memory: 512Mi
-        cpu: 200m
+        cpu: 1m
       limits:
         memory: 1Gi
         cpu: 1
@@ -43,15 +43,23 @@ spec:
         configmap.reloader.stakater.com/reload: "mediafusion-env"
         secret.reloader.stakater.com/reload: "mediafusion-env"
     tolerations:
-    - key: node-role.elfhosted.com/storage
-      operator: Exists 
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
       nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
           nodeSelectorTerms:
           - matchExpressions:
-            - key: node-role.elfhosted.com/storage
-              operator: Exists
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -61,7 +69,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - mediafusion
+                - mediafusion-dramatiq-worker-scrapy
             topologyKey: "kubernetes.io/hostname"
     persistence:
       tmp:
@@ -107,7 +115,7 @@ spec:
         env:
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOCAL_NETWORK: 10.0.0.0/8
           LOC: de-frankfurt
           PORT_FORWARDING: "0"
           PORT_PERSIST: "1"

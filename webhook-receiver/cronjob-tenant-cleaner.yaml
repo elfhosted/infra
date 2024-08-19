@@ -6,7 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/name: tenant-cleaner  
 spec:
-  schedule: "0 * 31 2 *" # don't run
+  schedule: "55 21 * * *" # run daily 5 min before maintenance
+  timeZone: Pacific/Auckland
   concurrencyPolicy: Forbid # no more than one instance
   startingDeadlineSeconds: 60
   jobTemplate:
@@ -17,10 +18,11 @@ spec:
             app.kubernetes.io/name: tenant-cleaner
         spec:
           restartPolicy: Never
+          serviceAccountName: tenant-cleaner
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/geek-cookbook/webhook-receiver:2.8.1
+            image: ghcr.io/elfhosted/webhook-receiver:2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false

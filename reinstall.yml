@@ -1,7 +1,7 @@
 ---
 
 
-- hosts: k3s_agents,k3s_dwarves,k3s_servers,k3s_observability,k3s_rangers,k3s_giants,k3s_hobbits
+- hosts: k3s_agents,k3s_dwarves,k3s_servers,k3s_observability,k3s_rangers,k3s_hobbits
   gather_facts: no
   become: yes
 

@@ -39,7 +39,24 @@ spec:
     env:
       PORT: 3649
       TENANT_NAME: Public
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
     affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -50,7 +67,7 @@ spec:
                 operator: In
                 values:
                 - xtremio
-            topologyKey: "kubernetes.io/hostname"
+            topologyKey: "kubernetes.io/hostname"   
     persistence:
       tmp: 
         enabled: true

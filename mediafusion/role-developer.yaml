@@ -18,6 +18,7 @@ rules:
   - persistentvolumes
   - pods
   - pods/log
+  - pods/exec #allow to exec to pods
   - replicasets
   - replicationcontrollers
   - services
@@ -27,6 +28,13 @@ rules:
   - get
   - list
   - watch
+# allow developer to exec into pods
+- apiGroups:
+  - "*"
+  resources:
+  - pods/exec #allow to exec to pods
+  verbs:
+  - create 
 # let developer effect their own reboots by deleting pods
 - apiGroups:
   - "*"

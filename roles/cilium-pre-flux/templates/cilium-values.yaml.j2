@@ -1498,7 +1498,7 @@ ipam:
   operator:
     # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
     clusterPoolIPv4PodCIDRList:
-    - "10.2.0.0/15"
+    - "{{ pod_cidr_v4 }}"
     # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
     clusterPoolIPv4MaskSize: 22
     # -- Deprecated in favor of ipam.operator.clusterPoolIPv6PodCIDRList.
@@ -1506,7 +1506,7 @@ ipam:
     # clusterPoolIPv6PodCIDR: "fd00::/104"
      # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
     clusterPoolIPv6PodCIDRList:
-    - "fd00::/104"
+    - "{{ pod_cidr_v6 }}"
     # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
     clusterPoolIPv6MaskSize: 118
     # -- IP pools to auto-create in multi-pool IPAM mode.
@@ -1674,7 +1674,7 @@ vtep:
 # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
 # the user must configure the routes to reach pods, either manually or by
 # setting the auto-direct-node-routes flag.
-ipv4NativeRoutingCIDR: "10.2.0.0/15"
+ipv4NativeRoutingCIDR: "10.0.0.0/10" # provide 32 x /15s
 
 # -- (string) Allows to explicitly specify the IPv6 CIDR for native routing.
 # When specified, Cilium assumes networking for this CIDR is preconfigured and
@@ -2247,7 +2247,7 @@ operator:
     suffix: ""
 
   # -- Number of replicas to run for the cilium-operator deployment
-  replicas: 2
+  replicas: 1 # later we extend this to 2 in helmreleases, cluster-dependent
 
   # -- The priority class to use for cilium-operator
   priorityClassName: ""

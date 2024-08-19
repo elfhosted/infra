@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: easynewsplus
+  namespace: easynewsplus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: easynewsplus
+  minAvailable: 1

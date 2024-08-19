@@ -1692,7 +1692,7 @@ spec:
     # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
     # the user must configure the routes to reach pods, either manually or by
     # setting the auto-direct-node-routes flag.
-    ipv4NativeRoutingCIDR: "10.2.0.0/15"
+    ipv4NativeRoutingCIDR: "10.0.0.0/10"
 
     # -- (string) Allows to explicitly specify the IPv6 CIDR for native routing.
     # When specified, Cilium assumes networking for this CIDR is preconfigured and
@@ -2265,7 +2265,7 @@ spec:
         suffix: ""
 
       # -- Number of replicas to run for the cilium-operator deployment
-      replicas: 2
+      replicas: ${ha_replica_count}
 
       # -- The priority class to use for cilium-operator
       priorityClassName: ""

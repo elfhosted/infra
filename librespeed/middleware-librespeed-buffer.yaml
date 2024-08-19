@@ -1,0 +1,8 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: librespeed-buffer
+  namespace: librespeed
+spec:
+  buffering:
+    maxRequestBodyBytes: 10000000000

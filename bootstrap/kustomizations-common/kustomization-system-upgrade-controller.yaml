@@ -10,7 +10,6 @@ spec:
   timeout: 10m # if not set, this defaults to interval duration, which is 1h
   dependsOn:
   - name: "traefik"  
-  - name: "rook-ceph-cluster"
   sourceRef:
     kind: GitRepository
     name: infra

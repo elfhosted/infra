@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seonaut.infra.${dns_domain}
+  namespace: seonaut
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: seonaut.infra.${dns_domain}
+    http:
+      paths:
+      - backend:
+          service:
+            name: seonaut
+            port:
+              name: http
+        path: /
+        pathType: Prefix

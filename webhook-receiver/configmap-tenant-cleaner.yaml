@@ -33,8 +33,27 @@ data:
 
     ../scripts/process-all-customers.sh
 
-    git add .
-    git commit -m "Tenant cleaner cleans tenants!" .
+    # clean out unused namespaces / kustomizations
+    for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
+      # Avoid null tenants
+      if [[ ! "$TENANT" == "" ]]; then
+        PVCs=$(kubectl get pvc -n aa-${TENANT})
+        if [[ "$PVCs" == "" ]]; then
+          # it's empty, we can delete it
+          rm bootstrap/namespaces/namespace-$TENANT.yaml
+          rm bootstrap/kustomizations/kustomization-$TENANT.yaml
+          rm -rf tenants/$TENANT
+        fi
+      fi
+    done
 
-    git pull
-    git push --set-upstream origin
+    sleep 23h
+    
+    # git pull
+    # git checkout -b clean-kustomizations
+
+    # git add .
+    # git commit -m "Tenant cleaner cleans tenants!" .
+
+    # git push --set-upstream origin clean-kustomizations
+    # gh pr create --title 'Tenant cleaner cleans up!' --base main --body 'Tenant cleaner cleans up!' --assignee funkypenguin

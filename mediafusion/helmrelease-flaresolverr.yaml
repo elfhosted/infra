@@ -44,6 +44,35 @@ spec:
         ephemeral-storage: 100Mi
     controller:
       replicas: 1
+    tolerations:
+    - key: node-role.elfhosted.com/dedicated
+      operator: Exists     
+    - key: node-role.elfhosted.com/hobbit
+      operator: Exists                   
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/dedicated
+              operator: Exists   
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.elfhosted.com/hobbit
+              operator: Exists                  
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - flaresolverr
+            topologyKey: "kubernetes.io/hostname"          
     ingress:
       main:
         enabled: false 
@@ -93,7 +122,7 @@ spec:
         env:
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.2.0.0/15,10.43.0.0/16
+          LOCAL_NETWORK: 10.0.0.0/8
           LOC: de-frankfurt
           PORT_FORWARDING: "0"
           PORT_PERSIST: "1"

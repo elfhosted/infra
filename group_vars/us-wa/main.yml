@@ -5,7 +5,8 @@ flux_repo_branch: main
 authentik_login_background: https://images.unsplash.com/photo-1608096275182-337284e623bd?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=karsten-winegeart-qbadM0DNF8Y-unsplash.jpg
 pod_cidr_v4: 10.3.0.0/15
 service_cidr_v4: 10.44.0.0/16
-pod_cidr:v6: fd01::/104 
-node-taint: # blank because we don't have separate worker nodes yet
+pod_cidr_v6: fd01::/104 
+# commented out because we don't have separate worker nodes yet
+# k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
 firewall:
   admin_source: "{{ vault_admin_source }}"
