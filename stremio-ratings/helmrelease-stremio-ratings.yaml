@@ -20,7 +20,7 @@ spec:
       nameOverride: stremio-ratings
     image:
       repository: ghcr.io/elfhosted/stremio-rating-addon
-      tag: rolling@sha256:28db698c5b4ad1a8cf22f23adbef893ba0f5b32043e2d08ae2525a70e933160f
+      tag: rolling@sha256:5ea727839dbd71010aa94029bbbd3af9507f595a904012934cc5fbeaf225d083
     securityContext:
       seccompProfile:
         type: RuntimeDefault
