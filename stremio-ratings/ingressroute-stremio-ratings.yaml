@@ -14,3 +14,5 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
+        - name: headers-add-cors-for-stremio
+          namespace: traefik
