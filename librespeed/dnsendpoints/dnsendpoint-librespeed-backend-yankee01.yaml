@@ -1,12 +1,12 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "yankee01-speed.${dns_domain}"
+  name: "yankee01-speed.elfhosted.us"
   namespace: librespeed
 spec:
   endpoints:
-  - dnsName: "yankee01-speed.${dns_domain}"
+  - dnsName: "yankee01-speed.elfhosted.us"
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "yankee01.${dns_domain}"
+    - "yankee01.elfhosted.us"

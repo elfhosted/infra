@@ -1,12 +1,12 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "hobbit02-speed.${dns_domain}"
+  name: "hobbit02-speed.elfhosted.com"
   namespace: librespeed
 spec:
   endpoints:
-  - dnsName: "hobbit02-speed.${dns_domain}"
+  - dnsName: "hobbit02-speed.elfhosted.com"
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "hobbit02.${dns_domain}"
+    - "hobbit02.elfhosted.com"
