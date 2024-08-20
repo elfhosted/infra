@@ -23,3 +23,8 @@ spec:
       kind: HelmRelease
       name: intel-gpu-plugin
       namespace: intel-gpu-plugin    
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
+   
