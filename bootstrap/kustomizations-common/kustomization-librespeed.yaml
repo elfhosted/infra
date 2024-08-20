@@ -13,9 +13,17 @@ spec:
     name: infra
   healthChecks:
     - apiVersion: apps/v1
-      kind: StatefulSet
-      name: librespeed
+      kind: Deployment
+      name: librespeed-frontend
       namespace: librespeed 
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: mysql
+      namespace: librespeed      
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: mysql
+      namespace: librespeed-backend         
   postBuild:
     substituteFrom:
       - kind: ConfigMap
