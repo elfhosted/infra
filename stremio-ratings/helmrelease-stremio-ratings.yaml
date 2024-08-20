@@ -90,6 +90,5 @@ spec:
         ports:
           http:
             port: 3000
-    envFrom:
-    - secretRef:
-        name: stremio-ratings-env 
+    env:
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
