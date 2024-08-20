@@ -70,7 +70,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - annatar
+                - stremio-ratings
             topologyKey: "kubernetes.io/hostname"        
     resources:
       requests:
@@ -92,3 +92,30 @@ spec:
             port: 3000
     env:
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
+    persistence:
+      npm: 
+        enabled: true
+        type: custom
+        mountPath: /.npm
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi       
+      tmp: 
+        enabled: true
+        type: custom
+        mountPath: /tmp
+        volumeSpec:
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi   
