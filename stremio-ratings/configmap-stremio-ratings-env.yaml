@@ -5,6 +5,6 @@ metadata:
   namespace: stremio-ratings
 data:
   CACHE_ENABLED: "true"
-  REDIS_URL: redis://redis:6379
+  REDIS_URL: redis://redis-master:6379
   NODE_TLS_REJECT_UNAUTHORIZED: "0"
   PROXY_URL: https://www.proxy-list.download/api/v1/get?type=https
