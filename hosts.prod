@@ -69,6 +69,16 @@ hobbit07     ansible_host=10.0.42.157 cluster_nic=eno1.4000 # 128GB
 hobbit08     ansible_host=10.0.42.158 cluster_nic=eno1.4000 # 128GB
 hobbit09     ansible_host=10.0.42.159 cluster_nic=eno1.4000 # 128GB
 hobbit10     ansible_host=10.0.42.160 cluster_nic=eno1.4000 # 128GB
+hobbit11     ansible_host=10.0.42.161 cluster_nic=eno1.4000 # 128GB
+hobbit12     ansible_host=10.0.42.162 cluster_nic=eno1.4000 # 128GB
+hobbit13     ansible_host=10.0.42.163 cluster_nic=eno1.4000 # 128GB
+hobbit14     ansible_host=10.0.42.164 cluster_nic=eno1.4000 # 128GB
+hobbit15     ansible_host=10.0.42.165 cluster_nic=eno1.4000 # 128GB
+hobbit16     ansible_host=10.0.42.166 cluster_nic=eno1.4000 # 128GB
+hobbit17     ansible_host=10.0.42.167 cluster_nic=eno1.4000 # 128GB
+hobbit18     ansible_host=10.0.42.168 cluster_nic=eno1.4000 # 128GB
+hobbit19     ansible_host=10.0.42.169 cluster_nic=eno1.4000 # 128GB
+hobbit20     ansible_host=10.0.42.170 cluster_nic=eno1.4000 # 128GB
 
 
 [k3s_observability]
@@ -190,6 +200,16 @@ hobbit07
 hobbit08
 hobbit09
 hobbit10
+hobbit11
+hobbit12
+hobbit13
+hobbit14
+hobbit15
+hobbit16
+hobbit17
+hobbit18
+hobbit19
+hobbit20
 
 [k3s_elves]
 elf01
