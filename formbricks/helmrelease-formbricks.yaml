@@ -66,10 +66,10 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp
-      # nextjs: 
-      #   enabled: true
-      #   type: emptyDir
-      #   mountPath: /home/nextjs/apps/web/.next/cache
+      nextjs: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/nextjs/apps/web/.next/cache
     envFrom:
     - secretRef:
         name: formbricks-env 
