@@ -5,6 +5,7 @@ metadata:
   namespace: formbricks
 data:
   WEBAPP_URL: https://feedback.${dns_domain}
+  NEXTAUTH_URL: https://feedback.${dns_domain}
   MAIL_FROM: formbricks@mg.elfhosted.com
   SMTP_HOST: smtp.eu.mailgun.org
   SMTP_PORT: "587"
