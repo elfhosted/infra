@@ -20,7 +20,7 @@ spec:
       nameOverride: librespeed-frontend
     image:
       repository: ghcr.io/elfhosted/librespeed
-      tag: 5.4.1@sha256:49853953addea049b79f8a9361656911837d55edad95c86353fbade955747423
+      tag: 5.4.1@sha256:10ef30b5bf0d0fc12603e9693f9b29d6248b42d50cf9ceb82eed09469ae57b16
     controller:
       replicas: 2
       strategy: RollingUpdate
