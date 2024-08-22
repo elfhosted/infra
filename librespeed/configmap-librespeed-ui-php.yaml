@@ -242,8 +242,8 @@ data:
         display:inline-block;
         margin:0 auto;
         color:#FFF;
-        background-color:#36511F;
-        border:0.15em solid #6060FF;
+        background-color:#50762E;
+        border:0.15em solid #36511F;
         border-radius:0.3em;
         transition:all 0.3s;
         box-sizing:border-box;
@@ -431,7 +431,7 @@ data:
     <body onload="initServers()">
     <h1><?= getenv('TITLE') ?: 'LibreSpeed' ?></h1>
     <img src="https://elfhosted.com/images/logo.svg" height="64px">
-    <p>Use this test to gauge your connectivity to the ElfHosted datacenters, and to identify your optimal datacenter.<br/>(<I>the fastest cluster should be pre-selected for you</I>)</p>
+    <p>Use this test to gauge your connectivity to the <A HREF="https://elfhosted.com>ElfHosted</A> datacenters, and to identify your optimal datacenter.<br/>(<I>the fastest cluster should be pre-selected for you</I>)</p>
     <p>You can <A HREF="https://elfhosted.com/how-to/migrate-datacenters/">migrate your apps between datacenters</A><br/>for optimal latency / throughput!</p>
     <div id="loading" class="visible">
       <p id="message"><span class="loadCircle"></span>Selecting a server...</p>
@@ -480,7 +480,7 @@ data:
           <img src="" id="resultsImg" />
         </div>
       </div>
-      <a href="https://github.com/librespeed/speedtest">Source code</a>
+      <a href="https://github.com/librespeed/speedtest">Source code</a><br/>
       <a class="privacy" href="#" onclick="I('privacyPolicy').style.display=''">Privacy</a>
     </div>
     <div id="privacyPolicy" style="display:none">
