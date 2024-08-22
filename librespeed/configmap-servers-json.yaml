@@ -23,13 +23,13 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Sydney, Australia (elfhosted.wtf - coming soon)",
-            "server" :"http://104.21.32.209:1231/",
+            "name": "Auckland, New Zealand (elfhosted.nz - want it?)",
+            "server" :"http://23.140.248.106:1231/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
-        }         
+        }              
         //...more servers...
     ]
 
