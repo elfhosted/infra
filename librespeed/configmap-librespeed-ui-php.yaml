@@ -93,7 +93,7 @@ data:
 
     var meterBk=/Trident.*rv:(\d+\.\d+)/i.test(navigator.userAgent)?"#EAEAEA":"#80808040";
     var dlColor="#50762E",
-      ulColor="#36511F";
+      ulColor="#50762E";
     var progColor=meterBk;
 
     //CODE FOR GAUGES
@@ -448,12 +448,12 @@ data:
         <div class="testGroup">
                 <div class="testArea2">
             <div class="testName">Ping</div>
-            <div id="pingText" class="meterText" style="color:#AA6060"></div>
+            <div id="pingText" class="meterText" style="color:#50762E"></div>
             <div class="unit">ms</div>
           </div>
           <div class="testArea2">
             <div class="testName">Jitter</div>
-            <div id="jitText" class="meterText" style="color:#AA6060"></div>
+            <div id="jitText" class="meterText" style="color:#50762E"></div>
             <div class="unit">ms</div>
           </div>
         </div>
