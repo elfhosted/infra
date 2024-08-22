@@ -5,7 +5,7 @@ metadata:
   namespace: librespeed
 spec:
   routes:
-    - match: Host(`librespeed.${dns_domain}`)
+    - match: Host(`speed.${dns_domain}`)
       kind: Rule
       services:
         - name: librespeed-frontend
