@@ -430,6 +430,9 @@ data:
     </head>
     <body onload="initServers()">
     <h1><?= getenv('TITLE') ?: 'LibreSpeed' ?></h1>
+    <img src="https://elfhosted.com/images/logo.svg" height="64px">
+    <p>Use this test to gauge your connectivity to the ElfHosted datacenters, and to identify your optimal datacenter.<br/>(<I>the fastest cluster should be pre-selected for you</I>)</p>
+    <p>You can <A HREF="https://elfhosted.com/how-to/migrate-datacenters/">migrate your apps between datacenters</A> for optimal latency / througput!</p>
     <div id="loading" class="visible">
       <p id="message"><span class="loadCircle"></span>Selecting a server...</p>
     </div>
