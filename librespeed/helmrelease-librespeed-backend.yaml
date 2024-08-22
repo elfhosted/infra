@@ -35,7 +35,9 @@ spec:
     - key: node-role.elfhosted.com/dedicated
       operator: Exists   
     - key: node-role.elfhosted.com/hobbit
-      operator: Exists      
+      operator: Exists   
+    - key: node-role.elfhosted.com/observability
+      operator: Exists            
     ingress:
       main:
         enabled: false 
