@@ -22,8 +22,8 @@ spec:
       namespace: librespeed      
     - apiVersion: apps/v1
       kind: DaemonSet
-      name: mysql
-      namespace: librespeed-backend         
+      name: librespeed-backend
+      namespace: librespeed         
   postBuild:
     substituteFrom:
       - kind: ConfigMap
