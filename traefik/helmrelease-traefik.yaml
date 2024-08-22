@@ -998,6 +998,8 @@ spec:
       operator: Exists   
     - key: node-role.elfhosted.com/hobbit
       operator: Exists            
+    - key: node-role.elfhosted.com/observability
+      operator: Exists            
 
     # -- You can use topology spread constraints to control
     # how Pods are spread across your cluster among failure-domains.
