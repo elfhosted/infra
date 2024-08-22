@@ -13,7 +13,7 @@ data:
   DB_HOSTNAME: mysql
   DB_PORT: "3306"
   DB_NAME: mysql
-  DB_USERNAME: librespeed
+  DB_USERNAME: librespeedbroken
   DB_PASSWORD: librespeed
   EMAIL: legolas@elfhosted.com
   WEBPORT: "8000"
