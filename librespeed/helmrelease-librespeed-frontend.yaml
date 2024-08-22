@@ -28,7 +28,7 @@ spec:
         unavailable: 1
       annotations:
         secret.reloader.stakater.com/reload: "librespeed-env"
-        configmap.reloader.stakater.com/reload: "librespeed-env,servers-json"      
+        configmap.reloader.stakater.com/reload: "librespeed-env,servers-json,librespeed-ui-php"      
     securityContext:
       seccompProfile:
         type: RuntimeDefault

@@ -5,7 +5,7 @@ metadata:
   namespace: librespeed
 spec:
   endpoints:
-  - dnsName: "librespeed.${dns_domain}"
+  - dnsName: "speed.${dns_domain}"
     recordTTL: 180
     recordType: CNAME
     targets:
