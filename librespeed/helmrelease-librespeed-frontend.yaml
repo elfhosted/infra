@@ -79,4 +79,4 @@ spec:
         type: "custom"
         volumeSpec:
           configMap:
-            name: index-php        
+            name: librespeed-index-php        
