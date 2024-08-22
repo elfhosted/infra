@@ -72,7 +72,7 @@ spec:
         volumeSpec:
           configMap:
             name: servers-json
-      index-php:
+      ui-php:
         enabled: "true"
         mountPath: "/speedtest/ui.php"
         subPath: "ui.php"
