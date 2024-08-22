@@ -1,0 +1,188 @@
+# Debugged and validated on proxmox, thanks to https://sekureco42.ch/posts/deploy-ubuntu-24.04-with-autoinstall-to-proxmox/
+storage:
+
+  swap:
+    # no swap
+    size: 0
+
+  config:
+    # Define device used for OS
+    - grub_device: false
+      id: disk-os
+      name: ''
+      preserve: false
+      ptable: gpt
+      match:
+        size: largest
+      type: disk
+      wipe: superblock-recursive
+      
+    # partition 0, for /efi
+    - device: disk-os
+      size: 500M
+      wipe: superblock
+      flag: boot
+      number: 1
+      preserve: false
+      grub_device: true
+      type: partition
+      id: partition-0
+
+    # format 0, for /efi
+    - fstype: fat32
+      volume: partition-0
+      preserve: false
+      type: format
+      id: format-0
+
+    # mount 0
+    - path: /boot/efi
+      device: format-0
+      type: mount
+      id: mount-0
+
+    # Create /boot partition (1GB)
+    - device: disk-os
+      flag: ''
+      grub_device: false
+      id: partition-1
+      number: 2
+      preserve: false
+      size: 1G
+      type: partition
+      wipe: superblock
+    - fstype: ext4
+      id: format-1
+      preserve: false
+      type: format
+      volume: partition-1
+    - device: format-1
+      id: mount-1
+      path: /boot
+      type: mount
+
+    # Create a partition for LVM PV with remaining space
+    - device: disk-os
+      flag: ''
+      grub_device: false
+      id: partition-2
+      number: 4
+      preserve: false
+      size: -1
+      type: partition
+      wipe: superblock
+
+    # Create the VG on the PV 
+    - name: vg0
+      devices:
+      - partition-2
+      preserve: false
+      type: lvm_volgroup
+      id: lvm_volgroup-0
+
+    # Create /tmp partition (2GB)
+    - id: lvm_partition-tmp
+      name: tmp
+      preserve: false
+      size: 2G
+      type: lvm_partition
+      volgroup: lvm_volgroup-0 
+    - fstype: ext4
+      id: format-tmp
+      preserve: false
+      type: format
+      volume: lvm_partition-tmp          
+    - device: format-tmp
+      id: mount-tmp
+      path: /tmp
+      type: mount  
+      options: 'rw,nosuid,nodev,relatime,noexec'
+
+    # Create /var partition (150GB)
+    - id: lvm_partition-var
+      name: var
+      preserve: false
+      size: 150G
+      type: lvm_partition
+      volgroup: lvm_volgroup-0        
+    - fstype: ext4
+      id: format-var
+      preserve: false
+      type: format
+      volume: lvm_partition-var
+    - device: format-var
+      id: mount-var
+      path: /var
+      type: mount    
+      options: 'rw,relatime,data=ordered'
+
+    # Create /var/log partition (4GB)
+    - id: lvm_partition-var-log
+      name: var-log
+      preserve: false
+      size: 4G
+      type: lvm_partition
+      volgroup: lvm_volgroup-0        
+    - fstype: ext4
+      id: format-var-log
+      preserve: false
+      type: format
+      volume: lvm_partition-var-log            
+    - device: format-var-log
+      id: mount-var-log
+      path: /var/log
+      type: mount  
+      options: 'rw,nosuid,nodev,noexec,relatime'
+
+    # Create /var/log/audit partition (100M)
+    - id: lvm_partition-var-log-audit
+      name: var-log-audit
+      preserve: false
+      size: 100M
+      type: lvm_partition
+      volgroup: lvm_volgroup-0        
+    - fstype: ext4
+      id: format-var-log-audit
+      preserve: false
+      type: format
+      volume: lvm_partition-var-log-audit
+    - device: format-var-log-audit
+      id: mount-var-log-audit
+      path: /var/log/audit
+      type: mount       
+      options: 'rw,relatime,data=ordered'        
+
+    # Create /home partition (100M)
+    - id: lvm_partition-home
+      name: home
+      preserve: false
+      size: 100M
+      type: lvm_partition
+      volgroup: lvm_volgroup-0        
+    - fstype: ext4
+      id: format-home
+      preserve: false
+      type: format
+      volume: lvm_partition-home
+    - device: format-home
+      id: mount-home
+      path: /home
+      type: mount 
+      options: 'rw,nodev,relatime,data=ordered'
+
+    # Create a 5GB root partition
+    - id: lvm_partition-root
+      name: root
+      preserve: false
+      size: 5G
+      type: lvm_partition
+      volgroup: lvm_volgroup-0        
+    - fstype: ext4
+      id: format-root
+      preserve: false
+      type: format
+      volume: lvm_partition-root
+    - device: format-root
+      id: mount-root
+      path: /
+      type: mount     
