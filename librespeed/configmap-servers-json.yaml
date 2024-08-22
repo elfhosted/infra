@@ -21,6 +21,17 @@ data:
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
-        } 
+        },
+        {
+            "name": "Sydney, Australia (elfhosted.wtf - coming soon)",
+            "server" :"http://104.21.32.209:1231/",
+            "dlURL" :"garbage.php",
+            "ulURL" :"empty.php",
+            "pingURL" :"empty.php",
+            "getIpURL" :"getIP.php"
+        }         
         //...more servers...
     ]
+
+
+    

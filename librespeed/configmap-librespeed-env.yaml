@@ -7,7 +7,7 @@ data:
   TITLE: ⚡️ ElfHosted Speed Test ⚡️
   TELEMETRY: "true"
   ENABLE_ID_OBFUSCATION: "true"
-  DISTANCE: "true"
+  DISTANCE: "km"
   DB_TYPE: "mysql"
   DB_HOSTNAME: mysql
   DB_PORT: "3306"
