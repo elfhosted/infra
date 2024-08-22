@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: librespeed-frontend
+  namespace: librespeed
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: librespeed-frontend
+  minAvailable: 1
