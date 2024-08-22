@@ -72,3 +72,11 @@ spec:
         volumeSpec:
           configMap:
             name: servers-json
+      index-php:
+        enabled: "true"
+        mountPath: "/var/www/html/index.php"
+        subPath: "index.php"
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: index-php        
