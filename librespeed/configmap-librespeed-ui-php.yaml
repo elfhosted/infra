@@ -92,8 +92,8 @@ data:
     }
 
     var meterBk=/Trident.*rv:(\d+\.\d+)/i.test(navigator.userAgent)?"#EAEAEA":"#80808040";
-    var dlColor="#6060AA",
-      ulColor="#616161";
+    var dlColor="#50762E",
+      ulColor="#36511F";
     var progColor=meterBk;
 
     //CODE FOR GAUGES
@@ -432,7 +432,7 @@ data:
     <h1><?= getenv('TITLE') ?: 'LibreSpeed' ?></h1>
     <img src="https://elfhosted.com/images/logo.svg" height="64px">
     <p>Use this test to gauge your connectivity to the ElfHosted datacenters, and to identify your optimal datacenter.<br/>(<I>the fastest cluster should be pre-selected for you</I>)</p>
-    <p>You can <A HREF="https://elfhosted.com/how-to/migrate-datacenters/">migrate your apps between datacenters</A> for optimal latency / throughput!</p>
+    <p>You can <A HREF="https://elfhosted.com/how-to/migrate-datacenters/">migrate your apps between datacenters</A><br/>for optimal latency / throughput!</p>
     <div id="loading" class="visible">
       <p id="message"><span class="loadCircle"></span>Selecting a server...</p>
     </div>
@@ -442,7 +442,7 @@ data:
         <a class="privacy" href="#" onclick="I('privacyPolicy').style.display=''">Privacy</a>
       <?php } ?>
       <div id="serverArea">
-        Server: <select id="server" onchange="s.setSelectedServer(SPEEDTEST_SERVERS[this.value])"></select>
+        Datacenter: <select id="server" onchange="s.setSelectedServer(SPEEDTEST_SERVERS[this.value])"></select>
       </div>
       <div id="test">
         <div class="testGroup">
