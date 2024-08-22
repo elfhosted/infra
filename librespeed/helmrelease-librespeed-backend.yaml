@@ -19,8 +19,8 @@ spec:
     global:
       nameOverride: librespeed-backend
     image:
-      repository: ghcr.io/librespeed/speedtest
-      tag: latest-alpine@sha256:524e1068baaf01f5e88d5fe76d27062b989d9cce95970148199778a771e10231
+      repository: ghcr.io/elfhosted/librespeed
+      tag: 5.4.1@sha256:49853953addea049b79f8a9361656911837d55edad95c86353fbade955747423
     securityContext:
       seccompProfile:
         type: RuntimeDefault
