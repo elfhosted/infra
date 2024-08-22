@@ -9,13 +9,13 @@ data:
     <html>
     <head>
     <link rel="shortcut icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
     <meta charset="UTF-8" />
     <script type="text/javascript" src="speedtest.js"></script>
     <script type="text/javascript">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
     function I(i){return document.getElementById(i);}
 
@@ -432,7 +432,7 @@ data:
     <h1><?= getenv('TITLE') ?: 'LibreSpeed' ?></h1>
     <img src="https://elfhosted.com/images/logo.svg" height="64px">
     <p>Use this test to gauge your connectivity to the ElfHosted datacenters, and to identify your optimal datacenter.<br/>(<I>the fastest cluster should be pre-selected for you</I>)</p>
-    <p>You can <A HREF="https://elfhosted.com/how-to/migrate-datacenters/">migrate your apps between datacenters</A> for optimal latency / througput!</p>
+    <p>You can <A HREF="https://elfhosted.com/how-to/migrate-datacenters/">migrate your apps between datacenters</A> for optimal latency / throughput!</p>
     <div id="loading" class="visible">
       <p id="message"><span class="loadCircle"></span>Selecting a server...</p>
     </div>
