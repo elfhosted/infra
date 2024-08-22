@@ -4,7 +4,7 @@ metadata:
   name: librespeed-env
   namespace: librespeed
 data:
-  TITLE: Elf-cellerate your speed ⚡️
+  TITLE: ⚡️ ElfHosted Speed Test ⚡️
   TELEMETRY: "true"
   ENABLE_ID_OBFUSCATION: "true"
   DISTANCE: "true"
