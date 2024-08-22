@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: librespeed-index-php
+  name: librespeed-ui-php
   namespace: librespeed
 data: 
-  index.php: |
+  ui.php: |
     <!DOCTYPE html>
     <html>
     <head>

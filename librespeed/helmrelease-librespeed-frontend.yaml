@@ -74,9 +74,9 @@ spec:
             name: servers-json
       index-php:
         enabled: "true"
-        mountPath: "/var/www/html/index.php"
-        subPath: "index.php"
+        mountPath: "/speedtest/ui.php"
+        subPath: "ui.php"
         type: "custom"
         volumeSpec:
           configMap:
-            name: librespeed-index-php        
+            name: librespeed-ui-php        
