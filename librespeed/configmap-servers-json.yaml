@@ -8,7 +8,7 @@ data:
     [
         {
             "name": "elfhosted.com",
-            "server" :"//speed.elfhosted.com/",
+            "server" :"//speed.elfhosted.com/backend/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
@@ -16,7 +16,7 @@ data:
         },
         {
             "name": "elfhosted.us",
-            "server" :"//speed.elfhosted.us/",
+            "server" :"//speed.elfhosted.us/backend/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
