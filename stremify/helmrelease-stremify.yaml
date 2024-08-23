@@ -20,7 +20,7 @@ spec:
       nameOverride: stremify
     image:
       repository: ghcr.io/elfhosted/stremify
-      tag: rolling@sha256:f3d2c66738e1e52ed49f4b1121d9cf2ab39415b9ba3ab40d22777e9e3f3ca882
+      tag: rolling@sha256:dab15d1f4b5982e962e48a708fdaea04ab7e0c1a83bb4e56572f1375b5e17203
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -81,6 +81,14 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/node/app/.output
+      nuxt-node-modules: 
+        enabled: true
+        type: emptyDir
+        mountPath: /nuxt/node_modules  
+      nuxt: 
+        enabled: true
+        type: emptyDir
+        mountPath: /nuxt/.nuxt              
       nitro: 
         enabled: true
         type: emptyDir
