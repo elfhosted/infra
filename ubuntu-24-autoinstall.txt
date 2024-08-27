@@ -1,11 +1,11 @@
 # Debugged and validated on proxmox, thanks to https://sekureco42.ch/posts/deploy-ubuntu-24.04-with-autoinstall-to-proxmox/
 storage:
 
-  swap:
-    # no swap
-    size: 0
-
-  config:
+    # fake the indentation
+    swap:
+      # no swap
+      size: 0
+    config:
     # Define device used for OS
     - grub_device: false
       id: disk-os

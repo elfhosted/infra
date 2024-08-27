@@ -24,7 +24,7 @@ data:
         },
         {
             "name": "Auckland, New Zealand (elfhosted.nz - want it?)",
-            "server" :"http://23.140.248.106:1231/",
+            "server" :"http://speedtest-auckland.elfhosted.com:1231/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
@@ -32,7 +32,7 @@ data:
         },
         {
             "name": "Ashburn (elfhosted.? - want it?)",
-            "server" :"http://23.168.232.22:1231/",
+            "server" :"http://speedtest-ashburn.elfhosted.com:1231/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
@@ -40,7 +40,7 @@ data:
         },
         {
             "name": "Kansas City (elfhosted.oz - want it?)",
-            "server" :"http://23.134.90.31:1231/",
+            "server" :"http://speedtest-kansascity.elfhosted.com:1231/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
@@ -48,7 +48,7 @@ data:
         },
         {
             "name": "Freemont (elfhosted.oz - want it?)",
-            "server" :"http://23.134.88.86:1231/",
+            "server" :"http://speedtest-freemont.elfhosted.com:1231/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
