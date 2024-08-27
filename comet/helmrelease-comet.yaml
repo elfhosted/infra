@@ -71,7 +71,7 @@ spec:
                 operator: In
                 values:
                 - mediafusion
-            topologyKey: "kubernetes.io/hostname"            
+            topologyKey: "kubernetes.io/hostname"  
     envFrom:
     - configMapRef:
         name: comet-env
@@ -87,6 +87,12 @@ spec:
           http:
             port: 8000   
     persistence:
+      warp:
+        enabled: true
+        type: custom
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: comet-warp
       cache: 
         enabled: true
         type: emptyDir
@@ -106,5 +112,4 @@ spec:
             name: comet-env            
         volumeMounts:
         - mountPath: /data
-          subPath: warp
-          name: config      
+          name: warp
