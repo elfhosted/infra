@@ -23,7 +23,7 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Auckland, New Zealand (elfhosted.nz - want it?)",
+            "name": "Auckland, New Zealand (elfhosted.tbc)",
             "server" :"//speedtest-auckland.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
@@ -31,7 +31,7 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Ashburn (elfhosted.? - want it?)",
+            "name": "Ashburn, USA (elfhosted.tbc)",
             "server" :"//speedtest-ashburn.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
@@ -39,7 +39,7 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Kansas City (elfhosted.oz - want it?)",
+            "name": "Kansas, USA (elfhosted.tbc)",
             "server" :"//speedtest-kansascity.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
@@ -47,7 +47,7 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Freemont (elfhosted.oz - want it?)",
+            "name": "California, USA (elfhosted.tbc)",
             "server" :"//speedtest-freemont.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
