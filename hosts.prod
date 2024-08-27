@@ -245,3 +245,9 @@ tinkerbell   ansible_host=tinkerbell-tailscale.elfhosted.com cluster_nic=enp7s0
 
 [haproxy_servers]
 # nothing here, we use hetzner's LB in prod
+
+[speedtesters]
+speedtest-auckland.elfhosted.com
+speedtest-ashburn.elfhosted.com
+speedtest-kansascity.elfhosted.com
+speedtest-freemont.elfhosted.com
