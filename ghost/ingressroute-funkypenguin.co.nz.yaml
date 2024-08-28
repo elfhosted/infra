@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: fnky.nz
+  namespace: shlink
+spec:
+  routes:
+    - match: Host(`funkypenguin.co.nz`)
+      kind: Rule
+      services:
+        - name: ghost
+          kind: Service
+          port: 8080
+  tls:
+    secretName: fnky.nz-tls
