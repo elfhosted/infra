@@ -95,7 +95,27 @@
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
       body_format: json
       status_code: 200
-    register: _profile_propertymapping       
+    register: _profile_propertymapping
+
+  - name: "what's the ID of the built-in authentik default openid scope?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/propertymappings/scope/?scope_name=openid"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _openid_propertymapping
+    
+  - name: "what's the ID of the built-in authentik default offline_access scope?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/propertymappings/scope/?scope_name=offline_access"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200
+    register: _offline_access_propertymapping    
 
   - name: "what's the ID of the built-in authentik default authentication flow?"
     uri:
@@ -220,21 +240,37 @@
           https://kubernetes-dashboard.infra.{{ dns_domain }}/oauth2/callback
           https://weave-gitops.infra.{{ dns_domain }}/oauth2/callback
         icon: https://infra.{{ dns_domain }}/assets/png/kubernetes.png
+        property_mappings:
+        - "{{ _email_propertymapping.json.results[0].pk }}"
+        - "{{ _profile_propertymapping.json.results[0].pk }}"       
       - name: grafana
         secret: "{{ authentik_grafana_client_secret }}"
         redirect_uris: |
           https://grafana.infra.{{ dns_domain }}/login/generic_oauth
         icon: https://infra.{{ dns_domain }}/assets/png/grafana.png
+        property_mappings:
+        - "{{ _email_propertymapping.json.results[0].pk }}"
+        - "{{ _profile_propertymapping.json.results[0].pk }}"    
       - name: minio
         secret: "{{ authentik_minio_client_secret }}"
         redirect_uris: |
           https://minio-console.infra.{{ dns_domain }}/oauth_callback
-        icon: https://infra.{{ dns_domain }}/assets/png/minio.png     
+        icon: https://infra.{{ dns_domain }}/assets/png/minio.png  
+        property_mappings:
+        - "{{ _email_propertymapping.json.results[0].pk }}"
+        - "{{ _profile_propertymapping.json.results[0].pk }}"
+        - "{{ minio_propertymapping_pk }}"       
       - name: gitea
         secret: "{{ authentik_gitea_client_secret }}"
         redirect_uris: |
           https://git.{{ dns_domain }}/user/oauth2/authentik/callback
-        icon: https://infra.{{ dns_domain }}/assets/png/gitea.png                
+        icon: https://infra.{{ dns_domain }}/assets/png/gitea.png  
+        property_mappings:
+        - "{{ _email_propertymapping.json.results[0].pk }}"
+        - "{{ _profile_propertymapping.json.results[0].pk }}"
+        - "{{ _offline_access_propertymapping.json.results[0].pk }}"
+        - "{{ _openid_propertymapping.json.results[0].pk }}"
+        - "{{ gitea_propertymapping_pk }}"     
     loop_control:
       loop_var: provider
 

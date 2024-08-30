@@ -25,11 +25,7 @@
         include_claims_in_id_token: true
         issuer_mode: per_provider
         name: "{{ provider.name }}"
-        property_mappings:
-        - "{{ _email_propertymapping.json.results[0].pk }}"
-        - "{{ _profile_propertymapping.json.results[0].pk }}"
-        - "{{ minio_propertymapping_pk }}"
-        - "{{ gitea_propertymapping_pk }}"
+        property_mappings: "{{ provider.property_mappings }}"
         redirect_uris: "{{ provider.redirect_uris }}"
         refresh_token_validity: "days=30"
         signing_key: "{{ _authentik_keypairs.json.results[0].pk }}"
