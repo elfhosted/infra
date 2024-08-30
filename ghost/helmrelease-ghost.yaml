@@ -101,8 +101,8 @@ spec:
     image:
       registry: ghcr.io
       repository: elfhosted/ghost
-      tag: 5.89.0
-      digest: ""
+      tag: 5.90.2
+      digest: "sha256:a19d5c8f7195a64b3f46a65e3750fabf00453b381bfbe7068146574f174046b8"
       ## Specify a imagePullPolicy
       ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
       ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
