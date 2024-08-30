@@ -141,11 +141,13 @@ spec:
       ##
       reportStats: false
 
+      publicListenerResources: client,consent,federation
+
       ## Protect registration with recaptcha. (optional)
       ##
-      # recaptcha:
-      #   publicKey: ''
-      #   privateKey: ''
+      recaptcha:
+        publicKey: '6LdYOJkkAAAAALJyMMeV1z9xvQlua6cKU-97l0X-'
+        privateKey: '6LdYOJkkAAAAADZkE6sLHuZ36xgkVTLM9JJbzE03'
 
       ## URIs and secret key for TURN servers to use to help establish 1:1 WebRTC
       ## calls.
@@ -156,13 +158,14 @@ spec:
       ## Registration configuration, note that registration with the
       ## container-internal register_new_matrix_user tool is always possible.
       ##
-      # enableRegistration: false
+      enableRegistration: true
 
       ## NB; this value will default to a random string if not specified.
       # registrationSharedSecret: ''
 
       ## NB; Strongly recommended to set this to a secure value.
-      # macaroonSecretKey: ''
+      macaroonSecretKey: 'xKssDjf@GwH*&_pgrB4FuqH2-@8=nA2NWX$Xt=V-bDFjwhN_xH8Ytdz5TBeSA'
+
 
       ## A set of trusted servers to contact if another server doesn't respond to a
       ## signing key request.
@@ -179,7 +182,17 @@ spec:
 
       ## Extra listeners to configure.
       ##
-      extraListeners: []
+      extraListeners:
+        - port: 8009
+          tls: false
+          bind_addresses: ['::']
+          type: http
+          x_forwarded: true
+
+          resources:
+            - names: [consent]
+              compress: false
+                    
       #  - port: 9000
       #    bind_addresses: ['::']
       #    type: manhole
