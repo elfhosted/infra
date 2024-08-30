@@ -11,6 +11,4 @@ spec:
         - name: gitea-http
           kind: Service
           port: 3000
-      middlewares:  
-        - name: error-pages
-          namespace: traefik   
+
