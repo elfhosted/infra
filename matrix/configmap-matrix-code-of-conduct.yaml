@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: code-of-conduct
+  namespace: matrix
+data:
+  1.0.html: |
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <title>ElfHosted's Community Code of Conduct</title>
+      </head>
+      <body>
+      {% if has_consented %}
+        <p>
+          You have already consented to the <A HREF='https://geek-cookbook.funkypenguin.co.nz/community/code-of-conduct/'>Community Code of Conduct</A>, thank you.
+        </p>
+      {% else %}
+          Please click "I agree" below, to indicate your consent to the <A HREF='https://geek-cookbook.funkypenguin.co.nz/community/code-of-conduct/'>Community Code of Conduct</A>.
+        {% if not public_version %}
+          <!-- The variables used here are only provided when the 'u' param is given to the homeserver -->
+          <form method="post" action="consent">
+            <input type="hidden" name="v" value="{{version}}"/>
+            <input type="hidden" name="u" value="{{user}}"/>
+            <input type="hidden" name="h" value="{{userhmac}}"/>
+            <input type="submit" value="I agree"/>
+          </form>
+        {% endif %}
+      {% endif %}
+      </body>
+    </html>
+  success.html: |+
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <title>Funky Penguin's Community Code of Conduct</title>
+      </head>
+      <body>
+        <p>
+          Thank you. We have noted your consent.
+        </p>
+      </body>
+    </html>

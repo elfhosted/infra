@@ -1,0 +1,149 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: element-web
+  namespace: matrix
+spec:
+  chart:
+    spec:
+      chart: element-web
+      version: 1.x
+      sourceRef:
+        kind: HelmRepository
+        name: anance-charts
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: element-web
+  values:
+    ## Number of replicas
+    ##
+    replicaCount: 1
+
+    ## Image configuration
+    ##
+    image:
+      repository: vectorim/element-web
+      pullPolicy: IfNotPresent
+      # tag: ""
+
+    imagePullSecrets: []
+    # nameOverride: ""
+    # fullnameOverride: ""
+
+    ## Default server for the Element install. (Required)
+    ## This will configure the default_server_config block in the config.json
+    ## Ref: https://github.com/vector-im/element-web/blob/develop/config.sample.json
+    ##
+    defaultServer:
+      url: 'https://matrix.elfhosted.com'
+      name: 'ElfHosted'
+      # identity_url: 'https://vector.im'
+
+    ## Element configuration
+    ## Ref: https://github.com/vector-im/element-web/blob/develop/config.sample.json
+    ##
+    config: {}
+
+    ## Configuration to add into the nginx server object
+    ##
+    nginxConfig: |-
+      add_header X-Frame-Options SAMEORIGIN;
+      add_header X-Content-Type-Options nosniff;
+      add_header X-XSS-Protection "1; mode=block";
+      add_header Content-Security-Policy "frame-ancestors 'none'";
+
+    ## Configuration for mounting additional volumes into the application container.
+    ##
+    extraVolumes: {}
+    # - name: backgrounds
+    #   persistentVolumeClaim:
+    #     claimName: element-backgrounds
+    extraVolumeMounts: {}
+    # - name: backgrounds
+    #   mountPath: /app/themes/element/img/backgrounds/
+
+    ## Configures an application-specific service account.
+    ##
+    serviceAccount:
+      create: true
+
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
+
+    ## Additional annotations to add to the pod.
+    ##
+    podAnnotations: {}
+
+    ## Security context configuration to add to the pod.
+    ##
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    ## Security context configuration to add to the container inside the pod.
+    ##
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    ## Service configuration.
+    ##
+    service:
+      type: ClusterIP
+      port: 80
+
+    ## Ingress configuration.
+    ##
+    ingress:
+      enabled: true
+      annotations: {}
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      hosts:
+        - matrix.elfhosted
+      tls: 
+       - secretName: letsencrypt-wildcard-cert
+         hosts:
+           - matrix.elfhosted.com
+
+      ## Set the name of the IngressClass cluster resource (optional)
+      ## https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/#IngressSpec
+      className: traefik
+
+    ## Resource configuration for the application.
+    ##
+    resources: {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    ## Configure auto-scaling for the application.
+    ##
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
+
+    ## Node selectors to use when deploying the application.
+    ##
+    nodeSelector: {}
+
+    ## Tolerations to apply to the application.
+    ##
+    tolerations: []
+
+    ## Affinities to set on the application.
+    ##
+    affinity: {}
