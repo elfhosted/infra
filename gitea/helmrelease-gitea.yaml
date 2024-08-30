@@ -420,7 +420,7 @@ spec:
 
         service:
           DISABLE_REGISTRATION: "true"
-          ENABLE_AUTO_REGISTRATION: "false"
+          ENABLE_AUTO_REGISTRATION: "true"
           REQUIRE_SIGNIN_VIEW: "true"
 
         database:
