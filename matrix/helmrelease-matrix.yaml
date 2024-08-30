@@ -43,11 +43,11 @@ spec:
     ## The Matrix domain name, this is what will be used for the domain part in
     ## your MXIDs.
     ##
-    # serverName: 'example.com'
+    serverName: 'matrix.elfhosted.com'
 
     ## The public Matrix server name, this will be used for any public URLs
     ## in config as well as for client API links in the ingress.
-    # publicServerName: 'matrix.example.com'
+    publicServerName: 'matrix.elfhosted.com'
 
     ## Force the chart to use ArgoCD compatibility. It should automatically detect it, but you can force it here to be sure.
     # argoCD: true
