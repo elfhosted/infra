@@ -419,9 +419,10 @@ spec:
           ROOT_URL: https://git.${dns_domain}
 
         service:
-          DISABLE_REGISTRATION: "true"
+          DISABLE_REGISTRATION: "false"
           ENABLE_AUTO_REGISTRATION: "true"
           REQUIRE_SIGNIN_VIEW: "true"
+          ALLOW_ONLY_EXTERNAL_REGISTRATION: "true"
 
         database:
           DB_TYPE: postgres
