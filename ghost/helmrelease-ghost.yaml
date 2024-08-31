@@ -404,7 +404,7 @@ spec:
     ## @param startupProbe.successThreshold Success threshold for startupProbe
     ##
     startupProbe:
-      enabled: false
+      enabled: true
       initialDelaySeconds: 120
       periodSeconds: 10
       timeoutSeconds: 5
