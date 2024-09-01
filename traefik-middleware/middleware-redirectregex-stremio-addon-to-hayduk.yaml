@@ -6,4 +6,4 @@ metadata:
 spec:
   redirectRegex:
     regex: ^https://(.*).elfhosted.com
-    replacement: http://${1}.hayd.uk
+    replacement: https://${1}.hayd.uk
