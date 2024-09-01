@@ -7,10 +7,10 @@ data:
   ZILEAN_URL: http://zilean.zilean:8181
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
-  INDEXER_MANAGER_TYPE: jackett
+  INDEXER_MANAGER_TYPE: None
   INDEXER_MANAGER_URL: http://jackett:9117
   # DEBRID_PROXY_URL: http://127.0.0.1:1080
-  INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
+  # INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
   GET_TORRENT_TIMEOUT: "5"
   INDEXER_MANAGER_TIMEOUT: "30"
   FASTAPI_WORKERS: "50"
