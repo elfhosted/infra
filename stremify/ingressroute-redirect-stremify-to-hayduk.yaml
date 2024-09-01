@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: redirect-stremify-to-hayduk
+  namespace: stremify
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`stremify.elfhosted.com`)
+    middlewares:
+    - name: redirect-stremio-addon-to-hayduk
+      namespace: traefik
+    services:
+    # just because we have to have a target service. This will never actually be used
+    - kind: Service
+      name: librespeed-frontend
+      namespace: librespeed
+      port: 8000
