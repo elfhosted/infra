@@ -5,6 +5,13 @@ metadata:
   namespace: comet
 spec:
   routes:
+    # allow playback endpoint without rate-limit (endpoint is cached anyway)
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/playback/{else:.+}`)
+      kind: Rule
+      services:
+        - name: comet
+          kind: Service
+          port: 8000
     - match: Host(`comet.${dns_domain}`)
       kind: Rule
       services:
