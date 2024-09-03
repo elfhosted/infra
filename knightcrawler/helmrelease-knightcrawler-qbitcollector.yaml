@@ -68,17 +68,9 @@ spec:
                     storage: 1Gi
       npm: 
         enabled: true
-        type: custom
         mountPath: /.npm
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
+        type: emptyDir
+        sizeLimit: 1Gi  
       pm2: 
         enabled: true
         type: custom

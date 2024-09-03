@@ -238,10 +238,19 @@ spec:
     hostAliases: []
     ## @param extraVolumes Optionally specify extra list of additional volumes for Ghost pods
     ##
-    extraVolumes: []
-    ## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts for Ghost container(s)
+    extraVolumeMounts:
+      - name: npm
+        mountPath: /.npm
+
+    ## @param extraVolumes Optionally specify extra list of additional volumes to the MongoDB(&reg;) statefulset
+    ## extraVolumes:
+    ##   - name: extras
+    ##     emptyDir: {}
     ##
-    extraVolumeMounts: []
+    extraVolumes:
+      - name: npm
+        emptyDir:
+          sizeLimit: 1Gi
     ## @param sidecars Add additional sidecar containers to the Ghost pod
     ## e.g:
     ## sidecars:

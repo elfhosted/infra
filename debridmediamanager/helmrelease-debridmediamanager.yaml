@@ -55,17 +55,9 @@ spec:
     persistence:
       npm: 
         enabled: true
-        type: custom
         mountPath: /.npm
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi       
+        type: emptyDir
+        sizeLimit: 1Gi      
       tmp: 
         enabled: true
         type: custom
