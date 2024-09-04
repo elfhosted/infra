@@ -20,28 +20,34 @@
     
   ignore_errors: true # sometimes apt is locked    
 
-- name: Add VLAN 4000
-  ansible.builtin.blockinfile:
-    path: /etc/netplan/01-netcfg.yaml
-    block: |
-      # For the vSwitch
-        vlans:
-            {{ cluster_nic }}:
-              id: 4000
-              link: {{ cluster_nic.split(".")[0] }}
-              mtu: 1400
-              addresses:
-                - {{ ansible_host }}/24
-                - fd00:10:0:42:0::{{ ansible_host.split(".")[3] }}/118
-              routes:
-                - to: "10.0.40.0/22"
-                  via: "10.0.42.1"
-                # Prevent leaking SMB requests towards service IPs
-                - to: "10.43.0.0/16"
-                  via: "10.0.42.1"   
+- name: load bonding modules
+  modprobe:
+    name: "{{ item }}"
+  with_items: 
+  - bonding
+
+- name: add bonding modules to /etc/modules-load.d/bonding.conf
+  copy:
+    dest: /etc/modules-load.d/bonding.conf
+    content: |
+      bonding
+
+- name: Remove initial cloud-init netplan
+  file:
+    path: /etc/netplan/50-cloud-init.yaml
+    state: absent
   notify: netplan apply
-  ignore_errors: true # some clusters don't have vlans
-                  
+
+- name: Replace with our own netplan
+  template:
+    src: netplan.yaml.j2
+    dest: /etc/netplan/elfhosted.yaml
+    mode: 0600
+  notify: netplan apply
+
+- name: flush handlers now if necessary
+  meta: flush_handlers
+
 - name: install yq via snap
   snap:
     name: yq
@@ -74,31 +80,31 @@
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
 
-- name: Allow any routed traffic on the cluster NIC
-  ufw:
-    # direction: in
-    rule: "allow"
-    route: true
-    interface_in: "{{ cluster_nic }}"
+# - name: Allow any routed traffic on the cluster NIC
+#   ufw:
+#     # direction: in
+#     rule: "allow"
+#     route: true
+#     interface_in: "bond0.1211"
 
-- name: Allow any incoming traffic on the cluster NIC
+- name: Allow any incoming traffic from the cluster range
   ufw:
     direction: in
     rule: "allow"
-    interface: "{{ cluster_nic }}"    
+    src: "10.0.44.0/24"    
 
-- name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
-  ufw:
-    direction: in
-    rule: "allow"
-    port: "{{ item.port }}"
-    proto: "{{ item.proto }}"
-    src: 10.0.40.3/32 # hetzner LB
-  with_items:
-    # - { port: "7000", proto: "tcp" }  # http
-    - { port: "7443", proto: "tcp" }  # https    
-  when:
-  - "inventory_hostname in groups['k3s_servers']"
+# - name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
+#   ufw:
+#     direction: in
+#     rule: "allow"
+#     port: "{{ item.port }}"
+#     proto: "{{ item.proto }}"
+#     src: 10.0.40.3/32 # hetzner LB
+#   with_items:
+#     # - { port: "7000", proto: "tcp" }  # http
+#     - { port: "7443", proto: "tcp" }  # https    
+#   when:
+#   - "inventory_hostname in groups['k3s_servers']"
 
 - name: Allow any incoming traffic from the cluster for host-network exposed services
   ufw:
@@ -122,21 +128,13 @@
     - { port: "7472", proto: "tcp" }  # metallb 
     - { port: "4244", proto: "tcp" }  # hubble     
 
-- name: Determine public NIC name (step 1/2)
-  set_fact: 
-    cluster_nic_split: "{{ cluster_nic | split('.')}}" 
 
-- name: Determine public NIC name (step 2/2)
-  set_fact: 
-    public_nic: "{{ cluster_nic_split.0 }}"     
-
-- name: Drop any unexpected incoming traffic hitting the hetzner public nic ({{ public_nic }}) # (this is the case anyway, but we want to avoid unnecessary logging)
+- name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
   ufw:
     direction: in
     rule: "deny"
-    interface: "{{ public_nic }}"
+    interface: "bond0"
     log: "false"
-  when: public_nic not in "eth1" # NICs work differently in ci
 
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance

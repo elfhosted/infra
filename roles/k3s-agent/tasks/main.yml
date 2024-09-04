@@ -29,7 +29,6 @@
   shell: >
     curl -sfL https://get.k3s.io | 
     INSTALL_K3S_EXEC="agent \
-      --flannel-iface={{ cluster_nic }} \
       --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
       --node-label node-role.{{ dns_domain }}/tenant=true \
       --prefer-bundled-bin" \

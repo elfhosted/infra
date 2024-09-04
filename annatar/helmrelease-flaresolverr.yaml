@@ -85,27 +85,11 @@ spec:
     persistence:
       tmp: 
         enabled: true
-        type: custom
-        mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi               
+        type: emptyDir
+        mountPath: /tmp         
+        sizeLimit: 1Gi 
       dot-local: 
         enabled: true
-        type: custom
+        type: emptyDir
         mountPath: /.local
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi               
+        sizeLimit: 1Gi 

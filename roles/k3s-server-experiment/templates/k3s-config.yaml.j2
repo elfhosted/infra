@@ -13,14 +13,12 @@ kube-scheduler-arg:
 kubelet-arg:
 - "max-pods=1000"
 etcd-expose-metrics: true
-# flannel-iface: "{{ cluster_nic }}"
 service-cidr: "{{ service_cidr_v4 }}"
 flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
 cluster-init: true
-# node-ip: {{ ansible_host }}
-node-external-ip: {{ ansible_host }}
+node-external-ip: {{ cluster_ip }}
 disable: 
 - "traefik"
 - "servicelb"
