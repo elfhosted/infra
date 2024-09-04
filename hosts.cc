@@ -10,7 +10,7 @@ controllers
 public_hosts
 
 [k3s_servers]
-us-fairy01   ansible_host=us-fairy01.elfhosted.com cluster_ip=10.0.44.11 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.166/29,10.0.44.11/24] gateway4=23.147.152.161
+us-fairy01   ansible_host=us-fairy01.elfhosted.com cluster_ip=10.0.44.11 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.166/29,10.0.44.11/24] gateway4=23.147.152.161 keepalived_priority=130
 
 [k3s_agents]
 us-ranger01  ansible_host=us-ranger01.elfhosted.com cluster_ip=10.0.44.111 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.162/29,10.0.44.111/24] gateway4=23.147.152.161

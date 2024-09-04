@@ -65,12 +65,12 @@
     --interval=15m \
     --export | kubectl apply -f -
 
-# - name: add cluster-vars
-#   shell: |
-#     flux create kustomization cluster-vars \
-#     --source=GitRepository/infra \
-#     --path=./cluster-vars/{{ dns_domain }} \
-#     --depends-on=infra \
-#     --prune=true \
-#     --interval=60m \
-#     --export | kubectl apply -f -
+- name: add cluster-vars
+  shell: |
+    flux create kustomization cluster-vars \
+    --source=GitRepository/infra \
+    --path=./cluster-vars/{{ dns_domain }} \
+    --depends-on=infra \
+    --prune=true \
+    --interval=60m \
+    --export | kubectl apply -f -

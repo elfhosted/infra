@@ -30,8 +30,10 @@
   - { import_role: { name: controller }, tags: [ controller ] }
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] }    
   - { import_role: { name: sealed-secrets }, tags: [ sealed-secrets ] }  
+  - { import_role: { name: keepalived }, tags: [ keepalived ] }
+  - { import_role: { name: haproxy }, tags: [ haproxy ] }
   - { import_role: { name: flux }, tags: [ flux ] }
-  # - { import_role: { name: authentik }, tags: [ authentik ] }
+  - { import_role: { name: authentik }, tags: [ authentik ] }
 
 # # Now install workers
 # - hosts: k3s_agents
