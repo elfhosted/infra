@@ -39,26 +39,6 @@
   become: yes
   when: "inventory_hostname in groups['k3s_agents']"  
 
-- name: install k3s on dwarves (tainted)
-  environment:
-    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
-    K3S_TOKEN: "{{ k3s_token }}"
-    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-  shell: >
-    curl -sfL https://get.k3s.io | 
-    INSTALL_K3S_EXEC="agent \
-      --flannel-iface={{ cluster_nic }} \
-      --kubelet-arg=config=/etc/rancher/k3s/kubelet-server.config \
-      --prefer-bundled-bin \
-      --node-taint node-role.{{ dns_domain }}/storage=true:NoSchedule \
-      --node-label node-role.{{ dns_domain }}/storage=true" \
-    sh -
-  # args:
-    # creates: /usr/local/bin/k3s
-  register: workers_install_result
-  become: yes
-  when: "inventory_hostname in groups['k3s_dwarves']"
-
 - name: install k3s on gnomes (tainted)
   environment:
     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"

@@ -36,3 +36,6 @@ us-fairy01
 
 [controllers]
 us-fairy01
+
+[k3s_observability]
+[k3s_goblins]
