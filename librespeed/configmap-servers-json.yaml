@@ -15,8 +15,8 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Washington State, USA (elfhosted.us)",
-            "server" :"//yankee01-speed.elfhosted.us/",
+            "name": "Washington State, USA (elfhosted.cc)",
+            "server" :"//yankee01-speed.elfhosted.cc/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
