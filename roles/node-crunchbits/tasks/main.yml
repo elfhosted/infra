@@ -113,12 +113,12 @@
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
 
-# - name: Allow any routed traffic on the cluster NIC
-#   ufw:
-#     # direction: in
-#     rule: "allow"
-#     route: true
-#     interface_in: "bond0.1211"
+- name: Allow any routed traffic on the cluster NIC
+  ufw:
+    # direction: in
+    rule: "allow"
+    route: true
+    interface_in: "bond0"
 
 - name: Allow any incoming traffic from the cluster range
   ufw:
