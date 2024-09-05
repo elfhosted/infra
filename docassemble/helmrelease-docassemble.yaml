@@ -62,8 +62,6 @@ spec:
         volumeSpec:
           persistentVolumeClaim:
             claimName: docassemble    
-    envFrom:
-    - secretRef:
-        name: docassemble-env 
-    - configMapRef:
-        name: docassemble-env           
+    env:
+      DAHOSTNAME: docassemble.elfhosted.com
+      TIMEZONE: UTC
