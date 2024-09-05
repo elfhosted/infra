@@ -34,9 +34,9 @@
 
 - name: Remove initial cloud-init netplan
   file:
-    path: /etc/netplan/50-cloud-init.yaml
+    path: /etc/netplan/00-installer-config.yaml
     state: absent
-  notify: netplan apply
+  notify: netplan apply  
 
 - name: Replace with our own netplan
   template:
@@ -47,6 +47,39 @@
 
 - name: flush handlers now if necessary
   meta: flush_handlers
+
+- name: "Update /etc/hosts for k3s-servers"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }} {{item}}'
+    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    owner: root
+    group: root
+    mode: '0644'        
+  with_items: "{{ groups['k3s-servers'] }}"
+
+- name: "Update /etc/hosts for k3s-agents"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }} {{item}}'
+    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    owner: root
+    group: root
+    mode: '0644'        
+  with_items: "{{ groups['k3s-agents'] }}" 
+
+
+- name: "Update /etc/hosts for localhost"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^localhost 127.0.0.1}'
+    line: "localhost 127.0.0.1"
+    owner: root
+    group: root
+    mode: '0644'        
 
 - name: install yq via snap
   snap:

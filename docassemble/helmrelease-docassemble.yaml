@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: docassemble
     image:
-      registry: ghcr.io
+      registry: docker.io
       repository: jhpyle/docassemble
       tag: latest@sha256:4b28420c67923138c5bd25662a0d6974e1b6f7cdb70bec51548d3327d73a6a8d
     securityContext:
