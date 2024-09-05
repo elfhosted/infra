@@ -18,7 +18,8 @@ flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
 cluster-init: true
-node-external-ip: {{ cluster_ip }}
+node-ip: {{ cluster_ip }}
+advertise-address: {{ cluster_ip }}
 disable: 
 - "traefik"
 - "servicelb"

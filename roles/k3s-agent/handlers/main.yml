@@ -1,2 +1,7 @@
 ---
-# handlers file for k3s_agents
+# handlers file for k3s-master
+- name: restart k3s-agent
+  systemd:
+    name: "k3s-agent"
+    state: restarted
+  throttle: 1

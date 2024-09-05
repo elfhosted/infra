@@ -21,6 +21,12 @@
     src: kubelet-server.config
     dest: /etc/rancher/k3s/kubelet-server.config
 
+- name: copy k3s config.yaml to /etc/rancher/k3s
+  template:
+    src: k3s-config.yaml.j2
+    dest: /etc/rancher/k3s/config.yaml
+  notify: restart k3s-agent  
+
 - name: install k3s on workers
   environment:
     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"

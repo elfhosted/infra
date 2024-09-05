@@ -39,7 +39,7 @@ spec:
         memory: 64Mi
       limits:
         cpu: 1
-        memory: 1Gi    
+        memory: 4Gi    
     controller:
       replicas: 1      
       annotations:
