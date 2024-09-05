@@ -29,9 +29,6 @@ spec:
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
-      runAsUser: 1001
-      runAsGroup: 65533
-      fsGroup: 1001
     automountServiceAccountToken: false
     resources:
       requests:
