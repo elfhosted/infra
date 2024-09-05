@@ -10,12 +10,10 @@
     - iperf3
     - jq
     - snapd
-    - bzip2
-    - restic
     - intel-gpu-tools
     - vnstat
     - jnettop
-    - linux-generic-hwe-22.04
+    # - linux-generic-hwe-22.04
     - ifenslave
     
   ignore_errors: true # sometimes apt is locked    
@@ -32,11 +30,25 @@
     content: |
       bonding
 
+- name: Set i915.disable_display=1 to avoid EDID spam
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="i915.disable_display=1"'
+  register: grub_config_changed
+
+- name: Update GRUB
+  ansible.builtin.command: update-grub
+  when: grub_config_changed.changed      
+
 - name: Remove initial cloud-init netplan
   file:
-    path: /etc/netplan/00-installer-config.yaml
+    path: "{{ item }}"
     state: absent
-  notify: netplan apply  
+  notify: netplan apply
+  with_items:
+  - /etc/netplan/50-cloud-init.yaml
+  - /etc/netplan/00-installer-config.yaml
 
 - name: Replace with our own netplan
   template:
@@ -47,6 +59,11 @@
 
 - name: flush handlers now if necessary
   meta: flush_handlers
+
+- name: Reboot for grub fix
+  ansible.builtin.reboot:
+    msg: "Rebooting due to GRUB_CMDLINE_LINUX change"
+  when: grub_config_changed.changed
 
 - name: "Update /etc/hosts for k3s-servers"
   tags: hosts
