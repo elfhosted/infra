@@ -1,11 +1,11 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: feedback.${dns_domain}
+  name: docassemble.${dns_domain}
   namespace: docassemble
 spec:
   routes:
-    - match: Host(`feedback.${dns_domain}`)
+    - match: Host(`docassemble.${dns_domain}`)
       kind: Rule
       services:
         - name: docassemble
