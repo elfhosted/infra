@@ -61,7 +61,11 @@ spec:
         mountPath: /usr/share/docassemble/backup/
         volumeSpec:
           persistentVolumeClaim:
-            claimName: docassemble    
+            claimName: docassemble
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp            
     env:
       DAHOSTNAME: docassemble.elfhosted.com
       TIMEZONE: UTC
