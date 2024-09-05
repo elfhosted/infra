@@ -5,7 +5,7 @@ metadata:
   namespace: docassemble
 spec:
   endpoints:
-  - dnsName: "docassemble.${dns_domain}"
+  - dnsName: "help.${dns_domain}"
     recordTTL: 180
     recordType: CNAME
     targets:
