@@ -57,7 +57,7 @@
     owner: root
     group: root
     mode: '0644'        
-  with_items: "{{ groups['k3s-servers'] }}"
+  with_items: "{{ groups['k3s_servers'] }}"
 
 - name: "Update /etc/hosts for k3s-agents"
   tags: hosts
@@ -68,15 +68,15 @@
     owner: root
     group: root
     mode: '0644'        
-  with_items: "{{ groups['k3s-agents'] }}" 
+  with_items: "{{ groups['k3s_agents'] }}" 
 
 
 - name: "Update /etc/hosts for localhost"
   tags: hosts
   lineinfile:
     path: /etc/hosts
-    regexp: '^localhost 127.0.0.1}'
-    line: "localhost 127.0.0.1"
+    regexp: '^127.0.0.1 localhost'
+    line: "127.0.0.1 localhost"
     owner: root
     group: root
     mode: '0644'        
