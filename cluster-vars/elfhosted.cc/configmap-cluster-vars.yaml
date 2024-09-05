@@ -8,7 +8,7 @@ data:
   tailscale_suffix: elfhosted-cc
   cluster_nic_class_c: 192.168.41
   nginx_ingress_ip: 100.126.71.110 # Provided by tailscale in elfhosted.us
-  traefik_ingress_dns_ip: 66.23.193.248 # yankee01, for now
+  traefik_ingress_dns_ip: 23.147.152.164 # hobbit01, for now
   k3s_server_endpoint_1: 192.168.41.11
   k3s_server_endpoint_2: 192.168.41.12
   k3s_server_endpoint_3: 192.168.41.13
