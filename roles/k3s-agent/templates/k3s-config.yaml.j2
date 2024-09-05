@@ -1,0 +1,5 @@
+node-ip: {{ cluster_ip }}
+advertise-address: {{ cluster_ip }}
+prefer-bundled-bin: true
+kubelet-arg:
+- "config=/etc/rancher/k3s/kubelet-server.config"

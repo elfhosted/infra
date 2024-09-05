@@ -67,10 +67,10 @@ spec:
         type: emptyDir
         mountPath: /tmp    
         sizeLimit: 1Gi     
-      log: 
+      var-log-supervisor: 
         enabled: true
         type: emptyDir
-        mountPath: /var/log    
+        mountPath: /var/log/supervisor
         sizeLimit: 1Gi                
     env:
       DAHOSTNAME: docassemble.elfhosted.com
