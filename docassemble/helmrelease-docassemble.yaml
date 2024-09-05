@@ -65,7 +65,13 @@ spec:
       tmp: 
         enabled: true
         type: emptyDir
-        mountPath: /tmp            
+        mountPath: /tmp    
+        sizeLimit: 1Gi     
+      log: 
+        enabled: true
+        type: emptyDir
+        mountPath: /var/log    
+        sizeLimit: 1Gi                
     env:
       DAHOSTNAME: docassemble.elfhosted.com
       TIMEZONE: UTC
