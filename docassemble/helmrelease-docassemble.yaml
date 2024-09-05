@@ -20,8 +20,8 @@ spec:
       nameOverride: docassemble
     image:
       registry: ghcr.io
-      repository: docassemble/docassemble
-      tag: v2.4.0
+      repository: jhpyle/docassemble
+      tag: latest@sha256:4b28420c67923138c5bd25662a0d6974e1b6f7cdb70bec51548d3327d73a6a8d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -53,23 +53,15 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 3000
+            port: 80
     persistence:
       config:
         enabled: true
         type: custom
-        mountPath: /data/
+        mountPath: /usr/share/docassemble/backup/
         volumeSpec:
           persistentVolumeClaim:
             claimName: docassemble    
-      tmp: 
-        enabled: true
-        type: emptyDir
-        mountPath: /tmp
-      nextjs: 
-        enabled: true
-        type: emptyDir
-        mountPath: /home/nextjs/apps/web/.next/cache
     envFrom:
     - secretRef:
         name: docassemble-env 

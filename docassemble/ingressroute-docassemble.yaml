@@ -10,7 +10,7 @@ spec:
       services:
         - name: docassemble
           kind: Service
-          port: 3000
+          port: 80
       middlewares:  
         - name: error-pages
           namespace: traefik   

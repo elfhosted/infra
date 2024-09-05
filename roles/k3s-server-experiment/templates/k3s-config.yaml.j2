@@ -28,5 +28,7 @@ node-taint:
 - {{ k3s_node_taint }}
 {% endif %}
 tls-san: 
+  - "{{ cluster_ip }}"
+  - "{{ k8s_ha_api_ip }}"
 etcd-arg:
 - "quota-backend-bytes=8589934592" # 8GB
