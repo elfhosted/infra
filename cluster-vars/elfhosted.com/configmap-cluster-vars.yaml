@@ -37,3 +37,13 @@ data:
   storageclass_rwo_name: ceph-block-ssd
   storageclass_rwo_accessMode: ReadWriteOnce  
   storageclass_rwo_volumeSnapshotClassName: ceph-block
+
+  # These apportion semi-dedicated resources across the node types
+  hobbit_cpu_requests: 1800m
+  hobbit_cpu_limits: "2"
+  ranger_cpu_requests: 3500m
+  ranger_cpu_limits: "4"
+  halfling_cpu_requests: 7200m
+  halflink_cpu_limits: "8"  
+  nazgul_cpu_requests: 14400m
+  nazgul_cpu_limits: "15"  

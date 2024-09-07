@@ -113,6 +113,15 @@
     state: enabled
   loop: "{{ firewall.admin_source }}"
 
+- name: Allow trusted kube-api sources to this host
+  ufw:
+    rule: allow
+    port: 6443
+    proto: tcp
+    src: '{{ item }}'
+    state: enabled
+  loop: "{{ firewall.kubeapi_source }}"  
+
 - name: Allow port 5201 for occasional iperf testing (enable when necessary)
   ufw:
     rule: allow
@@ -138,6 +147,12 @@
     interface_in: "bond0"
 
 - name: Allow any incoming traffic from the cluster range
+  ufw:
+    direction: in
+    rule: "allow"
+    src: "192.168.44.0/24"    
+
+- name: Allow any incoming traffic to the cluster range
   ufw:
     direction: in
     rule: "allow"

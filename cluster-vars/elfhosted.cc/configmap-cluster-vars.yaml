@@ -34,3 +34,15 @@ data:
   storageclass_rwo_name: topolvm-provisioner-thin
   storageclass_rwo_accessMode: ReadWriteOnce
   storageclass_rwo_volumeSnapshotClassName: topolvm-provisioner-thin
+
+  # These apportion semi-dedicated resources across the node types
+  hobbit_cpu_requests: 900m
+  hobbit_cpu_limits: "1"
+  ranger_cpu_requests: 1800m
+  ranger_cpu_limits: "2"
+  halfling_cpu_requests: 3600m
+  halflink_cpu_limits: "4"  
+  nazgul_cpu_requests: 7200m
+  nazgul_cpu_limits: "7"    
+
+

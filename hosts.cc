@@ -32,10 +32,13 @@ us-elf01
 us-ranger01
 
 [k3s_hobbits]
-us-fairy01
+us-hobbit01
 
 [controllers]
 us-fairy01
 
 [k3s_observability]
+us-hobbit01
+us-ranger01 
+
 [k3s_goblins]
