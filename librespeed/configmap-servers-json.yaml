@@ -16,7 +16,7 @@ data:
         },
         {
             "name": "Washington State, USA (elfhosted.cc)",
-            "server" :"//yankee01-speed.elfhosted.cc/",
+            "server" :"//librespeed.elfhosted.cc/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
