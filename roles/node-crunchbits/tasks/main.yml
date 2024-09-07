@@ -141,7 +141,7 @@
   ufw:
     direction: in
     rule: "allow"
-    src: "10.0.44.0/24"    
+    src: "192.168.44.0/24"    
 
 # - name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
 #   ufw:
