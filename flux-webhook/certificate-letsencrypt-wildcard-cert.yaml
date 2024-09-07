@@ -10,3 +10,4 @@ spec:
    kind: ClusterIssuer
  dnsNames:
   - "*.${dns_domain}"
+  - blah.letmerenewplease.${dns_domain}

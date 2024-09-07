@@ -1,4 +1,5 @@
-node-ip: {{ cluster_ip }}
+# node-ip: {{ cluster_ip }}
+node-ip: {{ external_ip }}
 prefer-bundled-bin: true
 kubelet-arg:
 - "config=/etc/rancher/k3s/kubelet-server.config"

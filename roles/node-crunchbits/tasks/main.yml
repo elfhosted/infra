@@ -118,7 +118,7 @@
     rule: allow
     port: 5201
     proto: tcp
-    state: enabled
+    state: disabled
 
 - name: Allow any incoming traffic to the public IP for host-port exposed services
   ufw:
@@ -143,19 +143,6 @@
     rule: "allow"
     src: "192.168.44.0/24"    
 
-# - name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
-#   ufw:
-#     direction: in
-#     rule: "allow"
-#     port: "{{ item.port }}"
-#     proto: "{{ item.proto }}"
-#     src: 10.0.40.3/32 # hetzner LB
-#   with_items:
-#     # - { port: "7000", proto: "tcp" }  # http
-#     - { port: "7443", proto: "tcp" }  # https    
-#   when:
-#   - "inventory_hostname in groups['k3s_servers']"
-
 - name: Allow any incoming traffic from the cluster for host-network exposed services
   ufw:
     direction: in
@@ -179,12 +166,12 @@
     - { port: "4244", proto: "tcp" }  # hubble     
 
 
-- name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
-  ufw:
-    direction: in
-    rule: "deny"
-    interface: "bond0"
-    log: "false"
+# - name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
+#   ufw:
+#     direction: in
+#     rule: "deny"
+#     interface: "bond0"
+#     log: "false"
 
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance
