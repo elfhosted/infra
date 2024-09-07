@@ -11,3 +11,4 @@ spec:
  dnsNames:
   - "infra.${dns_domain}"
   - "*.infra.${dns_domain}"
+  - "blah.letmerenewplease.${dns_domain}"  
