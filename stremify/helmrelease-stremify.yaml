@@ -20,7 +20,7 @@ spec:
       nameOverride: stremify
     image:
       repository: ghcr.io/elfhosted/stremify
-      tag: rolling@sha256:dab15d1f4b5982e962e48a708fdaea04ab7e0c1a83bb4e56572f1375b5e17203
+      tag: rolling@sha256:585a8086fb168a648a9a182932a62bc199b30f34fca523620020e8bab1c6e796
     securityContext:
       seccompProfile:
         type: RuntimeDefault
