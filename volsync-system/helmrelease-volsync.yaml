@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: volsync
-      version: 0.9.x
+      version: 0.10.x
       sourceRef:
         kind: HelmRepository
         name: backube
@@ -70,6 +70,12 @@ spec:
       # The name of the service account to use.
       # If not set and create is true, a name is generated using the fullname template
       name: ""
+
+    service:
+      # Set the ip family policy to configure dual-stack see [Configure dual-stack](https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services)
+      ipFamilyPolicy: ""
+      # Sets the families that should be supported and the order in which they should be applied to ClusterIP as well. Can be IPv4 and/or IPv6.
+      ipFamilies: []
 
     podAnnotations: {}
     podLabels: {}
