@@ -36,13 +36,14 @@ data:
   storageclass_rwo_volumeSnapshotClassName: topolvm-provisioner-thin
 
   # These apportion semi-dedicated resources across the node types
-  hobbit_cpu_requests: 900m
-  hobbit_cpu_limits: "1"
-  ranger_cpu_requests: 1800m
-  ranger_cpu_limits: "2"
-  halfling_cpu_requests: 3600m
-  halflink_cpu_limits: "4"  
-  nazgul_cpu_requests: 7200m
-  nazgul_cpu_limits: "7"    
+  hobbit_zurg_cpu_requests: 900m
+  ranger_zurg_cpu_requests: 1800m
+  halfling_zurg_cpu_requests: 3600m
+  nazgul_zurg_cpu_requests: 7200m
 
+  # these provide sane limits for the streamers
+  hobbit_streamer_cpu_limits: "1"
+  hobbit_streamer_ram_limits: "3Gi"
+  ranger_streamer_cpu_limits: "2"
+  ranger_streamer_ram_limits: "4Gi"
 
