@@ -8,6 +8,8 @@ spec:
   - kind: Rule
     match: Host(`stremify.elfhosted.com`)
     middlewares:
+    - name: headers-add-cors-for-stremio
+      namespace: traefik        
     - name: redirect-stremio-addon-to-hayduk
       namespace: traefik
     services:
