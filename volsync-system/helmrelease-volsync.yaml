@@ -20,34 +20,34 @@ spec:
     replicaCount: 1
 
     image:
-      repository: quay.io/backube/volsync
+      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       # Directly specifies the SHA hash of the container image to deploy
       image: ""
     rclone:
-      repository: quay.io/backube/volsync
+      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       image: ""
     restic:
-      repository: quay.io/backube/volsync
+      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       image: ""
     rsync:
-      repository: quay.io/backube/volsync
+      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       image: ""
     rsync-tls:
-      repository: quay.io/backube/volsync
+      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       image: ""
     syncthing:
-      repository: quay.io/backube/volsync
+      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       image: ""

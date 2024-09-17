@@ -6,8 +6,7 @@ authentik_login_background: https://images.unsplash.com/photo-1608096275182-3372
 pod_cidr_v4: 10.3.0.0/15
 service_cidr_v4: 10.44.0.0/16
 pod_cidr_v6: fd01::/104 
-# commented out because we don't have separate worker nodes yet
-# k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
+k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
 firewall:
   admin_source: "{{ vault_admin_source }}"
   kubeapi_source: "{{ vault_kubeapi_source }}"
