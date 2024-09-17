@@ -20,37 +20,37 @@ spec:
     replicaCount: 1
 
     image:
-      repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
+      repository: ghcr.io/elfhosted/volsync
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
+      tag: "rolling"
       # Directly specifies the SHA hash of the container image to deploy
-      image: ""
+      image: "sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
     rclone:
       repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
-      image: ""
+      tag: "rolling"
+      image: "sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
     restic:
       repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
-      image: ""
+      tag: "rolling"
+      image: "sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
     rsync:
       repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
-      image: ""
+      tag: "rolling"
+      image: "sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
     rsync-tls:
       repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
-      image: ""
+      tag: "rolling"
+      image: "sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
     syncthing:
       repository: ghcr.io/elfhosted/volsync:rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
-      image: ""
+      tag: "rolling"
+      image: "sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
 
     manageCRDs: true
 
