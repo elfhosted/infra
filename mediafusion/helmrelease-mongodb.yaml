@@ -815,7 +815,9 @@ spec:
       extraPorts: []
       ## @param service.annotations Provide any additional annotations that may be required
       ##
-      annotations: {}
+      annotations:
+        tailscale.com/expose: "true"
+        tailscale.com/hostname: elfhosted-internal-mediafusion-mongodb-${tailscale_suffix}        
       ## @param service.externalTrafficPolicy service external traffic policy (only for standalone architecture)
       ## ref https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
       ##
