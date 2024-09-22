@@ -6,7 +6,7 @@ metadata:
 spec:
   namespaceSelector:
     matchNames:
-      - traefik
+      - traefik-disabled
   podMetricsEndpoints:
   - targetPort: 9100
     honorLabels: true  
