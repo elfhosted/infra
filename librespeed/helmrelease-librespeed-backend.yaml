@@ -20,7 +20,7 @@ spec:
       nameOverride: librespeed-backend
     image:
       repository: ghcr.io/librespeed/speedtest
-      tag: latest@sha256:67cc269e69ac2c2f38b2561c796bd59a524c8512a6768afc3e2f6f924f8bb425
+      tag: latest@sha256:4f2bac7d2cda61f57249cdf32aa92e22ac55068f8a27da864018692ae285255a
     securityContext:
       seccompProfile:
         type: RuntimeDefault
