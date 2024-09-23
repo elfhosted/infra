@@ -15,23 +15,7 @@ spec:
     image: rancher/k3s-upgrade
     args:
     - prepare
-    - k3s-server # wait for the k3s-server plan to apply
-  tolerations:
-  - key: "node-role.${dns_domain}/dedicated"
-    operator: "Exists"
-    effect: "NoSchedule"
-  - key: "node-role.${dns_domain}/hobbit"
-    operator: "Exists"
-    effect: "NoSchedule"    
-  - key: "node-role.${dns_domain}/download-only"
-    operator: "Exists"
-    effect: "NoSchedule"
-  - key: "node-role.${dns_domain}/storage"
-    operator: "Exists"
-    effect: "NoSchedule"  
-  - key: "node-role.${dns_domain}/observability"
-    operator: "Exists"
-    effect: "NoSchedule"        
+    - k3s-server # wait for the k3s-server plan to apply     
   upgrade:
     image: rancher/k3s-upgrade
   serviceAccountName: system-upgrade

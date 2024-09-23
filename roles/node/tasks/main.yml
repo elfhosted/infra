@@ -15,7 +15,7 @@
     - intel-gpu-tools
     - vnstat
     - jnettop
-    - linux-generic-hwe-22.04
+    # - linux-generic-hwe-22.04
     - ifenslave
     
   ignore_errors: true # sometimes apt is locked    
@@ -161,6 +161,14 @@
     regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
     replace: '#\1\2\3swap\4'
     backup: yes  
+
+- name: Ensure archive is set to 0 and uncommented in /etc/lvm/lvm.conf
+  lineinfile:
+    path: /etc/lvm/lvm.conf
+    regexp: '^ *#? *archive *= *[01]'
+    line: 'archive = 0'
+    state: present
+    backup: yes
 
 - name: Create a thin pool on vg0
   community.general.lvol:

@@ -1,4 +1,8 @@
+{% if external_ip is defined and external_ip %}
 node-ip: {{ external_ip }}
+{% else %}
+node-ip: {{ ansible_host }}
+{% endif %}
 prefer-bundled-bin: true
 kubelet-arg:
 - "config=/etc/rancher/k3s/kubelet-server.config"

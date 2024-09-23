@@ -27,7 +27,7 @@
     dest: /etc/rancher/k3s/config.yaml
   notify: restart k3s-agent  
 
-- name: install k3s on workers
+- name: install k3s on contended nodes
   environment:
     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
     K3S_TOKEN: "{{ k3s_token }}"
@@ -35,11 +35,25 @@
   shell: >
     curl -sfL https://get.k3s.io | 
     INSTALL_K3S_EXEC="agent \
-      --node-label node-role.elfhosted.com/tenant=true" \
+      --node-label node-role.elfhosted.com/dedicated=false" \
     sh -
   register: workers_install_result
   become: yes
-  when: "inventory_hostname in groups['k3s_agents']"  
+  when: "inventory_hostname in groups['k3s_contended']" 
+
+- name: install k3s on dedicated nodes
+  environment:
+    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
+    K3S_TOKEN: "{{ k3s_token }}"
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    INSTALL_K3S_EXEC="agent \
+      --node-label node-role.elfhosted.com/dedicated=true" \
+    sh -
+  register: workers_install_result
+  become: yes
+  when: "inventory_hostname in groups['k3s_dedicated']"   
 
 - name: install k3s on gnomes (tainted)
   environment:
@@ -60,22 +74,6 @@
   become: yes
   when: "inventory_hostname in groups['k3s_observability']"  
 
-- name: label dedicated workers # 25% shared between tenants
-  become: no
-  shell: |
-    kubectl label node {{ inventory_hostname_short }} node-role.elfhosted.com/dedicated=true --overwrite
-    kubectl taint node {{ inventory_hostname_short }} node-role.elfhosted.com/dedicated=true:NoSchedule  --overwrite
-  when: "inventory_hostname in groups['k3s_rangers']"  
-  delegate_to: "{{ groups['controllers'][0] }}"  
-
-- name: label hobbit workers # 12.5% shared between tenants
-  become: no
-  shell: |
-    kubectl label node {{ inventory_hostname_short }} node-role.elfhosted.com/hobbit=true --overwrite
-    kubectl taint node {{ inventory_hostname_short }} node-role.elfhosted.com/hobbit=true:NoSchedule  --overwrite
-  when: "inventory_hostname in groups['k3s_hobbits']"  
-  delegate_to: "{{ groups['controllers'][0] }}"    
-
 - name: label observability workers # no GPU, no heavy workloads
   become: no
   shell: |
@@ -83,12 +81,6 @@
     kubectl taint node {{ inventory_hostname_short }} node-role.elfhosted.com/observability=true:NoSchedule  --overwrite
   when: "inventory_hostname in groups['k3s_observability']"  
   delegate_to: "{{ groups['controllers'][0] }}"      
-
-- name: label app workers
-  become: no
-  shell: kubectl label node {{ inventory_hostname_short }} node-role.elfhosted.com/app=true
-  when: "inventory_hostname in groups['k3s_elves']"  
-  delegate_to: "{{ groups['controllers'][0] }}"  
 
 - name: label 10g storage nodes
   become: no
