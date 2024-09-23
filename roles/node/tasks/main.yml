@@ -20,6 +20,20 @@
     
   ignore_errors: true # sometimes apt is locked    
 
+- name: load ceph modules
+  modprobe:
+    name: "{{ item }}"
+  with_items: 
+  - rbd
+  - ceph
+
+- name: add ceph modules to /etc/modules-load.d/ceph.conf
+  copy:
+    dest: /etc/modules-load.d/ceph.conf
+    content: |
+      rbd
+      ceph
+
 - name: Add VLAN 4000
   ansible.builtin.blockinfile:
     path: /etc/netplan/01-netcfg.yaml
@@ -162,13 +176,13 @@
     replace: '#\1\2\3swap\4'
     backup: yes  
 
-- name: Ensure archive is set to 0 and uncommented in /etc/lvm/lvm.conf
-  lineinfile:
-    path: /etc/lvm/lvm.conf
-    regexp: '^ *#? *archive *= *[01]'
-    line: 'archive = 0'
-    state: present
-    backup: yes
+# - name: Ensure archive is set to 0 and uncommented in /etc/lvm/lvm.conf
+#   lineinfile:
+#     path: /etc/lvm/lvm.conf
+#     regexp: '^ *#? *archive *= *[01]'
+#     line: 'archive = 0'
+#     state: present
+#     backup: yes
 
 - name: Create a thin pool on vg0
   community.general.lvol:
@@ -176,7 +190,7 @@
     thinpool: thinpool
     size: 100%FREE  
   when: 
-  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers'] or inventory_hostname in groups['k3s_observability'] or inventory_hostname in groups['k3s_rangers'] or inventory_hostname in groups['k3s_hobbits']"
+  - "inventory_hostname in groups['k3s_dedicated'] or inventory_hostname in groups['k3s_servers'] or inventory_hostname in groups['k3s_observability'] or inventory_hostname in groups['k3s_contended']"
   ignore_errors: true # so we can run it multiple times
 
 - name: copy scripts
