@@ -23,7 +23,7 @@ spec:
       repository: ghcr.io/elfhosted/volsync
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
+      tag: "rolling@sha256:68bbfef28e8ef74ae2f229545988512e6bd4bbd9b939b5561255fe437854aca5"
       # Directly specifies the SHA hash of the container image to deploy
       image: ""
     rclone:
