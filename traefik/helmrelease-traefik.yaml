@@ -27,7 +27,7 @@ spec:
       # -- Traefik image repository
       repository: traefik
       # -- defaults to appVersion
-      tag: "v2.11.8"
+      tag: "v2.11.10"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
 
