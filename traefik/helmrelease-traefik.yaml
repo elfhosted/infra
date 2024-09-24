@@ -997,10 +997,8 @@ spec:
     nodeSelector: {}
     # -- Tolerations allow the scheduler to schedule pods with matching taints.
     tolerations:
-    - key: node-role.${dns_domain}/dedicated
-      operator: Exists   
-    - key: node-role.${dns_domain}/hobbit
-      operator: Exists            
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists        
     - key: node-role.${dns_domain}/observability
       operator: Exists            
 
