@@ -19,7 +19,7 @@ fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
 [k3s_contended]
 elf01        ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
 elf02        ansible_host=10.0.42.22 cluster_nic=eno1.4000 
-elf03        ansible_host=10.0.42.23 cluster_nic=eno1.4000 # 128GB
+hansel03     ansible_host=10.0.42.23 cluster_nic=eno1.4000 # 128GB
 hansel04     ansible_host=10.0.42.24 cluster_nic=eno1.4000
 
 [k3s_dedicated]
@@ -97,36 +97,10 @@ fairy01-public.elfhosted.com
 fairy02-public.elfhosted.com
 fairy03-public.elfhosted.com
 
-elf01-public.elfhosted.com
-elf02-public.elfhosted.com
-elf03-public.elfhosted.com
-elf04-public.elfhosted.com
-elf05-public.elfhosted.com
-elf06-public.elfhosted.com
-elf07-public.elfhosted.com
-elf08-public.elfhosted.com
-elf09-public.elfhosted.com
-elf10-public.elfhosted.com
-elf11-public.elfhosted.com
-elf12-public.elfhosted.com
-elf13-public.elfhosted.com
-elf14-public.elfhosted.com
-elf15-public.elfhosted.com
-elf16-public.elfhosted.com
-elf17-public.elfhosted.com
-elf18-public.elfhosted.com
-elf19-public.elfhosted.com
-elf20-public.elfhosted.com
-elf21-public.elfhosted.com
-elf22-public.elfhosted.com
-elf23-public.elfhosted.com
-elf24-public.elfhosted.com
-elf25-public.elfhosted.com
-elf26-public.elfhosted.com
-elf27-public.elfhosted.com
-elf28-public.elfhosted.com
-elf29-public.elfhosted.com
-elf30-public.elfhosted.com
+hansel01-public.elfhosted.com
+hansel02-public.elfhosted.com
+hansel03-public.elfhosted.com
+hansel04-public.elfhosted.com
 
 goblin04-public.elfhosted.com
 goblin05-public.elfhosted.com
@@ -161,6 +135,7 @@ goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 
 
 [k3s_contended]
+hansel03
 hansel04
 
 [k3s_dedicated]
