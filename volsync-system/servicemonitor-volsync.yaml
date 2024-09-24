@@ -1,0 +1,20 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: volsync-monitor
+  namespace: volsync-system
+  labels:
+    control-plane: volsync-controller
+spec:
+  endpoints:
+    - interval: 30s
+      path: /metrics
+      port: https
+      scheme: https
+      tlsConfig:
+        # Using self-signed cert for connection
+        insecureSkipVerify: true
+  selector:
+    matchLabels:
+      control-plane: volsync-controller
