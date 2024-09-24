@@ -50,8 +50,6 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        mountPath: /tor/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: tor   
+        type: emptyDir
+        mountPath: /tor
+        sizeLimit: 1Gi 
