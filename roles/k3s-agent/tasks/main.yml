@@ -35,7 +35,7 @@
   shell: >
     curl -sfL https://get.k3s.io | 
     INSTALL_K3S_EXEC="agent \
-      --node-label node-role.elfhosted.com/dedicated=false" \
+      --node-label node-role.elfhosted.com/contended=true" \
     sh -
   register: workers_install_result
   become: yes
