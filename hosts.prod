@@ -17,8 +17,8 @@ fairy02     ansible_host=10.0.42.12 cluster_nic=eno1.4000
 fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
 
 [k3s_contended]
-elf01        ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
-elf02        ansible_host=10.0.42.22 cluster_nic=eno1.4000 
+hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
+hansel02     ansible_host=10.0.42.22 cluster_nic=eno1.4000 
 hansel03     ansible_host=10.0.42.23 cluster_nic=eno1.4000 # 128GB
 hansel04     ansible_host=10.0.42.24 cluster_nic=eno1.4000
 
@@ -127,6 +127,16 @@ gretel07-public.elfhosted.com
 gretel08-public.elfhosted.com
 gretel09-public.elfhosted.com
 gretel10-public.elfhosted.com
+gretel11-public.elfhosted.com
+gretel12-public.elfhosted.com
+gretel13-public.elfhosted.com
+gretel14-public.elfhosted.com
+gretel15-public.elfhosted.com
+gretel16-public.elfhosted.com
+gretel17-public.elfhosted.com
+gretel18-public.elfhosted.com
+gretel19-public.elfhosted.com
+gretel20-public.elfhosted.com
 
 [k3s_goblins]
 goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
@@ -135,6 +145,8 @@ goblin06     ansible_host=10.0.42.66 cluster_nic=enp1s0.4000
 
 
 [k3s_contended]
+hansel01
+hansel02
 hansel03
 hansel04
 
@@ -142,6 +154,13 @@ hansel04
 gretel01
 gretel02
 gretel03
+gretel04
+gretel05
+gretel06
+gretel07
+gretel06
+gretel09
+gretel10
 
 [k3s_rangers]
 ranger01
