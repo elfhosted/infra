@@ -44,6 +44,17 @@ gretel18     ansible_host=10.0.42.138 cluster_nic=eno1.4000 # 128GB
 gretel19     ansible_host=10.0.42.139 cluster_nic=eno1.4000 # 128GB
 gretel20     ansible_host=10.0.42.140 cluster_nic=eno1.4000 # 128GB
 
+gretel21     ansible_host=10.0.42.141 cluster_nic=eno1.4000 # 128GB
+gretel22     ansible_host=10.0.42.142 cluster_nic=eno1.4000 # 128GB
+gretel23     ansible_host=10.0.42.143 cluster_nic=eno1.4000 # 128GB
+gretel24     ansible_host=10.0.42.144 cluster_nic=eno1.4000 # 128GB
+gretel25     ansible_host=10.0.42.145 cluster_nic=eno1.4000 # 128GB
+gretel26     ansible_host=10.0.42.146 cluster_nic=eno1.4000 # 128GB
+gretel27     ansible_host=10.0.42.147 cluster_nic=eno1.4000 # 128GB
+gretel28     ansible_host=10.0.42.148 cluster_nic=eno1.4000 # 128GB
+gretel29     ansible_host=10.0.42.149 cluster_nic=eno1.4000 # 128GB
+gretel30     ansible_host=10.0.42.150 cluster_nic=eno1.4000 # 128GB
+
 ranger01     ansible_host=10.0.42.111 cluster_nic=eno1.4000 # 128GB
 ranger02     ansible_host=10.0.42.112 cluster_nic=eno1.4000 # 128GB
 ranger03     ansible_host=10.0.42.113 cluster_nic=eno1.4000 # 128GB
@@ -137,6 +148,16 @@ gretel17-public.elfhosted.com
 gretel18-public.elfhosted.com
 gretel19-public.elfhosted.com
 gretel20-public.elfhosted.com
+gretel21-public.elfhosted.com
+gretel22-public.elfhosted.com
+gretel23-public.elfhosted.com
+gretel24-public.elfhosted.com
+gretel25-public.elfhosted.com
+gretel26-public.elfhosted.com
+gretel27-public.elfhosted.com
+gretel28-public.elfhosted.com
+gretel29-public.elfhosted.com
+gretel30-public.elfhosted.com
 
 [k3s_goblins]
 goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
