@@ -51,3 +51,23 @@ data:
   nazgul_streamer_cpu_limits: "8"
   nazgul_streamer_ram_limits: "16Gi"    
 
+# And for riven, which can be a CPU/RAM hog
+  hobbit_riven_cpu_limits: "1"
+  hobbit_riven_ram_limits: "2Gi"
+  hobbit_riven_database_cpu_limits: "500m"
+  hobbit_riven_database_ram_limits: "500Mi"  
+
+  ranger_riven_cpu_limits: "1500m"
+  ranger_riven_ram_limits: "3Gi"
+  ranger_riven_database_cpu_limits: "500m"
+  ranger_riven_database_ram_limits: "500Mi"    
+
+  halfling_riven_cpu_limits: "2"
+  halfling_riven_ram_limits: "3Gi"
+  halfling_riven_database_cpu_limits: "1"
+  halfling_riven_database_ram_limits: "1Gi"    
+
+  nazgul_riven_cpu_limits: "4"
+  nazgul_riven_ram_limits: "4Gi"
+  nazgul_riven_database_cpu_limits: "2"
+  nazgul_riven_database_ram_limits: "2Gi"      
