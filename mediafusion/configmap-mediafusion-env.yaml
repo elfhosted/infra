@@ -12,6 +12,8 @@ data:
   REDIS_URL: redis://redis-master:6379
   PROWLARR_SEARCH_INTERVAL_HOUR: "72"
   is_public_instance: "true"
+  zilean_url: http://zilean.zilean:8181
+  is_scrap_from_zilean: "true"
   prowlarr_immediate_max_process_time: "0"
   validate_m3u8_urls_liveness: "true"
   worker_max_tasks_per_child: "30"
