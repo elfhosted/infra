@@ -50,6 +50,7 @@ data:
     git pull
     git checkout -b clean-kustomizations
 
+    git pull
     git add .
     git commit -m "Tenant cleaner cleans tenants!" .
 
