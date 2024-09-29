@@ -52,7 +52,7 @@ patches:
             memory: 2Gi
           requests:
             cpu: 1m
-            memory: 64Mi
+            memory: 1Mi
   - target:
       kind: Deployment
       name: "(source-controller|kustomize-controller|helm-controller|notification-controller)"
