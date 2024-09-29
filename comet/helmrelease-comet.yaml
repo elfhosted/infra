@@ -102,7 +102,7 @@ spec:
         mountPath: /.cache                              
     additionalContainers:
       warp:
-        image: ghcr.io/elfhosted/warp:rolling@sha256:9b7e2e5da5b1caab6bb1a4e450fc1a2cc7c99f162325901656d5bc9104439eb6
+        image: ghcr.io/elfhosted/warp:rolling@sha256:4e89fc07ff24c30ffc7f3804d7f3738d634c7b9aa4fecb4941618a366e43d8c9
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
