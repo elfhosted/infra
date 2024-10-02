@@ -19,3 +19,7 @@ data:
   worker_max_tasks_per_child: "30"
   addon_name: "MediaFusion | ElfHosted"
   logo_url: https://mediafusion.elfhosted.com/static/images/mediafusion-elfhosted-logo.png
+  disable_streambtw_scheduler: "true"
+  nowmetv_scheduler_crontab: "0 */4 * * *"
+  nowsports_scheduler_crontab: "0 */3 * * *"
+  tamilultra_scheduler_crontab: "30 */3 * * *"
