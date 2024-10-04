@@ -5,7 +5,7 @@ metadata:
   namespace: mediafusion
 spec:
   routes:
-    - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider`) || PathPrefix(`/poster`) || PathPrefix(`/configure`)) || PathPrefix(`/static`))
+    - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider`) || PathPrefix(`/poster`) || PathPrefix(`/configure`) || PathPrefix(`/static`))
       kind: Rule
       services:
         - name: mediafusion
