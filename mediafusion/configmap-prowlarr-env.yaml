@@ -4,7 +4,8 @@ metadata:
   name: prowlarr-env
   namespace: mediafusion
 data:
-  PROWLARR__POSTGRES_HOST: mediafusion-rw
+  PROWLARR__POSTGRES_HOST: pooler-mediafusion-rw
+  PROWLARR__POSTGRES_USER: mediafusion
   PROWLARR__POSTGRES_MAIN_DB: prowlarr_main
   PROWLARR__POSTGRES_LOG_DB: prowlarr_log
   PROWLARR__POSTGRES_PORT: "5432"
