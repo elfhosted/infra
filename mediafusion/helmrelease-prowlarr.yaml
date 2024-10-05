@@ -106,7 +106,8 @@ spec:
     envFrom:
     - secretRef:
         name: prowlarr-env
-    # resources:
+    - configMapRef:
+        name: prowlarr-env         
     ingress:
       main:
         enabled: false 
