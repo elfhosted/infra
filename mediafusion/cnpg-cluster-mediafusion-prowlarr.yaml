@@ -35,9 +35,9 @@ spec:
       owner: mediafusion
       secret:
         name: app-secret
-      postInitSQL:
-        - CREATE DATABASE prowlarr-main OWNER mediafusion
-        - CREATE DATABASE prowlarr-log  OWNER mediafusion
+      postInitSQL: |
+        CREATE DATABASE prowlarr-main OWNER mediafusion
+        CREATE DATABASE prowlarr-log  OWNER mediafusion
 
   backup:
       # Volume snapshot backups
