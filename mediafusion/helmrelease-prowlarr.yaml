@@ -153,13 +153,13 @@ spec:
           - name: config
             mountPath: /config
         env:
-          - name: PROWLARR_API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: mediafusion-env
-                key: PROWLARR_API_KEY   
           - name: FLARESOLVERR_HOST
-            value: "http://flaresolverr:8191/"                             
+            value: "http://flaresolverr:8191/"    
+        envFrom:
+        - secretRef:
+            name: prowlarr-env
+        - configMapRef:
+            name: prowlarr-env                                      
     additionalContainers:
       setup-indexers: 
         image: apteno/alpine-jq:latest
