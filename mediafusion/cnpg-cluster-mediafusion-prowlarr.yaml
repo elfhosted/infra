@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: mediafusion-db
+  name: mediafusion
   namespace: mediafusion
 spec:
   instances: 3
