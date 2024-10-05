@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: mediafusion-prowlarr
+  name: mediafusion
   namespace: mediafusion
 spec:
   instances: 3
@@ -31,10 +31,13 @@ spec:
 
   bootstrap:
     initdb:
-      database: mediafusion-prowlarr
-      owner: mediafusion-prowlarr
+      database: mediafusion
+      owner: mediafusion
       secret:
         name: app-secret
+      postInitSQL:
+        - CREATE DATABASE prowlarr-main OWNER mediafusion
+        - CREATE DATABASE prowlarr-log  OWNER mediafusion
 
   backup:
       # Volume snapshot backups
