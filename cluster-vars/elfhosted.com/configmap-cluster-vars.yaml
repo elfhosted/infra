@@ -61,16 +61,16 @@ data:
   hobbit_riven_database_ram_limits: "1Gi"  
 
   ranger_riven_cpu_limits: "2"
-  ranger_riven_ram_limits: "4Gi"
+  ranger_riven_ram_limits: "8Gi"
   ranger_riven_database_cpu_limits: "1"
-  ranger_riven_database_ram_limits: "1Gi"    
+  ranger_riven_database_ram_limits: "8Gi"    
 
   halfling_riven_cpu_limits: "2"
-  halfling_riven_ram_limits: "4Gi"
+  halfling_riven_ram_limits: "16Gi"
   halfling_riven_database_cpu_limits: "1"
-  halfling_riven_database_ram_limits: "1Gi"    
+  halfling_riven_database_ram_limits: "16Gi"    
 
   nazgul_riven_cpu_limits: "4"
-  nazgul_riven_ram_limits: "4Gi"
+  nazgul_riven_ram_limits: "32Gi"
   nazgul_riven_database_cpu_limits: "2"
-  nazgul_riven_database_ram_limits: "2Gi"        
+  nazgul_riven_database_ram_limits: "32Gi"        
