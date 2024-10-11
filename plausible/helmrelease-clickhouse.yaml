@@ -69,4 +69,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: false
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8123
