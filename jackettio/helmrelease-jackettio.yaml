@@ -32,7 +32,7 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       allowPrivilegeEscalation: false
-      runAsNonRoot: true
+      runAsNonRoot: false # can't use VPN with this enabled
       capabilities:
         drop:
         - ALL        
