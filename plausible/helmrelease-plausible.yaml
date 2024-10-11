@@ -44,7 +44,7 @@ spec:
         configmap.reloader.stakater.com/reload: "plausible-env"
         secret.reloader.stakater.com/reload: "plausible-env"
     command:
-    - /bin/bash
+    - /bin/sh
     - -c
     - |
       /entrypoint.sh db createdb
