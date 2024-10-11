@@ -84,7 +84,7 @@ spec:
         mountPath: /app/data
         volumeSpec:
           persistentVolumeClaim:
-            claimName: zilean-1-5
+            claimName: zilean
     envFrom:
     - secretRef:
         name: zilean-env                   
