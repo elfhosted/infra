@@ -33,7 +33,7 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       supplementalGroups:
-      - 109      
+      - 993      
       allowPrivilegeEscalation: false
       runAsNonRoot: true
       capabilities:
