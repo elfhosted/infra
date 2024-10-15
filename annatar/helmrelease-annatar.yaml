@@ -32,7 +32,7 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     controller:
-      replicas: 4
+      replicas: 1
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
