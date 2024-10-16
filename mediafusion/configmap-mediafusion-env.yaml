@@ -7,7 +7,7 @@ data:
   HOST_URL: https://mediafusion.${dns_domain}
   ENABLE_RATE_LIMIT: "false"
   PROWLARR_URL: http://prowlarr:9696
-  IS_SCRAP_FROM_TORRENTIO: "true"
+  IS_SCRAP_FROM_TORRENTIO: "false"
   TORRENTIO_URL: http://knightcrawler-addon.knightcrawler:7000
   REDIS_URL: redis://redis-master:6379
   PROWLARR_SEARCH_INTERVAL_HOUR: "72"
