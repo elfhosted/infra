@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion-dramatiq-worker
     image:
       repository: ghcr.io/elfhosted/mediafusion
-      tag: 4.0.4@sha256:e1e80415e78746ae708d9d3ece6a169094ca7def092436595e16bddda8c3bb87
+      tag: 4.0.5@sha256:0041ace77f3ab8fb9a9beea01ec287517a5027d3d98ceec67845dd908f7daf4f
     command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1"]
     securityContext:
       seccompProfile:
