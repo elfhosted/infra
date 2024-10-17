@@ -346,7 +346,7 @@ spec:
 
     # -- Enable installation of PodCIDR routes between worker
     # nodes if worker nodes share a common L2 network segment.
-    autoDirectNodeRoutes: true
+    autoDirectNodeRoutes: false
 
     # -- Annotate k8s node upon initialization with Cilium's metadata.
     annotateK8sNode: true
@@ -1692,7 +1692,7 @@ spec:
     # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
     # the user must configure the routes to reach pods, either manually or by
     # setting the auto-direct-node-routes flag.
-    ipv4NativeRoutingCIDR: "10.0.0.0/10"
+    # ipv4NativeRoutingCIDR: "10.0.0.0/10"
 
     # -- (string) Allows to explicitly specify the IPv6 CIDR for native routing.
     # When specified, Cilium assumes networking for this CIDR is preconfigured and
@@ -1704,7 +1704,7 @@ spec:
     # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
     # the user must configure the routes to reach pods, either manually or by
     # setting the auto-direct-node-routes flag.
-    ipv6NativeRoutingCIDR: "fd00::/104"
+    # ipv6NativeRoutingCIDR: "fd00::/104"
 
     # -- cilium-monitor sidecar.
     monitor:
@@ -1723,7 +1723,7 @@ spec:
 
       # -- mode is the operation mode of load balancing for remote backends
       # e.g. snat, dsr, hybrid
-      mode: dsr
+      # mode: dsr
 
       # -- acceleration is the option to accelerate service handling via XDP
       # e.g. native, disabled
@@ -2122,7 +2122,7 @@ spec:
     #   - disabled
     #   - vxlan (default)
     #   - geneve
-    tunnel: "disabled"
+    # tunnel: "disabled"
 
     # -- Configure VXLAN and Geneve tunnel port.
     # @default -- Port 8472 for VXLAN, Port 6081 for Geneve
