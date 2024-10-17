@@ -20,13 +20,13 @@
     creates: /usr/local/bin/k3s # only run this if k3s isn't already installed on master
   when: "groups['k3s_servers'][0] == inventory_hostname"
 
-# - name: What is master[0]'s IP?
-#   set_fact:
-#     master_ip: "{{ cluster_nic_class_c }}.{{ hostvars[groups['k3s_servers'][0]].ansible_host.split('.')[3] }}"
+- name: What is master[0]'s IP?
+  set_fact:
+    master_ip: "{{ hostvars[groups['k3s_servers'][0]].cluster_ip }}"
 
 - name: install k3s on masters[1-n] using master[0] for K3S_URL
   environment:
-    #  K3S_URL: "https://{{ master_ip }}:6443"
+     K3S_URL: "https://{{ master_ip }}:6443"
      K3S_TOKEN: "{{ k3s_token }}"
      INSTALL_K3S_EXEC: "server"
      INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
@@ -41,7 +41,7 @@
 #      INSTALL_K3S_EXEC: "server"
 #      INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
 #   shell: curl -sfL https://get.k3s.io | sh -
-#   # when: "groups['k3s_servers'][0] != inventory_hostname"
+#   when: "groups['k3s_servers'][0] != inventory_hostname"
 #   throttle: 1
 
 - name: setup kubectl auto-completion
@@ -50,3 +50,10 @@
     regexp: 'source <\(kubectl completion bash\)'
     line: source <(kubectl completion bash)
     create: yes
+
+- name: Remove executable from k3s-uninstall.sh script for safety
+  ansible.builtin.file:
+    path: /usr/local/bin/k3s-uninstall.sh
+    owner: root
+    group: root
+    mode: '0600'

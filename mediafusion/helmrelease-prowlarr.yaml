@@ -157,9 +157,7 @@ spec:
             value: "http://flaresolverr:8191/"    
         envFrom:
         - secretRef:
-            name: prowlarr-env
-        - configMapRef:
-            name: prowlarr-env                                      
+            name: prowlarr-env                                  
     additionalContainers:
       setup-indexers: 
         image: apteno/alpine-jq:latest

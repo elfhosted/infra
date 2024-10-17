@@ -10,3 +10,6 @@ k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
 firewall:
   admin_source: "{{ vault_admin_source }}"
   kubeapi_source: "{{ vault_kubeapi_source }}"
+packages:
+  k3s:
+    version: v1.31.0+k3s1
