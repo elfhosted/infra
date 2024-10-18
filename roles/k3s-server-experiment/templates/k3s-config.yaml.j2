@@ -17,7 +17,7 @@ service-cidr: "{{ service_cidr_v4 }}"
 flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
-# cluster-init: true
+cluster-init: true
 node-ip: {{ external_ip }}
 advertise-address: {{ cluster_ip }}
 disable: 
