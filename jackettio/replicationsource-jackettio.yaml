@@ -13,6 +13,16 @@ spec:
     pruneIntervalDays: 7
     # Name of the Secret with the connection information
     repository: jackettio-restic-config
+    moverAffinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution: 
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - jackettio
+          topologyKey: "kubernetes.io/hostname"    
     retain:
       daily: 2
     copyMethod: Snapshot
