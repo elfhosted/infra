@@ -31,4 +31,4 @@ spec:
     accessModes: 
     - ReadWriteOnce
     cacheCapacity: 1Gi
-    volumeSnapshotClassName: topolvm-provisioner-thin
+    volumeSnapshotClassName: ceph-block
