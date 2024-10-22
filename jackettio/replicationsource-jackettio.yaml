@@ -1,0 +1,24 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: rs-jackett
+  namespace: jackettio
+spec:
+  # The PVC to be backed up
+  sourcePVC: jackettio
+  trigger:
+    schedule: "0 9 * * *"
+  restic:
+    # Prune the repository (repack to free space) every 2 weeks
+    pruneIntervalDays: 7
+    # Name of the Secret with the connection information
+    repository: jackettio-restic-config
+    retain:
+      daily: 2
+    copyMethod: Snapshot
+    storageClassName: topolvm-provisioner-thin
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes: 
+    - ReadWriteOnce
+    cacheCapacity: 10Gi
+    volumeSnapshotClassName: topolvm-provisioner-thin
