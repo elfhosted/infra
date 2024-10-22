@@ -15,8 +15,8 @@ spec:
 
   # Persistent storage configuration
   storage:
-    storageClass: ceph-block-ssd
-    size: 100Gi
+    storageClass: topolvm-provisioner-thin
+    size: 10Gi
 
   monitoring:
     enablePodMonitor: true
