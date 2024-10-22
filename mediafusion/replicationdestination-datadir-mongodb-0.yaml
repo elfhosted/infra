@@ -7,7 +7,7 @@ spec:
   trigger:
     manual: runonce
   restic:
-    repository: jackettio-restic-config
+    repository: mongodb-restic-config
     copyMethod: Snapshot
     cacheCapacity: 10Gi
     capacity: 10Gi
