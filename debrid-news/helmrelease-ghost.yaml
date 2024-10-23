@@ -726,7 +726,7 @@ spec:
         database: bitnami_ghost
         username: bn_ghost
         password: ""
-        existingSecret: ""
+        existingSecret: "ghost-mysql"
       ## MySQL Primary configuration
       ##
       primary:
