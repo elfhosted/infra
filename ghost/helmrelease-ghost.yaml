@@ -134,7 +134,7 @@ spec:
     ## NOTE: Must contain key `ghost-password`
     ## NOTE: When it's set, the `ghostPassword` parameter is ignored
     ##
-    existingSecret: ""
+    existingSecret: "ghost-env"
     ## @param ghostEmail Ghost user email
     ##
     ghostEmail: davidy@funkypenguin.co.nz
@@ -169,7 +169,7 @@ spec:
     ## NOTE: Must contain key `smtp-password`
     ## NOTE: When it's set, the `smtpPassword` parameter is ignored
     ##
-    smtpExistingSecret: ""
+    smtpExistingSecret: "ghost-env"
     ## @param allowEmptyPassword Allow the container to be started with blank passwords
     ##
     allowEmptyPassword: true
