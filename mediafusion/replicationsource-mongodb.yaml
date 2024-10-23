@@ -1,11 +1,11 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: datadir-mongodb-0
+  name: rs-mongodb
   namespace: mediafusion
 spec:
   # The PVC to be backed up
-  sourcePVC: datadir-mongodb-0
+  sourcePVC: mongodb
   trigger:
     # Take a backup every 30 minutes
     schedule: "0 9 * * *"
