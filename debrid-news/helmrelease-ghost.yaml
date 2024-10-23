@@ -137,13 +137,13 @@ spec:
     existingSecret: "ghost-secrets"
     ## @param ghostEmail Ghost user email
     ##
-    ghostEmail: user@example.com
+    ghostEmail: postmaster@mail.debrid.news
     ## @param ghostBlogTitle Ghost Blog title
     ##
-    ghostBlogTitle: User's Blog
+    ghostBlogTitle: Debrid.News
     ## @param ghostHost Ghost host to create application URLs
     ##
-    ghostHost: ""
+    ghostHost: "https://debrid.news"
     ## @param ghostPath URL sub path where to server the Ghost application
     ##
     ghostPath: /
