@@ -194,7 +194,7 @@ spec:
     extraEnvVarsCM: ""
     ## @param extraEnvVarsSecret Name of existing Secret containing extra env vars
     ##
-    extraEnvVarsSecret: ""
+    extraEnvVarsSecret: "ghost-env"
     ## @section Ghost deployment parameters
 
     ## @param replicaCount Number of Ghost replicas to deploy
