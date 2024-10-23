@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: redditio.${dns_domain}
+  namespace: redditio
+spec:
+  routes:
+    - match: Host(`redditio.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: redditio
+          kind: Service
+          port: 7000
+      middlewares:  
+        - name: chain-public-stremio-addon-cached
+          namespace: traefik
