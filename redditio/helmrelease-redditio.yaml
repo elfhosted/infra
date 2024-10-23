@@ -20,7 +20,7 @@ spec:
       nameOverride: redditio
     image:
       repository: ghcr.io/elfhosted/redditio
-      tag: rolling@sha256:3e5514511b49fdf33cb28d4e21517e36decdcdf26b57416eafa6448830c9768e
+      tag: rolling@sha256:eef5b38238bcf583a805661d1adf3cd1ebdd042f9ef0decb48556aeb79e4b516
     securityContext:
       seccompProfile:
         type: RuntimeDefault
