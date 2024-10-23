@@ -125,7 +125,7 @@ spec:
 
     ## @param ghostUsername Ghost user name
     ##
-    ghostUsername: user
+    ghostUsername: bilbo
     ## @param ghostPassword Ghost user password
     ## Defaults to a random 10-character alphanumeric string if not set
     ##
@@ -137,7 +137,7 @@ spec:
     existingSecret: "ghost-secrets"
     ## @param ghostEmail Ghost user email
     ##
-    ghostEmail: postmaster@mail.debrid.news
+    ghostEmail: bilbo@debrid.news
     ## @param ghostBlogTitle Ghost Blog title
     ##
     ghostBlogTitle: Debrid.News
