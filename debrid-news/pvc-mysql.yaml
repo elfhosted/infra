@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql
-  namespace: ghost
+  namespace: debrid-news
 spec:
   dataSourceRef:
     kind: ReplicationDestination
