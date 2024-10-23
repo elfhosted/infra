@@ -143,7 +143,7 @@ spec:
     ghostBlogTitle: Debrid.News
     ## @param ghostHost Ghost host to create application URLs
     ##
-    ghostHost: "https://debrid.news"
+    ghostHost: "debrid.news"
     ## @param ghostPath URL sub path where to server the Ghost application
     ##
     ghostPath: /
