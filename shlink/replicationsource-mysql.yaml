@@ -1,0 +1,34 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: rs-mysql
+  namespace: shlink
+spec:
+  # The PVC to be backed up
+  sourcePVC: data-shlink-mariadb-0 # mysql
+  trigger:
+    schedule: "0 9 * * *"
+  restic:
+    # Prune the repository (repack to free space) every 2 weeks
+    pruneIntervalDays: 7
+    # Name of the Secret with the connection information
+    repository: shlink-restic-config
+    moverAffinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution: 
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - mysql
+          topologyKey: "kubernetes.io/hostname"        
+    retain:
+      daily: 7
+    copyMethod: Snapshot
+    storageClassName: ceph-block-ssd # topolvm-provisioner-thin
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes: 
+    - ReadWriteOnce
+    cacheCapacity: 1Gi
+    volumeSnapshotClassName: ceph-block # topolvm-provisioner-thin
