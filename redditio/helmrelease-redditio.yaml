@@ -38,7 +38,7 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 4
+      replicas: 1
       strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "redditio-env,redditio-env-dev-overrides"
