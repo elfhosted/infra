@@ -67,11 +67,11 @@ spec:
         volumeSpec:
           persistentVolumeClaim:
             claimName: redditio      
-    shared:
-      enabled: true
-      type: emptyDir
-      volumeSpec:
-        medium: Memory                 
+      shared:
+        enabled: true
+        type: emptyDir
+        volumeSpec:
+          medium: Memory                 
     resources:
       requests:
         cpu: 100m
