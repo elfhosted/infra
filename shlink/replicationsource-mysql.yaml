@@ -12,7 +12,7 @@ spec:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 7
     # Name of the Secret with the connection information
-    repository: shlink-restic-config
+    repository: mysql-restic-config
     moverAffinity:
       podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution: 
