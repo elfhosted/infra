@@ -447,7 +447,7 @@ spec:
     service:
       ## @param service.type Ghost service type
       ##
-      type: LoadBalancer
+      type: ClusterIP
       ## @param service.ports.http Ghost service HTTP port
       ## @param service.ports.https Ghost service HTTPS port
       ##
