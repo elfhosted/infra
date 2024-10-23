@@ -1,18 +1,18 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: rs-jackettio
-  namespace: jackettio
+  name: rs-mysql
+  namespace: debrid-news
 spec:
   # The PVC to be backed up
-  sourcePVC: jackettio
+  sourcePVC: mysql
   trigger:
     schedule: "0 9 * * *"
   restic:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 7
     # Name of the Secret with the connection information
-    repository: jackettio-restic-config
+    repository: mysql-restic-config
     moverAffinity:
       podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution: 
@@ -21,8 +21,8 @@ spec:
             - key: app.kubernetes.io/name
               operator: In
               values:
-              - jackettio
-          topologyKey: "kubernetes.io/hostname"    
+              - mysql
+          topologyKey: "kubernetes.io/hostname"        
     retain:
       daily: 7
     copyMethod: Snapshot
@@ -30,5 +30,5 @@ spec:
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
-    cacheCapacity: 10Gi
+    cacheCapacity: 1Gi
     volumeSnapshotClassName: topolvm-provisioner-thin

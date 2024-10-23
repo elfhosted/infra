@@ -16,7 +16,7 @@ spec:
     repository: redbot-restic-config
     # Retention policy for backups
     retain:
-      daily: 2
+      daily: 7
     # Clone the source volume prior to taking a backup to ensure a
     # point-in-time image.
     copyMethod: Snapshot

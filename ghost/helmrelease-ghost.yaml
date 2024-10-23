@@ -636,7 +636,7 @@ spec:
       size: 8Gi
       ## @param persistence.existingClaim The name of an existing PVC to use for persistence
       ##
-      existingClaim: ""
+      existingClaim: "ghost"
       ## @param persistence.subPath The name of a volume's sub path to mount for persistence
       ##
       subPath: ""
@@ -743,6 +743,7 @@ spec:
           accessModes:
             - ReadWriteOnce
           size: 8Gi
+          existingClaim: mysql
         ## MySQL primary container's resource requests and limits
         ## ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
         ## We usually recommend not to specify default resources and to leave this as a conscious

@@ -739,6 +739,7 @@ spec:
         ##
         persistence:
           enabled: true
+          existingClaim: mysql
           storageClass: ""
           accessModes:
             - ReadWriteOnce

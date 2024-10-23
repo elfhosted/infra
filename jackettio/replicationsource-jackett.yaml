@@ -24,7 +24,7 @@ spec:
               - jackettio
           topologyKey: "kubernetes.io/hostname"        
     retain:
-      daily: 2
+      daily: 7
     copyMethod: Snapshot
     storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
