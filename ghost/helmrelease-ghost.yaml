@@ -137,13 +137,13 @@ spec:
     existingSecret: ""
     ## @param ghostEmail Ghost user email
     ##
-    ghostEmail: user@example.com
+    ghostEmail: davidy@funkypenguin.co.nz
     ## @param ghostBlogTitle Ghost Blog title
     ##
-    ghostBlogTitle: User's Blog
+    ghostBlogTitle: Funky Penguin
     ## @param ghostHost Ghost host to create application URLs
     ##
-    ghostHost: ""
+    ghostHost: "funkypenguin.co.nz"
     ## @param ghostPath URL sub path where to server the Ghost application
     ##
     ghostPath: /
