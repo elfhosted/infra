@@ -3,8 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: redis
   namespace: knightcrawler
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
   dataSourceRef:
     kind: ReplicationDestination
@@ -14,5 +12,5 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 10Gi
   storageClassName: topolvm-provisioner-thin

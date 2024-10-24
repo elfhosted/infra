@@ -3,8 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: rabbitmq
   namespace: knightcrawler
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
   dataSourceRef:
     kind: ReplicationDestination
