@@ -6,6 +6,16 @@ metadata:
 spec:
   # The PVC to be backed up
   sourcePVC: mongodb
+  moverAffinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution: 
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - mongodb
+        topologyKey: "kubernetes.io/hostname"    
   trigger:
     # Take a backup every 30 minutes
     schedule: "0 9 * * *"
