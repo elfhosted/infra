@@ -413,9 +413,7 @@ spec:
       ## @param query.tolerations Thanos Query tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##    
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param query.podLabels Thanos Query pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -1101,9 +1099,7 @@ spec:
       ## @param queryFrontend.tolerations Thanos Query Frontend tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param queryFrontend.podLabels Thanos Query Frontend pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -1565,9 +1561,7 @@ spec:
       ## @param bucketweb.tolerations Thanos Bucket Web tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param bucketweb.podLabels Thanos Bucket Web pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -2029,9 +2023,7 @@ spec:
       ## @param compactor.tolerations Thanos Compactor tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param compactor.podLabels Thanos Compactor pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -2511,9 +2503,7 @@ spec:
       ## @param storegateway.tolerations Thanos Store Gateway tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param storegateway.podLabels Thanos Store Gateway pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -3171,9 +3161,7 @@ spec:
       ## @param ruler.tolerations Thanos Ruler tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param ruler.podLabels Thanos Ruler pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -3693,9 +3681,7 @@ spec:
       ## @param receive.tolerations Thanos Receive tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param receive.statefulsetLabels Thanos Receive statefulset labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -4180,9 +4166,7 @@ spec:
       ## @param receiveDistributor.tolerations Thanos Receive Distributor tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
         
       ## @param receiveDistributor.podLabels Thanos Receive Distributor pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
