@@ -7,7 +7,7 @@ spec:
   trigger:
     manual: runonce
   restic:
-    repository: peertube-restic-config
+    repository: redis-restic-config
     copyMethod: Snapshot
     cacheCapacity: 1Gi
     capacity: 1Gi
