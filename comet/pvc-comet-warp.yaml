@@ -3,12 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: comet-warp
   namespace: comet
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
   accessModes:
   - ReadWriteMany
   resources:
     requests:
       storage: 100Mi
-  storageClassName: ceph-filesystem-ssd
+  storageClassName: topolvm-provisioner-thin
