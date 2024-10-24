@@ -438,10 +438,7 @@ spec:
         # -- Additional annotations for the `tokengen` Job
         annotations: {}
         # -- Tolerations for tokengen Job
-        tolerations:
-        - key: node-role.elfhosted.com/observability
-          operator: Exists
-          effect: NoSchedule        
+        tolerations: []      
         # -- Additional volumes for Pods
         extraVolumes: []
         # -- Additional volume mounts for Pods
@@ -659,10 +656,7 @@ spec:
           # -- The name of the PriorityClass for GrafanaAgent pods
           priorityClassName: null
           # -- Tolerations for GrafanaAgent pods
-          tolerations:
-          - key: node-role.elfhosted.com/observability
-            operator: Exists
-            effect: NoSchedule          
+          tolerations: []        
         # PodLogs configuration
         podLogs:
           # -- PodLogs version
@@ -710,10 +704,7 @@ spec:
         # -- Node selector for canary pods
         nodeSelector: {}
         # -- Tolerations for canary pods
-        tolerations:
-        - key: node-role.elfhosted.com/observability
-          operator: Exists
-          effect: NoSchedule        
+        tolerations: []     
         # -- The name of the PriorityClass for loki-canary pods
         priorityClassName: null
         # -- Image to use for loki canary
@@ -827,13 +818,7 @@ spec:
             - labelSelector:
                 matchLabels:
                   {{- include "loki.writeSelectorLabels" . | nindent 10 }}
-              topologyKey: kubernetes.io/hostname
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists                 
+              topologyKey: kubernetes.io/hostname            
       # -- DNS config for write pods
       dnsConfig: {}
       # -- Node selector for write pods
@@ -841,10 +826,7 @@ spec:
       # -- Topology Spread Constraints for write pods
       topologySpreadConstraints: []
       # -- Tolerations for write pods
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
-        effect: NoSchedule      
+      tolerations: []     
       # -- The default is to deploy all pods in parallel.
       podManagementPolicy: "Parallel"
       persistence:
@@ -936,22 +918,13 @@ spec:
                 labelSelector:
                   matchLabels:
                     {{- include "loki.tableManagerSelectorLabels" . | nindent 12 }}
-                topologyKey: failure-domain.beta.kubernetes.io/zone
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists                   
+                topologyKey: failure-domain.beta.kubernetes.io/zone                
       # -- DNS config table-manager pods
       dnsConfig: {}
       # -- Node selector for table-manager pods
       nodeSelector: {}
       # -- Tolerations for table-manager pods
-      tolerations: 
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
-        effect: NoSchedule      
+      tolerations: []    
       # -- Enable deletes by retention
       retention_deletes_enabled: false
       # -- Set retention period
@@ -1043,13 +1016,7 @@ spec:
             - labelSelector:
                 matchLabels:
                   {{- include "loki.readSelectorLabels" . | nindent 10 }}
-              topologyKey: kubernetes.io/hostname
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists                 
+              topologyKey: kubernetes.io/hostname              
       # -- DNS config for read pods
       dnsConfig: {}
       # -- Node selector for read pods
@@ -1057,10 +1024,7 @@ spec:
       # -- Topology Spread Constraints for read pods
       topologySpreadConstraints: []
       # -- Tolerations for read pods
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
-        effect: NoSchedule      
+      tolerations: []      
       # -- The default is to deploy all pods in parallel.
       podManagementPolicy: "Parallel"
       persistence:
@@ -1161,13 +1125,7 @@ spec:
             - labelSelector:
                 matchLabels:
                   {{- include "loki.backendSelectorLabels" . | nindent 10 }}
-              topologyKey: kubernetes.io/hostname
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists                 
+              topologyKey: kubernetes.io/hostname              
       # -- DNS config for backend pods
       dnsConfig: {}
       # -- Node selector for backend pods
@@ -1175,10 +1133,7 @@ spec:
       # -- Topology Spread Constraints for backend pods
       topologySpreadConstraints: []
       # -- Tolerations for backend pods
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
-        effect: NoSchedule      
+      tolerations: []   
       # -- The default is to deploy all pods in parallel.
       podManagementPolicy: "Parallel"
       persistence:
@@ -1271,22 +1226,13 @@ spec:
             - labelSelector:
                 matchLabels:
                   {{- include "loki.singleBinarySelectorLabels" . | nindent 10 }}
-              topologyKey: kubernetes.io/hostname
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists               
+              topologyKey: kubernetes.io/hostname             
       # -- DNS config for single binary pods
       dnsConfig: {}
       # -- Node selector for single binary pods
       nodeSelector: {}
       # -- Tolerations for single binary pods
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
-        effect: NoSchedule      
+      tolerations: []   
       persistence:
         # -- Enable StatefulSetAutoDeletePVC feature
         enableStatefulSetAutoDeletePVC: true
@@ -1454,13 +1400,7 @@ spec:
               labelSelector:
                 matchLabels:
                   {{- include "loki.gatewaySelectorLabels" . | nindent 10 }}
-              topologyKey: kubernetes.io/hostname
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists                 
+              topologyKey: kubernetes.io/hostname              
       # -- DNS config for gateway pods
       dnsConfig: {}
       # -- Node selector for gateway pods
@@ -1468,10 +1408,7 @@ spec:
       # -- Topology Spread Constraints for gateway pods
       topologySpreadConstraints: []
       # -- Tolerations for gateway pods
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
-        effect: NoSchedule      
+      tolerations: []    
       # Gateway service configuration
       service:
         # -- Port of the gateway service
