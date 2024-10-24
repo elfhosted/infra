@@ -28,4 +28,4 @@ spec:
     # cache using topolvm
     # cacheCapacity: 20Gi
     # The VSC to use if the copy method is Snapshot (default if omitted)
-    volumeSnapshotClassName: ceph-block
+    volumeSnapshotClassName: topolvm-provisioner-thin

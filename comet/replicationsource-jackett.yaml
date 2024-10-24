@@ -1,11 +1,11 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: comet
+  name: jackett
   namespace: comet
 spec:
   # The PVC to be backed up
-  sourcePVC: comet
+  sourcePVC: jackett
   trigger:
     # Take a backup every 30 minutes
     schedule: "0 9 * * *"
@@ -13,7 +13,7 @@ spec:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 7
     # Name of the Secret with the connection information
-    repository: comet-restic-config
+    repository: jackett-restic-config
     # Retention policy for backups
     retain:
       daily: 7
@@ -28,4 +28,4 @@ spec:
     # cache using topolvm
     cacheCapacity: 1Gi
     # The VSC to use if the copy method is Snapshot (default if omitted)
-    volumeSnapshotClassName: ceph-block
+    volumeSnapshotClassName: topolvm-provisioner-thin
