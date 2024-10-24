@@ -27,9 +27,9 @@ spec:
     retain:
       daily: 7
     copyMethod: Snapshot
-    storageClassName: ceph-block-ssd
+    storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
-    cacheCapacity: 8Gi
-    volumeSnapshotClassName: ceph-block # topolvm-provisioner-thin
+    cacheCapacity: 1Gi
+    volumeSnapshotClassName: topolvm-provisioner-thin
