@@ -5,14 +5,14 @@ metadata:
   namespace: shlink
 spec:
   # The PVC to be backed up
-  sourcePVC: mariadb
+  sourcePVC: mysql
   trigger:
     schedule: "0 9 * * *"
   restic:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 7
     # Name of the Secret with the connection information
-    repository: mariadb-restic-config
+    repository: mysql-restic-config
     moverAffinity:
       podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution: 
@@ -26,9 +26,9 @@ spec:
     retain:
       daily: 7
     copyMethod: Snapshot
-    storageClassName: topolvm-provisioner-thin
+    storageClassName: ceph-block-ssd # topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
     cacheCapacity: 1Gi
-    volumeSnapshotClassName: topolvm-provisioner-thin
+    volumeSnapshotClassName: ceph-block # topolvm-provisioner-thin
