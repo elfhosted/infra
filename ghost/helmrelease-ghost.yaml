@@ -125,7 +125,7 @@ spec:
 
     ## @param ghostUsername Ghost user name
     ##
-    ghostUsername: user
+    ghostUsername: davidy
     ## @param ghostPassword Ghost user password
     ## Defaults to a random 10-character alphanumeric string if not set
     ##
@@ -159,12 +159,12 @@ spec:
     ## @param smtpService SMTP service
     ## @param smtpProtocol SMTP protocol (ssl or tls)
     ##
-    smtpHost: ""
-    smtpPort: ""
-    smtpUser: ""
+    smtpHost: "smtp.eu.mailgun.org"
+    smtpPort: "587"
+    smtpUser: "postmaster@mg.funkypenguin.co.nz"
     smtpPassword: ""
     smtpService: ""
-    smtpProtocol: ""
+    smtpProtocol: "ssl"
     ## @param smtpExistingSecret The name of an existing secret with SMTP credentials
     ## NOTE: Must contain key `smtp-password`
     ## NOTE: When it's set, the `smtpPassword` parameter is ignored
@@ -726,7 +726,7 @@ spec:
         database: bitnami_ghost
         username: bn_ghost
         password: ""
-        existingSecret: ""
+        existingSecret: "ghost-mysql"
       ## MySQL Primary configuration
       ##
       primary:
