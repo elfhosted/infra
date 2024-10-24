@@ -520,7 +520,7 @@ spec:
         ## @param master.persistence.existingClaim Use a existing PVC which must be created manually before bound
         ## NOTE: requires master.persistence.enabled: true
         ##
-        existingClaim: "redis-data-redis-master-0"
+        existingClaim: "redis"
       ## persistentVolumeClaimRetentionPolicy
       ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
       ## @param master.persistentVolumeClaimRetentionPolicy.enabled Controls if and how PVCs are deleted during the lifecycle of a StatefulSet
