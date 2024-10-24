@@ -971,7 +971,7 @@ spec:
       ## The value is evaluated as a template
       ## So, for example, the name can depend on .Release or .Chart
       ##
-      existingClaim: ""
+      existingClaim: "rabbitmq"
       ## @param persistence.mountPath The path the volume will be mounted at
       ## Note: useful when using custom RabbitMQ images
       ##
