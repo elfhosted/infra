@@ -1,8 +1,8 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: rs-mariadb
-  namespace: shlink
+  name: rs-mysql
+  namespace: seonaut
 spec:
   # The PVC to be backed up
   sourcePVC: mysql
@@ -26,9 +26,9 @@ spec:
     retain:
       daily: 7
     copyMethod: Snapshot
-    storageClassName: ceph-block-ssd # topolvm-provisioner-thin
+    storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
     cacheCapacity: 1Gi
-    volumeSnapshotClassName: ceph-block # topolvm-provisioner-thin
+    volumeSnapshotClassName: topolvm-provisioner-thin
