@@ -4,10 +4,10 @@ metadata:
   name: mysql
   namespace: debrid-news
 spec:
-  # dataSourceRef:
-  #   kind: ReplicationDestination
-  #   apiGroup: volsync.backube
-  #   name: rd-mysql
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-mysql
   accessModes:
   - ReadWriteOnce
   resources:

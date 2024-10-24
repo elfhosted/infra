@@ -4,10 +4,10 @@ metadata:
   name: ghost
   namespace: debrid-news
 spec:
-  # dataSourceRef:
-  #   kind: ReplicationDestination
-  #   apiGroup: volsync.backube
-  #   name: rd-ghost
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-ghost
   accessModes:
   - ReadWriteOnce
   resources:
