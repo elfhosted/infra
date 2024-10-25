@@ -2,7 +2,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: rs-redis
-  namespace: peertube
+  namespace: annatar
 spec:
   # The PVC to be backed up
   # sourcePVC: redis
@@ -27,9 +27,9 @@ spec:
     retain:
       daily: 7
     copyMethod: Snapshot
-    storageClassName: topolvm-provisioner-thin
+    storageClassName: ceph-block-ssd
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
     cacheCapacity: 8Gi
-    volumeSnapshotClassName: topolvm-provisioner-thin
+    volumeSnapshotClassName: ceph-block # topolvm-provisioner-thin
