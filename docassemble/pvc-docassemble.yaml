@@ -3,12 +3,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: docassemble
   namespace: docassemble
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-docassemble
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ceph-block-ssd
+  storageClassName: topolvm-provisioner-thin
