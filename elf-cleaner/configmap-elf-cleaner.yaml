@@ -30,7 +30,7 @@ data:
       for PVC in ${PVCS}
       do
         # Is PVC currently bound
-        if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>""); then
+        if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>"); then
 
           # is it a ceph pvc though?
           if (kubectl get pvc -n ${NS} ${PVC} | grep -v 'topolvm-provisioner-thin'); then
