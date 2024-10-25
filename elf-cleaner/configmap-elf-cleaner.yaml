@@ -30,7 +30,7 @@ data:
       for PVC in ${PVCS}
       do
         # Is PVC currently bound
-        if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>""); then
+        if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>"); then
 
           kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
 
