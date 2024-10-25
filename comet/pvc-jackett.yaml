@@ -4,10 +4,10 @@ metadata:
   name: jackett
   namespace: comet
 spec:
-  # dataSourceRef:
-  #   kind: ReplicationDestination
-  #   apiGroup: volsync.backube
-  #   name: rd-jackett
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-jackett
   accessModes:
   - ReadWriteOnce
   resources:
