@@ -29,45 +29,39 @@ data:
 
       for PVC in ${PVCS}
       do
-        # Is PVC currently bounh
-        if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'Used By:       <none>'); then
+        # Is PVC currently bound
+        if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>""); then
 
-          # is it a ceph pvc though?
-          if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'StorageClass:  ceph'); then
+          kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
 
-            kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
+          # if not, then does the PVC already have a timestamp?
+          if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
-            # if not, then does the PVC already have a timestamp?
-            if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
+            # if yes, and it's older than 31 days, then label for deletion
+            TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk '{split($0,a); print a[3]}')
+            TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
+            if [[ $TIMESTAMP_DIFF -gt 2764800 ]]; then # 2764800 sec = 32 days
 
-              # if yes, and it's older than 31 days, then label for deletion
-              TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk '{split($0,a); print a[3]}')
-              TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
-              if [[ $TIMESTAMP_DIFF -gt 2764800 ]]; then # 2764800 sec = 32 days
+              echo "[$NS/$PVC] unused for > 31 days, flagging for removal it.."
+              kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d=true --overwrite
 
-                echo "[$NS/$PVC] unused for > 31 days, flagging for removal it.."
-                kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-32d=true --overwrite
+              kubectl delete pvc -n $NS $PVC
 
-                kubectl delete pvc -n $NS $PVC
+            elif [[ $TIMESTAMP_DIFF -gt 691200 ]]; then # 691200 sec = 8 days
 
-              elif [[ $TIMESTAMP_DIFF -gt 691200 ]]; then # 691200 sec = 8 days
+              echo "[$NS/$PVC] unused for > 8 days, flagging for removal it.."
+              kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-8d=true --overwrite
 
-                echo "[$NS/$PVC] unused for > 8 days, flagging for removal it.."
-                kubectl label pvc -n $NS $PVC elfhosted.com/unbound-and-older-than-8d=true --overwrite
-
-                if ! (echo $PVC | grep -q elfstorage); then
-                  kubectl delete pvc -n $NS $PVC # allow elfstorage to persist up to 32d
-                fi
-              else
-                echo "[$NS/$PVC] Found annotated, but it's less than 8d old, so ignoring"
+              if ! (echo $PVC | grep -q elfstorage); then
+                kubectl delete pvc -n $NS $PVC # allow elfstorage to persist up to 32d
               fi
             else
-              # label for cleanup in 3 days
-              echo "[$NS/$PVC] is unused, recording when it first became unused"
-              kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since=$TIMESTAMP_NOW
+              echo "[$NS/$PVC] Found annotated, but it's less than 8d old, so ignoring"
             fi
           else
-            echo "[$NS/$PVC] Volume is not ceph-based, ignoring.."
+            # label for cleanup in 3 days
+            echo "[$NS/$PVC] is unused, recording when it first became unused"
+            kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since=$TIMESTAMP_NOW
           fi
         else
           echo "[$NS/$PVC] Volume is mounted, remove any existing annotations / labels"
