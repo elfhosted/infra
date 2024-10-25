@@ -29,11 +29,11 @@ data:
 
       for PVC in ${PVCS}
       do
-        # Is PVC currently bound
+        # Is PVC currently bounh
         if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>"); then
 
           # is it a ceph pvc though?
-          if (kubectl get pvc -n ${NS} ${PVC} | grep -v 'topolvm-provisioner-thin'); then
+          if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'topolvm-provisioner'); then
 
             kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
 
@@ -67,7 +67,7 @@ data:
               kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since=$TIMESTAMP_NOW
             fi
           else
-            echo "[$NS/$PVC] Volume is not topolvm, ignoring.."
+            echo "[$NS/$PVC] Volume is not topolvm-based, ignoring.."
           fi
         else
           echo "[$NS/$PVC] Volume is mounted, remove any existing annotations / labels"
