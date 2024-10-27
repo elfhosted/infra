@@ -998,17 +998,9 @@ spec:
       enabled: true
       namespaceOverride: ""
 
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.${dns_domain}/observability
-                operator: Exists
+      affinity: {}
                 
-      tolerations:
-      - key: node-role.${dns_domain}/observability
-        operator: Exists
+      tolerations: []
 
       replicas: 2
       
@@ -2199,18 +2191,8 @@ spec:
     prometheus-node-exporter:
 
       tolerations:
-      - key: node-role.${dns_domain}/observability
-        operator: Exists   
-      - key: node-role.${dns_domain}/storage
-        operator: Exists      
-      - key: node-role.${dns_domain}/download-only
-        operator: Exists
-      - key: node-role.${dns_domain}/download
-        operator: Exists
-      - key: node-role.${dns_domain}/dedicated
-        operator: Exists 
-      - key: node-role.${dns_domain}/hobbit
-        operator: Exists                
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists                 
     
       extraHostVolumeMounts:
       - name: text-file-collector
@@ -2598,16 +2580,8 @@ spec:
           #   argocd.argoproj.io/hook-delete-policy: HookSucceeded
           podAnnotations: {}
           nodeSelector: {}
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: node-role.${dns_domain}/observability
-                    operator: Exists        
-          tolerations:
-          - key: node-role.${dns_domain}/observability
-            operator: Exists      
+          affinity: {}  
+          tolerations: []
 
           ## SecurityContext holds pod-level security attributes and common container settings.
           ## This defaults to non root user with uid 2000 and gid 2000. *v1.PodSecurityContext  false
@@ -2857,20 +2831,12 @@ spec:
       ## Tolerations for use with node taints
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.${dns_domain}/observability
-        operator: Exists    
+      tolerations: []  
 
       # ## Assign custom affinity rules to the prometheus operator
       # ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
       # ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.${dns_domain}/observability
-                operator: Exists
+      affinity: {}
       dnsConfig: {}
         # nameservers:
         #   - 1.2.3.4
@@ -3537,9 +3503,7 @@ spec:
         ## Tolerations for use with node taints
         ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
         ##
-        tolerations:
-        - key: node-role.${dns_domain}/observability
-          operator: Exists
+        tolerations: []
 
         ## If specified, the pod's topology spread constraints.
         ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
@@ -3808,13 +3772,7 @@ spec:
         ## Assign custom affinity rules to the prometheus instance
         ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
         ##
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: node-role.${dns_domain}/observability
-                  operator: Exists
+        affinity: {}
 
         ## The remote_read spec configuration for Prometheus.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#remotereadspec
