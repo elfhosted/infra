@@ -2,7 +2,7 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: deprecations.${dns_domain}
-  namespace: docassemble
+  namespace: deprecations
 spec:
   routes:
     - match: Host(`deprecations.${dns_domain}`)
