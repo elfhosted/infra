@@ -16,3 +16,9 @@ spec:
       kind: Deployment
       name: nginx
       namespace: deprecations 
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
+      - kind: Secret
+        name: cluster-secret-vars   
