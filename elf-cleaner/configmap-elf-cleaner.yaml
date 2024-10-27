@@ -38,7 +38,7 @@ data:
           if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'topolvm-provisioner'); then
 
 
-            # if not, then does the PVC already have a timestamp?
+            # if so, then does the PVC already have a timestamp?
             if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
               # if yes, and it's older than 31 days, then label for deletion
