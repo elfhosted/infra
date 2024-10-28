@@ -5,5 +5,5 @@ metadata:
   namespace: traefik
 spec:
   redirectRegex:
-    regex: ^.*/stream/movie/tt0023694.json
+    regex: ^.*/stream/.*
     replacement: https://deprecations.elfhosted.com/annatar-is-deprecated.json
