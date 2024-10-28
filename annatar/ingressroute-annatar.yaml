@@ -17,7 +17,7 @@ spec:
           namespace: traefik
         - name: headers-add-cors-for-stremio
           namespace: traefik
-        - name: redirectregex-annatar-stream-is-deprecated
+        - name: redirectregex-annatar-is-deprecated
           namespace: traefik
     - match: Host(`annatar.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
@@ -28,5 +28,5 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon-cached
           namespace: traefik
-        - name: redirectregex-annatar-is-deprecated
+        - name: redirectregex-annatar-stream-is-deprecated
           namespace: traefik          
