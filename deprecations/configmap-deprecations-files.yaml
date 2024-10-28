@@ -15,3 +15,14 @@ data:
             }
         ]
     }
+  stremio-jackett-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Stremio-Jackett",
+                "title": "Stremio-Jackett is deprecated ",
+                "torrentTitle": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫",
+                "url": "https://stremio-jackett-is-deprecated.elfhosted.com"
+            }
+        ]
+    }    
