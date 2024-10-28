@@ -54,7 +54,7 @@ spec:
       config:
         enabled: true
         type: custom
-        mountPath: /usr/share/nginx
+        mountPath: /usr/share/nginx/html
         volumeSpec:
           configMap:
             name: deprecations-files
