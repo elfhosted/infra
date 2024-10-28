@@ -8,10 +8,10 @@ data:
     {
         "streams": [
             {
-                "name": "Annatar is deprecated 😿",
+                "name": "Deprecation",
                 "title": "Annatar is deprecated 😿",
-                "torrentTitle": "Annatar is deprecated 😿",
-                "torrentSize": 81992842583444,
+                "torrentTitle": "Annatar is deprecated long string 😿",
+                "torrentSize": 8199284258344400,
                 "url": "https://url-to-deprecated-md4"
             }
         ]
