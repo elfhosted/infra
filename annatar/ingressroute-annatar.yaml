@@ -28,5 +28,7 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon-cached
           namespace: traefik
+        - name: headers-add-cors-for-stremio
+          namespace: traefik          
         - name: redirectregex-annatar-stream-is-deprecated
           namespace: traefik          
