@@ -15,3 +15,5 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
+        - name: redirectregex-annatar-is-deprecated
+          namespace: traefik          
