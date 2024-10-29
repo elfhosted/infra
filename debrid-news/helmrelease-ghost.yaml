@@ -149,7 +149,7 @@ spec:
     ghostPath: /
     ## @param ghostEnableHttps Configure Ghost to build application URLs using https
     ##
-    ghostEnableHttps: false
+    ghostEnableHttps: true
     ## SMTP mail delivery configuration
     ## ref: https://github.com/bitnami/containers/tree/main/bitnami/ghost/#smtp-configuration
     ## @param smtpHost SMTP server host
