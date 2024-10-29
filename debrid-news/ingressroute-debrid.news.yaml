@@ -11,5 +11,6 @@ spec:
         - name: ghost
           kind: Service
           port: 443
+          scheme: http
   tls:
     secretName: debrid.news-tls
