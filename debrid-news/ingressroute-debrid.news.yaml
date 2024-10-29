@@ -10,6 +10,6 @@ spec:
       services:
         - name: ghost
           kind: Service
-          port: 80
+          port: 443
   tls:
     secretName: debrid.news-tls

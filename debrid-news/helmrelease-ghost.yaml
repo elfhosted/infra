@@ -144,12 +144,13 @@ spec:
     ## @param ghostHost Ghost host to create application URLs
     ##
     ghostHost: "debrid.news"
+
     ## @param ghostPath URL sub path where to server the Ghost application
     ##
     ghostPath: /
     ## @param ghostEnableHttps Configure Ghost to build application URLs using https
     ##
-    ghostEnableHttps: false
+    ghostEnableHttps: true
     ## SMTP mail delivery configuration
     ## ref: https://github.com/bitnami/containers/tree/main/bitnami/ghost/#smtp-configuration
     ## @param smtpHost SMTP server host
@@ -188,9 +189,7 @@ spec:
     ##   - name: FOO
     ##     value: "bar"
     ##
-    extraEnvVars:
-      - name: GHOST_ENABLE_HTTPS
-        value: "yes"
+    extraEnvVars: []
     ## @param extraEnvVarsCM Name of existing ConfigMap containing extra env vars
     ##
     extraEnvVarsCM: ""
