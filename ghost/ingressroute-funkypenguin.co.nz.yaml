@@ -10,12 +10,12 @@ spec:
       services:
         - name: ghost
           kind: Service
-          port: 80
+          port: 443
     - match: Host(`www.funkypenguin.co.nz`)
       kind: Rule
       services:
         - name: ghost
           kind: Service
-          port: 80          
+          port: 443          
   tls:
     secretName: funkypenguin.co.nz-tls
