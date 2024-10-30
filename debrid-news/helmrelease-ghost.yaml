@@ -163,9 +163,9 @@ spec:
     smtpHost: "smtp.eu.mailgun.org"
     smtpPort: "587"
     smtpUser: "postmaster@mail.debrid.news"
-    smtpPassword: ""
+    smtpPassword: "ignored-but-hast-to-exist-else-password-isnt-passed"
     smtpService: "Mailgun"
-    smtpProtocol: ""
+    smtpProtocol: "tls"
     ## @param smtpExistingSecret The name of an existing secret with SMTP credentials
     ## NOTE: Must contain key `smtp-password`
     ## NOTE: When it's set, the `smtpPassword` parameter is ignored
