@@ -59,7 +59,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"              
     image:
       repository: ghcr.io/elfhosted/knightcrawler-consumer
-      tag: v2.0.27@sha256:f9eb46f4f9b7064afa691fd4169423923efad4eace4372a90a85a9ca769afcd6
+      tag: v2.0.27@sha256:4ed811f977339d29059612842f91c9f56975f36a71980e70688a1e59d36e1c81
     securityContext:
       seccompProfile:
         type: RuntimeDefault
