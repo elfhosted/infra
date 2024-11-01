@@ -20,7 +20,7 @@ spec:
       nameOverride: shluflix
     image:
       repository: ghcr.io/elfhosted/shluflix
-      tag: rolling@sha256:d4ae8e5300efa2bf291540e2bfe0a721307e137c1fef1adf79643c11d49596d3
+      tag: rolling@sha256:e8637bdaed50fbb6c17ed5e46d9789433370c86aa01abc4708b93c6c6f016724
     securityContext:
       seccompProfile:
         type: RuntimeDefault
