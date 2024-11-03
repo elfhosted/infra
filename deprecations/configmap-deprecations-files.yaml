@@ -15,6 +15,17 @@ data:
             }
         ]
     }
+  shluflix-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Shluflix",
+                "title": "Shluflix is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Shuflix is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/shluflix-is-deprecated.mp4"
+            }
+        ]
+    }    
   stremio-jackett-is-deprecated.json: |
     {
         "streams": [

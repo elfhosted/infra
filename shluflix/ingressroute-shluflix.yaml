@@ -5,15 +5,7 @@ metadata:
   namespace: shluflix
 spec:
   routes:
-    - match: Host(`shluflix.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
-      kind: Rule
-      services:
-        - name: shluflix
-          kind: Service
-          port: 3649
-      middlewares:  
-        - name: chain-public-stremio-addon-static
-          namespace: traefik  
+    # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
     - match: Host(`shluflix.${dns_domain}`)
       kind: Rule
       services:
@@ -21,6 +13,16 @@ spec:
           kind: Service
           port: 3649
       middlewares:  
-        - name: chain-public-stremio-addon
+        - name: headers-add-cors-for-stremio
           namespace: traefik
-
+        - name: redirectregex-shluflix-is-deprecated
+    - match: Host(`shluflix.${dns_domain}`) && PathPrefix(`/stream`)
+      kind: Rule
+      services:
+        - name: shluflix
+          kind: Service
+          port: 3649
+      middlewares:  
+        - name: headers-add-cors-for-stremio
+          namespace: traefik          
+        - name: redirectregex-shluflix-stream-is-deprecated
