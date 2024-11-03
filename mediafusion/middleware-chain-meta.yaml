@@ -6,7 +6,7 @@ metadata:
 spec:
   chain:
     middlewares:
-    - name: errors-rate-limit-exceeded   
-    - name: rate-limit-meta
     - name: headers-add-cors-for-stremio
       namespace: traefik  
+    - name: errors-rate-limit-exceeded   
+    - name: rate-limit-meta
