@@ -27,7 +27,7 @@ spec:
       # -- Traefik image repository
       repository: traefik
       # -- defaults to appVersion
-      tag: "v2.11.10"
+      tag: "v2.11.13"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
 
@@ -148,6 +148,9 @@ spec:
         traefik-oidc-auth:
           moduleName: "github.com/sevensolutions/traefik-oidc-auth"
           version: "v0.2.0"
+        rco:
+          moduleName: github.com/Lepkem/traefik-plugin-response-code-override
+          version: v0.0.3          
       # demo:
       #   moduleName: github.com/traefik/plugindemo
       #   version: v0.2.1
