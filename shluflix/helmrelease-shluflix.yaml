@@ -32,7 +32,7 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     controller:
-      replicas: 2
+      replicas: 5
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -94,7 +94,7 @@ spec:
       # resources, such as Minikube. If you do want to specify resources, uncomment the following
       # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
       limits:
-        cpu: 250m
+        cpu: 2
         memory: 1Gi
       requests:
         cpu: 1m
