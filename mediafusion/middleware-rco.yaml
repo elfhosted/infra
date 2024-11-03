@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: return-code-override
+  namespace: mediafusion
+spec:
+  plugin:
+    rco:
+      RemoveBody: false
+      Overrides:
+        '429': 200

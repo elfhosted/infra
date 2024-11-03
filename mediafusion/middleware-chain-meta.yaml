@@ -7,6 +7,7 @@ spec:
   chain:
     middlewares:
     - name: headers-add-cors-for-stremio
-      namespace: traefik  
+      namespace: traefik
+    - name: return-code-override
     - name: errors-rate-limit-exceeded   
     - name: rate-limit-meta
