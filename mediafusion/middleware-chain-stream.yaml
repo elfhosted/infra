@@ -10,4 +10,4 @@ spec:
       namespace: traefik
     - name: return-code-override
     - name: errors-rate-limit-exceeded   
-    - name: rate-limit-meta
+    - name: rate-limit-stream
