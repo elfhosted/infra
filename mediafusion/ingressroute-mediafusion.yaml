@@ -24,7 +24,7 @@ spec:
         - name: chain-public-stremio-addon-cached
           namespace: traefik
     # This is a scrape / search - testing rate-limit on white zombie (tt0023694)
-    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}meta/movie/tt0023694.json{else:.*}`)
+    - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`/{something:.+}meta/movie/tt0023694.json{else:.*}`)
       priority: 100
       kind: Rule
       services:
