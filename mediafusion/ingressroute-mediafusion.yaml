@@ -23,17 +23,7 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon-cached
           namespace: traefik
-    # This is a scrape / search - testing rate-limit on white zombie (tt0023694)
-    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}meta/movie/tt0023694.json{else:.*}`)
-      priority: 100
-      kind: Rule
-      services:
-        - name: mediafusion
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-meta
-    # This is a scrape / search
+    # This is a scrape / search, subject to rate-limiting
     - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/meta/{else:.+}`)
       kind: Rule
       services:
@@ -41,8 +31,7 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-public-stremio-addon-scrape
-          namespace: traefik  
+        - name: chain-meta
     # This is a stream
     - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/stream{else:.+}`)
       kind: Rule
