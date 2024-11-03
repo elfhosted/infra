@@ -6,5 +6,6 @@ metadata:
 spec:
   chain:
     middlewares:
+    - name: errors-rate-limit-exceeded   
     - name: rate-limit-meta
-    - name: errors-rate-limit-exceeded    
+ 
