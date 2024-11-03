@@ -25,4 +25,15 @@ data:
                 "url": "https://fnky.nz/sag"
             }
         ]
-    }    
+    }  
+  mediafusion-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] MediaFusion",
+                "title": "MediaFusion public rate-limit exceeded 🐢",
+                "torrentTitle": "MediaFusion public rate-limited 🐢",
+                "url": "https://elfhosted.com/assets/mediafusion-rate-limited.mp4"
+            }
+        ]
+    }        
