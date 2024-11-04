@@ -9,9 +9,10 @@ spec:
     - match: Host(`annatar.${dns_domain}`)
       kind: Rule
       services:
-        - name: annatar
-          kind: Service
-          port: 8000
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
@@ -22,9 +23,10 @@ spec:
     - match: Host(`annatar.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
       services:
-        - name: annatar
-          kind: Service
-          port: 8000
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
         - name: chain-public-stremio-addon-cached
           namespace: traefik

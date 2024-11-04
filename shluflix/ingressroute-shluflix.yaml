@@ -9,9 +9,10 @@ spec:
     - match: Host(`shluflix.${dns_domain}`)
       kind: Rule
       services:
-        - name: shluflix
-          kind: Service
-          port: 3649
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
         - name: headers-add-cors-for-stremio
           namespace: traefik
@@ -19,9 +20,10 @@ spec:
     - match: Host(`shluflix.${dns_domain}`) && PathPrefix(`/stream`)
       kind: Rule
       services:
-        - name: shluflix
-          kind: Service
-          port: 3649
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
         - name: headers-add-cors-for-stremio
           namespace: traefik          
