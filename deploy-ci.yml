@@ -7,12 +7,6 @@
 
 - hosts: k3s_servers
   become: yes
-  roles:
-  - role: artis3n.tailscale
-    vars:
-      # Example pulling the API key from the env vars on the host running Ansible
-      tailscale_authkey: "{{ tailscale_key }}"
-      tailscale_args: "--accept-dns=false" # don't want tailscale messing up our kube dns
   tasks:
 
   - name: set host architecture

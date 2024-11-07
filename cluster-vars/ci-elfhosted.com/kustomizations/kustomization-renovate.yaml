@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: infra
   dependsOn:
-  - name: rook-ceph-cluster    
+  - name: opolvm--topolvm-system 
   healthChecks:
     - apiVersion: batch/v1
       kind: CronJob
