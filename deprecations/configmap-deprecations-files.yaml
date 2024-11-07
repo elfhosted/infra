@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deprecations-files
+  namespace: deprecations
+data:
+  annatar-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Annatar",
+                "title": "Annatar is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Annatar is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/annatar-is-deprecated.mp4"
+            }
+        ]
+    }
+  shluflix-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Shluflix",
+                "title": "Shluflix is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Shuflix is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/shluflix-is-deprecated.mp4"
+            }
+        ]
+    }    
+  stremio-jackett-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Stremio-Jackett",
+                "title": "Stremio-Jackett is deprecated ",
+                "torrentTitle": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "url": "https://fnky.nz/sag"
+            }
+        ]
+    }  
+  mediafusion-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] MediaFusion",
+                "title": "MediaFusion public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }        

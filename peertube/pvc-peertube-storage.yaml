@@ -6,9 +6,13 @@ metadata:
   annotations:
     helm.sh/resource-policy: keep
 spec:
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-peertube-storage
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
-  storageClassName: ceph-block-ssd
+  storageClassName: topolvm-provisioner-thin

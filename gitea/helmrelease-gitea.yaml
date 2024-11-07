@@ -284,9 +284,9 @@ spec:
     ## @param persistence.volumeName Name of persistent volume in PVC
     persistence:
       enabled: true
-      create: true
+      create: false
       mount: true
-      claimName: gitea-shared-storage
+      claimName: gitea
       size: 10Gi
       accessModes:
         - ReadWriteOnce

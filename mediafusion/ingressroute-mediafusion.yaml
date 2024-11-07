@@ -5,24 +5,15 @@ metadata:
   namespace: mediafusion
 spec:
   routes:
-    - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider`) || PathPrefix(`/poster`) || PathPrefix(`/configure`))
+    # This is a scrape / search, subject to rate-limiting
+    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
       services:
         - name: mediafusion
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-public-stremio-addon-static
-          namespace: traefik
-    - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/{something:.+}/catalog/{else:.+}`) || PathPrefix(`/catalog`))
-      kind: Rule
-      services:
-        - name: mediafusion
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-public-stremio-addon-cached
-          namespace: traefik
+        - name: chain-stream              
     - match: Host(`mediafusion.${dns_domain}`)
       kind: Rule
       services:
@@ -30,5 +21,5 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-public-stremio-addon
+        - name: chain-public-stremio-addon-static
           namespace: traefik

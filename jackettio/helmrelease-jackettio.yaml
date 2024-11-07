@@ -20,7 +20,7 @@ spec:
       nameOverride: jackettio
     image:
       repository: ghcr.io/elfhosted/jackettio
-      tag: v1.3.1@sha256:c9f336aa579a81700e3ab608743a48fdc4de522b0157adf3755e2e3cca12f12b
+      tag: v1.5.1@sha256:9d51b4dd66d9e31dc6c22bde1a5802a33af5ca554e776080d622a60580c90426
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -32,7 +32,7 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       allowPrivilegeEscalation: false
-      runAsNonRoot: true
+      runAsNonRoot: false # can't use VPN with this enabled
       capabilities:
         drop:
         - ALL        
@@ -121,3 +121,29 @@ spec:
           name: config
         - mountPath: /tmp
           name: tmp        
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: jackettio-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.0.0.0/8
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"      
+          VPNDNS: "0"  
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config  

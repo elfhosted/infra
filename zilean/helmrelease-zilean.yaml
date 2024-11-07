@@ -20,7 +20,7 @@ spec:
       nameOverride: zilean
     image:
       repository: ghcr.io/elfhosted/zilean
-      tag: v1.5.3@sha256:76cf006b2dd5324f51d400c2b442fed47359c4e3dd35843d2f2e11aca8d8e1f3
+      tag: v2.0.0@sha256:343e425e36814d431ae2720df6f9ced67a5ff48e791e5cca8c4c90c00e6f6900
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -84,7 +84,7 @@ spec:
         mountPath: /app/data
         volumeSpec:
           persistentVolumeClaim:
-            claimName: zilean-1-5
+            claimName: zilean
     envFrom:
     - secretRef:
         name: zilean-env                   

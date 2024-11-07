@@ -101,7 +101,7 @@ spec:
     image:
       registry: docker.io
       repository: bitnami/ghost
-      tag: 5.91.0-debian-12-r0
+      tag: 5.97.3-debian-12-r0
       digest: ""
       ## Specify a imagePullPolicy
       ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -125,7 +125,7 @@ spec:
 
     ## @param ghostUsername Ghost user name
     ##
-    ghostUsername: user
+    ghostUsername: davidy
     ## @param ghostPassword Ghost user password
     ## Defaults to a random 10-character alphanumeric string if not set
     ##
@@ -134,22 +134,22 @@ spec:
     ## NOTE: Must contain key `ghost-password`
     ## NOTE: When it's set, the `ghostPassword` parameter is ignored
     ##
-    existingSecret: ""
+    existingSecret: "ghost-env"
     ## @param ghostEmail Ghost user email
     ##
-    ghostEmail: user@example.com
+    ghostEmail: davidy@funkypenguin.co.nz
     ## @param ghostBlogTitle Ghost Blog title
     ##
-    ghostBlogTitle: User's Blog
+    ghostBlogTitle: Funky Penguin
     ## @param ghostHost Ghost host to create application URLs
     ##
-    ghostHost: ""
+    ghostHost: "funkypenguin.co.nz"
     ## @param ghostPath URL sub path where to server the Ghost application
     ##
     ghostPath: /
     ## @param ghostEnableHttps Configure Ghost to build application URLs using https
     ##
-    ghostEnableHttps: false
+    ghostEnableHttps: true
     ## SMTP mail delivery configuration
     ## ref: https://github.com/bitnami/containers/tree/main/bitnami/ghost/#smtp-configuration
     ## @param smtpHost SMTP server host
@@ -159,17 +159,17 @@ spec:
     ## @param smtpService SMTP service
     ## @param smtpProtocol SMTP protocol (ssl or tls)
     ##
-    smtpHost: ""
-    smtpPort: ""
-    smtpUser: ""
+    smtpHost: "smtp.eu.mailgun.org"
+    smtpPort: "587"
+    smtpUser: "postmaster@mg.funkypenguin.co.nz"
     smtpPassword: ""
     smtpService: ""
-    smtpProtocol: ""
+    smtpProtocol: "ssl"
     ## @param smtpExistingSecret The name of an existing secret with SMTP credentials
     ## NOTE: Must contain key `smtp-password`
     ## NOTE: When it's set, the `smtpPassword` parameter is ignored
     ##
-    smtpExistingSecret: ""
+    smtpExistingSecret: "ghost-env"
     ## @param allowEmptyPassword Allow the container to be started with blank passwords
     ##
     allowEmptyPassword: true
@@ -636,7 +636,7 @@ spec:
       size: 8Gi
       ## @param persistence.existingClaim The name of an existing PVC to use for persistence
       ##
-      existingClaim: ""
+      existingClaim: "ghost"
       ## @param persistence.subPath The name of a volume's sub path to mount for persistence
       ##
       subPath: ""
@@ -726,7 +726,7 @@ spec:
         database: bitnami_ghost
         username: bn_ghost
         password: ""
-        existingSecret: ""
+        existingSecret: "ghost-mysql"
       ## MySQL Primary configuration
       ##
       primary:
@@ -743,6 +743,7 @@ spec:
           accessModes:
             - ReadWriteOnce
           size: 8Gi
+          existingClaim: mysql
         ## MySQL primary container's resource requests and limits
         ## ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
         ## We usually recommend not to specify default resources and to leave this as a conscious

@@ -497,7 +497,7 @@ spec:
         ## @param primary.persistence.existingClaim Name of an existing `PersistentVolumeClaim` for MySQL primary replicas
         ## NOTE: When it's set the rest of persistence parameters are ignored
         ##
-        existingClaim: ""
+        existingClaim: "mysql"
         ## @param primary.persistence.subPath The name of a volume's sub path to mount for persistence
         ##
         subPath: ""

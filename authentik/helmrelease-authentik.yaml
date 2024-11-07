@@ -956,7 +956,7 @@ spec:
         existingSecretPasswordKey: AUTHENTIK_REDIS__PASSWORD
       master:
         persistence:
-          storageClass: "${storageclass_rwo_name}"
+          storageClass: "topolvm-provisioner-thin"
           ## @param master.persistence.accessModes Persistent Volume access modes
           ##
           accessModes:

@@ -10,6 +10,14 @@ spec:
       services:
         - name: ghost
           kind: Service
-          port: 8080
+          port: 443
+          scheme: http
+    - match: Host(`www.funkypenguin.co.nz`)
+      kind: Rule
+      services:
+        - name: ghost
+          kind: Service
+          port: 443          
+          scheme: http
   tls:
     secretName: funkypenguin.co.nz-tls

@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: debrid.news
+  namespace: debrid-news
+spec:
+  routes:
+    - match: Host(`debrid.news`)
+      kind: Rule
+      services:
+        - name: ghost
+          kind: Service
+          port: 443
+          scheme: http
+  tls:
+    secretName: debrid.news-tls

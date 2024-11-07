@@ -398,13 +398,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: query.podAffinityPreset, query.podAntiAffinityPreset, and query.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
 
       ## @param query.nodeSelector Thanos Query node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -413,9 +407,7 @@ spec:
       ## @param query.tolerations Thanos Query tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##    
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param query.podLabels Thanos Query pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -1087,13 +1079,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: queryFrontend.podAffinityPreset, queryFrontend.podAntiAffinityPreset, and queryFrontend.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param queryFrontend.nodeSelector Thanos Query Frontend node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -1101,9 +1087,7 @@ spec:
       ## @param queryFrontend.tolerations Thanos Query Frontend tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param queryFrontend.podLabels Thanos Query Frontend pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -1551,13 +1535,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: bucketweb.podAffinityPreset, bucketweb.podAntiAffinityPreset, and bucketweb.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param bucketweb.nodeSelector Thanos Bucket Web node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -1565,9 +1543,7 @@ spec:
       ## @param bucketweb.tolerations Thanos Bucket Web tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param bucketweb.podLabels Thanos Bucket Web pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -2015,13 +1991,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: compactor.podAffinityPreset, compactor.podAntiAffinityPreset, and compactor.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param compactor.nodeSelector Thanos Compactor node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -2029,9 +1999,7 @@ spec:
       ## @param compactor.tolerations Thanos Compactor tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param compactor.podLabels Thanos Compactor pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -2497,13 +2465,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: storegateway.podAffinityPreset, storegateway.podAntiAffinityPreset, and storegateway.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param storegateway.nodeSelector Thanos Store Gateway node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -2511,9 +2473,7 @@ spec:
       ## @param storegateway.tolerations Thanos Store Gateway tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param storegateway.podLabels Thanos Store Gateway pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -3157,13 +3117,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: ruler.podAffinityPreset, ruler.podAntiAffinityPreset, and ruler.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param ruler.nodeSelector Thanos Ruler node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -3171,9 +3125,7 @@ spec:
       ## @param ruler.tolerations Thanos Ruler tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param ruler.podLabels Thanos Ruler pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -3679,13 +3631,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: receive.podAffinityPreset, receive.podAntiAffinityPreset, and receive.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param receive.nodeSelector Thanos Receive node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -3693,9 +3639,7 @@ spec:
       ## @param receive.tolerations Thanos Receive tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
 
       ## @param receive.statefulsetLabels Thanos Receive statefulset labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -4166,13 +4110,7 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
       ## Note: receiveDistributor.podAffinityPreset, receiveDistributor.podAntiAffinityPreset, and receiveDistributor.nodeAffinityPreset will be ignored when it's set
       ##
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.elfhosted.com/observability
-                operator: Exists
+      affinity: {}
       ## @param receiveDistributor.nodeSelector Thanos Receive Distributor node labels for pod assignment
       ## ref: https://kubernetes.io/docs/user-guide/node-selection/
       ##
@@ -4180,9 +4118,7 @@ spec:
       ## @param receiveDistributor.tolerations Thanos Receive Distributor tolerations for pod assignment
       ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
       ##
-      tolerations:
-      - key: node-role.elfhosted.com/observability
-        operator: Exists
+      tolerations: []
         
       ## @param receiveDistributor.podLabels Thanos Receive Distributor pod labels
       ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/

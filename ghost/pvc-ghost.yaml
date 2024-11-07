@@ -3,12 +3,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: ghost
   namespace: ghost
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-ghost
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: ceph-filesystem-ssd
+      storage: 10Gi
+  storageClassName: topolvm-provisioner-thin

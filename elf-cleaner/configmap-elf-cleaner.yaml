@@ -25,19 +25,20 @@ data:
       # kubectl delete deployments.apps -n $NS -l myprecious.elfhosted.com/version!=$VERSION,app.kubernetes.io/name!=kubernetesdashboard,app!=mattermost
 
       # Get a list of all customer PVCs excluding tmp (because it's ephemeral)
-      PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -v tmp | cut -f1 -d' ')
+      PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -E "config|symlinks|backup|logs" | grep -v volsync | cut -f1 -d' ')
 
       for PVC in ${PVCS}
       do
         # Is PVC currently bounh
-        if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'Used By:       <none>'); then
+        if (kubectl describe pvc -n ${NS} ${PVC} | grep -qE "Used By:.*<none>"); then
 
-          # is it a ceph pvc though?
-          if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'StorageClass:  ceph'); then
+          kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
 
-            kubectl label pvc -n $NS $PVC elfhosted.com/currently-unbound=true --overwrite
+          # is it a topolvm pvc though?
+          if (kubectl describe pvc -n ${NS} ${PVC} | grep -q 'topolvm-provisioner'); then
 
-            # if not, then does the PVC already have a timestamp?
+
+            # if so, then does the PVC already have a timestamp?
             if (kubectl describe pvc -n $NS $PVC | grep -q elfhosted.com/unused-since); then
 
               # if yes, and it's older than 31 days, then label for deletion
@@ -67,7 +68,7 @@ data:
               kubectl annotate pvc -n $NS $PVC elfhosted.com/unused-since=$TIMESTAMP_NOW
             fi
           else
-            echo "[$NS/$PVC] Volume is not ceph-based, ignoring.."
+            echo "[$NS/$PVC] Volume is not topolvm-based, ignoring.."
           fi
         else
           echo "[$NS/$PVC] Volume is mounted, remove any existing annotations / labels"

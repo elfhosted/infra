@@ -1,0 +1,13 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-stream
+  namespace: mediafusion
+spec:
+  chain:
+    middlewares:
+    - name: headers-add-cors-for-stremio
+      namespace: traefik
+    - name: return-code-override
+    - name: errors-rate-limit-exceeded   
+    - name: rate-limit-stream

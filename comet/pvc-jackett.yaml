@@ -3,12 +3,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: jackett
   namespace: comet
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-jackett
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
-  storageClassName: ceph-block-ssd
+      storage: 1Gi
+  storageClassName: topolvm-provisioner-thin

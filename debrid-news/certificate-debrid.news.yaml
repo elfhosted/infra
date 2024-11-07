@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: debrid.news
+  namespace: debrid-news
+spec:
+  secretName: debrid.news-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: debrid.news
+  dnsNames:
+  - debrid.news

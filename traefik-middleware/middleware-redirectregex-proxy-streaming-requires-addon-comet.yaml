@@ -6,7 +6,7 @@ metadata:
 spec:
   redirectRegex:
     # regex: ^.*playback.*
-    regex: ^.*/2$
+    regex: ^.*/brokenonpurpose2$
     replacement: https://elfhosted.com/assets/proxy-streaming-requires-addon-comet.mp4
   # errors:
   #   status:

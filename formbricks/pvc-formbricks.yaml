@@ -3,12 +3,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: formbricks
   namespace: formbricks
-  annotations:
-    helm.sh/resource-policy: keep
 spec:
+  dataSourceRef:
+    kind: ReplicationDestination
+    apiGroup: volsync.backube
+    name: rd-formbricks
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ceph-block-ssd
+  storageClassName: topolvm-provisioner-thin
