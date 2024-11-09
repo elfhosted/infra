@@ -15,6 +15,8 @@ egress_gateways
 fairy01     ansible_host=10.0.42.11 cluster_nic=eno1.4000
 fairy02     ansible_host=10.0.42.12 cluster_nic=eno1.4000
 fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
+fairy04     ansible_host=10.0.42.14 cluster_nic=eno1.4000
+
 
 [k3s_contended]
 hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
@@ -93,15 +95,6 @@ hobbit18     ansible_host=10.0.42.168 cluster_nic=eno1.4000 # 128GB
 hobbit19     ansible_host=10.0.42.169 cluster_nic=eno1.4000 # 128GB
 hobbit20     ansible_host=10.0.42.170 cluster_nic=eno1.4000 # 128GB
 
-
-[k3s_observability]
-# gnomes - lightweight (cheap)nodes without GPUs for lightweight workloads
-gnome01      ansible_host=10.0.42.101 cluster_nic=enp0s31f6.4000 # an i7-8 host, 64GB (old fairy01)
-gnome02      ansible_host=10.0.42.102 cluster_nic=enp0s31f6.4000 # an i7-8 host, 64GB (old fairy02)
-gnome03      ansible_host=10.0.42.103 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
-gnome04      ansible_host=10.0.42.104 cluster_nic=enp0s31f6.4000 # an i7 host, 64GB
-
-
 # We use these for doing automated hetzner installimage reinstalls
 # There's no DNS here but these are saved entries in my .ssh/config
 [public_hosts]
@@ -113,6 +106,7 @@ gnome04-public.elfhosted.com
 fairy01-public.elfhosted.com
 fairy02-public.elfhosted.com
 fairy03-public.elfhosted.com
+fairy04-public.elfhosted.com
 
 hansel01-public.elfhosted.com
 hansel02-public.elfhosted.com

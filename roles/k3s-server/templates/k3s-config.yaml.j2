@@ -19,6 +19,16 @@ flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
 cluster-init: true
+{% if external_ip is defined %}
+node-ip: {{ external_ip }}
+{% else %}
+node-ip: {{ ansible_host }}
+{% endif %}
+{% if cluster_ip is defined %}
+advertise-address: {{ cluster_ip }}
+{% else %}
+advertise-address: {{ ansible_host }}
+{% endif %}
 disable: 
 - "traefik"
 - "servicelb"

@@ -328,7 +328,7 @@ aksbyocni:
 
 # -- Enable installation of PodCIDR routes between worker
 # nodes if worker nodes share a common L2 network segment.
-autoDirectNodeRoutes: true
+autoDirectNodeRoutes: false
 
 # -- Annotate k8s node upon initialization with Cilium's metadata.
 annotateK8sNode: true
@@ -1112,7 +1112,7 @@ hubble:
       override: ~
       repository: "quay.io/cilium/hubble-relay"
       tag: "v1.14.0"
-       # hubble-relay-digest
+      # hubble-relay-digest
       digest: ""
       useDigest: false
       pullPolicy: "IfNotPresent"
@@ -1469,11 +1469,11 @@ hubble:
         # kubernetes.io/tls-acme: "true"
       className: "nginx"
       hosts:
-        - hubble.infra.{{ dns_domain }}
+        - hubble.infra.disabled
       tls:
       - hosts:
-        - hubble.infra.{{ dns_domain }}
-        secretName: letsencrypt-wildcard-cert-infra.{{ dns_domain }}
+        - hubble.infra.disabled
+        secretName: letsencrypt-wildcard-cert-infra.disabled
 
 
 # -- Method to use for identity allocation (`crd` or `kvstore`).
@@ -1504,7 +1504,7 @@ ipam:
     # -- Deprecated in favor of ipam.operator.clusterPoolIPv6PodCIDRList.
     # IPv6 CIDR range to delegate to individual nodes for IPAM.
     # clusterPoolIPv6PodCIDR: "fd00::/104"
-     # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
+    # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
     clusterPoolIPv6PodCIDRList:
     - "{{ pod_cidr_v6 }}"
     # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
@@ -1674,7 +1674,7 @@ vtep:
 # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
 # the user must configure the routes to reach pods, either manually or by
 # setting the auto-direct-node-routes flag.
-ipv4NativeRoutingCIDR: "10.0.0.0/10" # provide 32 x /15s
+# ipv4NativeRoutingCIDR: "10.0.0.0/10"
 
 # -- (string) Allows to explicitly specify the IPv6 CIDR for native routing.
 # When specified, Cilium assumes networking for this CIDR is preconfigured and
@@ -1686,7 +1686,7 @@ ipv4NativeRoutingCIDR: "10.0.0.0/10" # provide 32 x /15s
 # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
 # the user must configure the routes to reach pods, either manually or by
 # setting the auto-direct-node-routes flag.
-ipv6NativeRoutingCIDR: "fd00::/104"
+# ipv6NativeRoutingCIDR: "fd00::/104"
 
 # -- cilium-monitor sidecar.
 monitor:
@@ -1705,7 +1705,7 @@ loadBalancer:
 
   # -- mode is the operation mode of load balancing for remote backends
   # e.g. snat, dsr, hybrid
-  mode: dsr
+  # mode: dsr
 
   # -- acceleration is the option to accelerate service handling via XDP
   # e.g. native, disabled
@@ -2104,7 +2104,7 @@ tls:
 #   - disabled
 #   - vxlan (default)
 #   - geneve
-tunnel: "disabled"
+# tunnel: "disabled"
 
 # -- Configure VXLAN and Geneve tunnel port.
 # @default -- Port 8472 for VXLAN, Port 6081 for Geneve
@@ -2505,12 +2505,12 @@ nodeinit:
 
   # -- startup offers way to customize startup nodeinit script (pre and post position)
   startup:
-   preScript: ""
-   postScript: ""
+    preScript: ""
+    postScript: ""
   # -- prestop offers way to customize prestop nodeinit script (pre and post position)
   prestop:
-   preScript: ""
-   postScript: ""
+    preScript: ""
+    postScript: ""
 
 preflight:
   # -- Enable Cilium pre-flight resources (required for upgrade)
@@ -2966,7 +2966,7 @@ clustermesh:
       kvstoremesh:
         # -- Enables exporting KVStoreMesh metrics in OpenMetrics format.
         enabled: true
-         # -- Configure the port the KVStoreMesh metric server listens on.
+        # -- Configure the port the KVStoreMesh metric server listens on.
         port: 9964
 
       etcd:

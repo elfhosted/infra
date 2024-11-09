@@ -18,9 +18,6 @@ pixie03     ansible_host=192.168.40.13 cluster_nic=eth1 proxmox_id=403 mac=52:54
 sprite01    ansible_host=192.168.40.21 cluster_nic=eth1 proxmox_id=404 mac=52:54:00:40:00:21 proxmox_vm_cores=16
 sprite02    ansible_host=192.168.40.22 cluster_nic=eth1 proxmox_id=405 mac=52:54:00:40:00:22 proxmox_vm_cores=16
 sprite03    ansible_host=192.168.40.23 cluster_nic=eth1 proxmox_id=406 mac=52:54:00:40:00:23 proxmox_vm_cores=16
-hobbit01    ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:54:00:40:00:81 proxmox_vm_cores=8
-hobbit02    ansible_host=192.168.40.82 cluster_nic=eth1 proxmox_id=408 mac=52:54:00:40:00:82 proxmox_vm_cores=8
-hobbit03    ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54:00:40:00:83 proxmox_vm_cores=8
 
 [controllers]
 gollum01    ansible_host=192.168.40.3  cluster_nic=eth1 proxmox_id=400 mac=52:54:00:40:00:03
@@ -40,32 +37,10 @@ sprite01        ansible_host=192.168.40.21 cluster_nic=eth1 proxmox_id=404 mac=5
 sprite02        ansible_host=192.168.40.22 cluster_nic=eth1 proxmox_id=405 mac=52:54:00:40:00:22
 sprite03        ansible_host=192.168.40.23 cluster_nic=eth1 proxmox_id=406 mac=52:54:00:40:00:23
 
-[k3s_elves]
+[k3s_contended]
 sprite01
 sprite02
-sprite03
 
-[k3s_dwarves]
-hobbit01      ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:54:00:40:00:81
-hobbit02      ansible_host=192.168.40.82 cluster_nic=eth1 proxmox_id=408 mac=52:54:00:40:00:82
-hobbit03      ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54:00:40:00:83
-
-[k3s_goblins] # so that we can run MDSs
-hobbit01      ansible_host=192.168.40.81 cluster_nic=eth1 proxmox_id=407 mac=52:54:00:40:00:81
-hobbit02      ansible_host=192.168.40.82 cluster_nic=eth1 proxmox_id=408 mac=52:54:00:40:00:82
-hobbit03      ansible_host=192.168.40.83 cluster_nic=eth1 proxmox_id=409 mac=52:54:00:40:00:83
-
-
-[k3s_observability]
-
-[node_role_download]
-sprite01
-
-[k3s_rangers]
-[k3s_hobbits]
-
-[node_role_app]
+[k3s_dedicated]
 sprite02
 sprite03
-
-# Why are we using a separate cluster NIC? For most accurate simulation of the Hetzner design

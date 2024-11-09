@@ -12,4 +12,4 @@ spec:
     kind: GitRepository
     name: infra
   dependsOn:
-  - name: rook-ceph-cluster
+  - name: topolvm--topolvm-system
