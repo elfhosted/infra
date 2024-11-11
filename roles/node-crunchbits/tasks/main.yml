@@ -150,11 +150,8 @@
   ufw:
     direction: in
     rule: "allow"
-    src: "{{ item }}"    
-  with_items:
-  - 192.168.44.0/24
-  - 23.147.152.152/29
-  - 23.147.152.160/29
+    src: "{{ item }}"
+  loop: "{{ firewall.cluster_source }}"    
 
 - name: Allow any incoming traffic to the cluster range
   ufw:

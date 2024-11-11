@@ -8,6 +8,7 @@ k3s_rangers # dedicated customer nodes
 k3s_hobbits # lightweight rangers
 k3s_dedicated # dedicated nodes (prev hobbits, rangers)
 k3s_contended # contended nodes
+k3s_agents
 controllers
 egress_gateways
 
@@ -30,7 +31,7 @@ hansel08     ansible_host=10.0.42.28 cluster_nic=eno1.4000
 hansel09     ansible_host=10.0.42.29 cluster_nic=eno1.4000
 hansel10     ansible_host=10.0.42.30 cluster_nic=eno1.4000
 
-[k3s_dedicated]
+[k3s_agents]
 gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 # 128GB
 gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 # 128GB
 gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 # 128GB
@@ -51,7 +52,6 @@ gretel17     ansible_host=10.0.42.137 cluster_nic=eno1.4000 # 128GB
 gretel18     ansible_host=10.0.42.138 cluster_nic=eno1.4000 # 128GB
 gretel19     ansible_host=10.0.42.139 cluster_nic=eno1.4000 # 128GB
 gretel20     ansible_host=10.0.42.140 cluster_nic=eno1.4000 # 128GB
-
 gretel21     ansible_host=10.0.42.141 cluster_nic=eno1.4000 # 128GB
 gretel22     ansible_host=10.0.42.142 cluster_nic=eno1.4000 # 128GB
 gretel23     ansible_host=10.0.42.143 cluster_nic=eno1.4000 # 128GB
@@ -62,47 +62,20 @@ gretel27     ansible_host=10.0.42.147 cluster_nic=eno1.4000 # 128GB
 gretel28     ansible_host=10.0.42.148 cluster_nic=eno1.4000 # 128GB
 gretel29     ansible_host=10.0.42.149 cluster_nic=eno1.4000 # 128GB
 gretel30     ansible_host=10.0.42.150 cluster_nic=eno1.4000 # 128GB
-
-ranger01     ansible_host=10.0.42.111 cluster_nic=eno1.4000 # 128GB
-ranger02     ansible_host=10.0.42.112 cluster_nic=eno1.4000 # 128GB
-ranger03     ansible_host=10.0.42.113 cluster_nic=eno1.4000 # 128GB
-ranger04     ansible_host=10.0.42.114 cluster_nic=eno1.4000 # 128GB
-ranger05     ansible_host=10.0.42.115 cluster_nic=eno1.4000 # 128GB
-ranger06     ansible_host=10.0.42.116 cluster_nic=eno1.4000 # 128GB
-ranger07     ansible_host=10.0.42.117 cluster_nic=eno1.4000 # 128GB
-ranger08     ansible_host=10.0.42.118 cluster_nic=eno1.4000 # 128GB
-ranger09     ansible_host=10.0.42.119 cluster_nic=eno1.4000 # 128GB
-ranger10     ansible_host=10.0.42.120 cluster_nic=eno1.4000 # 128GB
-
-hobbit01     ansible_host=10.0.42.151 cluster_nic=eno1.4000 # 128GB
-hobbit02     ansible_host=10.0.42.152 cluster_nic=eno1.4000 # 128GB
-hobbit03     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
-hobbit04     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
-hobbit05     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
-hobbit06     ansible_host=10.0.42.156 cluster_nic=eno1.4000 # 128GB
-hobbit07     ansible_host=10.0.42.157 cluster_nic=eno1.4000 # 128GB
-hobbit08     ansible_host=10.0.42.158 cluster_nic=eno1.4000 # 128GB
-hobbit09     ansible_host=10.0.42.159 cluster_nic=eno1.4000 # 128GB
-hobbit10     ansible_host=10.0.42.160 cluster_nic=eno1.4000 # 128GB
-hobbit11     ansible_host=10.0.42.161 cluster_nic=eno1.4000 # 128GB
-hobbit12     ansible_host=10.0.42.162 cluster_nic=eno1.4000 # 128GB
-hobbit13     ansible_host=10.0.42.163 cluster_nic=eno1.4000 # 128GB
-hobbit14     ansible_host=10.0.42.164 cluster_nic=eno1.4000 # 128GB
-hobbit15     ansible_host=10.0.42.165 cluster_nic=eno1.4000 # 128GB
-hobbit16     ansible_host=10.0.42.166 cluster_nic=eno1.4000 # 128GB
-hobbit17     ansible_host=10.0.42.167 cluster_nic=eno1.4000 # 128GB
-hobbit18     ansible_host=10.0.42.168 cluster_nic=eno1.4000 # 128GB
-hobbit19     ansible_host=10.0.42.169 cluster_nic=eno1.4000 # 128GB
-hobbit20     ansible_host=10.0.42.170 cluster_nic=eno1.4000 # 128GB
+gretel31     ansible_host=10.0.42.151 cluster_nic=eno1.4000 # 128GB
+gretel32     ansible_host=10.0.42.152 cluster_nic=eno1.4000 # 128GB
+gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
+gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
+gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
+gretel36     ansible_host=10.0.42.156 cluster_nic=eno1.4000 # 128GB
+gretel37     ansible_host=10.0.42.157 cluster_nic=eno1.4000 # 128GB
+gretel38     ansible_host=10.0.42.158 cluster_nic=eno1.4000 # 128GB
+gretel39     ansible_host=10.0.42.159 cluster_nic=eno1.4000 # 128GB
+gretel40     ansible_host=10.0.42.160 cluster_nic=eno1.4000 # 128GB
 
 # We use these for doing automated hetzner installimage reinstalls
 # There's no DNS here but these are saved entries in my .ssh/config
 [public_hosts]
-gnome01-public.elfhosted.com
-gnome02-public.elfhosted.com
-gnome03-public.elfhosted.com
-gnome04-public.elfhosted.com
-
 fairy01-public.elfhosted.com
 fairy02-public.elfhosted.com
 fairy03-public.elfhosted.com
@@ -118,21 +91,6 @@ hansel07-public.elfhosted.com
 hansel08-public.elfhosted.com
 hansel09-public.elfhosted.com
 hansel10-public.elfhosted.com
-
-goblin04-public.elfhosted.com
-goblin05-public.elfhosted.com
-goblin06-public.elfhosted.com
-
-ranger01-public.elfhosted.com
-ranger02-public.elfhosted.com
-ranger03-public.elfhosted.com
-ranger04-public.elfhosted.com
-ranger05-public.elfhosted.com
-ranger06-public.elfhosted.com
-ranger07-public.elfhosted.com
-ranger08-public.elfhosted.com
-ranger09-public.elfhosted.com
-ranger10-public.elfhosted.com
 
 gretel01-public.elfhosted.com
 gretel02-public.elfhosted.com
@@ -164,6 +122,16 @@ gretel27-public.elfhosted.com
 gretel28-public.elfhosted.com
 gretel29-public.elfhosted.com
 gretel30-public.elfhosted.com
+gretel31-public.elfhosted.com
+gretel32-public.elfhosted.com
+gretel33-public.elfhosted.com
+gretel34-public.elfhosted.com
+gretel35-public.elfhosted.com
+gretel36-public.elfhosted.com
+gretel37-public.elfhosted.com
+gretel38-public.elfhosted.com
+gretel39-public.elfhosted.com
+gretel40-public.elfhosted.com
 
 [k3s_goblins]
 goblin04     ansible_host=10.0.42.64 cluster_nic=enp1s0.4000
@@ -194,66 +162,8 @@ gretel07
 gretel06
 gretel09
 gretel10
+gretel31
 
-[k3s_rangers]
-ranger01
-ranger02
-ranger03
-ranger04
-ranger05
-ranger06
-ranger07
-ranger08
-ranger09
-ranger10
-
-[k3s_hobbits]
-hobbit01
-hobbit02
-hobbit03
-hobbit04
-hobbit05
-hobbit06
-hobbit07
-hobbit08
-hobbit09
-hobbit10
-hobbit11
-hobbit12
-hobbit13
-hobbit14
-hobbit15
-hobbit16
-hobbit17
-hobbit18
-hobbit19
-hobbit20
-
-[k3s_elves]
-elf01
-elf02
-elf03
-elf04
-elf05
-elf06
-elf07
-elf08
-elf09
-elf10
-elf11
-elf12
-elf13
-elf14
-elf15
-elf16
-elf17
-elf18
-elf19
-elf20
-elf21
-elf22
-elf23
-elf24
 
 [controllers]
 tinkerbell   ansible_host=tinkerbell-public.elfhosted.com

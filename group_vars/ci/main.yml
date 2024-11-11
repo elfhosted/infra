@@ -29,4 +29,4 @@ firewall:
   admin_source: 
   - 192.168.29.0/24 # admin LAN
   - 172.16.34.36    # source routed via tailscale exit node fphq
-  
+  cluster_source: "{{ vault_cluster_source }}"  
