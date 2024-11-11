@@ -12,3 +12,4 @@ k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
 firewall:
   admin_source: "{{ vault_admin_source }}"
   kubeapi_source: "{{ vault_admin_source }}"
+  cluster_source: "{{ vault_cluster_source }}"

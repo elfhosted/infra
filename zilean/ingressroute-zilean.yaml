@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zilean.${dns_domain}
+  namespace: zilean
+spec:
+  routes:
+    - match: Host(`zilean.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: zilean
+          kind: Service
+          port: 8181
+      middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
