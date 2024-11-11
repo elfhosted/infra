@@ -20,7 +20,7 @@ spec:
       nameOverride: cyberflix
     image:
       repository: ghcr.io/elfhosted/cyberflix-server
-      tag: rolling@sha256:65967650e4ca552f6377e5dbaac65dffc8537afb272358583062cf57f9f7692d
+      tag: rolling@sha256:19b2e86d12bf5526082d3e687d6d2af8ca18eebe8498955c56933e5179eda091
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -142,23 +142,23 @@ spec:
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 10
-    # initContainers:
-    #   setup:
-    #     image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:65967650e4ca552f6377e5dbaac65dffc8537afb272358583062cf57f9f7692d
-    #     imagePullPolicy: IfNotPresent
-    #     command:
-    #     - /bin/bash
-    #     - -c
-    #     - |
-    #       set -x
-    #       set -e
+    initContainers:
+      setup:
+        image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:19b2e86d12bf5526082d3e687d6d2af8ca18eebe8498955c56933e5179eda091
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
 
-    #       # the volume is empty
-    #       if [ -z "$(ls -A /db)" ]; then
-    #         # Copy the baked-in DB into the volume
-    #         cp /app/db/* /db/   
-    #       fi
-    #     volumeMounts:        
-    #     - mountPath: /db
-    #       name: db
+          # the volume is empty
+          if [ -z "$(ls -A /db)" ]; then
+            # Copy the baked-in DB into the volume
+            cp /app/db/* /db/   
+          fi
+        volumeMounts:        
+        - mountPath: /db
+          name: db
        
