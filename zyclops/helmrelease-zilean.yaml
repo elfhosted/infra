@@ -35,7 +35,7 @@ spec:
     automountServiceAccountToken: true
     controller:
       replicas: 1
-      strategy: RollingUpdate
+      strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "zyclops-env"      
     ingress:
