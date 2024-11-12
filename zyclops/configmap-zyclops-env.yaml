@@ -5,4 +5,4 @@ metadata:
   namespace: zyclops
 data:
   INDEX_PATH: /config/torrents.bleve
-  # KUBECONFIG: /run/secrets/kubernetes.io/serviceaccount
+  KUBECONFIG: /shared/kubeconfig
