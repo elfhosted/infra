@@ -6,3 +6,4 @@ metadata:
 data:
   INDEX_PATH: /config/torrents.bleve
   KUBECONFIG: /shared/kubeconfig
+  ZURG_LABEL: app.kubernetes.io/name=zurg
