@@ -45,10 +45,41 @@ spec:
         enabled: false 
     service:
       main:
-        enabled: true # necessary for probes
-        ports:
-          http:
-            port: 8080   
+        enabled: false # necessary for probes
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      readiness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      startup:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 30 # 30 min
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 60 # 1 min each
+          timeoutSeconds: 10                
     persistence:
       config:
         enabled: true
