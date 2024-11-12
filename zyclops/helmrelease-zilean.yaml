@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zyclops
+  namespace: zyclops
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: zyclops
+  values:
+    global:
+      nameOverride: zyclops
+    serviceAccountName: zyclops
+    image:
+      repository: ghcr.io/elfhosted/zyclops
+      tag: rolling@sha256:9b831b4136535b06ee5538bffbb70b3565d8be8e49a9a3dfef649a8bf10c2b8f
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568                  
+    automountServiceAccountToken: true
+    controller:
+      replicas: 1
+      strategy: Recreate
+    ingress:
+      main:
+        enabled: false 
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8080   
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: zyclops
+    envFrom:
+    - configMapRef:
+        name: zyclops-env                   
