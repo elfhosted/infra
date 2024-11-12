@@ -39,7 +39,6 @@ spec:
       #   value: "1"      
     automountServiceAccountToken: false
     controller:
-      type: statefulset
       replicas: 4
       strategy: RollingUpdate
       rollingUpdate:
@@ -51,20 +50,7 @@ spec:
     - key: node-role.elfhosted.com/dedicated
       operator: Exists     
     - key: node-role.elfhosted.com/hobbit
-      operator: Exists                   
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/dedicated
-              operator: Exists   
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/hobbit
-              operator: Exists                  
+      operator: Exists                                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -74,7 +60,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - mediafusion
+                - comet
             topologyKey: "kubernetes.io/hostname"  
     envFrom:
     - configMapRef:
@@ -91,17 +77,16 @@ spec:
           http:
             port: 8000   
     persistence:
+      # warp:
+      #   enabled: true
+      #   type: custom
+      #   volumeSpec:
+      #     persistentVolumeClaim:
+      #       claimName: comet-warp
       cache: 
         enabled: true
         type: emptyDir
-        mountPath: /.cache      
-    volumeClaimTemplates:
-      warp:
-        enabled: true
-        type: custom
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: comet-warp                               
+        mountPath: /.cache                                  
     additionalContainers:
       warp:
         image: ghcr.io/elfhosted/warp:rolling@sha256:9b7e2e5da5b1caab6bb1a4e450fc1a2cc7c99f162325901656d5bc9104439eb6
@@ -115,6 +100,6 @@ spec:
         envFrom:
         - secretRef:
             name: comet-env            
-        volumeMounts:
-        - mountPath: /data
-          name: warp
+        # volumeMounts:
+        # - mountPath: /data
+        #   name: warp
