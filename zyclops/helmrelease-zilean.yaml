@@ -18,7 +18,9 @@ spec:
   values:
     global:
       nameOverride: zyclops
-    serviceAccountName: zyclops
+    serviceAccount:
+      create: false
+      name: zyclops
     image:
       repository: ghcr.io/elfhosted/zyclops
       tag: rolling@sha256:9b831b4136535b06ee5538bffbb70b3565d8be8e49a9a3dfef649a8bf10c2b8f
