@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zyclops-env
+  namespace: zyclops
+data:
+  INDEX_PATH: /config/torrents.bleve
+  # KUBECONFIG: /run/secrets/kubernetes.io/serviceaccount
