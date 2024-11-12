@@ -35,7 +35,9 @@ spec:
     automountServiceAccountToken: true
     controller:
       replicas: 1
-      strategy: Recreate
+      strategy: RollingUpdate
+      annotations:
+        configmap.reloader.stakater.com/reload: "zyclops-env"      
     ingress:
       main:
         enabled: false 
@@ -117,4 +119,4 @@ spec:
         securityContext:
           seccompProfile:
             type: RuntimeDefault
-          readOnlyRootFilesystem: true              
+          readOnlyRootFilesystem: false              
