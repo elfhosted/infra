@@ -7,3 +7,4 @@ data:
   INDEX_PATH: /config/torrents.bleve
   KUBECONFIG: /shared/kubeconfig
   ZURG_LABEL: app.kubernetes.io/name=zurg
+  ZURG_URL_TEMPLATE: http://zurg.{{.Namespace}}:9999/debug/torrents
