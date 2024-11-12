@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: zyclops
     serviceAccount:
-      create: false
+      create: true
       name: zyclops
     image:
       repository: ghcr.io/elfhosted/zyclops
