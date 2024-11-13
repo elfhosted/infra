@@ -135,7 +135,7 @@ spec:
         custom: true
         enabled: true
         spec:
-          failureThreshold: 60 # 60 min
+          failureThreshold: 600 # 600 min
           httpGet:
             path: /health
             port: 8080
