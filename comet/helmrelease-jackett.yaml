@@ -33,10 +33,10 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 5
+      replicas: 1
       strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
+      # rollingUpdate:
+      #   unavailable: 1
       annotations:
         configmap.reloader.stakater.com/reload: "jackett-config"
     persistence:
