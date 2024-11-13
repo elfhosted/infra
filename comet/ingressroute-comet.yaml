@@ -22,7 +22,7 @@ spec:
         - name: chain-public-stremio-addon
           namespace: traefik
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/tt0426769/{else:.+}`)
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/tt0426769{else:.+}`)
       kind: Rule
       services:
         - name: comet
