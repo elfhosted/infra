@@ -86,7 +86,7 @@ spec:
           set -x
 
           mkdir -p /config/Jackett/Indexers
-          cp -rf /bootstrap/*.json /config/Jackett/Indexers/
+          cp -rf --dereference /bootstrap/*.json /config/Jackett/Indexers/
           mv /config/Jackett/Indexers/ServerConfig.json /config/Jackett/
 
         volumeMounts:
