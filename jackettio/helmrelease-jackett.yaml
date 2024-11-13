@@ -34,6 +34,21 @@ spec:
     automountServiceAccountToken: false
     controller:
       replicas: 1
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: dedicated.elfhosted.com/app
+              operator: In
+              values:
+              - mediafusion  
+    tolerations:
+      - key: dedicated.elfhosted.com/app
+        operator: Equal
+        values:
+        - mediafusion         
     persistence:
       config:
         enabled: true
