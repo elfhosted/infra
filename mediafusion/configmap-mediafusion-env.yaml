@@ -23,6 +23,7 @@ data:
   nowmetv_scheduler_crontab: "0 */4 * * *"
   nowsports_scheduler_crontab: "0 */3 * * *"
   tamilultra_scheduler_crontab: "30 */3 * * *"
+  db_max_connections: "30"
   branding_description: |
     <h4 class="mt-4">🧝 What is ElfHosted?</h4>
     <p><a href="https://store.elfhosted.com/">ElfHosted</a> is an <a href="https://elfhosted.com/open/">open-source</a> platform for <A HREF="https://elfhosted.com/guides/media/">"self-hosting" Plex, Jellyfin, or Emby with Real Debrid</A> (<I>using <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/">plex_debrid</A>, <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-riven/">Riven</A>, or <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-radarr-sonarr-prowlarr/">Radarr & Sonarr</A></I>), and your <a href="https://elfhosted.com/apps/">awesome self-hosted apps</a>, automatically and easily.</p>
