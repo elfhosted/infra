@@ -532,7 +532,7 @@ spec:
     ##
     tolerations:
       - key: dedicated.elfhosted.com/app
-        operator: In
+        operator: Equal
         values:
         - mediafusion
     ## @param topologySpreadConstraints MongoDB(&reg;) Spread Constraints for Pods
