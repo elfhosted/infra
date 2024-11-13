@@ -135,12 +135,12 @@ spec:
         custom: true
         enabled: true
         spec:
-          failureThreshold: 5
+          failureThreshold: 60 # 60 min
           httpGet:
             path: /health
-            port: 8000
+            port: 8080
           initialDelaySeconds: 30
-          periodSeconds: 10
+          periodSeconds: 60 # 1 min each
           timeoutSeconds: 10
     # initContainers:
     #   setup:
