@@ -44,11 +44,11 @@ spec:
               operator: In
               values:
               - mediafusion  
-    tolerations:
-      - key: dedicated.elfhosted.com/app
-        operator: Equal
-        values:
-        - mediafusion         
+      tolerations:
+        - key: dedicated.elfhosted.com/app
+          operator: Equal
+          values:
+          - mediafusion         
     persistence:
       config:
         enabled: true
