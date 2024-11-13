@@ -37,18 +37,18 @@ spec:
     affinity:
       nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
+        - weight: 1
+          preference: # prefer a particular class of node
+            matchExpressions:
             - key: dedicated.elfhosted.com/app
               operator: In
               values:
-              - mediafusion  
-      tolerations:
-        - key: dedicated.elfhosted.com/app
-          operator: Equal
-          values:
-          - mediafusion         
+              - "mediafusion"
+    tolerations:
+    - key: dedicated.elfhosted.com/app
+      operator: Equal
+      values:
+      - "mediafusion"           
     persistence:
       config:
         enabled: true
