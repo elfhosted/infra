@@ -2,7 +2,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: rate-limit-stream
-  namespace: comet
+  namespace: mediafusion
 spec:
   rateLimit:
     average: 6     # 6 requests per source IP every ..
