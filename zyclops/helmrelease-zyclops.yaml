@@ -1,0 +1,155 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zyclops
+  namespace: zyclops
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: zyclops
+  values:
+    global:
+      nameOverride: zyclops
+    serviceAccount:
+      create: true
+      name: zyclops
+    image:
+      repository: ghcr.io/elfhosted/zyclops
+      tag: rolling@sha256:9b831b4136535b06ee5538bffbb70b3565d8be8e49a9a3dfef649a8bf10c2b8f
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568                  
+    automountServiceAccountToken: true
+    controller:
+      replicas: 1
+      strategy: Recreate
+      annotations:
+        configmap.reloader.stakater.com/reload: "zyclops-env"      
+    ingress:
+      main:
+        enabled: false 
+    service:
+      main:
+        enabled: false # necessary for probes
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      readiness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      startup:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 30 # 30 min
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 60 # 1 min each
+          timeoutSeconds: 10                
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /config
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: zyclops
+      shared:
+        enabled: true
+        mountPath: /shared
+        type: emptyDir
+        volumeSpec:
+          medium: Memory               
+    envFrom:
+    - configMapRef:
+        name: zyclops-env                   
+    initContainers:
+      setup-kubeconfig:
+        image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+
+          #!/bin/bash
+
+          # Paths to necessary files
+          SERVICE_ACCOUNT_TOKEN_FILE="/var/run/secrets/kubernetes.io/serviceaccount/token"
+          CA_CERT_FILE="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          API_SERVER="https://kubernetes.default.svc"
+
+          # Output Kubeconfig location
+          KUBECONFIG_FILE="/shared/kubeconfig"
+
+          # Get the service account token
+          SERVICE_ACCOUNT_TOKEN=$(cat $SERVICE_ACCOUNT_TOKEN_FILE)
+
+          # Create the Kubeconfig file
+          cat << EOF > $KUBECONFIG_FILE
+          apiVersion: v1
+          clusters:
+          - cluster:
+              certificate-authority-data: $(cat $CA_CERT_FILE | base64 | tr -d '\n')
+              server: $API_SERVER
+            name: kubernetes
+          contexts:
+          - context:
+              cluster: kubernetes
+              user: default
+            name: default-context
+          current-context: default-context
+          kind: Config
+          preferences: {}
+          users:
+          - name: default
+            user:
+              token: $SERVICE_ACCOUNT_TOKEN
+          EOF
+
+          # Print the location of the generated kubeconfig
+          echo "Kubeconfig generated at $KUBECONFIG_FILE"
+
+
+        volumeMounts:
+        - mountPath: /shared
+          name: shared
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: false              

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zyclops-env
+  namespace: zyclops
+data:
+  INDEX_PATH: /config/torrents.bleve
+  KUBECONFIG: /shared/kubeconfig
+  ZURG_LABEL: zyclops.elfhosted.com/scrape=true
+  ZURG_URL_TEMPLATE: http://zurg.{{.Namespace}}:9999/debug/torrents

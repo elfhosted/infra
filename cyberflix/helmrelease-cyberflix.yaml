@@ -20,7 +20,7 @@ spec:
       nameOverride: cyberflix
     image:
       repository: ghcr.io/elfhosted/cyberflix-server
-      tag: rolling@sha256:19b2e86d12bf5526082d3e687d6d2af8ca18eebe8498955c56933e5179eda091
+      tag: rolling@sha256:edbbe8d489793c4699bb9f36d82146cf0775dd471777569be6c7fa8d5271cec4
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -38,7 +38,7 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 4
+      replicas: 1
       strategy: Recreate
       annotations:
         configmap.reloader.stakater.com/reload: "cyberflix-env,cyberflix-env-dev-overrides"
@@ -142,23 +142,23 @@ spec:
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 10
-    initContainers:
-      setup:
-        image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:19b2e86d12bf5526082d3e687d6d2af8ca18eebe8498955c56933e5179eda091
-        imagePullPolicy: IfNotPresent
-        command:
-        - /bin/bash
-        - -c
-        - |
-          set -x
-          set -e
+    # initContainers:
+    #   setup:
+    #     image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:19b2e86d12bf5526082d3e687d6d2af8ca18eebe8498955c56933e5179eda091
+    #     imagePullPolicy: IfNotPresent
+    #     command:
+    #     - /bin/bash
+    #     - -c
+    #     - |
+    #       set -x
+    #       set -e
 
-          # the volume is empty
-          if [ -z "$(ls -A /db)" ]; then
-            # Copy the baked-in DB into the volume
-            cp /app/db/* /db/   
-          fi
-        volumeMounts:        
-        - mountPath: /db
-          name: db
+    #       # the volume is empty
+    #       if [ -z "$(ls -A /db)" ]; then
+    #         # Copy the baked-in DB into the volume
+    #         cp /app/db/* /db/   
+    #       fi
+    #     volumeMounts:        
+    #     - mountPath: /db
+    #       name: db
        

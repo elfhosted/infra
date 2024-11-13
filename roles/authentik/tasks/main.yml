@@ -2,6 +2,17 @@
   become: no
   block:
 
+  - name: "wait for https://authentik.infra.{{ dns_domain }}/api/v2.0/health respond 200"
+    uri:
+      url: "https://authentik.infra.{{ dns_domain }}/-/health/ready/"
+      method: GET
+      status_code: 200
+      validate_certs: false
+    register: _result
+    until: _result.failed == false
+    retries: 60 # retry X times  
+    delay: 30     # pause for X sec b/w each call  
+
   - name: "Do we already have a user for {{ authentik_user_email }}?"
     uri:
       url: "https://authentik.infra.{{ dns_domain }}/api/v3/core/users/?email={{ authentik_user_email }}"
