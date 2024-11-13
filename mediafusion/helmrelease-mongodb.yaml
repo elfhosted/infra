@@ -530,7 +530,11 @@ spec:
     ## @param tolerations MongoDB(&reg;) Tolerations for pod assignment
     ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
     ##
-    tolerations: []
+    tolerations:
+      - key: dedicated.elfhosted.com/app
+        operator: In
+        values:
+        - mediafusion
     ## @param topologySpreadConstraints MongoDB(&reg;) Spread Constraints for Pods
     ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
     ##
