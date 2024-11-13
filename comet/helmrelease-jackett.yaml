@@ -20,7 +20,7 @@ spec:
       nameOverride: jackett
     image:
       repository: ghcr.io/elfhosted/jackett
-      tag: 0.22.910
+      tag: 0.22.903
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -33,48 +33,28 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 4
-      strategy: RollingUpdate
-      rollingUpdate:
-        unavailable: 1
-      annotations:
-        configmap.reloader.stakater.com/reload: "jackett-config,jackett-indexers"
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - jackett
-            topologyKey: "kubernetes.io/hostname"        
+      replicas: 1
     persistence:
       config:
         enabled: true
-        type: emptyDir
+        type: custom
         mountPath: /config/
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: jackett
       tmp: 
         enabled: true
-        type: emptyDir
-        mountPath: /tmp 
-      serverconfig:
-        enabled: "true"
-        type: "custom"
-        mountPath: /config/Jackett/ServerConfig.json
+        type: custom
+        mountPath: /tmp
         volumeSpec:
-          configMap:
-            name: jackett-config
-            subPath: ServerConfig.json  
-      indexers:
-        enabled: "true"
-        type: "custom"
-        mountPath: /config/Jackett/Indexers/
-        volumeSpec:
-          configMap:
-            name: jackett-indexers                                    
+          ephemeral:
+            volumeClaimTemplate:
+              spec:
+                accessModes: [ "ReadWriteOnce" ]
+                storageClassName: "topolvm-provisioner-thin"
+                resources:
+                  requests:
+                    storage: 1Gi              
     ingress:
       main:
         enabled: false 
