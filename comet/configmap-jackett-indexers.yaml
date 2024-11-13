@@ -1,0 +1,182 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jackett-indexers
+  namespace: comet
+data:
+  therarbg.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://therarbg.to/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": ""
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "sortrequestedfromsite",
+        "type": "inputselect",
+        "name": "Sort requested from site",
+        "value": "-a",
+        "options": {
+          "-a": "created desc",
+          "a": "created asc",
+          "-se": "seeders desc",
+          "se": "seeders asc",
+          "-s": "size desc",
+          "s": "size asc"
+        }
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
+  bitsearch.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://bitsearch.to/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": ""
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "prefermagnetlinks",
+        "type": "inputbool",
+        "name": "Prefer Magnet Links",
+        "value": false
+      },
+      {
+        "id": "sortrequestedfromsite",
+        "type": "inputselect",
+        "name": "Sort requested from site",
+        "value": "date",
+        "options": {
+          "date": "created",
+          "seeders": "seeders",
+          "size": "size"
+        }
+      },
+      {
+        "id": "orderrequestedfromsite",
+        "type": "inputselect",
+        "name": "Order requested from site",
+        "value": "desc",
+        "options": {
+          "desc": "desc",
+          "asc": "asc"
+        }
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
+  thepiratebay.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://thepiratebay.org/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": ""
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
+  eztv.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://eztvx.to/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": "PHPSESSID=f2c6pbt8ohbd1njgnobptpgfep"
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
+  yts.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://yts.mx/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": "PHPSESSID=pq892lcvugku31jquqj8cp9db2"
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  

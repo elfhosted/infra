@@ -46,11 +46,7 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "comet-env"
         secret.reloader.stakater.com/reload: "comet-env"
-    tolerations:
-    - key: node-role.elfhosted.com/dedicated
-      operator: Exists     
-    - key: node-role.elfhosted.com/hobbit
-      operator: Exists                                  
+    affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -61,7 +57,7 @@ spec:
                 operator: In
                 values:
                 - comet
-            topologyKey: "kubernetes.io/hostname"  
+            topologyKey: "kubernetes.io/hostname"
     envFrom:
     - configMapRef:
         name: comet-env
