@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v1.32.2@sha256:9173883363799fce4f2d700062b304ee6853276d37fc7cd15f84a093dc98db95
+      tag: v1.32.2@sha256:3eeec34ef89ea490a813e3232d860403d1b3390f70749478244dd73b2fa0c281
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -73,29 +73,7 @@ spec:
           http:
             port: 8000   
     persistence:
-      # warp:
-      #   enabled: true
-      #   type: custom
-      #   volumeSpec:
-      #     persistentVolumeClaim:
-      #       claimName: comet-warp
       cache: 
         enabled: true
         type: emptyDir
         mountPath: /.cache                                  
-    additionalContainers:
-      warp:
-        image: ghcr.io/elfhosted/warp:rolling@sha256:9b7e2e5da5b1caab6bb1a4e450fc1a2cc7c99f162325901656d5bc9104439eb6
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-          privileged: false
-          capabilities:
-            add:
-            - NET_ADMIN    
-        envFrom:
-        - secretRef:
-            name: comet-env            
-        # volumeMounts:
-        # - mountPath: /data
-        #   name: warp
