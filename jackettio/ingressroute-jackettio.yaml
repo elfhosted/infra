@@ -12,7 +12,7 @@ spec:
           kind: Service
           port: 4000
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`jackettio.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/movie/tt0023694{else:.+}`)
+    - match: Host(`jackettio.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
       services:
         - name: jackettio
