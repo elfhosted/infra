@@ -35,6 +35,17 @@ spec:
               operator: In
               values:
               - "mediafusion"
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - comet
+            topologyKey: "kubernetes.io/hostname"              
     tolerations:
     - key: dedicated.elfhosted.com/app
       operator: Equal
@@ -61,18 +72,6 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "comet-env"
         secret.reloader.stakater.com/reload: "comet-env"
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - comet
-            topologyKey: "kubernetes.io/hostname"
     envFrom:
     - configMapRef:
         name: comet-env
