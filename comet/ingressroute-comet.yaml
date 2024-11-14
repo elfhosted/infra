@@ -27,3 +27,12 @@ spec:
           port: 8000
       middlewares:  
         - name: chain-stream                  
+    # Catch unconfigured clients
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/stream`)
+      kind: Rule
+      services:
+        - name: deprecations
+          namespace: deprecations
+          kind: Service
+          port: 8080
+                      
