@@ -27,30 +27,14 @@ spec:
       readOnlyRootFilesystem: true
     affinity:
       nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          preference: # prefer a particular class of node
-            matchExpressions:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
             - key: dedicated.elfhosted.com/app
-              operator: In
-              values:
-              - "mediafusion"
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - comet
-            topologyKey: "kubernetes.io/hostname"              
+              operator: Exists                    
     tolerations:
     - key: dedicated.elfhosted.com/app
-      operator: Equal
-      values:
-      - "mediafusion"           
+      operator: Exists         
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
