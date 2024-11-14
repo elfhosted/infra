@@ -138,7 +138,7 @@ spec:
           failureThreshold: 600 # 600 min
           httpGet:
             path: /health
-            port: 8080
+            port: 8000
           initialDelaySeconds: 30
           periodSeconds: 60 # 1 min each
           timeoutSeconds: 10
