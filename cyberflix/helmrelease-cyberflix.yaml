@@ -38,7 +38,7 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     controller:
-      replicas: 2
+      replicas: 10
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1      
