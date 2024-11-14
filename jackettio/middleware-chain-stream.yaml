@@ -9,7 +9,7 @@ spec:
     # These are generic
     - name: headers-add-cors-for-stremio
       namespace: traefik
-    - name: return-code-override-429-200
+    - name: return-code-override-ratelimit
       namespace: traefik
 
     # These are specific to traefik

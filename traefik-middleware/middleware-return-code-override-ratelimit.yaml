@@ -1,7 +1,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: return-code-override-429-200
+  name: return-code-override-ratelimit
   namespace: traefik
 spec:
   plugin:
