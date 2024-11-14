@@ -56,19 +56,14 @@ spec:
             name: jackett-config   
     affinity:
       nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference: # prefer a particular class of node
-            matchExpressions:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
             - key: dedicated.elfhosted.com/app
-              operator: In
-              values:
-              - "mediafusion"
+              operator: Exists                    
     tolerations:
     - key: dedicated.elfhosted.com/app
-      operator: Equal
-      values:
-      - "mediafusion"                       
+      operator: Exists                       
     ingress:
       main:
         enabled: false 
