@@ -18,8 +18,8 @@ fairy02     ansible_host=10.0.42.12 cluster_nic=eno1.4000
 fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
 fairy04     ansible_host=10.0.42.14 cluster_nic=eno1.4000
 
+[k3s_agents]
 
-[k3s_contended]
 hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
 hansel02     ansible_host=10.0.42.22 cluster_nic=eno1.4000 
 hansel03     ansible_host=10.0.42.23 cluster_nic=eno1.4000 # 128GB
@@ -31,7 +31,6 @@ hansel08     ansible_host=10.0.42.28 cluster_nic=eno1.4000
 hansel09     ansible_host=10.0.42.29 cluster_nic=eno1.4000
 hansel10     ansible_host=10.0.42.30 cluster_nic=eno1.4000
 
-[k3s_agents]
 gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 # 128GB
 gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 # 128GB
 gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 # 128GB
@@ -63,7 +62,7 @@ gretel28     ansible_host=10.0.42.148 cluster_nic=eno1.4000 # 128GB
 gretel29     ansible_host=10.0.42.149 cluster_nic=eno1.4000 # 128GB
 gretel30     ansible_host=10.0.42.150 cluster_nic=eno1.4000 # 128GB
 gretel31     ansible_host=10.0.42.151 cluster_nic=eno1.4000 # 128GB
-gretel32     ansible_host=10.0.42.152 cluster_nic=eno1.4000 # 128GB
+gretel32     ansible_host=10.0.42.152 cluster_nic=enp98s0f0.4000 # 128GB # epyc host
 gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
 gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
 gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB

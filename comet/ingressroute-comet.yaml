@@ -18,9 +18,6 @@ spec:
         - name: comet
           kind: Service
           port: 8000
-      middlewares:  
-        - name: chain-public-stremio-addon
-          namespace: traefik
     # This is a scrape / search, subject to rate-limiting
     - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
