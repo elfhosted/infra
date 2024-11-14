@@ -6,8 +6,12 @@ metadata:
 spec:
   chain:
     middlewares:
+    # These are generic
     - name: headers-add-cors-for-stremio
       namespace: traefik
-    - name: return-code-override
+    - name: return-code-override-429-200
+      namespace: traefik
+
+    # These are specific to comet
     - name: errors-rate-limit-exceeded   
     - name: rate-limit-stream
