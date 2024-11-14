@@ -33,22 +33,21 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 1
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference: # prefer a particular class of node
-            matchExpressions:
-            - key: dedicated.elfhosted.com/app
-              operator: In
-              values:
-              - "mediafusion"
+      replicas: 1   
     tolerations:
     - key: dedicated.elfhosted.com/app
       operator: Equal
       values:
-      - "mediafusion"           
+      - "mediafusion"   
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: dedicated.elfhosted.com/app
+              operator: Equal
+              values:
+              - mediafusion
     persistence:
       config:
         enabled: true
