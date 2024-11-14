@@ -33,7 +33,7 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 1
+      replicas: 5
       strategy: RollingUpdate
       # rollingUpdate:
       #   unavailable: 1
