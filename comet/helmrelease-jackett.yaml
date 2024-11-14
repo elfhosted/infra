@@ -20,7 +20,7 @@ spec:
       nameOverride: jackett
     image:
       repository: ghcr.io/elfhosted/jackett
-      tag: 0.22.932
+      tag: 0.22.910
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -33,7 +33,7 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 5
+      replicas: 10
       strategy: RollingUpdate
       # rollingUpdate:
       #   unavailable: 1
@@ -54,16 +54,23 @@ spec:
         volumeSpec:
           configMap:
             name: jackett-config   
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: dedicated.elfhosted.com/app
-              operator: Exists                    
+    affinity:      
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - jackett
+            topologyKey: "kubernetes.io/hostname"      
     tolerations:
-    - key: dedicated.elfhosted.com/app
-      operator: Exists                       
+      - key: dedicated.elfhosted.com/app
+        operator: Equal
+        values:
+        - mediafusion                       
     ingress:
       main:
         enabled: false 
