@@ -20,7 +20,7 @@ spec:
       nameOverride: dev-cyberflix
     image:
       repository: ghcr.io/elfhosted/cyberflix-server-develop
-      tag: rolling@sha256:3e6aad81f8312295facbd4def9ba06d053c56b70112d8d1432e826d0f05af9fb
+      tag: rolling@sha256:26146ad8315a3e9f08a3c41d6799949ef1926aa6d92a1b86e1d4e2252ec4a620
     securityContext:
       seccompProfile:
         type: RuntimeDefault
