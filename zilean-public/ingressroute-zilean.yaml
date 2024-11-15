@@ -11,5 +11,5 @@ spec:
         - name: zilean-public
           kind: Service
           port: 8181
-      middlewares:  
-        - name: rate-limit-zilean
+      # middlewares:  
+      #   - name: rate-limit-zilean
