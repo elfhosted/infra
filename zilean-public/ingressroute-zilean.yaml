@@ -12,5 +12,4 @@ spec:
           kind: Service
           port: 8181
       middlewares:  
-        - name: chain-public-stremio-addon
-          namespace: traefik
+        - name: rate-limit-zilean
