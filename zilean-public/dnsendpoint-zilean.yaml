@@ -2,7 +2,7 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: "zilean.${dns_domain}"
-  namespace: zilean
+  namespace: zilean-public
 spec:
   endpoints:
   - dnsName: "zilean.${dns_domain}"
