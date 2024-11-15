@@ -34,16 +34,6 @@ spec:
     automountServiceAccountToken: false
     controller:
       replicas: 1   
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: dedicated.elfhosted.com/app
-              operator: Exists                    
-    tolerations:
-    - key: dedicated.elfhosted.com/app
-      operator: Exists  
     persistence:
       config:
         enabled: true
