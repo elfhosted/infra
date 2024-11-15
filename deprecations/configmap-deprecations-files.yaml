@@ -59,6 +59,17 @@ data:
             }
         ]
     } 
+  comet-requires-configuration.json: |
+    {
+        "streams": [
+            {
+                "name": "[🤦‍♂️] Comet",
+                "title": "Comet addon unconfigured 🤦‍♂️",
+                "torrentTitle": "Comet addon requires configuration ✅\nConfigure in Stremio or\nvisit https://comet.elfhosted.com",
+                "url": "https://elfhosted.com/assets/comet-requires-configuration.mp4"
+            }
+        ]
+    }     
   jackettio-search-rate-limited.json: |
     {
         "streams": [

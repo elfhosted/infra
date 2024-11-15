@@ -5,19 +5,17 @@ metadata:
   namespace: comet
 spec:
   routes:
-    # allow playback endpoint without rate-limit (endpoint is cached anyway)
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/playback/{else:.+}`)
-      kind: Rule
-      services:
-        - name: comet
-          kind: Service
-          port: 8000
+    # Base URL, but catch bad paths in the regex
     - match: Host(`comet.${dns_domain}`)
       kind: Rule
       services:
         - name: comet
           kind: Service
           port: 8000
+      middlewares:
+        - name: headers-add-cors-for-stremio
+          namespace: traefik
+        - name: redirectregex-comet-requires-configuration
     # This is a scrape / search, subject to rate-limiting
     - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
       kind: Rule
@@ -26,13 +24,4 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-stream                  
-    # Catch unconfigured clients
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/stream`)
-      kind: Rule
-      services:
-        - name: deprecations
-          namespace: deprecations
-          kind: Service
-          port: 8080
-                      
+        - name: chain-stream
