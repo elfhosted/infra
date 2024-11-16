@@ -37,8 +37,29 @@ spec:
         drop:
         - ALL        
     automountServiceAccountToken: false
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: dedicated.elfhosted.com/app
+              operator: Exists                    
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - jackettio
+            topologyKey: "kubernetes.io/hostname"              
+    tolerations:
+    - key: dedicated.elfhosted.com/app
+      operator: Exists             
     controller:
-      replicas: 10
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1      
@@ -98,7 +119,7 @@ spec:
         memory: 512Mi
         ephemeral-storage: 50Mi
       limits:
-        cpu: 1 # never gets here because it's single-threaded
+        cpu: 2 # never gets here because it's single-threaded
         memory: 4Gi
         ephemeral-storage: 1Gi        
     ingress:
