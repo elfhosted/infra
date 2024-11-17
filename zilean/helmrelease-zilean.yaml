@@ -51,9 +51,6 @@ spec:
     ingress:
       main:
         enabled: false 
-    command:
-    - /app/scraper
-    - generic-sync
     service:
       main:
         enabled: true # necessary for probes
