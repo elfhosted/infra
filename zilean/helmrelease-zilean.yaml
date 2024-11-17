@@ -18,6 +18,9 @@ spec:
   values:
     global:
       nameOverride: zilean
+    serviceAccount:
+      create: true
+      name: zilean            
     image:
       repository: ghcr.io/elfhosted/zilean
       tag: v2.3.0@sha256:46cb4227190bd30b7d051b47965ecd2a92c5121016b0452c25b2c63f7a65d714

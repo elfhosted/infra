@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: zilean-scraper
     serviceAccount:
-      create: true
+      create: false
       name: zilean      
     image:
       repository: ghcr.io/elfhosted/zilean
