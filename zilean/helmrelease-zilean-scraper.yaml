@@ -74,6 +74,13 @@ spec:
     envFrom:
     - secretRef:
         name: zilean-env
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false        
     initContainers:
       # copy the configmap-based setup over the persistent storage
       setup:
