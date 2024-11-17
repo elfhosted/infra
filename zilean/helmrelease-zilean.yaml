@@ -19,7 +19,7 @@ spec:
     global:
       nameOverride: zilean
     serviceAccount:
-      create: true
+      create: false # already created by cnpg
       name: zilean
     image:
       repository: ghcr.io/elfhosted/zilean
