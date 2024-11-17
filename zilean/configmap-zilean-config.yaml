@@ -8,6 +8,7 @@ data:
     {
       "Zilean": {
         "FirstRun": false,
+        "ApiKey": "overridden-in-env",
         "Dmm": {
           "EnableScraping": true,
           "EnableEndpoint": true,
@@ -17,6 +18,9 @@ data:
           "MinimumScoreMatch": 0.85,
           "ImportBatched": false
         },
+        "Database": {
+          "ConnectionString": "overridden-in-env"
+        },        
         "Torznab": {
           "EnableEndpoint": true
         },

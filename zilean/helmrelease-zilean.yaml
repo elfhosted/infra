@@ -56,14 +56,14 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /app/data
-      # settings:
-      #   enabled: "true"
-      #   type: "custom"
-      #   mountPath: /app/data/settings.json
-      #   subPath: settings.json
-      #   volumeSpec:
-      #     configMap:
-      #       name: zilean-config        
+      settings:
+        enabled: "true"
+        type: "custom"
+        mountPath: /app/data/settings.json
+        subPath: settings.json
+        volumeSpec:
+          configMap:
+            name: zilean-config        
     envFrom:
     - secretRef:
         name: zilean-env                   
