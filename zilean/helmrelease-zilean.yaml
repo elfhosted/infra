@@ -20,7 +20,7 @@ spec:
       nameOverride: zilean
     image:
       repository: ghcr.io/elfhosted/zilean
-      tag: v2.2.1@sha256:f90e577b71c5b3b746bdfd9b022e203bf570522db1cd3d7866ffa26ab878c233
+      tag: v2.3.0@sha256:46cb4227190bd30b7d051b47965ecd2a92c5121016b0452c25b2c63f7a65d714
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -36,33 +36,7 @@ spec:
       operator: Exists     
     - key: node-role.elfhosted.com/hobbit
       operator: Exists                   
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/dedicated
-              operator: Exists   
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/hobbit
-              operator: Exists                  
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - zilean
-            topologyKey: "kubernetes.io/hostname"    
-    automountServiceAccountToken: false
-    env:
-      Zilean__Dmm__MinimumScoreMatch: "0.4"
+    automountServiceAccountToken: true
     controller:
       replicas: 1
       strategy: RollingUpdate
@@ -80,11 +54,15 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
+        type: emptyDir
         mountPath: /app/data
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: zilean
+    example-config:
+      enabled: "true"
+      type: "custom"
+      mountPath: /app/data/settings.json
+      volumeSpec:
+        configMap:
+          name: zilean-config        
     envFrom:
     - secretRef:
         name: zilean-env                   
