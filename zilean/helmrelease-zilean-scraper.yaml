@@ -14,7 +14,7 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: zilean-scrcaper
+  releaseName: zilean-scraper
   values:
     global:
       nameOverride: zilean-scraper
