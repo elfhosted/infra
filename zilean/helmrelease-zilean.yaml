@@ -59,8 +59,6 @@ spec:
       settings:
         enabled: "true"
         type: "custom"
-        mountPath: /app/data/settings.json
-        subPath: settings.json
         volumeSpec:
           configMap:
             name: zilean-config        
