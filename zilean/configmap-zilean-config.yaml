@@ -46,7 +46,7 @@ data:
             "KubernetesSelectors": [
               {
                 "UrlTemplate": "http://zurg.{0}:9999",
-                "LabelSelector": "app.kubernetes.Io/name=zurg",
+                "LabelSelector": "app.kubernetes.io/name=zurg",
                 "EndpointType": 1
               }
             ],
