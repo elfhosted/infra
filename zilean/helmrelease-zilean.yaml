@@ -20,7 +20,7 @@ spec:
       nameOverride: zilean
     serviceAccount:
       create: true
-      name: zilean            
+      name: zilean      
     image:
       repository: ghcr.io/elfhosted/zilean
       tag: v2.3.0@sha256:46cb4227190bd30b7d051b47965ecd2a92c5121016b0452c25b2c63f7a65d714
@@ -47,10 +47,13 @@ spec:
         unavailable: 1
       annotations:
         configmap.reloader.stakater.com/reload: "zilean-config"  
-        secret.reloader.stakater.com/reload: "zilean-env"                   
+        secret.reloader.stakater.com/reload: "zilean-env"             
     ingress:
       main:
         enabled: false 
+    command:
+    - /app/scraper
+    - generic-sync
     service:
       main:
         enabled: true # necessary for probes
@@ -71,24 +74,24 @@ spec:
     envFrom:
     - secretRef:
         name: zilean-env
-    # initContainers:
-    #   # copy the configmap-based setup over the persistent storage
-    #   setup:
-    #     image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
-    #     imagePullPolicy: IfNotPresent
-    #     command:
-    #     - /bin/bash
-    #     - -c
-    #     - |
-    #       set -x
+    initContainers:
+      # copy the configmap-based setup over the persistent storage
+      setup:
+        image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
 
-    #       cp /settings/* /app/data/
-    #     volumeMounts:
-    #     - mountPath: /app/data
-    #       name: config
-    #     - mountPath: /settings
-    #       name: settings          
-    #     securityContext:
-    #       seccompProfile:
-    #         type: RuntimeDefault
-    #       readOnlyRootFilesystem: true           
+          cp /settings/* /app/data/
+        volumeMounts:
+        - mountPath: /app/data
+          name: config
+        - mountPath: /settings
+          name: settings          
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: true           
