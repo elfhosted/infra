@@ -24,6 +24,13 @@ spec:
     command:
     - /app/scraper
     - generic-sync    
+    probes:
+      liveness:
+        enabled: false
+      startup:
+        enabled: false
+      readiness:
+        enabled: false      
     image:
       repository: ghcr.io/elfhosted/zilean
       tag: v2.3.10@sha256:6d725a5b429199c5130502e0b3695402f367be0715f316c49c65015140a96330
@@ -56,7 +63,7 @@ spec:
         enabled: false 
     service:
       main:
-        enabled: true # necessary for probes
+        enabled: false # necessary for probes
         ports:
           http:
             port: 8181   
