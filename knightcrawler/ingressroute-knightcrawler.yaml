@@ -12,5 +12,14 @@ spec:
           kind: Service
           port: 7000
       middlewares:  
-        - name: chain-public-stremio-addon
+        - name: headers-add-cors-for-stremio
           namespace: traefik
+    # This is a search, subject to rate-limiting
+    - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/stream/`)
+      kind: Rule
+      services:
+        - name: knightcrawler-addon
+          kind: Service
+          port: 7000
+      middlewares:  
+        - name: chain-stream
