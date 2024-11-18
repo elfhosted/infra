@@ -4,7 +4,7 @@ metadata:
   annotations:
     tailscale.com/tailnet-fqdn: elfhosted-internal-zilean-elfhosted-com.tail5bd7d1.ts.net
     tailscale.com/hostname: ignore-zilean-scrape-com-from-${tailscale_suffix}
-  name: elfhosted-com
+  name: scrape-com
   namespace: zilean
 spec:
   externalName: placeholder   # any value - will be overwritten by operator

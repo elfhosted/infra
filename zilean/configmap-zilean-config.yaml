@@ -39,7 +39,16 @@ data:
               "EndpointType": 1
             }
           ],
-          "ZileanInstances": [],
+          "ZileanInstances": [
+            {
+              "Url": "http://scrape-cc:80",
+              "EndpointType": 0
+            },
+            {
+              "Url": "http://scrape-com:80",
+              "EndpointType": 0
+            }                      
+          ],
           "EnableScraping": true,
           "Kubernetes": {
             "EnableServiceDiscovery": true,
