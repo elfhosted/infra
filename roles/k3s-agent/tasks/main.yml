@@ -27,29 +27,30 @@
     dest: /etc/rancher/k3s/config.yaml
   notify: restart k3s-agent  
 
-- name: install k3s on agents
+- name: install k3s on contended nodes
   environment:
     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
     K3S_TOKEN: "{{ k3s_token }}"
     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
   shell: >
     curl -sfL https://get.k3s.io | 
-    INSTALL_K3S_EXEC="agent" \
+    INSTALL_K3S_EXEC="agent \
+      --node-label node-role.elfhosted.com/contended=true" \
     sh -
   register: workers_install_result
   become: yes
-  when: "inventory_hostname in groups['k3s_agents']" 
+  when: "inventory_hostname in groups['k3s_contended']" 
 
-# - name: install k3s on dedicated nodes
-#   environment:
-#     K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
-#     K3S_TOKEN: "{{ k3s_token }}"
-#     INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
-#   shell: >
-#     curl -sfL https://get.k3s.io | 
-#     INSTALL_K3S_EXEC="agent \
-#       --node-label node-role.elfhosted.com/dedicated=true" \
-#     sh -
-  # register: workers_install_result
-  # become: yes
-  # when: "inventory_hostname in groups['k3s_dedicated']"   
+- name: install k3s on dedicated nodes
+  environment:
+    K3S_URL: "https://{{ k8s_ha_api_ip }}:{{ k8s_ha_api_port }}"
+    K3S_TOKEN: "{{ k3s_token }}"
+    INSTALL_K3S_CHANNEL: "{{ packages.k3s.version }}"
+  shell: >
+    curl -sfL https://get.k3s.io | 
+    INSTALL_K3S_EXEC="agent \
+      --node-label node-role.elfhosted.com/dedicated=true" \
+    sh -
+  register: workers_install_result
+  become: yes
+  when: "inventory_hostname in groups['k3s_dedicated']"   

@@ -49,6 +49,7 @@ data:
     
     DATE=$(date +"%Y-%m-%d")
     git checkout -b clean-kustomizations origin/clean-kustomizations-$DATE || git checkout -b clean-kustomizations-$DATE
+    git pull
     git add .
     git commit -m "Tenant cleaner cleans tenants on $DATE" .
 

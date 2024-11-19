@@ -1,25 +1,17 @@
 
 [prod:children]
 k3s_servers
-k3s_observability
-k3s_goblins # 10Ge ceph nodes
-k3s_elves   # customer workloads
-k3s_rangers # dedicated customer nodes
-k3s_hobbits # lightweight rangers
-k3s_dedicated # dedicated nodes (prev hobbits, rangers)
-k3s_contended # contended nodes
 k3s_agents
 controllers
-egress_gateways
+k3s_dedicated # dedicated nodes (prev hobbits, rangers)
+k3s_contended # contended nodes
 
 [k3s_servers]
 fairy01     ansible_host=10.0.42.11 cluster_nic=eno1.4000
 fairy02     ansible_host=10.0.42.12 cluster_nic=eno1.4000
 fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
-fairy04     ansible_host=10.0.42.14 cluster_nic=eno1.4000
 
-[k3s_agents]
-
+[k3s_contended]
 hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
 hansel02     ansible_host=10.0.42.22 cluster_nic=eno1.4000 
 hansel03     ansible_host=10.0.42.23 cluster_nic=eno1.4000 # 128GB
@@ -29,8 +21,9 @@ hansel06     ansible_host=10.0.42.26 cluster_nic=eno1.4000
 hansel07     ansible_host=10.0.42.27 cluster_nic=eno1.4000
 hansel08     ansible_host=10.0.42.28 cluster_nic=eno1.4000
 hansel09     ansible_host=10.0.42.29 cluster_nic=eno1.4000
-hansel10     ansible_host=10.0.42.30 cluster_nic=eno1.4000
+hansel10     ansible_host=10.0.42.30 cluster_nic=enp0s31f6.4000
 
+[k3s_dedicated]
 gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 # 128GB
 gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 # 128GB
 gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 # 128GB

@@ -47,7 +47,7 @@
   - { import_role: { name: cilium-pre-flux }, tags: [ cilium-pre-flux ] } 
 
 # Now install workers
-- hosts: k3s_agents
+- hosts: k3s_agents,k3s_contended,k3s_dedicated
   gather_facts: yes
   become: yes
 
