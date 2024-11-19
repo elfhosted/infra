@@ -19,7 +19,7 @@ spec:
     replicaCount: 2
     image: 
       repository: ghcr.io/elfhosted/webhook-receiver
-      tag: 2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
+      tag: 2.8.2@sha256:f6569169f8ed427226cd756b264fedaf24992b9d23390610b275b290f332b066
     persistence:
       config:
         enabled: "true"
@@ -52,7 +52,7 @@ spec:
         
     initContainers:
       pull-repo:
-        image: ghcr.io/elfhosted/webhook-receiver:2.8.1@sha256:510dc411fcc4e41f50311de61a88cfdc66f46346c59f050ff056befbf39ded67
+        image: ghcr.io/elfhosted/webhook-receiver:2.8.2@sha256:f6569169f8ed427226cd756b264fedaf24992b9d23390610b275b290f332b066
         command:
         - /bin/sh
         - -c
