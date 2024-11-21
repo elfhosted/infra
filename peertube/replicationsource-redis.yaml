@@ -5,8 +5,7 @@ metadata:
   namespace: peertube
 spec:
   # The PVC to be backed up
-  # sourcePVC: redis
-  sourcePVC: redis-data-redis-master-0
+  sourcePVC: redis
   trigger:
     schedule: "0 9 * * *"
   restic:

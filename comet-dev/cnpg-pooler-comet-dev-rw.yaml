@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: pooler-comet-dev-rw
+  namespace: comet-dev
+spec:
+  cluster:
+    name: comet-dev
+  instances: 1
+  type: rw
+  pgbouncer:
+    poolMode: session
+    parameters:
+      max_client_conn: "10000"
+      default_pool_size: "100"

@@ -17,15 +17,10 @@ spec:
     # Retention policy for backups
     retain:
       daily: 7
-    # Clone the source volume prior to taking a backup to ensure a
-    # point-in-time image.
     copyMethod: Snapshot
-    # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
-    # storageClassName: topolvm-provisioner-thin
+    storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
-    # accessModes: 
-    # - ReadWriteOnce
-    # cache using topolvm
-    # cacheCapacity: 20Gi
-    # The VSC to use if the copy method is Snapshot (default if omitted)
+    accessModes: 
+    - ReadWriteOnce
+    cacheCapacity: 1Gi
     volumeSnapshotClassName: topolvm-provisioner-thin
