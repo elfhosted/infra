@@ -68,7 +68,7 @@ spec:
             tag: latest
         envFrom:
         - secretRef:
-            name: comet-vpn
+            name: comet-dev-vpn
         env:
           IPTABLES_BACKEND: nft
           KILLSWITCH: "true"
