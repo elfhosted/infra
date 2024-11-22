@@ -59,7 +59,7 @@ data:
             }
         ]
     }
-  realdebrid-api-removed.json: |
+  realdebrid-api-removal.json: |
     {
         "streams": [
             {
