@@ -23,3 +23,15 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
+    # Advise user of RD deprecation (match base64 value of "realdebrid")
+    - match: Host(`stremio-jackett.${dns_domain}`) && PathPrefix(`/{something:.+}/cmVhbGRlYnJpZA{else:.+}`)
+      kind: Rule
+      services:
+        - name: comet
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: headers-add-cors-for-stremio
+          namespace: traefik
+        - name: redirectregex-realdebrid-api-removal
+          namespace: traefik
