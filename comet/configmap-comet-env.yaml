@@ -13,6 +13,7 @@ data:
   INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
   GET_TORRENT_TIMEOUT: "5" # let the cache build
   INDEXER_MANAGER_TIMEOUT: "30"
+  CACHE_TTL: 2764800 # 1 month
   DATABASE_TYPE: postgresql
   REMOVE_ADULT_CONTENT: "true"
   CUSTOM_HEADER_HTML: |
