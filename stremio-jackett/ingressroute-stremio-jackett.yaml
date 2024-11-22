@@ -24,12 +24,12 @@ spec:
         - name: chain-public-stremio-addon
           namespace: traefik
     # Advise user of RD deprecation (match base64 value of "realdebrid")
-    - match: Host(`stremio-jackett.${dns_domain}`) && PathPrefix(`/{something:.+}/cmVhbGRlYnJpZA{else:.+}`)
+    - match: Host(`stremio-jackett.${dns_domain}`) && PathPrefix(`/{something:.+}cmVhbGRlYnJpZA{else:.+}`)
       kind: Rule
       services:
-        - name: comet
+        - name: stremio-jackett
           kind: Service
-          port: 8000
+          port: 3000
       middlewares:  
         - name: headers-add-cors-for-stremio
           namespace: traefik

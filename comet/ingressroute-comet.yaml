@@ -26,7 +26,7 @@ spec:
       middlewares:  
         - name: chain-stream
     # Advise user of RD deprecation (match base64 value of "realdebrid")
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/cmVhbGRlYnJpZA{else:.+}`)
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}cmVhbGRlYnJpZA{else:.+}`)
       kind: Rule
       services:
         - name: comet
