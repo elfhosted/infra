@@ -14,6 +14,8 @@ spec:
       middlewares:  
         - name: headers-add-cors-for-stremio
           namespace: traefik
+        - name: redirectregex-realdebrid-api-removal
+          namespace: traefik
     # This is a search, subject to rate-limiting
     - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/stream/`)
       kind: Rule

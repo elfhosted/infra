@@ -59,6 +59,17 @@ data:
             }
         ]
     }
+  realdebrid-api-removed.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] RealDebrid api removed",
+                "title": "RealDebrid API removed 😿",
+                "torrentTitle": "RealDebrid API removed 😿\nUse AD, DL, or Torbox\nSee https://fnky.nz/sadcat",
+                "url": "https://elfhosted.com/assets/realdebrid-api-removal.mp4"
+            }
+        ]
+    }    
   comet-search-rate-limited.json: |
     {
         "streams": [
