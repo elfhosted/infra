@@ -16,7 +16,7 @@ spec:
           namespace: traefik
         - name: redirectregex-realdebrid-api-removal
           namespace: traefik
-    - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/realdebrid/`)
+    - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/realdebrid`)
       kind: Rule
       services:
         - name: knightcrawler-addon
