@@ -44,8 +44,6 @@ spec:
                 - zilean-public
             topologyKey: "kubernetes.io/hostname"    
     automountServiceAccountToken: false
-    env:
-      Zilean__Dmm__MinimumScoreMatch: "0.4"
     controller:
       replicas: 1
       strategy: RollingUpdate

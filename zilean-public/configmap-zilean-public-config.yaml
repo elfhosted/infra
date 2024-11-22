@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: zilean-config
-  namespace: zilean
+  name: zilean-public-config
+  namespace: zilean-public
 data:
   settings.json: |
     {
@@ -26,6 +26,9 @@ data:
         },
         "Torrents": {
           "EnableEndpoint": true,
+          "MaxHashesToCheck": 100
+          "MaxHashesToCheck": 100,
+          "EnableScrapeEndpoint": false,
           "EnableCacheCheckEndpoint": true
         },
         "Imdb": {
@@ -34,40 +37,22 @@ data:
           "MinimumScoreMatch": 0.85
         },
         "Ingestion": {
-          "ZurgInstances": [
-            {
-              "Url": "http://zurg:9999",
-              "EndpointType": 1
-            }
-          ],
-          "ZileanInstances": [
-            {
-              "Url": "http://scrape-cc:80",
-              "EndpointType": 0
-            },
-            {
-              "Url": "http://scrape-com:80",
-              "EndpointType": 0
-            }                      
-          ],
-          "EnableScraping": true,
+          "ZurgInstances": [],
+          "ZileanInstances": [],
+          "EnableScraping": false,
           "Kubernetes": {
-            "EnableServiceDiscovery": true,
-            "KubernetesSelectors": [
-              {
-                "UrlTemplate": "http://zurg.{0}:9999",
-                "LabelSelector": "zilean.elfhosted.com/scrape=true",
-                "EndpointType": 1
-              }
-            ],
+            "EnableServiceDiscovery": false,
+            "KubernetesSelectors": [],
             "KubeConfigFile": "/$HOME/.kube/config",
-            "AuthenticationType": 1
+            "AuthenticationType": 0
           },
-          "BatchSize": 500,
-          "MaxChannelSize": 5000,
-          "ScrapeSchedule": "0 * * * *",
+          "ScrapeSchedule": "0 0 * * *",
           "ZurgEndpointSuffix": "/debug/torrents",
-          "ZileanEndpointSuffix": "/torrents/all"
+          "ZileanEndpointSuffix": "/torrents/all",
+          "RequestTimeout": 10000
+        },
+        "Parsing": {
+          "BatchSize": 5000
         }
       }
     }
