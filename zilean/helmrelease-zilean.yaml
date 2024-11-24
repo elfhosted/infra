@@ -38,7 +38,20 @@ spec:
     - key: node-role.elfhosted.com/dedicated
       operator: Exists     
     - key: node-role.elfhosted.com/hobbit
-      operator: Exists                   
+      operator: Exists  
+    # update scraper temporarily                 
+    command:
+    - /app/scraper
+    - resync-imdb
+    - -s
+    - -t      
+    probes:
+      liveness:
+        enabled: false
+      startup:
+        enabled: false
+      readiness:
+        enabled: false     
     automountServiceAccountToken: true
     controller:
       replicas: 1
