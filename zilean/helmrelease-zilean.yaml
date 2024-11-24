@@ -39,12 +39,6 @@ spec:
       operator: Exists     
     - key: node-role.elfhosted.com/hobbit
       operator: Exists  
-    # update scraper temporarily                 
-    command:
-    - /app/scraper
-    - resync-imdb
-    - -s
-    - -t      
     probes:
       liveness:
         enabled: false
