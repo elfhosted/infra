@@ -64,11 +64,8 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
+        type: emptyDir
         mountPath: /app/data
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: zilean-public
     envFrom:
     - secretRef:
         name: zilean-public-env                   
