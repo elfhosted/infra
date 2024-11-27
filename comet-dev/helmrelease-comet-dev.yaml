@@ -20,7 +20,7 @@ spec:
       nameOverride: comet-dev
     image:
       repository: ghcr.io/elfhosted/comet-dev
-      tag: rolling@sha256:08ecf9ceecc59ecc5fac7e26f661c8c5bf9f8417de1905e80220fb744bde4a40
+      tag: rolling@sha256:f701ecb501a8f99148bcb289d3a61b5d25c3bc59ed7028d1fe22a0c8ebe9fb53
     securityContext:
       seccompProfile:
         type: RuntimeDefault
