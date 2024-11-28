@@ -229,9 +229,9 @@
     src: rsyslog
     dest: /etc/logrotate.d/rsyslog
 
-- name: remove incorrect /etc/logrotate.d/rsyslog
+- name: remove incorrect /etc/logrotate.d/syslog
   file:
-    path: /etc/logrotate.d/rsyslog
+    path: /etc/logrotate.d/syslog
     state: absent
 
 - name: ensure resolveconf systemd directory exists
