@@ -25,27 +25,27 @@ spec:
           port: 8000
       middlewares:  
         - name: chain-stream
-    # Advise user of RD deprecation (match base64 value of "realdebrid")
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}cmVhbGRlYn{else:.+}`)
-      kind: Rule
-      services:
-        - name: comet
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: headers-add-cors-for-stremio
-          namespace: traefik
-        - name: redirectregex-realdebrid-api-removal
-          namespace: traefik
-    # And likewise for AD
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}YWxsZGVicmlkCg{else:.+}`)
-      kind: Rule
-      services:
-        - name: comet
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: headers-add-cors-for-stremio
-          namespace: traefik
-        - name: redirectregex-realdebrid-api-removal
-          namespace: traefik          
+    # # Advise user of RD deprecation (match base64 value of "realdebrid")
+    # - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}cmVhbGRlYn{else:.+}`)
+    #   kind: Rule
+    #   services:
+    #     - name: comet
+    #       kind: Service
+    #       port: 8000
+    #   middlewares:  
+    #     - name: headers-add-cors-for-stremio
+    #       namespace: traefik
+    #     - name: redirectregex-realdebrid-api-removal
+    #       namespace: traefik
+    # # And likewise for AD
+    # - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}YWxsZGVicmlkCg{else:.+}`)
+    #   kind: Rule
+    #   services:
+    #     - name: comet
+    #       kind: Service
+    #       port: 8000
+    #   middlewares:  
+    #     - name: headers-add-cors-for-stremio
+    #       namespace: traefik
+    #     - name: redirectregex-realdebrid-api-removal
+    #       namespace: traefik          
