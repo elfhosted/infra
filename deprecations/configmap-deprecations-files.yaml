@@ -63,9 +63,9 @@ data:
     {
         "streams": [
             {
-                "name": "[😿] RealDebrid API has been removed",
-                "title": "RealDebrid API removed 😿\nUse AllDebrid / Debrid-Link / Torbox\nSee https://fnky.nz/sadcat",
-                "torrentTitle": "RealDebrid API removed 😿\nUse AllDebrid / Debrid-Link / Torbox\nSee https://fnky.nz/sadcat",
+                "name": "[😿] RealDebrid/AllDebrid API has been removed",
+                "title": "RealDebrid/AllDebrid/Debrid-Link APIs removed 😿\nUse Premiumize / Torbox\nSee https://fnky.nz/sadcat",
+                "torrentTitle": "RealDebrid/AllDebrid/Debrid-Link API removed 😿\nUse Premiumize / Torbox\nSee https://fnky.nz/sadcat",
                 "url": "https://elfhosted.com/assets/realdebrid-api-removal.mp4"
             }
         ]
