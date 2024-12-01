@@ -37,3 +37,15 @@ spec:
           namespace: traefik
         - name: redirectregex-realdebrid-api-removal
           namespace: traefik
+    # And likewise for AD
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}YWxsZGVicmlkCg{else:.+}`)
+      kind: Rule
+      services:
+        - name: comet
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: headers-add-cors-for-stremio
+          namespace: traefik
+        - name: redirectregex-realdebrid-api-removal
+          namespace: traefik          
