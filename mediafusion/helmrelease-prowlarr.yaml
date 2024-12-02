@@ -20,7 +20,7 @@ spec:
       nameOverride: prowlarr
     image:
       repository: ghcr.io/elfhosted/prowlarr-nightly
-      tag: 1.28.0.4854
+      tag: 1.28.0.4855
     securityContext:
       seccompProfile:
         type: RuntimeDefault
