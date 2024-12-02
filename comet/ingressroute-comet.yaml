@@ -5,6 +5,14 @@ metadata:
   namespace: comet
 spec:
   routes:
+    # Allow manifest.json regardless
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}manifest.json`)
+      priority: 100
+      kind: Rule
+      services:
+        - name: comet
+          kind: Service
+          port: 8000
     # Base URL, but catch bad paths in the regex
     - match: Host(`comet.${dns_domain}`)
       kind: Rule
