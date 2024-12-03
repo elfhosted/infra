@@ -34,8 +34,8 @@ spec:
 
   bootstrap:
     initdb:
-      database: cometdev
-      owner: cometdev
+      database: comet
+      owner: comet
       secret:
         name: app-secret
 
