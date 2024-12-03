@@ -5,7 +5,7 @@ metadata:
   namespace: mediafusion
 spec:
   # The PVC to be backed up
-  sourcePVC: redis-data-redis-master-0
+  sourcePVC: redis
   trigger:
     # Take a backup every 30 minutes
     schedule: "0 9 * * *"
