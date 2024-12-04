@@ -15,6 +15,10 @@ data:
   INDEXER_MANAGER_TIMEOUT: "30"
   DATABASE_TYPE: postgresql
   REMOVE_ADULT_CONTENT: "true"
+  SCRAPE_ZILEAN: "True"
+  SCRAPE_TORRENTIO: "True"
+  SCRAPE_MEDIAFUSION: "True"  
+  MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
