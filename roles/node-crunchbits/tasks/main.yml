@@ -252,7 +252,7 @@
     hour: "*"
     job: "/usr/local/bin/kill-unwanted-transcodes.sh"
   when:
-  - "inventory_hostname in groups['k3s_elves']"
+  - "inventory_hostname in groups['k3s_contended']"
 
 - name: ignore irrelevant logs via rsyslog
   copy:
