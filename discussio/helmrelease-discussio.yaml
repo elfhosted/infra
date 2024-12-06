@@ -84,6 +84,8 @@ spec:
     ingress:
       main:
         enabled: false
+    env:
+      V8_FLAGS: "--max-heap-size=1024,--max-old-space-size=1024"        
     service:
       main:
         enabled: true # necessary for probes
