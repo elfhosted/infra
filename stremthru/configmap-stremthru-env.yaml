@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stremthru-env
+  namespace: stremthru
+data:
+  STREMTHRU_REDIS_URI: redis://redis-master:6379
