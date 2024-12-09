@@ -36,14 +36,14 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
-    env:
-      PORT: 3649
-      TENANT_NAME: Public
-    persistence:
-      tmp: 
-        enabled: true
-        type: emptyDir
-        mountPath: /tmp
+      annotations:
+        configmap.reloader.stakater.com/reload: "stremthru-env"
+        secret.reloader.stakater.com/reload: "stremthru-env"        
+    # persistence:
+    #   tmp: 
+    #     enabled: true
+    #     type: emptyDir
+    #     mountPath: /tmp
     # resources:
     ingress:
       main:
