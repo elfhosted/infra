@@ -14,5 +14,5 @@ spec:
       middlewares:  
         - name: error-pages
           namespace: traefik
-        - name: rate-limit-stremthru        
+        # - name: rate-limit-stremthru        
 
