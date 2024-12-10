@@ -20,7 +20,7 @@ spec:
       nameOverride: stremthru
     image:
       repository: ghcr.io/elfhosted/stremthru
-      tag: 0.8.0@sha256:b9c7a29c274078d4d7afe8c01acf02edf9ba8b3c290ac108a193936e19835b5b
+      tag: 0.9.0@sha256:47ec5c4a8e379a456c2496c80a7ba4e3e182379d098920046d91dada6fae3b83
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -61,7 +61,7 @@ spec:
         name: stremthru-env             
     initContainers:
       setup:
-        image: ghcr.io/elfhosted/stremthru:0.8.0@sha256:b9c7a29c274078d4d7afe8c01acf02edf9ba8b3c290ac108a193936e19835b5b
+        image: ghcr.io/elfhosted/stremthru:0.9.0@sha256:47ec5c4a8e379a456c2496c80a7ba4e3e182379d098920046d91dada6fae3b83
         command:
         - /scripts/schema.sh 
         - migrate 
