@@ -63,7 +63,7 @@ spec:
       setup:
         image: ghcr.io/elfhosted/stremthru:0.8.0@sha256:4cf358eeaa8e93f5e0bb76b3e47571b9986202814100129088f8e07aaf5eff84
         command:
-        - ./scripts/schema.sh 
+        - /scripts/schema.sh 
         - migrate 
         - --auto-approve
         env: 
