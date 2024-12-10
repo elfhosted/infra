@@ -59,3 +59,10 @@ spec:
         name: stremthru-env 
     - configMapRef:
         name: stremthru-env             
+    initContainers:
+      setup:
+        image: ghcr.io/elfhosted/stremthru:0.8.0@sha256:47f1301322df093eedbefe8aa5c3e0bb8fc5de7f1ca51fd6228be8b73bf8fc27
+        command:
+        - ./scripts/schema.sh 
+        - migrate 
+        - --auto-approve
