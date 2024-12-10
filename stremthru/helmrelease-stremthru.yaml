@@ -66,3 +66,14 @@ spec:
         - ./scripts/schema.sh 
         - migrate 
         - --auto-approve
+      env: 
+        TMPDIR: /tmp
+      envFrom:
+      - secretRef:
+          name: stremthru-env 
+      - configMapRef:
+          name: stremthru-env          
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      
