@@ -39,12 +39,12 @@ spec:
       annotations:
         configmap.reloader.stakater.com/reload: "stremthru-env"
         secret.reloader.stakater.com/reload: "stremthru-env"        
-    # persistence:
-    #   tmp: 
-    #     enabled: true
-    #     type: emptyDir
-    #     mountPath: /tmp
-    # resources:
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp
+    resources:
     ingress:
       main:
         enabled: false
@@ -66,14 +66,14 @@ spec:
         - ./scripts/schema.sh 
         - migrate 
         - --auto-approve
-      env: 
-        TMPDIR: /tmp
-      envFrom:
-      - secretRef:
-          name: stremthru-env 
-      - configMapRef:
-          name: stremthru-env          
-      volumeMounts:
-        - name: tmp
-          mountPath: /tmp
-      
+        env: 
+          TMPDIR: /tmp
+        envFrom:
+        - secretRef:
+            name: stremthru-env 
+        - configMapRef:
+            name: stremthru-env          
+        volumeMounts:
+          - name: tmp
+            mountPath: /tmp
+        
