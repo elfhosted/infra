@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: stremthru
+  namespace: stremthru
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: stremthru
+  minAvailable: 1

@@ -1,8 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: mastodon
-  namespace: mastodon
+  name: stremthru
+  namespace: stremthru
 spec:
   instances: 3
 
@@ -16,30 +16,28 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 20Gi
+    size: 10Gi
 
-  resources:
-    requests:
-      cpu: "1"
-      memory: 4Gi
-    limits:
-      cpu: "4"
-      memory: 10Gi
-      
+  monitoring:
+    enablePodMonitor: true
+    customQueriesConfigMap:
+    - name: stremthru-monitoring
+      key: custom-queries
+                
   superuserSecret:
       name: cnpg-postgres-credentials
 
   bootstrap:
     initdb:
-      database: mastodon
-      owner: mastodon
+      database: stremthru
+      owner: stremthru
       secret:
         name: app-secret
 
   backup:
       # Volume snapshot backups
       volumeSnapshot:
-        className: ceph-block
+        className: topoplvm-provisioner-thin
       # WAL archive
       barmanObjectStore:        
         destinationPath: s3://cnpg/

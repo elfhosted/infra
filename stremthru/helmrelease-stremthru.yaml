@@ -1,0 +1,61 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: stremthru
+  namespace: stremthru
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: stremthru
+  values:
+    global:
+      nameOverride: stremthru
+    image:
+      repository: ghcr.io/elfhosted/stremthru
+      tag: 0.9.0@sha256:a5cdb8677e91dd1b0f74f541d68250f9b0f2085c279da0b4194ab286f9d06fe7
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 10001
+      runAsGroup: 10001
+    automountServiceAccountToken: false
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "stremthru-env"
+        secret.reloader.stakater.com/reload: "stremthru-env"        
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp
+    resources:
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8080
+    envFrom:
+    - secretRef:
+        name: stremthru-env 
+    - configMapRef:
+        name: stremthru-env             
