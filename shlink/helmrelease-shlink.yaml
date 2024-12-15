@@ -42,7 +42,6 @@ spec:
       DEFAULT_BASE_URL_REDIRECT: https://geek-cookbook.funkypenguin.co.nz
       DEFAULT_REGULAR_404_REDIRECT: https://geek-cookbook.funkypenguin.co.nz
       ENABLE_PERIODIC_VISIT_LOCATE: true
-      GEOLITE_LICENSE_KEY: CRsnybV7jxnLVNWy
       PROXY_TRUST: true
       # DB_DRIVER: mysql
       # DB_USER: shlink
