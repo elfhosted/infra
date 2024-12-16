@@ -20,7 +20,7 @@ spec:
       nameOverride: cyberflix
     image:
       repository: ghcr.io/elfhosted/cyberflix-server
-      tag: rolling@sha256:c7ff8b45c268f3f8e91e1efa2c11f7a06c2fc7457f9abbbfa270e36631ad84cc
+      tag: rolling@sha256:75745cd2acb8e8eaadd8ee4d2bebd09ee1f302180398c0cf1637e7550168fb15
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -144,7 +144,7 @@ spec:
           timeoutSeconds: 10
     initContainers:
       setup:
-        image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:c7ff8b45c268f3f8e91e1efa2c11f7a06c2fc7457f9abbbfa270e36631ad84cc
+        image: ghcr.io/elfhosted/cyberflix-server:rolling@sha256:75745cd2acb8e8eaadd8ee4d2bebd09ee1f302180398c0cf1637e7550168fb15
         imagePullPolicy: IfNotPresent
         command:
         - /bin/bash
