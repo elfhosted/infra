@@ -20,7 +20,7 @@ spec:
       nameOverride: cyberflix
     image:
       repository: ghcr.io/elfhosted/cyberflix-server
-      tag: sha256@aab0462424e48910a679c10e36b96bcc7e4ac071c9184881f702fbca70e20284
+      tag: rolling@sha256:aab0462424e48910a679c10e36b96bcc7e4ac071c9184881f702fbca70e20284
     securityContext:
       seccompProfile:
         type: RuntimeDefault
