@@ -123,7 +123,7 @@ spec:
           HTTP_CONTROL_SERVER_ADDRESS: ":8000"
           VPN_TYPE: wireguard
           VPN_SERVICE_PROVIDER: custom
-          FIREWALL_INPUT_PORTS: "8888"
+          FIREWALL_INPUT_PORTS: "8080"
           WIREGUARD_MTU: "1280"
           VPN_ENDPOINT_PORT: "2408"
           DOT: "off"
