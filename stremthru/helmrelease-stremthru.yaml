@@ -31,8 +31,20 @@ spec:
       runAsUser: 10001
       runAsGroup: 10001
     automountServiceAccountToken: false
+    affinity:      
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - stremthru
+            topologyKey: "kubernetes.io/hostname"        
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
