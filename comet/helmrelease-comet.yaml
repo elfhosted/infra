@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v1.51.0@sha256:61c2e32b0885a361f0ac91c8d67e2acc6957619a91a10fa51d2e6d7e6388b511
+      tag: v1.51.0@sha256:a85acdd18a7365066e76bd6c4c833ad4f21e3a3922e293742cb0fa11d17671f8
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -85,7 +85,13 @@ spec:
       cache: 
         enabled: true
         type: emptyDir
-        mountPath: /.cache          
+        mountPath: /.cache        
+      config:
+        enabled: true
+        mountPath: /app/data
+        type: emptyDir
+        volumeSpec:
+          medium: Memory             
     addons:
       vpn:
         enabled: true # in case we ever need it

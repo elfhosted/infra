@@ -20,7 +20,7 @@ spec:
       nameOverride: stremthru
     image:
       repository: ghcr.io/elfhosted/stremthru
-      tag: 0.18.0@sha256:36e00cb2a0bf44cc062f0ac7fe0fa6bf90bfe61090fd6bd34869b19185d0859b
+      tag: 0.21.0@sha256:969fae530be5bb2274bea010e45cad895b0826310dc3a5b1af8a252bd21ba60d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -31,8 +31,20 @@ spec:
       runAsUser: 10001
       runAsGroup: 10001
     automountServiceAccountToken: false
+    affinity:      
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - stremthru
+            topologyKey: "kubernetes.io/hostname"        
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -43,7 +55,7 @@ spec:
       tmp: 
         enabled: true
         type: emptyDir
-        mountPath: /tmp
+        mountPath: /tmp       
     resources:
     ingress:
       main:
@@ -59,3 +71,29 @@ spec:
         name: stremthru-env 
     - configMapRef:
         name: stremthru-env             
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: thrnz/docker-wireguard-pia
+            tag: latest
+        envFrom:
+        - secretRef:
+            name: stremthru-vpn
+        env:
+          IPTABLES_BACKEND: nft
+          KILLSWITCH: "true"
+          LOCAL_NETWORK: 10.0.0.0/8
+          LOC: de-frankfurt
+          PORT_FORWARDING: "0"
+          PORT_PERSIST: "1"
+          NFTABLES: "1"      
+          VPNDNS: "0"  
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config  
