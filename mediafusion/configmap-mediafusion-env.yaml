@@ -26,6 +26,7 @@ data:
   db_max_connections: "30"
   jackett_immediate_max_process_time: "0"
   is_scrap_from_jackett: "true"
+  is_scrap_from_bt4g: "false"
   jackett_url: http://jackett:9117
   sync_debrid_cache_streams: "false"
   branding_description: |
