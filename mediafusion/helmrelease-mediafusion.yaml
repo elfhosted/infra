@@ -20,32 +20,15 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/elfhosted/mediafusion
-      tag: 4.3.1@sha256:0146a36f61a4e897bfb9a82c73394c0e3453bb9643ba145a61d4916af5886901
+      tag: 4.3.0@sha256:dae3d856d96fd31984260e3da09c01e92462652201d8fc323ac4be94d1332f03
     securityContext:
       seccompProfile:
         type: RuntimeDefault
       readOnlyRootFilesystem: true
     podSecurityContext:
       seccompProfile:
-        type: RuntimeDefault
-    tolerations:
-    - key: node-role.elfhosted.com/dedicated
-      operator: Exists     
-    - key: node-role.elfhosted.com/hobbit
-      operator: Exists                   
+        type: RuntimeDefault     
     affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/dedicated
-              operator: Exists   
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/hobbit
-              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
