@@ -42,7 +42,9 @@ spec:
           k8s:io.kubernetes.pod.namespace: stremthru  
       toPorts:
         - ports:
-            - port: "8080"            
+            - port: "80"   
+        - ports:
+            - port: "8080"                        
 
     # Allow to Kube DNS
     - toEndpoints:
