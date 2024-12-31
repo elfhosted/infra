@@ -47,7 +47,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - jackettio
+                - cyberflix
             topologyKey: "kubernetes.io/hostname"              
     controller:
       replicas: 2
