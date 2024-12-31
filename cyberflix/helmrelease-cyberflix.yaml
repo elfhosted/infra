@@ -38,12 +38,6 @@ spec:
         - ALL        
     automountServiceAccountToken: false
     affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: dedicated.elfhosted.com/app
-              operator: Exists                    
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -55,9 +49,6 @@ spec:
                 values:
                 - jackettio
             topologyKey: "kubernetes.io/hostname"              
-    tolerations:
-    - key: dedicated.elfhosted.com/app
-      operator: Exists             
     controller:
       replicas: 2
       strategy: RollingUpdate
