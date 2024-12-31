@@ -65,12 +65,7 @@ spec:
                 operator: In
                 values:
                 - jackett
-            topologyKey: "kubernetes.io/hostname"      
-    tolerations:
-      - key: dedicated.elfhosted.com/app
-        operator: Equal
-        values:
-        - mediafusion                       
+            topologyKey: "kubernetes.io/hostname"                     
     ingress:
       main:
         enabled: false 

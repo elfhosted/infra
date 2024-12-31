@@ -25,13 +25,7 @@ spec:
       seccompProfile:
         type: RuntimeDefault
       readOnlyRootFilesystem: true
-    affinity:
-      # nodeAffinity:
-      #   requiredDuringSchedulingIgnoredDuringExecution:
-      #     nodeSelectorTerms:
-      #     - matchExpressions:
-      #       - key: dedicated.elfhosted.com/app
-      #         operator: Exists                    
+    affinity:                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  
@@ -41,11 +35,8 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - jackettio
+                - comet
             topologyKey: "kubernetes.io/hostname"              
-    tolerations:
-    - key: dedicated.elfhosted.com/app
-      operator: Exists         
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -60,7 +51,7 @@ spec:
       #   value: "1"      
     automountServiceAccountToken: false
     controller:
-      replicas: 20
+      replicas: 30
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
