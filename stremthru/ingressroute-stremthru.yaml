@@ -19,9 +19,9 @@ spec:
     - match: Host(`stremthru.${dns_domain}`) && PathPrefix(`/v0/store/magnets/check`) 
       kind: Rule
       services:
-        - name: mediafusion
+        - name: stremthru
           kind: Service
-          port: 8000
+          port: 8080
       middlewares:  
         - name: ipallowlist-localhost-only
           namespace: traefik
