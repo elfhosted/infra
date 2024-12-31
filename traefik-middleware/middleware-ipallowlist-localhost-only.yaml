@@ -1,8 +1,8 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: protect-scraper
-  namespace: mediafusion
+  name: ipallowlist-localhost-only
+  namespace: traefik
 spec:
   ipAllowList:
     sourceRange:
