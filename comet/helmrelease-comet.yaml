@@ -76,7 +76,11 @@ spec:
       cache: 
         enabled: true
         type: emptyDir
-        mountPath: /.cache        
+        mountPath: /.cache    
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp                
       config:
         enabled: true
         mountPath: /app/data
