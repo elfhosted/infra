@@ -18,6 +18,7 @@ data:
   validate_m3u8_urls_liveness: "true"
   worker_max_tasks_per_child: "30"
   addon_name: "MediaFusion | ElfHosted"
+  disabled_providers: '["easydebrid"]'
   logo_url: https://mediafusion.elfhosted.com/static/images/mediafusion-elfhosted-logo.png
   disable_streambtw_scheduler: "true"
   nowmetv_scheduler_crontab: "0 */4 * * *"
