@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v1.51.0@sha256:1f01cf007ebc99e18f8c84aad61eb3663942b0a533a834f741864ce71214ae2e
+      tag: v1.51.0@sha256:d8c7b023ca5faad2a509f4a9b685d7203ce443098697d5786e5dfbc782b22add
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -73,6 +73,10 @@ spec:
           http:
             port: 8000   
     persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp   
       cache: 
         enabled: true
         type: emptyDir
@@ -82,12 +86,7 @@ spec:
         mountPath: /app/data
         type: emptyDir
         volumeSpec:
-          medium: Memory    
-      tmp:
-        enabled: true
-        mountPath: /tmp
-        type: emptyDir
-        sizeLimit: 1Gi                     
+          medium: Memory             
     addons:
       vpn:
         enabled: true # in case we ever need it
