@@ -73,6 +73,10 @@ spec:
           http:
             port: 8000   
     persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp  
       cache: 
         enabled: true
         type: emptyDir
