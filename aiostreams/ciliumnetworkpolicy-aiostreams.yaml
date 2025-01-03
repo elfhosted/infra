@@ -39,3 +39,21 @@ spec:
           rules:
             dns:
               - matchPattern: "*"
+
+    # Allow AIO to talk to comet
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: comet
+          k8s:io.kubernetes.pod.namespace: comet  
+      toPorts:
+        - ports:
+            - port: "8000"
+
+    # Allow AIO to talk to mediafusion
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: mediafusion
+          k8s:io.kubernetes.pod.namespace: mediafusion  
+      toPorts:
+        - ports:
+            - port: "8000"            
