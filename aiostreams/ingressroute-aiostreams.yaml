@@ -11,5 +11,5 @@ spec:
         - name: aiostreams
           kind: Service
           port: 3000
-      middlewares:  
-        - name: chain-stream
+      # middlewares:  
+      #   - name: chain-stream
