@@ -12,5 +12,4 @@ spec:
           kind: Service
           port: 3000
       middlewares:  
-        - name: chain-public-stremio-addon-cached
-          namespace: traefik
+        - name: chain-stream
