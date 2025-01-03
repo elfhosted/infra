@@ -30,8 +30,6 @@ spec:
       strategy:
       rollingUpdate:
         unavailable: 1
-    affinity: *standard_affinity
-    tolerations: *standard_tolerations
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -42,7 +40,12 @@ spec:
       fsGroupChangePolicy: "OnRootMismatch"
     automountServiceAccountToken: false
     persistence:
-      tmp: *tmp
+      tmp:
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        volumeSpec:
+          medium: Memory   
       tinyproxy-conf:
         enabled: "true"
         type: "custom"
