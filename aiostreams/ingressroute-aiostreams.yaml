@@ -11,5 +11,12 @@ spec:
         - name: aiostreams
           kind: Service
           port: 3000
-      # middlewares:  
-      #   - name: chain-stream
+    # This is a scrape / search, subject to rate-limiting
+    - match: Host(`aiostreams.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+      kind: Rule
+      services:
+        - name: aiostreams
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: chain-stream      
