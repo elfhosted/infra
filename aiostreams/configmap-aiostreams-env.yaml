@@ -4,9 +4,7 @@ metadata:
   name: aiostreams-env
   namespace: aiostreams
 data:
-  APP_ENVIRONMENT: PROD
-  TMDB_CATALOG_PAGES: "180"
-  SPONSOR: |
+  NEXT_PUBLIC_ELFHOSTED_BRANDING: |
 
     This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of aiostreams, for the Stremio Community - Enjoy! ❤️ </BR>(<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)
     <br/><br/>What is ElfHosted?
