@@ -14,7 +14,7 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: stremthru
+  releaseName: tinyproxy
   values:
     global:
       nameOverride: tinyproxy
