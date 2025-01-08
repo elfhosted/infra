@@ -7,8 +7,9 @@ data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
-  INDEXER_MANAGER_TYPE: jackett
-  INDEXER_MANAGER_URL: http://jackett:9117
+  SCRAPE_MEDIAFUSION: "False"
+  # INDEXER_MANAGER_TYPE: jackett
+  # INDEXER_MANAGER_URL: http://jackett:9117
   # DEBRID_PROXY_URL: http://127.0.0.1:1080
   STREMTHRU_DEFAULT_URL: http://elfhosted-internal.stremthru
   # INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
