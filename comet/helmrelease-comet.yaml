@@ -50,8 +50,15 @@ spec:
       # - name: net.ipv4.conf.all.src_valid_mark
       #   value: "1"      
     automountServiceAccountToken: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 2
+        memory: 2Gi
     controller:
-      replicas: 10
+      replicas: 1
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -81,12 +88,19 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp                
+      # config:
+      #   enabled: true
+      #   mountPath: /app/data
+      #   type: emptyDir
+      #   volumeSpec:
+      #     medium: Memory
       config:
         enabled: true
+        type: custom
         mountPath: /app/data
-        type: emptyDir
         volumeSpec:
-          medium: Memory             
+          persistentVolumeClaim:
+            claimName: comet          
     addons:
       vpn:
         enabled: true # in case we ever need it
