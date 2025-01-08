@@ -7,7 +7,8 @@ data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
-  SCRAPE_MEDIAFUSION: "False"
+  MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
+  SCRAPE_MEDIAFUSION: "True"
   # INDEXER_MANAGER_TYPE: jackett
   # INDEXER_MANAGER_URL: http://jackett:9117
   # DEBRID_PROXY_URL: http://127.0.0.1:1080

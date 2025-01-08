@@ -44,7 +44,17 @@ spec:
         - ports:
             - port: "80"   
         - ports:
-            - port: "8080"                        
+            - port: "8080"   
+
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: mediafusion
+          k8s:io.kubernetes.pod.namespace: mediafusion  
+      toPorts:
+        - ports:
+            - port: "80"   
+        - ports:
+            - port: "8000"                                    
 
     # Allow to Kube DNS
     - toEndpoints:
