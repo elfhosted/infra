@@ -51,7 +51,7 @@ spec:
       #   value: "1"      
     automountServiceAccountToken: false
     controller:
-      replicas: 20
+      replicas: 3
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
