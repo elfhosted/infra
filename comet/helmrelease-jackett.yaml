@@ -20,7 +20,7 @@ spec:
       nameOverride: jackett
     image:
       repository: ghcr.io/elfhosted/jackett
-      tag: 0.22.1182
+      tag: 0.22.1224
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -33,7 +33,7 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 10
+      replicas: 1
       strategy: RollingUpdate
       # rollingUpdate:
       #   unavailable: 1
@@ -69,6 +69,13 @@ spec:
     ingress:
       main:
         enabled: false 
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 1
+        memory: 2Gi        
     service:
       main:
         enabled: false # necessary for probes

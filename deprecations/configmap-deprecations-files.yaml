@@ -81,6 +81,17 @@ data:
             }
         ]
     } 
+  aiostreams-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] AIO",
+                "title": "AIO Streams public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }     
   comet-requires-configuration.json: |
     {
         "streams": [

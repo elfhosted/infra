@@ -1,0 +1,22 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: aiostreams.${dns_domain}
+  namespace: aiostreams
+spec:
+  routes:
+    - match: Host(`aiostreams.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: aiostreams
+          kind: Service
+          port: 3000
+    # This is a scrape / search, subject to rate-limiting
+    - match: Host(`aiostreams.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+      kind: Rule
+      services:
+        - name: aiostreams
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: chain-stream      

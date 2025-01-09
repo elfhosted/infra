@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v1.51.0@sha256:40842893e73c000a10eb1fb304b05c07d5ae11b5ee26432e0c8155785c934a07
+      tag: rolling@sha256:28c4c1facdaa98b2d122a4fedbfe1966e0a090ccee3d4b346962bfecfa66457a
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -50,8 +50,15 @@ spec:
       # - name: net.ipv4.conf.all.src_valid_mark
       #   value: "1"      
     automountServiceAccountToken: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 2
+        memory: 2Gi
     controller:
-      replicas: 20
+      replicas: 1
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -81,12 +88,19 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp                
+      # config:
+      #   enabled: true
+      #   mountPath: /app/data
+      #   type: emptyDir
+      #   volumeSpec:
+      #     medium: Memory
       config:
         enabled: true
+        type: custom
         mountPath: /app/data
-        type: emptyDir
         volumeSpec:
-          medium: Memory             
+          persistentVolumeClaim:
+            claimName: comet          
     addons:
       vpn:
         enabled: true # in case we ever need it
