@@ -32,6 +32,7 @@ spec:
       runAsGroup: 10001
     automountServiceAccountToken: false
     controller:
+      replicas: 0
       annotations:
         configmap.reloader.stakater.com/reload: "knightcrawler-env"
     tolerations:
