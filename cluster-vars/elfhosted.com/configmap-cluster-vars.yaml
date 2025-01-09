@@ -49,7 +49,7 @@ data:
   hobbit_streamer_ram_limits: "6Gi"
   ranger_streamer_cpu_limits: "4"
   ranger_streamer_ram_limits: "8Gi"
-  halfling_streamer_cpu_limits: "8"
+  halfling_streamer_cpu_limits: "6"
   halfling_streamer_ram_limits: "16Gi"
   nazgul_streamer_cpu_limits: "14"
   nazgul_streamer_ram_limits: "32Gi"  
