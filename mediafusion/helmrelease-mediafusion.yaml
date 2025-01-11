@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion
     image:
       repository: ghcr.io/elfhosted/mediafusion
-      tag: 4.3.5@sha256:bd5ca87407f1fa677f811ccb1f32b6434919ec1793a1797fb0639be658cd26ec
+      tag: 4.3.6@sha256:0b7c69d39922f6a7ed28fdeba873ae9c9db1c4821bed506b5b5a26496e7e45ac
     securityContext:
       seccompProfile:
         type: RuntimeDefault
