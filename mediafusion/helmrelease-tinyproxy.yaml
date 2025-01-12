@@ -72,7 +72,7 @@ spec:
         enabled: false
     service:
       main:
-        enabled: false # necessary for probes
+        enabled: true # necessary for probes
         ports:
           http:
             port: 8888
