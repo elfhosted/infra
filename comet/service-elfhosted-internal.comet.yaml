@@ -13,6 +13,6 @@ spec:
     protocol: TCP
     targetPort: 8000
   selector:
-    app.kubernetes.io/name: comet
+    app.kubernetes.io/name: comet-internal
   sessionAffinity: None
   type: ClusterIP
