@@ -4,8 +4,8 @@ metadata:
   name: aiostreams-env
   namespace: aiostreams
 data:
-  COMET_URL: http://comet.comet:8000/
-  MEDIAFUSION_URL: http://mediafusion.mediafusion:8000/
+  COMET_URL: http://elfhosted-internal.comet/
+  MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
   NEXT_PUBLIC_ELFHOSTED_BRANDING: |
 
     This is an <A HREF="https://elfhosted.com">ElfHosted</A> instance of AIOStreams, for the Stremio Community - Enjoy! ❤️ </BR>(<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)
