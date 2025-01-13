@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: comet-env
+  name: comet-internal-env
   namespace: comet
 data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
