@@ -1567,7 +1567,7 @@ spec:
 
     ipv6:
       # -- Enable IPv6 support.
-      enabled: true
+      enabled: false
 
     # -- Configure Kubernetes specific configuration
     k8s: {}
