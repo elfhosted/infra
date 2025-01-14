@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jackett
+  namespace: comet-dev
+spec:
+  ports:
+  - name: http
+    port: 9117
+    protocol: TCP
+    targetPort: 9117
+  selector:
+    app.kubernetes.io/name: jackett
+  sessionAffinity: ClientIP
+  type: ClusterIP

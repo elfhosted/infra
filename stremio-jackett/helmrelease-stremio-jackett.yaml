@@ -21,8 +21,8 @@ spec:
     annotations:
       configmap.reloader.stakater.com/reload: "stremio-jackett-env"
     image:
-      repository: ghcr.io/geek-cookbook/stremio-jackett
-      tag: v4.1.6@sha256:f396624f5be314eb7d46432835fb3bc3cf3572e242ea78d54a24db0239638d71
+      repository: ghcr.io/elfhosted/stremio-jackett
+      tag: v4.2.2@sha256:a496777c70fbb1aa36da9b4f9a8b16059607007e6bee7d3cc5f7d98fb74fb38c
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -40,36 +40,7 @@ spec:
         unavailable: 1
     envFrom:
     - configMapRef:
-        name: stremio-jackett-env
-    tolerations:
-    - key: node-role.elfhosted.com/dedicated
-      operator: Exists     
-    - key: node-role.elfhosted.com/hobbit
-      operator: Exists                   
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/dedicated
-              operator: Exists   
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/hobbit
-              operator: Exists                  
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution: 
-        - weight: 100  
-          podAffinityTerm:    
-            labelSelector:
-              matchExpressions:
-              - key: app.kubernetes.io/name
-                operator: In
-                values:
-                - stremio-jackett
-            topologyKey: "kubernetes.io/hostname"   
+        name: stremio-jackett-env                
     persistence:
       tmp: 
         enabled: true

@@ -36,6 +36,26 @@ spec:
         - ports:
             - port: "8181"
 
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: stremthru
+          k8s:io.kubernetes.pod.namespace: stremthru  
+      toPorts:
+        - ports:
+            - port: "80"   
+        - ports:
+            - port: "8080"   
+
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: mediafusion
+          k8s:io.kubernetes.pod.namespace: mediafusion  
+      toPorts:
+        - ports:
+            - port: "80"   
+        - ports:
+            - port: "8000"                                    
+
     # Allow to Kube DNS
     - toEndpoints:
         - matchLabels:

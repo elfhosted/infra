@@ -47,4 +47,70 @@ data:
                 "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
             }
         ]
-    }        
+    }   
+  knightcrawler-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] KnightCrawler",
+                "title": "KnightCrawler public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }
+  realdebrid-api-removal.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Comet",
+                "title": "RealDebrid/AllDebrid/Debrid-Link APIs removed 😿\nUse Premiumize / Torbox\nSee https://fnky.nz/sadcat",
+                "torrentTitle": "RealDebrid/AllDebrid/Debrid-Link API removed 😿\nUse Premiumize / Torbox\nSee https://fnky.nz/sadcat",
+                "url": "https://elfhosted.com/assets/realdebrid-api-removal.mp4"
+            }
+        ]
+    }    
+  comet-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] Comet",
+                "title": "Comet public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    } 
+  aiostreams-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] AIO",
+                "title": "AIO Streams public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }     
+  comet-requires-configuration.json: |
+    {
+        "streams": [
+            {
+                "name": "[🤦‍♂️] Comet",
+                "title": "Comet addon unconfigured 🤦‍♂️",
+                "torrentTitle": "Comet addon requires configuration ✅\nConfigure in Stremio or\nvisit https://comet.elfhosted.com",
+                "url": "https://elfhosted.com/assets/comet-requires-configuration.mp4"
+            }
+        ]
+    }     
+  jackettio-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] Jackettio",
+                "title": "Jackettio public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }                

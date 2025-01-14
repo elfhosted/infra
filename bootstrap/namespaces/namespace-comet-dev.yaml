@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: comet-dev
+  annotations:
+    volsync.backube/privileged-movers: "true"

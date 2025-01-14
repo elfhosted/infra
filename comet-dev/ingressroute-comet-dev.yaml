@@ -1,0 +1,27 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: comet-dev.${dns_domain}
+  namespace: comet-dev
+spec:
+  routes:
+    # Base URL, but catch bad paths in the regex
+    - match: Host(`comet-dev.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: comet-dev
+          kind: Service
+          port: 8000
+      middlewares:
+        - name: headers-add-cors-for-stremio
+          namespace: traefik
+        - name: redirectregex-comet-requires-configuration
+    # This is a scrape / search, subject to rate-limiting
+    - match: Host(`comet-dev.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+      kind: Rule
+      services:
+        - name: comet-dev
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-stream

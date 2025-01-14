@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zilean-public-config
+  namespace: zilean-public
+data:
+  settings.json: |
+    {
+      "Zilean": {
+        "FirstRun": false,
+        "ApiKey": "overridden-in-env",
+        "Dmm": {
+          "EnableScraping": true,
+          "EnableEndpoint": true,
+          "ScrapeSchedule": "0 * * * *",
+          "MinimumReDownloadIntervalMinutes": 30,
+          "MaxFilteredResults": 200,
+          "MinimumScoreMatch": 0.85,
+          "ImportBatched": false
+        },
+        "Database": {
+          "ConnectionString": "overridden-in-env"
+        },        
+        "Torznab": {
+          "EnableEndpoint": true
+        },
+        "Torrents": {
+          "EnableEndpoint": true,
+          "MaxHashesToCheck": 100
+          "MaxHashesToCheck": 100,
+          "EnableScrapeEndpoint": false,
+          "EnableCacheCheckEndpoint": true
+        },
+        "Imdb": {
+          "EnableImportMatching": true,
+          "EnableEndpoint": true,
+          "MinimumScoreMatch": 0.85
+        },
+        "Ingestion": {
+          "ZurgInstances": [],
+          "ZileanInstances": [],
+          "EnableScraping": false,
+          "Kubernetes": {
+            "EnableServiceDiscovery": false,
+            "KubernetesSelectors": [],
+            "KubeConfigFile": "/$HOME/.kube/config",
+            "AuthenticationType": 0
+          },
+          "ScrapeSchedule": "0 0 * * *",
+          "ZurgEndpointSuffix": "/debug/torrents",
+          "ZileanEndpointSuffix": "/torrents/all",
+          "RequestTimeout": 10000
+        },
+        "Parsing": {
+          "BatchSize": 5000
+        }
+      }
+    }

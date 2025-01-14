@@ -34,33 +34,74 @@ spec:
     automountServiceAccountToken: false
     controller:
       replicas: 1
+      strategy: RollingUpdate
+      # rollingUpdate:
+      #   unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "jackett-config"
     persistence:
       config:
         enabled: true
-        type: custom
+        type: emptyDir
         mountPath: /config/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: jackett
       tmp: 
         enabled: true
-        type: custom
-        mountPath: /tmp
+        type: emptyDir
+        mountPath: /tmp           
+      bootstrap:
+        enabled: "true"
+        type: "custom"
         volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi              
+          configMap:
+            name: jackett-config   
+    affinity:      
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - jackett
+            topologyKey: "kubernetes.io/hostname"                     
     ingress:
       main:
         enabled: false 
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 1
+        memory: 2Gi        
     service:
       main:
-        enabled: true # necessary for probes
+        enabled: false # necessary for probes
         ports:
           http:
             port: 9117
+    initContainers:
+      setup:
+        image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+
+          mkdir -p /config/Jackett/Indexers
+          cp -rf --dereference /bootstrap/*.json /config/Jackett/Indexers/
+          mv /config/Jackett/Indexers/ServerConfig.json /config/Jackett/
+
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        - mountPath: /bootstrap
+          name: bootstrap
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: false   

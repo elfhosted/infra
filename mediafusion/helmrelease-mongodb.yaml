@@ -746,7 +746,7 @@ spec:
     extraVolumes:
       - name: backup
         emptyDir:
-          sizeLimit: 5Gi
+          sizeLimit: 10Gi
 
     ## MongoDB(&reg;) Pod Disruption Budget configuration
     ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/

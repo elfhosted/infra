@@ -7,6 +7,9 @@ data:
   tenant-cleaner.sh: |
     #!/bin/bash
 
+    # time to debug
+    sleep 1h
+
     # setup git
     git config --global user.name "Elfbot"
     git config --global user.email "elfbot@elfhosted.com"
@@ -47,12 +50,11 @@ data:
       fi
     done
     
-    git pull
-    git checkout -b clean-kustomizations
-
+    DATE=$(date +"%Y-%m-%d")
+    git checkout -b clean-kustomizations origin/clean-kustomizations-$DATE || git checkout -b clean-kustomizations-$DATE
     git pull
     git add .
-    git commit -m "Tenant cleaner cleans tenants!" .
+    git commit -m "Tenant cleaner cleans tenants on $DATE" .
 
-    git push --set-upstream origin clean-kustomizations
-    gh pr create --title 'Tenant cleaner cleans up!' --base main --body 'Tenant cleaner cleans up!' --assignee funkypenguin
+    git push --set-upstream origin clean-kustomizations-$DATE
+    gh pr create --title 'Tenant cleaner cleans up on $DATE!' --base main --body 'Tenant cleaner cleans up!' --assignee funkypenguin

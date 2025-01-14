@@ -27,25 +27,8 @@ spec:
       readOnlyRootFilesystem: true
     podSecurityContext:
       seccompProfile:
-        type: RuntimeDefault
-    tolerations:
-    - key: node-role.elfhosted.com/dedicated
-      operator: Exists     
-    - key: node-role.elfhosted.com/hobbit
-      operator: Exists                   
+        type: RuntimeDefault     
     affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/dedicated
-              operator: Exists   
-        - weight: 100
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.elfhosted.com/hobbit
-              operator: Exists                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
         - weight: 100  

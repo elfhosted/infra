@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: comet-dev
+  namespace: comet-dev
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: comet-dev
+  minAvailable: 1

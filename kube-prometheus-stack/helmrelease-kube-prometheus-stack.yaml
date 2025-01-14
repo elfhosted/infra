@@ -1247,6 +1247,7 @@ spec:
         auth.generic_oauth:
           enabled: true
           allow_sign_up: true
+          update_user_attributes: true
           name: authentik
           auto_login: false
           client_id: grafana

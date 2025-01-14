@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    tailscale.com/tailnet-fqdn: elfhosted-internal-zilean-elfhosted-cc.tail5bd7d1.ts.net
+    tailscale.com/hostname: ignore-zilean-scrape-cc-from-${tailscale_suffix}
+  name: scrape-cc
+  namespace: zilean
+spec:
+  externalName: placeholder   # any value - will be overwritten by operator
+  type: ExternalName

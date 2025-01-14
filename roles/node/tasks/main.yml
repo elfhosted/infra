@@ -185,7 +185,6 @@
     thinpool: thinpool
     size: 100%FREE  
   when: 
-  - "inventory_hostname in groups['k3s_servers'] or inventory_hostname in groups['k3s_agents']"
   ignore_errors: true # so we can run it multiple times
 
 - name: copy scripts
@@ -197,6 +196,15 @@
     - smartmon_metrics.sh
     - kill-unwanted-transcodes.sh
 
+- name: Add cron scripts to kill unwanted transcodes
+  cron:
+    name: "unwanted transcodes"
+    minute: "*"
+    hour: "*"
+    job: "/usr/local/bin/kill-unwanted-transcodes.sh"
+  when:
+  - "inventory_hostname in groups['k3s_contended']"
+  
 - name: Install smartmontools
   apt: pkg=smartmontools
 
@@ -228,7 +236,12 @@
 - name: update logrotate.d/syslog 
   copy:
     src: rsyslog
-    dest: /etc/logrotate.d/syslog
+    dest: /etc/logrotate.d/rsyslog
+
+- name: remove incorrect /etc/logrotate.d/syslog
+  file:
+    path: /etc/logrotate.d/syslog
+    state: absent
 
 - name: ensure resolveconf systemd directory exists
   file:

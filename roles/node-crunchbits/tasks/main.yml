@@ -252,7 +252,7 @@
     hour: "*"
     job: "/usr/local/bin/kill-unwanted-transcodes.sh"
   when:
-  - "inventory_hostname in groups['k3s_elves']"
+  - "inventory_hostname in groups['k3s_contended']"
 
 - name: ignore irrelevant logs via rsyslog
   copy:
@@ -267,7 +267,12 @@
 - name: update logrotate.d/syslog 
   copy:
     src: rsyslog
-    dest: /etc/logrotate.d/syslog
+    dest: /etc/logrotate.d/rsyslog
+
+- name: remove incorrect /etc/logrotate.d/syslog
+  file:
+    path: /etc/logrotate.d/syslog
+    state: absent    
 
 - name: ensure resolveconf systemd directory exists
   file:

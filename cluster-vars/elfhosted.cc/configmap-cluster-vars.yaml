@@ -27,7 +27,7 @@ data:
   pod_cidr_v4: 10.8.0.0/15
   service_cidr_v4: 10.44.0.0/16
   pod_cidr_v6: fd02::/104  
-  ha_replica_count: "1" # for ha-enabled deployments like topolvm - we only have 1 node currently
+  ha_replica_count: "2" # for ha-enabled deployments like topolvm - we only have 1 node currently
   storageclass_rwx_name: topolvm-provisioner-thin
   storageclass_rwx_accessMode: ReadWriteOnce
   storageclass_rwx_volumeSnapshotClassName: topolvm-provisioner-thin
@@ -42,9 +42,9 @@ data:
   nazgul_zurg_cpu_requests: 7200m
 
   # these provide sane limits for the streamers
-  hobbit_streamer_cpu_limits: "1"
+  hobbit_streamer_cpu_limits: "2"
   hobbit_streamer_ram_limits: "3Gi"
-  ranger_streamer_cpu_limits: "2"
+  ranger_streamer_cpu_limits: "3"
   ranger_streamer_ram_limits: "4Gi"
   halfling_streamer_cpu_limits: "4"
   halfling_streamer_ram_limits: "8Gi"

@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zilean.${dns_domain}
+  namespace: zilean-public
+spec:
+  routes:
+    - match: Host(`zilean.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: zilean-public
+          kind: Service
+          port: 8181
+      # middlewares:  
+      #   - name: rate-limit-zilean
