@@ -37,3 +37,4 @@ data:
   storageclass_rwo_name: ceph-block-ssd
   storageclass_rwo_accessMode: ReadWriteOnce  
   storageclass_rwo_volumeSnapshotClassName: ceph-block
+  cilium_hubble_enabled: "true"
