@@ -15,11 +15,7 @@ spec:
     - apiVersion: apps/v1
       kind: Deployment
       name: librespeed-frontend
-      namespace: librespeed 
-    - apiVersion: apps/v1
-      kind: StatefulSet
-      name: mysql
-      namespace: librespeed      
+      namespace: librespeed     
     - apiVersion: apps/v1
       kind: DaemonSet
       name: librespeed-backend
