@@ -20,7 +20,7 @@ spec:
       # -- image repository
       repository: ghcr.io/geek-cookbook/error-pages
       # -- image tag
-      tag: v2.26.0@sha256:0ad29fa4b86d265b4820398c84d94175cfbf56066ac88a23c4644bbd23ca8481
+      tag: v2.27.0@sha256:0c58b2e6eed5215080d93a1a86368a78d771eace6724d8ec33ef5194d07ca70b
       # -- image pull policy
       pullPolicy: Always
 
