@@ -88,19 +88,19 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp                
-      # config:
-      #   enabled: true
-      #   mountPath: /app/data
-      #   type: emptyDir
-      #   volumeSpec:
-      #     medium: Memory
       config:
         enabled: true
-        type: custom
         mountPath: /app/data
+        type: emptyDir
         volumeSpec:
-          persistentVolumeClaim:
-            claimName: comet          
+          medium: Memory
+      # config:
+      #   enabled: true
+      #   type: custom
+      #   mountPath: /app/data
+      #   volumeSpec:
+      #     persistentVolumeClaim:
+      #       claimName: comet          
     addons:
       vpn:
         enabled: true # in case we ever need it
