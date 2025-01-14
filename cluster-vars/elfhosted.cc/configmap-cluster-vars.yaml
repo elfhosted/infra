@@ -34,6 +34,7 @@ data:
   storageclass_rwo_name: topolvm-provisioner-thin
   storageclass_rwo_accessMode: ReadWriteOnce
   storageclass_rwo_volumeSnapshotClassName: topolvm-provisioner-thin
+  cilium_hubble_enabled: "false"
 
   # These apportion semi-dedicated resources across the node types
   hobbit_zurg_cpu_requests: 900m

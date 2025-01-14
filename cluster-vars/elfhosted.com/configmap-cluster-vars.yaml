@@ -37,6 +37,7 @@ data:
   storageclass_rwo_name: ceph-block-ssd
   storageclass_rwo_accessMode: ReadWriteOnce  
   storageclass_rwo_volumeSnapshotClassName: ceph-block
+  cilium_hubble_enabled: "true"
 
   # These apportion semi-dedicated resources across the node types
   hobbit_zurg_cpu_requests: 1800m
