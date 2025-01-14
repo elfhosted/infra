@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: infra
   dependsOn:
-  - name: opolvm--topolvm-system 
+  - name: topolvm--topolvm-system 
   healthChecks:
     - apiVersion: batch/v1
       kind: CronJob

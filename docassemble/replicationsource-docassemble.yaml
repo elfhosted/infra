@@ -26,7 +26,7 @@ spec:
     retain:
       daily: 7
     copyMethod: Snapshot
-    storageClassName: opolvm-provisioner-thin
+    storageClassName: topolvm-provisioner-thin
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
