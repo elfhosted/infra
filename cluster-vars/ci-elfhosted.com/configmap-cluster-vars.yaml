@@ -21,6 +21,7 @@ data:
   prometheus_pvc_storage: 6Gi
   minio_storage: '10Gi'
   thanos_storage: '10Gi'
+  proxy_wildcard_dns: 'false'
   dashboard_background: development.jpg
   hetzner_auction_hunter_cron: 0 0 31 2 * # don't automatically run
   k3s_version: v1.28.15+k3s1
