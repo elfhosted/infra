@@ -6,4 +6,4 @@ metadata:
   namespace: traefik
 spec:
   compress:
-    enabled: false
+    disabled: true # TRAEFIKFIXME
