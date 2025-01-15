@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: gitea
-      version: 10.1.4
+      version: 10.6.x
       sourceRef:
         kind: HelmRepository
         name: gitea
@@ -37,6 +37,9 @@ spec:
       # - ip: 192.168.137.2
       #   hostnames:
       #   - example.com
+
+    ## @param namespace An explicit namespace to deploy gitea into. Defaults to the release namespace if not specified
+    namespace: ""
 
     ## @param replicaCount number of replicas for the deployment
     replicaCount: 1
@@ -125,6 +128,7 @@ spec:
       ## @param service.http.loadBalancerSourceRanges Source range filter for http loadbalancer
       ## @param service.http.annotations HTTP service annotations
       ## @param service.http.labels HTTP service additional labels
+      ## @param service.http.loadBalancerClass Loadbalancer class
       http:
         type: ClusterIP
         port: 3000
@@ -138,6 +142,7 @@ spec:
         loadBalancerSourceRanges: []
         annotations: {}
         labels: {}
+        loadBalancerClass:
       ## @param service.ssh.type Kubernetes service type for ssh traffic
       ## @param service.ssh.port Port number for ssh traffic
       ## @param service.ssh.clusterIP ClusterIP setting for ssh autosetup for deployment is None
@@ -151,6 +156,7 @@ spec:
       ## @param service.ssh.loadBalancerSourceRanges Source range filter for ssh loadbalancer
       ## @param service.ssh.annotations SSH service annotations
       ## @param service.ssh.labels SSH service additional labels
+      ## @param service.ssh.loadBalancerClass Loadbalancer class
       ssh:
         type: ClusterIP
         port: 22
@@ -165,6 +171,7 @@ spec:
         loadBalancerSourceRanges: []
         annotations: {}
         labels: {}
+        loadBalancerClass:
 
     ## @section Ingress
     ## @param ingress.enabled Enable ingress
@@ -177,21 +184,18 @@ spec:
     ## @extra ingress.apiVersion Specify APIVersion of ingress object. Mostly would only be used for argocd.
     ingress:
       enabled: false
-      className: nginx
-      # className:
+      # className: nginx
+      className:
       annotations:
         {}
         # kubernetes.io/ingress.class: nginx
         # kubernetes.io/tls-acme: "true"
       hosts:
-        - host: git.${dns_domain}
+        - host: git.example.com
           paths:
             - path: /
               pathType: Prefix
-      tls: 
-       - secretName: chart-example-tls # dummy, doesn't matter, just creates ROOT_URL
-         hosts:
-           - git.${dns_domain}
+      tls: []
       #  - secretName: chart-example-tls
       #    hosts:
       #      - git.example.com
@@ -261,8 +265,8 @@ spec:
     ## @param serviceAccount.annotations Custom annotations for the ServiceAccount
     ## @param serviceAccount.labels Custom labels for the ServiceAccount
     serviceAccount:
-      create: true
-      name: "gitea-sa"
+      create: false
+      name: ""
       automountServiceAccountToken: false
       imagePullSecrets: []
       # - name: private-registry-access
@@ -291,11 +295,17 @@ spec:
       accessModes:
         - ReadWriteOnce
       labels: {}
-      storageClass: ceph-block-ssd
+      storageClass:
       subPath:
       volumeName: ""
       annotations:
         helm.sh/resource-policy: keep
+
+    ## @param extraContainers Additional sidecar containers to run in the pod
+    extraContainers: []
+    #  - name: sidecar-bob
+    #    image: busybox
+    #    command: [/bin/sh, -c, 'echo "Hello world"; sleep 86400']
 
     ## @param extraVolumes Additional volumes to mount to the Gitea deployment
     extraVolumes: []
@@ -356,6 +366,102 @@ spec:
       #   -----END PGP PRIVATE KEY BLOCK-----
       existingSecret: ""
 
+    # Configure Gitea Actions
+    # - must enable persistence if the job is enabled
+    ## @section Gitea Actions
+    #
+    ## @param actions.enabled Create an act runner StatefulSet.
+    ## @param actions.init.image.repository The image used for the init containers
+    ## @param actions.init.image.tag The image tag used for the init containers
+    ## @param actions.statefulset.annotations Act runner annotations
+    ## @param actions.statefulset.labels Act runner labels
+    ## @param actions.statefulset.resources Act runner resources
+    ## @param actions.statefulset.nodeSelector NodeSelector for the statefulset
+    ## @param actions.statefulset.tolerations Tolerations for the statefulset
+    ## @param actions.statefulset.affinity Affinity for the statefulset
+    ## @param actions.statefulset.actRunner.repository The Gitea act runner image
+    ## @param actions.statefulset.actRunner.tag The Gitea act runner tag
+    ## @param actions.statefulset.actRunner.pullPolicy The Gitea act runner pullPolicy
+    ## @param actions.statefulset.actRunner.config [default: Too complex. See values.yaml] Act runner custom configuration. See [Act Runner documentation](https://docs.gitea.com/usage/actions/act-runner#configuration) for details.
+    ## @param actions.statefulset.dind.repository The Docker-in-Docker image
+    ## @param actions.statefulset.dind.tag The Docker-in-Docker image tag
+    ## @param actions.statefulset.dind.pullPolicy The Docker-in-Docker pullPolicy
+    ## @param actions.statefulset.dind.extraEnvs Allows adding custom environment variables, such as `DOCKER_IPTABLES_LEGACY`
+    ## @param actions.provisioning.enabled Create a job that will create and save the token in a Kubernetes Secret
+    ## @param actions.provisioning.annotations Job's annotations
+    ## @param actions.provisioning.labels Job's labels
+    ## @param actions.provisioning.resources Job's resources
+    ## @param actions.provisioning.nodeSelector NodeSelector for the job
+    ## @param actions.provisioning.tolerations Tolerations for the job
+    ## @param actions.provisioning.affinity Affinity for the job
+    ## @param actions.provisioning.ttlSecondsAfterFinished ttl for the job after finished in order to allow helm to properly recognize that the job completed
+    ## @param actions.provisioning.publish.repository The image that can create the secret via kubectl
+    ## @param actions.provisioning.publish.tag The publish image tag that can create the secret
+    ## @param actions.provisioning.publish.pullPolicy The publish image pullPolicy that can create the secret
+    ## @param actions.existingSecret Secret that contains the token
+    ## @param actions.existingSecretKey Secret key
+    actions:
+      enabled: false
+      statefulset:
+        annotations: {}
+        labels: {}
+        resources: {}
+        nodeSelector: {}
+        tolerations: []
+        affinity: {}
+
+        actRunner:
+          repository: gitea/act_runner
+          tag: 0.2.11
+          pullPolicy: IfNotPresent
+
+          config: |
+            log:
+              level: debug
+            cache:
+              enabled: false
+            runner:
+              labels:
+                - "ubuntu-latest"
+
+        dind:
+          repository: docker
+          tag: 25.0.2-dind
+          pullPolicy: IfNotPresent
+          # If the container keeps crashing in your environment, you might have to add the `DOCKER_IPTABLES_LEGACY` environment variable.
+          # See https://github.com/docker-library/docker/issues/463#issuecomment-1881909456
+          extraEnvs: []
+            #  - name: "DOCKER_IPTABLES_LEGACY"
+            #    value: "1"
+
+      init:
+        image:
+          repository: busybox
+          # Overrides the image tag whose default is the chart appVersion.
+          tag: "1.36.1"
+
+      provisioning:
+        enabled: false
+
+        annotations: {}
+        labels: {}
+        resources: {}
+        nodeSelector: {}
+        tolerations: []
+        affinity: {}
+
+        publish:
+          repository: bitnami/kubectl
+          tag: 1.29.0
+          pullPolicy: IfNotPresent
+
+        ttlSecondsAfterFinished: 300
+
+      ## Specify an existing token secret
+      ##
+      existingSecret: ""
+      existingSecretKey: ""
+
     ## @section Gitea
     #
     gitea:
@@ -363,6 +469,7 @@ spec:
       ## @param gitea.admin.existingSecret Use an existing secret to store admin user credentials
       ## @param gitea.admin.password Password for the Gitea admin user
       ## @param gitea.admin.email Email for the Gitea admin user
+      ## @param gitea.admin.passwordMode Mode for how to set/update the admin user password. Options are: initialOnlyNoReset, initialOnlyRequireReset, and keepUpdated
       admin:
         existingSecret: gitea-admin-credentials
         # existingSecret:
@@ -371,13 +478,23 @@ spec:
         # email: "gitea@local.domain"
 
       ## @param gitea.metrics.enabled Enable Gitea metrics
-      ## @param gitea.metrics.serviceMonitor.enabled Enable Gitea metrics service monitor
+      ## @param gitea.metrics.serviceMonitor.enabled Enable Gitea metrics service monitor. Requires, that `gitea.metrics.enabled` is also set to true, to enable metrics generally.
+      ## @param gitea.metrics.serviceMonitor.interval Interval at which metrics should be scraped. If not specified Prometheus' global scrape interval is used.
+      ## @param gitea.metrics.serviceMonitor.relabelings RelabelConfigs to apply to samples before scraping.
+      ## @param gitea.metrics.serviceMonitor.scheme HTTP scheme to use for scraping. For example `http` or `https`. Default is http.
+      ## @param gitea.metrics.serviceMonitor.scrapeTimeout Timeout after which the scrape is ended. If not specified, global Prometheus scrape timeout is used.
+      ## @param gitea.metrics.serviceMonitor.tlsConfig TLS configuration to use when scraping the metric endpoint by Prometheus.
       metrics:
-        enabled: true
+        enabled: false
         serviceMonitor:
           enabled: false
           #  additionalLabels:
           #    prometheus-release: prom1
+          interval: ""
+          relabelings: []
+          scheme: ""
+          scrapeTimeout: ""
+          tlsConfig: {}
 
       ## @param gitea.ldap LDAP configuration
       ldap:
@@ -519,16 +636,40 @@ spec:
         failureThreshold: 10
 
     ## @section redis-cluster
-    ## @param redis-cluster.enabled Enable redis
+    ## @param redis-cluster.enabled Enable redis cluster
+    # ⚠️ The redis charts do not work well with special characters in the password (<https://gitea.com/gitea/helm-chart/issues/690>).
+    # Consider omitting such or open an issue in the Bitnami repo and let us know once this got fixed.
     ## @param redis-cluster.usePassword Whether to use password authentication
     ## @param redis-cluster.cluster.nodes Number of redis cluster master nodes
     ## @param redis-cluster.cluster.replicas Number of redis cluster master node replicas
+    ## @descriptionStart
+    ## Redis cluster and [Redis](#redis) cannot be enabled at the same time.
+    ## @descriptionEnd
     redis-cluster:
       enabled: false
       usePassword: false
       cluster:
         nodes: 3 # default: 6
-        replicas: 2 # default: 1
+        replicas: 0 # default: 1
+
+    ## @section redis
+    ## @param redis.enabled Enable redis standalone or replicated
+    ## @param redis.architecture Whether to use standalone or replication
+    # ⚠️ The redis charts do not work well with special characters in the password (<https://gitea.com/gitea/helm-chart/issues/690>).
+    # Consider omitting such or open an issue in the Bitnami repo and let us know once this got fixed.
+    ## @param redis.global.redis.password Required password
+    ## @param redis.master.count Number of Redis master instances to deploy
+    ## @descriptionStart
+    ## Redis and [Redis cluster](#redis-cluster) cannot be enabled at the same time.
+    ## @descriptionEnd
+    redis:
+      enabled: false
+      architecture: standalone
+      global:
+        redis:
+          password: changeme
+      master:
+        count: 1
 
     ## @section PostgreSQL HA
     #
@@ -541,7 +682,7 @@ spec:
     ## @param postgresql-ha.postgresql.postgresPassword postgres Password
     ## @param postgresql-ha.pgpool.adminPassword pgpool adminPassword
     ## @param postgresql-ha.service.ports.postgresql PostgreSQL service port (overrides `service.ports.postgresql`)
-    ## @param postgresql-ha.primary.persistence.size PVC Storage Request for PostgreSQL HA volume
+    ## @param postgresql-ha.persistence.size PVC Storage Request for PostgreSQL HA volume
     postgresql-ha:
       global:
         postgresql:
@@ -558,9 +699,8 @@ spec:
       service:
         ports:
           postgresql: 5432
-      primary:
-        persistence:
-          size: 10Gi
+      persistence:
+        size: 10Gi
 
     ## @section PostgreSQL
     #
