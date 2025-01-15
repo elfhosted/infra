@@ -3124,7 +3124,9 @@ spec:
       ## Configuration for Prometheus service
       ##
       service:
-        annotations: {}
+        annotations:
+          tailscale.com/expose: "true"
+          tailscale.com/hostname: prometheus-kube-prometheus-stack-${tailscale_suffix}        
         labels: {}
         clusterIP: ""
 
@@ -3538,7 +3540,7 @@ spec:
 
         ## enable --web.enable-remote-write-receiver flag on prometheus-server
         ##
-        enableRemoteWriteReceiver: false
+        enableRemoteWriteReceiver: true
 
         ## Name of the external label used to denote replica name
         ##
