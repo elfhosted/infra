@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.14.0
+      version: 1.16.5
       sourceRef:
         kind: HelmRepository
         name: cilium
@@ -161,7 +161,7 @@ spec:
     image:
       override: ~
       repository: "quay.io/cilium/cilium"
-      tag: "v1.14.0"
+      tag: "v1.16.5"
       pullPolicy: "IfNotPresent"
       # cilium-digest
       digest: ""
@@ -947,7 +947,7 @@ spec:
       image:
         override: ~
         repository: "quay.io/cilium/certgen"
-        tag: "v0.1.8"
+        tag: "v0.2.2"
         digest: "sha256:4a456552a5f192992a6edcec2febb1c54870d665173a33dc7d876129b199ddbd"
         useDigest: true
         pullPolicy: "IfNotPresent"
@@ -1129,7 +1129,7 @@ spec:
         image:
           override: ~
           repository: "quay.io/cilium/hubble-relay"
-          tag: "v1.14.0"
+          tag: "v1.16.5"
           # hubble-relay-digest
           digest: ""
           useDigest: false
@@ -1351,7 +1351,7 @@ spec:
           image:
             override: ~
             repository: "quay.io/cilium/hubble-ui-backend"
-            tag: "v0.12.0"
+            tag: "v0.13.1"
             digest: "sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e"
             useDigest: true
             pullPolicy: "IfNotPresent"
@@ -1382,7 +1382,7 @@ spec:
           image:
             override: ~
             repository: "quay.io/cilium/hubble-ui"
-            tag: "v0.12.0"
+            tag: "v0.13.1"
             digest: "sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f"
             useDigest: true
             pullPolicy: "IfNotPresent"
@@ -2251,7 +2251,7 @@ spec:
       image:
         override: ~
         repository: "quay.io/cilium/operator"
-        tag: "v1.14.0"
+        tag: "v1.16.5"
         # operator-generic-digest
         genericDigest: ""
         # operator-azure-digest
@@ -2538,7 +2538,7 @@ spec:
       image:
         override: ~
         repository: "quay.io/cilium/cilium"
-        tag: "v1.14.0"
+        tag: "v1.16.5"
         # cilium-digest
         digest: ""
         useDigest: false
@@ -2688,7 +2688,7 @@ spec:
         image:
           override: ~
           repository: "quay.io/cilium/clustermesh-apiserver"
-          tag: "v1.14.0"
+          tag: "v1.16.5"
           # clustermesh-apiserver-digest
           digest: ""
           useDigest: false
@@ -2699,7 +2699,7 @@ spec:
           image:
             override: ~
             repository: "quay.io/coreos/etcd"
-            tag: "v3.5.4"
+            tag: "v3.5.17"
             digest: "sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3"
             useDigest: true
             pullPolicy: "IfNotPresent"
@@ -2735,7 +2735,7 @@ spec:
           image:
             override: ~
             repository: "quay.io/cilium/kvstoremesh"
-            tag: "v1.14.0"
+            tag: "v1.14.18"
             # kvstoremesh-digest
             digest: ""
             useDigest: false
@@ -3127,7 +3127,7 @@ spec:
             # SPIRE agent configuration
             agent:
               # -- SPIRE agent image
-              image: ghcr.io/spiffe/spire-agent:1.6.3@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823
+              image: ghcr.io/spiffe/spire-agent:1.11.1@sha256:3468d6c06da4a36c2b85f61c116935cc32dfdeec669ee7b09ad4f49566cea881
               # -- SPIRE agent service account
               serviceAccount:
                 create: true
@@ -3140,7 +3140,7 @@ spec:
               skipKubeletVerification: true
             server:
               # -- SPIRE server image
-              image: ghcr.io/spiffe/spire-server:1.6.3@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f
+              image: ghcr.io/spiffe/spire-server:1.11.1@sha256:f48d3d766d862de9e7232544737be0aa9d2ece600567fdcaf6439167ca9cef5f
               # -- SPIRE server service account
               serviceAccount:
                 create: true
