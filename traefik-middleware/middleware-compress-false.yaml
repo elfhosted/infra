@@ -1,9 +1,0 @@
-# We use this to avoid compression on the speedtests
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: compress-false
-  namespace: traefik
-spec:
-  compress:
-    disabled: true # TRAEFIKFIXME
