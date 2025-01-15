@@ -265,8 +265,8 @@ spec:
     ## @param serviceAccount.annotations Custom annotations for the ServiceAccount
     ## @param serviceAccount.labels Custom labels for the ServiceAccount
     serviceAccount:
-      create: false
-      name: ""
+      create: true
+      name: "gitea-sa"
       automountServiceAccountToken: false
       imagePullSecrets: []
       # - name: private-registry-access
