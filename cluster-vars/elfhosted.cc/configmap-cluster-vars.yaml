@@ -18,6 +18,7 @@ data:
   prometheus_retention: "4d"   # enough to chart a month's progress with some headroom
   prometheus_pvc_storage: 6Gi
   minio_storage: '100Gi'
+  thanos_storage: '50Gi'
   rook_ceph_osd_ram: 2Gi
   rook_ceph_mds_ram: 1Gi
   ceph_ec_data_chunks: "1"
