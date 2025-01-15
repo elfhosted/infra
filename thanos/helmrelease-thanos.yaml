@@ -2222,7 +2222,7 @@ spec:
           - ReadWriteOnce
         ## @param compactor.persistence.size PVC Storage Request for data volume
         ##
-        size: 50Gi
+        size: ${thanos_storage}
         ## @param compactor.persistence.labels Labels for the PVC
         ##
         labels: {}

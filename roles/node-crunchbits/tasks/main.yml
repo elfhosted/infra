@@ -30,11 +30,11 @@
     content: |
       bonding
 
-- name: Set i915.disable_display=1 to avoid EDID spam
+- name: Set i915.disable_display=1 to avoid EDID spam, disable cstates
   ansible.builtin.lineinfile:
     path: /etc/default/grub
     regexp: '^GRUB_CMDLINE_LINUX='
-    line: 'GRUB_CMDLINE_LINUX="i915.disable_display=1"'
+    line: 'GRUB_CMDLINE_LINUX="i915.disable_display=1 intel_idle.max_cstate=1 processor.max_cstate=1 intel_pstate=disable"'
   register: grub_config_changed
 
 - name: Update GRUB
@@ -60,10 +60,11 @@
 - name: flush handlers now if necessary
   meta: flush_handlers
 
-- name: Reboot for grub fix
-  ansible.builtin.reboot:
-    msg: "Rebooting due to GRUB_CMDLINE_LINUX change"
-  when: grub_config_changed.changed
+# this can be disruptive, so disabled for now
+# - name: Reboot for grub fix
+#   ansible.builtin.reboot:
+#     msg: "Rebooting due to GRUB_CMDLINE_LINUX change"
+#   when: grub_config_changed.changed
 
 - name: "Update /etc/hosts for k3s-servers"
   tags: hosts
@@ -226,6 +227,32 @@
   loop:
     - smartmon_metrics.sh
     - kill-unwanted-transcodes.sh
+
+- name: Set igb modprobe defaults
+  copy:
+    dest: /etc/modprobe.d/igb.conf
+    content: options igb InterruptThrottleRate=1,1,1,1 RSS=8 FlowControl=0 QueuePairs=4
+    mode: '0644'
+  
+- name: copy ethtool-config service
+  copy:
+    src: ethtool-config.service
+    dest: /etc/systemd/system/ethtool-config.service
+    mode: '0644'  
+
+- name: Reload systemd to apply new service
+  systemd:
+    daemon_reload: yes
+
+- name: Enable ethtool-config.service to start at boot
+  systemd:
+    name: ethtool-config.service
+    enabled: yes
+
+- name: Start ethtool-config.service
+  systemd:
+    name: ethtool-config.service
+    state: started    
 
 - name: Install smartmontools
   apt: pkg=smartmontools

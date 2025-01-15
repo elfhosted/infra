@@ -1,0 +1,17 @@
+[Unit]
+Description=Apply ethtool settings
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ethtool -K enp1s0f0 gro on gso on tso on rx on tx on sg on
+ExecStart=/usr/sbin/ethtool -G enp1s0f0 rx 4096 tx 4096
+ExecStart=/usr/sbin/ethtool -C enp1s0f0 rx-usecs 50
+ExecStart=/usr/sbin/ethtool -K enp1s0f1 gro on gso on tso on rx on tx on sg on
+ExecStart=/usr/sbin/ethtool -G enp1s0f1 rx 4096 tx 4096
+ExecStart=/usr/sbin/ethtool -C enp1s0f1 rx-usecs 50
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
