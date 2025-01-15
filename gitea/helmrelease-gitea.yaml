@@ -521,7 +521,7 @@ spec:
       #     key:
       #     secret:
           existingSecret: gitea-oauth-credentials
-          autoDiscoverUrl: "https://authentik.${dns_domain}/application/o/gitea/.well-known/openid-configuration"
+          autoDiscoverUrl: "https://authentik.infra.${dns_domain}/application/o/gitea/.well-known/openid-configuration"
           iconUrl: "https://goauthentik.io/img/icon.png"
           scopes: "email profile offline_access"
 
