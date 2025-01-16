@@ -19,10 +19,7 @@ data:
   prometheus_pvc_storage: 6Gi
   minio_storage: '100Gi'
   thanos_storage: '50Gi'
-  rook_ceph_osd_ram: 2Gi
-  rook_ceph_mds_ram: 1Gi
-  ceph_ec_data_chunks: "1"
-  ceph_ec_coding_chunks: "1"
+  proxy_wildcard_dns: 'true'
   dashboard_background: development.jpg
   k3s_version: v1.31.0+k3s1
   pod_cidr_v4: 10.8.0.0/15

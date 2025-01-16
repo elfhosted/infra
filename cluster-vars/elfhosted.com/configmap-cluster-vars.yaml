@@ -21,13 +21,10 @@ data:
   prometheus_pvc_storage: 500Gi
   minio_storage: '500Gi'
   thanos_storage: '50Gi'
-  rook_ceph_osd_ram: 6500Mi
-  rook_ceph_mds_ram: 12Gi
-  ceph_ec_data_chunks: "8"
-  ceph_ec_coding_chunks: "2"
+  proxy_wildcard_dns: 'true'
   dashboard_background: production.jpg  
   hetzner_auction_hunter_cron: 0 * * * * # run hourly
-  k3s_version: v1.28.4+k3s2
+  k3s_version: v1.28.15+k3s1
   pod_cidr_v4: 10.2.0.0/15
   service_cidr_v4: 10.43.0.0/16 # this is also the k3s default
   pod_cidr_v6: fd00::/104

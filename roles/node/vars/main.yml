@@ -21,7 +21,7 @@ sysctl_config:
   net.core.wmem_default: 16777216
 
   net.ipv4.tcp_tw_reuse: 1
-   net.ipv4.tcp_keepalive_time: 300
+  net.ipv4.tcp_keepalive_time: 300
 
   net.ipv4.tcp_window_scaling: 1
   net.ipv4.tcp_mtu_probing: 1
