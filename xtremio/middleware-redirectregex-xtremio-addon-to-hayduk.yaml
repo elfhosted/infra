@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-xtremio-addon-to-hayduk
+  namespace: xtremio
+spec:
+  redirectRegex:
+    regex: ^https://xtremio.elfhosted.com(.*)
+    replacement: https://youriptv.hayd.uk${1}
