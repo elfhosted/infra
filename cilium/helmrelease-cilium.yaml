@@ -1149,11 +1149,11 @@ spec:
           # -- Interval for scrape metrics.
           interval: "10s"
           # -- Relabeling configs for the ServiceMonitor hubble
-          relabelings:
-            - sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: node
-              replacement: ${1}
+          # relabelings:
+          #   - sourceLabels:
+          #       - __meta_kubernetes_pod_node_name
+          #     targetLabel: node
+          #     replacement: ${1}
           # @schema
           # type: [null, array]
           # @schema
@@ -2115,11 +2115,11 @@ spec:
         # service monitors configured.
         # namespace: ""
         # -- Relabeling configs for the ServiceMonitor cilium-agent
-        relabelings:
-          - sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: node
-            replacement: ${1}
+        # relabelings:
+        #   - sourceLabels:
+        #       - __meta_kubernetes_pod_node_name
+        #     targetLabel: node
+        #     replacement: ${1}
         # @schema
         # type: [null, array]
         # @schema
@@ -2378,11 +2378,11 @@ spec:
           # namespace: ""
           # -- Relabeling configs for the ServiceMonitor cilium-envoy
           # or for cilium-agent with Envoy configured.
-          relabelings:
-            - sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: node
-              replacement: ${1}
+          # relabelings:
+          #   - sourceLabels:
+          #       - __meta_kubernetes_pod_node_name
+          #     targetLabel: node
+          #     replacement: ${1}
           # @schema
           # type: [null, array]
           # @schema
