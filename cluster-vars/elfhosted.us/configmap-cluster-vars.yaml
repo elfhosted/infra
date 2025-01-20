@@ -18,10 +18,6 @@ data:
   prometheus_retention: "4d"   # enough to chart a month's progress with some headroom
   prometheus_pvc_storage: 6Gi
   minio_storage: '100Gi'
-  rook_ceph_osd_ram: 2Gi
-  rook_ceph_mds_ram: 1Gi
-  ceph_ec_data_chunks: "1"
-  ceph_ec_coding_chunks: "1"
   dashboard_background: development.jpg
   k3s_version: v1.28.4+k3s2
   pod_cidr_v4: 10.6.0.0/15

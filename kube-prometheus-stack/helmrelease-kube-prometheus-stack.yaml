@@ -3124,9 +3124,7 @@ spec:
       ## Configuration for Prometheus service
       ##
       service:
-        annotations:
-          tailscale.com/expose: "true"
-          tailscale.com/hostname: prometheus-kube-prometheus-stack-${tailscale_suffix}        
+        annotations:     
         labels: {}
         clusterIP: ""
 

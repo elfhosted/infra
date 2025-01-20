@@ -8,3 +8,6 @@ data:
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
   DISABLE_TORRENTIO: "true"
   DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
+  ADDON_NAME: AIOStreams | ElfHosted
+  MAX_ADDONS: "10"
+  DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"

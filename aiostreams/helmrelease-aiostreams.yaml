@@ -20,7 +20,7 @@ spec:
       nameOverride: aiostreams
     image:
       repository: ghcr.io/elfhosted/aiostreams
-      tag: v1.7.1@sha256:05e6cf45937a90b1e0bad364c8b385e8281e06025bb9fa2935456a8ad5c3536c
+      tag: v1.8.6@sha256:b5710473a2f950b54ea49fac4061ccab478e7338d0ebc824af58f2d6f29477b8
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -32,7 +32,7 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       allowPrivilegeEscalation: false
-      runAsNonRoot: true
+      runAsNonRoot: false
       capabilities:
         drop:
         - ALL        
@@ -62,6 +62,12 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp        
+      shared:
+        enabled: true
+        mountPath: /shared
+        type: emptyDir
+        volumeSpec:
+          medium: Memory          
     envFrom:
     - secretRef:
         name: aiostreams-env    
@@ -85,3 +91,63 @@ spec:
         ports:
           http:
             port: 3000
+    initContainers:      
+      setup-warp:
+        image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+
+          cd /shared
+
+          # Create cloudflare account
+          wgcf register --accept-tos
+
+          # Create gluetun config
+          wgcf generate -p /shared/wg0.conf
+
+          # grab the values from the profile and put them into env vars for gluetun to consume
+          echo "export WIREGUARD_PRIVATE_KEY=$(grep PrivateKey /shared/wg0.conf | cut -f3 -d' ')" > /shared/env
+          echo "export WIREGUARD_PUBLIC_KEY=$(grep PublicKey /shared/wg0.conf | cut -f3 -d' ')" >> /shared/env
+          echo "export WIREGUARD_ADDRESSES=$(grep Address /shared/wg0.conf | grep '/32' | cut -f3 -d' ')" >> /shared/env
+
+          echo "export VPN_ENDPOINT_IP=$(dig +short dig +short engage.cloudflareclient.com)" >> /shared/env
+
+        volumeMounts:
+        - mountPath: /shared
+          name: shared
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: false    
+    addons:
+      vpn:
+        enabled: true # in case we ever need it
+        gluetun:
+          image:
+            repository: ghcr.io/elfhosted/gluetun
+            tag: 3.40.0@sha256:2ce9c1407bad9897f4269b3c7f53862befb52a25c712731c91ae05906d41358f
+        env:
+          FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
+          DNS_KEEP_NAMESERVER: "on"
+          HTTP_CONTROL_SERVER_PORT: "8000"
+          HTTP_CONTROL_SERVER_ADDRESS: ":8000"
+          VPN_TYPE: wireguard
+          VPN_SERVICE_PROVIDER: custom
+          FIREWALL_INPUT_PORTS: "3000"
+          WIREGUARD_MTU: "1280"
+          VPN_ENDPOINT_PORT: "2408"
+          DOT: "off"
+        securityContext:
+          runAsUser: 0
+          capabilities:
+            add:
+              - NET_ADMIN
+              - SYS_MODULE
+        config: # We have to set this to null so that we can override with our own config
+        volumeMounts:
+        - mountPath: /shared
+          name: shared

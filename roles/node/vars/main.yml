@@ -3,17 +3,31 @@ sysctl_config:
   fs.inotify.max_user_watches: 16777216  # Due to how streamers like to watch for fs changes
   fs.inotify.max_user_instances: 1024    # Due to how streamers like to watch for fs changes
 
-  # Lazily took these from https://discord.com/channels/396055506072109067/396055506663374849/1180940177322037359
+  net.ipv4.conf.all.rp_filter: 0
+  net.ipv4.conf.default.rp_filter: 0
+
+  fs.file-max: 1000000
+
   net.core.default_qdisc: fq
-  net.ipv4.tcp_congestion_control: bbr
-  # increase TCP max buffer size setable using setsockopt()
-  net.core.rmem_max: 67108864
-  net.core.wmem_max: 67108864
-  # increase Linux autotuning TCP buffer limit
-  net.ipv4.tcp_rmem: 8192 262144 67108864
-  net.ipv4.tcp_wmem: 4096 16384 67108864
+  net.ipv4.tcp_congestion_control: cubic
+
+  net.core.rmem_max: 16777216
+  net.core.wmem_max: 16777216
+
+  net.ipv4.tcp_rmem: 4096 16384 16777216
+  net.ipv4.tcp_wmem: 4096 16384 16777216
+
+  net.core.rmem_default: 16777216
+  net.core.wmem_default: 16777216
+
+  net.ipv4.tcp_tw_reuse: 1
+  net.ipv4.tcp_keepalive_time: 300
 
   net.ipv4.tcp_window_scaling: 1
   net.ipv4.tcp_mtu_probing: 1
   net.ipv4.tcp_fastopen: 3
   net.ipv4.tcp_slow_start_after_idle: 0  
+
+  net.core.netdev_budget: 600 # up to 600 packets per cycle
+  net.core.netdev_budget_usecs: 8000  # up to 8ms per cycle to process network packets. Default 2000
+  net.core.workqueue_unbound: 1

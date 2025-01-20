@@ -18,12 +18,10 @@ data:
   prometheus_retention: "4d"   # enough to chart a month's progress with some headroom
   prometheus_pvc_storage: 6Gi
   minio_storage: '100Gi'
-  rook_ceph_osd_ram: 2Gi
-  rook_ceph_mds_ram: 1Gi
-  ceph_ec_data_chunks: "1"
-  ceph_ec_coding_chunks: "1"
+  thanos_storage: '50Gi'
+  proxy_wildcard_dns: 'true'
   dashboard_background: development.jpg
-  k3s_version: v1.31.0+k3s1
+  k3s_version:  v1.31.4+k3s1
   pod_cidr_v4: 10.8.0.0/15
   service_cidr_v4: 10.44.0.0/16
   pod_cidr_v6: fd02::/104  
@@ -41,6 +39,10 @@ data:
   ranger_zurg_cpu_requests: 1800m
   halfling_zurg_cpu_requests: 3600m
   nazgul_zurg_cpu_requests: 7200m
+  hobbit_cpu_requests: 900m
+  ranger_cpu_requests: 1800m
+  halfling_cpu_requests: 3600m
+  nazgul_cpu_requests: 7200m  
 
   # these provide sane limits for the streamers
   hobbit_streamer_cpu_limits: "2"

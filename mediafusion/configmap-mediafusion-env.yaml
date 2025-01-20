@@ -21,6 +21,7 @@ data:
   logo_url: https://mediafusion.elfhosted.com/static/images/mediafusion-elfhosted-logo.png
   disable_streambtw_scheduler: "true"
   nowmetv_scheduler_crontab: "0 */4 * * *"
+  dlhd_scheduler_crontab: "0 0 * * 1"
   nowsports_scheduler_crontab: "0 */3 * * *"
   tamilultra_scheduler_crontab: "30 */3 * * *"
   db_max_connections: "30"

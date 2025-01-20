@@ -2,9 +2,9 @@
   become: no
   block:
 
-  - name: "wait for https://authentik.infra.{{ dns_domain }}/api/v2.0/health respond 200"
+  - name: "wait for https://authentik.infra.{{ dns_domain }} to be ready"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/-/health/ready/"
+      url: "https://authentik.infra.{{ dns_domain }}"
       method: GET
       status_code: 200
       validate_certs: false
