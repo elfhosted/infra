@@ -8,3 +8,4 @@ data:
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
   ADDON_NAME: AIOStreams | ElfHosted
   MAX_ADDONS: "10"
+  DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"
