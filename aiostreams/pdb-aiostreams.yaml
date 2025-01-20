@@ -1,10 +1,10 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: xtremio
-  namespace: xtremio
+  name: aiostreams
+  namespace: aiostreams
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: xtremio
+      app.kubernetes.io/name: aiostreams
   minAvailable: 1

@@ -1,0 +1,19 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: redirect-xtremio-to-hayduk
+  namespace: xtremio
+spec:
+  routes:
+  - kind: Rule
+    match: Host(`xtremio.elfhosted.com`)
+    middlewares:
+    - name: headers-add-cors-for-stremio
+      namespace: traefik        
+    - name: redirect-xtremio-addon-to-hayduk
+    services:
+    # just because we have to have a target service. This will never actually be used
+    - kind: Service
+      name: librespeed-frontend
+      namespace: librespeed
+      port: 8000
