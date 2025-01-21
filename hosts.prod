@@ -36,6 +36,8 @@ hansel20     ansible_host=10.0.42.40 cluster_nic=eno1.4000 # i7-8700
 
 
 # another doubleup
+gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 # 128GB
+gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 # 128GB
 gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
 gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
 gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
