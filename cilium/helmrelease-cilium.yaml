@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.16.5
+      version: 1.16.6
       sourceRef:
         kind: HelmRepository
         name: cilium
@@ -171,7 +171,7 @@ spec:
       # @schema
       override: ~
       repository: "quay.io/cilium/cilium"
-      tag: "v1.16.5"
+      tag: "v1.16.6"
       pullPolicy: "IfNotPresent"
       # cilium-digest
       digest: "sha256:758ca0793f5995bb938a2fa219dcce63dc0b3fa7fc4ce5cc851125281fb7361d"
@@ -1032,7 +1032,7 @@ spec:
         # @schema
         override: ~
         repository: "quay.io/cilium/certgen"
-        tag: "v0.2.0"
+        tag: "v0.2.3"
         digest: "sha256:169d93fd8f2f9009db3b9d5ccd37c2b753d0989e1e7cd8fe79f9160c459eef4f"
         useDigest: true
         pullPolicy: "IfNotPresent"
@@ -1343,7 +1343,7 @@ spec:
           # @schema
           override: ~
           repository: "quay.io/cilium/hubble-relay"
-          tag: "v1.16.5"
+          tag: "v1.16.6"
           # hubble-relay-digest
           digest: "sha256:6cfae1d1afa566ba941f03d4d7e141feddd05260e5cd0a1509aba1890a45ef00"
           useDigest: true
@@ -2510,7 +2510,7 @@ spec:
         # @schema
         override: ~
         repository: "quay.io/cilium/operator"
-        tag: "v1.16.5"
+        tag: "v1.16.6"
         # operator-generic-digest
         genericDigest: "sha256:f7884848483bbcd7b1e0ccfd34ba4546f258b460cb4b7e2f06a1bcc96ef88039"
         # operator-azure-digest
@@ -2794,7 +2794,7 @@ spec:
         # @schema
         override: ~
         repository: "quay.io/cilium/cilium"
-        tag: "v1.16.5"
+        tag: "v1.16.6"
         # cilium-digest
         digest: "sha256:758ca0793f5995bb938a2fa219dcce63dc0b3fa7fc4ce5cc851125281fb7361d"
         useDigest: true
@@ -2943,7 +2943,7 @@ spec:
           # @schema
           override: ~
           repository: "quay.io/cilium/clustermesh-apiserver"
-          tag: "v1.16.5"
+          tag: "v1.16.6"
           # clustermesh-apiserver-digest
           digest: "sha256:37a7fdbef806b78ef63df9f1a9828fdddbf548d1f0e43b8eb10a6bdc8fa03958"
           useDigest: true
@@ -3443,7 +3443,7 @@ spec:
               # @schema
               override: ~
               repository: "docker.io/library/busybox"
-              tag: "1.36.1"
+              tag: "1.37.0"
               digest: "sha256:d75b758a4fea99ffff4db799e16f853bbde8643671b5b72464a8ba94cbe3dbe3"
               useDigest: true
               pullPolicy: "IfNotPresent"
@@ -3456,7 +3456,7 @@ spec:
                 # @schema
                 override: ~
                 repository: "ghcr.io/spiffe/spire-agent"
-                tag: "1.9.6"
+                tag: "1.11.1"
                 digest: "sha256:5106ac601272a88684db14daf7f54b9a45f31f77bb16a906bd5e87756ee7b97c"
                 useDigest: true
                 pullPolicy: "IfNotPresent"
@@ -3507,7 +3507,7 @@ spec:
                 # @schema
                 override: ~
                 repository: "ghcr.io/spiffe/spire-server"
-                tag: "1.9.6"
+                tag: "1.11.1"
                 digest: "sha256:59a0b92b39773515e25e68a46c40d3b931b9c1860bc445a79ceb45a805cab8b4"
                 useDigest: true
                 pullPolicy: "IfNotPresent"
