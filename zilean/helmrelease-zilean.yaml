@@ -23,7 +23,7 @@ spec:
       name: zilean
     image:
       repository: ghcr.io/elfhosted/zilean
-      tag: v3.3.3@sha256:4f9a33554180a14f3d267ae44983f8b3b3cad8ffe1e183a757a6af34f74c3469
+      tag: v3.3.4@sha256:25cda5946b3a481f4a68cdf766fcb7518bc8cafc4077eeecadcdbb7419609f81
     securityContext:
       seccompProfile:
         type: RuntimeDefault
