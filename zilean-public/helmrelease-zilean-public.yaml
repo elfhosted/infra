@@ -20,7 +20,7 @@ spec:
       nameOverride: zilean-public
     image:
       repository: ghcr.io/elfhosted/zilean
-      tag: v3.4.0@sha256:99d6c97d8e85d46c802e6ad4e9f1aed45b58116af8b5a1ed49b3eadf8ce289f8
+      tag: v3.4.0@sha256:250ea5d60f6302608d3d0ed96456b273ea3462785fcac3e8d50fbd504235b99f
     securityContext:
       seccompProfile:
         type: RuntimeDefault
