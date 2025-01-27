@@ -20,7 +20,7 @@ spec:
       nameOverride: discussio
     image:
       repository: ghcr.io/elfhosted/discussio
-      tag: rolling@sha256:e0138581223217bb3df75577ae7e908a69e84f501753f1f5d9f54c6137d843ad
+      tag: rolling@sha256:14336a614ab9e6b1b70b19add7d26db3c1c04474f1f9c8afc221a347f29e724f
     securityContext:
       seccompProfile:
         type: RuntimeDefault
