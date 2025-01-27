@@ -31,7 +31,8 @@ data:
         "Imdb": {
           "EnableImportMatching": true,
           "EnableEndpoint": true,
-          "MinimumScoreMatch": 0.85
+          "MinimumScoreMatch": 0.85,
+          "UseLucene": true
         },
         "Ingestion": {
           "ZurgInstances": [
