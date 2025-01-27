@@ -22,7 +22,7 @@ spec:
       configmap.reloader.stakater.com/reload: "stremio-jackett-env"
     image:
       repository: ghcr.io/elfhosted/stremio-jackett
-      tag: v4.2.3@sha256:7b5353dd24bd45e30dbaca483815f8172420bd15fcdf4794e113cc6450f84b2c
+      tag: v4.2.3@sha256:ace8ef39d84a6c5d566cfc1233df9f567acdd250b01c8acdc381ba243d8f0239
     securityContext:
       seccompProfile:
         type: RuntimeDefault
