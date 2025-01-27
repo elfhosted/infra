@@ -828,6 +828,7 @@ spec:
       ##
       annotations:
         tailscale.com/expose: "true"
+        tailscale.com/hostname: nginx-ingress-controller-${tailscale_suffix}
       ## @param service.labels Labels for controller service
       ##
       labels: {}
