@@ -11,6 +11,11 @@ spec:
         - {}
 
     # Allow from Traefik to exposed port only
+    - toPorts:
+        - ports:
+            - port: "8888"
+
+    # Allow from Traefik to exposed port only
     - fromEndpoints:
         - matchLabels:
             app.kubernetes.io/name: traefik
