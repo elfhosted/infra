@@ -20,7 +20,7 @@ spec:
       nameOverride: warpproxy
     image:
       repository: ghcr.io/elfhosted/gluetun
-      tag: 3.40.0@sha256:2ce9c1407bad9897f4269b3c7f53862befb52a25c712731c91ae05906d41358f
+      tag: 3.40.0@sha256:897e3dc0945a104ba087af36026a8bd365a1c1d4865b3a111a2fbdad7e6b9729
     priorityClassName: cluster-normal
     securityContext:
       runAsUser: 0
