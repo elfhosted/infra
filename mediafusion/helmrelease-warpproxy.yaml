@@ -56,20 +56,20 @@ spec:
         ports:
           http:
             port: 8888
-  probes:
-    liveness:
-      custom: true
-      enabled: true
-      spec:
-        failureThreshold: 5
-        exec:
-          command:
-          - /bin/bash
-          - -c
-          - curl -x http://localhost:8888 -s https://docs.elfhosted.com/ | grep ElfHosted
-        initialDelaySeconds: 30
-        periodSeconds: 10
-        timeoutSeconds: 10            
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - curl -x http://localhost:8888 -s https://docs.elfhosted.com/ | grep ElfHosted
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10            
     env:
       VPN_TYPE: wireguard
       VPN_SERVICE_PROVIDER: custom
