@@ -32,7 +32,7 @@ spec:
     securityContext:
       seccompProfile:
         type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      readOnlyRootFilesystem: false
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -110,3 +110,5 @@ spec:
           subPath: tinyproxy.conf
         - mountPath: /shared
           name: shared
+        env:
+          WAIT_FOR_VPN: "true" 
