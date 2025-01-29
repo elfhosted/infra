@@ -64,7 +64,7 @@ spec:
           failureThreshold: 5
           exec:
             command:
-            - /bin/bash
+            - /bin/ash
             - -c
             - curl -x http://localhost:8888 -s https://docs.elfhosted.com/ | grep ElfHosted
           initialDelaySeconds: 30
