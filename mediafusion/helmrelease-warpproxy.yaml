@@ -77,6 +77,7 @@ spec:
       VPN_ENDPOINT_PORT: "2408"
       HTTPPROXY: "on"
       FIREWALL_INPUT_PORTS: "8888"
+      DOT: "off"
     initContainers:      
       setup-warp:
         image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
