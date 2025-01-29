@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elfhosted-internal
+  namespace: jackettio
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: elfhosted-internal-jackettio-${tailscale_suffix}
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 4000
+  selector:
+    app.kubernetes.io/name: jackettio
+  sessionAffinity: None
+  type: ClusterIP
