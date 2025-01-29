@@ -87,26 +87,26 @@ spec:
     envFrom:
     - secretRef:
         name: piaproxy-vpn
-  probes:
-    liveness:
-      custom: true
-      enabled: true
-      spec:
-        failureThreshold: 5
-        exec:
-          command:
-          - /bin/bash
-          - -c
-          - curl -x http://localhost:8888 -s https://docs.elfhosted.com/ | grep ElfHosted
-        initialDelaySeconds: 30
-        periodSeconds: 10
-        timeoutSeconds: 10
-  additionalContainers:
-    tinyproxy:
-      image: ghcr.io/elfhosted/tinyproxy:v1.4.3@sha256:9370be1434e80f8ac7d3a24d9c19335742b2c74ba15129dcdc166bb0dd3c9098
-      volumeMounts:
-      - mountPath: /etc/tinyproxy/tinyproxy.conf
-        name: tinyproxy-conf
-        subPath: tinyproxy.conf
-      - mountPath: /shared
-        name: shared
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - curl -x http://localhost:8888 -s https://docs.elfhosted.com/ | grep ElfHosted
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+    additionalContainers:
+      tinyproxy:
+        image: ghcr.io/elfhosted/tinyproxy:v1.4.3@sha256:9370be1434e80f8ac7d3a24d9c19335742b2c74ba15129dcdc166bb0dd3c9098
+        volumeMounts:
+        - mountPath: /etc/tinyproxy/tinyproxy.conf
+          name: tinyproxy-conf
+          subPath: tinyproxy.conf
+        - mountPath: /shared
+          name: shared
