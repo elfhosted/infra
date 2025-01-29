@@ -30,9 +30,12 @@ spec:
       rollingUpdate:
         unavailable: 1
     securityContext:
-      seccompProfile:
-        type: RuntimeDefault
-      readOnlyRootFilesystem: false
+      runAsUser: 0
+      privileged: true
+      capabilities:
+        add:
+          - NET_ADMIN
+          - SYS_MODULE
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault

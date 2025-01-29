@@ -130,6 +130,7 @@ spec:
           DOT: "off"
         securityContext:
           runAsUser: 0
+          privileged: true
           capabilities:
             add:
               - NET_ADMIN
