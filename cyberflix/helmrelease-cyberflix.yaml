@@ -121,5 +121,4 @@ spec:
           tcpSocket:
             port: 8000
           initialDelaySeconds: 30
-          periodSeconds: 10
           timeoutSeconds: 10
