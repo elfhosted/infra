@@ -1,0 +1,25 @@
+# Customized for ElfHosted
+network:
+    ethernets:
+        enp1s0f0:
+            dhcp4: no
+            optional: true
+        enp1s0f1:
+            dhcp4: no
+            optional: true
+    bonds:
+      bond0:
+        interfaces: {{ interfaces }}
+        addresses: {{ addresses }}
+        routes:
+          - on-link: true
+            to: 0.0.0.0/0
+            via: {{ gateway4 }}
+        nameservers:
+          addresses: [8.8.8.8, 8.8.4.4]
+        parameters:
+          mode: 802.3ad
+          lacp-rate: fast
+          mii-monitor-interval: 100
+    renderer: networkd
+    version: 2
