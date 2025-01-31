@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 58.x
+      version: 68.x
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -706,7 +706,7 @@ spec:
         image:
           registry: quay.io
           repository: prometheus/alertmanager
-          tag: v0.27.0
+          tag: v0.28.0
           sha: ""
 
         ## If true then the user will be responsible to provide a secret with alertmanager configuration
@@ -2950,7 +2950,7 @@ spec:
       thanosImage:
         registry: quay.io
         repository: thanos/thanos
-        tag: v0.34.1
+        tag: v0.37.2
         sha: ""
 
       ## Set a Label Selector to filter watched prometheus and prometheusAgent
@@ -3498,7 +3498,7 @@ spec:
         image:
           registry: quay.io
           repository: prometheus/prometheus
-          tag: v2.51.2
+          tag: v2.55.1
           sha: ""
 
         ## Tolerations for use with node taints
@@ -4469,7 +4469,7 @@ spec:
         image:
           registry: quay.io
           repository: thanos/thanos
-          tag: v0.34.1
+          tag: v0.37.2
           sha: ""
 
         ## Namespaces to be selected for PrometheusRules discovery.
