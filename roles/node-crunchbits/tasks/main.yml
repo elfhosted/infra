@@ -145,7 +145,7 @@
     # direction: in
     rule: "allow"
     route: true
-    interface_in: "bond0"
+    interface_in: "cluster"
 
 - name: Allow any incoming traffic from the cluster range
   ufw:

@@ -1,5 +1,5 @@
-{% if cluster_ip is defined and cluster_ip %}
-node-ip: {{ cluster_ip }}
+{% if external_ip is defined and external_ip %}
+node-ip: {{ external_ip }}
 {% else %}
 node-ip: {{ ansible_host }}
 {% endif %}

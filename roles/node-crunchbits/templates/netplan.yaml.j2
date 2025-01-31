@@ -18,13 +18,13 @@ network:
       cluster-bond0:
         peer: cluster
       cluster:
-        addresses: [{{ cluster_ip }}]
+        addresses: [ {{ cluster_ip }}/24 ]
         peer: cluster-bond0
       external-bond0:
         peer: external
       external:
         peer: external-bond0
-        addresses: [{{ exteral_ip }}]
+        addresses: [ {{ external_ip }}/29 ]
         routes:
           - on-link: true
             to: 0.0.0.0/0
