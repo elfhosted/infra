@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: grafana-agent-operator
-      version: 0.3.x
+      version: 0.x
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -51,16 +51,16 @@ spec:
 
     image:
       # -- Image registry
-      registry: git.pterofractal.fractalems.com
+      # registry: git.pterofractal.fractalems.com
       # -- Image repo
-      repository: airbridger/agent-operator
+      # repository: airbridger/agent-operator
       # -- Image tag
       # tag: v0.40.2
       # -- Image pull policy
       pullPolicy: IfNotPresent
       # -- Image pull secrets
-      pullSecrets:
-      - name: airbridger-registry-creds
+      # pullSecrets:
+      # - name: airbridger-registry-creds
 
     # -- hostAliases to add
     hostAliases: []
@@ -70,9 +70,9 @@ spec:
 
     # -- If both are set, Agent Operator will create and maintain a service for scraping kubelets
     # https://grafana.com/docs/agent/latest/operator/getting-started/#monitor-kubelets
-    kubeletService:
-      namespace: pterofractal
-      serviceName: kubelet
+    # kubeletService:
+    #   namespace: pterofractal
+    #   serviceName: kubelet
 
     # -- List of additional cli arguments to configure agent-operator (example: `--log.level`)
     extraArgs: []
@@ -83,8 +83,14 @@ spec:
     # -- nodeSelector configuration
     nodeSelector: {}
 
-    # -- Tolerations applied to Pods
-    tolerations: []
-
-    # -- Pod affinity configuration
-    affinity: {}
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists          
+      
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
