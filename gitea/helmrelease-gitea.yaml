@@ -438,7 +438,7 @@ spec:
         image:
           repository: busybox
           # Overrides the image tag whose default is the chart appVersion.
-          tag: "1.36.1"
+          tag: "1.37.0"
 
       provisioning:
         enabled: false
