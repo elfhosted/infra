@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: grafana-agent-operator
+  name: grafana-agent
   namespace: flux-system
 spec:
   interval: 15m
-  path: grafana-agent-operator
+  path: grafana-agent
   # dependsOn:
   # - name: external-dns
   prune: true # remove any elements later removed from the above path
@@ -15,13 +15,13 @@ spec:
     name: infra
   healthChecks:
     - apiVersion: apps/v1
-      kind: Deployment
-      name: grafana-agent-operator
-      namespace: grafana-agent-operator
+      kind: DaemonSet
+      name: grafana-agent
+      namespace: grafana-agent
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: grafana-agent-operator
-      namespace: grafana-agent-operator      
+      name: grafana-agent
+      namespace: grafana-agent      
   postBuild:
     substituteFrom:
       - kind: ConfigMap
