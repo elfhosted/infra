@@ -1,0 +1,31 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: MetricsInstance
+metadata:
+  name: grafana-agent
+  namespace: grafana-agent
+  labels:
+    agent: grafana-agent-metrics
+spec:
+  remoteWrite:
+  - url: http://elfhosted-internal.kube-prometheus-stack/api/v1/write
+    writeRelabelConfigs:
+    # recover the original namespace/pod from 
+    - sourceLabels: [exported_pod,service]
+      regex: (.*);kube-state-metrics
+      targetLabel: pod
+    - sourceLabels: [exported_namespace,service]
+      regex: (.*);kube-state-metrics
+      targetLabel: namespace
+    
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the MetricsInstance CR
+  serviceMonitorNamespaceSelector: {}
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the MetricsInstance CR.
+  podMonitorNamespaceSelector: {}
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the MetricsInstance CR.
+  probeNamespaceSelector: {}

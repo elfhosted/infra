@@ -182,12 +182,24 @@
     - { port: "4244", proto: "tcp" }  # hubble  
     - { port: "9965", proto: "tcp" }  # hubble metrics  
 
-# - name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
-#   ufw:
-#     direction: in
-#     rule: "deny"
-#     interface: "external"
-#     log: "false"
+- name: Drop noisy traffic
+  ufw:
+    direction: in
+    rule: "deny"
+    log: false
+    src: "{{ pod_cidr_v4 }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "5351", proto: "udp" } # NAT-PMP (Plex)
+    - { port: "1900", proto: "udp" } # DLNA (Plex)
+
+- name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
+  ufw:
+    direction: in
+    rule: "deny"
+    interface: "external"
+    log: "false"
 
 - name: Ensure UFW service starts on boot
   service:
