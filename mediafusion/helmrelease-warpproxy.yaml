@@ -66,7 +66,7 @@ spec:
             command:
             - /bin/ash
             - -c
-            - curl -x http://localhost:8888 -s https://docs.elfhosted.com/ | grep ElfHosted
+            - curl -x http://localhost:8888 -s https://www.cloudflare.com/cdn-cgi/trace | grep www.cloudflare.com
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 10            
