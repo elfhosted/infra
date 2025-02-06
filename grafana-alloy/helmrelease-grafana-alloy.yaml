@@ -51,9 +51,9 @@ spec:
         content: |-
           prometheus.exporter.unix "local_system" { }
 
-          discovery.kubernetes "pods" {
-            role = "pod"
-          }          
+          # discovery.kubernetes "pods" {
+          #   role = "pod"
+          # }          
 
           prometheus.scrape "scrape_metrics" {
             targets         = prometheus.exporter.unix.local_system.targets
@@ -61,10 +61,10 @@ spec:
             scrape_interval = "10s"
           }
 
-          prometheus.scrape "pods" {
-            targets    = discovery.kubernetes.pods.targets
-            forward_to = [prometheus.remote_write.elfhosted_internal.receiver]
-          }          
+          # prometheus.scrape "pods" {
+          #   targets    = discovery.kubernetes.pods.targets
+          #   forward_to = [prometheus.remote_write.elfhosted_internal.receiver]
+          # }          
 
           prometheus.relabel "filter_metrics" {
             rule {
