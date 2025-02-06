@@ -4,16 +4,9 @@ metadata:
   name: external-dns
   namespace: external-dns
 spec:
-  chart:
-    spec:
-      chart: external-dns
-      version: 8.7.x # bumping this causes CRD issues, needs a debug
-      sourceRef:
-        kind: HelmRepository
-        name: bitnami
-        namespace: flux-system
-  interval: 15m
-  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-external-dns
   releaseName: external-dns
   values:
     # Copyright Broadcom, Inc. All Rights Reserved.
