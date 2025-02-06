@@ -51,11 +51,20 @@ spec:
         content: |-
           prometheus.exporter.unix "local_system" { }
 
+          discovery.kubernetes "pods" {
+            role = "pod"
+          }          
+
           prometheus.scrape "scrape_metrics" {
             targets         = prometheus.exporter.unix.local_system.targets
             forward_to      = [prometheus.relabel.filter_metrics.receiver]
             scrape_interval = "10s"
           }
+
+          prometheus.scrape "pods {
+            targets    = discovery.kubernetes.pods.targets
+            forward_to = [prometheus.remote_write.elfhosted_internal.receiver]
+          }          
 
           prometheus.relabel "filter_metrics" {
             rule {
@@ -64,10 +73,10 @@ spec:
               regex         = "dev"
             }
 
-            forward_to = [prometheus.remote_write.metrics_service.receiver]
+            forward_to = [prometheus.remote_write.elfhosted_internal.receiver]
           }       
 
-          prometheus.remote_write "metrics_service" {
+          prometheus.remote_write "elfhosted_internal" {
               endpoint {
                   url = "http://elfhosted-internal.kube-prometheus-stack/api/v1/write"
 
