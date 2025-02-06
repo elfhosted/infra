@@ -7,6 +7,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: bitnami-external-dns
+    namespace: flux-system
   interval: 1h
   timeout: 5m
   releaseName: external-dns
