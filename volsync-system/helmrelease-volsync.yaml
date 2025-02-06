@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: volsync
-      version: 0.10.x
+      version: 0.11.x
       sourceRef:
         kind: HelmRepository
         name: backube
@@ -20,36 +20,36 @@ spec:
     replicaCount: 1
 
     image:
-      repository: ghcr.io/elfhosted/volsync
+      repository: quay.io/backube/volsync
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
+      tag: ""
       # Directly specifies the SHA hash of the container image to deploy
       image: ""
     rclone:
-      repository: ghcr.io/elfhosted/volsync
+      repository: quay.io/backube/volsync
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
+      tag: ""
       image: ""
     restic:
-      repository: ghcr.io/elfhosted/volsync
+      repository: quay.io/backube/volsync
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
+      tag: ""
       image: ""
     rsync:
-      repository: ghcr.io/elfhosted/volsync
+      repository: quay.io/backube/volsync
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
       image: ""
     rsync-tls:
-      repository: ghcr.io/elfhosted/volsync
+      repository: quay.io/backube/volsync
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
+      tag: ""
       image: ""
     syncthing:
-      repository: ghcr.io/elfhosted/volsync
+      repository: quay.io/backube/volsync
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "rolling@sha256:03516485c3fec843e1a258d798c0b3dfd46ba47934e04837fa6132afdcbf65d3"
+      tag: ""
       image: ""
 
     manageCRDs: true
