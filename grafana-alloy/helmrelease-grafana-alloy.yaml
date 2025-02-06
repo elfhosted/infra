@@ -61,7 +61,7 @@ spec:
             scrape_interval = "10s"
           }
 
-          prometheus.scrape "pods {
+          prometheus.scrape "pods" {
             targets    = discovery.kubernetes.pods.targets
             forward_to = [prometheus.remote_write.elfhosted_internal.receiver]
           }          
