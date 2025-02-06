@@ -15,6 +15,16 @@ spec:
     # Name of the Secret with the connection information
     repository: redbot-restic-config
     # Retention policy for backups
+    moverAffinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution: 
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - redbot
+          topologyKey: "kubernetes.io/hostname"        
     retain:
       daily: 7
     copyMethod: Snapshot

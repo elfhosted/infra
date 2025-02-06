@@ -15,7 +15,7 @@ data:
           "ScrapeSchedule": "0 * * * *",
           "MinimumReDownloadIntervalMinutes": 30,
           "MaxFilteredResults": 200,
-          "MinimumScoreMatch": 0.85,
+          "MinimumScoreMatch": 0.9,
           "ImportBatched": false
         },
         "Database": {
@@ -31,7 +31,8 @@ data:
         "Imdb": {
           "EnableImportMatching": true,
           "EnableEndpoint": true,
-          "MinimumScoreMatch": 0.85
+          "MinimumScoreMatch": 0.85,
+          "UseLucene": true
         },
         "Ingestion": {
           "ZurgInstances": [

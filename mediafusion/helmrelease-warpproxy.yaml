@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: tinyproxy
+  name: warpproxy
   namespace: mediafusion
 spec:
   chart:
@@ -14,46 +14,26 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: tinyproxy
+  releaseName: warpproxy
   values:
     global:
-      nameOverride: tinyproxy
+      nameOverride: warpproxy
     image:
-      repository: ghcr.io/elfhosted/tinyproxy
-      tag: v1.4.3@sha256:afc49b44bcab30c261e4e0232e23126da9b63220d2f9a8201ce3e3a90132a035
-    podLabels:
-        app.elfhosted.com/name: tinyproxy
-    priorityClassName: tenant-normal
-    controller:
-      annotations:
-        configmap.reloader.stakater.com/reload: "tinyproxy-conf"
-      strategy:
-      rollingUpdate:
-        unavailable: 1
+      repository: ghcr.io/elfhosted/gluetun
+      tag: 3.40.0@sha256:897e3dc0945a104ba087af36026a8bd365a1c1d4865b3a111a2fbdad7e6b9729
+    priorityClassName: cluster-normal
     securityContext:
-      seccompProfile:
-        type: RuntimeDefault
-      readOnlyRootFilesystem: true
+      runAsUser: 0
+      capabilities:
+        add:
+          - NET_ADMIN
+          - SYS_MODULE
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
       fsGroupChangePolicy: "OnRootMismatch"
     automountServiceAccountToken: false
     persistence:
-      tmp:
-        enabled: true
-        mountPath: /tmp
-        type: emptyDir
-        volumeSpec:
-          medium: Memory   
-      tinyproxy-conf:
-        enabled: "true"
-        type: "custom"
-        mountPath: /etc/tinyproxy/tinyproxy.conf
-        subPath: tinyproxy.conf  
-        volumeSpec:
-          configMap:
-            name: tinyproxy-conf 
       shared:
         enabled: true
         mountPath: /shared
@@ -76,8 +56,28 @@ spec:
         ports:
           http:
             port: 8888
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          exec:
+            command:
+            - /bin/ash
+            - -c
+            - curl -x http://localhost:8888 -s https://www.cloudflare.com/cdn-cgi/trace | grep www.cloudflare.com
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10            
     env:
-      WAIT_FOR_VPN: "true"    
+      VPN_TYPE: wireguard
+      VPN_SERVICE_PROVIDER: custom
+      # WIREGUARD_MTU: "1280"
+      VPN_ENDPOINT_PORT: "2408"
+      HTTPPROXY: "on"
+      FIREWALL_INPUT_PORTS: "8888"
+      DOT: "off"
     initContainers:      
       setup-warp:
         image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
@@ -110,32 +110,3 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           readOnlyRootFilesystem: false    
-    addons:
-      vpn:
-        enabled: true # in case we ever need it
-        gluetun:
-          image:
-            repository: ghcr.io/elfhosted/gluetun
-            tag: 3.40.0@sha256:2ce9c1407bad9897f4269b3c7f53862befb52a25c712731c91ae05906d41358f
-        env:
-          FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
-          DNS_KEEP_NAMESERVER: "on"
-          HTTP_CONTROL_SERVER_PORT: "8000"
-          HTTP_CONTROL_SERVER_ADDRESS: ":8000"
-          VPN_TYPE: wireguard
-          VPN_SERVICE_PROVIDER: custom
-          FIREWALL_INPUT_PORTS: "8888"
-          WIREGUARD_MTU: "1280"
-          VPN_ENDPOINT_PORT: "2408"
-          DOT: "off"
-        securityContext:
-          runAsUser: 0
-          privileged: true
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config
-        volumeMounts:
-        - mountPath: /shared
-          name: shared

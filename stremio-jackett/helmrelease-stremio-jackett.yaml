@@ -18,8 +18,6 @@ spec:
   values:
     global:
       nameOverride: stremio-jackett
-    annotations:
-      configmap.reloader.stakater.com/reload: "stremio-jackett-env"
     image:
       repository: ghcr.io/elfhosted/stremio-jackett
       tag: v4.2.6@sha256:7ec5011079056b0eae117f13e8eb56b8f0169e1c9cd9db2e2b4db38b45e5dd75
@@ -38,6 +36,8 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "stremio-jackett-env"        
     envFrom:
     - configMapRef:
         name: stremio-jackett-env                

@@ -6,9 +6,12 @@ metadata:
 spec:
   endpointSelector: {}
   ingress:
-    # Allow from any pods in this namespace
-    - fromEndpoints:
-        - {}
+    # Allow from any pods in the cluster
+    - fromEntities:
+        - cluster
+      toPorts:
+        - ports:
+            - port: "4000"        
 
     # Allow from Traefik to exposed port only
     - fromEndpoints:

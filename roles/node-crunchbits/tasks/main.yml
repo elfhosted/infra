@@ -105,6 +105,12 @@
   when: "inventory_hostname in groups['k3s_servers']"  
   ignore_errors: true # sometimes snap has issues
 
+- name: Set default forward policy to ACCEPT
+  lineinfile:
+    path: /etc/default/ufw
+    regexp: '^DEFAULT_FORWARD_POLICY='
+    line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+  
 - name: Allow admin SSH sources to this host
   ufw:
     rule: allow
@@ -140,25 +146,23 @@
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
 
-- name: Allow any routed traffic on the cluster NIC
+
+- name: Allow any incoming traffic on the cluster NIC
   ufw:
-    # direction: in
+    direction: in
     rule: "allow"
-    route: true
-    interface_in: "bond0"
+    interface: "{{ item }}"    
+  with_items:
+  - bond0
+  - cluster_bond0
+  - cluster
 
 - name: Allow any incoming traffic from the cluster range
   ufw:
     direction: in
     rule: "allow"
     src: "{{ item }}"
-  loop: "{{ firewall.cluster_source }}"    
-
-- name: Allow any incoming traffic to the cluster range
-  ufw:
-    direction: in
-    rule: "allow"
-    src: "192.168.44.0/24"    
+  loop: "{{ firewall.cluster_source }}"
 
 - name: Allow any incoming traffic from the cluster for host-network exposed services
   ufw:
@@ -175,17 +179,48 @@
     - { port: "9100", proto: "tcp" }  # node-exporter  
     - { port: "6443", proto: "tcp" }  # k8s-api   
     - { port: "8080", proto: "tcp" }  # kured
-    - { port: "7472", proto: "tcp" }  # metallb 
-    - { port: "4244", proto: "tcp" }  # hubble     
+    - { port: "4244", proto: "tcp" }  # hubble  
+    - { port: "9965", proto: "tcp" }  # hubble metrics  
+
+- name: Drop noisy traffic
+  ufw:
+    direction: in
+    rule: "deny"
+    log: false
+    src: "{{ pod_cidr_v4 }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "5351", proto: "udp" } # NAT-PMP (Plex)
+    - { port: "1900", proto: "udp" } # DLNA (Plex)
+
+- name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
+  ufw:
+    direction: in
+    rule: "deny"
+    interface: "external"
+    log: "false"
+
+- name: Ensure UFW service starts on boot
+  service:
+    name: ufw
+    enabled: yes
+    state: restarted
+
+- name: Check UFW status
+  command: ufw status
+  register: ufw_status
+  changed_when: false
 
 
-# - name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
-#   ufw:
-#     direction: in
-#     rule: "deny"
-#     interface: "bond0"
-#     log: "false"
-
+- name: Enable UFW if not active
+  ufw:
+    state: enabled
+    policy: deny
+    logging: "on"
+  when: "'Status: inactive' in ufw_status.stdout"
+  notify: reload ufw
+      
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance
 
@@ -226,7 +261,6 @@
     mode: u+x
   loop:
     - smartmon_metrics.sh
-    - kill-unwanted-transcodes.sh
 
 - name: Set igb modprobe defaults
   copy:
@@ -272,14 +306,15 @@
     hour: "*"
     job: "/usr/local/bin/smartmon_metrics.sh > /var/lib/node-exporter/textfiles/smart_metrics.prom && chmod 644 /var/lib/node-exporter/textfiles/smart_metrics.prom"
 
-- name: Add cron scripts to kill unwanted transcodes
-  cron:
-    name: "unwanted transcodes"
-    minute: "*"
-    hour: "*"
-    job: "/usr/local/bin/kill-unwanted-transcodes.sh"
-  when:
-  - "inventory_hostname in groups['k3s_contended']"
+# no diff in .cc
+# - name: Add cron scripts to kill unwanted transcodes
+#   cron:
+#     name: "unwanted transcodes"
+#     minute: "*"
+#     hour: "*"
+#     job: "/usr/local/bin/kill-unwanted-transcodes.sh"
+#   when:
+#   - "inventory_hostname in groups['k3s_contended']"
 
 - name: ignore irrelevant logs via rsyslog
   copy:

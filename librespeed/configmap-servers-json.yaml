@@ -16,7 +16,7 @@ data:
         },
         {
             "name": "Washington State, USA (elfhosted.cc)",
-            "server" :"//eagle01-speed.elfhosted.cc/",
+            "server" :"//eagle02-speed.elfhosted.cc/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",

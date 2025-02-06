@@ -6,18 +6,13 @@ metadata:
 spec:
   endpointSelector: {}
   ingress:
-    # Allow from any pods in this namespace
-    - fromEndpoints:
-        - {}
-
-    # Allow from Traefik to exposed port only
-    - fromEndpoints:
-        - matchLabels:
-            app.kubernetes.io/name: traefik
-            io.kubernetes.pod.namespace: traefik
+    # Allow from any pods in the cluster
+    - fromEntities:
+        - cluster
       toPorts:
         - ports:
-            - port: "3649"
+            - port: "1337"
+
   egress:
     # Allow to the world
     - toEntities:

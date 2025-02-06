@@ -6,9 +6,12 @@ metadata:
 spec:
   endpointSelector: {}
   ingress:
-    # Allow from any pods in this namespace
-    - fromEndpoints:
-        - {}
+    # Allow from any pods in the cluster
+    - fromEntities:
+        - cluster
+      toPorts:
+        - ports:
+            - port: "8888" # tinyproxy
 
     # Allow from Traefik to exposed port only
     - fromEndpoints:
@@ -56,4 +59,22 @@ spec:
           k8s:io.kubernetes.pod.namespace: mediafusion  
       toPorts:
         - ports:
-            - port: "8000"            
+            - port: "8000"
+
+    # Allow AIO to talk to jackettio
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: jackettio
+          k8s:io.kubernetes.pod.namespace: jackettio  
+      toPorts:
+        - ports:
+            - port: "4000"        
+
+    # Allow AIO to talk to easynewsplus
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: easynewsplus
+          k8s:io.kubernetes.pod.namespace: easynewsplus  
+      toPorts:
+        - ports:
+            - port: "1337"                             

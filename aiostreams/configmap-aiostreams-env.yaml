@@ -6,8 +6,11 @@ metadata:
 data:
   COMET_URL: http://elfhosted-internal.comet/
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
+  JACKETTIO_URL: http://elfhosted-internal.jackettio/
+  # EASYNEWS_PLUS_URL: http://elfhosted-internal.easynewsplus/
   DISABLE_TORRENTIO: "true"
   DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
   ADDON_NAME: AIOStreams | ElfHosted
   MAX_ADDONS: "10"
   DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"
+  CACHE_STREAM_RESULTS: "false"
