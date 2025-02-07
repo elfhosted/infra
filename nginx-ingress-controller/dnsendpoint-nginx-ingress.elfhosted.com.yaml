@@ -10,3 +10,6 @@ spec:
     recordType: A
     targets:
     - ${nginx_ingress_ip}
+    providerSpecific:
+      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+        value: false   
