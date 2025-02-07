@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: ghost
-      version: 21.x
+      version: 22.x
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -101,7 +101,7 @@ spec:
     image:
       registry: docker.io
       repository: bitnami/ghost
-      tag: 5.97.3-debian-12-r0
+      tag: 5.109.3-debian-12-r0
       digest: ""
       ## Specify a imagePullPolicy
       ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
