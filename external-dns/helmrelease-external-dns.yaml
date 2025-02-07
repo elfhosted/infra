@@ -372,7 +372,7 @@ spec:
       ## @param cloudflare.secretName When using the Cloudflare provider, it's the name of the secret containing cloudflare_api_token or cloudflare_api_key.
       ## This ignores cloudflare.apiToken, and cloudflare.apiKey
       ##
-      secretName: ""
+      secretName: "cloudflare-api-token-secret"
       ## @param cloudflare.email When using the Cloudflare provider, `CF_API_EMAIL` to set (optional). Needed when using CF_API_KEY
       ##
       email: ""
