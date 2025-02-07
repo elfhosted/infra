@@ -291,7 +291,7 @@ spec:
       apiRetries: 3
       ## @param aws.batchChangeSize When using the AWS provider, set the maximum number of changes that will be applied in each batch
       ##
-      batchChangeSize: 1000
+      batchChangeSize: 1 # don't bail if some (but not all) records are invalid
       ## @param aws.zonesCacheDuration If the list of Route53 zones managed by ExternalDNS doesn't change frequently, cache it by setting a TTL
       ## (default 0 - disabled, can be set to time interval like 1m or 1h)
       ##
