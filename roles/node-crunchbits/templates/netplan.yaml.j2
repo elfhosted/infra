@@ -37,5 +37,12 @@ network:
         - bond0
         - cluster-bond0
         - external-bond0
+    vlans:
+      internal:
+        id: 1217
+        link: bond0
+        mtu: 1500
+        addresses:
+          - 192.168.45.{{ cluster_ip.split(".")[3] }}/24        
     renderer: networkd
     version: 2

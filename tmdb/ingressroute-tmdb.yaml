@@ -5,32 +5,9 @@ metadata:
   namespace: tmdb
 spec:
   routes:
-    # This is a scrape / search, subject to rate-limiting
-    - match: Host(`tmdb.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
-      kind: Rule
-      services:
-        - name: tmdb
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-stream         
-    # Block URLs we don't want public access to
-    - match: Host(`tmdb.${dns_domain}`) && (PathPrefix(`/streaming_provider/cache/status`) || PathPrefix(`/streaming_provider/cache/submit`)) 
-      kind: Rule
-      services:
-        - name: tmdb
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: ipallowlist-localhost-only
-          namespace: traefik
-    # Everything else
     - match: Host(`tmdb.${dns_domain}`)
       kind: Rule
       services:
         - name: tmdb
           kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-public-stremio-addon-static
-          namespace: traefik
+          port: 3000
