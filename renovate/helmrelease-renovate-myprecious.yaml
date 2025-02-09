@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: renovate
-      version: 39.x
+      version: 36.x # because of yaml syntax checking
       sourceRef:
         kind: HelmRepository
         name: renovate
