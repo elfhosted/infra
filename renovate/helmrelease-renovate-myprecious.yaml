@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: renovate
-      version: 39.x
+      version: 36.x
       sourceRef:
         kind: HelmRepository
         name: renovate
@@ -80,7 +80,7 @@ spec:
       # -- Image name to pull
       repository: renovatebot/renovate
       # -- Renovate image tag to pull
-      tag: 39.140.0
+      # tag: 39.140.0
       # -- "IfNotPresent" to pull the image if no image with the specified tag exists on the node, "Always" to always pull the image or "Never" to try and use pre-pulled images
       pullPolicy: IfNotPresent
 
@@ -99,8 +99,7 @@ spec:
           "dryRun": false,
           "printConfig": false,
           "autodiscoverFilter": ["elfhosted/myprecious"],
-          "allowedPostUpgradeCommands": ["./scripts/bump-myprecious.sh"],
-          "renovateVersion": "36.0.0"
+          "allowedPostUpgradeCommands": ["./scripts/bump-myprecious.sh"]
         }
 
       # -- Renovate Container-level security-context
