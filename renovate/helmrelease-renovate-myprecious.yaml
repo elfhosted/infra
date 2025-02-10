@@ -1,20 +1,20 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: renovate
+  name: renovate-myprecious
   namespace: renovate
 spec:
   chart:
     spec:
       chart: renovate
-      version: 39.x
+      version: 36.x
       sourceRef:
         kind: HelmRepository
         name: renovate
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: renovate
+  releaseName: renovate-myprecious
   values:
     global:
       # -- Additional labels to be set on all renovate resources
@@ -27,7 +27,7 @@ spec:
 
     cronjob:
       # Every hour
-      schedule: '0/30 * * * *'
+      schedule: '0/15 * * * *'
       # -- If it is set to true, all subsequent executions are suspended. This setting does not apply to already started executions.
       suspend: false
       # -- Annotations to set on the cronjob
@@ -80,7 +80,7 @@ spec:
       # -- Image name to pull
       repository: renovatebot/renovate
       # -- Renovate image tag to pull
-      tag: 39.140.0
+      # tag: 39.140.0
       # -- "IfNotPresent" to pull the image if no image with the specified tag exists on the node, "Always" to always pull the image or "Never" to try and use pre-pulled images
       pullPolicy: IfNotPresent
 
@@ -95,10 +95,10 @@ spec:
       config: |
         {
           "platform": "github",
-          "repositories": ["elfhosted/charts","elfhosted/infra","elfhosted/myprecious"],
+          "repositories": ["elfhosted/myprecious"],
           "dryRun": false,
           "printConfig": false,
-          "autodiscoverFilter": ["elfhosted/charts","elfhosted/infra","elfhosted/myprecious"],
+          "autodiscoverFilter": ["elfhosted/myprecious"],
           "allowedPostUpgradeCommands": ["./scripts/bump-myprecious.sh"]
         }
 
