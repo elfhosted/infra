@@ -5,7 +5,7 @@ metadata:
   namespace: gitea
 spec:
   # The PVC to be backed up
-  sourcePVC: gitea-shared-storage
+  sourcePVC: gitea
   trigger:
     schedule: "0 9 * * *"
   restic:
