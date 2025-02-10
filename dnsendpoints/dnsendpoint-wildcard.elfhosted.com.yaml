@@ -12,5 +12,4 @@ spec:
     - "traefik-lb-ingress.${dns_domain}"     
     providerSpecific:
       - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
-        value: |-
-          ${proxy_wildcard_dns}
+        value: "${proxy_wildcard_dns}"
