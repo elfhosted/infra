@@ -33,7 +33,10 @@ spec:
       ##
       imagePullSecrets: []
       storageClass: ""
-      hostAliases: []
+      hostAliases:
+      - ip: 10.43.87.249 # to make tailscale-routed authentik work for gitea
+        hostnames:
+        - authentik.infra.elfhosted.com
       # - ip: 192.168.137.2
       #   hostnames:
       #   - example.com
