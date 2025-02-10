@@ -16,8 +16,12 @@ spec:
   healthChecks:
     - apiVersion: batch/v1
       kind: CronJob
-      name: renovate
+      name: renovate-infra
       namespace: renovate
+    - apiVersion: batch/v1
+      kind: CronJob
+      name: renovate-myprecious
+      namespace: renovate      
     # Always use the helmrelease to determine health too
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
