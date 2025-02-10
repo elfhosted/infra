@@ -1263,8 +1263,8 @@ spec:
     ##
     pdb:
       create: true
-      minAvailable: ""
-      maxUnavailable: "1"
+      minAvailable: 1
+      maxUnavailable: 
     ## Prometheus Exporter / Metrics
     ##
     metrics:
