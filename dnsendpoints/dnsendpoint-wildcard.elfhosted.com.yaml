@@ -13,4 +13,4 @@ spec:
     providerSpecific:
       - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
         value: |-
-          "${proxy_wildcard_dns}"
+          ${proxy_wildcard_dns}
