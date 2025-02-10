@@ -26,6 +26,8 @@ spec:
     ## @param global.storageClass DEPRECATED: use global.defaultStorageClass instead
     ##
     global:
+      security:
+        allowInsecureImages: true # we use our own images because we need S3 support
       imageRegistry: ""
       ## E.g.
       ## imagePullSecrets:
