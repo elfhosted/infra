@@ -58,7 +58,13 @@ spec:
       cache: 
         enabled: true
         type: emptyDir
-        mountPath: /.cache          
+        mountPath: /.cache    
+      tmp:
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        volumeSpec:
+          medium: Memory                 
     addons:
       vpn:
         enabled: true # in case we ever need it
