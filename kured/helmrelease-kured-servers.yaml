@@ -74,7 +74,7 @@ spec:
       startTime: "10:00"            # glowup
       timeZone: "Pacific/Auckland"  # time-zone to use (valid zones from "time" golang package)
       annotateNodes: false          # enable 'weave.works/kured-reboot-in-progress' and 'weave.works/kured-most-recent-reboot-needed' node annotations to signify kured reboot operations
-      lockReleaseDelay: 30          # hold lock after reboot by this amount of time (default 0, disabled)
+      lockReleaseDelay: 30m          # hold lock after reboot by this amount of time (default 0, disabled)
       preferNoScheduleTaint: "weave.works/kured-node-reboot"     # Taint name applied during pending node reboot (to prevent receiving additional pods from other rebooting nodes). Disabled by default. Set e.g. to "weave.works/kured-node-reboot" to enable tainting.
       logFormat: "text"             # log format specified as text or json, defaults to text
       preRebootNodeLabels: []       # labels to add to nodes before cordoning (default [])
