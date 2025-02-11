@@ -18,6 +18,7 @@ data:
   SCRAPE_ZILEAN: "True"
   SCRAPE_TORRENTIO: "True"
   SCRAPE_MEDIAFUSION: "True"  
+  STREMTHRU_DEFAULT_URL: http://elfhosted-internal.stremthru
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
