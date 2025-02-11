@@ -20,7 +20,7 @@ spec:
       nameOverride: comet-dev
     image:
       repository: ghcr.io/elfhosted/comet-rewrite
-      tag: rolling@sha256:917ceac1c8f2c80974d0937661a4aaad2011791dca09e78e6c78e019a5f4edf0
+      tag: rolling@sha256:d6567a4fe1f32e66fb1fab9591e2af16af25915a76bea67c0a2f2e8fd748c0bc
     securityContext:
       seccompProfile:
         type: RuntimeDefault
