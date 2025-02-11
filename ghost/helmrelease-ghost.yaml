@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: ghost
@@ -6,14 +6,10 @@ metadata:
 spec:
   driftDetection:
     mode: enabled
-  chart:
-    spec:
-      chart: ghost
-      version: 21.x
-      sourceRef:
-        kind: HelmRepository
-        name: bitnami
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-ghost
+    namespace: flux-system
   interval: 24h
   timeout: 5m
   releaseName: ghost
