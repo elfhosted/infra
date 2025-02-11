@@ -18,7 +18,11 @@ flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
 cluster-init: true
-node-ip: {{ cluster_ip }}
+{% if cluster_ip is defined and cluster_ip %}
+node-ip: 192.168.45.{{ cluster_ip.split(".")[3] }}
+{% else %}
+node-ip: {{ ansible_host }}
+{% endif %}
 disable: 
 - "traefik"
 - "servicelb"
