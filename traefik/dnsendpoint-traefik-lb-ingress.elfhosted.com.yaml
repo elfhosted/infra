@@ -9,6 +9,4 @@ spec:
     recordTTL: 180
     recordType: A
     targets:
-    {% for ip in traefik_ingress_lb_ips %}
-    - {{ ip }}
-    {% endfor %}
+    - ${traefik_ingress_dns_ip} # LB / pfsense directs this to ${cluster_nic_class_c}.101
