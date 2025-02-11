@@ -4,8 +4,6 @@ metadata:
   name: ghost
   namespace: ghost
 spec:
-  driftDetection:
-    mode: enabled
   chartRef:
     kind: OCIRepository
     name: bitnami-ghost
@@ -97,7 +95,7 @@ spec:
     image:
       registry: docker.io
       repository: bitnami/ghost
-      tag: 5.97.3-debian-12-r0
+      tag: 5.109.3-debian-12-r0
       digest: ""
       ## Specify a imagePullPolicy
       ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -443,7 +441,7 @@ spec:
     service:
       ## @param service.type Ghost service type
       ##
-      type: LoadBalancer
+      type: ClusterIP
       ## @param service.ports.http Ghost service HTTP port
       ## @param service.ports.https Ghost service HTTPS port
       ##
@@ -735,11 +733,11 @@ spec:
         ##
         persistence:
           enabled: true
+          existingClaim: mysql
           storageClass: ""
           accessModes:
             - ReadWriteOnce
           size: 8Gi
-          existingClaim: mysql
         ## MySQL primary container's resource requests and limits
         ## ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
         ## We usually recommend not to specify default resources and to leave this as a conscious
