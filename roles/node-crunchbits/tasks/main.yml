@@ -18,6 +18,49 @@
     
   ignore_errors: true # sometimes apt is locked    
 
+
+- name: Enable automatic updates
+  copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+      APT::Periodic::AutocleanInterval "7";
+
+- name: Configure unattended-upgrades to allow all updates but disable reboots
+  copy:
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    content: |
+      Unattended-Upgrade::Allowed-Origins {
+          "${distro_id}:${distro_codename}-security";
+          "${distro_id}:${distro_codename}-updates";
+          "${distro_id}:${distro_codename}-backports";
+      };
+      Unattended-Upgrade::Automatic-Reboot "false";
+
+- name: Ensure correct permissions for configuration files
+  file:
+    path: "{{ item }}"
+    mode: '0644'
+  loop:
+    - /etc/apt/apt.conf.d/20auto-upgrades
+    - /etc/apt/apt.conf.d/50unattended-upgrades
+
+- name: Restart unattended-upgrades service
+  systemd:
+    name: unattended-upgrades
+    state: restarted
+    enabled: yes
+
+- name: Run unattended-upgrades manually for verification (dry run)
+  command: unattended-upgrade --dry-run --debug
+  register: unattended_output
+  changed_when: false
+
+- name: Show unattended-upgrades output
+  debug:
+    var: unattended_output.stdout_lines
+
 - name: load bonding modules
   modprobe:
     name: "{{ item }}"
