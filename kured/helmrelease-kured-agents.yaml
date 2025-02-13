@@ -50,7 +50,7 @@ spec:
       # alertFilterRegexp: "(Watchdog|RebootRequired|CPUThrottlingHigh|InfoInhibitor|KubeJobFailed|PersistentVolumeUsageCritical|PersistentVolumeUsageNearFull)"      # alert names to ignore when checking for active alerts
       # alertFiringOnly: true     # only consider firing alerts when checking for active alerts
       blockingPodSelector: []       # label selector identifying pods whose presence should prevent reboots
-      endTime: "11:00"              # 
+      endTime: "10:45"              # in case reboots trigger at 10:44!
       lockAnnotation: ""            # annotation in which to record locking node (default "weave.works/kured-node-lock")
       period: "10m"                 # reboot check period (default 1h0m0s)
       forceReboot: false            # force a reboot even if the drain fails or times out (default: false)
