@@ -55,10 +55,10 @@
     src: netplan.yaml.j2
     dest: /etc/netplan/elfhosted.yaml
     mode: 0600
-  notify: netplan apply
+  # notify: netplan apply
 
-- name: flush handlers now if necessary
-  meta: flush_handlers
+# - name: flush handlers now if necessary
+#   meta: flush_handlers
 
 # this can be disruptive, so disabled for now
 # - name: Reboot for grub fix
@@ -153,9 +153,6 @@
     rule: "allow"
     interface: "{{ item }}"    
   with_items:
-  - bond0
-  - cluster_bond0
-  - cluster
   - internal
 
 - name: Allow any incoming traffic from the cluster range

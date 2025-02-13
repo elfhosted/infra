@@ -44,7 +44,7 @@ spec:
                 - stremthru
             topologyKey: "kubernetes.io/hostname"        
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -57,6 +57,9 @@ spec:
         type: emptyDir
         mountPath: /tmp       
     resources:
+      limits:
+        cpu: 1
+        memory: 1Gi
     ingress:
       main:
         enabled: false
