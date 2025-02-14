@@ -50,7 +50,7 @@ spec:
                 - cyberflix
             topologyKey: "kubernetes.io/hostname"              
     controller:
-      replicas: 2
+      replicas: 3
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1      
@@ -98,7 +98,7 @@ spec:
         memory: 512Mi
         ephemeral-storage: 50Mi
       limits:
-        cpu: 2 # never gets here because it's single-threaded
+        cpu: 500m
         memory: 4Gi
         ephemeral-storage: 1Gi        
     ingress:
