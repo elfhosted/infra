@@ -44,17 +44,8 @@ spec:
             claimName: jackett
       tmp: 
         enabled: true
-        type: custom
-        mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi              
+        type: emptyDir
+        mountPath: /tmp           
     ingress:
       main:
         enabled: false 
