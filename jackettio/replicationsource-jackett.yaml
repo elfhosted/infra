@@ -21,7 +21,7 @@ spec:
             - key: app.kubernetes.io/name
               operator: In
               values:
-              - jackettio
+              - jackett
           topologyKey: "kubernetes.io/hostname"        
     retain:
       daily: 7
