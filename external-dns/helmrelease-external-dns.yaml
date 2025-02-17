@@ -1262,7 +1262,7 @@ spec:
     ## @param pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable. Defaults to `1` if both `pdb.minAvailable` and `pdb.maxUnavailable` are empty.
     ##
     pdb:
-      create: true
+      create: false
       minAvailable: 1
       maxUnavailable: 
     ## Prometheus Exporter / Metrics
