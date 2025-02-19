@@ -19,7 +19,7 @@ data:
   SCRAPE_TORRENTIO: "false"
   SCRAPE_MEDIAFUSION: "True"  
   DOWNLOAD_TORRENTS: "false"
-  STREMTHRU_DEFAULT_URL: http://elfhosted-internal.stremthru
+  STREMTHRU_URL: http://elfhosted-internal.stremthru
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
