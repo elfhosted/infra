@@ -16,12 +16,13 @@ data:
   DATABASE_TYPE: postgresql
   REMOVE_ADULT_CONTENT: "true"
   SCRAPE_ZILEAN: "True"
-  SCRAPE_TORRENTIO: "True"
+  SCRAPE_TORRENTIO: "false"
   SCRAPE_MEDIAFUSION: "True"  
+  DOWNLOAD_TORRENTS: "false"
   STREMTHRU_DEFAULT_URL: http://elfhosted-internal.stremthru
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
     <P>
-      This is a dev instance of comet, and is not intended to be used outside of developer testing. Please use <A HREF="https://comet.elfhosted.com">the official public instance</A> instead</P>
+      This is a dev instance of the comet rewrite, and is intended for limited public testing. Please use <A HREF="https://comet.elfhosted.com">the official public instance</A></P>
