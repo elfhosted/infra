@@ -8,7 +8,8 @@ data:
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
-  SCRAPE_MEDIAFUSION: "false" # doesn't seem to work anymore
+  SCRAPE_MEDIAFUSION: "True"
+  DOWNLOAD_TORRENTS: "false"
   # INDEXER_MANAGER_TYPE: jackett
   # INDEXER_MANAGER_URL: http://jackett:9117
   # DEBRID_PROXY_URL: http://127.0.0.1:1080
