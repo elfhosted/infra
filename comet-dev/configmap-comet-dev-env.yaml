@@ -7,10 +7,10 @@ data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
   ADDON_ID: comet-dev.elfhosted.com
   ADDON_NAME: Comet (Dev) | ElfHosted
-  # INDEXER_MANAGER_TYPE: jackett
-  # INDEXER_MANAGER_URL: http://jackett:9117
-  # DEBRID_PROXY_URL: http://127.0.0.1:1080
-  # INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
+  INDEXER_MANAGER_TYPE: jackett
+  INDEXER_MANAGER_URL: http://jackett:9117
+  DEBRID_PROXY_URL: http://127.0.0.1:1080
+  INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
   GET_TORRENT_TIMEOUT: "5" # let the cache build
   INDEXER_MANAGER_TIMEOUT: "30"
   DATABASE_TYPE: postgresql
