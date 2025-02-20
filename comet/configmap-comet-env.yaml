@@ -8,7 +8,7 @@ data:
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
-  SCRAPE_MEDIAFUSION: "True"
+  SCRAPE_MEDIAFUSION: "false"
   DOWNLOAD_TORRENTS: "false"
   # INDEXER_MANAGER_TYPE: jackett
   # INDEXER_MANAGER_URL: http://jackett:9117
