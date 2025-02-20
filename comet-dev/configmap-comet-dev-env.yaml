@@ -17,7 +17,7 @@ data:
   REMOVE_ADULT_CONTENT: "true"
   SCRAPE_ZILEAN: "True"
   SCRAPE_TORRENTIO: "false"
-  SCRAPE_MEDIAFUSION: "false"  
+  SCRAPE_MEDIAFUSION: "true"  
   DOWNLOAD_TORRENTS: "false"
   STREMTHRU_URL: http://elfhosted-internal.stremthru
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
