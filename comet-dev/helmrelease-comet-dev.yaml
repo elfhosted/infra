@@ -76,11 +76,11 @@ spec:
           configMap:
             name: jackett-config
     additionalContainers:
-      name: jackett
-      image: ghcr.io/elfhosted/jackett:0.22.1445
-      volumeMounts:
-      - name: jackett-config
-        mountPath: /config/
+      jackett:
+        image: ghcr.io/elfhosted/jackett:0.22.1445
+        volumeMounts:
+        - name: jackett-config
+          mountPath: /config/
     initContainers:
       setup-jackett:
         image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
