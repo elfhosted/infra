@@ -1026,12 +1026,23 @@ spec:
 
 
     redis:
-      # -- enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values.
-      enabled: false
+      # -- enable the bundled bitnami redis chart
+      enabled: true
       architecture: standalone
       auth:
-        enabled: false
+        enabled: true
+        existingSecret: authentik-secrets
+        existingSecretPasswordKey: AUTHENTIK_REDIS__PASSWORD
       master:
+        persistence:
+          storageClass: "topolvm-provisioner-thin"
+          ## @param master.persistence.accessModes Persistent Volume access modes
+          ##
+          accessModes:
+            - ReadWriteOnce
+          ## @param master.persistence.size Persistent Volume size
+          ##
+          size: 8Gi      
         resourcesPreset: "none"
       replica:
         resourcesPreset: "none"
