@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2024.2.x
+      version: 2024.12.x
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -29,6 +29,8 @@ spec:
       nameOverride: ""
       # -- String to fully override `"authentik.fullname"`
       fullnameOverride: ""
+      # -- A custom namespace to override the default namespace for the deployed resources.
+      namespaceOverride: ""
       # -- Common labels for all resources.
       additionalLabels: {}
         # app: authentik
@@ -55,6 +57,9 @@ spec:
 
       # -- Annotations for all deployed pods
       podAnnotations: {}
+
+      # -- Annotations for all deployed secrets
+      secretAnnotations: {}
 
       # -- Labels for all deployed pods
       podLabels: {}
@@ -166,10 +171,13 @@ spec:
           geoip: /geoip/GeoLite2-City.mmdb
           # -- Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled.
           asn: /geoip/GeoLite2-ASN.mmdb
+      web:
+        # -- Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash.
+        path: /
       email:
         # -- SMTP Server emails are sent from, fully optional
         host: "smtp.eu.mailgun.org"
-        port: 465
+        port: 587
         # -- SMTP credentials, when left empty, not authentication will be done
         username: "postmaster@mg.elfhosted.com"
         # -- SMTP credentials, when left empty, not authentication will be done
@@ -177,7 +185,7 @@ spec:
         # -- Enable either use_tls or use_ssl, they can't be enabled at the same time.
         use_tls: false
         # -- Enable either use_tls or use_ssl, they can't be enabled at the same time.
-        use_ssl: true
+        use_ssl: false
         # -- Connection timeout
         timeout: 30
         # -- Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>"
@@ -387,6 +395,9 @@ spec:
       # -- Alternative DNS policy for authentik server pods
       dnsPolicy: ""
 
+      # -- serviceAccount to use for authentik server pods
+      serviceAccountName: ~
+
       # -- authentik server pod-level security context
       # @default -- `{}` (See [values.yaml])
       securityContext: {}
@@ -422,7 +433,7 @@ spec:
         timeoutSeconds: 1
         ## Probe configuration
         httpGet:
-          path: /-/health/live/
+          path: "{{ .Values.authentik.web.path }}-/health/live/"
           port: http
 
       readinessProbe:
@@ -438,7 +449,7 @@ spec:
         timeoutSeconds: 1
         ## Probe configuration
         httpGet:
-          path: /-/health/ready/
+          path: "{{ .Values.authentik.web.path }}-/health/ready/"
           port: http
 
       startupProbe:
@@ -454,7 +465,7 @@ spec:
         timeoutSeconds: 1
         ## Probe configuration
         httpGet:
-          path: /-/health/live/
+          path: "{{ .Values.authentik.web.path }}-/health/live/"
           port: http
 
       # -- terminationGracePeriodSeconds for container lifecycle hook
@@ -575,20 +586,20 @@ spec:
 
       ingress:
         # -- enable an ingress resource for the authentik server
-        enabled: true
+        enabled: false
         # -- additional ingress annotations
         annotations: {}
         # -- additional ingress labels
         labels: {}
         # -- defines which ingress controller will implement the resource
-        ingressClassName: "nginx"
+        ingressClassName: ""
         # -- List of ingress hosts
-        hosts:
-          - authentik.infra.${dns_domain}
+        hosts: []
+          # - authentik.domain.tld
 
         # -- List of ingress paths
         paths:
-          - /
+          - "{{ .Values.authentik.web.path }}"
         # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
         pathType: Prefix
         # -- additional ingress paths
@@ -763,6 +774,9 @@ spec:
       # -- Alternative DNS policy for authentik worker pods
       dnsPolicy: ""
 
+      # -- serviceAccount to use for authentik worker pods. If set, overrides the value used when serviceAccount.create is true
+      serviceAccountName: ~
+
       # -- authentik worker pod-level security context
       # @default -- `{}` (See [values.yaml])
       securityContext: {}
@@ -782,6 +796,57 @@ spec:
         # capabilities:
         #   drop:
         #     - ALL
+
+      livenessProbe:
+        # -- Minimum consecutive failures for the [probe] to be considered failed after having succeeded
+        failureThreshold: 3
+        # -- Number of seconds after the container has started before [probe] is initiated
+        initialDelaySeconds: 5
+        # -- How often (in seconds) to perform the [probe]
+        periodSeconds: 10
+        # -- Minimum consecutive successes for the [probe] to be considered successful after having failed
+        successThreshold: 1
+        # -- Number of seconds after which the [probe] times out
+        timeoutSeconds: 1
+        ## Probe configuration
+        exec:
+          command:
+            - ak
+            - healthcheck
+
+      readinessProbe:
+        # -- Minimum consecutive failures for the [probe] to be considered failed after having succeeded
+        failureThreshold: 3
+        # -- Number of seconds after the container has started before [probe] is initiated
+        initialDelaySeconds: 5
+        # -- How often (in seconds) to perform the [probe]
+        periodSeconds: 10
+        # -- Minimum consecutive successes for the [probe] to be considered successful after having failed
+        successThreshold: 1
+        # -- Number of seconds after which the [probe] times out
+        timeoutSeconds: 1
+        ## Probe configuration
+        exec:
+          command:
+            - ak
+            - healthcheck
+
+      startupProbe:
+        # -- Minimum consecutive failures for the [probe] to be considered failed after having succeeded
+        failureThreshold: 60
+        # -- Number of seconds after the container has started before [probe] is initiated
+        initialDelaySeconds: 30
+        # -- How often (in seconds) to perform the [probe]
+        periodSeconds: 10
+        # -- Minimum consecutive successes for the [probe] to be considered successful after having failed
+        successThreshold: 1
+        # -- Number of seconds after which the [probe] times out
+        timeoutSeconds: 1
+        ## Probe configuration
+        exec:
+          command:
+            - ak
+            - healthcheck
 
       # -- terminationGracePeriodSeconds for container lifecycle hook
       terminationGracePeriodSeconds: 30
@@ -857,7 +922,7 @@ spec:
         # -- If defined, a repository for GeoIP images
         repository: ghcr.io/maxmind/geoipupdate
         # -- If defined, a tag for GeoIP images
-        tag: v6.0.0
+        tag: v7.1.0
         # -- If defined, an image digest for GeoIP images
         digest: ""
         # -- If defined, an imagePullPolicy for GeoIP images
@@ -932,6 +997,9 @@ spec:
     postgresql:
       # -- enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values.
       enabled: false
+      image:
+        repository: bitnami/postgresql
+        tag: 15.8.0-debian-12-r18
       auth:
         username: authentik
         database: authentik
@@ -939,11 +1007,22 @@ spec:
       primary:
         extendedConfiguration: |
           max_connections = 500
+        resourcesPreset: "none"
         # persistence:
         #   enabled: true
         #   storageClass:
         #   accessModes:
         #     - ReadWriteOnce
+      readReplicas:
+        resourcesPreset: "none"
+      backup:
+        resourcesPreset: "none"
+      passwordUpdateJob:
+        resourcesPreset: "none"
+      volumePermissions:
+        resourcesPreset: "none"
+      metrics:
+        resourcesPreset: "none"
 
 
     redis:
@@ -964,6 +1043,18 @@ spec:
           ## @param master.persistence.size Persistent Volume size
           ##
           size: 8Gi      
+        resourcesPreset: "none"
+      replica:
+        resourcesPreset: "none"
+      sentinel:
+        resourcesPreset: "none"
+      metrics:
+        resourcesPreset: "none"
+      volumePermissions:
+        resourcesPreset: "none"
+      sysctl:
+        resourcesPreset: "none"
+
 
     # -- additional resources to deploy. Those objects are templated.
     additionalObjects: []
