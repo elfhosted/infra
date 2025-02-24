@@ -1,5 +1,5 @@
-- name: netplan apply
-  command: netplan apply
+# - name: netplan apply
+#   command: netplan apply
 
 - name: reload ufw
   ufw:

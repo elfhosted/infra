@@ -8,22 +8,12 @@ network:
             dhcp4: no
             optional: true
     bonds:
-      bond0:
+      external:
         interfaces: ["enp1s0f0","enp1s0f1"]
         parameters:
           mode: 802.3ad
           lacp-rate: fast
           mii-monitor-interval: 100
-    virtual-ethernets:
-      cluster-bond0:
-        peer: cluster
-      cluster:
-        addresses: [ {{ cluster_ip }}/24 ]
-        peer: cluster-bond0
-      external-bond0:
-        peer: external
-      external:
-        peer: external-bond0
         addresses: [ {{ external_ip }}/29 ]
         routes:
           - on-link: true
@@ -31,16 +21,10 @@ network:
             via: {{ gateway4 }}
         nameservers:
           addresses: [8.8.8.8, 8.8.4.4]
-    bridges:
-      br0:
-        interfaces:
-        - bond0
-        - cluster-bond0
-        - external-bond0
     vlans:
       internal:
         id: 1217
-        link: bond0
+        link: external
         mtu: 1500
         addresses:
           - 192.168.45.{{ cluster_ip.split(".")[3] }}/24        

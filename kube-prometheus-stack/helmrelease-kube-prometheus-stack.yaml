@@ -797,7 +797,7 @@ spec:
 
         ## Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
         ## running cluster equal to the expected size.
-        replicas: 1
+        replicas: ${ha_replica_count}
 
         ## Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
         ## [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
@@ -1002,7 +1002,7 @@ spec:
                 
       tolerations: []
 
-      replicas: 2
+      replicas: ${ha_replica_count}
       
       ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
       ##
@@ -3727,7 +3727,7 @@ spec:
         ## Number of replicas of each shard to deploy for a Prometheus deployment.
         ## Number of replicas multiplied by shards is the total number of Pods created.
         ##
-        replicas: 1
+        replicas: ${ha_replica_count}
 
         ## EXPERIMENTAL: Number of shards to distribute targets onto.
         ## Number of replicas multiplied by shards is the total number of Pods created.

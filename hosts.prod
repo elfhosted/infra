@@ -16,84 +16,89 @@ fairy03     ansible_host=10.0.42.13 cluster_nic=eno1.4000
 hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
 hansel02     ansible_host=10.0.42.22 cluster_nic=eno1.4000 
 hansel03     ansible_host=10.0.42.23 cluster_nic=enp0s31f6.4000
-hansel04     ansible_host=10.0.42.24 cluster_nic=eno1.4000 # i7-8700
-hansel05     ansible_host=10.0.42.25 cluster_nic=eno1.4000 # i7-8700
+hansel04     ansible_host=10.0.42.24 cluster_nic=eno1.4000
+hansel05     ansible_host=10.0.42.25 cluster_nic=eno1.4000
+hansel06     ansible_host=10.0.42.26 cluster_nic=eno1.4000
+hansel07     ansible_host=10.0.42.27 cluster_nic=eno1.4000
+hansel08     ansible_host=10.0.42.28 cluster_nic=eno1.4000
+
 hansel13     ansible_host=10.0.42.33 cluster_nic=enp0s31f6.4000
-hansel14     ansible_host=10.0.42.34 cluster_nic=eno1.4000 # i7-8700
-hansel15     ansible_host=10.0.42.35 cluster_nic=eno1.4000 # i7-8700
-hansel16     ansible_host=10.0.42.36 cluster_nic=eno1.4000 # i7-8700
-hansel17     ansible_host=10.0.42.37 cluster_nic=eno1.4000 # i7-8700
-hansel18     ansible_host=10.0.42.38 cluster_nic=eno1.4000 # i7-8700
-hansel20     ansible_host=10.0.42.40 cluster_nic=eno1.4000 # i7-8700
+hansel14     ansible_host=10.0.42.34 cluster_nic=eno1.4000
+hansel15     ansible_host=10.0.42.35 cluster_nic=eno1.4000
+hansel16     ansible_host=10.0.42.36 cluster_nic=eno1.4000
+hansel17     ansible_host=10.0.42.37 cluster_nic=eno1.4000
+hansel18     ansible_host=10.0.42.38 cluster_nic=eno1.4000
+hansel20     ansible_host=10.0.42.40 cluster_nic=eno1.4000
 
 
 # another doubleup
-gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 # 128GB
-gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 # 128GB
-gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
-gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
-gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
-gretel36     ansible_host=10.0.42.156 cluster_nic=eno1.4000 # 128GB
-gretel37     ansible_host=10.0.42.157 cluster_nic=eno1.4000 # 128GB
-gretel38     ansible_host=10.0.42.158 cluster_nic=eno1.4000 # 128GB
-gretel39     ansible_host=10.0.42.159 cluster_nic=eno1.4000 # 128GB
-gretel40     ansible_host=10.0.42.160 cluster_nic=eno1.4000 # 128GB
+gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 
+gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 
+gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 
+gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 
+gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 
+gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 
+gretel36     ansible_host=10.0.42.156 cluster_nic=eno1.4000 
+gretel37     ansible_host=10.0.42.157 cluster_nic=eno1.4000 
+gretel38     ansible_host=10.0.42.158 cluster_nic=eno1.4000 
+gretel39     ansible_host=10.0.42.159 cluster_nic=eno1.4000 
+gretel40     ansible_host=10.0.42.160 cluster_nic=eno1.4000 
 
 [k3s_contended]
 hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
 hansel02     ansible_host=10.0.42.22 cluster_nic=eno1.4000 
 hansel03     ansible_host=10.0.42.23 cluster_nic=enp0s31f6.4000
 hansel13     ansible_host=10.0.42.33 cluster_nic=enp0s31f6.4000
-hansel14     ansible_host=10.0.42.34 cluster_nic=eno1.4000 # i7-8700
-hansel15     ansible_host=10.0.42.35 cluster_nic=eno1.4000 # i7-8700
-hansel16     ansible_host=10.0.42.36 cluster_nic=eno1.4000 # i7-8700
-hansel17     ansible_host=10.0.42.37 cluster_nic=eno1.4000 # i7-8700
-hansel18     ansible_host=10.0.42.38 cluster_nic=eno1.4000 # i7-8700
-hansel19     ansible_host=10.0.42.39 cluster_nic=eno1.4000 # i7-8700
-hansel20     ansible_host=10.0.42.40 cluster_nic=eno1.4000 # i7-8700
+hansel14     ansible_host=10.0.42.34 cluster_nic=eno1.4000
+hansel15     ansible_host=10.0.42.35 cluster_nic=eno1.4000
+hansel16     ansible_host=10.0.42.36 cluster_nic=eno1.4000
+hansel17     ansible_host=10.0.42.37 cluster_nic=eno1.4000
+hansel18     ansible_host=10.0.42.38 cluster_nic=eno1.4000
+hansel19     ansible_host=10.0.42.39 cluster_nic=eno1.4000
+hansel20     ansible_host=10.0.42.40 cluster_nic=eno1.4000
 
 
 [k3s_dedicated]
-gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 # 128GB
-gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 # 128GB
-gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 # 128GB
-gretel04     ansible_host=10.0.42.124 cluster_nic=eno1.4000 # 128GB
-gretel05     ansible_host=10.0.42.125 cluster_nic=eno1.4000 # 128GB
-gretel06     ansible_host=10.0.42.126 cluster_nic=eno1.4000 # 128GB
-gretel07     ansible_host=10.0.42.127 cluster_nic=eno1.4000 # 128GB
-gretel08     ansible_host=10.0.42.128 cluster_nic=eno1.4000 # 128GB
-gretel09     ansible_host=10.0.42.129 cluster_nic=eno1.4000 # 128GB
-gretel10     ansible_host=10.0.42.130 cluster_nic=eno1.4000 # 128GB
-gretel11     ansible_host=10.0.42.131 cluster_nic=eno1.4000 # 128GB
-gretel12     ansible_host=10.0.42.132 cluster_nic=eno1.4000 # 128GB
-gretel13     ansible_host=10.0.42.133 cluster_nic=eno1.4000 # 128GB
-gretel14     ansible_host=10.0.42.134 cluster_nic=eno1.4000 # 128GB
-gretel15     ansible_host=10.0.42.135 cluster_nic=eno1.4000 # 128GB
-gretel16     ansible_host=10.0.42.136 cluster_nic=eno1.4000 # 128GB
-gretel17     ansible_host=10.0.42.137 cluster_nic=eno1.4000 # 128GB
-gretel18     ansible_host=10.0.42.138 cluster_nic=eno1.4000 # 128GB
-gretel19     ansible_host=10.0.42.139 cluster_nic=eno1.4000 # 128GB
-gretel20     ansible_host=10.0.42.140 cluster_nic=eno1.4000 # 128GB
-gretel21     ansible_host=10.0.42.141 cluster_nic=eno1.4000 # 128GB
-gretel22     ansible_host=10.0.42.142 cluster_nic=eno1.4000 # 128GB
-gretel23     ansible_host=10.0.42.143 cluster_nic=eno1.4000 # 128GB
-gretel24     ansible_host=10.0.42.144 cluster_nic=eno1.4000 # 128GB
-gretel25     ansible_host=10.0.42.145 cluster_nic=eno1.4000 # 128GB
-gretel26     ansible_host=10.0.42.146 cluster_nic=eno1.4000 # 128GB
-gretel27     ansible_host=10.0.42.147 cluster_nic=eno1.4000 # 128GB
-gretel28     ansible_host=10.0.42.148 cluster_nic=eno1.4000 # 128GB
-gretel29     ansible_host=10.0.42.149 cluster_nic=eno1.4000 # 128GB
-gretel30     ansible_host=10.0.42.150 cluster_nic=eno1.4000 # 128GB
-gretel31     ansible_host=10.0.42.151 cluster_nic=eno1.4000 # 128GB
-gretel32     ansible_host=10.0.42.152 cluster_nic=enp98s0f0.4000 # 128GB # epyc host
-gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 # 128GB
-gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 # 128GB
-gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 # 128GB
-gretel36     ansible_host=10.0.42.156 cluster_nic=eno1.4000 # 128GB
-gretel37     ansible_host=10.0.42.157 cluster_nic=eno1.4000 # 128GB
-gretel38     ansible_host=10.0.42.158 cluster_nic=eno1.4000 # 128GB
-gretel39     ansible_host=10.0.42.159 cluster_nic=eno1.4000 # 128GB
-gretel40     ansible_host=10.0.42.160 cluster_nic=eno1.4000 # 128GB
+gretel01     ansible_host=10.0.42.121 cluster_nic=eno1.4000 
+gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000 
+gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 
+gretel04     ansible_host=10.0.42.124 cluster_nic=eno1.4000 
+gretel05     ansible_host=10.0.42.125 cluster_nic=eno1.4000 
+gretel06     ansible_host=10.0.42.126 cluster_nic=eno1.4000 
+gretel07     ansible_host=10.0.42.127 cluster_nic=eno1.4000 
+gretel08     ansible_host=10.0.42.128 cluster_nic=eno1.4000 
+gretel09     ansible_host=10.0.42.129 cluster_nic=eno1.4000 
+gretel10     ansible_host=10.0.42.130 cluster_nic=eno1.4000 
+gretel11     ansible_host=10.0.42.131 cluster_nic=eno1.4000 
+gretel12     ansible_host=10.0.42.132 cluster_nic=eno1.4000 
+gretel13     ansible_host=10.0.42.133 cluster_nic=eno1.4000 
+gretel14     ansible_host=10.0.42.134 cluster_nic=eno1.4000 
+gretel15     ansible_host=10.0.42.135 cluster_nic=eno1.4000 
+gretel16     ansible_host=10.0.42.136 cluster_nic=eno1.4000 
+gretel17     ansible_host=10.0.42.137 cluster_nic=eno1.4000 
+gretel18     ansible_host=10.0.42.138 cluster_nic=eno1.4000 
+gretel19     ansible_host=10.0.42.139 cluster_nic=eno1.4000 
+gretel20     ansible_host=10.0.42.140 cluster_nic=eno1.4000 
+gretel21     ansible_host=10.0.42.141 cluster_nic=eno1.4000 
+gretel22     ansible_host=10.0.42.142 cluster_nic=eno1.4000 
+gretel23     ansible_host=10.0.42.143 cluster_nic=eno1.4000 
+gretel24     ansible_host=10.0.42.144 cluster_nic=eno1.4000 
+gretel25     ansible_host=10.0.42.145 cluster_nic=eno1.4000 
+gretel26     ansible_host=10.0.42.146 cluster_nic=eno1.4000 
+gretel27     ansible_host=10.0.42.147 cluster_nic=eno1.4000 
+gretel28     ansible_host=10.0.42.148 cluster_nic=eno1.4000 
+gretel29     ansible_host=10.0.42.149 cluster_nic=eno1.4000 
+gretel30     ansible_host=10.0.42.150 cluster_nic=eno1.4000 
+gretel31     ansible_host=10.0.42.151 cluster_nic=eno1.4000 
+gretel32     ansible_host=10.0.42.152 cluster_nic=enp98s0f0.4000  # epyc host
+gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 
+gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 
+gretel35     ansible_host=10.0.42.155 cluster_nic=eno1.4000 
+gretel36     ansible_host=10.0.42.156 cluster_nic=eno1.4000 
+gretel37     ansible_host=10.0.42.157 cluster_nic=eno1.4000 
+gretel38     ansible_host=10.0.42.158 cluster_nic=eno1.4000 
+gretel39     ansible_host=10.0.42.159 cluster_nic=eno1.4000 
+gretel40     ansible_host=10.0.42.160 cluster_nic=eno1.4000 
 
 # We use these for doing automated hetzner installimage reinstalls
 # There's no DNS here but these are saved entries in my .ssh/config
