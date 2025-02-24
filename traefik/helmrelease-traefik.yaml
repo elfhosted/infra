@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 27.x.x
+      version: 34.x
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -27,7 +27,7 @@ spec:
       # -- Traefik image repository
       repository: traefik
       # -- defaults to appVersion
-      tag: "v2.11.13"
+      tag: "v2.11.21"
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
 
