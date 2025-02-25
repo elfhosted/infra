@@ -40,7 +40,7 @@ spec:
         ephemeral-storage: 50Mi
       limits:
         cpu: 600m
-        memory: 1Gi    
+        memory: 2Gi    
         ephemeral-storage: 100Mi
     controller:
       replicas: 1
