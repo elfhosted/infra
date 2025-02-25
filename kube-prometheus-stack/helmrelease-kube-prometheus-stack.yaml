@@ -70,7 +70,7 @@ spec:
       create: true
       rules:
         alertmanager: true
-        etcd: true
+        etcd: false # we don't see etcd from within k3s
         configReloaders: true
         general: true
         k8sContainerCpuUsageSecondsTotal: true
