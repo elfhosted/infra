@@ -32,19 +32,19 @@ data:
       "ProxyPassword": "",
       "ProxyIsAnonymous": true
     }
-  therarbg.json: |
+  animetosho.json: |
     [
       {
         "id": "sitelink",
         "type": "inputstring",
         "name": "Site Link",
-        "value": "https://therarbg.to/"
+        "value": "https://animetosho.org/"
       },
       {
         "id": "cookieheader",
         "type": "hiddendata",
         "name": "CookieHeader",
-        "value": ""
+        "value": null
       },
       {
         "id": "lasterror",
@@ -53,80 +53,12 @@ data:
         "value": null
       },
       {
-        "id": "sortrequestedfromsite",
-        "type": "inputselect",
-        "name": "Sort requested from site",
-        "value": "-a",
-        "options": {
-          "-a": "created desc",
-          "a": "created asc",
-          "-se": "seeders desc",
-          "se": "seeders asc",
-          "-s": "size desc",
-          "s": "size asc"
-        }
-      },
-      {
         "id": "tags",
         "type": "inputtags",
         "name": "Tags",
         "value": ""
       }
-    ]  
-  bitsearch.json: |
-    [
-      {
-        "id": "sitelink",
-        "type": "inputstring",
-        "name": "Site Link",
-        "value": "https://bitsearch.to/"
-      },
-      {
-        "id": "cookieheader",
-        "type": "hiddendata",
-        "name": "CookieHeader",
-        "value": ""
-      },
-      {
-        "id": "lasterror",
-        "type": "hiddendata",
-        "name": "LastError",
-        "value": null
-      },
-      {
-        "id": "prefermagnetlinks",
-        "type": "inputbool",
-        "name": "Prefer Magnet Links",
-        "value": false
-      },
-      {
-        "id": "sortrequestedfromsite",
-        "type": "inputselect",
-        "name": "Sort requested from site",
-        "value": "date",
-        "options": {
-          "date": "created",
-          "seeders": "seeders",
-          "size": "size"
-        }
-      },
-      {
-        "id": "orderrequestedfromsite",
-        "type": "inputselect",
-        "name": "Order requested from site",
-        "value": "desc",
-        "options": {
-          "desc": "desc",
-          "asc": "asc"
-        }
-      },
-      {
-        "id": "tags",
-        "type": "inputtags",
-        "name": "Tags",
-        "value": ""
-      }
-    ]  
+    ]
   thepiratebay.json: |
     [
       {
