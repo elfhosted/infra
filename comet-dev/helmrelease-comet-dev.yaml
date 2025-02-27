@@ -20,7 +20,7 @@ spec:
       nameOverride: comet-dev
     image:
       repository: ghcr.io/elfhosted/comet-rewrite
-      tag: rolling@sha256:0b7e40c08e6c2eddd6eb71fa296f19c35f86020095086f1ab9fe2d9314be0e3d
+      tag: rolling@sha256:9ddb2dcfaf169d48378ff5bcaced07087a2e03170d77917baca19f9d00dee23d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -93,7 +93,7 @@ spec:
             name: jackett-config
     additionalContainers:
       jackett:
-        image: ghcr.io/elfhosted/jackett:0.22.1458
+        image: ghcr.io/elfhosted/jackett:0.22.1459
         volumeMounts:
         - name: jackett-config
           mountPath: /config/
