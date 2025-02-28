@@ -52,7 +52,7 @@ spec:
         cpu: 2
         memory: 3Gi
     controller:
-      replicas: 1
+      replicas: 10
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
