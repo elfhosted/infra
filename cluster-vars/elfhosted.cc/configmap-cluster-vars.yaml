@@ -12,7 +12,7 @@ data:
   k3s_server_endpoint_1: 192.168.41.11
   k3s_server_endpoint_2: 192.168.41.12
   k3s_server_endpoint_3: 192.168.41.13
-  k8s_ha_api_ip: 192.168.44.10
+  k8s_ha_api_ip: 192.168.45.10
   k8s_ha_api_port: "8443"
   prometheus_retentionsize: '5GB'
   prometheus_retention: "4d"   # enough to chart a month's progress with some headroom
@@ -21,7 +21,7 @@ data:
   thanos_storage: '50Gi'
   proxy_wildcard_dns: "true"
   dashboard_background: development.jpg
-  k3s_version:  v1.31.4+k3s1
+  k3s_version: v1.31.5+k3s1
   pod_cidr_v4: 10.8.0.0/15
   service_cidr_v4: 10.44.0.0/16
   pod_cidr_v6: fd02::/104  
@@ -39,11 +39,11 @@ data:
   ranger_zurg_cpu_requests: 1800m
   halfling_zurg_cpu_requests: 3600m
   nazgul_zurg_cpu_requests: 7200m
-  hobbit_cpu_requests: 900m
-  ranger_cpu_requests: 1800m
+  hobbit_cpu_requests: 1100m
+  ranger_cpu_requests: 2200m
   halfling_cpu_requests: 3600m
   nazgul_cpu_requests: 7200m  
-
+  
   # these provide sane limits for the streamers
   hobbit_streamer_cpu_limits: "2"
   hobbit_streamer_ram_limits: "3Gi"

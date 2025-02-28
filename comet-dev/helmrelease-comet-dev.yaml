@@ -20,7 +20,7 @@ spec:
       nameOverride: comet-dev
     image:
       repository: ghcr.io/elfhosted/comet-rewrite
-      tag: rolling@sha256:ff09eb2ececb023cccd9fd4090ec1898c9f310f5ac4198d6686fbecf5397a4f8
+      tag: rolling@sha256:4b4ab6ffcfaa5b39caf96960ea1739f68a364174de60756f8763ed727b598257
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -33,13 +33,25 @@ spec:
       fsGroup: 568
     automountServiceAccountToken: false
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
       annotations:
         configmap.reloader.stakater.com/reload: "comet-dev-env"
         secret.reloader.stakater.com/reload: "comet-dev-env"
+    affinity:      
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - comet
+            topologyKey: "kubernetes.io/hostname"          
     envFrom:
     - configMapRef:
         name: comet-dev-env
@@ -64,30 +76,106 @@ spec:
         mountPath: /tmp
         type: emptyDir
         volumeSpec:
-          medium: Memory                 
+          medium: Memory    
+      shared:
+        enabled: true
+        type: emptyDir
+        volumeSpec:
+          medium: Memory               
+      jackett-config:
+        enabled: true
+        type: emptyDir  
+      jackett-bootstrap:
+        enabled: "true"
+        type: "custom"
+        volumeSpec:
+          configMap:
+            name: jackett-config
+    additionalContainers:
+      jackett:
+        image: ghcr.io/elfhosted/jackett:0.22.1461
+        volumeMounts:
+        - name: jackett-config
+          mountPath: /config/
+    initContainers:
+      setup-jackett:
+        image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+
+          mkdir -p /config/Jackett/Indexers
+          cp -rf --dereference /bootstrap/*.json /config/Jackett/Indexers/
+          mv /config/Jackett/Indexers/ServerConfig.json /config/Jackett/
+
+        volumeMounts:
+        - mountPath: /config
+          name: jackett-config
+        - mountPath: /bootstrap
+          name: jackett-bootstrap
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: false      
+      setup-warp:
+        image: ghcr.io/elfhosted/tooling:focal-20240530@sha256:458d1f3b54e9455b5cdad3c341d6853a6fdd75ac3f1120931ca3c09ac4b588de
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+
+          cd /shared
+
+          # Create cloudflare account
+          wgcf register --accept-tos
+
+          # Create gluetun config
+          wgcf generate -p /shared/wg0.conf
+
+          # grab the values from the profile and put them into env vars for gluetun to consume
+          echo "export WIREGUARD_PRIVATE_KEY=$(grep PrivateKey /shared/wg0.conf | cut -f3 -d' ')" > /shared/env
+          echo "export WIREGUARD_PUBLIC_KEY=$(grep PublicKey /shared/wg0.conf | cut -f3 -d' ')" >> /shared/env
+          echo "export WIREGUARD_ADDRESSES=$(grep Address /shared/wg0.conf | grep '/32' | cut -f3 -d' ')" >> /shared/env
+
+          echo "export VPN_ENDPOINT_IP=$(dig +short dig +short engage.cloudflareclient.com)" >> /shared/env
+
+        volumeMounts:
+        - mountPath: /shared
+          name: shared
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+          readOnlyRootFilesystem: false                 
     addons:
       vpn:
-        enabled: true # in case we ever need it
+        enabled: false # in case we ever need it
         gluetun:
           image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: comet-dev-vpn
+            repository: ghcr.io/elfhosted/gluetun
+            tag: 3.40.0@sha256:897e3dc0945a104ba087af36026a8bd365a1c1d4865b3a111a2fbdad7e6b9729
         env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.0.0.0/8
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"      
-          VPNDNS: "0"  
+          FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
+          DNS_KEEP_NAMESERVER: "on"
+          HTTP_CONTROL_SERVER_PORT: "8001"
+          HTTP_CONTROL_SERVER_ADDRESS: ":8001"
+          VPN_TYPE: wireguard
+          VPN_SERVICE_PROVIDER: custom
+          FIREWALL_INPUT_PORTS: "8000"
+          WIREGUARD_MTU: "1280"
+          VPN_ENDPOINT_PORT: "2408"
+          DOT: "off"
         securityContext:
           runAsUser: 0
           capabilities:
             add:
               - NET_ADMIN
               - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config                                  
+        config: # We have to set this to null so that we can override with our own config
+        volumeMounts:
+        - mountPath: /shared
+          name: shared

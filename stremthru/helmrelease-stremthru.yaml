@@ -20,7 +20,7 @@ spec:
       nameOverride: stremthru
     image:
       repository: ghcr.io/elfhosted/stremthru
-      tag: 0.55.1@sha256:dacdef1df19ac2f203ac4c4c4fe9c7963a1e8998760c0b178202776029cc226a
+      tag: 0.56.3@sha256:3dca8f9f9b44d8da23bacdfe342a2d288e9d0c8cc04a40f7f929178093847bba
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -44,7 +44,7 @@ spec:
                 - stremthru
             topologyKey: "kubernetes.io/hostname"        
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -57,6 +57,9 @@ spec:
         type: emptyDir
         mountPath: /tmp       
     resources:
+      limits:
+        cpu: 1
+        memory: 1Gi
     ingress:
       main:
         enabled: false

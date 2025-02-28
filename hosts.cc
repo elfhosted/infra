@@ -8,9 +8,9 @@ controllers
 public_hosts
 
 [k3s_servers]
-eagle03   ansible_host=eagle03.elfhosted.cc cluster_ip=192.168.44.13 external_ip=23.147.152.157 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.157/29,192.168.44.13/24,fd00:192:168:44:0::13/118] gateway4=23.147.152.153 keepalived_priority=110
-eagle01   ansible_host=eagle01.elfhosted.cc cluster_ip=192.168.44.11 external_ip=23.147.152.166 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.166/29,192.168.44.11/24,fd00:192:168:44:0::11/118] gateway4=23.147.152.161 keepalived_priority=130
-eagle02   ansible_host=eagle02.elfhosted.cc cluster_ip=192.168.44.12 external_ip=23.147.152.165 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.165/29,192.168.44.12/24,fd00:192:168:44:0::12/118] gateway4=23.147.152.161 keepalived_priority=120
+eagle03   ansible_host=eagle03.elfhosted.cc cluster_ip=192.168.45.13 external_ip=23.147.152.157 cluster_nic=internal interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.157/29,192.168.44.13/24,fd00:192:168:44:0::13/118] gateway4=23.147.152.153 keepalived_priority=110
+eagle01   ansible_host=eagle01.elfhosted.cc cluster_ip=192.168.45.11 external_ip=23.147.152.166 cluster_nic=internal interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.166/29,192.168.44.11/24,fd00:192:168:44:0::11/118] gateway4=23.147.152.161 keepalived_priority=130
+eagle02   ansible_host=eagle02.elfhosted.cc cluster_ip=192.168.45.12 external_ip=23.147.152.165 cluster_nic=internal interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.165/29,192.168.44.12/24,fd00:192:168:44:0::12/118] gateway4=23.147.152.161 keepalived_priority=120
 
 [k3s_agents]
 yankee01  ansible_host=yankee01.elfhosted.cc cluster_ip=192.168.44.21 external_ip=23.147.152.164 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.164/29,192.168.44.21/24,fd00:192:168:44:0::21/118] gateway4=23.147.152.161

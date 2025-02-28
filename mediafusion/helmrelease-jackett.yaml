@@ -20,7 +20,7 @@ spec:
       nameOverride: jackett
     image:
       repository: ghcr.io/elfhosted/jackett
-      tag: 0.22.1445
+      tag: 0.22.1461
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -44,17 +44,8 @@ spec:
             claimName: jackett
       tmp: 
         enabled: true
-        type: custom
-        mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi              
+        type: emptyDir
+        mountPath: /tmp           
     ingress:
       main:
         enabled: false 

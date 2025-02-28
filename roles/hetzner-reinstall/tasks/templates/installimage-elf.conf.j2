@@ -11,7 +11,7 @@ HOSTNAME {{ inventory_hostname_short}}
 USE_KERNEL_MODE_SETTING yes
 
 PART /boot/efi esp 256
-PART /boot  ext3     1024M
+PART /boot  ext3     2048M
 PART lvm    vg0       all
 
 LV vg0   root   /        ext4         64G

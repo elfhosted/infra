@@ -1,16 +1,16 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: rd-comet
-  namespace: comet
+  name: rd-mariadb
+  namespace: mautic
 spec:
   trigger:
     manual: runonce
   restic:
-    repository: comet-restic-config
+    repository: mautic-restic-config
     copyMethod: Snapshot
-    cacheCapacity: 20Gi
-    capacity: 20Gi
+    cacheCapacity: 10Gi
+    capacity: 10Gi
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes:
     - ReadWriteOnce
