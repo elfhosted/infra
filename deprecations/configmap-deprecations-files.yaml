@@ -47,7 +47,19 @@ data:
                 "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
             }
         ]
-    }   
+    }  
+  mediafusion-catalog-rate-limited.json: |
+    {
+    "metas": [
+        {
+        "id": "rate-limit-exceeded",
+        "name": "MediaFusion public rate-limit exceeded 🐢",
+        "type": "movie",
+        "poster": "https://docs.elfhosted.com/images/public-rate-limit-exceeded-movie-poster.png",
+        "description": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio"
+        }
+     ]
+    }  
   knightcrawler-search-rate-limited.json: |
     {
         "streams": [
