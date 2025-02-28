@@ -7,10 +7,12 @@ data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
-  FASTAPI_WORKERS: "4"
+  FASTAPI_WORKERS: "8" # 8 workers with 10 pods = 80 db connections?
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
   SCRAPE_MEDIAFUSION: "true"
   SCRAPE_ZILEAN: "true"
+  SCRAPE_TORRENTI: "true"
+  TORRENTIO_URL: http://elfhosted-internal.knightcrawler
   DOWNLOAD_TORRENTS: "false"  
   INDEXER_MANAGER_TYPE: jackett
   INDEXER_MANAGER_URL: http://localhost:9117

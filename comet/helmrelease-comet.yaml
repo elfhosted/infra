@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v2.0.0@sha256:4e6274fecc9b21437e53f580cd601f933615bdaa638d48154f1007cdbcd2489d
+      tag: v2.0.1@sha256:4fc81d33d93093fa4c1c3a48c190ae49e357bb9f40ab156d6b9a157184e4a880
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -52,7 +52,7 @@ spec:
         cpu: 2
         memory: 3Gi
     controller:
-      replicas: 4
+      replicas: 0
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
@@ -98,6 +98,40 @@ spec:
         volumeSpec:
           configMap:
             name: jackett-config
+    probes:
+      liveness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      readiness:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+      startup:
+        custom: true
+        enabled: true
+        spec:
+          failureThreshold: 30
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10                 
     additionalContainers:
       jackett:
         image: ghcr.io/elfhosted/jackett:0.22.1462
