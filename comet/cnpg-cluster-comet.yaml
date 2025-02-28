@@ -5,6 +5,10 @@ metadata:
   namespace: comet
 spec:
   instances: 3
+  
+  postgresql:
+    parameters:
+      max_connections: "200"  
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
