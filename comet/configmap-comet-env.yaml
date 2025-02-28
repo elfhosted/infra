@@ -7,6 +7,7 @@ data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
+  FASTAPI_WORKERS: "1"
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
   SCRAPE_MEDIAFUSION: "true"
   SCRAPE_ZILEAN: "true"
