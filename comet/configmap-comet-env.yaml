@@ -13,14 +13,12 @@ data:
   DOWNLOAD_TORRENTS: "false"  
   INDEXER_MANAGER_TYPE: jackett
   INDEXER_MANAGER_URL: http://localhost:9117
-
   INDEXER_MANAGER_INDEXERS: '["animetosho","eztv","thepiratebay","yts"]'
   GET_TORRENT_TIMEOUT: "5" # let the cache build
   INDEXER_MANAGER_TIMEOUT: "30"
   DATABASE_TYPE: postgresql
   REMOVE_ADULT_CONTENT: "true"
   STREMTHRU_URL: http://elfhosted-internal.stremthru
-  MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
