@@ -6,10 +6,10 @@ metadata:
 spec:
   cluster:
     name: comet
-  instances: 1
+  instances: 2
   type: rw
   pgbouncer:
     poolMode: session
     parameters:
-      max_client_conn: "10000"
+      max_client_conn: "100000"
       default_pool_size: "100"
