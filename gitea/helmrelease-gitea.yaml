@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: gitea
-      version: 10.6.x
+      version: 11.0.x
       sourceRef:
         kind: HelmRepository
         name: gitea
