@@ -24,7 +24,7 @@ spec:
         - name: headers-add-cors-for-stremio
           namespace: traefik
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.*}/stream/{else:.+}`)
+    - match: Host(`comet.${dns_domain}`) && PathPrefix(`{something:.*}stream/{else:.+}`)
       kind: Rule
       services:
         - name: comet
