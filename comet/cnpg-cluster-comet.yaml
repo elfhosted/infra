@@ -8,7 +8,7 @@ spec:
 
   postgresql:
     parameters:
-      max_connections: "1000"  
+      max_connections: "500"  
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
