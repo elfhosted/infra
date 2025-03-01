@@ -9,9 +9,6 @@ spec:
   postgresql:
     parameters:
       max_connections: "500"  
-      shared_preload_libraries: "pg_stat_statements"
-      pg_stat_statements.max: "10000"
-      pg_stat_statements.track: "all"      
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
