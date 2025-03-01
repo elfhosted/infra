@@ -27,8 +27,8 @@ spec:
       cpu: "200m"
       memory: 1Gi
     limits:
-      cpu: "1"
-      memory: 10Gi
+      cpu: "2"
+      memory: 20Gi
 
   monitoring:
     enablePodMonitor: true
