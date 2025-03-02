@@ -803,7 +803,7 @@ spec:
     service:
       ## @param service.type Kubernetes Service type for Controller
       ##
-      type: LoadBalancerIP
+      type: LoadBalancer
       ## @param service.ports [object] Service ports
       ##
       ports:
