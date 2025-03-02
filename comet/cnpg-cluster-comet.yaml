@@ -20,7 +20,7 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 10Gi
+    size: 20Gi
 
   resources:
     requests:
@@ -46,7 +46,7 @@ spec:
   backup:
       # Volume snapshot backups
       volumeSnapshot:
-        className: topolvm-provisioner
+        className: topolvm-provisioner-thin
       # WAL archive
       barmanObjectStore:        
         destinationPath: s3://cnpg/
@@ -61,3 +61,4 @@ spec:
         wal:
           compression: gzip
           maxParallel: 2      
+      retentionPolicy: "7d"

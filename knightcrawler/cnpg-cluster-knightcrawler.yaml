@@ -45,7 +45,7 @@ spec:
   backup:
       # Volume snapshot backups
       volumeSnapshot:
-        className: topolvm-provisioner
+        className: topolvm-provisioner-thin
       # WAL archive
       barmanObjectStore:        
         destinationPath: s3://cnpg/
@@ -60,3 +60,4 @@ spec:
         wal:
           compression: gzip
           maxParallel: 2      
+      retentionPolicy: "7d"          
