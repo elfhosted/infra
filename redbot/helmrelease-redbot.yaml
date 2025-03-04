@@ -20,7 +20,7 @@ spec:
       nameOverride: redbot
     image:
       repository: phasecorex/red-discordbot
-      tag: latest@sha256:f38277458aae5e784cc86a1a330d2e0dcc6cb841afffdb1d28792abd98b74166
+      tag: latest@sha256:7b271413af7ac8de4a43de1bb0ba138e3151d96c656bc9d754a7e858097c5f34
     securityContext:
       seccompProfile:
         type: RuntimeDefault
