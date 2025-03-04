@@ -44,7 +44,7 @@ spec:
   backup:
       # Volume snapshot backups
       volumeSnapshot:
-        className: ceph-block
+        className: topolvm-provisioner-thin
       # WAL archive
       barmanObjectStore:        
         destinationPath: s3://cnpg/

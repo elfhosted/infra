@@ -7,28 +7,27 @@ data:
   ZILEAN_URL: http://zilean-public.zilean-public:8181 # use the public zilean now
   ADDON_ID: comet.elfhosted.com
   ADDON_NAME: Comet | ElfHosted
+  FASTAPI_WORKERS: "4"
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
-  SCRAPE_MEDIAFUSION: "false"
+  SCRAPE_MEDIAFUSION: "true"
   SCRAPE_ZILEAN: "true"
-  DOWNLOAD_TORRENTS: "false"
-  # INDEXER_MANAGER_TYPE: jackett
-  # INDEXER_MANAGER_URL: http://jackett:9117
-  # DEBRID_PROXY_URL: http://127.0.0.1:1080
-  STREMTHRU_DEFAULT_URL: http://elfhosted-internal.stremthru
-  STREMTHRU_URL: http://elfhosted-internal.stremthru
-  # INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
+  SCRAPE_TORRENTIO: "true"
+  TORRENTIO_URL: http://elfhosted-internal.knightcrawler
+  DOWNLOAD_TORRENTS: "false"  
+  INDEXER_MANAGER_TYPE: jackett
+  INDEXER_MANAGER_URL: http://localhost:9117
+  INDEXER_MANAGER_INDEXERS: '["animetosho","eztv","thepiratebay","yts"]'
   GET_TORRENT_TIMEOUT: "5" # let the cache build
   INDEXER_MANAGER_TIMEOUT: "30"
-  CACHE_TTL: "2764800" # 1 month
-  # DATABASE_TYPE: postgresql
+  DATABASE_TYPE: postgresql
   REMOVE_ADULT_CONTENT: "true"
+  STREMTHRU_URL: http://elfhosted-internal.stremthru
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
     <P>
       This is a free community instance of <A HREF="https://github.com/g0ldyy/comet">Comet</A> - enjoy! ❤️ </BR>(<I>reasonable <A HREF="https://github.com/funkypenguin/elf-infra/blob/main/comet/middleware-rate-limit-stream.yaml">rate-limits</A> apply</I>)</BR>
     </P>
-    <P>To provide the best experience for the widest range of users (<I>at least until the <A HREF="https://github.com/g0ldyy/comet/pull/234">pending rewrite</A></I>) this instance now only serves cached (public <A HREF="https://debridmediamanager.com">DMM</A>/<A HREF="https://mediafusion.elfhosted.com">MediaFusion</A>) results. Users wanting to search using custom indexers are invited to <A HREF="https://github.com/g0ldyy/comet?tab=readme-ov-file#self-hosted">self-host Comet</A>, or <A HREF="https://store.elfhosted.com/product/comet/elf/g0ldy">subscribe to a private ElfHosted instance</A> (33% goes to developer).</P>
     <P>See the <A HREF='https://stremio-addons-guide.elfhosted.com/'>ElfHosted Stremio Addons Guide</A> for more addons!</P>
 
              <h3>What is ElfHosted?</h3>

@@ -153,7 +153,7 @@ spec:
           readOnlyRootFilesystem: false                 
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: ghcr.io/elfhosted/gluetun

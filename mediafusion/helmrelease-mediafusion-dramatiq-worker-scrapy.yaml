@@ -21,7 +21,7 @@ spec:
     image:
       repository: ghcr.io/elfhosted/mediafusion
       tag: 4.3.25@sha256:769feca938945c58f5009993b8d2ef0f0b24b703136fe15b2561734fa04cd990
-    command: ["pipenv", "run", "dramatiq", "api.task", "-p", "1", "-t", "1", "--queues", "scrapy"]
+    command: ["dramatiq", "api.task", "-p", "1", "-t", "1", "--queues", "scrapy"]
     securityContext:
       seccompProfile:
         type: RuntimeDefault
