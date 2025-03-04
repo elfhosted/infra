@@ -5,27 +5,15 @@ metadata:
   namespace: comet
 spec:
   routes:
-    # Allow manifest.json regardless
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}manifest.json`)
-      priority: 100
-      kind: Rule
-      services:
-        - name: comet
-          kind: Service
-          port: 8000
-    # Base URL, but catch bad paths in the regex
+    # Base URL
     - match: Host(`comet.${dns_domain}`)
       kind: Rule
       services:
         - name: comet
           kind: Service
           port: 8000
-      middlewares:
-        - name: headers-add-cors-for-stremio
-          namespace: traefik
-        - name: redirectregex-comet-requires-configuration
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+    - match: Host(`comet.${dns_domain}`) && (PathPrefix(`/{something:.+}stream/{else:.+}`) || PathPrefix(`/stream`))
       kind: Rule
       services:
         - name: comet
@@ -33,39 +21,3 @@ spec:
           port: 8000
       middlewares:  
         - name: chain-stream
-    # Advise user of RD deprecation (match base64 value of "realdebrid")
-    # - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}cmVhbGRlYn{else:.+}`)
-    #   kind: Rule
-    #   services:
-    #     - name: comet
-    #       kind: Service
-    #       port: 8000
-    #   middlewares:  
-    #     - name: headers-add-cors-for-stremio
-    #       namespace: traefik
-    #     - name: redirectregex-realdebrid-api-removal
-    #       namespace: traefik
-    # # And likewise for AD
-    # - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}ImRlYnJpZFNlcnZpY2UiOiJhbGxkZWJyaWQ{else:.+}`)
-    #   kind: Rule
-    #   services:
-    #     - name: comet
-    #       kind: Service
-    #       port: 8000
-    #   middlewares:  
-    #     - name: headers-add-cors-for-stremio
-    #       namespace: traefik
-    #     - name: redirectregex-realdebrid-api-removal
-    #       namespace: traefik         
-    # # And likewise for DL
-    # - match: Host(`comet.${dns_domain}`) && PathPrefix(`/{something:.+}ImRlYnJpZFNlcnZpY2{else:.+}`)
-    #   kind: Rule
-    #   services:
-    #     - name: comet
-    #       kind: Service
-    #       port: 8000
-    #   middlewares:  
-    #     - name: headers-add-cors-for-stremio
-    #       namespace: traefik
-    #     - name: redirectregex-realdebrid-api-removal
-    #       namespace: traefik                   
