@@ -79,7 +79,7 @@ spec:
       logFormat: "text"             # log format specified as text or json, defaults to text
       preRebootNodeLabels: []       # labels to add to nodes before cordoning (default [])
       postRebootNodeLabels: []      # labels to add to nodes after uncordoning (default [])
-      concurrency: 2                # amount of nodes to concurrently reboot. (default 1)
+      concurrency: 3                # amount of nodes to concurrently reboot. (default 1)
 
 
     rbac:
