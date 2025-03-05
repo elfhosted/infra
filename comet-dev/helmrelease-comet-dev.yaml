@@ -20,7 +20,7 @@ spec:
       nameOverride: comet-dev
     image:
       repository: ghcr.io/elfhosted/comet-rewrite
-      tag: rolling@sha256:9ddb2dcfaf169d48378ff5bcaced07087a2e03170d77917baca19f9d00dee23d
+      tag: rolling@sha256:384c145c9f8d4920f018343bbc95fef7acebf09008da55186eb18470687d3185
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -93,7 +93,7 @@ spec:
             name: jackett-config
     additionalContainers:
       jackett:
-        image: ghcr.io/elfhosted/jackett:0.22.1459
+        image: ghcr.io/elfhosted/jackett:0.22.1507
         volumeMounts:
         - name: jackett-config
           mountPath: /config/
@@ -153,11 +153,11 @@ spec:
           readOnlyRootFilesystem: false                 
     addons:
       vpn:
-        enabled: false # in case we ever need it
+        enabled: true # in case we ever need it
         gluetun:
           image:
             repository: ghcr.io/elfhosted/gluetun
-            tag: 3.40.0@sha256:897e3dc0945a104ba087af36026a8bd365a1c1d4865b3a111a2fbdad7e6b9729
+            tag: 3.40.0@sha256:ac01473025f4ed729e49f26282702267785949518fcccb3ba1a523fe201def0d
         env:
           FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
           DNS_KEEP_NAMESERVER: "on"

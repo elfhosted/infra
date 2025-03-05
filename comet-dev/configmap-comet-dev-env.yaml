@@ -10,7 +10,7 @@ data:
   INDEXER_MANAGER_TYPE: jackett
   INDEXER_MANAGER_URL: http://localhost:9117
   DEBRID_PROXY_URL: http://127.0.0.1:1080
-  INDEXER_MANAGER_INDEXERS: '["bitsearch","eztv","thepiratebay","therarbg","yts"]'
+  INDEXER_MANAGER_INDEXERS: '["animetosho","eztv","thepiratebay","yts"]'
   GET_TORRENT_TIMEOUT: "5" # let the cache build
   INDEXER_MANAGER_TIMEOUT: "30"
   DATABASE_TYPE: postgresql
@@ -19,7 +19,7 @@ data:
   SCRAPE_TORRENTIO: "false"
   SCRAPE_MEDIAFUSION: "True"  
   DOWNLOAD_TORRENTS: "false"
-  STREMTHRU_DEFAULT_URL: http://elfhosted-internal.stremthru
+  STREMTHRU_URL: http://elfhosted-internal.stremthru
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion  
   CUSTOM_HEADER_HTML: |
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>

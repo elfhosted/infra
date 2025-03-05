@@ -1,10 +1,14 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: peertube
-  namespace: peertube
+  name: comet
+  namespace: comet
 spec:
   instances: 3
+
+  postgresql:
+    parameters:
+      max_connections: "500"  
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
@@ -20,11 +24,11 @@ spec:
 
   resources:
     requests:
-      cpu: "1"
-      memory: 4Gi
+      cpu: "200m"
+      memory: 1Gi
     limits:
-      cpu: "4"
-      memory: 10Gi
+      cpu: "2"
+      memory: 20Gi
 
   monitoring:
     enablePodMonitor: true
@@ -34,8 +38,8 @@ spec:
 
   bootstrap:
     initdb:
-      database: peertube
-      owner: peertube
+      database: comet
+      owner: comet
       secret:
         name: app-secret
 
@@ -57,4 +61,4 @@ spec:
         wal:
           compression: gzip
           maxParallel: 2      
-      retentionPolicy: "7d"          
+      retentionPolicy: "7d"
