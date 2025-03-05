@@ -19,6 +19,7 @@
         access_token_validity: "minutes=5"
         authentication_flow: "{{ _authentication_flow.json.pk }}"
         authorization_flow: "{{ _authorization_flow.json.pk }}"
+        invalidation_flow: "{{ _invalidation_flow.json.pk }}"
         client_id: "{{ provider.name }}"
         client_secret: "{{ provider.secret }}"
         client_type: confidential
@@ -44,6 +45,7 @@
         access_token_validity: "minutes=5"
         authentication_flow: "{{ _authentication_flow.json.pk }}"
         authorization_flow: "{{ _authorization_flow.json.pk }}"
+        invalidation_flow: "{{ _invalidation_flow.json.pk }}"
         client_id: "{{ provider.name }}"
         client_secret: "{{ provider.secret }}"
         client_type: confidential
