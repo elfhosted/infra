@@ -1105,8 +1105,8 @@ spec:
 
           ## URL of prometheus datasource
           ##
-          # url: http://prometheus-stack-prometheus:9090/
-          url: http://thanos-query.thanos:9090/
+          url: http://prometheus-stack-prometheus:9090/
+          # url: http://thanos-query.thanos:9090/
 
           ## Prometheus request timeout in seconds
           # timeout: 30
@@ -3033,7 +3033,7 @@ spec:
       # Thanos sidecar on prometheus nodes
       # (Please remember to change ${kube-prometheus-stack.fullname} and ${namespace}. Not just copy and paste!)
       thanosService:
-        enabled: true
+        enabled: false
         annotations: {}
         labels: {}
 
