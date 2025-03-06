@@ -80,12 +80,12 @@ spec:
         k8sContainerResource: true
         k8sContainerMemoryWorkingSetBytes: true
         k8sPodOwner: false
-        kubeApiserverAvailability: true
+        kubeApiserverAvailability: false
         kubeApiserverBurnrate: true
         kubeApiserverHistogram: false
         kubeApiserverSlos: false
-        kubeControllerManager: true
-        kubelet: true
+        kubeControllerManager: false
+        kubelet: false
         kubeProxy: false
         kubePrometheusGeneral: true
         kubePrometheusNodeRecording: true
@@ -1105,7 +1105,7 @@ spec:
 
           ## URL of prometheus datasource
           ##
-          url: http://prometheus-stack-prometheus:9090/
+          url: http://prometheus-operated.kube-prometheus-stack:9090
           # url: http://thanos-query.thanos:9090/
 
           ## Prometheus request timeout in seconds
