@@ -33,7 +33,7 @@
         internal_host_ssl_validation: false
         authentication_flow: "{{ _authentication_flow.json.pk }}"
         authorization_flow: "{{ _authorization_flow.json.pk }}"   
-        # skip_path_regex: "{{ skip_path_regex }}"
+        invalidation_flow: "{{ _invalidation_flow.json.pk }}"
       body_format: json
       status_code: 200
     when: _existing_provider.json.results # resolves to false/undefined if search is empty
@@ -56,7 +56,7 @@
         internal_host_ssl_validation: false
         authentication_flow: "{{ _authentication_flow.json.pk }}"
         authorization_flow: "{{ _authorization_flow.json.pk }}"     
-        # skip_path_regex: "{{ skip_path_regex }}"
+        invalidation_flow: "{{ _invalidation_flow.json.pk }}"
       body_format: json
       status_code: 201
     when: not _existing_provider.json.results # resolves to false/undefined if search is empty

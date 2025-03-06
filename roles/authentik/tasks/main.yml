@@ -90,7 +90,7 @@
 
   - name: "what's the ID of the built-in authentik default email scope?"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?scope_name=email"
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/provider/scope/?search=email"
       method: GET
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -100,7 +100,7 @@
 
   - name: "what's the ID of the built-in authentik default profile scope?"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?scope_name=profile"
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/provider/scope/?search=profile"
       method: GET
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -110,7 +110,7 @@
 
   - name: "what's the ID of the built-in authentik default openid scope?"
     uri:
-      url: "https://{{ authentik_dns_name }}/api/v3/propertymappings/scope/?scope_name=openid"
+      url: "https://{{ authentik_dns_name }}/api/v3/propertymappings/provider/scope/?scope_name=openid"
       method: GET
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -120,7 +120,7 @@
     
   - name: "what's the ID of the built-in authentik default offline_access scope?"
     uri:
-      url: "https://{{ authentik_dns_name }}/api/v3/propertymappings/scope/?scope_name=offline_access"
+      url: "https://{{ authentik_dns_name }}/api/v3/propertymappings/provider/scope/?search=offline_access"
       method: GET
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -148,6 +148,16 @@
       status_code: 200,404
     register: _authorization_flow
 
+  - name: "what's the ID of the built-in authentik invalidation flow?"
+    uri:
+      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-invalidation-flow/"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ authentik_bootstrap_token }}"
+      body_format: json
+      status_code: 200,404
+    register: _invalidation_flow
+
   - name: "what's the ID of the built-in authentik signing key?"
     uri:
       url: "https://authentik.infra.{{ dns_domain }}/api/v3/crypto/certificatekeypairs/"
@@ -160,7 +170,7 @@
 
   - name: "Do we already have a property mapping for minio-policy?"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?name=minio-policy"
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/all/?name=minio-policy"
       method: GET
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -175,7 +185,7 @@
 
   - name: "create minio-policy property mapping"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/"
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/provider/scope/"
       method: POST
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -199,7 +209,7 @@
 
   - name: "Do we already have a property mapping for gitea?"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/?name=gitea"
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/all/?name=gitea"
       method: GET
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -214,7 +224,7 @@
 
   - name: "create gitea property mapping"
     uri:
-      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/scope/"
+      url: "https://authentik.infra.{{ dns_domain }}/api/v3/propertymappings/provider/scope/"
       method: POST
       headers:
         Authorization: "Bearer {{ authentik_bootstrap_token }}"
@@ -245,27 +255,33 @@
     with_items:
       - name: kube-apiserver
         secret: "{{ authentik_kube_apiserver_client_secret }}"
-        redirect_uris: |
-          http://localhost:8000
-          http://localhost:18000
-          https://kubernetes-dashboard.infra.{{ dns_domain }}/oauth2/callback
-          https://weave-gitops.infra.{{ dns_domain }}/oauth2/callback
+        redirect_uris:
+          - matching_mode: strict
+            url: http://localhost:8000
+          - matching_mode: strict
+            url: http://localhost:18000
+          - matching_mode: strict
+            url: https://kubernetes-dashboard.infra.{{ dns_domain }}/oauth2/callback
+          - matching_mode: strict
+            url: https://weave-gitops.infra.{{ dns_domain }}/oauth2/callback
         icon: https://infra.{{ dns_domain }}/assets/png/kubernetes.png
         property_mappings:
         - "{{ _email_propertymapping.json.results[0].pk }}"
         - "{{ _profile_propertymapping.json.results[0].pk }}"       
       - name: grafana
         secret: "{{ authentik_grafana_client_secret }}"
-        redirect_uris: |
-          https://grafana.infra.{{ dns_domain }}/login/generic_oauth
+        redirect_uris:
+          - matching_mode: strict
+            url: https://grafana.infra.{{ dns_domain }}/login/generic_oauth
         icon: https://infra.{{ dns_domain }}/assets/png/grafana.png
         property_mappings:
         - "{{ _email_propertymapping.json.results[0].pk }}"
         - "{{ _profile_propertymapping.json.results[0].pk }}"    
       - name: minio
         secret: "{{ authentik_minio_client_secret }}"
-        redirect_uris: |
-          https://minio-console.infra.{{ dns_domain }}/oauth_callback
+        redirect_uris:
+          - matching_mode: strict
+            url: https://minio-console.infra.{{ dns_domain }}/oauth_callback
         icon: https://infra.{{ dns_domain }}/assets/png/minio.png  
         property_mappings:
         - "{{ _email_propertymapping.json.results[0].pk }}"
@@ -273,8 +289,9 @@
         - "{{ minio_propertymapping_pk }}"       
       - name: gitea
         secret: "{{ authentik_gitea_client_secret }}"
-        redirect_uris: |
-          https://git.{{ dns_domain }}/user/oauth2/authentik/callback
+        redirect_uris:
+          - matching_mode: strict
+            url: https://git.{{ dns_domain }}/user/oauth2/authentik/callback
         icon: https://infra.{{ dns_domain }}/assets/png/gitea.png  
         property_mappings:
         - "{{ _email_propertymapping.json.results[0].pk }}"
