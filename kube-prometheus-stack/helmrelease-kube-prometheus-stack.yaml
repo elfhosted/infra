@@ -80,12 +80,12 @@ spec:
         k8sContainerResource: true
         k8sContainerMemoryWorkingSetBytes: true
         k8sPodOwner: false
-        kubeApiserverAvailability: true
+        kubeApiserverAvailability: false
         kubeApiserverBurnrate: true
         kubeApiserverHistogram: false
         kubeApiserverSlos: false
-        kubeControllerManager: true
-        kubelet: true
+        kubeControllerManager: false
+        kubelet: false
         kubeProxy: false
         kubePrometheusGeneral: true
         kubePrometheusNodeRecording: true
