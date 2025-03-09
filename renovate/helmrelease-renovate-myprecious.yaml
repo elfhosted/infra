@@ -27,7 +27,7 @@ spec:
 
     cronjob:
       # Every hour
-      schedule: '0/15 * * * *'
+      schedule: '0/30 * * * *'
       # -- If it is set to true, all subsequent executions are suspended. This setting does not apply to already started executions.
       suspend: false
       # -- Annotations to set on the cronjob
