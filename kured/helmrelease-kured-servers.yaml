@@ -46,7 +46,7 @@ spec:
       alertFilterRegexp: "(Watchdog|RebootRequired|CPUThrottlingHigh|InfoInhibitor|KubeJobFailed|PersistentVolumeUsageCritical|PersistentVolumeUsageNearFull)"      # alert names to ignore when checking for active alerts
       alertFiringOnly: true     # only consider firing alerts when checking for active alerts
       blockingPodSelector: []       # label selector identifying pods whose presence should prevent reboots
-      endTime: "11:00"              # 6am EST
+      endTime: "10:45"              # 6am EST
       lockAnnotation: ""            # annotation in which to record locking node (default "weave.works/kured-node-lock")
       period: ""                    # reboot check period (default 1h0m0s)
       forceReboot: false            # force a reboot even if the drain fails or times out (default: false)
@@ -70,7 +70,7 @@ spec:
       startTime: "10:00"            # glowup
       timeZone: "Pacific/Auckland"  # time-zone to use (valid zones from "time" golang package)
       annotateNodes: false          # enable 'weave.works/kured-reboot-in-progress' and 'weave.works/kured-most-recent-reboot-needed' node annotations to signify kured reboot operations
-      lockReleaseDelay: 30m          # hold lock after reboot by this amount of time (default 0, disabled)
+      lockReleaseDelay: 0           # hold lock after reboot by this amount of time (default 0, disabled)
       preferNoScheduleTaint: "weave.works/kured-node-reboot"     # Taint name applied during pending node reboot (to prevent receiving additional pods from other rebooting nodes). Disabled by default. Set e.g. to "weave.works/kured-node-reboot" to enable tainting.
       logFormat: "text"             # log format specified as text or json, defaults to text
       preRebootNodeLabels: []       # labels to add to nodes before cordoning (default [])
