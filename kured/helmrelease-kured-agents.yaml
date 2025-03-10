@@ -57,7 +57,7 @@ spec:
       drainGracePeriod: ""          # time in seconds given to each pod to terminate gracefully, if negative, the default value specified in the pod will be used (default: -1)
       drainPodSelector: ""          # only drain pods with labels matching the selector (default: '', all pods)
       drainTimeout: "10m"            # timeout after which the drain is aborted (default: 0, infinite time)
-      skipWaitForDeleteTimeout: "5m"  # when time is greater than zero, skip waiting for the pods whose deletion timestamp is older than N seconds while draining a node (default: 0)
+      skipWaitForDeleteTimeout: "300"  # when time is greater than zero, skip waiting for the pods whose deletion timestamp is older than N seconds while draining a node (default: 0)
       # prometheusUrl: "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090"          # Prometheus instance to probe for active alerts
       rebootDays: [tu,we,th,fr]  # only reboot on these days (default [su,mo,tu,we,th,fr,sa])
       rebootSentinel: "/run/reboot-required"  # path to file whose existence signals need to reboot (default "/var/run/reboot-required")
