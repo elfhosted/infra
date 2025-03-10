@@ -56,8 +56,8 @@ spec:
       forceReboot: false            # force a reboot even if the drain fails or times out (default: false)
       drainGracePeriod: ""          # time in seconds given to each pod to terminate gracefully, if negative, the default value specified in the pod will be used (default: -1)
       drainPodSelector: ""          # only drain pods with labels matching the selector (default: '', all pods)
-      drainTimeout: ""              # timeout after which the drain is aborted (default: 0, infinite time)
-      skipWaitForDeleteTimeout: ""  # when time is greater than zero, skip waiting for the pods whose deletion timestamp is older than N seconds while draining a node (default: 0)
+      drainTimeout: "10m"            # timeout after which the drain is aborted (default: 0, infinite time)
+      skipWaitForDeleteTimeout: "5m"  # when time is greater than zero, skip waiting for the pods whose deletion timestamp is older than N seconds while draining a node (default: 0)
       # prometheusUrl: "http://kube-prometheus-stack-prometheus.kube-prometheus-stack.svc.cluster.local:9090"          # Prometheus instance to probe for active alerts
       rebootDays: [tu,we,th,fr]  # only reboot on these days (default [su,mo,tu,we,th,fr,sa])
       rebootSentinel: "/run/reboot-required"  # path to file whose existence signals need to reboot (default "/var/run/reboot-required")
@@ -67,7 +67,7 @@ spec:
       slackChannel: ""              # slack channel for reboot notifications
       slackHookUrl: "${discord_webhook_infra_alerts}"              # slack hook URL for reboot notifications
       slackUsername: ""             # slack username for reboot notifications (default "kured")
-      notifyUrl: ""                 # notification URL with the syntax as follows: https://containrrr.dev/shoutrrr/services/overview/
+      notifyUrl: "${discord_webhook_infra_alerts}"                 # notification URL with the syntax as follows: https://containrrr.dev/shoutrrr/services/overview/
       messageTemplateDrain: ""      # slack message template when notifying about a node being drained (default "Draining node %s")
       messageTemplateReboot: ""     # slack message template when notifying about a node being rebooted (default "Rebooted node %s")
       messageTemplateUncordon: ""   # slack message template when notifying about a node being uncordoned (default "Node %s rebooted & uncordoned successfully!")

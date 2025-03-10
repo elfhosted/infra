@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: debridmediamanager
+  namespace: debridmediamanager
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: debridmediamanager
+  minAvailable: 1
