@@ -518,15 +518,15 @@ spec:
 
       # Either specify inline `key` and `secret` or refer to them via `existingSecret`
       ## @param gitea.oauth OAuth configuration
-      oauth:
-        - name: 'authentik'
-          provider: "openidConnect"
-      #     key:
-      #     secret:
-          existingSecret: gitea-oauth-credentials
-          autoDiscoverUrl: "https://authentik.infra.${dns_domain}/application/o/gitea/.well-known/openid-configuration"
-          iconUrl: "https://goauthentik.io/img/icon.png"
-          scopes: "email profile offline_access"
+      # oauth:
+      #   - name: 'authentik'
+      #     provider: "openidConnect"
+      # #     key:
+      # #     secret:
+      #     existingSecret: gitea-oauth-credentials
+      #     autoDiscoverUrl: "https://authentik.infra.${dns_domain}/application/o/gitea/.well-known/openid-configuration"
+      #     iconUrl: "https://goauthentik.io/img/icon.png"
+      #     scopes: "email profile offline_access"
 
       ## @param gitea.config.server.SSH_PORT SSH port for rootlful Gitea image
       ## @param gitea.config.server.SSH_LISTEN_PORT SSH port for rootless Gitea image
