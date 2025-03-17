@@ -20,7 +20,7 @@ spec:
       nameOverride: jackett
     image:
       repository: ghcr.io/elfhosted/jackett
-      tag: 0.22.1634
+      tag: 0.22.1646
     securityContext:
       seccompProfile:
         type: RuntimeDefault
