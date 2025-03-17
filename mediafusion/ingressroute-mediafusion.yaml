@@ -14,6 +14,14 @@ spec:
           port: 8000
       middlewares:  
         - name: chain-stream   
+    - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`)
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-stream           
     # This is a catalog endpoint, also subject to rate-limiting, but display a dummy catalog instead
     - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.*}/catalog/{else:.+}`)
       kind: Rule
@@ -22,7 +30,15 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-catalog      
+        - name: chain-catalog 
+    - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.*)/catalog/`)
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-catalog              
     # Block URLs we don't want public access to
     - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider/cache/status`) || PathPrefix(`/streaming_provider/cache/submit`)) 
       kind: Rule

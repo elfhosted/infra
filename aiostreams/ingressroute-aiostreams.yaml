@@ -19,4 +19,13 @@ spec:
           kind: Service
           port: 3000
       middlewares:  
-        - name: chain-stream      
+        - name: chain-stream
+    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)/stream`)
+      kind: Rule
+      services:
+        - name: aiostreams
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: chain-stream              
+        

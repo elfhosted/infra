@@ -20,3 +20,11 @@ spec:
           port: 4000
       middlewares:  
         - name: chain-stream                            
+    - match: Host(`jackettio.${dns_domain}`) && PathPrefix(`^(.*)/stream/`)
+      kind: Rule
+      services:
+        - name: jackettio
+          kind: Service
+          port: 4000
+      middlewares:  
+        - name: chain-stream                                    
