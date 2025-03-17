@@ -17,8 +17,7 @@ spec:
           namespace: traefik
         - name: redirectregex-comet-requires-configuration
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`comet-dev.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
-      syntax: v2
+    - match: Host(`comet-dev.${dns_domain}`) && PathRegexp(`^(.*)/stream/`)
       kind: Rule
       services:
         - name: comet-dev
