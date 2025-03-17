@@ -14,6 +14,7 @@ spec:
           port: 8000
     # This is a scrape / search, subject to rate-limiting
     - match: Host(`comet.${dns_domain}`) && (PathPrefix(`/{something:.+}stream/{else:.+}`) || PathPrefix(`/stream`))
+      syntax: v2
       kind: Rule
       services:
         - name: comet

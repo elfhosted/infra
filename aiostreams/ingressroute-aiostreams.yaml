@@ -13,6 +13,7 @@ spec:
           port: 3000
     # This is a scrape / search, subject to rate-limiting
     - match: Host(`aiostreams.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+      syntax: v2
       kind: Rule
       services:
         - name: aiostreams

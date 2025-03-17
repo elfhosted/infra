@@ -7,6 +7,7 @@ spec:
   routes:
     # This is a scrape / search, subject to rate-limiting
     - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+      syntax: v2
       kind: Rule
       services:
         - name: mediafusion
@@ -16,6 +17,7 @@ spec:
         - name: chain-stream   
     # This is a catalog endpoint, also subject to rate-limiting, but display a dummy catalog instead
     - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.*}/catalog/{else:.+}`)
+      syntax: v2
       kind: Rule
       services:
         - name: mediafusion

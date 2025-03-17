@@ -21,6 +21,7 @@ spec:
         - name: redirectregex-annatar-is-deprecated
           namespace: traefik
     - match: Host(`annatar.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
+      syntax: v2
       kind: Rule
       services:
         - kind: Service

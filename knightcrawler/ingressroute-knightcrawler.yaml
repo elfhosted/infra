@@ -15,6 +15,7 @@ spec:
         - name: headers-add-cors-for-stremio
           namespace: traefik
     - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/{something:.*}/realdebrid={something:.+/stream}`)
+      syntax: v2
       kind: Rule
       services:
         - name: knightcrawler-addon
