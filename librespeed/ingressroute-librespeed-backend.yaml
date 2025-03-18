@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostRegexp(`{subdomain:[a-z0-9]+}-speed.${dns_domain}`)
+    - match: HostRegexp(`[a-z0-9]+-speed.${dns_domain}`)
       kind: Rule
       services:
         - name: librespeed-backend
