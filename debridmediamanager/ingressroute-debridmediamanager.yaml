@@ -4,6 +4,8 @@ metadata:
   name: debridmediamanager.${dns_domain}
   namespace: debridmediamanager
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`debridmediamanager.${dns_domain}`)
       kind: Rule

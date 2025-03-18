@@ -4,6 +4,8 @@ metadata:
   name: stremthru.${dns_domain}
   namespace: stremthru
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`stremthru.${dns_domain}`)
       kind: Rule

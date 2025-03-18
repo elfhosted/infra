@@ -4,6 +4,8 @@ metadata:
   name: rdebrid-ui.${dns_domain}
   namespace: rdebrid-ui
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`rdebrid-ui.${dns_domain}`)
       kind: Rule

@@ -4,6 +4,8 @@ metadata:
   name: redirect-stremify-to-hayduk
   namespace: stremify
 spec:
+  entryPoints:
+    - websecure
   routes:
   - kind: Rule
     match: Host(`stremify.elfhosted.com`)

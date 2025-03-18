@@ -4,6 +4,8 @@ metadata:
   name: plausible.${dns_domain}
   namespace: plausible
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`plausible.${dns_domain}`)
       kind: Rule

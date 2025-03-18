@@ -4,6 +4,8 @@ metadata:
   name: comet-dev.${dns_domain}
   namespace: comet-dev
 spec:
+  entryPoints:
+    - websecure
   routes:
     # Base URL, but catch bad paths in the regex
     - match: Host(`comet-dev.${dns_domain}`)

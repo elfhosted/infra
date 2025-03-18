@@ -4,6 +4,8 @@ metadata:
   name: tmdb.${dns_domain}
   namespace: tmdb
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`tmdb.${dns_domain}`)
       kind: Rule

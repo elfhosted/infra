@@ -4,6 +4,8 @@ metadata:
   name: aiostreams.${dns_domain}
   namespace: aiostreams
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`aiostreams.${dns_domain}`)
       kind: Rule

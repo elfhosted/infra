@@ -4,6 +4,8 @@ metadata:
   name: stremio-jackett.${dns_domain}
   namespace: stremio-jackett
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`stremio-jackett.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
       kind: Rule

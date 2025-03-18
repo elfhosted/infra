@@ -4,6 +4,8 @@ metadata:
   name: flux-webhook.${dns_domain}
   namespace: flux-system
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`flux-webhook.${dns_domain}`)
       kind: Rule

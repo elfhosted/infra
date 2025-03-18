@@ -4,6 +4,8 @@ metadata:
   name: jackettio.${dns_domain}
   namespace: jackettio
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`jackettio.${dns_domain}`)
       kind: Rule

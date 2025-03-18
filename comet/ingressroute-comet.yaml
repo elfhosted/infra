@@ -4,6 +4,8 @@ metadata:
   name: comet.${dns_domain}
   namespace: comet
 spec:
+  entryPoints:
+    - websecure
   routes:
     # Base URL
     - match: Host(`comet.${dns_domain}`)

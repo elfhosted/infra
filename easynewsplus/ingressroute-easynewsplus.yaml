@@ -4,6 +4,8 @@ metadata:
   name: easynewsplus.${dns_domain}
   namespace: easynewsplus
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`easynewsplus.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
       kind: Rule

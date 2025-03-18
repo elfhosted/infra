@@ -6,6 +6,8 @@ metadata:
   name: error-pages.${dns_domain}
   namespace: error-pages
 spec:
+  entryPoints:
+    - websecure
   routes:
   - kind: Rule
     match: HostRegexp(`.${dns_domain}`)

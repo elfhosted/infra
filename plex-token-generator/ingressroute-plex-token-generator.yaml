@@ -4,6 +4,8 @@ metadata:
   name: plex-token-generator.${dns_domain}
   namespace: plex-token-generator
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`plex-token-generator.${dns_domain}`)
       kind: Rule

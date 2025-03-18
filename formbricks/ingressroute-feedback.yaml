@@ -4,6 +4,8 @@ metadata:
   name: feedback.${dns_domain}
   namespace: formbricks
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`feedback.${dns_domain}`)
       kind: Rule

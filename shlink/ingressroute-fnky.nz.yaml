@@ -4,6 +4,8 @@ metadata:
   name: fnky.nz
   namespace: shlink
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`fnky.nz`)
       kind: Rule

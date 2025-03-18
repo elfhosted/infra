@@ -4,6 +4,8 @@ metadata:
   name: arc-webhook.${dns_domain}
   namespace: actions-runner-controller
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`arc-webhook.${dns_domain}`)
       kind: Rule

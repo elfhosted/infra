@@ -4,6 +4,8 @@ metadata:
   name: zilean.${dns_domain}
   namespace: zilean-public
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`zilean.${dns_domain}`)
       kind: Rule

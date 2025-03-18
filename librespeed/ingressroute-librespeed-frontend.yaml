@@ -4,6 +4,8 @@ metadata:
   name: librespeed-frontend.${dns_domain}
   namespace: librespeed
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`speed.${dns_domain}`)
       kind: Rule

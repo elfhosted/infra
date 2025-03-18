@@ -4,6 +4,8 @@ metadata:
   name: grafana.${dns_domain}
   namespace: kube-prometheus-stack
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`grafana.${dns_domain}`) && Path(`/login`)
       kind: Rule
