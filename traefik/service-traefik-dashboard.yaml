@@ -8,7 +8,7 @@ metadata:
 spec:
   ports:
   - name: traefik
-    port: 9000
+    port: 8080
     protocol: TCP
     targetPort: traefik
   selector:

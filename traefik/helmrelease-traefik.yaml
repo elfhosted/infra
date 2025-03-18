@@ -693,6 +693,7 @@ spec:
           # https://docs.traefik.io/routing/entrypoints/#redirection
           entryPoint:
             to: websecure
+            scheme: https
         forwardedHeaders:
           # -- Trust forwarded headers information (X-Forwarded-*).
           trustedIPs:
