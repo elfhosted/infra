@@ -4,6 +4,8 @@ metadata:
   name: podinfo.${dns_domain}
   namespace: podinfo
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`podinfo.${dns_domain}`)
       kind: Rule

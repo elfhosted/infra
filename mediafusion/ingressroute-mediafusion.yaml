@@ -4,6 +4,8 @@ metadata:
   name: mediafusion.${dns_domain}
   namespace: mediafusion
 spec:
+  entryPoints:
+    - websecure
   routes:
     # This is a scrape / search, subject to rate-limiting
     - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)

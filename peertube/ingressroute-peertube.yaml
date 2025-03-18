@@ -4,6 +4,8 @@ metadata:
   name: video.${dns_domain}
   namespace: peertube
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`video.${dns_domain}`)
       kind: Rule

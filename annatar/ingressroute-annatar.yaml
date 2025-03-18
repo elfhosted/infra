@@ -4,6 +4,8 @@ metadata:
   name: annatar.${dns_domain}
   namespace: annatar
 spec:
+  entryPoints:
+    - websecure
   routes:
     # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
     - match: Host(`annatar.${dns_domain}`)

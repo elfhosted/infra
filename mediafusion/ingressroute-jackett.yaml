@@ -4,6 +4,8 @@ metadata:
   name: mediafusion-jackett.${dns_domain}
   namespace: mediafusion
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`mediafusion-jackett.${dns_domain}`)
       kind: Rule

@@ -4,6 +4,8 @@ metadata:
   name: discussio.${dns_domain}
   namespace: discussio
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`discussio.${dns_domain}`)
       kind: Rule

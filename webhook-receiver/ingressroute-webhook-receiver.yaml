@@ -4,6 +4,8 @@ metadata:
   name: webhook-receiver.${dns_domain}
   namespace: webhook-receiver
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`webhook-receiver.${dns_domain}`)
       kind: Rule

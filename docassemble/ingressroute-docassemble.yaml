@@ -4,6 +4,8 @@ metadata:
   name: help.${dns_domain}
   namespace: docassemble
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`help.${dns_domain}`)
       kind: Rule

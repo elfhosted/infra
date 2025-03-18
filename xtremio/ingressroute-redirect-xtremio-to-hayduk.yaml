@@ -4,6 +4,8 @@ metadata:
   name: redirect-xtremio-to-hayduk
   namespace: xtremio
 spec:
+  entryPoints:
+    - websecure
   routes:
   - kind: Rule
     match: Host(`xtremio.elfhosted.com`)

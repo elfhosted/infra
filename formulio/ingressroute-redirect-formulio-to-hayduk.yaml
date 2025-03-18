@@ -4,6 +4,8 @@ metadata:
   name: redirect-formulio-to-hayduk
   namespace: formulio
 spec:
+  entryPoints:
+    - websecure
   routes:
   - kind: Rule
     match: Host(`formulio.elfhosted.com`)

@@ -4,6 +4,8 @@ metadata:
   name: librespeed-backend.${dns_domain}
   namespace: librespeed
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: HostRegexp(`{subdomain:[a-z0-9]+}-speed.${dns_domain}`)
       kind: Rule

@@ -4,6 +4,8 @@ metadata:
   name: stremio-jackett-cacher.${dns_domain}
   namespace: stremio-jackett-cacher
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`stremio-jackett-cacher.${dns_domain}`)
       kind: Rule

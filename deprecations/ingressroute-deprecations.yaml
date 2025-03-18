@@ -4,6 +4,8 @@ metadata:
   name: deprecations.${dns_domain}
   namespace: deprecations
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`deprecations.${dns_domain}`)
       kind: Rule

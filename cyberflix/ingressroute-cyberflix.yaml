@@ -4,6 +4,8 @@ metadata:
   name: cyberflix.${dns_domain}
   namespace: cyberflix
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`cyberflix.${dns_domain}`)
       kind: Rule

@@ -4,6 +4,8 @@ metadata:
   name: torrentio.${dns_domain}
   namespace: knightcrawler
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`torrentio.${dns_domain}`)
       kind: Rule

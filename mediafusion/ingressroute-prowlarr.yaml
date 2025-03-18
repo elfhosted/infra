@@ -4,6 +4,8 @@ metadata:
   name: mediafusion-prowlarr.${dns_domain}
   namespace: mediafusion
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`mediafusion-prowlarr.${dns_domain}`)
       kind: Rule

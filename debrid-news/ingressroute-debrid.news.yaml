@@ -4,6 +4,8 @@ metadata:
   name: debrid.news
   namespace: debrid-news
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`debrid.news`)
       kind: Rule

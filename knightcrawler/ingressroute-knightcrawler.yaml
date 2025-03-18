@@ -4,6 +4,8 @@ metadata:
   name: knightcrawler.${dns_domain}
   namespace: knightcrawler
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`knightcrawler.${dns_domain}`)
       kind: Rule

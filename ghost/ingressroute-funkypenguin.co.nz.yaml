@@ -4,6 +4,8 @@ metadata:
   name: funkypenguin.co.nz
   namespace: ghost
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`funkypenguin.co.nz`)
       kind: Rule

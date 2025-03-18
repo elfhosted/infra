@@ -4,6 +4,8 @@ metadata:
   name: git.${dns_domain}
   namespace: gitea
 spec:
+  entryPoints:
+    - websecure
   routes:
     - match: Host(`git.${dns_domain}`)
       kind: Rule
