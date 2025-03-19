@@ -45,6 +45,7 @@ spec:
       TEMPLATE_NAME: elfhosted
       # -- Enable details on error pages
       SHOW_DETAILS: "false"
+      PROXY_HTTP_HEADERS: "Access-Control-Allow-Origin"
 
     controller:
       replicas: 2
