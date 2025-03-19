@@ -15,14 +15,6 @@ spec:
           kind: Service
           port: 8000
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`comet.${dns_domain}`) && (PathPrefix(`/{something:.+}stream/{else:.+}`) || PathPrefix(`/stream`))
-      kind: Rule
-      services:
-        - name: comet
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-stream
     - match: Host(`comet.${dns_domain}`) && (PathRegexp(`^/(.*)stream`) || PathPrefix(`/stream`))
       kind: Rule
       services:

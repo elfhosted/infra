@@ -16,17 +16,6 @@ spec:
       middlewares:  
         - name: headers-add-cors-for-stremio
           namespace: traefik
-    - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/{something:.*}/realdebrid={something:.+/stream}`)
-      kind: Rule
-      services:
-        - name: knightcrawler-addon
-          kind: Service
-          port: 7000
-      middlewares:  
-        - name: headers-add-cors-for-stremio
-          namespace: traefik
-        - name: redirectregex-realdebrid-api-removal
-          namespace: traefik
     - match: Host(`knightcrawler.${dns_domain}`) && PathRegexp(`^/(.*)/realdebrid=(.+)/stream`)
       kind: Rule
       services:

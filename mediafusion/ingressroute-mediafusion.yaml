@@ -8,14 +8,6 @@ spec:
     - websecure
   routes:
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.+}/stream/{else:.+}`)
-      kind: Rule
-      services:
-        - name: mediafusion
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-stream   
     - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`)
       kind: Rule
       services:
@@ -25,14 +17,6 @@ spec:
       middlewares:  
         - name: chain-stream           
     # This is a catalog endpoint, also subject to rate-limiting, but display a dummy catalog instead
-    - match: Host(`mediafusion.${dns_domain}`) && PathPrefix(`/{something:.*}/catalog/{else:.+}`)
-      kind: Rule
-      services:
-        - name: mediafusion
-          kind: Service
-          port: 8000
-      middlewares:  
-        - name: chain-catalog 
     - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.*)/catalog/`)
       kind: Rule
       services:
