@@ -14,6 +14,7 @@ resource "proxmox_vm_qemu" "{{ inventory_hostname_short }}" {
 {{ admin_ssh_key }}
 EOF
     network {
+        id = 0
 {% if proxmox_vm_vlan_tag is defined %}        
         tag = {{ proxmox_vm_vlan_tag }}
 {% endif %}
@@ -22,6 +23,7 @@ EOF
         macaddr = "{{ mac }}"
     }
     network {
+        id = 1
         tag = 11
         model = "virtio"
         bridge = "vmbr0"
@@ -29,12 +31,14 @@ EOF
     disk {
         storage = "{{ proxmox_storage }}"
         size = "{{ proxmox_vm_disk0_size }}"
-        type = "scsi"
+        type = "disk"
+        slot = "scsi0"
     }
     disk {
         storage = "{{ proxmox_nfs_storage }}"
         size = "{{ proxmox_vm_topolvm_disk_size }}"
-        type = "scsi"
+        type = "disk"
+        slot = "scsi1"
     }    
 }
 
