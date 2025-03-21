@@ -29,12 +29,14 @@ EOF
         bridge = "vmbr0"
     }    
     disk {
+        backup = false
         storage = "{{ proxmox_storage }}"
         size = "{{ proxmox_vm_disk0_size }}"
         type = "disk"
         slot = "scsi0"
     }
     disk {
+        backup = false
         storage = "{{ proxmox_nfs_storage }}"
         size = "{{ proxmox_vm_topolvm_disk_size }}"
         type = "disk"
