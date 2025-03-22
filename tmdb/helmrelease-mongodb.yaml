@@ -1115,7 +1115,7 @@ spec:
     persistence:
       ## @param persistence.enabled Enable MongoDB(&reg;) data persistence using PVC
       ##
-      enabled: true # we are just used for caching, no need for storage
+      enabled: false # we are just used for caching, no need for storage
       ## @param persistence.name Name of the PVC and mounted volume
       ##
       name: "datadir"
