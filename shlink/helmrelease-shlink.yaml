@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: shlink
-      version: 5.0.0
+      version: 5.2.0
       sourceRef:
         kind: HelmRepository
         name: geek-cookbook
@@ -31,7 +31,7 @@ spec:
       # -- image pull policy
       pullPolicy: IfNotPresent
       # -- image tag
-      tag: 3.5.1
+      tag: 3.7.4
 
     # -- environment variables. See more environment variables in the [shlink documentation](https://shlink.io/documentation/install-docker-image/)
     env:
