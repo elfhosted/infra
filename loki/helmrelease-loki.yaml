@@ -804,7 +804,7 @@ spec:
           memory: 2000Mi
           cpu: 1
         requests:
-          memory: 1500Mi
+          memory: 250Mi
           cpu: 10m
       # -- Grace period to allow the write to shutdown before it is killed. Especially for the ingester,
       # this must be increased. It must be long enough so writes can be gracefully shutdown flushing/transferring
