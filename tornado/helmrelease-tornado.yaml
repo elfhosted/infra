@@ -20,6 +20,7 @@ spec:
       nameOverride: tornado
     image:
       repository: hiroakis/tornado-websocket-example
+      tag: latest
     securityContext:
       seccompProfile:
         type: RuntimeDefault
