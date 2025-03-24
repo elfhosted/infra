@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: easynewsplus
-  namespace: easynewsplus
+  name: tornado
+  namespace: tornado
 spec:
   chart:
     spec:
@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: easynewsplus
+  releaseName: tornado
   values:
     global:
-      nameOverride: easynewsplus
+      nameOverride: tornado
     image:
       repository: hiroakis/tornado-websocket-example
     securityContext:
