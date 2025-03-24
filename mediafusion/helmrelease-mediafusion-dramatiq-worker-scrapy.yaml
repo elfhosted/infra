@@ -20,7 +20,7 @@ spec:
       nameOverride: mediafusion-dramatiq-worker-scrapy
     image:
       repository: ghcr.io/elfhosted/mediafusion
-      tag: 4.3.28@sha256:d850287348215eb14f138ec95805f4cc335a2a7cb38bc3475dfdca68e82f59df
+      tag: 4.3.29@sha256:9525b038077e17c1460e6ce743855e10e1ca720ec7200219e91846ff3dbc0fa5
     command: ["dramatiq", "api.task", "-p", "1", "-t", "1", "--queues", "scrapy"]
     securityContext:
       seccompProfile:
