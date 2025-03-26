@@ -76,7 +76,7 @@ spec:
     # type: [string, integer]
     # @schema
     # -- (string) Kubernetes service port
-    k8sServicePort: ""
+    k8sServicePort: "${k8s_ha_api_port}"
     # @schema
     # type: [null, string]
     # @schema
