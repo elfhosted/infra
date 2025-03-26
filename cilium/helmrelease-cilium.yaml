@@ -2695,7 +2695,7 @@ spec:
     #   - native
     #   - tunnel
     # @default -- `"tunnel"`
-    routingMode: ""
+    routingMode: "native"
     # -- Configure VXLAN and Geneve tunnel port.
     # @default -- Port 8472 for VXLAN, Port 6081 for Geneve
     tunnelPort: 0
