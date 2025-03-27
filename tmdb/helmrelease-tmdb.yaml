@@ -53,36 +53,14 @@ spec:
     persistence:
       tmp: 
         enabled: true
-        type: custom
         mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi   
+        type: emptyDir
+        sizeLimit: 1Gi   
       local: 
         enabled: true
-        type: custom
         mountPath: /.local
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              metadata:
-                labels:
-                  velero.io/exclude-from-backup: "true"               
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                                            
+        type: emptyDir
+        sizeLimit: 1Gi                                            
     envFrom:
     - secretRef:
         name: tmdb-env 

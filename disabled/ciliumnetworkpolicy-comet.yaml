@@ -13,6 +13,9 @@ spec:
         - ports:
             - port: "8000"      
 
+    # nodes in this namespace
+    - fromEndpoints:
+        - {}
 
     # Allow from Traefik to exposed port only
     - fromEndpoints:
@@ -23,15 +26,25 @@ spec:
         - ports:
             - port: "8000"
   egress:
-    # Allow to the world
+    # Allow to the world and to kube-apiserver
     - toEntities:
         - world
+        - kube-apiserver
 
     # Allow to any pods in this namespace
     - toEndpoints:
         - {}
 
-    # Allow comet to talk to prowlarr
+    # Allow comet to talk to zilean
+    - toEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: minio
+          k8s:io.kubernetes.pod.namespace: minio  
+      toPorts:
+        - ports:
+            - port: "9000"
+
+    # Allow comet to talk to zilean
     - toEndpoints:
       - matchLabels:
           app.kubernetes.io/name: zilean

@@ -831,7 +831,7 @@ spec:
       podManagementPolicy: "Parallel"
       persistence:
         # -- Enable volume claims in pod spec
-        volumeClaimsEnabled: true
+        volumeClaimsEnabled: false
         # -- Parameters used for the `data` volume when volumeClaimEnabled if false
         dataVolumeParameters:
           ephemeral:
@@ -1138,7 +1138,7 @@ spec:
       podManagementPolicy: "Parallel"
       persistence:
         # -- Enable volume claims in pod spec
-        volumeClaimsEnabled: true
+        volumeClaimsEnabled: false
         # -- Parameters used for the `data` volume when volumeClaimEnabled if false
         dataVolumeParameters:
           ephemeral:

@@ -264,10 +264,10 @@ spec:
 
     updateStrategy:  # @schema additionalProperties: false
       # -- Customize updateStrategy of Deployment or DaemonSet
-      type: RollingUpdate
+      type: Recreate
       rollingUpdate:
-        maxUnavailable: 0  # @schema type:[integer, string, null]
-        maxSurge: 1        # @schema type:[integer, string, null]
+        maxUnavailable: 1  # @schema type:[integer, string, null]
+        # maxSurge: 1        # @schema type:[integer, string, null]
 
     readinessProbe:  # @schema additionalProperties: false
       # -- The number of consecutive failures allowed before considering the probe as failed.

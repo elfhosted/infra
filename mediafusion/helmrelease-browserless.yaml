@@ -103,17 +103,9 @@ spec:
     persistence:
       tmp: 
         enabled: true
-        type: custom
         mountPath: /tmp
-        volumeSpec:
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: 1Gi                  
+        type: emptyDir
+        sizeLimit: 1Gi                
     addons:
       vpn:
         enabled: false # in case we ever need it
