@@ -13,6 +13,9 @@ spec:
         - ports:
             - port: "8000"      
 
+    # nodes in this namespace
+    - fromEndpoints:
+        - {}
 
     # Allow from Traefik to exposed port only
     - fromEndpoints:
