@@ -83,7 +83,7 @@ spec:
     image:
       registry: docker.io
       repository: bitnami/nginx-ingress-controller
-      tag: 1.12.0-debian-12-r13
+      # tag: 1.12.1-debian-12-r0
       digest: ""
       ## Specify a imagePullPolicy
       ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -411,7 +411,7 @@ spec:
     ## @param priorityClassName Controller priorityClassName
     ## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
     ##
-    priorityClassName: "cluster-critical"
+    priorityClassName: ""
     ## @param schedulerName Name of the k8s scheduler (other than default)
     ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
     ##
@@ -559,7 +559,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/nginx
-        tag: 1.27.4-debian-12-r5
+        # tag: 1.27.4-debian-12-r7
         digest: ""
         ## Specify a imagePullPolicy
         ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
