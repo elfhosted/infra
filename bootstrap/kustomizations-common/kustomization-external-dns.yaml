@@ -18,7 +18,7 @@ spec:
       kind: CustomResourceDefinition
       name: dnsendpoints.externaldns.k8s.io
     # Always use the helmrelease to determine health too
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: external-dns
       namespace: external-dns      

@@ -8,7 +8,6 @@ spec:
   path: ./nginx-ingress-controller
   dependsOn:
   - name: external-dns  
-  - name: metallb--metallb-system
   prune: true # remove any elements later removed from the above path
   timeout: 10m # if not set, this defaults to interval duration, which is 1h
   sourceRef:
@@ -20,7 +19,7 @@ spec:
       name: nginx-ingress-controller
       namespace: nginx-ingress-controller
     # Always use the helmrelease to determine health too
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+    - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       name: nginx-ingress-controller
       namespace: nginx-ingress-controller        

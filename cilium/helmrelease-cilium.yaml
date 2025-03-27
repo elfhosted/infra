@@ -1119,7 +1119,7 @@ spec:
       # -- Enable socket LB
       enabled: true
       # -- Disable socket lb for non-root ns. This is used to enable Istio routing rules.
-      # hostNamespaceOnly: false
+      hostNamespaceOnly: true
       # -- Enable terminating pod connections to deleted service backends.
       # terminatePodConnections: true
       # -- Enables tracing for socket-based load balancing.
