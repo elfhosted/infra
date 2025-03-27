@@ -30,11 +30,15 @@ spec:
     - toEntities:
         - world
 
+    # To kube-apiserver
+    - toEntities:
+        - kube-apiserver
+
     # Allow to any pods in this namespace
     - toEndpoints:
         - {}
 
-    # Allow comet to talk to prowlarr
+    # Allow comet to talk to zilean
     - toEndpoints:
       - matchLabels:
           app.kubernetes.io/name: zilean
