@@ -17,7 +17,8 @@ spec:
             io.kubernetes.pod.namespace: traefik
       toPorts:
         - ports:
-            - port: "3000"
+            - port: "1337"
+              protocol: TCP
   egress:
     # Allow to the world
     - toEntities:
