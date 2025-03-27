@@ -11,6 +11,8 @@ spec:
       namespace: traefik
     - name: return-code-override-ratelimit
       namespace: traefik
+    - name: block-scrapers
+      namespace: traefik
 
     # These are specific to comet
     - name: errors-rate-limit-exceeded   
