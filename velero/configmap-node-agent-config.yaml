@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-agent-config
+  namespace: velero
+data:
+  elfhosted.json: "{\n    \"loadAffinity\": [\n        {\n            \"nodeSelector\":
+    {\n                \"matchLabels\": {\n                    \"node-role.elfhosted.com/storage-1g\":
+    \"true\"\n                }\n            }\n        }\n    ],\n    \"loadConcurrency\":
+    {\n            \"globalConfig\": 2\n        }              \n}\n"

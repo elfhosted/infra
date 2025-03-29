@@ -921,7 +921,7 @@ spec:
     service:
       ## @param service.type Kubernetes Service type for Controller
       ##
-      type: ClusterIP
+      type: LoadBalancer
       ## @param service.ports [object] Service ports
       ##
       ports:
@@ -974,7 +974,7 @@ spec:
       ## @param service.loadBalancerIP Kubernetes LoadBalancerIP to request for Controller (optional, cloud specific)
       ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
       ##
-      loadBalancerIP: ""
+      loadBalancerIP: "${nginx_ingress_ip}"
       ## @param service.loadBalancerSourceRanges List of IP CIDRs allowed access to load balancer (if supported)
       ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
       ##
