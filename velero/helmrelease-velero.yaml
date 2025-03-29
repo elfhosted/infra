@@ -622,6 +622,8 @@ spec:
           ttl: "240h"
           storageLocation: b2
           includedNamespaces: [] # cover all namespaces
+          includedResources:
+          - configmaps # The only thing not gitops-driven
 
     # Velero ConfigMaps.
     # Eg:
