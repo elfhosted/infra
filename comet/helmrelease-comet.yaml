@@ -20,7 +20,7 @@ spec:
       nameOverride: comet
     image:
       repository: ghcr.io/elfhosted/comet
-      tag: v2.4.1@sha256:38022897004b4e06b710a31ca24d0c8b4a18312374524971665896c457ea5ab7
+      tag: v2.4.2@sha256:8909540f7807ab91eededa810ddc0b52c6894e9db881d9e768b2499656fe69cd
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -134,7 +134,7 @@ spec:
           timeoutSeconds: 10                 
     additionalContainers:
       jackett:
-        image: ghcr.io/elfhosted/jackett:0.22.1702
+        image: ghcr.io/elfhosted/jackett:0.22.1709
         volumeMounts:
         - name: jackett-config
           mountPath: /config/
