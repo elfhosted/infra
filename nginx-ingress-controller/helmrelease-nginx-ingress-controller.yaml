@@ -466,23 +466,23 @@ spec:
     ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
     ## Note: podAffinityPreset, podAntiAffinityPreset, and nodeAffinityPreset will be ignored when it's set
     ##
-    affinity:
+    # affinity:
     ## @param nodeSelector Node labels for pod assignment. Evaluated as a template.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
     ##
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: Exists
-    nodeSelector: {}
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #       - matchExpressions:
+    #         - key: node-role.kubernetes.io/control-plane
+    #           operator: Exists
+    # nodeSelector: {}
     ## @param tolerations Tolerations for pod assignment. Evaluated as a template.
     ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
     ##
-    tolerations:
-    - key: node-role.kubernetes.io/control-plane
-      operator: Exists 
+    # tolerations:
+    # - key: node-role.kubernetes.io/control-plane
+    #   operator: Exists 
     ## @param extraVolumes Optionally specify extra list of additional volumes for Controller pods
     ##
     extraVolumes: []
@@ -641,7 +641,7 @@ spec:
       ## @param defaultBackend.resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if defaultBackend.resources is set (defaultBackend.resources is recommended for production).
       ## More information: https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15
       ##
-      resourcesPreset: "nano"
+      # resourcesPreset: "nano"
       ## @param defaultBackend.resources Set container requests and limits for different resources like CPU or memory (essential for production workloads)
       ## Example:
       ## resources:
@@ -652,7 +652,13 @@ spec:
       ##     cpu: 3
       ##     memory: 1024Mi
       ##
-      resources: {}
+      resources:
+        requests:
+          cpu: 1m
+          memory: 256Mi
+        limits:
+          cpu: 1
+          memory: 512Mi   
       ## Default backend containers' liveness probe. Evaluated as a template.
       ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
       ## @param defaultBackend.livenessProbe.enabled Enable livenessProbe
