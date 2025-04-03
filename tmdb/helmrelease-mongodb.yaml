@@ -1,17 +1,13 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: mongodb
   namespace: tmdb
 spec:
-  chart:
-    spec:
-      chart: mongodb
-      version: 16.4.x
-      sourceRef:
-        kind: HelmRepository
-        name: bitnami
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: bitnami-mongodb
+    namespace: flux-system
   interval: 15m
   timeout: 5m
   releaseName: mongodb
