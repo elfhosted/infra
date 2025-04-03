@@ -49,6 +49,11 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1       
+    persistence:
+      p2p-db-storage:
+        enabled: true
+        mountPath: /app/p2p-db-storage/
+        type: emptyDir       
     ingress:
       main:
         enabled: false 
