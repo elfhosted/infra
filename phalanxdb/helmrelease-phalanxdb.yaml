@@ -49,6 +49,8 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1       
+    env:
+      ENCRYPTION_KEY: phalanx_db_v1_32byte_key_20240312_01
     persistence:
       p2p-db-storage:
         enabled: true
