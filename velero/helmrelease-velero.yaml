@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: velero
-      version: 6.7.x
+      version: 8.7.x
       sourceRef:
         kind: HelmRepository
         name: vmware-tanzu
