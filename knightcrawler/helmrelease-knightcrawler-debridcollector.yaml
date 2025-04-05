@@ -43,7 +43,7 @@ spec:
               operator: Exists                            
     image:
       repository: ghcr.io/elfhosted/knightcrawler-debrid-collector
-      tag: v2.0.26@sha256:f66ed48c714e1a8374d08d69b23a67d5d96de3f20f347e5b21b35bff65c4974b
+      tag: v2.0.26@sha256:a6320cb8638863eaf728239aa36d32167006547169bb79029d4c43475122b112
     securityContext:
       seccompProfile:
         type: RuntimeDefault
