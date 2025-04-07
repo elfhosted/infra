@@ -197,8 +197,9 @@ spec:
       runbookUrl: "https://runbooks.prometheus-operator.dev/runbooks"
 
       ## Disabled PrometheusRule alerts
-      disabled: {}
-      # KubeAPIDown: true
+      disabled:
+        KubeAPIDown: true
+        KubeletDown: true
       # NodeRAIDDegraded: true
 
     ## Deprecated way to provide custom recording or alerting rules to be deployed into the cluster.
@@ -2744,7 +2745,7 @@ spec:
         ## If true, the operator will create and maintain a service for scraping kubelets
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/helm/prometheus-operator/README.md
         ##
-        enabled: true
+        enabled: false
         namespace: kube-system
         ## Use '{{ template "kube-prometheus-stack.fullname" . }}-kubelet' by default
         name: ""
