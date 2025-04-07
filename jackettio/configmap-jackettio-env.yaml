@@ -30,3 +30,4 @@ data:
     See the [ElfHosted Stremio Addons Guide](https://stremio-addons-guide.elfhosted.com/) for more addons!
 
   ADDON_ID: jackettio.elfhosted.com  
+  STREMTHRU_URL: http://elfhosted-internal.stremthru

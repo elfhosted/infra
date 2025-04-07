@@ -103,6 +103,9 @@ spec:
 
           echo "export VPN_ENDPOINT_IP=$(dig +short dig +short engage.cloudflareclient.com)" >> /shared/env
 
+          # In case gluetun starts too fast
+          sleep 5s
+
         volumeMounts:
         - mountPath: /shared
           name: shared
