@@ -20,7 +20,7 @@ spec:
       nameOverride: jackettio
     image:
       repository: ghcr.io/elfhosted/jackettio
-      tag: v1.7.0@sha256:2159b41a44c59829600df565d24d09f1156aeb481b6b1b565abbf10c13d5174c
+      tag: v1.4@sha256:90ebb10471caa84227cf4ae5868fa5c165b8b995f57800ffdc5ed1803eb0e490
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -81,7 +81,7 @@ spec:
       limits:
         cpu: 1
         memory: 512Mi
-        ephemeral-storage: 100Mi        
+        ephemeral-storage: 1Gi        
     ingress:
       main:
         enabled: false
