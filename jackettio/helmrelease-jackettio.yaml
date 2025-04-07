@@ -20,7 +20,7 @@ spec:
       nameOverride: jackettio
     image:
       repository: ghcr.io/elfhosted/jackettio
-      tag: v1.4@sha256:90ebb10471caa84227cf4ae5868fa5c165b8b995f57800ffdc5ed1803eb0e490
+      tag: rolling@sha256:90ebb10471caa84227cf4ae5868fa5c165b8b995f57800ffdc5ed1803eb0e490
     securityContext:
       seccompProfile:
         type: RuntimeDefault
