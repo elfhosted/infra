@@ -5,8 +5,8 @@ metadata:
   namespace: mediafusion
 spec:
   rateLimit:
-    average: 12    # 12 requests per source IP every .. (this isn't working like I expected, CloudFlare isn't load-balancing randomly)
-    period: 1m     # This is a per-node limit, and we have 10 nodes (x), randomly load-balanced, so it's effectively 5/min, or 1 per 12.5s
-    burst: 20      # Allow 10 requests in the period to start off with, before rate-limiting kicks in
+    average: 6     # 6 requests per source IP every ..
+    period: 1m     # 
+    burst: 10      # Allow 10 requests in the period to start off with, before rate-limiting kicks in
     sourceCriterion:
       requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
