@@ -940,10 +940,10 @@ spec:
     # -- [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for `traefik` container.
     resources:
       requests:
-        cpu: 200m
+        cpu: 1m
         memory: "1Gi"
       limits:
-        cpu: "6"
+        cpu: "2"
         memory: "2Gi"
 
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
@@ -1160,3 +1160,18 @@ spec:
             traceParent: ""
             # -- Name of the header that will contain the tracestate copy.
             traceState: ""
+
+    # -- Required for OCI Marketplace integration.
+    # See https://docs.public.content.oci.oraclecloud.com/en-us/iaas/Content/Marketplace/understanding-helm-charts.htm
+    oci_meta:
+      # -- Enable specific values for Oracle Cloud Infrastructure
+      enabled: false
+        # -- It needs to be an ocir repo
+      repo: traefik
+      images:
+        proxy:
+          image: traefik
+          tag: latest
+        hub:
+          image: traefik-hub
+          tag: latest

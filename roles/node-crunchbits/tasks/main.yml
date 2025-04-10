@@ -347,15 +347,12 @@
     hour: "*"
     job: "/usr/local/bin/smartmon_metrics.sh > /var/lib/node-exporter/textfiles/smart_metrics.prom && chmod 644 /var/lib/node-exporter/textfiles/smart_metrics.prom"
 
-# no diff in .cc
-# - name: Add cron scripts to kill unwanted transcodes
-#   cron:
-#     name: "unwanted transcodes"
-#     minute: "*"
-#     hour: "*"
-#     job: "/usr/local/bin/kill-unwanted-transcodes.sh"
-#   when:
-#   - "inventory_hostname in groups['k3s_contended']"
+- name: Add cron scripts to kill unwanted transcodes
+  cron:
+    name: "unwanted transcodes"
+    minute: "*"
+    hour: "*"
+    job: "/usr/local/bin/kill-unwanted-transcodes.sh"
 
 - name: ignore irrelevant logs via rsyslog
   copy:

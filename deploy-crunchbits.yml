@@ -51,3 +51,4 @@
 
   tasks: 
   - { import_role: { name: k3s-agent }, tags: [ k3s-agent ] }  
+  - { import_role: { name: transcode-killer }, tags: [ transcode-killer ] }   

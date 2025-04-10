@@ -172,6 +172,18 @@
     - { port: "4244", proto: "tcp" }  # hubble  
     - { port: "8472", proto: "udp" }  # vxlan
 
+- name: Drop noisy traffic
+  ufw:
+    direction: in
+    rule: "deny"
+    log: false
+    src: "{{ pod_cidr_v4 }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "5351", proto: "udp" } # NAT-PMP (Plex)
+    - { port: "1900", proto: "udp" } # DLNA (Plex)
+    
 - name: Determine public NIC name (step 1/2)
   set_fact: 
     cluster_nic_split: "{{ cluster_nic | split('.')}}" 
@@ -235,17 +247,7 @@
     mode: u+x
   loop:
     - smartmon_metrics.sh
-    - kill-unwanted-transcodes.sh
 
-# - name: Add cron scripts to kill unwanted transcodes - we don't do this anymore
-#   cron:
-#     name: "unwanted transcodes"
-#     minute: "*"
-#     hour: "*"
-#     job: "/usr/local/bin/kill-unwanted-transcodes.sh"
-#   when:
-#   - "inventory_hostname in groups['k3s_contended']"
-  
 - name: Install smartmontools
   apt: pkg=smartmontools
 
