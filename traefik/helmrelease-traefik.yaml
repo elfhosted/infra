@@ -949,13 +949,7 @@ spec:
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
     # -- on nodes where no other traefik pods are scheduled.
     # It should be used when hostNetwork: true to prevent port conflicts
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: node-role.kubernetes.io/control-plane
-              operator: Exists 
+    affinity: {}
 
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
