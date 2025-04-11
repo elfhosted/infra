@@ -940,23 +940,22 @@ spec:
     # -- [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for `traefik` container.
     resources:
       requests:
-        cpu: 200m
+        cpu: 10m
         memory: "1Gi"
       limits:
-        cpu: "6"
-        memory: "2Gi"
+        cpu: "1"
+        memory: "4Gi"
 
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
     # -- on nodes where no other traefik pods are scheduled.
     # It should be used when hostNetwork: true to prevent port conflicts
-    affinity: {}
-    #  podAntiAffinity:
-    #    requiredDuringSchedulingIgnoredDuringExecution:
-    #      - labelSelector:
-    #          matchLabels:
-    #            app.kubernetes.io/name: '{{ template "traefik.name" . }}'
-    #            app.kubernetes.io/instance: '{{ .Release.Name }}-{{ include "traefik.namespace" . }}'
-    #        topologyKey: kubernetes.io/hostname
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists 
 
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
