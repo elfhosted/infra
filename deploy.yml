@@ -60,6 +60,7 @@
 
   tasks: 
   - { import_role: { name: node }, tags: [ node ] }
+  - { import_role: { name: transcode-killer }, tags: [ transcode-killer ] }  
   - { import_role: { name: k3s-agent }, tags: [ k3s-agent ] }
   # - { import_role: { name: kata-containers }, tags: [ kata-containers ] }
 

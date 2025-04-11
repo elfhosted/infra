@@ -9,8 +9,8 @@ spec:
   restic:
     repository: mongodb-restic-config
     copyMethod: Snapshot
-    cacheCapacity: 10Gi
-    capacity: 10Gi
+    cacheCapacity: 20Gi
+    capacity: 20Gi
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes:
     - ReadWriteOnce

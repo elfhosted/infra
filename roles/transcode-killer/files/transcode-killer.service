@@ -1,0 +1,14 @@
+[Unit]
+Description=Transcode Killer Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/transcode-killer.py
+Restart=always
+RestartSec=5
+User=root
+StandardOutput=append:/var/log/transcode-killer.log
+StandardError=append:/var/log/transcode-killer.log
+
+[Install]
+WantedBy=multi-user.target

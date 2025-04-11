@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 35.x
+      version: 35.x.x
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -264,10 +264,10 @@ spec:
 
     updateStrategy:  # @schema additionalProperties: false
       # -- Customize updateStrategy of Deployment or DaemonSet
-      type: Recreate
+      type: RollingUpdate
       rollingUpdate:
         maxUnavailable: 1  # @schema type:[integer, string, null]
-        # maxSurge: 1        # @schema type:[integer, string, null]
+        maxSurge:          # @schema type:[integer, string, null]
 
     readinessProbe:  # @schema additionalProperties: false
       # -- The number of consecutive failures allowed before considering the probe as failed.
@@ -940,11 +940,11 @@ spec:
     # -- [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for `traefik` container.
     resources:
       requests:
-        cpu: 10m
+        cpu: 1m
         memory: "1Gi"
       limits:
-        cpu: "1"
-        memory: "4Gi"
+        cpu: "2"
+        memory: "2Gi"
 
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
     # -- on nodes where no other traefik pods are scheduled.
@@ -1159,3 +1159,18 @@ spec:
             traceParent: ""
             # -- Name of the header that will contain the tracestate copy.
             traceState: ""
+
+    # -- Required for OCI Marketplace integration.
+    # See https://docs.public.content.oci.oraclecloud.com/en-us/iaas/Content/Marketplace/understanding-helm-charts.htm
+    oci_meta:
+      # -- Enable specific values for Oracle Cloud Infrastructure
+      enabled: false
+        # -- It needs to be an ocir repo
+      repo: traefik
+      images:
+        proxy:
+          image: traefik
+          tag: latest
+        hub:
+          image: traefik-hub
+          tag: latest
