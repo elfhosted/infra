@@ -3422,7 +3422,7 @@ spec:
       thanosImage:
         registry: quay.io
         repository: thanos/thanos
-        tag: v0.37.2
+        tag: v0.38.0
         sha: ""
 
       ## Set a Label Selector to filter watched prometheus and prometheusAgent
@@ -5147,7 +5147,7 @@ spec:
         image:
           registry: quay.io
           repository: thanos/thanos
-          tag: v0.37.2
+          tag: v0.38.0
           sha: ""
 
         ## Namespaces to be selected for PrometheusRules discovery.
