@@ -156,7 +156,7 @@ spec:
       plugins:
         traefik-oidc-auth:
           moduleName: "github.com/sevensolutions/traefik-oidc-auth"
-          version: "v0.10.1"
+          version: "v0.9.0"
         rco:
           moduleName: github.com/Lepkem/traefik-plugin-response-code-override
           version: v0.0.3
@@ -943,7 +943,7 @@ spec:
         cpu: 1m
         memory: "1Gi"
       limits:
-        cpu: "2"
+        cpu: "6"
         memory: "2Gi"
 
     # -- This example pod anti-affinity forces the scheduler to put traefik pods
