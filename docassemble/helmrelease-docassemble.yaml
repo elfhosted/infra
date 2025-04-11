@@ -21,7 +21,7 @@ spec:
     image:
       registry: docker.io
       repository: jhpyle/docassemble
-      tag: latest@sha256:e61481989ff8fec6c9b38a97628722d66a077b49c65cb6db3cbe1115f171ab15
+      tag: latest@sha256:834dffe3cb658d7b13acc4d8634aa16e8977e484c4827febbfaa891aaaacb5ed
     securityContext:
       seccompProfile:
         type: RuntimeDefault
