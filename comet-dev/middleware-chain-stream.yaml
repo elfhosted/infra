@@ -12,6 +12,9 @@ spec:
     - name: return-code-override-ratelimit
       namespace: traefik
 
-    # These are specific to comet
+    # These are specific to comet, since they return a comet-specific error
     - name: errors-rate-limit-exceeded   
-    - name: rate-limit-stream
+
+    # This is generic again
+    - name: clusterratelimit-public-stremio-addon
+      namespace: traefik

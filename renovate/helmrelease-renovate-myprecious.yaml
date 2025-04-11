@@ -35,7 +35,7 @@ spec:
       # -- Labels to set on the cronjob
       labels: {}
       # -- "Allow" to allow concurrent runs, "Forbid" to skip new runs if a previous run is still running or "Replace" to replace the previous run
-      concurrencyPolicy: ''
+      concurrencyPolicy: 'Replace'
       # -- Amount of failed jobs to keep in history
       failedJobsHistoryLimit: ''
       # -- Amount of completed jobs to keep in history

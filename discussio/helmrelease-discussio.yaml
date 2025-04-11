@@ -70,7 +70,7 @@ spec:
         ephemeral-storage: 50Mi
       limits:
         cpu: 1 # never gets here because it's single-threaded
-        memory: 4Gi
+        memory: 6Gi
         ephemeral-storage: 1Gi     
     ingress:
       main:
