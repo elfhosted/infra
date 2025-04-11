@@ -11,3 +11,4 @@ spec:
       period: 60 # seconds, so effectively you can "borrow" 10 minutes (60 requests) of requests for aggressive searching, but then you have to "cool off" before you get more
       sourceCriterion:
         requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
+      redisAddress: redis-headless:6379 # Use the single-purpose redis in the traefik namespace
