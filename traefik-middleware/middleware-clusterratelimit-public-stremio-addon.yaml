@@ -4,9 +4,10 @@ metadata:
   name: clusterratelimit-public-stremio-addon
   namespace: traefik
 spec:
-  clusterRatelimit:
-    burst: 60  # "depth" of the request bucket, which refills with...
-    average: 6 # 6 requests per source IP every ..
-    period: 60 # seconds, so effectively you can "borrow" 10 minutes (60 requests) of requests for aggressive searching, but then you have to "cool off" before you get more
-    sourceCriterion:
-      requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
+  plugin:
+    clusterRatelimit:
+      burst: 60  # "depth" of the request bucket, which refills with...
+      average: 6 # 6 requests per source IP every ..
+      period: 60 # seconds, so effectively you can "borrow" 10 minutes (60 requests) of requests for aggressive searching, but then you have to "cool off" before you get more
+      sourceCriterion:
+        requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
