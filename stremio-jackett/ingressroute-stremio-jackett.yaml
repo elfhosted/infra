@@ -13,9 +13,6 @@ spec:
         - name: stremio-jackett
           kind: Service
           port: 3000
-      middlewares:  
-        - name: chain-public-stremio-addon-static
-          namespace: traefik  
     - match: Host(`stremio-jackett.${dns_domain}`)
       kind: Rule
       services:
@@ -23,5 +20,4 @@ spec:
           kind: Service
           port: 3000
       middlewares:  
-        - name: chain-public-stremio-addon
-          namespace: traefik
+        - name: chain-stream
