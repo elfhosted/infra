@@ -26,17 +26,6 @@ data:
             }
         ]
     }    
-  stremio-jackett-is-deprecated.json: |
-    {
-        "streams": [
-            {
-                "name": "[😿] Stremio-Jackett",
-                "title": "Stremio-Jackett is deprecated ",
-                "torrentTitle": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
-                "url": "https://fnky.nz/sag"
-            }
-        ]
-    }  
   mediafusion-search-rate-limited.json: |
     {
         "streams": [
@@ -70,18 +59,7 @@ data:
                 "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
             }
         ]
-    }
-  realdebrid-api-removal.json: |
-    {
-        "streams": [
-            {
-                "name": "[😿] Comet",
-                "title": "RealDebrid/AllDebrid/Debrid-Link APIs removed 😿\nUse Premiumize / Torbox\nSee https://fnky.nz/sadcat",
-                "torrentTitle": "RealDebrid/AllDebrid/Debrid-Link API removed 😿\nUse Premiumize / Torbox\nSee https://fnky.nz/sadcat",
-                "url": "https://elfhosted.com/assets/realdebrid-api-removal.mp4"
-            }
-        ]
-    }    
+    } 
   comet-search-rate-limited.json: |
     {
         "streams": [
@@ -114,18 +92,18 @@ data:
                 "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
             }
         ]
-    }         
-  comet-requires-configuration.json: |
+    }  
+  stremthru-search-rate-limited.json: |
     {
         "streams": [
             {
-                "name": "[🤦‍♂️] Comet",
-                "title": "Comet addon unconfigured 🤦‍♂️",
-                "torrentTitle": "Comet addon requires configuration ✅\nConfigure in Stremio or\nvisit https://comet.elfhosted.com",
-                "url": "https://elfhosted.com/assets/comet-requires-configuration.mp4"
+                "name": "[🐢] Stremthru",
+                "title": "Stremthru public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
             }
         ]
-    }     
+    }             
   jackettio-search-rate-limited.json: |
     {
         "streams": [
