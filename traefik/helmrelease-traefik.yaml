@@ -396,7 +396,7 @@ spec:
         # -- To write the logs into a log file, use the filePath option.
         filePath: ""
         # -- When set to true and format is common, it disables the colorized output.
-        noColor: false
+        noColor: true
       access:
         # -- To enable access logs
         enabled: false
