@@ -27,3 +27,12 @@ spec:
       middlewares:  
         - name: ipallowlist-localhost-only
           namespace: traefik
+    # This is a scrape / search, subject to rate-limiting
+    - match: Host(`stremthru.${dns_domain}`) && PathRegexp(`^/(.*)stream`)
+      kind: Rule
+      services:
+        - name: stremthru
+          kind: Service
+          port: 8080
+      middlewares:  
+        - name: chain-stream          
