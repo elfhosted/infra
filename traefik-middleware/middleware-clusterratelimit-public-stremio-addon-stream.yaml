@@ -8,7 +8,7 @@ spec:
     clusterRatelimit:      
       average: 1 # requests per source IP every ..
       period: 5  # ... seconds, with a ...
-      burst: 2   # .. request "deep" "token bucket"
+      burst: 2   # .. request-deep "token bucket" (allowing x simultaneous requests in the period)
       sourceCriterion:
         requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
       redisAddress: redis-headless:6379 # Use the single-purpose redis in the traefik namespace
