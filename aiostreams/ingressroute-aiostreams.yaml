@@ -14,7 +14,7 @@ spec:
           kind: Service
           port: 3000
     # This is a scrape / search, subject to rate-limiting
-    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)/stream`)
+    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`)
       kind: Rule
       services:
         - name: aiostreams
