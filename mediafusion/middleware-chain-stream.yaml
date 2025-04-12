@@ -11,4 +11,6 @@ spec:
     - name: return-code-override-ratelimit
       namespace: traefik
     - name: errors-rate-limit-exceeded   
-    - name: rate-limit-stream
+    # Generic
+    - name: clusterratelimit-public-stremio-addon-stream
+      namespace: traefik
