@@ -7,7 +7,8 @@ data:
   COMET_URL: http://elfhosted-internal.comet/
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
   JACKETTIO_URL: http://elfhosted-internal.jackettio/
-  # EASYNEWS_PLUS_URL: http://elfhosted-internal.easynewsplus/
+  EASYNEWS_PLUS_URL: http://elfhosted-internal.easynewsplus/
+  STREMIO_JACKETT_URL: http://elfhosted-internal.stremio-jackett/
   DISABLE_TORRENTIO: "true"
   DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
   ADDON_NAME: AIOStreams | ElfHosted
