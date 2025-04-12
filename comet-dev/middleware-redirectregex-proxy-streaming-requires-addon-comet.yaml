@@ -1,9 +1,0 @@
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: redirectregex-comet-requires-configuration
-  namespace: comet-dev
-spec:
-  redirectRegex:
-    regex: ^stream.*$
-    replacement: https://deprecations.elfhosted.com/comet-requires-configuration.json

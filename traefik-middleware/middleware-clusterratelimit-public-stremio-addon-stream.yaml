@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: clusterratelimit-public-stremio-addon-stream
+  namespace: traefik
+spec:
+  plugin:
+    clusterRatelimit:      
+      average: 1 # requests per source IP every ..
+      period: 2  # ... seconds, with a ...
+      burst: 2   # .. request "deep" "token bucket"
+      sourceCriterion:
+        requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
+      redisAddress: redis-headless:6379 # Use the single-purpose redis in the traefik namespace

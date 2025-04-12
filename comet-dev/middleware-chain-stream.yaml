@@ -16,5 +16,5 @@ spec:
     - name: errors-rate-limit-exceeded   
 
     # This is generic again
-    - name: clusterratelimit-public-stremio-addon
+    - name: clusterratelimit-public-stremio-addon-stream
       namespace: traefik

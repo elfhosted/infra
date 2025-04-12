@@ -17,4 +17,7 @@ spec:
 
     # These are specific to comet
     - name: errors-rate-limit-exceeded   
-    - name: rate-limit-stream
+
+    # This is generic again
+    - name: clusterratelimit-public-stremio-addon-stream
+      namespace: traefik

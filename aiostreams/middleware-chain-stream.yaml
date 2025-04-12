@@ -2,7 +2,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: chain-stream
-  namespace: aiostreams
+  namespace: comet-dev
 spec:
   chain:
     middlewares:
@@ -12,6 +12,9 @@ spec:
     - name: return-code-override-ratelimit
       namespace: traefik
 
-    # These are specific to aiostreams
-    - name: errors-rate-limit-exceeded   
-    - name: rate-limit-stream
+    # These are specific to aiostreams, since they return an aiostreams-specific error
+    - name: errors-rate-limit-exceeded
+
+    # Generic
+    - name: clusterratelimit-public-stremio-addon-stream
+      namespace: traefik
