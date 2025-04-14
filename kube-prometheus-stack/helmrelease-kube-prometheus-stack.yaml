@@ -1379,8 +1379,8 @@ spec:
 
           ## URL of prometheus datasource
           ##
-          url: http://prometheus-operated.kube-prometheus-stack:9090
-          # url: http://thanos-query.thanos:9090/
+          # url: http://prometheus-operated.kube-prometheus-stack:9090
+          url: http://thanos-query.thanos:9090/
 
           ## Prometheus request timeout in seconds
           # timeout: 30
