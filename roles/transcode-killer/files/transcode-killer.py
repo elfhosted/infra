@@ -60,6 +60,10 @@ def is_video_transcode(cmdline):
     if video_codec == "ass":
         return False, None
 
+    # Allow audio transcoding to FLAC
+    if video_codec == "flac":
+        return False, None
+
     # Check if VA-API is mentioned for hardware transcoding
     if "vaapi" not in cmdline.lower():
         return True, "No VA-API involved, blocking software transcode"
