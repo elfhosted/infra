@@ -206,7 +206,7 @@ spec:
         kubeApiserverHistogram: false
         kubeApiserverSlos: false
         kubeControllerManager: false
-        kubelet: false
+        kubelet: true
         kubeProxy: false
         kubePrometheusGeneral: true
         kubePrometheusNodeRecording: true
@@ -1548,7 +1548,7 @@ spec:
     ## Flag to disable all the kubernetes component scrapers
     ##
     kubernetesServiceMonitors:
-      enabled: false
+      enabled: true
 
     ## Component scraping the kube api server
     ##
@@ -2600,7 +2600,8 @@ spec:
         - --no-collector.fibrechannel 
         - --no-collector.infiniband 
         - --no-collector.ipvs 
-        - --no-collector.netclass 
+        # - --no-collector.netclass 
+        - --collector.netdev.device-include=(eno|eth|external)
         - --no-collector.nfs 
         - --no-collector.nfsd 
         - --no-collector.powersupplyclass 
