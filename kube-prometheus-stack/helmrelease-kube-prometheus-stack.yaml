@@ -2600,7 +2600,7 @@ spec:
         - --no-collector.fibrechannel 
         - --no-collector.infiniband 
         - --no-collector.ipvs 
-        - --no-collector.netclass 
+        # - --no-collector.netclass 
         - --no-collector.nfs 
         - --no-collector.nfsd 
         - --no-collector.powersupplyclass 
