@@ -2601,7 +2601,7 @@ spec:
         - --no-collector.infiniband 
         - --no-collector.ipvs 
         # - --no-collector.netclass 
-        - --collector.netdev.device-include=eno1
+        - --collector.netdev.device-include=(eno|eth|external)
         - --no-collector.nfs 
         - --no-collector.nfsd 
         - --no-collector.powersupplyclass 
