@@ -1548,7 +1548,7 @@ spec:
     ## Flag to disable all the kubernetes component scrapers
     ##
     kubernetesServiceMonitors:
-      enabled: false
+      enabled: true
 
     ## Component scraping the kube api server
     ##
