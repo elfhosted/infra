@@ -206,7 +206,7 @@ spec:
         kubeApiserverHistogram: false
         kubeApiserverSlos: false
         kubeControllerManager: false
-        kubelet: false
+        kubelet: true
         kubeProxy: false
         kubePrometheusGeneral: true
         kubePrometheusNodeRecording: true
