@@ -9,10 +9,12 @@ spec:
     # These are generic
     - name: headers-add-cors-for-stremio
       namespace: traefik
+    - name: headers-cache-for-5s
+      namespace: traefik
     - name: return-code-override-ratelimit
       namespace: traefik
 
-    # These are specific to traefik
+    # These are specific to jacketito
     - name: errors-rate-limit-exceeded   
 
     # Generic

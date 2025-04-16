@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: headers-cache-for-5s
+  namespace: traefik
+spec:
+  headers:
+    customResponseHeaders:
+      Cache-Control: "public, max-age=5"
