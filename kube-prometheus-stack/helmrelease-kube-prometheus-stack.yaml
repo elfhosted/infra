@@ -4388,9 +4388,13 @@ spec:
 
         ## Resource limits & requests
         ##
-        resources: {}
-        # requests:
-        #   memory: 400Mi
+        resources:
+          requests:
+            memory: 16Gi
+            cpu: 1200m
+          rateLimits:
+            memory: 20Gi
+            cpu: 2
 
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/platform/storage.md
