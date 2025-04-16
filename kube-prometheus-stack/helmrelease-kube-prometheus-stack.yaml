@@ -2586,9 +2586,12 @@ spec:
         jobLabel: node-exporter
       releaseLabel: true
       extraArgs:
-        - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
-        - --collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
+        # filesystem entirely disabled for now
+        # - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+        # - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
         - --collector.textfile.directory=/var/lib/node-exporter/textfiles/
+        - --no-collector.filesystem
+        - --no-collector.diskstats
         - --no-collector.bcache 
         - --no-collector.btrfs 
         - --no-collector.wifi 
@@ -2600,10 +2603,11 @@ spec:
         - --no-collector.fibrechannel 
         - --no-collector.infiniband 
         - --no-collector.ipvs 
-        # - --no-collector.netclass 
+        - --no-collector.netclass 
         - --collector.netdev.device-include=(eno|eth|external)
         - --no-collector.nfs 
         - --no-collector.nfsd 
+        - --no-collector.nvme
         - --no-collector.powersupplyclass 
         - --no-collector.pressure 
         - --no-collector.rapl 
@@ -2676,13 +2680,13 @@ spec:
           ## RelabelConfigs to apply to samples before scraping
           ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
           ##
-          relabelings: []
-          # - sourceLabels: [__meta_kubernetes_pod_node_name]
-          #   separator: ;
-          #   regex: ^(.*)$
-          #   targetLabel: nodename
-          #   replacement: $1
-          #   action: replace
+          relabelings: 
+          - sourceLabels: [__meta_kubernetes_pod_node_name]
+            separator: ;
+            regex: ^(.*)$
+            targetLabel: nodename
+            replacement: $1
+            action: replace
 
           ## Attach node metadata to discovered targets. Requires Prometheus v2.35.0 and above.
           ##

@@ -9,8 +9,8 @@ spec:
     # These are generic
     - name: headers-add-cors-for-stremio
       namespace: traefik
-    - name: return-code-override-ratelimit
-      namespace: traefik
+    # - name: return-code-override-ratelimit
+    #   namespace: traefik
 
     # These are specific to comet, since they return a comet-specific error
     - name: errors-rate-limit-exceeded   
