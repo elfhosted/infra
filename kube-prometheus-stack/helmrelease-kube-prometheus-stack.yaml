@@ -1730,7 +1730,11 @@ spec:
           # Drop less useful container / always zero filesystem metrics.
           - sourceLabels: [__name__]
             action: drop
-            regex: 'container_fs_(io_current|io_time_seconds_total|io_time_weighted_seconds_total|reads_merged_total|sector_reads_total|sector_writes_total|writes_merged_total)'
+            # regex: 'container_fs_(io_current|io_time_seconds_total|io_time_weighted_seconds_total|reads_merged_total|sector_reads_total|sector_writes_total|writes_merged_total)'
+            regex: 'container_fs_.*'
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_blkio_.*'            
           # Drop less useful / always zero container memory metrics.
           - sourceLabels: [__name__]
             action: drop
@@ -2160,7 +2164,7 @@ spec:
     ## Component scraping etcd
     ##
     kubeEtcd:
-      enabled: true
+      enabled: false
 
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
