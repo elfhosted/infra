@@ -1710,7 +1710,7 @@ spec:
         ## Configure the scrape interval for resource metrics. This is configured to the default Kubelet cAdvisor
         ## minimum housekeeping interval in order to avoid missing samples. Note, this value is ignored
         ## if kubelet.serviceMonitor.interval is not empty.
-        resourceInterval: 1m
+        resourceInterval: 10s
 
         ## Enable scraping /metrics/cadvisor from kubelet's service
         ##
@@ -1718,7 +1718,7 @@ spec:
         ## Configure the scrape interval for cAdvisor. This is configured to the default Kubelet cAdvisor
         ## minimum housekeeping interval in order to avoid missing samples. Note, this value is ignored
         ## if kubelet.serviceMonitor.interval is not empty.
-        cAdvisorInterval: 1m
+        cAdvisorInterval: 10s
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
@@ -1786,7 +1786,7 @@ spec:
         #   separator: ;
         #   regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
         #   replacement: $1
-        #   action: drop    
+        #   action: drop
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
@@ -1884,7 +1884,7 @@ spec:
     ## Component scraping the kube controller manager
     ##
     kubeControllerManager:
-      enabled: false
+      enabled: true
 
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
@@ -2280,7 +2280,7 @@ spec:
     ## Component scraping kube scheduler
     ##
     kubeScheduler:
-      enabled: false
+      enabled: true
 
       ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
       ##
