@@ -1840,10 +1840,10 @@ spec:
           - source_labels: [__name__]
             regex: 'etcd_.*'
             action: drop
-          # We only want CPU / RAM usage 
-          - source_labels: [__name__]
-            regex: 'container_((?!cpu|memory).*)'
-            action: drop
+          # We only want CPU / RAM usage - DEBUG4
+          # - source_labels: [__name__]
+          #   regex: 'container_((?!cpu|memory).*)'
+          #   action: drop
 
 
         # - sourceLabels: [__name__, image]
