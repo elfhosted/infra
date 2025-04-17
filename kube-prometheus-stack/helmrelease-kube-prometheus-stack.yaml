@@ -1724,10 +1724,9 @@ spec:
         ##
         cAdvisorMetricRelabelings:
           # Drop less useful container CPU metrics.
-          # is this breaking cpu metrics?
-          # - sourceLabels: [__name__]
-          #   action: drop
-          #   regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
           # Drop less useful container / always zero filesystem metrics.
           - sourceLabels: [__name__]
             action: drop
@@ -1841,10 +1840,10 @@ spec:
           - source_labels: [__name__]
             regex: 'etcd_.*'
             action: drop
-          # We only want CPU / RAM usage
-          - source_labels: [__name__]
-            regex: 'container_((?!cpu|memory).*)'
-            action: drop
+          # # We only want CPU / RAM usage
+          # - source_labels: [__name__]
+          #   regex: 'container_((?!cpu|memory).*)'
+          #   action: drop
 
 
         # - sourceLabels: [__name__, image]
