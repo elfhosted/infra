@@ -4421,11 +4421,11 @@ spec:
         ##
         resources:
           requests:
-            memory: 16Gi
-            cpu: 1200m
-          rateLimits:
-            memory: 20Gi
-            cpu: 2
+            memory: 1Gi
+            cpu: 25m
+          limits:
+            memory: 2Gi
+            cpu: 500m
 
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/platform/storage.md
