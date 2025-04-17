@@ -4316,7 +4316,7 @@ spec:
         ## Number of replicas of each shard to deploy for a Prometheus deployment.
         ## Number of replicas multiplied by shards is the total number of Pods created.
         ##
-        replicas: ${ha_replica_count}
+        replicas: 1 # no point making this HA, all it's supposed to do is feed thanos
 
         ## EXPERIMENTAL: Number of shards to distribute targets onto.
         ## Number of replicas multiplied by shards is the total number of Pods created.
@@ -4406,14 +4406,14 @@ spec:
         storageSpec:
         # Using PersistentVolumeClaim
         #
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: ${prometheus_pvc_storage}
+          # ephemeral:
+          #   volumeClaimTemplate:
+          #     spec:
+          #       accessModes: [ "ReadWriteOnce" ]
+          #       storageClassName: "topolvm-provisioner-thin"
+          #       resources:
+          #         requests:
+          #           storage: ${prometheus_pvc_storage}
 
           # volumeClaimTemplate:
           #   spec:
@@ -4426,8 +4426,8 @@ spec:
 
         ## Using tmpfs volume
         ##
-        #  emptyDir:
-        #    medium: Memory
+          emptyDir:
+            medium: ""
 
         # Additional volumes on the output StatefulSet definition.
         volumes: []
