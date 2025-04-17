@@ -4424,7 +4424,7 @@ spec:
             memory: 1Gi
             cpu: 25m
           limits:
-            memory: 4Gi
+            memory: 6Gi
             cpu: 500m
 
         ## Prometheus StorageSpec for persistent data
