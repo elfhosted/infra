@@ -49,13 +49,15 @@ data:
             {
               "Url": "http://scrape-com:80",
               "EndpointType": 0
-            },
+            }                                
+          ],
+          "GenericInstances": [
             {
               "Url": "http://elfhosted-internal.stremthru:80",
               "EndpointType": 2,
               "Authorization": "Basic elfies:arethegreatest",
               "EndpointSuffix": "/__debug__/torrents?no_missing_size=1"              
-            }                                  
+            }
           ],
           "EnableScraping": true,
           "Kubernetes": {
