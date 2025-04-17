@@ -1724,9 +1724,10 @@ spec:
         ##
         cAdvisorMetricRelabelings:
           # Drop less useful container CPU metrics.
-          - sourceLabels: [__name__]
-            action: drop
-            regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
+          # is this breaking cpu metrics?
+          # - sourceLabels: [__name__]
+          #   action: drop
+          #   regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
           # Drop less useful container / always zero filesystem metrics.
           - sourceLabels: [__name__]
             action: drop
@@ -1884,7 +1885,7 @@ spec:
     ## Component scraping the kube controller manager
     ##
     kubeControllerManager:
-      enabled: true
+      enabled: false
 
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
