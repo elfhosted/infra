@@ -1724,7 +1724,6 @@ spec:
         ##
         cAdvisorMetricRelabelings:
           # Drop less useful container CPU metrics.
-          # DEBUG2
           - sourceLabels: [__name__]
             action: drop
             regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
@@ -1841,8 +1840,8 @@ spec:
           - source_labels: [__name__]
             regex: 'etcd_.*'
             action: drop
-            # DEBUG1
-          # # We only want CPU / RAM usage
+            # this removes all cpu metrics
+          # # We only want CPU / RAM usage - DEBUGME
           # - source_labels: [__name__]
           #   regex: 'container_((?!cpu|memory).*)'
           #   action: drop
