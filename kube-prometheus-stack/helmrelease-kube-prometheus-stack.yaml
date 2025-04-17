@@ -4425,7 +4425,7 @@ spec:
             cpu: 25m
           limits:
             memory: 6Gi
-            cpu: 500m
+            cpu: 2
 
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/platform/storage.md
