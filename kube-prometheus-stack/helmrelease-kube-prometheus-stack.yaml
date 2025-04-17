@@ -1884,7 +1884,7 @@ spec:
     ## Component scraping the kube controller manager
     ##
     kubeControllerManager:
-      enabled: false
+      enabled: true
 
       ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
       ##
