@@ -1776,7 +1776,7 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        probesMetricRelabelings: []
+        probesMetricRelabelings:
         # - sourceLabels: [__name__, image]
         #   separator: ;
         #   regex: container_([a-z_]+);
@@ -1787,6 +1787,10 @@ spec:
         #   regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
         #   replacement: $1
         #   action: drop
+          # Don't bother keeping track of probe results
+          - action: drop
+            sourceLabels: [__name__]
+            regex: 'prober_.*'        
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
@@ -1810,6 +1814,10 @@ spec:
           - action: replace
             sourceLabels: [__metrics_path__]
             targetLabel: metrics_path
+          # Don't bother keeping track of probe results
+          - action: drop
+            sourceLabels: [__name__]
+            regex: 'prober_.*'            
         # - sourceLabels: [__meta_kubernetes_pod_node_name]
         #   separator: ;
         #   regex: ^(.*)$
@@ -1839,10 +1847,6 @@ spec:
           - action: drop
             sourceLabels: [__name__, le]
             regex: (csi_operations|storage_operation_duration)_seconds_bucket;(0.25|2.5|15|25|120|600)(\.0)?
-          # Don't bother keeping track of probe results
-          - action: drop
-            sourceLabels: [__name__]
-            regex: 'prober.*'
 
         # - sourceLabels: [__name__, image]
         #   separator: ;
