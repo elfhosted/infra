@@ -4,7 +4,7 @@ metadata:
   annotations:
     tailscale.com/tailnet-fqdn: elfhosted-internal-mediafusion-redis-elfhosted-com.tail5bd7d1.ts.net
     tailscale.com/hostname: elfhosted-internal-mediafusion-redis-${tailscale_suffix}
-  name: disabled-redis-master
+  name: redis-master
   namespace: mediafusion
 spec:
   externalName: placeholder   # any value - will be overwritten by operator
