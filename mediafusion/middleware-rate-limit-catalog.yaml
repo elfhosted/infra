@@ -1,12 +1,11 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: rate-limit-stream
+  name: rate-limit-catalog
   namespace: mediafusion
 spec:
   rateLimit:
-    average: 6     # 6 requests per source IP every ..
-    period: 1m     # 
-    burst: 10      # Allow 10 requests in the period to start off with, before rate-limiting kicks in
+    average: 20 # requests per source IP every ..
+    period: 1m  # 
     sourceCriterion:
       requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP

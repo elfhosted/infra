@@ -13,4 +13,4 @@ spec:
     - name: return-code-override-ratelimit
       namespace: traefik
     - name: errors-rate-limit-catalog-exceeded   
-    - name: rate-limit-stream
+    - name: rate-limit-catalog
