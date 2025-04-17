@@ -1699,7 +1699,7 @@ spec:
 
         ## Enable scraping /metrics/probes from kubelet's service
         ##
-        probes: true
+        probes: false
 
         ## Enable scraping /metrics/resource from kubelet's service
         ## This is disabled by default because container metrics are already exposed by cAdvisor
@@ -1710,7 +1710,7 @@ spec:
         ## Configure the scrape interval for resource metrics. This is configured to the default Kubelet cAdvisor
         ## minimum housekeeping interval in order to avoid missing samples. Note, this value is ignored
         ## if kubelet.serviceMonitor.interval is not empty.
-        resourceInterval: 10s
+        resourceInterval: 1m
 
         ## Enable scraping /metrics/cadvisor from kubelet's service
         ##
@@ -1718,7 +1718,7 @@ spec:
         ## Configure the scrape interval for cAdvisor. This is configured to the default Kubelet cAdvisor
         ## minimum housekeeping interval in order to avoid missing samples. Note, this value is ignored
         ## if kubelet.serviceMonitor.interval is not empty.
-        cAdvisorInterval: 10s
+        cAdvisorInterval: 1m
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
@@ -1786,11 +1786,7 @@ spec:
         #   separator: ;
         #   regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
         #   replacement: $1
-        #   action: drop
-          # Don't bother keeping track of probe results
-          - action: drop
-            sourceLabels: [__name__]
-            regex: 'prober_.*'        
+        #   action: drop    
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
@@ -1810,14 +1806,7 @@ spec:
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        probesRelabelings:
-          - action: replace
-            sourceLabels: [__metrics_path__]
-            targetLabel: metrics_path
-          # Don't bother keeping track of probe results
-          - action: drop
-            sourceLabels: [__name__]
-            regex: 'prober_.*'            
+        probesRelabelings: []   
         # - sourceLabels: [__meta_kubernetes_pod_node_name]
         #   separator: ;
         #   regex: ^(.*)$
@@ -1847,6 +1836,10 @@ spec:
           - action: drop
             sourceLabels: [__name__, le]
             regex: (csi_operations|storage_operation_duration)_seconds_bucket;(0.25|2.5|15|25|120|600)(\.0)?
+          # Don't want etcd metrics
+          - source_labels: [__name__]
+            regex: 'etcd_.*'
+            action: drop
 
         # - sourceLabels: [__name__, image]
         #   separator: ;
