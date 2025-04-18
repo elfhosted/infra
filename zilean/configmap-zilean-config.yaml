@@ -55,7 +55,7 @@ data:
             {
               "Url": "http://elfhosted-internal.stremthru:80",
               "EndpointType": 2,
-              "Authorization": "elfies:arethegreatest",
+              "Authorization": "Basic ZWxmaWVzOmFyZXRoZWdyZWF0ZXN0",
               "EndpointSuffix": "/__debug__/torrents?no_missing_size=1"              
             }
           ],
