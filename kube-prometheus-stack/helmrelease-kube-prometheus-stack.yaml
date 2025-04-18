@@ -1840,10 +1840,6 @@ spec:
           - source_labels: [__name__]
             regex: 'etcd_.*'
             action: drop
-          # Don't want apiserver metrics either
-          - action: drop
-            sourceLabels: [__name__]
-            regex: ^apiserver_request_duration_seconds_bucket$
                     
           # We only want CPU / RAM usage - DEBUG4
           # - source_labels: [__name__]
@@ -2314,7 +2310,7 @@ spec:
         enabled: true
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: ""
+        interval: "60s"
 
         ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
         ##
@@ -2363,15 +2359,16 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        metricRelabelings: []
-        # - action: keep
-        #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-        #   sourceLabels: [__name__]
+        metricRelabelings: 
+        # Only keep important stuffz
+        - action: keep
+          regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+          sourceLabels: [__name__]
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        relabelings: []
+        relabelings:
         # - sourceLabels: [__meta_kubernetes_pod_node_name]
         #   separator: ;
         #   regex: ^(.*)$
