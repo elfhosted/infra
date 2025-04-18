@@ -1836,10 +1836,6 @@ spec:
           - action: drop
             sourceLabels: [__name__, le]
             regex: (csi_operations|storage_operation_duration)_seconds_bucket;(0.25|2.5|15|25|120|600)(\.0)?
-          # Don't want etcd metrics
-          - source_labels: [__name__]
-            regex: 'etcd_.*'
-            action: drop
           # Don't want apiserver metrics either
           - action: drop
             sourceLabels: [__name__]
@@ -1848,10 +1844,14 @@ spec:
 
                     
           # We only want CPU / RAM usage - DEBUG4
-          # - source_labels: [__name__]
-          #   regex: 'container_((?!cpu|memory).*)'
-          #   action: drop
+          - source_labels: [__name__]
+            regex: 'container_((?!cpu|memory).*)'
+            action: drop
 
+          # # Don't want etcd metrics
+          # - source_labels: [__name__]
+          #   regex: 'etcd_.*'
+          #   action: drop
 
         # - sourceLabels: [__name__, image]
         #   separator: ;
