@@ -3534,7 +3534,7 @@ spec:
       # Thanos sidecar on prometheus nodes
       # (Please remember to change ${kube-prometheus-stack.fullname} and ${namespace}. Not just copy and paste!)
       thanosService:
-        enabled: false
+        enabled: true
         annotations: {}
         labels: {}
 
