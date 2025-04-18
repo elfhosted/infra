@@ -1840,6 +1840,11 @@ spec:
           - source_labels: [__name__]
             regex: 'etcd_.*'
             action: drop
+          # Don't want apiserver metrics either
+          - action: drop
+            sourceLabels: [__name__]
+            regex: ^apiserver_request_duration_seconds_bucket$
+                    
           # We only want CPU / RAM usage - DEBUG4
           # - source_labels: [__name__]
           #   regex: 'container_((?!cpu|memory).*)'
