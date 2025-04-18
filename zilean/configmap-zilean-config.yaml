@@ -56,7 +56,7 @@ data:
               "Url": "http://elfhosted-internal.stremthru:80",
               "EndpointType": 2,
               "Authorization": "Basic ZWxmaWVzOmFyZXRoZWdyZWF0ZXN0",
-              "EndpointSuffix": "/__debug__/torrents?no_missing_size=1"              
+              "EndpointSuffix": "/__experiment__/zilean/torrents"              
             }
           ],
           "EnableScraping": true,
