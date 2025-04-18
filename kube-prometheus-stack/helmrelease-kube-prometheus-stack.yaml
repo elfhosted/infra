@@ -2541,28 +2541,28 @@ spec:
           ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
           ##
 
-          # Only keep critical metrics
-          metricRelabelings:
-            - action: keep
-              sourceLabels: [__name__]
-              regex: >
-                kube_(daemonset_status_number_available|
-                      daemonset_status_desired_number_scheduled|
-                      deployment_status_replicas_available|
-                      deployment_status_replicas_updated|
-                      namespace_status_phase|
-                      node_status_condition|
-                      node_spec_unschedulable|
-                      node_status_allocatable_.+|
-                      node_status_capacity_.+|
-                      pod_status_phase|
-                      pod_container_status_ready|
-                      pod_container_status_restarts_total|
-                      pod_container_status_terminated_reason|
-                      pod_container_status_waiting_reason|
-                      pod_info|
-                      statefulset_status_replicas_ready|
-                      statefulset_replicas)
+          # # Only keep critical metrics - this breaks kube_pod_info and it shouldn't
+          # metricRelabelings:
+          #   - action: keep
+          #     sourceLabels: [__name__]
+          #     regex: >
+          #       kube_(daemonset_status_number_available|
+          #             daemonset_status_desired_number_scheduled|
+          #             deployment_status_replicas_available|
+          #             deployment_status_replicas_updated|
+          #             namespace_status_phase|
+          #             node_status_condition|
+          #             node_spec_unschedulable|
+          #             node_status_allocatable_.+|
+          #             node_status_capacity_.+|
+          #             pod_status_phase|
+          #             pod_container_status_ready|
+          #             pod_container_status_restarts_total|
+          #             pod_container_status_terminated_reason|
+          #             pod_container_status_waiting_reason|
+          #             pod_info|
+          #             statefulset_status_replicas_ready|
+          #             statefulset_replicas)
 
 
           ## RelabelConfigs to apply to samples before scraping
