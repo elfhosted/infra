@@ -1844,8 +1844,8 @@ spec:
           - action: drop
             sourceLabels: [__name__]
             regex: ^apiserver_request_duration_seconds_bucket$
-                    
-                                
+
+
                     
           # We only want CPU / RAM usage - DEBUG4
           # - source_labels: [__name__]
@@ -1970,10 +1970,12 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        metricRelabelings: []
-        # - action: keep
-        #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-        #   sourceLabels: [__name__]
+
+        # remove unwanted metrics
+        metricRelabelings:
+        - action: keep
+          regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+          sourceLabels: [__name__]
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
