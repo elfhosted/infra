@@ -2556,7 +2556,7 @@ spec:
           metricRelabelings:
             - action: keep
               sourceLabels: [__name__]
-              regex: ^(kube_pod_info|kube_pod_container_resource_requests_(cpu_cores|memory_bytes))$
+              regex: ^(kube_pod_info|kube_pod_container_resource_requests)$
 
           ## RelabelConfigs to apply to samples before scraping
           ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
