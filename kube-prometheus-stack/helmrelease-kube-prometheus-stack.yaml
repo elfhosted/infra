@@ -1845,8 +1845,9 @@ spec:
                     
           # We only want CPU / RAM usage - DEBUG4
           - source_labels: [__name__]
-            regex: 'container_((?!cpu|memory).*)'
-            action: drop
+            regex: ^container_.*(cpu|memory)
+            action: keep
+
 
           # # Don't want etcd metrics
           # - source_labels: [__name__]
