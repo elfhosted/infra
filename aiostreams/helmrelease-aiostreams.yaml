@@ -20,7 +20,7 @@ spec:
       nameOverride: aiostreams
     image:
       repository: ghcr.io/elfhosted/aiostreams
-      tag: v1.14.2@sha256:ab0870d42225a1c4892d76e76cb9504ca060e80dd6a68b6ec56c7bc3ce61f498
+      tag: v1.14.3@sha256:3654bbc3a000656ae55f5f57c44d2f7e2c0b9cf1a65b420e22e11871a67fa38b
     securityContext:
       seccompProfile:
         type: RuntimeDefault
