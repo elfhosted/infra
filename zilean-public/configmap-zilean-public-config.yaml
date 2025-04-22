@@ -40,6 +40,14 @@ data:
         "Ingestion": {
           "ZurgInstances": [],
           "ZileanInstances": [],
+          "GenericInstances": [
+            {
+              "Url": "http://elfhosted-internal.stremthru:80",
+              "EndpointType": 2,
+              "Authorization": "Basic ZWxmaWVzOmFyZXRoZWdyZWF0ZXN0",
+              "EndpointSuffix": "/__experiment__/zilean/torrents"              
+            }
+          ],          
           "EnableScraping": false,
           "Kubernetes": {
             "EnableServiceDiscovery": false,
