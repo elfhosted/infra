@@ -311,6 +311,53 @@
     state: restarted
     enabled: yes
 
+- name: Set high open file limits in /etc/security/limits.conf
+  lineinfile:
+    path: /etc/security/limits.conf
+    line: "{{ item }}"
+    state: present
+  loop:
+    - "* soft nofile 1048576"
+    - "* hard nofile 1048576"
+
+- name: Set DefaultLimitNOFILE in system.conf
+  lineinfile:
+    path: /etc/systemd/system.conf
+    regexp: '^#?DefaultLimitNOFILE='
+    line: 'DefaultLimitNOFILE=1048576'
+
+- name: Set DefaultLimitNOFILE in user.conf
+  lineinfile:
+    path: /etc/systemd/user.conf
+    regexp: '^#?DefaultLimitNOFILE='
+    line: 'DefaultLimitNOFILE=1048576'
+
+- name: Create override directory for k3s-agent
+  file:
+    path: /etc/systemd/system/k3s-agent.service.d
+    state: directory
+    mode: '0755'
+
+- name: Set LimitNOFILE override for k3s-agent
+  copy:
+    dest: /etc/systemd/system/k3s-agent.service.d/override.conf
+    content: |
+      [Service]
+      LimitNOFILE=1048576
+    mode: '0644'
+
+- name: Reload systemd daemon
+  command: systemctl daemon-reexec
+
+- name: Reload systemd units
+  command: systemctl daemon-reload
+
+- name: Restart k3s-agent
+  systemd:
+    name: k3s-agent
+    state: restarted
+    daemon_reload: yes
+    
 # - name: remove HWE kernel
 #   shell: |
 #     apt remove -y --purge linux-generic-hwe-22.04
