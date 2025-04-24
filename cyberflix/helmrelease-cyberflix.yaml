@@ -111,9 +111,15 @@ spec:
           http:
             port: 8000
     probes:
+      readiness:
+        custom: true
+        enabled: false
+      liveness:
+        custom: true
+        enabled: false        
       startup:
         custom: true
-        enabled: true
+        enabled: false
         spec:
           failureThreshold: 600
           periodSeconds: 5
