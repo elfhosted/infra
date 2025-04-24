@@ -50,7 +50,7 @@ spec:
                 - cyberflix
             topologyKey: "kubernetes.io/hostname"              
     controller:
-      replicas: 3
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1      
