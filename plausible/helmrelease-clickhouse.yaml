@@ -61,8 +61,8 @@ spec:
         memory: 50Mi
         ephemeral-storage: 50Mi
       limits:
-        cpu: 1
-        memory: 4Gi
+        cpu: 2
+        memory: 8Gi
         ephemeral-storage: 10Gi        
     ingress:
       main:
