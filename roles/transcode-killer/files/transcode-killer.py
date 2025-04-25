@@ -44,6 +44,10 @@ def is_video_transcode(cmdline):
     if "-an" in cmdline and "-vn" in cmdline:
         return True, "Subtitle extraction detected (-an and -vn flags)"
 
+    # jellyfin sometimes calls ffmpeg and tests its version
+    if "-version" in cmdline:
+        return False, None # Allow version checks
+
     # Check for audio-only transcodes (no video codec or video mapping)
     if not re.search(r'-(?:c:v|codec:0|map\s+0:v)', cmdline) and re.search(r'-(?:ac|ar|acodec)', cmdline):
         return False, None  # Allow audio-only transcodes

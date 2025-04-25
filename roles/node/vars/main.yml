@@ -1,13 +1,12 @@
 # This dictionary is used to apply sysctl settings to the nodes
 sysctl_config:
   fs.inotify.max_user_watches: 16777216  # Due to how streamers like to watch for fs changes
-  fs.inotify.max_user_instances: 1024    # Due to how streamers like to watch for fs changes
+  fs.inotify.max_user_instances: 8192    # Due to how streamers like to watch for fs changes
 
   net.ipv4.conf.all.rp_filter: 0
   net.ipv4.conf.default.rp_filter: 0
 
   fs.file-max: 1000000
-
   net.core.default_qdisc: fq
   net.ipv4.tcp_congestion_control: cubic
 
