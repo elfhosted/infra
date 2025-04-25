@@ -22,6 +22,14 @@ spec:
       registry: ghcr.io
       repository: elfhosted/rreading-glasses
       tag: rolling@sha256:42f87e5a0a9693c39de883f5fc07c7efc0db000d939049387445a9e8668c9343
+    command:
+      - --upstream=hardcover.app
+      - --postgres-host=rreadingglasses-rw
+      - --postgres-database=rreadingglasses
+      - --postgres-user=rreadingglasses
+      - --postgres-password=$POSTGRES_PASSWORD # Generate a random string without special symbols
+      - --hardcover-auth=$HARDCOVER_AUTH # Only used for Hardcover. Starts with Bearer
+      - --verbose            
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -54,20 +62,6 @@ spec:
         ports:
           http:
             port: 3000
-    persistence:
-      config:
-        enabled: true
-        type: custom
-        mountPath: /data/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: rreading-glasses    
-      tmp: 
-        enabled: true
-        type: emptyDir
-        mountPath: /tmp
     envFrom:
     - secretRef:
-        name: rreading-glasses-env 
-    - configMapRef:
-        name: rreading-glasses-env           
+        name: rreading-glasses-env       
