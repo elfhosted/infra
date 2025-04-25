@@ -22,14 +22,14 @@ spec:
       registry: ghcr.io
       repository: elfhosted/rreading-glasses
       tag: rolling@sha256:42f87e5a0a9693c39de883f5fc07c7efc0db000d939049387445a9e8668c9343
-    args:
-      - --upstream=hardcover.app
-      - --postgres-host=rreadingglasses-rw
-      - --postgres-database=rreadingglasses
-      - --postgres-user=rreadingglasses
-      - --postgres-password=$POSTGRES_PASSWORD # Generate a random string without special symbols
-      - --hardcover-auth=$HARDCOVER_AUTH # Only used for Hardcover. Starts with Bearer
-      - --verbose            
+    # args:
+    #   - --upstream=hardcover.app
+    #   - --postgres-host=rreadingglasses-rw
+    #   - --postgres-database=rreadingglasses
+    #   - --postgres-user=rreadingglasses
+    #   - --postgres-password=$POSTGRES_PASSWORD # Generate a random string without special symbols
+    #   - --hardcover-auth=$HARDCOVER_AUTH # Only used for Hardcover. Starts with Bearer
+    #   - --verbose            
     securityContext:
       seccompProfile:
         type: RuntimeDefault
