@@ -40,28 +40,28 @@ def is_video_transcode(cmdline):
     """
     Return (True, reason) if a video transcode or subtitle extraction should be killed.
     """
-    # Check for subtitle extraction (both -an and -vn flags present)
-    if "-an" in cmdline and "-vn" in cmdline:
+    # Check for subtitle extraction (both -an and -vn flags present, without video/audio copy)
+    if "-an" in cmdline and "-vn" in cmdline and not re.search(r'-(?:c:v|c:a)(?::\d+)?\s+copy', cmdline):
         return True, "Subtitle extraction detected (-an and -vn flags)"
 
     # jellyfin sometimes calls ffmpeg and tests its version
     if "-version" in cmdline:
-        return False, None # Allow version checks
+        return False, None  # Allow version checks
 
     # Check for audio-only transcodes (no video codec or video mapping)
     if not re.search(r'-(?:c:v|codec:0|map\s+0:v)', cmdline) and re.search(r'-(?:ac|ar|acodec)', cmdline):
         return False, None  # Allow audio-only transcodes
 
     # Find the final video codec
-    video_codec_match = re.findall(r'-(?:c:v|codec:0)\s+(\S+)', cmdline)
+    video_codec_match = re.findall(r'-(?:c:v|codec:0)(?::\d+)?\s+(\S+)', cmdline)
     video_codec = video_codec_match[-1].lower() if video_codec_match else None
 
     # Allow copying/remuxing
     if video_codec == "copy":
         return False, None
 
-    # Allow subtitle transcoding (e.g., to ASS format)
-    if video_codec == "ass":
+    # Allow subtitle transcoding (e.g., to WebVTT or ASS format)
+    if re.search(r'-(?:c:s|scodec)\s+(ass|webvtt)', cmdline):
         return False, None
 
     # Allow audio transcoding to FLAC
