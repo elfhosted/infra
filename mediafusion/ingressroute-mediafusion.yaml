@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     # This is a search, subject to rate-limiting
-    - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio)`)
+    - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio/|aiostreams)`)
       kind: Rule
       services:
         - name: mediafusion
