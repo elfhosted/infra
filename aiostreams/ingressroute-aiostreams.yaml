@@ -12,22 +12,14 @@ spec:
       services:
         - name: aiostreams
           kind: Service
-    # This is a search, subject to rate-limiting
-    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio)`)
+          port: 3000
+    # This is a scrape / search, subject to rate-limiting
+    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`)
       kind: Rule
       services:
         - name: aiostreams
           kind: Service
           port: 3000
       middlewares:  
-        - name: chain-stream
-    # This is a scrape, subject to further rate-limiting
-    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`) 
-      kind: Rule
-      services:
-        - name: aiostreams
-          kind: Service
-          port: 3000        
-      middlewares:  
-        - name: clusterratelimit-public-stremio-addon-scraper
-          namespace: traefik        
+        - name: chain-stream              
+        
