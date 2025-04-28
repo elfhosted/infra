@@ -1,3 +1,8 @@
+# This is a rate-limit applied specifically to automated scraping (i.e. NOT Stremio users)
+# It's intentionally low, to prevent automated abuse of resources impacting the average user. 
+# If you need a source to scrape,, please consider self-hosting, or using the un-rate-limited Zilean instance, 
+# at https://zilean.elfhosted.com, which contains the entire DMM publicly-shared hash database, 
+# as well as the entire StremThru cache - @funkypenguin
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -6,9 +11,9 @@ metadata:
 spec:
   plugin:
     clusterRatelimit:      
-      average: 1 # requests per source IP every ..
-      period: 60  # ... seconds, with a ...
-      burst: 1   # .. request-deep "token bucket" (allowing x simultaneous requests in the period)
+      average: 1   # requests per source IP every ..
+      period: 300  # ... seconds, with a ...
+      burst: 5     # .. request-deep "token bucket" (allowing x simultaneous requests in the period)
       sourceCriterion:
         requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
       redisAddress: redis-headless:6379 # Use the single-purpose redis in the traefik namespace
