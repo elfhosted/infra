@@ -12,16 +12,8 @@ data:
     git config --global user.email "elfbot@elfhosted.com"
     git config --global pull.rebase true
 
-    # Get rclone on first startup, if we don't have it
-    if [[ ! -f /tmp/rclone ]]; then
-        cd /tmp
-        curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
-        unzip rclone-current-linux-amd64.zip
-        mv rclone-*-linux-amd64/rclone /tmp/
-    fi
-
-    # set -x
-    # set -e
+    set -x
+    set -e
 
     gh auth setup-git
 
