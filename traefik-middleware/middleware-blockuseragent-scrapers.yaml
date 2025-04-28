@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: blockuseragent-scrapers
+  namespace: traefik
+spec:
+  plugin:
+    blockuseragent:
+      regexp:
+        - "python-requests"
+        - "curl"

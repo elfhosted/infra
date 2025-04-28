@@ -9,6 +9,8 @@ spec:
     # These are generic
     - name: headers-add-cors-for-stremio
       namespace: traefik
+    - name: blockuseragent-scrapers
+      namespace: traefik
     # - name: return-code-override-ratelimit
     #   namespace: traefik
 
