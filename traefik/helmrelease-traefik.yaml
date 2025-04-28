@@ -166,7 +166,9 @@ spec:
         clusterRatelimit:
           moduleName: "github.com/nzin/traefik-cluster-ratelimit"
           version: "v1.1.1"            
-
+        blockuseragent:
+          moduleName: github.com/agence-gaya/traefik-plugin-blockuseragent
+          version: "v0.1.8"
       # demo:
       #   moduleName: github.com/traefik/plugindemo
       #   version: v0.2.1
