@@ -7,9 +7,6 @@ data:
   tenant-cleaner.sh: |
     #!/bin/bash
 
-    # time to debug
-    sleep 1h
-
     # setup git
     git config --global user.name "Elfbot"
     git config --global user.email "elfbot@elfhosted.com"
