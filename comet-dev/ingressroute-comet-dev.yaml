@@ -18,8 +18,8 @@ spec:
         - name: headers-add-cors-for-stremio
           namespace: traefik
         - name: redirectregex-comet-requires-configuration
-    # This is a scrape / search, subject to rate-limiting
-    - match: Host(`comet-dev.${dns_domain}`) && PathRegexp(`^(.*)/stream/`)
+    # This is a search, subject to friendly rate-limiting
+    - match: Host(`comet-dev.${dns_domain}`) && PathRegexp(`^(.*)/stream/`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio)`)
       kind: Rule
       services:
         - name: comet-dev
@@ -27,3 +27,13 @@ spec:
           port: 8000
       middlewares:  
         - name: chain-stream
+    # This is a scraper, rate-limit it without json results
+    - match: Host(`comet-dev.${dns_domain}`) && PathRegexp(`^(.*)/stream/`)
+      kind: Rule
+      services:
+        - name: comet-dev
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: clusterratelimit-public-stremio-addon-scraper
+          namespace: traefik
