@@ -55,8 +55,6 @@ data:
     done
     
     DATE=$(date +"%Y-%m-%d")
-    git checkout clean-kustomizations
-    git pull origin main --rebase
 
     git add .
     git commit -m "Tenant cleaner cleans tenants on $DATE" .
