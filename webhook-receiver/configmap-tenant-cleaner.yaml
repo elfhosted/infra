@@ -44,11 +44,11 @@ data:
     git add .
     git commit -m "Tenant cleaner cleans tenants on $DATE" .
     git pull
-    
+
     # Push the branch to the remote repository
     if git push --set-upstream origin clean-kustomizations-$DATE; then
         # Create the pull request
-        gh pr create --title "Tenant cleaner cleans up on $DATE!" --base main --body "Tenant cleaner cleans up!" --assignee funkypenguin
+        gh pr create --title "Tenant cleaner cleans up on $DATE!" --head clean-kustomizations-$DATE --base main --body "Tenant cleaner cleans up!" --assignee funkypenguin
     else
         echo "Error: Failed to push the branch to the remote repository."
         exit 1
