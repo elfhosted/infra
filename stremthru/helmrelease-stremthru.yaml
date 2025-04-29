@@ -20,7 +20,7 @@ spec:
       nameOverride: stremthru
     image:
       repository: ghcr.io/elfhosted/stremthru
-      tag: 0.69.0@sha256:a4a686cec1448c8740382df5c160e43325c43293cad810727020953a647c88e8
+      tag: 0.69.0@sha256:60352c6ae8e3dca43b4333d1600d929e502dad6f84c219fe256a0845bf5e09c2
     securityContext:
       seccompProfile:
         type: RuntimeDefault
