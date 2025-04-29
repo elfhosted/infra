@@ -38,7 +38,7 @@ data:
       git checkout -b "$BRANCH_NAME"
     fi
 
-    # ../scripts/process-all-customers.sh
+    ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
