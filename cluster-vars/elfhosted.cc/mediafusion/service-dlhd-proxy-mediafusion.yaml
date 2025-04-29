@@ -5,7 +5,7 @@ metadata:
   namespace: mediafusion
   annotations:
     tailscale.com/expose: "true"
-    tailscale.com/hostname: dlhd-proxy-mediafusion-${tailscale_suffix}
+    tailscale.com/hostname: dlhd-proxy-mediafusion-elfhosted-cc  # can't use var substitution here because this is not deployed with a kustomization
 spec:
   ports:
   - name: http
