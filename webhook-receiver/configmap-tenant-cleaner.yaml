@@ -23,6 +23,21 @@ data:
     git config --global --add safe.directory tenants
     cd tenants/fsn/
 
+    BRANCH_NAME="tenant-cleaner"
+    BASE_BRANCH="main"
+
+    # Fetch and prepare branches
+    git fetch origin
+    git checkout "$BASE_BRANCH"
+    git pull origin "$BASE_BRANCH"
+
+    if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
+      git checkout "$BRANCH_NAME"
+      git merge "$BASE_BRANCH"
+    else
+      git checkout -b "$BRANCH_NAME"
+    fi
+
     # ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
@@ -46,12 +61,9 @@ data:
     git add .
     git commit -m "Tenant cleaner cleans tenants on $DATE" .
 
-    # Push the branch to the remote repository
-    if git push --set-upstream origin clean-kustomizations; then
-        # Create the pull request
-        gh pr create --title "Tenant cleaner cleans up on $DATE!" --head clean-kustomizations --base main --body "Tenant cleaner cleans up!" --assignee funkypenguin
+    # Create or update PR
+    if gh pr list --head "$BRANCH_NAME" --base "$BASE_BRANCH" --state open --json number --jq '.[0]' &>/dev/null; then
+      echo "Pull request already exists."
     else
-        echo "Error: Failed to push the branch to the remote repository."
-        sleep 1h
-        exit 1
+      gh pr create --title "Tenant Cleaner" --body "Tenant Cleaner" --base "$BASE_BRANCH" --head "$BRANCH_NAME" --assignee funkypenguin
     fi
