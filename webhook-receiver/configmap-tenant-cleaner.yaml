@@ -12,8 +12,8 @@ data:
     git config --global user.email "elfbot@elfhosted.com"
     git config --global pull.rebase true
 
-    set -x
-    set -e
+    # set -x
+    # set -e
 
     gh auth setup-git
 
@@ -51,5 +51,6 @@ data:
         gh pr create --title "Tenant cleaner cleans up on $DATE!" --head clean-kustomizations-$DATE --base main --body "Tenant cleaner cleans up!" --assignee funkypenguin
     else
         echo "Error: Failed to push the branch to the remote repository."
+        sleep 1h
         exit 1
     fi
