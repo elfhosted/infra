@@ -29,7 +29,7 @@ data:
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
       # Avoid null tenants
       if [[ ! "$TENANT" == "" ]]; then
-        PVCs=$(kubectl get pvc -n aa-${TENANT})
+        PVCs=$(kubectl get pvc -n aa-$TENANT)
         if [[ "$PVCs" == "" ]]; then
           # it's empty, we can delete it
           rm bootstrap/namespaces/namespace-$TENANT.yaml
