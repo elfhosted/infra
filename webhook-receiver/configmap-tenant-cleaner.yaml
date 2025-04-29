@@ -38,7 +38,7 @@ data:
       git checkout -b "$BRANCH_NAME"
     fi
 
-    # ../scripts/process-all-customers.sh
+    ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
@@ -56,12 +56,27 @@ data:
     
     DATE=$(date +"%Y-%m-%d")
 
-    git add .
-    git commit -m "Tenant cleaner cleans tenants on $DATE" .
+    # Check if branch has diverged from base
+    git fetch origin "$BASE_BRANCH"
+    if git diff --quiet "origin/$BASE_BRANCH" "$BRANCH_NAME"; then
+      echo "No changes to commit or push."
+      exit 0
+    fi
 
-    # Create or update PR
-    if gh pr list --head "$BRANCH_NAME" --base "$BASE_BRANCH" --state open --json number --jq '.[0]' &>/dev/null; then
-      echo "Pull request already exists."
+    # Stage and commit
+    git add .
+    if ! git diff --cached --quiet; then
+      git commit -m "Tenant Cleaner cleans tenants on $DATE"
+    fi
+
+    # Push the branch (creates it remotely if needed)
+    git push -u origin "$BRANCH_NAME"
+
+    # Check if PR already exists
+    existing_pr=$(gh pr list --head "$BRANCH_NAME" --base "$BASE_BRANCH" --state open --json number --jq '.[0].number')
+
+    if [ -n "$existing_pr" ]; then
+      echo "Pull request #$existing_pr already exists."
       sleep 1h
     else
       gh pr create --title "Tenant Cleaner" --body "Tenant Cleaner" --base "$BASE_BRANCH" --head "$BRANCH_NAME" --assignee funkypenguin
