@@ -12,7 +12,7 @@ data:
     git config --global user.email "elfbot@elfhosted.com"
     git config --global pull.rebase true
 
-    # set -x
+    set -x
     # set -e
 
     gh auth setup-git
@@ -38,7 +38,7 @@ data:
       git checkout -b "$BRANCH_NAME"
     fi
 
-    ../scripts/process-all-customers.sh
+    # ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
@@ -62,6 +62,7 @@ data:
     # Create or update PR
     if gh pr list --head "$BRANCH_NAME" --base "$BASE_BRANCH" --state open --json number --jq '.[0]' &>/dev/null; then
       echo "Pull request already exists."
+      sleep 1h
     else
       gh pr create --title "Tenant Cleaner" --body "Tenant Cleaner" --base "$BASE_BRANCH" --head "$BRANCH_NAME" --assignee funkypenguin
     fi
