@@ -15,8 +15,6 @@ data:
     set -x
     set -e
 
-    sleep 1h
-
     gh auth setup-git
 
     TEMPDIR=$(mktemp -d)
