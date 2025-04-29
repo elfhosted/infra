@@ -40,15 +40,16 @@ data:
     done
     
     DATE=$(date +"%Y-%m-%d")
-    git checkout -b clean-kustomizations origin/clean-kustomizations-$DATE || git checkout -b clean-kustomizations-$DATE
+    git checkout -b clean-kustomizations origin/clean-kustomizations || git checkout -b clean-kustomizations
+    git pull origin main --rebase
+
     git add .
     git commit -m "Tenant cleaner cleans tenants on $DATE" .
-    git pull
 
     # Push the branch to the remote repository
-    if git push --set-upstream origin clean-kustomizations-$DATE; then
+    if git push --set-upstream origin clean-kustomizations; then
         # Create the pull request
-        gh pr create --title "Tenant cleaner cleans up on $DATE!" --head clean-kustomizations-$DATE --base main --body "Tenant cleaner cleans up!" --assignee funkypenguin
+        gh pr create --title "Tenant cleaner cleans up on $DATE!" --head clean-kustomizations --base main --body "Tenant cleaner cleans up!" --assignee funkypenguin
     else
         echo "Error: Failed to push the branch to the remote repository."
         sleep 1h
