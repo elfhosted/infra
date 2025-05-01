@@ -1066,7 +1066,7 @@ spec:
 
         ## Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
         ## running cluster equal to the expected size.
-        replicas: ${ha_replica_count}
+        replicas: 2
 
         ## Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
         ## [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
