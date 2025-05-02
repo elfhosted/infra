@@ -44,6 +44,10 @@ def is_video_transcode(cmdline):
     if "-an" in cmdline and "-vn" in cmdline and not re.search(r'-(?:c:v|c:a)(?::\d+)?\s+copy', cmdline):
         return True, "Subtitle extraction detected (-an and -vn flags)"
 
+    # Allow any process that includes "-codec:0 copy" or "-codec:0:1 copy"
+    if re.search(r'-(?:codec:0(?::\d+)?\s+copy)', cmdline):
+        return False, None
+        
     # jellyfin sometimes calls ffmpeg and tests its version
     if "-version" in cmdline:
         return False, None  # Allow version checks
@@ -52,9 +56,9 @@ def is_video_transcode(cmdline):
     if not re.search(r'-(?:c:v|codec:0|map\s+0:v)', cmdline) and re.search(r'-(?:ac|ar|acodec)', cmdline):
         return False, None  # Allow audio-only transcodes
 
-    # Find the final video codec
-    video_codec_match = re.findall(r'-(?:c:v|codec:0)(?::\d+)?\s+(\S+)', cmdline)
-    video_codec = video_codec_match[-1].lower() if video_codec_match else None
+    # Find the video codec (specific to -c:v or -codec:0)
+    video_codec_match = re.search(r'-(?:c:v|codec:0)(?::\d+)?\s+(\S+)', cmdline)
+    video_codec = video_codec_match.group(1).lower() if video_codec_match else None
 
     # Allow copying/remuxing
     if video_codec == "copy":
@@ -68,8 +72,8 @@ def is_video_transcode(cmdline):
     if video_codec == "flac":
         return False, None
 
-    # Check if VA-API is mentioned for hardware transcoding
-    if "vaapi" not in cmdline.lower():
+    # Check if VA-API is mentioned for hardware transcoding (only for video transcodes)
+    if "vaapi" not in cmdline.lower() and re.search(r'-(?:c:v|codec:0)', cmdline) and video_codec != "copy":
         return True, "No VA-API involved, blocking software transcode"
 
     # Detect input resolution (to block transcoding from 4K)
