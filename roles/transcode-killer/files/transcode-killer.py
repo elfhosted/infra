@@ -40,9 +40,6 @@ def is_video_transcode(cmdline):
     """
     Return (True, reason) if a video transcode or subtitle extraction should be killed.
     """
-    # Check for subtitle extraction (both -an and -vn flags present, without video/audio copy)
-    if "-an" in cmdline and "-vn" in cmdline and not re.search(r'-(?:c:v|c:a)(?::\d+)?\s+copy', cmdline):
-        return True, "Subtitle extraction detected (-an and -vn flags)"
 
     # Allow any process that includes "-codec:0 copy" or "-codec:0:1 copy"
     if re.search(r'-(?:codec:0(?::\d+)?\s+copy)', cmdline):
