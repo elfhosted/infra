@@ -269,7 +269,7 @@ spec:
         https: 443
     ## @param replicaCount Desired number of Controller pods
     ##
-    replicaCount: 1
+    replicaCount: 2
     ## @param updateStrategy Strategy to use to update Pods
     ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
     ##
