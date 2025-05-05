@@ -3746,7 +3746,7 @@ spec:
       ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
       ##
       podDisruptionBudget:
-        enabled: true
+        enabled: false
         minAvailable: 1
         maxUnavailable: ""
 
