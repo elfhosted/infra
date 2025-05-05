@@ -17,7 +17,6 @@ spec:
       middlewares:
         - name: headers-add-cors-for-stremio
           namespace: traefik
-        - name: redirectregex-comet-requires-configuration
     # This is a search, subject to friendly rate-limiting
     - match: Host(`comet-dev.${dns_domain}`) && PathRegexp(`^(.*)/stream/`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio)`)
       kind: Rule
