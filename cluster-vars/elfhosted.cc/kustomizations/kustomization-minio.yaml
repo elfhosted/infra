@@ -11,8 +11,8 @@ spec:
   sourceRef:
     kind: GitRepository
     name: infra
-  dependsOn:
-  - name: topolvm--topolvm-system   
+  # dependsOn:
+  # - name: topolvm--topolvm-system   
   healthChecks:
     - apiVersion: apps/v1
       kind: StatefulSet
