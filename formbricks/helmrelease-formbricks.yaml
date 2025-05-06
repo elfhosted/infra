@@ -66,6 +66,10 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp
+      cache: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/nextjs/.cache
       nextjs: 
         enabled: true
         type: emptyDir
