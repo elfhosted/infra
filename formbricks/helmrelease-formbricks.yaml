@@ -70,6 +70,10 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /home/nextjs/apps/web/.next/cache
+      migrations: 
+        enabled: true
+        type: emptyDir
+        mountPath: /home/nextjs/packages/database/migrations
     envFrom:
     - secretRef:
         name: formbricks-env 
