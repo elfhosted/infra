@@ -49,6 +49,14 @@ def is_video_transcode(cmdline):
     if "-version" in cmdline:
         return False, None  # Allow version checks
 
+    # jellyfin skip-intro plugin uses chromaprint for "audio fingerprinting"
+    if "chromaprint" in cmdline:
+        return True, "Audio fingerprinting (chromaprint) detected, bandwith-wasteful, blocking"       
+
+    # jellyfin chapter detection
+    if "blackframe" in cmdline:
+        return True, "Jellyfin chapter thumbnailling detected, bandwith-wasteful, blocking"       
+
     # Check for audio-only transcodes (no video codec or video mapping)
     if not re.search(r'-(?:c:v|codec:0|map\s+0:v)', cmdline) and re.search(r'-(?:ac|ar|acodec)', cmdline):
         return False, None  # Allow audio-only transcodes
