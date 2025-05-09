@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: formbricks
-  namespace: formbricks
+  name: rreading-glasses
+  namespace: rreading-glasses
 spec:
   chart:
     spec:
@@ -14,14 +14,23 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: formbricks
+  releaseName: rreading-glasses
   values:
     global:
-      nameOverride: formbricks
+      nameOverride: rreading-glasses
     image:
       registry: ghcr.io
-      repository: formbricks/formbricks
-      tag: v3.7.1
+      repository: elfhosted/rreading-glasses
+      tag: rolling@sha256:42f87e5a0a9693c39de883f5fc07c7efc0db000d939049387445a9e8668c9343
+    args:
+      - serve
+      - --upstream=hardcover.app
+      - --postgres-host=rreadingglasses-rw
+      - --postgres-database=rreadingglasses
+      - --postgres-user=rreadingglasses
+      - --postgres-password=$POSTGRES_PASSWORD # Generate a random string without special symbols
+      - --hardcover-auth=$HARDCOVER_AUTH # Only used for Hardcover. Starts with Bearer
+      - --verbose            
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -43,8 +52,8 @@ spec:
     controller:
       replicas: 1      
       annotations:
-        configmap.reloader.stakater.com/reload: "formbricks-env"   
-        secret.reloader.stakater.com/reload: "formbricks-env"
+        configmap.reloader.stakater.com/reload: "rreading-glasses-env"   
+        secret.reloader.stakater.com/reload: "rreading-glasses-env"
     ingress:
       main:
         enabled: false 
@@ -54,32 +63,6 @@ spec:
         ports:
           http:
             port: 3000
-    persistence:
-      config:
-        enabled: true
-        type: custom
-        mountPath: /data/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: formbricks    
-      tmp: 
-        enabled: true
-        type: emptyDir
-        mountPath: /tmp
-      cache: 
-        enabled: true
-        type: emptyDir
-        mountPath: /home/nextjs/.cache
-      nextjs: 
-        enabled: true
-        type: emptyDir
-        mountPath: /home/nextjs/apps/web/.next/cache
-      migrations: 
-        enabled: true
-        type: emptyDir
-        mountPath: /home/nextjs/packages/database/migrations
     envFrom:
     - secretRef:
-        name: formbricks-env 
-    - configMapRef:
-        name: formbricks-env           
+        name: rreading-glasses-env       

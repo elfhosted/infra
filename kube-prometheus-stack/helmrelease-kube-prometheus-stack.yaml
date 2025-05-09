@@ -202,7 +202,7 @@ spec:
         k8sContainerMemoryWorkingSetBytes: true
         k8sPodOwner: false
         kubeApiserverAvailability: false
-        kubeApiserverBurnrate: true
+        kubeApiserverBurnrate: false
         kubeApiserverHistogram: false
         kubeApiserverSlos: false
         kubeControllerManager: false
@@ -1066,7 +1066,7 @@ spec:
 
         ## Size is the expected size of the alertmanager cluster. The controller will eventually make the size of the
         ## running cluster equal to the expected size.
-        replicas: ${ha_replica_count}
+        replicas: 2
 
         ## Time duration Alertmanager shall retain data for. Default is '120h', and must match the regular expression
         ## [0-9]+(ms|s|m|h) (milliseconds seconds minutes hours).
@@ -1647,7 +1647,7 @@ spec:
 
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: ""
+        interval: "60s"
 
         ## If true, Prometheus use (respect) labels provided by exporter.
         ##
@@ -1699,7 +1699,7 @@ spec:
 
         ## Enable scraping /metrics/probes from kubelet's service
         ##
-        probes: true
+        probes: false
 
         ## Enable scraping /metrics/resource from kubelet's service
         ## This is disabled by default because container metrics are already exposed by cAdvisor
@@ -1724,13 +1724,17 @@ spec:
         ##
         cAdvisorMetricRelabelings:
           # Drop less useful container CPU metrics.
-          - sourceLabels: [__name__]
-            action: drop
-            regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
+          # - sourceLabels: [__name__]
+          #   action: drop
+          #   regex: 'container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)'
           # Drop less useful container / always zero filesystem metrics.
           - sourceLabels: [__name__]
             action: drop
-            regex: 'container_fs_(io_current|io_time_seconds_total|io_time_weighted_seconds_total|reads_merged_total|sector_reads_total|sector_writes_total|writes_merged_total)'
+            # regex: 'container_fs_(io_current|io_time_seconds_total|io_time_weighted_seconds_total|reads_merged_total|sector_reads_total|sector_writes_total|writes_merged_total)'
+            regex: 'container_fs_.*'
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_blkio_.*'            
           # Drop less useful / always zero container memory metrics.
           - sourceLabels: [__name__]
             action: drop
@@ -1772,7 +1776,7 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        probesMetricRelabelings: []
+        probesMetricRelabelings:
         # - sourceLabels: [__name__, image]
         #   separator: ;
         #   regex: container_([a-z_]+);
@@ -1802,10 +1806,7 @@ spec:
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        probesRelabelings:
-          - action: replace
-            sourceLabels: [__metrics_path__]
-            targetLabel: metrics_path
+        probesRelabelings: []   
         # - sourceLabels: [__meta_kubernetes_pod_node_name]
         #   separator: ;
         #   regex: ^(.*)$
@@ -1835,6 +1836,24 @@ spec:
           - action: drop
             sourceLabels: [__name__, le]
             regex: (csi_operations|storage_operation_duration)_seconds_bucket;(0.25|2.5|15|25|120|600)(\.0)?
+          # Don't want apiserver metrics either
+          - action: drop
+            sourceLabels: [__name__]
+            regex: ^apiserver_request_duration_seconds_bucket$
+
+
+                    
+          # We only want CPU / RAM usage - DEBUG4
+          - source_labels: [__name__]
+            regex: ^container_.*(cpu|memory)
+            action: keep
+
+
+          # # Don't want etcd metrics
+          # - source_labels: [__name__]
+          #   regex: 'etcd_.*'
+          #   action: drop
+
         # - sourceLabels: [__name__, image]
         #   separator: ;
         #   regex: container_([a-z_]+);
@@ -1952,10 +1971,12 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        metricRelabelings: []
-        # - action: keep
-        #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-        #   sourceLabels: [__name__]
+
+        # remove unwanted metrics
+        metricRelabelings:
+        - action: keep
+          regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+          sourceLabels: [__name__]
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
@@ -2160,7 +2181,7 @@ spec:
     ## Component scraping etcd
     ##
     kubeEtcd:
-      enabled: true
+      enabled: false
 
       ## If your etcd is not deployed as a pod, specify IPs it can be found on
       ##
@@ -2298,7 +2319,7 @@ spec:
         enabled: true
         ## Scrape interval. If not set, the Prometheus default scrape interval is used.
         ##
-        interval: ""
+        interval: "60s"
 
         ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
         ##
@@ -2347,15 +2368,16 @@ spec:
         ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        metricRelabelings: []
-        # - action: keep
-        #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-        #   sourceLabels: [__name__]
+        metricRelabelings: 
+        # Only keep important stuffz
+        - action: keep
+          regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+          sourceLabels: [__name__]
 
         ## RelabelConfigs to apply to samples before scraping
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
         ##
-        relabelings: []
+        relabelings:
         # - sourceLabels: [__meta_kubernetes_pod_node_name]
         #   separator: ;
         #   regex: ^(.*)$
@@ -2375,7 +2397,7 @@ spec:
     ## Component scraping kube proxy
     ##
     kubeProxy:
-      enabled: true
+      enabled: false
 
       ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
       ##
@@ -2529,10 +2551,12 @@ spec:
           ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
           ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
           ##
-          metricRelabelings: []
-          # - action: keep
-          #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-          #   sourceLabels: [__name__]
+
+          # Only keep critical metrics - dunno why we need kube_pod_info twice though
+          metricRelabelings:
+            - action: keep
+              sourceLabels: [__name__]
+              regex: ^(kube_pod_info|kube_pod_container_resource_requests)$
 
           ## RelabelConfigs to apply to samples before scraping
           ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
@@ -3510,7 +3534,7 @@ spec:
       # Thanos sidecar on prometheus nodes
       # (Please remember to change ${kube-prometheus-stack.fullname} and ${namespace}. Not just copy and paste!)
       thanosService:
-        enabled: false
+        enabled: true
         annotations: {}
         labels: {}
 
@@ -3722,7 +3746,7 @@ spec:
       ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget
       ##
       podDisruptionBudget:
-        enabled: true
+        enabled: false
         minAvailable: 1
         maxUnavailable: ""
 
@@ -4312,7 +4336,7 @@ spec:
         ## Number of replicas of each shard to deploy for a Prometheus deployment.
         ## Number of replicas multiplied by shards is the total number of Pods created.
         ##
-        replicas: ${ha_replica_count}
+        replicas: 1 # no point making this HA, all it's supposed to do is feed thanos
 
         ## EXPERIMENTAL: Number of shards to distribute targets onto.
         ## Number of replicas multiplied by shards is the total number of Pods created.
@@ -4388,9 +4412,13 @@ spec:
 
         ## Resource limits & requests
         ##
-        resources: {}
-        # requests:
-        #   memory: 400Mi
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 25m
+          limits:
+            memory: 6Gi
+            cpu: 2
 
         ## Prometheus StorageSpec for persistent data
         ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/platform/storage.md
@@ -4398,14 +4426,14 @@ spec:
         storageSpec:
         # Using PersistentVolumeClaim
         #
-          ephemeral:
-            volumeClaimTemplate:
-              spec:
-                accessModes: [ "ReadWriteOnce" ]
-                storageClassName: "topolvm-provisioner-thin"
-                resources:
-                  requests:
-                    storage: ${prometheus_pvc_storage}
+          # ephemeral:
+          #   volumeClaimTemplate:
+          #     spec:
+          #       accessModes: [ "ReadWriteOnce" ]
+          #       storageClassName: "topolvm-provisioner-thin"
+          #       resources:
+          #         requests:
+          #           storage: ${prometheus_pvc_storage}
 
           # volumeClaimTemplate:
           #   spec:
@@ -4418,8 +4446,8 @@ spec:
 
         ## Using tmpfs volume
         ##
-        #  emptyDir:
-        #    medium: Memory
+          emptyDir:
+            medium: ""
 
         # Additional volumes on the output StatefulSet definition.
         volumes: []

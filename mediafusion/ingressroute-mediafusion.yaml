@@ -7,7 +7,16 @@ spec:
   entryPoints:
     - websecure
   routes:
-    # This is a scrape / search, subject to rate-limiting
+    # This is a search, subject to rate-limiting
+    - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio/|aiostreams)`)
+      kind: Rule
+      services:
+        - name: mediafusion
+          kind: Service
+          port: 8000
+      middlewares:  
+        - name: chain-stream   
+    # This is an automated scrape, subject to further rate-limiting
     - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`)
       kind: Rule
       services:
@@ -15,7 +24,8 @@ spec:
           kind: Service
           port: 8000
       middlewares:  
-        - name: chain-stream           
+        - name: clusterratelimit-public-stremio-addon-scraper
+          namespace: traefik               
     # This is a catalog endpoint, also subject to rate-limiting, but display a dummy catalog instead
     - match: Host(`mediafusion.${dns_domain}`) && PathRegexp(`^/(.*)/catalog/`)
       kind: Rule

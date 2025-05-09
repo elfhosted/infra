@@ -8,7 +8,9 @@ spec:
     middlewares:
     - name: headers-add-cors-for-stremio
       namespace: traefik
+    - name: headers-cache-for-5s
+      namespace: traefik      
     - name: return-code-override-ratelimit
       namespace: traefik
     - name: errors-rate-limit-catalog-exceeded   
-    - name: rate-limit-stream
+    - name: clusterratelimit-catalog

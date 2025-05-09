@@ -7,23 +7,12 @@ data:
   tenant-cleaner.sh: |
     #!/bin/bash
 
-    # time to debug
-    sleep 1h
-
     # setup git
     git config --global user.name "Elfbot"
     git config --global user.email "elfbot@elfhosted.com"
     git config --global pull.rebase true
 
-    # Get rclone on first startup, if we don't have it
-    if [[ ! -f /tmp/rclone ]]; then
-        cd /tmp
-        curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
-        unzip rclone-current-linux-amd64.zip
-        mv rclone-*-linux-amd64/rclone /tmp/
-    fi
-
-    # set -x
+    set -x
     # set -e
 
     gh auth setup-git
@@ -34,13 +23,28 @@ data:
     git config --global --add safe.directory tenants
     cd tenants/fsn/
 
+    BRANCH_NAME="tenant-cleaner"
+    BASE_BRANCH="main"
+
+    # Fetch and prepare branches
+    git fetch origin
+    git checkout "$BASE_BRANCH"
+    git pull origin "$BASE_BRANCH"
+
+    if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
+      git checkout "$BRANCH_NAME"
+      git merge "$BASE_BRANCH"
+    else
+      git checkout -b "$BRANCH_NAME"
+    fi
+
     ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
       # Avoid null tenants
       if [[ ! "$TENANT" == "" ]]; then
-        PVCs=$(kubectl get pvc -n aa-${TENANT})
+        PVCs=$(kubectl get pvc -n aa-$TENANT)
         if [[ "$PVCs" == "" ]]; then
           # it's empty, we can delete it
           rm bootstrap/namespaces/namespace-$TENANT.yaml
@@ -51,10 +55,29 @@ data:
     done
     
     DATE=$(date +"%Y-%m-%d")
-    git checkout -b clean-kustomizations origin/clean-kustomizations-$DATE || git checkout -b clean-kustomizations-$DATE
-    git pull
-    git add .
-    git commit -m "Tenant cleaner cleans tenants on $DATE" .
 
-    git push --set-upstream origin clean-kustomizations-$DATE
-    gh pr create --title 'Tenant cleaner cleans up on $DATE!' --base main --body 'Tenant cleaner cleans up!' --assignee funkypenguin
+    # Check if branch has diverged from base
+    git fetch origin "$BASE_BRANCH"
+    if git diff --quiet "origin/$BASE_BRANCH" "$BRANCH_NAME"; then
+      echo "No changes to commit or push."
+      exit 0
+    fi
+
+    # Stage and commit
+    git add .
+    if ! git diff --cached --quiet; then
+      git commit -m "Tenant Cleaner cleans tenants on $DATE"
+    fi
+
+    # Push the branch (creates it remotely if needed)
+    git push -u origin "$BRANCH_NAME"
+
+    # Check if PR already exists
+    existing_pr=$(gh pr list --head "$BRANCH_NAME" --base "$BASE_BRANCH" --state open --json number --jq '.[0].number')
+
+    if [ -n "$existing_pr" ]; then
+      echo "Pull request #$existing_pr already exists."
+      sleep 1h
+    else
+      gh pr create --title "Tenant Cleaner" --body "Tenant Cleaner" --base "$BASE_BRANCH" --head "$BRANCH_NAME" --assignee funkypenguin
+    fi

@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: clusterratelimit-catalog
+  namespace: mediafusion
+spec:
+  plugin:
+    clusterRatelimit:      
+      average: 10 # requests per source IP every ..
+      period: 30  # ... seconds, with a ...
+      burst: 10   # .. request-deep "token bucket" (allowing x simultaneous requests in the period)
+      sourceCriterion:
+        requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
+      redisAddress: redis-headless:6379 # Use the single-purpose redis in the traefik namespace

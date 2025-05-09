@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: backup-rreadingglasses
+  namespace: rreading-glasses
+spec:
+  schedule: "0 0 0 * * *" # daily
+  backupOwnerReference: self
+  cluster:
+    name: rreadingglasses

@@ -40,32 +40,45 @@ def is_video_transcode(cmdline):
     """
     Return (True, reason) if a video transcode or subtitle extraction should be killed.
     """
-    # Check for subtitle extraction (both -an and -vn flags present)
-    if "-an" in cmdline and "-vn" in cmdline:
-        return True, "Subtitle extraction detected (-an and -vn flags)"
+
+    # Allow any process that includes "-c:v:0 copy", "-codec:0 copy", or "-codec:0:1 copy"
+    if re.search(r'-(?:c:v|codec:0)(?::\d+)?\s+copy', cmdline):
+        return False, None
+        
+    # jellyfin sometimes calls ffmpeg and tests its version
+    if "-version" in cmdline:
+        return False, None  # Allow version checks
+
+    # jellyfin skip-intro plugin uses chromaprint for "audio fingerprinting"
+    if "chromaprint" in cmdline:
+        return True, "Audio fingerprinting (chromaprint) detected, bandwith-wasteful, blocking"       
+
+    # jellyfin chapter detection
+    if "blackframe" in cmdline:
+        return True, "Jellyfin chapter thumbnailling detected, bandwith-wasteful, blocking"       
 
     # Check for audio-only transcodes (no video codec or video mapping)
     if not re.search(r'-(?:c:v|codec:0|map\s+0:v)', cmdline) and re.search(r'-(?:ac|ar|acodec)', cmdline):
         return False, None  # Allow audio-only transcodes
 
-    # Find the final video codec
-    video_codec_match = re.findall(r'-(?:c:v|codec:0)\s+(\S+)', cmdline)
-    video_codec = video_codec_match[-1].lower() if video_codec_match else None
+    # Find the video codec (specific to -c:v or -codec:0)
+    video_codec_match = re.search(r'-(?:c:v|codec:0)(?::\d+)?\s+(\S+)', cmdline)
+    video_codec = video_codec_match.group(1).lower() if video_codec_match else None
 
     # Allow copying/remuxing
     if video_codec == "copy":
         return False, None
 
-    # Allow subtitle transcoding (e.g., to ASS format)
-    if video_codec == "ass":
+    # Allow subtitle transcoding (e.g., to WebVTT or ASS format)
+    if re.search(r'-(?:c:s|scodec)\s+(ass|webvtt)', cmdline):
         return False, None
 
     # Allow audio transcoding to FLAC
     if video_codec == "flac":
         return False, None
 
-    # Check if VA-API is mentioned for hardware transcoding
-    if "vaapi" not in cmdline.lower():
+    # Check if VA-API is mentioned for hardware transcoding (only for video transcodes)
+    if "vaapi" not in cmdline.lower() and re.search(r'-(?:c:v|codec:0)', cmdline) and video_codec != "copy":
         return True, "No VA-API involved, blocking software transcode"
 
     # Detect input resolution (to block transcoding from 4K)

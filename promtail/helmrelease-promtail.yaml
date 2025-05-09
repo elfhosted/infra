@@ -443,6 +443,10 @@ spec:
       snippets:
         pipelineStages:
           - cri: {}
+          - match:
+              pipeline_name: "drop-tenants"
+              selector: '{namespace~"aa-.*"}'
+              action: drop              
         common:
           - action: replace
             source_labels:

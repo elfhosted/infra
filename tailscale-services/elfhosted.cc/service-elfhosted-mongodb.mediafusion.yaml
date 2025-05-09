@@ -4,7 +4,7 @@ metadata:
   annotations:
     tailscale.com/tailnet-fqdn: elfhosted-internal-mediafusion-mongodb-elfhosted-com.tail5bd7d1.ts.net
     tailscale.com/hostname: elfhosted-internal-mediafusion-mongodb-${tailscale_suffix}
-  name: disabled-mongodb
+  name: mongodb
   namespace: mediafusion
 spec:
   externalName: placeholder   # any value - will be overwritten by operator

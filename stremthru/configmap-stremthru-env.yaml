@@ -10,3 +10,5 @@ data:
   STREMTHRU_STORE_TUNNEL: '*:false,realdebrid:api,alldebrid:api'
   STREMTHRU_HTTP_PROXY: http://warpproxy:8888
   STREMTHRU_HTTPS_PROXY: http://warpproxy:8888
+  STREMTHRU_AUTH_ADMIN: elfies:arethegreatest # only used internally
+  STREMTHRU_DATA_DIR: /tmp # for git pulls of the DMM hashlists

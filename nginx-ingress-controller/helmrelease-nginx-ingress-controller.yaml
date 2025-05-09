@@ -269,7 +269,7 @@ spec:
         https: 443
     ## @param replicaCount Desired number of Controller pods
     ##
-    replicaCount: 1
+    replicaCount: 2
     ## @param updateStrategy Strategy to use to update Pods
     ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
     ##
@@ -913,7 +913,7 @@ spec:
       pdb:
         ## @param defaultBackend.pdb.create Enable/disable a Pod Disruption Budget creation for Default backend
         ##
-        create: true
+        create: false
         ## @param defaultBackend.pdb.minAvailable Minimum number/percentage of Default backend pods that should remain scheduled
         ##
         minAvailable: "1"
@@ -1111,7 +1111,7 @@ spec:
     pdb:
       ## @param pdb.create Enable/disable a Pod Disruption Budget creation for Controller
       ##
-      create: true
+      create: false
       ## @param pdb.minAvailable Minimum number/percentage of Controller pods that should remain scheduled
       ##
       minAvailable: "1"
