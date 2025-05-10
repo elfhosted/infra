@@ -21,7 +21,7 @@ spec:
     image:
       registry: docker.io
       repository: nginxinc/nginx-unprivileged
-      tag: bookworm@sha256:228360b3d6b18001d7c123486d7c267e3278b32d14864ee14f92f35156c34bed
+      tag: bookworm@sha256:799d8bfce0e9a2df29181f2f01c22f2ff1282f92fde3c76daa825fa4ecd28f5e
     securityContext:
       seccompProfile:
         type: RuntimeDefault
