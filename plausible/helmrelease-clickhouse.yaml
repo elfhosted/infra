@@ -20,7 +20,7 @@ spec:
       nameOverride: clickhouse
     image:
       repository: clickhouse/clickhouse-server
-      tag: 25.4.2.31-alpine
+      tag: 25.4.3.22-alpine
     securityContext:
       seccompProfile:
         type: RuntimeDefault
