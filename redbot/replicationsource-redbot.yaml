@@ -32,5 +32,5 @@ spec:
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes: 
     - ReadWriteOnce
-    cacheCapacity: 1Gi
+    cacheCapacity: 10Gi
     volumeSnapshotClassName: topolvm-provisioner-thin
