@@ -9,8 +9,8 @@ spec:
   restic:
     repository: redbot-restic-config
     copyMethod: Snapshot
-    cacheCapacity: 1Gi
-    capacity: 1Gi
+    cacheCapacity: 10Gi
+    capacity: 10Gi
     cacheStorageClassName: topolvm-provisioner-thin
     accessModes:
     - ReadWriteOnce
