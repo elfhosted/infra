@@ -43,7 +43,7 @@ spec:
               operator: Exists           
     image:
       repository: ghcr.io/elfhosted/knightcrawler-producer
-      tag: v2.0.28@sha256:538a7bc4d207f63f828b4ea47cf7d3a2c5c27eec31aa0d852b0cb8e15fde3e7c
+      tag: v2.0.28@sha256:a6472592d67bc36970896b3e7eb0361037a6d31c29dab23c43068b267b98d67a
     securityContext:
       seccompProfile:
         type: RuntimeDefault
