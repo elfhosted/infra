@@ -22,7 +22,7 @@ spec:
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/elfhosted/webhook-receiver:2.8.1@sha256:8faa7d7197238b0f14f4ae2adb1afa123c06a0bed59e25b64d40b6d35ca00492
+            image: ghcr.io/elfhosted/webhook-receiver:2.8.2@sha256:45dc52d243469859bb1388da2dbc50ddadf1524e6697045cfdcc7c6b197c1c12
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
