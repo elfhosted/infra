@@ -20,7 +20,7 @@ spec:
       nameOverride: stremio-jackett
     image:
       repository: ghcr.io/elfhosted/stremio-jackett
-      tag: v4.2.6@sha256:7ec5011079056b0eae117f13e8eb56b8f0169e1c9cd9db2e2b4db38b45e5dd75
+      tag: v4.2.6@sha256:6cf189069d0f2e6b94149768b01f0184b5325031283a7d512610f2966e62e275
     securityContext:
       seccompProfile:
         type: RuntimeDefault
