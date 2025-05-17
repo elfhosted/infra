@@ -20,7 +20,7 @@ spec:
       nameOverride: tinyproxy
     image:
       repository: ghcr.io/elfhosted/tinyproxy
-      tag: v1.4.3@sha256:9370be1434e80f8ac7d3a24d9c19335742b2c74ba15129dcdc166bb0dd3c9098
+      tag: v1.4.3@sha256:cb0b28a1f3c8728967be9446ce9717d15c79e0de8f7a07066db897f8ed777587
     podLabels:
         app.elfhosted.com/name: tinyproxy
     priorityClassName: tenant-normal
