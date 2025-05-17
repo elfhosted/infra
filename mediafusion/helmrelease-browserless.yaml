@@ -21,7 +21,7 @@ spec:
     image:
       registry: ghcr.io
       repository: ghcr.io/browserless/chromium
-      tag: v2.25.2@sha256:a5f2cb9c71ce425e45b452e3a6ea67900af45e43b2928c5f6a02dd6b31145dc0
+      tag: v2.30.1@sha256:d0fca01134f05081e923413ffedcf870c33de58b6e6895c39489104e946483d0
     securityContext:
       seccompProfile:
         type: RuntimeDefault
