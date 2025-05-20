@@ -33,6 +33,7 @@ data:
 
     if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
       git checkout "$BRANCH_NAME"
+      git pull origin "$BRANCH_NAME"
       git merge "$BASE_BRANCH"
     else
       git checkout -b "$BRANCH_NAME"

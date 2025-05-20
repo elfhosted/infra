@@ -183,7 +183,7 @@ spec:
       ## @param auth.enabled Enable authentication
       ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
       ##
-      enabled: true
+      enabled: false
       ## @param auth.rootUser MongoDB(&reg;) root user
       ##
       rootUser: root
