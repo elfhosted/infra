@@ -36,6 +36,8 @@ spec:
     envFrom:
     - secretRef:
         name: webhook-receiver
+    - secretRef:
+        name: webhook-receiver-s5cmd-env
     args:
     - -verbose
     - -hooks=/etc/webhook/hooks.yaml
