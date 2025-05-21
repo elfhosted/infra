@@ -15,7 +15,7 @@ spec:
 
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 5Gi
+    size: 10Gi
 
   resources:
     requests:
