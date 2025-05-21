@@ -44,6 +44,8 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "jackett-config"
     affinity:                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
