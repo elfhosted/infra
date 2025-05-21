@@ -1845,7 +1845,7 @@ spec:
                     
           # We only want CPU / RAM usage - DEBUG4
           - source_labels: [__name__]
-            regex: ^container_.*(cpu|memory)
+            regex: ^container_.*(cpu|mooemory)
             action: keep
 
 
