@@ -1748,6 +1748,10 @@ spec:
           - sourceLabels: [__name__, scope]
             action: drop
             regex: 'container_memory_failures_total;hierarchy'
+          # actually we don't care about memory at all I don't think
+          - sourceLabels: [__name__]
+            action: drop
+            regex: 'container_memory_.*'         
           # Drop container_network_... metrics that match various interfaces that
           # correspond to CNI and similar interfaces. This avoids capturing network
           # metrics for host network containers.
@@ -1845,7 +1849,7 @@ spec:
                     
           # We only want CPU / RAM usage - DEBUG4
           - source_labels: [__name__]
-            regex: ^container_.*(cpu|mooemory)
+            regex: ^container_.*(cpu|memory)
             action: keep
 
 
