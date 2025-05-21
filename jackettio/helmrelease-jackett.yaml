@@ -32,8 +32,18 @@ spec:
       runAsGroup: 568
       fsGroup: 568
     automountServiceAccountToken: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 1
+        memory: 3Gi
     controller:
-      replicas: 1   
+      replicas: 5
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
     affinity:                  
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution: 
