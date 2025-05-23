@@ -41,7 +41,7 @@ data:
   hobbit_zurg_cpu_requests: 1800m
   ranger_zurg_cpu_requests: 3600m
   halfling_zurg_cpu_requests: 7200m
-  nazgul_zurg_cpu_requests: 14400m
+  nazgul_zurg_cpu_requests: 10400m
   hobbit_cpu_requests: 1800m
   ranger_cpu_requests: 3600m
   halfling_cpu_requests: 7200m
