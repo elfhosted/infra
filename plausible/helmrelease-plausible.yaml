@@ -20,7 +20,7 @@ spec:
       nameOverride: plausible
     image:
       repository: ghcr.io/plausible/community-edition
-      tag: v2.1.5
+      tag: v3.0.1
     securityContext:
       seccompProfile:
         type: RuntimeDefault
