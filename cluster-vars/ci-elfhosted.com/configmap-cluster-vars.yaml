@@ -36,3 +36,4 @@ data:
   storageclass_rwo_accessMode: ReadWriteOnce  
   storageclass_rwo_volumeSnapshotClassName: ceph-block
   cilium_hubble_enabled: "true"
+  k3s_etcd_snapshot_s3_bucket: backup-ci-elfhosted
