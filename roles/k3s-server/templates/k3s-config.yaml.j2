@@ -33,6 +33,7 @@ disable:
 - "traefik"
 - "servicelb"
 - "local-storage"
+- "coredns"
 {% if k3s_node_taint is defined %}
 node-taint: 
 - {{ k3s_node_taint }}

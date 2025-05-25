@@ -57,3 +57,30 @@
     owner: root
     group: root
     mode: '0600'
+
+- name: Extract first three octets from service_cidr_v4 and create fixed IP for kube-dns service
+  set_fact:
+    kube_dns_service_ip: "{{ service_cidr_v4.split('/')[0].split('.')[0:3] | join('.') ~ '.10' }}"
+
+- name: "Create temporary directory for coredns mani"
+  tempfile:
+    state: directory
+    suffix: temp
+  register: tempdir  
+  
+- name: Copy coredns templated components to /tmp
+  template:
+    src: coredns.yaml.j2
+    dest: /{{ tempdir.path }}/coredns.yaml
+  when: "groups['k3s_servers'][0] == inventory_hostname"
+
+- name: Apply coredns manifests
+  command: k3s kubectl apply -f {{ tempdir.path }}/coredns.yaml
+  when: "groups['k3s_servers'][0] == inventory_hostname"
+  register: coredns_apply_result
+  ignore_errors: true
+
+- name: "Clean up temporary directory"
+  file:
+    path: "{{ tempdir.path }}"
+    state: absent     
