@@ -33,4 +33,6 @@ data:
   disable_update_seeders: "true"
   branding_description: |
     <h4 class="mt-4">🚀 Get your own MediaFusion</h4>
-    <p>Skip the public rate-limits, and get live streaming / bundled MediaFlow Proxy, with <A HREF="https://store.elfhosted.com/product/mediafusion/">your own, private, hosted MediaFusion instance</A> (<I>for custom indexers, channels, etc</I>), and claim your copy of our FREE <A HREF="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</A> for more addons!</p>
+    <p>This is the public instance of <A HREF='github.com/mhdzumair/MediaFusion'>MediaFusion</A>, sponsored by <a href='https://store.elfhosted.com/'>ElfHosted</a> ❤️ (<I>reasonable rate-limits apply</I>).</p>
+    <p>Skip the public rate-limits, plus get live streaming / bundled MediaFlow Proxy, with <A HREF="https://store.elfhosted.com/product/mediafusion/">your own, private, hosted MediaFusion instance</A> (<I>for custom indexers, channels, etc</I>)</P>
+    <p>See our FREE <A HREF="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</A> for more great addons and features!</p>
