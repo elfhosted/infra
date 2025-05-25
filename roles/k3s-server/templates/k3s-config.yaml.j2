@@ -19,6 +19,8 @@ flannel-backend: none
 disable-network-policy: true
 disable-kube-proxy: true
 cluster-init: true
+etcd-s3: true
+etcd-s3-config-secret: k3s-etcd-snapshot-s3-config
 {% if external_ip is defined %}
 node-ip: {{ external_ip }}
 {% else %}
