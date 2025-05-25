@@ -121,8 +121,6 @@ spec:
           items:
           - key: Corefile
             path: Corefile
-          - key: NodeHosts
-            path: NodeHosts
           name: coredns
         name: config-volume
       - configMap:
@@ -182,11 +180,6 @@ data:
         kubernetes cluster.local in-addr.arpa ip6.arpa {
           pods insecure
           fallthrough in-addr.arpa ip6.arpa
-        }
-        hosts /etc/coredns/NodeHosts {
-          ttl 60
-          reload 15s
-          fallthrough
         }
         prometheus :9153
         forward . /etc/resolv.conf
