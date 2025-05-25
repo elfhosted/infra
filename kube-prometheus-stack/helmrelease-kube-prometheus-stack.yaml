@@ -1747,7 +1747,7 @@ spec:
           # we only need the container scope.
           - sourceLabels: [__name__, scope]
             action: drop
-            regex: 'container_memory_failures_total;hierarchy'
+            regex: 'container_memory_failures_total;hierarchy'    
           # Drop container_network_... metrics that match various interfaces that
           # correspond to CNI and similar interfaces. This avoids capturing network
           # metrics for host network containers.
@@ -4417,7 +4417,7 @@ spec:
             memory: 1Gi
             cpu: 25m
           limits:
-            memory: 6Gi
+            memory: 16Gi
             cpu: 2
 
         ## Prometheus StorageSpec for persistent data

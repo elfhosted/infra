@@ -32,12 +32,7 @@ data:
   sync_debrid_cache_streams: "false"
   disable_update_seeders: "true"
   branding_description: |
-    <h4 class="mt-4">🧝 What is ElfHosted?</h4>
-    <p><a href="https://store.elfhosted.com/">ElfHosted</a> is an <a href="https://elfhosted.com/open/">open-source</a> platform for <A HREF="https://elfhosted.com/guides/media/">"self-hosting" Plex, Jellyfin, or Emby with Real Debrid</A> (<I>using <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/">plex_debrid</A>, <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-riven/">Riven</A>, or <A HREF="https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-radarr-sonarr-prowlarr/">Radarr & Sonarr</A></I>), and your <a href="https://elfhosted.com/apps/">awesome self-hosted apps</a>, automatically and easily.</p>
-    <p><A HREF="https://store.elfhosted.com/product/mediafusion/">Get your own, private, hosted MediaFusion instance</A> (<I>for custom indexers, channels, etc</I>), and claim your copy of our FREE <A HREF="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</A>, teaching you how to:</p>
-    <ul>
-        <li>👨‍👩‍👦‍👦 <A HREF="https://elfhosted.com/app/comet/">Share your Real Debrid account from multiple locations at once</A> (<I>Comet, MediaFusion</I>)</li>
-        <li>🎁 Watch your paid <A HREF="https://elfhosted.com/app/mediafusion/">IPTV with Stremio</A> (<I>MediaFusion</I>)</li>
-        <li>📺 Install a <A HREF="https://elfhosted.com/app/mediafusion/">Stremio Live TV addon</A> (<I>MediaFusion</I>)</li>
-        <li>🏈 Watch recorded / live <A HREF="https://elfhosted.com/app/mediafusion/">sports with Stremio</A> (<I>MediaFusion</I>)</li>
-    </ul>              
+    <h4 class="mt-4">🚀 Get your own MediaFusion</h4>
+    <p>This is the public instance of <A HREF='github.com/mhdzumair/MediaFusion'>MediaFusion</A>, sponsored by <a href='https://store.elfhosted.com/'>ElfHosted</a> ❤️ (<I>reasonable rate-limits apply</I>).</p>
+    <p>Skip the public rate-limits, plus get live streaming / bundled MediaFlow Proxy, with <A HREF="https://store.elfhosted.com/product/mediafusion/">your own, private, hosted MediaFusion instance</A> (<I>for custom indexers, channels, etc</I>)</P>
+    <p>See our FREE <A HREF="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</A> for more great addons and features!</p>

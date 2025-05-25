@@ -10,22 +10,9 @@ data:
   WELCOME_MESSAGE: |
     ![](https://elfhosted.com/images/logo.png)
 
-    This is a public, [ElfHosted](https://elfhosted.com/) instance of [jackettio](https://github.com/arvida42/jackettio) for the Stremio community - Enjoy! (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/jackettio/middleware-rate-limit-stream.yaml) apply*)
+    This is the public, [ElfHosted](https://elfhosted.com/) instance of [jackettio](https://github.com/arvida42/jackettio) for the Stremio community - Enjoy! (*reasonable [rate-limits](https://github.com/funkypenguin/elf-infra/blob/main/jackettio/middleware-rate-limit-stream.yaml) apply*)
 
-    ElfHosted is an [open-source](https://elfhosted.com/open/) PaaS built and run by [geeks](https://geek-cookbook.funkypenguin.co.nz), which self-hosts your [favorite streaming apps](https://elfhosted.com/guides/media/) for you, automatically and easily. 
-
-    Individual, [hosted Jackettio instances are available](https://store.elfhosted.com/product/jackettio/) (*say, if you need to add your private trackers, or a higher rate-limit*).
-
-    ### What is [ElfHosted](https://elfhosted.com/)?
-
-    ElfHosted an [open-source](https://elfhosted.com/open/) platform for ["self-hosting" Plex with Real Debrid](https://elfhosted.com/guides/media/) (*Using [plex_debrid](https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/), [Riven](https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-riven/), or [Radarr & Sonarr](https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-radarr-sonarr-prowlarr/)*), and your [awesome self-hosted apps](https://elfhosted.com/apps/), automatically and easily.
-
-    We support the Stremio community by providing free hosting for some of the [best Stremio Addons](https://elfhosted.com/stremio-addons/), including those which enable you to:
-   
-    * [Share your Real Debrid / Stremio from multiple locations at once](https://elfhosted.com/app/comet/) (*Comet, MediaFusion*)
-    * 🎁 Watch your own [IPTV with Stremio](https://elfhosted.com/app/xtremio/) (*Xtremio*)
-    * 📺 Install a [Stremio Live TV addon](https://elfhosted.com/app/mediafusion/) (*MediaFusion*)
-    * 🏈 Watch recorded / live [sports with Stremio](https://elfhosted.com/app/mediafusion/) (*MediaFusion*)
+    Get your [own, private Jackettio instance](https://store.elfhosted.com/product/jackettio/) bundled with StremThru / MediaFlow Proxy, for more results and proxy streaming (*share your RD account*)
 
     See the [ElfHosted Stremio Addons Guide](https://stremio-addons-guide.elfhosted.com/) for more addons!
 

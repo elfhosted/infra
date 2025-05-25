@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jackett-config
+  namespace: jackettio
+data:
+  ServerConfig.json: |
+    {
+      "Port": 9117,
+      "LocalBindAddress": "127.0.0.1",
+      "AllowExternal": true,
+      "AllowCORS": false,
+      "APIKey": "c6r7l9uipbaf3qobnpbkyd4nk4bwammz",
+      "AdminPassword": null,
+      "InstanceId": "zrgmoilfxaidvzhfikkiq3lkysg6b7jfa5ibtznuhzvev63lrg0lx3d1iloaelzd",
+      "BlackholeDir": "",
+      "UpdateDisabled": false,
+      "UpdatePrerelease": false,
+      "BasePathOverride": "",
+      "BaseUrlOverride": "",
+      "CacheEnabled": true,
+      "CacheTtl": 21000,
+      "CacheMaxResultsPerIndexer": 10000,
+      "FlareSolverrUrl": "http://byparr:8191",
+      "FlareSolverrMaxTimeout": 55000,
+      "OmdbApiKey": "",
+      "OmdbApiUrl": "",
+      "ProxyType": -1,
+      "ProxyUrl": "",
+      "ProxyPort": null,
+      "ProxyUsername": "",
+      "ProxyPassword": "",
+      "ProxyIsAnonymous": true
+    }
+  thepiratebay.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://thepiratebay.org/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": ""
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
+  eztv.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://eztvx.to/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": "PHPSESSID=f2c6pbt8ohbd1njgnobptpgfep"
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
+  yts.json: |
+    [
+      {
+        "id": "sitelink",
+        "type": "inputstring",
+        "name": "Site Link",
+        "value": "https://yts.mx/"
+      },
+      {
+        "id": "cookieheader",
+        "type": "hiddendata",
+        "name": "CookieHeader",
+        "value": "PHPSESSID=pq892lcvugku31jquqj8cp9db2"
+      },
+      {
+        "id": "lasterror",
+        "type": "hiddendata",
+        "name": "LastError",
+        "value": null
+      },
+      {
+        "id": "tags",
+        "type": "inputtags",
+        "name": "Tags",
+        "value": ""
+      }
+    ]  
