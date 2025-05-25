@@ -37,8 +37,6 @@ data:
   storageclass_rwo_volumeSnapshotClassName: ceph-block
   cilium_hubble_enabled: "true"
 
-  k3s_etcd_snapshot_s3_bucket: backup-elfhosted
-  
   # These apportion semi-dedicated resources across the node types
   hobbit_zurg_cpu_requests: 1800m
   ranger_zurg_cpu_requests: 3600m
