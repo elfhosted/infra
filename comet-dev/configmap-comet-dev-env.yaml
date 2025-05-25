@@ -25,9 +25,9 @@ data:
     <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
 
     <P>
-      This is a dev instance of the comet rewrite, and is intended for limited public testing. Please use <A HREF="https://comet.elfhosted.com">the official public instance</A>
+      This is a dev instance of the comet rewrite, <B>significantly rate-limited</B>, and is intended for limited public testing. Please use <A HREF="https://comet.elfhosted.com">the official public instance</A>
     </P>
 
     <P>This is the public instance of <A HREF="https://github.com/g0ldyy/comet">Comet</A>, sponsored by <a href='https://store.elfhosted.com/'>ElfHosted</a> ❤️ (<I>reasonable <A HREF="https://github.com/funkypenguin/elf-infra/blob/main/comet/middleware-rate-limit-stream.yaml">rate-limits</A> apply</I>)</P>
-    <P>Skip the public rate-limits, and get proxy-streaming support (<I>share your RD account</I>), with <A HREF="https://store.elfhosted.com/product/comet/">your own, private, hosted Comet instance</A> (<I>customize indexers, scrape torrentio, proxy-stream</I>)</P>
+    <P>Skip the public rate-limits, get more results, and proxy your streams (<I>share your RD account</I>), with <A HREF="https://store.elfhosted.com/product/comet/">your own, private, hosted Comet instance</A> (<I>customize indexers, torrentio scraping, etc</I>)</P>
     <P>See the FREE <A HREF="https://stremio-addons-guide.elfhosted.com">ElfHosted Stremio Addons Guide</A> for more great addons and features!</P>    
