@@ -787,7 +787,7 @@ spec:
         # -- See [upstream documentation](https://doc.traefik.io/traefik/routing/entrypoints/#transport)
         transport:
           respondingTimeouts:
-            readTimeout:   # @schema type:[string, integer, null]
+            readTimeout: 180s # necessary for longer uploads with storyteller  # @schema type:[string, integer, null]
             writeTimeout:  # @schema type:[string, integer, null]
             idleTimeout:   # @schema type:[string, integer, null]
           lifeCycle:
