@@ -20,7 +20,7 @@ spec:
       nameOverride: my-fun-api
     image:
       repository: ghcr.io/elfhosted/my-fun-api
-      tag: rolling@sha256:9e4ed82e8b7f44e662c3ee6ed6dac17874e0d5bebfeabbae30fe6b4cf172cc9f
+      tag: rolling
     securityContext:
       seccompProfile:
         type: RuntimeDefault
