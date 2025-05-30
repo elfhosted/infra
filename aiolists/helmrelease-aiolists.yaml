@@ -1,0 +1,87 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: aiolists
+  namespace: aiolists
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: aiolists
+  values:
+    global:
+      nameOverride: aiolists
+    image:
+      repository: ghcr.io/elfhosted/aiolists
+      tag: v1.0.0@sha256:f43971e7091f24cf178fbd0c7d35201f474c3d5827a7cf96fd0c878c1e513aee
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: false
+      capabilities:
+        drop:
+        - ALL        
+    automountServiceAccountToken: false
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - aiolists
+            topologyKey: "kubernetes.io/hostname"              
+    controller:
+      replicas: 2
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1      
+      annotations:
+        configmap.reloader.stakater.com/reload: "aiolists-env"
+        secret.reloader.stakater.com/reload: "aiolists-env"
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp           
+    # envFrom:
+    # - secretRef:
+    #     name: aiolists-env    
+    # - configMapRef:
+    #     name: aiolists-env            
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+        ephemeral-storage: 50Mi
+      limits:
+        cpu: 1 # never gets here because it's single-threaded
+        memory: 4Gi
+        ephemeral-storage: 1Gi        
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 7000
