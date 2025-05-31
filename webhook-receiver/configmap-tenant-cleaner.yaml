@@ -19,7 +19,7 @@ data:
 
     TEMPDIR=$(mktemp -d)
     cd $TEMPDIR
-    gh repo clone elfhosted/tenants -- --depth=1
+    gh repo clone elfhosted/tenants
     
     git config --global --add safe.directory tenants
     cd tenants/fsn/
