@@ -12,3 +12,5 @@ data:
   STREMTHRU_HTTPS_PROXY: http://warpproxy:8888
   STREMTHRU_AUTH_ADMIN: elfies:arethegreatest # only used internally
   STREMTHRU_DATA_DIR: /tmp # for git pulls of the DMM hashlists
+  STREMTHRU_BASE_URL: https://stremthru.elfhosted.com
+  STREMTHRU_INTEGRATION_TRAKT_CLIENT_ID: 1b5eacf5e0df5fde7219c0b13ac60e38582ebd93e442bc9149339e7c36f2e99f
