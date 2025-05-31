@@ -50,6 +50,7 @@ gretel40     ansible_host=10.0.42.160 cluster_nic=eno1.4000
 hansel01     ansible_host=10.0.42.21 cluster_nic=eno1.4000 public_host=elf01-public.elfhosted.com hetzner_id=2284561 # 64GB
 hansel02     ansible_host=10.0.42.22 cluster_nic=eno1.4000 
 hansel03     ansible_host=10.0.42.23 cluster_nic=eno1.4000
+hansel04     ansible_host=10.0.42.24 cluster_nic=eno1.4000
 hansel13     ansible_host=10.0.42.33 cluster_nic=enp0s31f6.4000
 hansel14     ansible_host=10.0.42.34 cluster_nic=eno1.4000
 hansel15     ansible_host=10.0.42.35 cluster_nic=eno1.4000

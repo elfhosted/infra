@@ -66,6 +66,7 @@ data:
     fi
 
     # Stage and commit
+    git pull origin "$BRANCH_NAME"
     git add .
     if ! git diff --cached --quiet; then
       git commit -m "Tenant Cleaner cleans tenants on $DATE"
