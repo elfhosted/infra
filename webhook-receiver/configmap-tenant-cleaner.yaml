@@ -58,7 +58,7 @@ data:
     
     DATE=$(date +"%Y-%m-%d")
 
-    echo $DATE > last-cleaned.txt
+    sleep 1h
 
     # Check if branch has diverged from base
     git fetch origin "$BASE_BRANCH"
@@ -115,6 +115,5 @@ data:
         fi
     done
 
-    sleep 1h # for debug
 
 
