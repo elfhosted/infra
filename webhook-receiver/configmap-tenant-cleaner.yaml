@@ -80,33 +80,34 @@ data:
       gh pr create --title "Tenant Cleaner" --body "Tenant Cleaner" --base "$BASE_BRANCH" --head "$BRANCH_NAME" --assignee funkypenguin
     fi
 
-    # Clean out backups
-    s5cmd ls s3://elfhosted-tenants/volsync/backup/ | awk '{print $2}' | while read -r tenant; do
-        # Skip empty lines
-        [ -z "$tenant" ] && continue
+    sleep 1h
+    # # Clean out backups
+    # s5cmd ls s3://elfhosted-tenants/volsync/backup/ | awk '{print $2}' | while read -r tenant; do
+    #     # Skip empty lines
+    #     [ -z "$tenant" ] && continue
 
-        # Strip trailing slash and 'aa-' prefix
-        FULL_TENANT=$(basename "$tenant")        # e.g. aa-zeroh55i
-        TENANT="${FULL_TENANT#aa-}"              # e.g. zeroh55i
+    #     # Strip trailing slash and 'aa-' prefix
+    #     FULL_TENANT=$(basename "$tenant")        # e.g. aa-zeroh55i
+    #     TENANT="${FULL_TENANT#aa-}"              # e.g. zeroh55i
 
-        # Sanity check: skip if result is empty or unchanged (meaning bad/missing prefix)
-        if [ -z "$TENANT" ] || [ "$TENANT" = "$FULL_TENANT" ]; then
-            echo "⚠️  Skipping invalid or empty tenant: '$FULL_TENANT'"
-            continue
-        fi
+    #     # Sanity check: skip if result is empty or unchanged (meaning bad/missing prefix)
+    #     if [ -z "$TENANT" ] || [ "$TENANT" = "$FULL_TENANT" ]; then
+    #         echo "⚠️  Skipping invalid or empty tenant: '$FULL_TENANT'"
+    #         continue
+    #     fi
 
-        echo "🔍 Checking tenant: $TENANT"
+    #     echo "🔍 Checking tenant: $TENANT"
 
-        if find $TEMPDIR/tenants -type d -name "$TENANT" | grep -q .; then
-            echo "✅ Tenant $TENANT exists locally — skipping"
-        else
-            echo "🗑️  Tenant $TENANT not found locally — deleting from S3"
+    #     if find $TEMPDIR/tenants -type d -name "$TENANT" | grep -q .; then
+    #         echo "✅ Tenant $TENANT exists locally — skipping"
+    #     else
+    #         echo "🗑️  Tenant $TENANT not found locally — deleting from S3"
 
-            echo s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
-            echo s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
-            echo s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
-        fi
-    done
+    #         echo s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
+    #         echo s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
+    #         echo s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
+    #     fi
+    # done
 
 
 
