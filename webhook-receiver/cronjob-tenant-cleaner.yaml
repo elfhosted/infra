@@ -37,7 +37,9 @@ spec:
                 - ALL              
             envFrom:
             - secretRef:
-                name: webhook-receiver                  
+                name: webhook-receiver   
+            - secretRef:
+                name: webhook-receiver-s5cmd-env               
             volumeMounts:
             - mountPath: /tmp
               name: tmp
