@@ -40,23 +40,25 @@ data:
       git checkout -b "$BRANCH_NAME"
     fi
 
-    ../scripts/process-all-customers.sh
+    # ../scripts/process-all-customers.sh
 
-    # clean out unused namespaces / kustomizations
-    for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
-      # Avoid null tenants
-      if [[ ! "$TENANT" == "" ]]; then
-        PVCs=$(kubectl get pvc -n aa-$TENANT)
-        if [[ "$PVCs" == "" ]]; then
-          # it's empty, we can delete it
-          rm bootstrap/namespaces/namespace-$TENANT.yaml
-          rm bootstrap/kustomizations/kustomization-$TENANT.yaml
-          rm -rf tenants/$TENANT
-        fi
-      fi
-    done
+    # # clean out unused namespaces / kustomizations
+    # for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
+    #   # Avoid null tenants
+    #   if [[ ! "$TENANT" == "" ]]; then
+    #     PVCs=$(kubectl get pvc -n aa-$TENANT)
+    #     if [[ "$PVCs" == "" ]]; then
+    #       # it's empty, we can delete it
+    #       rm bootstrap/namespaces/namespace-$TENANT.yaml
+    #       rm bootstrap/kustomizations/kustomization-$TENANT.yaml
+    #       rm -rf tenants/$TENANT
+    #     fi
+    #   fi
+    # done
     
     DATE=$(date +"%Y-%m-%d")
+
+    echo $DATE > last-cleaned.txt
 
     # Check if branch has diverged from base
     git fetch origin "$BASE_BRANCH"
@@ -112,5 +114,7 @@ data:
             s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
         fi
     done
+
+    sleep 1h # for debug
 
 
