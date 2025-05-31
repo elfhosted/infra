@@ -7,7 +7,7 @@ spec:
   plugin:
     clusterRatelimit:      
       average: 1 # requests per source IP every ..
-      period: 5  # ... seconds, with a ...
+      period: 10 # ... seconds, with a ...
       burst: 5   # .. request-deep "token bucket" (allowing x simultaneous requests in the period)
       sourceCriterion:
         requestHeaderName: CF-Connecting-IP # Rate-limit by cloudflare connecting IP
