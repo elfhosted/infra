@@ -346,7 +346,7 @@ spec:
         memory: 256Mi
       limits:
         cpu: 4
-        memory: 512Mi       
+        memory: 4Gi       
     ## Controller containers' liveness probe. Evaluated as a template.
     ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
     ## @param livenessProbe.enabled Enable livenessProbe
