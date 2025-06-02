@@ -11,8 +11,8 @@ data:
   STREMIO_JACKETT_URL: http://elfhosted-internal.stremio-jackett/
   DISABLE_TORRENTIO: "true"
   DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
-  ADDON_PROXY: http://localhost:8000
-  ADDON_PROXY_CONFIG: "*:false,stremthru.elfhosted.com:true"
+  # ADDON_PROXY: http://localhost:8000
+  # ADDON_PROXY_CONFIG: "*:false,stremthru.elfhosted.com:true"
   ADDON_NAME: AIOStreams | ElfHosted
   MAX_ADDONS: "10"
   DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"
