@@ -19,14 +19,15 @@ spec:
         - name: protect-grafana-login
         - name: inflightreq-grafana
 
-    - match: Host(`grafana.${dns_domain}`)
-      kind: Rule
-      services:
-        - name: kube-prometheus-stack-grafana
-          kind: Service
-          port: 80
-      middlewares:  
-        - name: error-pages
-          namespace: traefik
-        - name: rate-limit-grafana       
-        - name: inflightreq-grafana         
+    # Disable public access for now
+    # - match: Host(`grafana.${dns_domain}`)
+    #   kind: Rule
+    #   services:
+    #     - name: kube-prometheus-stack-grafana
+    #       kind: Service
+    #       port: 80
+    #   middlewares:  
+    #     - name: error-pages
+    #       namespace: traefik
+    #     - name: rate-limit-grafana       
+    #     - name: inflightreq-grafana         
