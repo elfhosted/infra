@@ -25,3 +25,11 @@ data:
   FORCE_JACKETTIO_PORT: ""
   # For https://beta.stremio-addons.net/  
   STREMIO_ADDONS_CONFIG_SIGNATURE: eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..acmV1DfOh52nwT-O3myHNg.Vb_c3MkkeLV9Nb4mBvEmbYoRcKh9I1CIxmLAH0CJLQaXBeiKzfT_JjIOCKw53qkossEchr768t2n3sS290hwOHE3HA6rhRwWRkotlSJU9lcMzcbxCiWezF8qr9ZV6MzO.48H-f2Psh4FE0CWD3uVDUA
+
+  # For the rewrite
+  DISABLED_ADDONS: "torrentio:Disabled on public instance as requested by TheBeastLT"
+  DISABLED_HOSTS: "torrentio.strem.fun:Disabled on public instance as requested by TheBeastLT"
+  CUSTOM_HTML: |
+    <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
+    <p>This is the public instance of AIOStreams, sponsored by <A HREF="https://elfhosted.com">ElfHosted</A> ❤️, </BR>(<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)</p>
+    <p>Get <A HREF="https://store.elfhosted.com/product/aiostreams/elf/viren070">your own private, un-rate-limited instance</A> (<I>including torrentio support!</I>), bundled with MediaFlowProxy/StremThru, and support your developer (<I>with 33% commission</I>)!</p>
