@@ -24,9 +24,8 @@ data:
   FORCE_JACKETTIO_HOSTNAME: "jackettio.elfhosted.com"
   FORCE_JACKETTIO_PROTOCOL: "https"
   FORCE_JACKETTIO_PORT: ""
-  DISABLED_ADDONS: "torrentio:Disabled on public instance as requested by TheBeastLT"
-  DISABLED_HOSTS: "torrentio.strem.fun:Disabled on public instance as requested by TheBeastLT"
+  DISABLED_ADDONS: "torrentio:Private instances only"
+  DISABLED_HOSTS: "torrentio.strem.fun:Private instances only"
   CUSTOM_HTML: |
-    <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>
-    <p>This is the public instance of AIOStreams, sponsored by <A HREF="https://elfhosted.com">ElfHosted</A> ❤️, </BR>(<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)</p>
+    <p><img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>This is the public instance of AIOStreams, sponsored by <A HREF="https://elfhosted.com">ElfHosted</A> ❤️ (<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)</p>
     <p>Get <A HREF="https://store.elfhosted.com/product/aiostreams/elf/viren070">your own private, un-rate-limited instance</A> (<I>including torrentio support!</I>), bundled with MediaFlowProxy/StremThru, and support your developer (<I>with 33% commission</I>)!</p>
