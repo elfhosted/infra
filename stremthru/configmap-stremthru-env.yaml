@@ -7,7 +7,7 @@ data:
   STREMTHRU_REDIS_URI: redis://redis-master:6379
   STREMTHRU_LANDING_PAGE: |
     {"description": "This is a public instance of <A HREF='https://github.com/MunifTanjim/stremthru'>StremThru</A>, sponsored by <a href='https://store.elfhosted.com/'>ElfHosted</a>. See our docs <A HREF='https://docs.elfhosted.com/app/stremthru/'>here</A>.<p><A HREF='https://store.elfhosted.com/product/stremthru/'>Get your own, private, StremThru instance</A> (<I>and add proxystreaming to any Stremio addon!</I>)</p>", "sections": [{"title": "What is ElfHosted?","content": "<p><a href='https://store.elfhosted.com/'>ElfHosted</a> is an <a href='https://elfhosted.com/open/'>open-source</a> platform for <A HREF='https://elfhosted.com/guides/media/'>'self-hosting' Plex, Jellyfin, or Emby with Real Debrid</A> (<I>using <A HREF='https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/'>plex_debrid</A>, <A HREF='https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-riven/'>Riven</A>, or <A HREF='https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex-radarr-sonarr-prowlarr/'>Radarr & Sonarr</A></I>), and your <a href='https://elfhosted.com/apps/'>awesome self-hosted apps</a>, automatically and easily.</p>"}]}
-  STREMTHRU_STORE_TUNNEL: '*:false,realdebrid:api,alldebrid:api'
+  STREMTHRU_STORE_TUNNEL: '*:false,realdebrid:api,alldebrid:api,torrentio.strem.fun:http://127.0.0.1:1234' # prevent torrentio scraping per TheBeastLT's r
   STREMTHRU_HTTP_PROXY: http://warpproxy:8888
   STREMTHRU_HTTPS_PROXY: http://warpproxy:8888
   STREMTHRU_AUTH_ADMIN: elfies:arethegreatest # only used internally
