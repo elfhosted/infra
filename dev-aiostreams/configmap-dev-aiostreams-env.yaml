@@ -27,5 +27,10 @@ data:
   DISABLED_ADDONS: "torrentio:Private instances only"
   DISABLED_HOSTS: "torrentio.strem.fun:Private instances only"
   CUSTOM_HTML: |
-    <p><img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px"/>This is the public instance of AIOStreams, sponsored by <A HREF="https://elfhosted.com">ElfHosted</A> ❤️ (<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)</p>
-    <p>Get <A HREF="https://store.elfhosted.com/product/aiostreams/elf/viren070">your own private, un-rate-limited instance</A> (<I>including torrentio support!</I>), bundled with MediaFlowProxy/StremThru, and support your developer (<I>with 33% commission</I>)!</p>
+    <p>
+      <img src="https://elfhosted.com/images/logo.svg" height="72px" width="72px" style="float:left; margin-right:16px;"/>
+      This is the public instance of AIOStreams, sponsored by <A HREF="https://elfhosted.com">ElfHosted</A> ❤️ (<I>reasonable <A HREF="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml">rate-limits</A> apply</I>)
+    </p>
+    <p style="clear:both;">
+      Get <A HREF="https://store.elfhosted.com/product/aiostreams/elf/viren070">your own private, un-rate-limited instance</A> (<I>including torrentio support!</I>), bundled with MediaFlowProxy/StremThru, and support your developer (<I>with 33% commission</I>)!
+    </p>
