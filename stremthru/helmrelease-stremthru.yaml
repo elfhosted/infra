@@ -20,7 +20,7 @@ spec:
       nameOverride: stremthru
     image:
       repository: ghcr.io/elfhosted/stremthru
-      tag: 0.77.4@sha256:c51031b7d41252da965d94a28ce4d91d3387218c2946fcb45549baf215359cd0
+      tag: 0.78.0@sha256:20fde35ca337ff5fb1f369ae20fe6a599abb1ebc055c02ed1375ec4ca970dd53
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -74,29 +74,3 @@ spec:
         name: stremthru-env 
     - configMapRef:
         name: stremthru-env             
-    addons:
-      vpn:
-        enabled: false # in case we ever need it
-        gluetun:
-          image:
-            repository: thrnz/docker-wireguard-pia
-            tag: latest
-        envFrom:
-        - secretRef:
-            name: stremthru-vpn
-        env:
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "true"
-          LOCAL_NETWORK: 10.0.0.0/8
-          LOC: de-frankfurt
-          PORT_FORWARDING: "0"
-          PORT_PERSIST: "1"
-          NFTABLES: "1"      
-          VPNDNS: "0"  
-        securityContext:
-          runAsUser: 0
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        config: # We have to set this to null so that we can override with our own config  
