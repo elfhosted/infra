@@ -19,13 +19,16 @@ data:
     for NS in ${NAMESPACES}
     do
 
+      # Get the tenant name from the namespace
+      TENANT="${NS#aa-}"
+
       # Delete any orphaned deployments / needs automated label updates first
       # VERSION=$(kubectl get helmreleases.helm.toolkit.fluxcd.io -n $NS -o json | jq -r .items[0].status.lastAttemptedRevision)
       # echo "helmrelease current version is [$VERSION], deleting any unrelated deployments..."
       # kubectl delete deployments.apps -n $NS -l myprecious.elfhosted.com/version!=$VERSION,app.kubernetes.io/name!=kubernetesdashboard,app!=mattermost
 
-      # Get a list of all customer PVCs excluding tmp (because it's ephemeral)
-      PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -E "config|symlinks|backup|logs" | grep -v volsync | cut -f1 -d' ')
+      # Get a list of all customer PVCs excluding volsync or ephemeral ones (they'll have the tenant name in the PVC name)
+      PVCS=$(kubectl get pvc -n $NS --no-headers=true | grep -E "config|symlinks|backup|logs" | grep -v volsync | grep -v $NS | cut -f1 -d' ')
 
       for PVC in ${PVCS}
       do
@@ -45,8 +48,8 @@ data:
               TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk '{split($0,a); print a[3]}')
               TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
               if [[ $TIMESTAMP_DIFF -gt 86400 ]]; then # 86400 sec = 1 days
-                echo "[$NS/$PVC] unused for > 1 days, deleting it.."
-                kubectl delete pvc -n $NS $PVC # allow elfstorage to persist up to 32d
+                echo "[$NS/$PVC] unused for > 1 days, deleting it (30s timeout).."
+                kubectl delete pvc -n $NS $PVC --timeout=30s
               else
                 echo "[$NS/$PVC] Found annotated, but it's less than 8d old, so ignoring"
               fi
