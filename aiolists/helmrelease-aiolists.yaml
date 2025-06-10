@@ -62,9 +62,9 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp           
-    # envFrom:
-    # - secretRef:
-    #     name: aiolists-env    
+    envFrom:
+    - secretRef:
+        name: aiolists-env    
     # - configMapRef:
     #     name: aiolists-env            
     resources:
