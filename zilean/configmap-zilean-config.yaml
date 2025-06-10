@@ -26,6 +26,7 @@ data:
         },
         "Torrents": {
           "EnableEndpoint": true,
+          "EnableScrapeEndpoint": true,
           "EnableCacheCheckEndpoint": true
         },
         "Imdb": {
