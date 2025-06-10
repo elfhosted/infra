@@ -10,9 +10,9 @@ data:
   FASTAPI_WORKERS: "4"
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion
   SCRAPE_MEDIAFUSION: "true"
+  MEDIAFUSION_LIVE_SEARCH: "false" # don't overload the public instance
   SCRAPE_ZILEAN: "true"
   SCRAPE_TORRENTIO: "false" # anything we wanted from KC has been scraped already
-  TORRENTIO_URL: http://elfhosted-internal.knightcrawler
   DOWNLOAD_TORRENTS: "false"  
   INDEXER_MANAGER_TYPE: jackett
   INDEXER_MANAGER_URL: http://localhost:9117
