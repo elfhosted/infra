@@ -65,8 +65,8 @@ spec:
     envFrom:
     - secretRef:
         name: aiolists-env    
-    # - configMapRef:
-    #     name: aiolists-env            
+    - configMapRef:
+        name: aiolists-env            
     resources:
       requests:
         cpu: 100m
