@@ -21,7 +21,7 @@ spec:
     image:
       registry: ghcr.io
       repository: elfhosted/byparr
-      tag: v1.1.2@sha256:9df165b9291a18f287b20f0161ad0894b3feb670a0189d2ea925bb2458e85987
+      tag: v1.2.1@sha256:0e4df5c23b5010518a8330c77484a7efcc840caa837db1c4c76d7cef7319ecaf
     securityContext:
       seccompProfile:
         type: RuntimeDefault
