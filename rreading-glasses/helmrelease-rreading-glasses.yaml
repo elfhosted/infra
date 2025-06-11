@@ -21,7 +21,7 @@ spec:
     image:
       registry: ghcr.io
       repository: elfhosted/rreading-glasses
-      tag: rolling@sha256:42f87e5a0a9693c39de883f5fc07c7efc0db000d939049387445a9e8668c9343
+      tag: rolling@sha256:c5681b70f7b27321ac476d7cc04af4220bdeb41b1efb08203879cfdf9c6a4396
     args:
       - serve
       - --upstream=hardcover.app
