@@ -25,6 +25,7 @@ data:
   FORCE_JACKETTIO_PROTOCOL: "https"
   FORCE_JACKETTIO_PORT: ""
   DISABLED_ADDONS: "torrentio:Private instances only"
+  REGEX_FILTER_ACCESS: none
   DISABLED_HOSTS: "torrentio.strem.fun:Private instances only"
   CUSTOM_HTML: |
     <div

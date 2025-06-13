@@ -11,8 +11,6 @@ data:
   STREMIO_JACKETT_URL: http://elfhosted-internal.stremio-jackett/
   DISABLE_TORRENTIO: "true"
   DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
-  ADDON_PROXY: http://localhost:8000
-  ADDON_PROXY_CONFIG: "*:false"
   ADDON_NAME: AIOStreams | ElfHosted
   MAX_ADDONS: "10"
   DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"
@@ -27,6 +25,7 @@ data:
   STREMIO_ADDONS_CONFIG_SIGNATURE: eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..acmV1DfOh52nwT-O3myHNg.Vb_c3MkkeLV9Nb4mBvEmbYoRcKh9I1CIxmLAH0CJLQaXBeiKzfT_JjIOCKw53qkossEchr768t2n3sS290hwOHE3HA6rhRwWRkotlSJU9lcMzcbxCiWezF8qr9ZV6MzO.48H-f2Psh4FE0CWD3uVDUA
 
   # For the rewrite
+  REGEX_FILTER_ACCESS: none
   DISABLED_ADDONS: "torrentio:Disabled on public instance as requested by TheBeastLT"
   DISABLED_HOSTS: "torrentio.strem.fun:Disabled on public instance as requested by TheBeastLT"
   CUSTOM_HTML: |
