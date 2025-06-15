@@ -20,7 +20,7 @@ spec:
       nameOverride: aiolists
     image:
       repository: ghcr.io/elfhosted/aiolists-dev
-      tag: rolling@sha256:60b16c16116a9dbbda84cf8823a08048430100053be8bd81207fd03f8b981f33
+      tag: rolling@sha256:e6c337a47c395735072eeb39f06fd8db97f7b3ca8797997882c7237a3387114d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
