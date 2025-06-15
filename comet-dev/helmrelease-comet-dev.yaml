@@ -157,7 +157,7 @@ spec:
         gluetun:
           image:
             repository: ghcr.io/elfhosted/gluetun
-            tag: 3.40.0@sha256:ac01473025f4ed729e49f26282702267785949518fcccb3ba1a523fe201def0d
+            tag: 3.40.0@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
         env:
           FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
           DNS_KEEP_NAMESERVER: "on"
