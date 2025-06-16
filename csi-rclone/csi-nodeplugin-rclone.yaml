@@ -15,6 +15,24 @@ spec:
         app: csi-nodeplugin-rclone
     spec:
       serviceAccountName: csi-nodeplugin-rclone
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists          
+      - key: "node-role.${dns_domain}/download"
+        operator: "Exists"
+        effect: "NoSchedule"     
+      - key: "node-role.${dns_domain}/download-only"
+        operator: "Exists"
+        effect: "NoSchedule"  
+      - key: "node-role.${dns_domain}/dedicated"
+        operator: "Exists"
+        effect: "NoSchedule"
+      - key: "node-role.${dns_domain}/hobbit"
+        operator: "Exists"
+        effect: "NoSchedule"        
+      - key: "node-role.${dns_domain}/observability"
+        operator: "Exists"
+        effect: "NoSchedule"            
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
@@ -23,9 +41,14 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["/bin/sh", "-c", "rm -rf /registration/csi-rclone /registration/csi-rclone-reg.sock"]
+                command:
+                  [
+                    "/bin/sh",
+                    "-c",
+                    "rm -rf /registration/csi-rclone /registration/csi-rclone-reg.sock",
+                  ]
           args:
-            - --v=1
+            - --v=5
             - --csi-address=/plugin/csi.sock
             - --kubelet-registration-path=/var/lib/kubelet/plugins/csi-rclone/csi.sock
           env:
@@ -38,25 +61,17 @@ spec:
               mountPath: /plugin
             - name: registration-dir
               mountPath: /registration
-          resources:
-            requests:
-              cpu: "10m"
-              memory: "0.5Gi"
-            limits:
-              cpu: "1"
-              memory: "1Gi"
         - name: rclone
           securityContext:
             privileged: true
             capabilities:
               add: ["SYS_ADMIN"]
             allowPrivilegeEscalation: true
-          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:2c4712b5234f8329ca0264d74532dd51b60b986dd90786b4872e2f723119bd85
+          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:4a3a303c3e0610483cc8a8b6930cc125f595aa1214758b74f87ce0fdb74b24aa
           args:
             - "/bin/csi-rclone-plugin"
             - "--nodeid=$(NODE_ID)"
             - "--endpoint=$(CSI_ENDPOINT)"
-            - "--v=1"
           env:
             - name: NODE_ID
               valueFrom:
@@ -68,20 +83,18 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "mount -t fuse.rclone | while read -r mount; do umount $(echo $mount | awk '{print $3}') || true ; done"]
+                command:
+                  [
+                    "/bin/sh",
+                    "-c",
+                    "mount -t fuse.rclone | while read -r mount; do umount $(echo $mount | awk '{print $3}') ; done",
+                  ]
           volumeMounts:
             - name: plugin-dir
               mountPath: /plugin
             - name: pods-mount-dir
               mountPath: /var/lib/kubelet/pods
               mountPropagation: "Bidirectional"
-          resources:
-            requests:
-              cpu: "10m"
-              memory: "1Gi"
-            limits:
-              cpu: "1"
-              memory: "16Gi"
       volumes:
         - name: plugin-dir
           hostPath:
@@ -95,8 +108,3 @@ spec:
             path: /var/lib/kubelet/plugins_registry
             type: DirectoryOrCreate
           name: registration-dir
-      tolerations:
-        - effect: NoSchedule
-          operator: Exists
-        - effect: NoExecute
-          operator: Exists

@@ -5,4 +5,4 @@ metadata:
   name: csi-rclone
 spec:
   attachRequired: true
-  podInfoOnMount: true
+  podInfoOnMount: false  # are we sure about this?

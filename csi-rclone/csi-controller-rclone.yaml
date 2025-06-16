@@ -29,40 +29,25 @@ spec:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists      
       containers:
-        - name: csi-provisioner
-          image: registry.k8s.io/sig-storage/csi-provisioner:v5.0.2
-          args:
-            - "--csi-address=$(ADDRESS)"
-            - "--extra-create-metadata"
-            # - "--leader-election"
-            - "--v=1"
-          env:
-            - name: ADDRESS
-              value: /plugin/csi.sock
-          imagePullPolicy: "Always"
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /plugin
         - name: csi-attacher
           image: k8s.gcr.io/sig-storage/csi-attacher:v3.4.0
           args:
+            - "--v=5"
             - "--csi-address=$(ADDRESS)"
-            - "--v=1"
             - "--leader-election"
           env:
             - name: ADDRESS
-              value: /plugin/csi.sock
+              value: /csi/csi.sock
           imagePullPolicy: "Always"
           volumeMounts:
             - name: socket-dir
-              mountPath: /plugin
+              mountPath: /csi
         - name: rclone
-          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:2c4712b5234f8329ca0264d74532dd51b60b986dd90786b4872e2f723119bd85
-          args :
+          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:4a3a303c3e0610483cc8a8b6930cc125f595aa1214758b74f87ce0fdb74b24aa
+          args:
             - "/bin/csi-rclone-plugin"
             - "--nodeid=$(NODE_ID)"
             - "--endpoint=$(CSI_ENDPOINT)"
-            - "--v=1"
           env:
             - name: NODE_ID
               valueFrom:
