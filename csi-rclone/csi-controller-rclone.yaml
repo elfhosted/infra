@@ -57,7 +57,7 @@ spec:
             - name: socket-dir
               mountPath: /plugin
         - name: rclone
-          image: ghcr.io/elfhosted/csi-rclone:1.69.3
+          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:2c4712b5234f8329ca0264d74532dd51b60b986dd90786b4872e2f723119bd85
           args :
             - "/bin/csi-rclone-plugin"
             - "--nodeid=$(NODE_ID)"
