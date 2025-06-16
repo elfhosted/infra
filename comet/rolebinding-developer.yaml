@@ -1,15 +1,15 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: aa-bamb0uu-kubernetes-dashboard-developer
+  name: aa-g0ldyy-kubernetes-dashboard-developer
   namespace: comet
 subjects:
 - kind: ServiceAccount
   name: kubernetes-dashboard
-  namespace: aa-bamb0uu
+  namespace: aa-g0ldyy
 - kind: ServiceAccount
   name: filebrowser
-  namespace: aa-bamb0uu  
+  namespace: aa-g0ldyy  
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
