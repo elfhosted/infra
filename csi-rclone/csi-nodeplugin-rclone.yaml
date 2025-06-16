@@ -67,7 +67,7 @@ spec:
             capabilities:
               add: ["SYS_ADMIN"]
             allowPrivilegeEscalation: true
-          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:4a3a303c3e0610483cc8a8b6930cc125f595aa1214758b74f87ce0fdb74b24aa
+          image: ghcr.io/elfhosted/csi-rclone:v1.69.3@sha256:d9c1acdeb416a674da76b3d099a3700a08264116858d07950b0ca9fad3c1caa4
           args:
             - "/bin/csi-rclone-plugin"
             - "--nodeid=$(NODE_ID)"
