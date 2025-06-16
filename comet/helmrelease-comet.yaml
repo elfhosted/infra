@@ -134,7 +134,7 @@ spec:
           timeoutSeconds: 10                 
     additionalContainers:
       jackett:
-        image: ghcr.io/elfhosted/jackett:0.22.2017
+        image: ghcr.io/elfhosted/jackett:0.22.2020
         volumeMounts:
         - name: jackett-config
           mountPath: /config/
