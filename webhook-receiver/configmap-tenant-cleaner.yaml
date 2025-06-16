@@ -19,7 +19,7 @@ data:
 
     TEMPDIR=$(mktemp -d)
     cd $TEMPDIR
-    gh repo clone elfhosted/tenants -- --depth=1
+    gh repo clone elfhosted/tenants
     
     git config --global --add safe.directory tenants
     cd tenants/fsn/
@@ -27,18 +27,12 @@ data:
     BRANCH_NAME="tenant-cleaner"
     BASE_BRANCH="main"
 
-    # Fetch and prepare branches
-    git fetch origin
-    git checkout "$BASE_BRANCH"
-    git pull origin "$BASE_BRANCH"
+    
+    # Check out remote tracking branch
+    git checkout -t "origin/$BRANCH_NAME"
 
-    if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
-      git checkout "$BRANCH_NAME"
-      git pull origin "$BRANCH_NAME"
-      git merge "$BASE_BRANCH"
-    else
-      git checkout -b "$BRANCH_NAME"
-    fi
+    # Pull latest changes from main
+    git pull origin "$BASE_BRANCH"
 
     ../scripts/process-all-customers.sh
 
@@ -58,6 +52,8 @@ data:
     
     DATE=$(date +"%Y-%m-%d")
 
+    echo $DATE > date.txt
+
     # Check if branch has diverged from base
     git fetch origin "$BASE_BRANCH"
     if git diff --quiet "origin/$BASE_BRANCH" "$BRANCH_NAME"; then
@@ -66,6 +62,7 @@ data:
     fi
 
     # Stage and commit
+    git pull origin "$BRANCH_NAME"
     git add .
     if ! git diff --cached --quiet; then
       git commit -m "Tenant Cleaner cleans tenants on $DATE"
@@ -79,7 +76,6 @@ data:
 
     if [ -n "$existing_pr" ]; then
       echo "Pull request #$existing_pr already exists."
-      sleep 1h
     else
       gh pr create --title "Tenant Cleaner" --body "Tenant Cleaner" --base "$BASE_BRANCH" --head "$BRANCH_NAME" --assignee funkypenguin
     fi
@@ -101,15 +97,16 @@ data:
 
         echo "🔍 Checking tenant: $TENANT"
 
-        if find /repo/ -type d -name "$TENANT" | grep -q .; then
+        if find $TEMPDIR/tenants -type d -name "$TENANT" | grep -q .; then
             echo "✅ Tenant $TENANT exists locally — skipping"
         else
             echo "🗑️  Tenant $TENANT not found locally — deleting from S3"
 
-            s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
-            s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
-            s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
+            echo s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
+            echo s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
+            echo s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
         fi
     done
+    sleep 1h # for debug
 
 

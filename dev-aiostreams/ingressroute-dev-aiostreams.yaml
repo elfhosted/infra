@@ -1,0 +1,34 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dev-aiostreams.${dns_domain}
+  namespace: dev-aiostreams
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`dev-aiostreams.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: dev-aiostreams
+          kind: Service
+          port: 3000          
+    # This is a search, subject to rate-limiting
+    - match: Host(`dev-aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio/|dev-aiostreams)`)
+      kind: Rule
+      services:
+        - name: dev-aiostreams
+          kind: Service
+          port: 3000
+      middlewares:  
+        - name: chain-stream
+    # This is a scrape, subject to further rate-limiting
+    - match: Host(`dev-aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`) 
+      kind: Rule
+      services:
+        - name: dev-aiostreams
+          kind: Service
+          port: 3000        
+      middlewares:  
+        - name: clusterratelimit-public-stremio-addon-scraper
+          namespace: traefik

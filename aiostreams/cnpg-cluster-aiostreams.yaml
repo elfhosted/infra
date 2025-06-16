@@ -1,0 +1,60 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: aiostreams
+  namespace: aiostreams
+spec:
+  instances: 3
+
+  # Example of rolling update strategy:
+  # - unsupervised: automated update of the primary once all
+  #                 replicas have been upgraded (default)
+  # - supervised: requires manual supervision to perform
+  #               the switchover of the primary
+  primaryUpdateStrategy: unsupervised
+
+  # Persistent storage configuration
+  storage:
+    storageClass: topolvm-provisioner-thin
+    size: 5Gi
+
+  resources:
+    requests:
+      cpu: "200m"
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 20Gi
+
+  monitoring:
+    enablePodMonitor: true
+                
+  superuserSecret:
+    name: cnpg-postgres-credentials
+
+  bootstrap:
+    initdb:
+      database: aiostreams
+      owner: aiostreams
+      secret:
+        name: app-secret
+
+  backup:
+      # Volume snapshot backups
+      volumeSnapshot:
+        className: topolvm-provisioner-thin
+      # WAL archive
+      barmanObjectStore:        
+        destinationPath: s3://cnpg/
+        endpointURL: "http://minio.minio:9000"
+        s3Credentials:
+          accessKeyId:
+            name: cnpg-minio-credentials
+            key: ACCESS_KEY_ID
+          secretAccessKey:
+            name: cnpg-minio-credentials
+            key: ACCESS_SECRET_KEY
+        wal:
+          compression: gzip
+          maxParallel: 2      
+      retentionPolicy: "7d"

@@ -1,0 +1,113 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postiz-env
+  namespace: postiz
+data:
+  HOST_NAME: postiz.${dns_domain}
+  # Configuration reference: http://docs.postiz.com/configuration/reference
+
+  # === Required Settings
+  DATABASE_URL="postgresql://postiz:postiz-password@localhost:5432/postiz-db-local"
+  REDIS_URL="redis://redis-master:6379"
+  JWT_SECRET="random string for your JWT secret, make it long"
+
+  # === This needs to be exactly the URL you're accessing Postiz on
+  FRONTEND_URL="https://postiz.infra.elfhosted.com"
+  NEXT_PUBLIC_BACKEND_URL="http://localhost:3000"
+  BACKEND_INTERNAL_URL="http://localhost:3000"
+
+  ## Remember to set your public internet IP address in the allow-list for the API token.
+  ##
+  ## Cloudflare is currently required to save things like social media avatars for accounts.
+  # CLOUDFLARE_ACCOUNT_ID="your-account-id"
+  # CLOUDFLARE_ACCESS_KEY="your-access-key"
+  # CLOUDFLARE_SECRET_ACCESS_KEY="your-secret-access-key"
+  # CLOUDFLARE_BUCKETNAME="your-bucket-name"
+  # CLOUDFLARE_BUCKET_URL="https://your-bucket-url.r2.cloudflarestorage.com/"
+  # CLOUDFLARE_REGION="auto"
+
+  # === Common optional Settings
+
+  ## This is a dummy key, you must create your own from Resend.
+  ## If this variable exists, user activation is required.
+  ## If it is commented out, users are activated automatically.
+  #RESEND_API_KEY="RzeTwHijvxvPUerScFcenUZUALuQJzSaGSMJ"
+  #EMAIL_FROM_ADDRESS=""
+  #EMAIL_FROM_NAME=""
+  #DISABLE_REGISTRATION=false
+
+  # Where will social media icons be saved - local or cloudflare.
+  STORAGE_PROVIDER="local"
+
+  # Your upload directory path if you host your files locally, otherwise Cloudflare will be used.
+  #UPLOAD_DIRECTORY=""
+
+  # Your upload directory path if you host your files locally, otherwise Cloudflare will be used.
+  #NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY=""
+
+  # Social Media API Settings
+  X_API_KEY=""
+  X_API_SECRET=""
+  LINKEDIN_CLIENT_ID=""
+  LINKEDIN_CLIENT_SECRET=""
+  REDDIT_CLIENT_ID=""
+  REDDIT_CLIENT_SECRET=""
+  GITHUB_CLIENT_ID=""
+  GITHUB_CLIENT_SECRET=""
+  BEEHIIVE_API_KEY=""
+  BEEHIIVE_PUBLICATION_ID=""
+  THREADS_APP_ID=""
+  THREADS_APP_SECRET=""
+  FACEBOOK_APP_ID=""
+  FACEBOOK_APP_SECRET=""
+  YOUTUBE_CLIENT_ID=""
+  YOUTUBE_CLIENT_SECRET=""
+  TIKTOK_CLIENT_ID=""
+  TIKTOK_CLIENT_SECRET=""
+  PINTEREST_CLIENT_ID=""
+  PINTEREST_CLIENT_SECRET=""
+  DRIBBBLE_CLIENT_ID=""
+  DRIBBBLE_CLIENT_SECRET=""
+  DISCORD_CLIENT_ID=""
+  DISCORD_CLIENT_SECRET=""
+  DISCORD_BOT_TOKEN_ID=""
+  SLACK_ID=""
+  SLACK_SECRET=""
+  SLACK_SIGNING_SECRET=""
+  MASTODON_URL="https://mastodon.social"
+  MASTODON_CLIENT_ID=""
+  MASTODON_CLIENT_SECRET=""
+
+  # Misc Settings
+  OPENAI_API_KEY=""
+  NEXT_PUBLIC_DISCORD_SUPPORT=""
+  NEXT_PUBLIC_POLOTNO=""
+  # NOT_SECURED=false
+  API_LIMIT=30 # The limit of the public API hour limit
+
+  # Payment settings
+  FEE_AMOUNT=0.05
+  STRIPE_PUBLISHABLE_KEY=""
+  STRIPE_SECRET_KEY=""
+  STRIPE_SIGNING_KEY=""
+  STRIPE_SIGNING_KEY_CONNECT=""
+
+  # Developer Settings
+  NX_ADD_PLUGINS=false
+  IS_GENERAL="true" # required for now
+  NEXT_PUBLIC_POSTIZ_OAUTH_DISPLAY_NAME="Authentik"
+  NEXT_PUBLIC_POSTIZ_OAUTH_LOGO_URL="https://raw.githubusercontent.com/walkxcode/dashboard-icons/master/png/authentik.png"
+  POSTIZ_GENERIC_OAUTH="false"
+  POSTIZ_OAUTH_URL="https://auth.example.com"
+  POSTIZ_OAUTH_AUTH_URL="https://auth.example.com/application/o/authorize"
+  POSTIZ_OAUTH_TOKEN_URL="https://auth.example.com/application/o/token"
+  POSTIZ_OAUTH_USERINFO_URL="https://authentik.example.com/application/o/userinfo"
+  POSTIZ_OAUTH_CLIENT_ID=""
+  POSTIZ_OAUTH_CLIENT_SECRET=""
+  # POSTIZ_OAUTH_SCOPE="openid profile email" # default values
+
+  # Short Link Service Settings
+  # DUB_TOKEN="" # Your self-hosted Dub API token
+  # DUB_API_ENDPOINT="https://api.dub.co" # Your self-hosted Dub API endpoint
+  # DUB_SHORT_LINK_DOMAIN="dub.sh" # Your self-hosted Dub domain

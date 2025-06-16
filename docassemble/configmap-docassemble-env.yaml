@@ -4,13 +4,13 @@ metadata:
   name: docassemble-env
   namespace: docassemble
 data:
-  WEBAPP_URL: https://feedback.${dns_domain}
-  NEXTAUTH_URL: https://feedback.${dns_domain}
+  WEBAPP_URL: https://help.${dns_domain}
+  NEXTAUTH_URL: https://help.${dns_domain}
   MAIL_FROM: docassemble@mg.elfhosted.com
   SMTP_HOST: smtp.eu.mailgun.org
   SMTP_PORT: "587"
   SMTP_USER: docassemble@mg.elfhosted.com
   UPLOADS_DIR: /data
-  PRIVACY_URL: https://elfhosted.com/legal/privacy-policy/
-  TERMS_URL: https://elfhosted.com/legal/terms-of-service/
+  PRIVACY_URL: https://store.elfhosted.com/legal/privacy-policy/
+  TERMS_URL: https://store.elfhosted.com/legal/terms-of-service/
   DEFAULT_BRAND_COLOR: '#50762E'

@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: dev-aiostreams
+  namespace: dev-aiostreams
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dev-aiostreams
+  minAvailable: 1

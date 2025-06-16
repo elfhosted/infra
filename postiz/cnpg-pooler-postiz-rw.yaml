@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: pooler-postiz-rw
+  namespace: postiz
+spec:
+  cluster:
+    name: postiz
+  instances: 2
+  type: rw
+  pgbouncer:
+    poolMode: session
+    parameters:
+      max_client_conn: "100000"
+      default_pool_size: "1000"

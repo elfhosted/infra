@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aiolists-env
+  namespace: aiolists
+data:
+  CUSTOM_HTML_BLURB: |
+    <img src="https://elfhosted.com/images/logo.svg" height="128px" width="128px" style="float: left; margin-right: 10px;"/><p>This is the public instance of <a href="https://github.com/SebastianMorel/AIOLists">AIOLists</a>, sponsored by <a href="https://store.elfhosted.com/">ElfHosted</a> ❤️ <br/>See our FREE <a href="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</a> for more great addons and features!</p>
+

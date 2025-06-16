@@ -22,7 +22,7 @@ spec:
           containers:
           - name: "tenant-cleaner"
             command: [ "/tenant-cleaner.sh" ]
-            image: ghcr.io/elfhosted/webhook-receiver:2.8.1@sha256:8faa7d7197238b0f14f4ae2adb1afa123c06a0bed59e25b64d40b6d35ca00492
+            image: ghcr.io/elfhosted/webhook-receiver:2.8.2@sha256:90bfa37054b9ed34eb0f84934151bcdbda3fc40d2311fb949b50d0b6707f504e
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
@@ -37,7 +37,9 @@ spec:
                 - ALL              
             envFrom:
             - secretRef:
-                name: webhook-receiver                  
+                name: webhook-receiver   
+            - secretRef:
+                name: webhook-receiver-s5cmd-env               
             volumeMounts:
             - mountPath: /tmp
               name: tmp

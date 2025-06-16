@@ -24,20 +24,6 @@
   # - debug:
   #     var: default_authentication_password.json.results[0].pk
 
-
-  - name: "what's the ID of the default-recovery-flow flow?"
-    uri:
-      url: "https://{{ authentik_dns_name }}/api/v3/flows/instances/default-recovery-flow/"
-      method: GET
-      headers:
-        Authorization: "Bearer {{ authentik_bootstrap_token }}"
-      body_format: json
-      status_code: 200,404
-    register: default_recovery_flow
-
-  - debug:
-      var: default_recovery_flow.json.pk      
-
   - name: "get pk for default-authentication-identification stage in built-in default-authentication-flow"
     uri:
       url: "https://{{ authentik_dns_name }}/api/v3/flows/bindings/?target={{ default_authentication_flow.json.pk }}&search=default-authentication-identification"
@@ -61,7 +47,6 @@
       status_code: 200
       body:
         password_stage:	"{{ default_authentication_password.json.results[0].pk }}"
-        recovery_flow:	"{{ default_recovery_flow.json.pk }}"
         name: "default-authentication-identification"
         user_fields: ["username", "email"]
         case_insensitive_matching: true

@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: aiolists
+  namespace: aiolists
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aiolists
+  minAvailable: 1

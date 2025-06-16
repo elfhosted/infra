@@ -48,17 +48,17 @@ spec:
       volumeSnapshot:
         className: topolvm-provisioner-thin
       # WAL archive
-      # barmanObjectStore:        
-      #   destinationPath: s3://cnpg/
-      #   endpointURL: "http://minio.minio:9000"
-      #   s3Credentials:
-      #     accessKeyId:
-      #       name: cnpg-minio-credentials
-      #       key: ACCESS_KEY_ID
-      #     secretAccessKey:
-      #       name: cnpg-minio-credentials
-      #       key: ACCESS_SECRET_KEY
-      #   wal:
-      #     compression: gzip
-      #     maxParallel: 2      
-      # retentionPolicy: "7d"
+      barmanObjectStore:        
+        destinationPath: s3://cnpg/
+        endpointURL: "http://minio.minio:9000"
+        s3Credentials:
+          accessKeyId:
+            name: cnpg-minio-credentials
+            key: ACCESS_KEY_ID
+          secretAccessKey:
+            name: cnpg-minio-credentials
+            key: ACCESS_SECRET_KEY
+        wal:
+          compression: gzip
+          maxParallel: 2      
+      retentionPolicy: "7d"

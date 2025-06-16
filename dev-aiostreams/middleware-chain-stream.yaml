@@ -1,0 +1,22 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: chain-stream
+  namespace: dev-aiostreams
+spec:
+  chain:
+    middlewares:
+    # These are generic
+    - name: headers-add-cors-for-stremio
+      namespace: traefik
+    - name: headers-cache-for-5s
+      namespace: traefik      
+    - name: return-code-override-ratelimit
+      namespace: traefik
+
+    # These are specific to dev-aiostreams, since they return an dev-aiostreams-specific error
+    - name: errors-rate-limit-exceeded
+
+    # Generic
+    - name: clusterratelimit-public-stremio-addon-stream
+      namespace: traefik

@@ -12,7 +12,7 @@ spec:
     - name: return-code-override-ratelimit
       namespace: traefik
 
-    # These are specific to comet, since they return a comet-specific error
+    # These are specific to stremthru, since they return a stremthru-specific error
     - name: errors-rate-limit-exceeded   
 
     # This is generic again

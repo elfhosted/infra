@@ -70,5 +70,5 @@ spec:
         mountPath: /var/log/supervisor
         sizeLimit: 1Gi                
     env:
-      DAHOSTNAME: docassemble.elfhosted.com
+      DAHOSTNAME: help.elfhosted.com
       TIMEZONE: UTC

@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-aiostreams-env
+  namespace: dev-aiostreams
+data:
+  BASE_URL: https://dev-aiostreams.elfhosted.com
+  COMET_URL: http://elfhosted-internal.comet/
+  MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
+  JACKETTIO_URL: http://elfhosted-internal.jackettio/
+  EASYNEWS_PLUS_URL: http://elfhosted-internal.easynewsplus/
+  STREMIO_JACKETT_URL: http://elfhosted-internal.stremio-jackett/
+  DISABLE_TORRENTIO: "true"
+  DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
+  ADDON_PROXY: http://localhost:8000
+  ADDON_PROXY_CONFIG: "*:false"
+  ADDON_NAME: AIOStreams | ElfHosted
+  MAX_ADDONS: "10"
+  DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"
+  CACHE_STREAM_RESULTS: "false"
+  FORCE_COMET_HOSTNAME: "comet.elfhosted.com"
+  FORCE_COMET_PROTOCOL: "https"
+  FORCE_COMET_PORT: ""
+  FORCE_JACKETTIO_HOSTNAME: "jackettio.elfhosted.com"
+  FORCE_JACKETTIO_PROTOCOL: "https"
+  FORCE_JACKETTIO_PORT: ""
+  DISABLED_ADDONS: "torrentio:Private instances only"
+  REGEX_FILTER_ACCESS: none
+  DISABLED_HOSTS: "torrentio.strem.fun:Private instances only"
+  CUSTOM_HTML: |
+    <div
+      style="display: flex; align-items: center; justify-content: center; gap: 32px"
+    >
+      <img
+        src="https://elfhosted.com/images/logo.svg"
+        height="72px"
+        width="72px"
+        style="flex-shrink: 0"
+      />
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <div style="margin: 0">
+          This is the public instance of AIOStreams, sponsored by
+          <a href="https://elfhosted.com">ElfHosted</a> ❤️ (<i
+            >reasonable
+            <a
+              href="https://github.com/elfhosted/infra/blob/main/traefik-middleware/middleware-rate-limit-public-stremio-addon.yaml"
+              >rate-limits</a
+            >
+            apply</i
+          >)
+        </div>
+        <div style="margin: 0">
+          Get
+          <a href="https://store.elfhosted.com/product/aiostreams/elf/viren070"
+            >your own private, un-rate-limited instance</a
+          >
+          (<i>including torrentio support!</i>), bundled with
+          MediaFlowProxy/StremThru, and support your developer (<i
+            >with 33% commission</i
+          >)!
+        </div>
+      </div>
+    </div>
