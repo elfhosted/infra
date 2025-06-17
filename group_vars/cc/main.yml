@@ -1,5 +1,5 @@
 dns_domain: elfhosted.cc
-k8s_ha_api_ip: 192.168.44.10 # haproxy between fairies
+k8s_ha_api_ip: 192.168.45.10 # haproxy between eagles
 k8s_ha_api_port: 8443
 flux_repo_branch: main
 authentik_login_background: https://images.unsplash.com/photo-1608096275182-337284e623bd?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=karsten-winegeart-qbadM0DNF8Y-unsplash.jpg
