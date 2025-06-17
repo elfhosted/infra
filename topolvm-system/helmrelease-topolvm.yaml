@@ -57,7 +57,7 @@ spec:
     # A scheduler extender for TopoLVM
     scheduler:
       # scheduler.enabled --  If true, enable scheduler extender for TopoLVM
-      enabled: true
+      enabled: false
 
       # scheduler.args -- Arguments to be passed to the command.
       args: []
