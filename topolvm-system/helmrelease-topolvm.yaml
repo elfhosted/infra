@@ -112,6 +112,7 @@ spec:
       tolerations:
         - key: node-role.kubernetes.io/control-plane
           effect: NoSchedule
+          operation: Exists
 
       # scheduler.nodeSelector -- Specify nodeSelector on the Deployment or DaemonSet.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
