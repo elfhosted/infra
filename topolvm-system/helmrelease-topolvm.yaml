@@ -553,7 +553,8 @@ spec:
       ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
       tolerations:
         - key: node-role.kubernetes.io/control-plane
-          effect: NoSchedule    
+          effect: NoSchedule
+          operator: Exists
 
       # controller.nodeSelector -- Specify nodeSelector.
       ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
