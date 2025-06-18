@@ -223,9 +223,7 @@ spec:
       # name: special-config
 
       # lvmd.env -- extra environment variables
-      env:
-        - name: LVMD_LOG_LEVEL
-          value: debug
+      env: []
       #  - name: LVM_SYSTEM_DIR
       #    value: /tmp
 
@@ -265,7 +263,7 @@ spec:
 
       metrics:
         # lvmd.metrics.enabled -- If true, enable scraping of metrics by Prometheus.
-        enabled: false
+        enabled: true
         # lvmd.metrics.annotations -- Annotations for Scrape used by Prometheus.
         annotations:
           prometheus.io/port: metrics
