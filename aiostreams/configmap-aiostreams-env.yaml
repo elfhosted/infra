@@ -27,9 +27,9 @@ data:
   STREMIO_ADDONS_CONFIG_SIGNATURE: eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..acmV1DfOh52nwT-O3myHNg.Vb_c3MkkeLV9Nb4mBvEmbYoRcKh9I1CIxmLAH0CJLQaXBeiKzfT_JjIOCKw53qkossEchr768t2n3sS290hwOHE3HA6rhRwWRkotlSJU9lcMzcbxCiWezF8qr9ZV6MzO.48H-f2Psh4FE0CWD3uVDUA
 
   # For the rewrite
+  DISABLED_ADDONS: "torrentio:Private instances only"
   REGEX_FILTER_ACCESS: none
-  DISABLED_ADDONS: "torrentio:Disabled on public instance as requested by TheBeastLT"
-  DISABLED_HOSTS: "torrentio.strem.fun:Disabled on public instance as requested by TheBeastLT"
+  DISABLED_HOSTS: "torrentio.strem.fun:Private instances only"
   CUSTOM_HTML: |
     <div
       style="display: flex; align-items: center; justify-content: center; gap: 32px"
