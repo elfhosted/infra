@@ -4,6 +4,7 @@ metadata:
   name: aiostreams-env
   namespace: aiostreams
 data:
+  BASE_URL: https://aiostreams.elfhosted.com
   COMET_URL: http://elfhosted-internal.comet/
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
   JACKETTIO_URL: http://elfhosted-internal.jackettio/
