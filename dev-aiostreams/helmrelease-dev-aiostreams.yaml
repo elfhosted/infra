@@ -20,7 +20,7 @@ spec:
       nameOverride: dev-aiostreams
     image:
       repository: ghcr.io/elfhosted/aiostreams-dev
-      tag: rolling@sha256:2e192df318afece752bda7b87f08b86a6c6452eb50559654665ef2db67645caa
+      tag: rolling@sha256:4a8b5e9faa78bc6fbc8bbbe9ea00f41b20c9afa4fec3ce8a350af360d7250fd3
     securityContext:
       seccompProfile:
         type: RuntimeDefault
