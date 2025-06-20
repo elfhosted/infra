@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -20,7 +20,7 @@ spec:
       nameOverride: aiostreams
     image:
       repository: ghcr.io/elfhosted/aiostreams
-      tag: v2.0.0@sha256:052f5ec5ed2cf7f34d39bd431f153e2ecb546e4503c56c65226dfdb3b5b36c30
+      tag: v2.0.1@sha256:fc043a03f4fc09fbd9b8734622c112fcee23fb6aef89ae97faf117af5f38781d
     securityContext:
       seccompProfile:
         type: RuntimeDefault
