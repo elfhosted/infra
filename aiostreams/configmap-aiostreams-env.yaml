@@ -28,12 +28,12 @@ data:
   STREMIO_ADDONS_CONFIG_SIGNATURE: eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..acmV1DfOh52nwT-O3myHNg.Vb_c3MkkeLV9Nb4mBvEmbYoRcKh9I1CIxmLAH0CJLQaXBeiKzfT_JjIOCKw53qkossEchr768t2n3sS290hwOHE3HA6rhRwWRkotlSJU9lcMzcbxCiWezF8qr9ZV6MzO.48H-f2Psh4FE0CWD3uVDUA
 
   STREMTHRU_TORZ_URL: http://elfhosted-internal.stremthru/stremio/torz/
-  FORCE_STREMTHRU_TORZ_HOST: stremthru.elfhosted.com
+  FORCE_STREMTHRU_TORZ_HOSTNAME: stremthru.elfhosted.com
   FORCE_STREMTHRU_TORZ_PORT: ""
   FORCE_STREMTHRU_TORZ_PROTOCOL: https
 
   STREMTHRU_STORE_URL: http://elfhosted-internal.stremthru/stremio/store/
-  FORCE_STREMTHRU_STORE_HOST: stremthru.elfhosted.com
+  FORCE_STREMTHRU_STORE_HOSTNAME: stremthru.elfhosted.com
   FORCE_STREMTHRU_STORE_PORT: ""
   FORCE_STREMTHRU_STORE_PROTOCOL: https
 
