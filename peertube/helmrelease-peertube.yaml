@@ -20,7 +20,7 @@ spec:
       nameOverride: peertube
     image:
       repository: ghcr.io/elfhosted/peertube
-      tag: v7.1.1-bookworm@sha256:17d5e43a6825cdc739731d97d294a6d1df5e6e4ddbad17bef5db19f99a3f022d
+      tag: v7.2-1@sha256:2deb45522e01660a223d95fb20797736186313cdfa674b0f39879e97711a3e5b
     securityContext:
       seccompProfile:
         type: RuntimeDefault
