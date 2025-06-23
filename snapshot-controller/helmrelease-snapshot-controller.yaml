@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: snapshot-controller
-      version: 4.0.x # auto-update to semver bugfixes only 
+      version: 4.1.x # auto-update to semver bugfixes only 
       sourceRef:
         kind: HelmRepository
         name: piraeus-charts
