@@ -44,7 +44,7 @@ spec:
                 - stremthru
             topologyKey: "kubernetes.io/hostname"        
     controller:
-      replicas: 2
+      replicas: 3
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
