@@ -87,14 +87,14 @@ data:
   API_LIMIT: "30" # The limit of the public API hour limit
 
   # Payment settings
-  FEE_AMOUNT: 0".05"
-  STRIPE_PUBLISHABLE_KEY: ""
-  STRIPE_SECRET_KEY: ""
-  STRIPE_SIGNING_KEY: ""
-  STRIPE_SIGNING_KEY_CONNECT: ""
+  # FEE_AMOUNT: 0".05"
+  # STRIPE_PUBLISHABLE_KEY: ""
+  # STRIPE_SECRET_KEY: ""
+  # STRIPE_SIGNING_KEY: ""
+  # STRIPE_SIGNING_KEY_CONNECT: ""
 
   # Developer Settings
-  NX_ADD_PLUGINS: false
+  NX_ADD_PLUGINS: "false"
   IS_GENERAL: "true" # required for now
   NEXT_PUBLIC_POSTIZ_OAUTH_DISPLAY_NAME: "Authentik"
   NEXT_PUBLIC_POSTIZ_OAUTH_LOGO_URL: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/master/png/authentik.png"
