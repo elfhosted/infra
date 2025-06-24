@@ -36,7 +36,7 @@ spec:
       middlewares:  
         - name: chain-catalog              
     # Block URLs we don't want public access to
-    - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider/cache/status`) || PathPrefix(`/streaming_provider/cache/submit`)) 
+    - match: Host(`mediafusion.${dns_domain}`) && (PathPrefix(`/streaming_provider/cache/status`) || PathPrefix(`/streaming_provider/cache/submit`) || PathPrefix(`/metrics/metadata`) || PathPrefix(`/metrics/torrents`) || PathPrefix(`/metrics/sources`) || PathPrefix(`/metrics/debrid-cache`)) 
       kind: Rule
       services:
         - name: mediafusion
