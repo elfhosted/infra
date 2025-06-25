@@ -34,7 +34,7 @@ data:
     # Pull latest changes from main
     git pull origin "$BASE_BRANCH"
 
-    ../scripts/process-all-customers.sh
+    # ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
@@ -86,8 +86,8 @@ data:
         [ -z "$tenant" ] && continue
 
         # Strip trailing slash and 'aa-' prefix
-        FULL_TENANT=$(basename "$tenant")        # e.g. aa-zeroh55i
-        TENANT="${FULL_TENANT#aa-}"              # e.g. zeroh55i
+        FULL_TENANT=$(basename "${tenant%/}")    # Remove trailing slash and get basename
+        TENANT="${FULL_TENANT#aa-}"              # Strip 'aa-' prefix
 
         # Sanity check: skip if result is empty or unchanged (meaning bad/missing prefix)
         if [ -z "$TENANT" ] || [ "$TENANT" = "$FULL_TENANT" ]; then
