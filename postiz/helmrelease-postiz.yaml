@@ -38,11 +38,7 @@ spec:
       tmp: 
         enabled: true
         type: emptyDir
-        mountPath: /tmp    
-      cache: 
-        enabled: true
-        type: emptyDir
-        mountPath: /root/.cache            
+        mountPath: /tmp         
     controller:
       replicas: 1
       strategy: RollingUpdate
