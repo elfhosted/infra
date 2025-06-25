@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: tenant-cleaner
   namespace: webhook-receiver
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 data:
   tenant-cleaner.sh: |
     #!/bin/bash
