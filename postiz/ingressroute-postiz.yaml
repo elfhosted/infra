@@ -19,3 +19,6 @@ spec:
         - name: postiz-api
           kind: Service
           port: 3000
+      middlewares:
+      - name: stripprefix-api
+        namespace: traefik
