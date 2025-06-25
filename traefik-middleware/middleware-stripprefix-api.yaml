@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: stripprefix-api
+  namespace: traefik
+spec:
+  stripPrefix:
+    prefixes:
+      - /api

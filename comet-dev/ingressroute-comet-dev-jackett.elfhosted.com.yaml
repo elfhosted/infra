@@ -15,6 +15,6 @@ spec:
           kind: Service
           port: 9117
       middlewares:  
-        - name: bamb0uu-traefik-forward-auth
-          namespace: aa-bamb0uu
+        - name: g0ldyy-traefik-forward-auth
+          namespace: aa-g0ldyy
           
