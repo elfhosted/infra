@@ -33,6 +33,7 @@ data:
   ## If this variable exists, user activation is required.
   ## If it is commented out, users are activated automatically.
   #RESEND_API_KEY: "RzeTwHijvxvPUerScFcenUZUALuQJzSaGSMJ"
+  EMAIL_PROVIDER: resend
   EMAIL_FROM_ADDRESS: "postiz@resend.elfhosted.com"
   EMAIL_FROM_NAME: "ElfHosted Postiz"
   #DISABLE_REGISTRATION: false
