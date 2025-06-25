@@ -20,14 +20,14 @@ data:
     TEMPDIR=$(mktemp -d)
     cd $TEMPDIR
     gh repo clone elfhosted/tenants
-    
+
     git config --global --add safe.directory tenants
     cd tenants/fsn/
 
     BRANCH_NAME="tenant-cleaner"
     BASE_BRANCH="main"
 
-    
+
     # Check out remote tracking branch
     git checkout -t "origin/$BRANCH_NAME"
 
@@ -49,7 +49,7 @@ data:
         fi
       fi
     done
-    
+
     DATE=$(date +"%Y-%m-%d")
 
     echo $DATE > date.txt
