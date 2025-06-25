@@ -34,7 +34,7 @@ data:
     # Pull latest changes from main
     git pull origin "$BASE_BRANCH"
 
-    # ../scripts/process-all-customers.sh
+    ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
