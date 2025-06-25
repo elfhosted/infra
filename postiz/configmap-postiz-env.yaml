@@ -33,8 +33,8 @@ data:
   ## If this variable exists, user activation is required.
   ## If it is commented out, users are activated automatically.
   #RESEND_API_KEY: "RzeTwHijvxvPUerScFcenUZUALuQJzSaGSMJ"
-  #EMAIL_FROM_ADDRESS: ""
-  #EMAIL_FROM_NAME: ""
+  EMAIL_FROM_ADDRESS: "postiz@resend.elfhosted.com"
+  EMAIL_FROM_NAME: "ElfHosted Postiz"
   #DISABLE_REGISTRATION: false
 
   # Where will social media icons be saved - local or cloudflare.
