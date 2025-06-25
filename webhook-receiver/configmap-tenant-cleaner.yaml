@@ -36,7 +36,7 @@ data:
     # Pull latest changes from main
     git pull origin "$BASE_BRANCH"
 
-    # ../scripts/process-all-customers.sh
+    ../scripts/process-all-customers.sh
 
     # clean out unused namespaces / kustomizations
     for TENANT in $(ls bootstrap/namespaces/namespace-*.yaml | cut -f2 -d- | cut -f1 -d.); do
@@ -104,9 +104,9 @@ data:
         else
             echo "🗑️  Tenant $TENANT not found locally — deleting from S3"
 
-            echo s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
-            echo s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
-            echo s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
+            s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
+            s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
+            s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
         fi
     done
     sleep 1h # for debug
