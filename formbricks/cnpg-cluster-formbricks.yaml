@@ -38,6 +38,8 @@ spec:
       owner: formbricks
       secret:
         name: app-secret
+      postInitSQL:
+      - CREATE EXTENSION vector
 
   backup:
       # Volume snapshot backups
