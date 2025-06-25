@@ -8,7 +8,7 @@ data:
   # Configuration reference: http://docs.postiz.com/configuration/reference
 
   # : : :  Required Settings
-  DATABASE_URL: "postgresql://postiz:postiz-password@localhost:5432/postiz-db-local"
+  # DATABASE_URL: overridden in secrets
   REDIS_URL: "redis://redis-master:6379"
   JWT_SECRET: "random string for your JWT secret, make it long"
 
