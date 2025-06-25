@@ -47,8 +47,8 @@ data:
   #NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: ""
 
   # Social Media API Settings
-  X_API_KEY: ""
-  X_API_SECRET: ""
+  # X_API_KEY: ""
+  # X_API_SECRET: ""
   LINKEDIN_CLIENT_ID: ""
   LINKEDIN_CLIENT_SECRET: ""
   # REDDIT_CLIENT_ID: ""
