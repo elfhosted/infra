@@ -29,6 +29,11 @@ spec:
       seccompProfile:
         type: RuntimeDefault
     automountServiceAccountToken: false
+    envFrom:
+    - secretRef:
+        name: postiz-env    
+    - configMapRef:
+        name: postiz-env      
     persistence:
       tmp: 
         enabled: true
