@@ -13,3 +13,9 @@ spec:
         - name: postiz
           kind: Service
           port: 5000
+    - match: Host(`postiz.${dns_domain}`) && PathPrefix(`/api/`)
+      kind: Rule
+      services:
+        - name: postiz
+          kind: Service
+          port: 3000
