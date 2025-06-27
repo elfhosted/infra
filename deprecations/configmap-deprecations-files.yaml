@@ -25,7 +25,18 @@ data:
                 "url": "https://elfhosted.com/assets/shluflix-is-deprecated.mp4"
             }
         ]
-    }    
+    }
+  stremio-jackett-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Stremio-Jackett",
+                "title": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/annatar-is-deprecated.mp4"
+            }
+        ]
+    }       
   mediafusion-search-rate-limited.json: |
     {
         "streams": [
