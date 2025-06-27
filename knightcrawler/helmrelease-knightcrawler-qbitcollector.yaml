@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -20,7 +20,7 @@ spec:
       nameOverride: knightcrawler-qbitcollector
     image:
       repository: ghcr.io/elfhosted/knightcrawler-qbit-collector
-      tag: v2.0.26@sha256:bca86c05b041086861d5e03a7eaaa3000b51c32f3b7be11b8e526f4ab0658cbe
+      tag: v2.0.28@sha256:4b0e388901695f3687c97251db61a6bc2731028a0f987fa969ef61ccdee21d6e
     securityContext:
       seccompProfile:
         type: RuntimeDefault
