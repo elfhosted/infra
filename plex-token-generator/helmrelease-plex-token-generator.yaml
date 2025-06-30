@@ -20,7 +20,7 @@ spec:
       nameOverride: plex-token-generator
     image:
       repository: ghcr.io/elfhosted/plex-token-generator
-      tag: rolling@sha256:237bdf6cead234b794766c2b1c7da945a75c21ef4482d30f70ac26025a75917d
+      tag: rolling@sha256:b6c62bde1c6fa55e84d30888d00ac21353e6826d2e33193371a033b0ccc65ba9
     securityContext:
       seccompProfile:
         type: RuntimeDefault
