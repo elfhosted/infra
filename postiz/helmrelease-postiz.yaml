@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -20,7 +20,7 @@ spec:
       nameOverride: postiz
     image:
       repository: ghcr.io/elfhosted/postiz
-      tag: v1.48.3@sha256:366c8a88874afaec6a82970dc7fb7c9f88520daac9285d09f47a5e6e8f44a6c9
+      tag: v1.57.0@sha256:2c4177d534553653d2745dd6e684ca7621f02cc195430a294add90c134e65166
     securityContext:
       seccompProfile:
         type: RuntimeDefault
