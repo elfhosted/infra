@@ -42,10 +42,10 @@ data:
   STORAGE_PROVIDER: "local"
 
   # Your upload directory path if you host your files locally, otherwise Cloudflare will be used.
-  #UPLOAD_DIRECTORY: ""
+  UPLOAD_DIRECTORY: "/uploads/"
 
   # Your upload directory path if you host your files locally, otherwise Cloudflare will be used.
-  #NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: ""
+  NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: "/uploads/"
 
   # Social Media API Settings
   # X_API_KEY: ""
