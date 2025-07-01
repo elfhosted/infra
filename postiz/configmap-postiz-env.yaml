@@ -81,7 +81,7 @@ data:
   MASTODON_CLIENT_SECRET: ""
 
   # Misc Settings
-  OPENAI_API_KEY: ""
+  # OPENAI_API_KEY: ""
   NEXT_PUBLIC_DISCORD_SUPPORT: ""
   NEXT_PUBLIC_POLOTNO: ""
   # NOT_SECURED: false
