@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authentik.${dns_domain}
+  namespace: authentik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`authentik.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: authentik-server
+          kind: Service
+          port: 80

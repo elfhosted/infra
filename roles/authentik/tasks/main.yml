@@ -303,7 +303,7 @@
         secret: "{{ authentik_postiz_client_secret }}"
         redirect_uris:
           - matching_mode: strict
-            url: https://postiz.{{ dns_domain }}/user/oauth2/authentik/callback
+            url: https://postiz.{{ dns_domain }}/settings
         icon: https://infra.{{ dns_domain }}/assets/png/postiz.png  
         property_mappings:
         - "{{ _email_propertymapping.json.results[0].pk }}"
