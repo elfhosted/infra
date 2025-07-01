@@ -39,13 +39,13 @@ data:
   #DISABLE_REGISTRATION: false
 
   # Where will social media icons be saved - local or cloudflare.
-  STORAGE_PROVIDER: "local"
+  STORAGE_PROVIDER: "cloudflare"
 
   # Your upload directory path if you host your files locally, otherwise Cloudflare will be used.
-  UPLOAD_DIRECTORY: "/uploads/"
+  # UPLOAD_DIRECTORY: "/uploads/"
 
   # Your upload directory path if you host your files locally, otherwise Cloudflare will be used.
-  NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: "/uploads/"
+  # NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: "/uploads/"
 
   # Social Media API Settings
   # X_API_KEY: ""
@@ -77,8 +77,8 @@ data:
   # SLACK_SECRET: ""
   # SLACK_SIGNING_SECRET: ""
   MASTODON_URL: "https://mastodon.social"
-  MASTODON_CLIENT_ID: ""
-  MASTODON_CLIENT_SECRET: ""
+  # MASTODON_CLIENT_ID: ""
+  # MASTODON_CLIENT_SECRET: ""
 
   # Misc Settings
   # OPENAI_API_KEY: ""
