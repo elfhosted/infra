@@ -38,14 +38,7 @@ spec:
       tmp: 
         enabled: true
         type: emptyDir
-        mountPath: /tmp
-      config:
-        enabled: true
-        type: custom
-        mountPath: /uploads/
-        volumeSpec:
-          persistentVolumeClaim:
-            claimName: postiz        
+        mountPath: /tmp     
     controller:
       replicas: 1
       strategy: RollingUpdate
