@@ -24,7 +24,7 @@ data:
   # CLOUDFLARE_ACCESS_KEY: "your-access-key"
   # CLOUDFLARE_SECRET_ACCESS_KEY: "your-secret-access-key"
   # CLOUDFLARE_BUCKETNAME: "your-bucket-name"
-  CLOUDFLARE_BUCKET_URL: "https://cdn.postiz.elfhosted.com/"
+  CLOUDFLARE_BUCKET_URL: "https://cdn.postiz.elfhosted.com" # doesn't like a slash at the end
   CLOUDFLARE_REGION: "auto"
 
   # : : :  Common optional Settings
