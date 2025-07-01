@@ -10,6 +10,6 @@ spec:
     - match: Host(`authentik.${dns_domain}`)
       kind: Rule
       services:
-        - name: authentik-server
+        - name: disabled-for-now-authentik-server
           kind: Service
           port: 80
