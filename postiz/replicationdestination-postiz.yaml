@@ -1,0 +1,20 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: rd-postiz
+  namespace: postiz
+spec:
+  trigger:
+    manual: runonce
+  restic:
+    repository: postiz-restic-config
+    copyMethod: Snapshot
+    cacheCapacity: 10Gi
+    capacity: 10Gi
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes:
+    - ReadWriteOnce
+    storageClassName: topolvm-provisioner-thin
+    cacheAccessModes:
+    - ReadWriteOnce
+    volumeSnapshotClassName: topolvm-provisioner-thin
