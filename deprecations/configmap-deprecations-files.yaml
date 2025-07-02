@@ -36,7 +36,20 @@ data:
                 "url": "https://elfhosted.com/assets/annatar-is-deprecated.mp4"
             }
         ]
-    }       
+    }   
+
+  knightcrawler-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] KnightCrawler",
+                "title": "KnightCrawler is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "KnightCrawler is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/knightcrawler-is-deprecated.mp4"
+            }
+        ]
+    }   
+
   mediafusion-search-rate-limited.json: |
     {
         "streams": [
@@ -60,17 +73,7 @@ data:
         }
      ]
     }  
-  knightcrawler-search-rate-limited.json: |
-    {
-        "streams": [
-            {
-                "name": "[🐢] KnightCrawler",
-                "title": "KnightCrawler public rate-limit exceeded 🐢",
-                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
-                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
-            }
-        ]
-    } 
+
   comet-search-rate-limited.json: |
     {
         "streams": [

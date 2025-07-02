@@ -7,32 +7,32 @@ spec:
   entryPoints:
     - websecure
   routes:
+    # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
     - match: Host(`knightcrawler.${dns_domain}`)
       kind: Rule
       services:
-        - name: knightcrawler-addon
-          kind: Service
-          port: 7000
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
+        - name: chain-public-stremio-addon
+          namespace: traefik
         - name: headers-add-cors-for-stremio
           namespace: traefik
-    - match: Host(`knightcrawler.${dns_domain}`) && PathRegexp(`^/(.*)/realdebrid=(.+)/stream`)
+        - name: redirectregex-knightcrawler-is-deprecated
+          namespace: traefik
+    - match: Host(`knightcrawler.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`)
       kind: Rule
       services:
-        - name: knightcrawler-addon
-          kind: Service
-          port: 7000
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
+        - name: chain-public-stremio-addon-cached
+          namespace: traefik
         - name: headers-add-cors-for-stremio
-          namespace: traefik
-        - name: redirectregex-realdebrid-api-removal
-          namespace: traefik
-    # This is a search, subject to rate-limiting
-    - match: Host(`knightcrawler.${dns_domain}`) && PathPrefix(`/stream/`)
-      kind: Rule
-      services:
-        - name: knightcrawler-addon
-          kind: Service
-          port: 7000
-      middlewares:  
-        - name: chain-stream
+          namespace: traefik          
+        - name: redirectregex-knightcrawler-stream-is-deprecated
+          namespace: traefik          

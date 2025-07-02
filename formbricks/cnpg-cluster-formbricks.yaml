@@ -40,6 +40,7 @@ spec:
         name: app-secret
       postInitSQL:
       - CREATE EXTENSION vector
+      - ALTER ROLE formbricks WITH SUPERUSER # necessary for formbricks' prisma to initialize the vector extension
 
   backup:
       # Volume snapshot backups
