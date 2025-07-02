@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -43,7 +43,7 @@ spec:
               operator: Exists                            
     image:
       repository: ghcr.io/elfhosted/knightcrawler-debrid-collector
-      tag: v2.0.26@sha256:f66ed48c714e1a8374d08d69b23a67d5d96de3f20f347e5b21b35bff65c4974b
+      tag: v2.0.28@sha256:e51c87ef965af26f0e3af00d111fff31799cabb21a81b647c51d606ae04bc0b7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
