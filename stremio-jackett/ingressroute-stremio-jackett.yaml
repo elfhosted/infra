@@ -7,17 +7,32 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`stremio-jackett.${dns_domain}`) && (PathPrefix(`/configure`) || PathPrefix(`/manifest.json`))
-      kind: Rule
-      services:
-        - name: stremio-jackett
-          kind: Service
-          port: 3000
+    # "stream" endpoint is the one which invokes database access, and thus needs tighter rate-limiting
     - match: Host(`stremio-jackett.${dns_domain}`)
       kind: Rule
       services:
-        - name: stremio-jackett
-          kind: Service
-          port: 3000
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
       middlewares:  
-        - name: chain-stream
+        - name: chain-public-stremio-addon
+          namespace: traefik
+        - name: headers-add-cors-for-stremio
+          namespace: traefik
+        - name: redirectregex-stremio-jackett-is-deprecated
+          namespace: traefik
+    - match: Host(`stremio-jackett.${dns_domain}`) && PathRegexp(`^/(.+)/stream/`)
+      kind: Rule
+      services:
+        - kind: Service
+          name: deprecations
+          namespace: deprecations
+          port: 8080
+      middlewares:  
+        - name: chain-public-stremio-addon-cached
+          namespace: traefik
+        - name: headers-add-cors-for-stremio
+          namespace: traefik          
+        - name: redirectregex-stremio-jackett-stream-is-deprecated
+          namespace: traefik          

@@ -1,19 +1,19 @@
-- name: copy scripts
-  copy:
-    src: "{{ item }}"
-    dest: /usr/local/bin/{{ item }}
-    mode: u+x
-  loop:
-    - transcode-killer.py
+# - name: copy scripts
+#   copy:
+#     src: "{{ item }}"
+#     dest: /usr/local/bin/{{ item }}
+#     mode: u+x
+#   loop:
+#     - transcode-killer.py
 
-- name: create transcode-killer systemd service
-  copy:
-    src: transcode-killer.service
-    dest: /etc/systemd/system/transcode-killer.service
-    mode: u+x
+# - name: create transcode-killer systemd service
+#   copy:
+#     src: transcode-killer.service
+#     dest: /etc/systemd/system/transcode-killer.service
+#     mode: u+x
 
-- name: restart transcode-killer
+- name: disable and mask transcode-killer
   systemd:
     name: transcode-killer
-    state: restarted
-    enabled: yes
+    state: stopped
+    enabled: no

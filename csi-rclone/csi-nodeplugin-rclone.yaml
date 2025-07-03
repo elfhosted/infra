@@ -35,6 +35,7 @@ spec:
         effect: "NoSchedule"            
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      priorityClassName: cluster-critical
       containers:
         - name: node-driver-registrar
           image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.4.0

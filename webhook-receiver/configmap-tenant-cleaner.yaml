@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: tenant-cleaner
   namespace: webhook-receiver
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 data:
   tenant-cleaner.sh: |
     #!/bin/bash
@@ -12,7 +14,7 @@ data:
     git config --global user.email "elfbot@elfhosted.com"
     git config --global pull.rebase true
 
-    set -x
+    # set -x
     # set -e
 
     gh auth setup-git
@@ -20,14 +22,14 @@ data:
     TEMPDIR=$(mktemp -d)
     cd $TEMPDIR
     gh repo clone elfhosted/tenants
-    
+
     git config --global --add safe.directory tenants
     cd tenants/fsn/
 
     BRANCH_NAME="tenant-cleaner"
     BASE_BRANCH="main"
 
-    
+
     # Check out remote tracking branch
     git checkout -t "origin/$BRANCH_NAME"
 
@@ -49,7 +51,7 @@ data:
         fi
       fi
     done
-    
+
     DATE=$(date +"%Y-%m-%d")
 
     echo $DATE > date.txt
@@ -86,8 +88,8 @@ data:
         [ -z "$tenant" ] && continue
 
         # Strip trailing slash and 'aa-' prefix
-        FULL_TENANT=$(basename "$tenant")        # e.g. aa-zeroh55i
-        TENANT="${FULL_TENANT#aa-}"              # e.g. zeroh55i
+        FULL_TENANT=$(basename "${tenant%/}")    # Remove trailing slash and get basename
+        TENANT="${FULL_TENANT#aa-}"              # Strip 'aa-' prefix
 
         # Sanity check: skip if result is empty or unchanged (meaning bad/missing prefix)
         if [ -z "$TENANT" ] || [ "$TENANT" = "$FULL_TENANT" ]; then
@@ -102,9 +104,9 @@ data:
         else
             echo "🗑️  Tenant $TENANT not found locally — deleting from S3"
 
-            echo s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
-            echo s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
-            echo s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
+            s5cmd rm s3://elfhosted-tenants/volsync/backup/$FULL_TENANT/*
+            s5cmd rm s3://elfhosted-tenants/volsync/config/$FULL_TENANT/*
+            s5cmd rm s3://elfhosted-tenants/volsync/symlinks/$FULL_TENANT/*
         fi
     done
     sleep 1h # for debug

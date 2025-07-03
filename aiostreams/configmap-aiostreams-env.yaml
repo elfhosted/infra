@@ -4,6 +4,7 @@ metadata:
   name: aiostreams-env
   namespace: aiostreams
 data:
+  BASE_URL: https://aiostreams.elfhosted.com
   COMET_URL: http://elfhosted-internal.comet/
   MEDIAFUSION_URL: http://elfhosted-internal.mediafusion/
   JACKETTIO_URL: http://elfhosted-internal.jackettio/
@@ -11,6 +12,8 @@ data:
   STREMIO_JACKETT_URL: http://elfhosted-internal.stremio-jackett/
   DISABLE_TORRENTIO: "true"
   DISABLE_TORRENTIO_MESSAGE: "TorrentIO disabled on public AIOStreams instance to prevent abuse"
+  LOG_SENSITIVE_INFO: "false"
+  LOG_LEVEL: "http"
   ADDON_NAME: AIOStreams | ElfHosted
   MAX_ADDONS: "10"
   DISABLE_CUSTOM_CONFIG_GENERATOR_ROUTE: "true"
@@ -24,10 +27,20 @@ data:
   # For https://beta.stremio-addons.net/  
   STREMIO_ADDONS_CONFIG_SIGNATURE: eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..acmV1DfOh52nwT-O3myHNg.Vb_c3MkkeLV9Nb4mBvEmbYoRcKh9I1CIxmLAH0CJLQaXBeiKzfT_JjIOCKw53qkossEchr768t2n3sS290hwOHE3HA6rhRwWRkotlSJU9lcMzcbxCiWezF8qr9ZV6MzO.48H-f2Psh4FE0CWD3uVDUA
 
+  STREMTHRU_TORZ_URL: http://elfhosted-internal.stremthru/stremio/torz/
+  FORCE_STREMTHRU_TORZ_HOSTNAME: stremthru.elfhosted.com
+  FORCE_STREMTHRU_TORZ_PORT: ""
+  FORCE_STREMTHRU_TORZ_PROTOCOL: https
+
+  STREMTHRU_STORE_URL: http://elfhosted-internal.stremthru/stremio/store/
+  FORCE_STREMTHRU_STORE_HOSTNAME: stremthru.elfhosted.com
+  FORCE_STREMTHRU_STORE_PORT: ""
+  FORCE_STREMTHRU_STORE_PROTOCOL: https
+
   # For the rewrite
+  DISABLED_ADDONS: "torrentio:Private instances only"
   REGEX_FILTER_ACCESS: none
-  DISABLED_ADDONS: "torrentio:Disabled on public instance as requested by TheBeastLT"
-  DISABLED_HOSTS: "torrentio.strem.fun:Disabled on public instance as requested by TheBeastLT"
+  DISABLED_HOSTS: "torrentio.strem.fun:Private instances only"
   CUSTOM_HTML: |
     <div
       style="display: flex; align-items: center; justify-content: center; gap: 32px"

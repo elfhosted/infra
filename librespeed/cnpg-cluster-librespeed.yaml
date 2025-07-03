@@ -1,8 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: formbricks
-  namespace: formbricks
+  name: librespeed
+  namespace: librespeed
 spec:
   instances: 3
 
@@ -23,7 +23,7 @@ spec:
       cpu: "200m"
       memory: 1Gi
     limits:
-      cpu: "4"
+      cpu: "1"
       memory: 10Gi
 
   monitoring:
@@ -34,18 +34,15 @@ spec:
 
   bootstrap:
     initdb:
-      database: formbricks
-      owner: formbricks
+      database: librespeed
+      owner: librespeed
       secret:
         name: app-secret
-      postInitSQL:
-      - CREATE EXTENSION vector
-      - ALTER ROLE formbricks WITH SUPERUSER # necessary for formbricks' prisma to initialize the vector extension
 
   backup:
       # Volume snapshot backups
       volumeSnapshot:
-        className: topolvm-provisioner-thin
+        className: ceph-block
       # WAL archive
       barmanObjectStore:        
         destinationPath: s3://cnpg/
@@ -60,4 +57,3 @@ spec:
         wal:
           compression: gzip
           maxParallel: 2      
-      retentionPolicy: "7d"          

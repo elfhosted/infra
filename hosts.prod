@@ -22,6 +22,8 @@ hansel06     ansible_host=10.0.42.26 cluster_nic=eno1.4000
 hansel07     ansible_host=10.0.42.27 cluster_nic=eno1.4000
 hansel08     ansible_host=10.0.42.28 cluster_nic=eno1.4000
 hansel09     ansible_host=10.0.42.29 cluster_nic=eno1.4000
+hansel10     ansible_host=10.0.42.30 cluster_nic=eno1.4000
+
 
 hansel13     ansible_host=10.0.42.33 cluster_nic=enp0s31f6.4000
 hansel14     ansible_host=10.0.42.34 cluster_nic=eno1.4000

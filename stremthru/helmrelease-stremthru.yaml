@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -20,7 +20,7 @@ spec:
       nameOverride: stremthru
     image:
       repository: ghcr.io/elfhosted/stremthru
-      tag: 0.79.2@sha256:52aaa4423764b2559d477ae8933c1e8785ac72331366d2c3304f32044b21a42b
+      tag: 0.79.3@sha256:6bc9e4e075e574d1311e7ef2e4daddd9cf7128cebd8850399d740184e8b4fe43
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -44,7 +44,7 @@ spec:
                 - stremthru
             topologyKey: "kubernetes.io/hostname"        
     controller:
-      replicas: 2
+      replicas: 3
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1

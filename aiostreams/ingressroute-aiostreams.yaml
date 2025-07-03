@@ -14,7 +14,7 @@ spec:
           kind: Service
           port: 3000          
     # This is a search, subject to rate-limiting
-    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio/|aiostreams)`)
+    - match: Host(`aiostreams.${dns_domain}`) && PathRegexp(`^/(.*)stream`) && HeaderRegexp(`User-Agent`, `(?i)(Mozilla/5\\.0|Chrome/|Firefox/|Safari/|Edge/|Opera/|Brave/|Stremio/)`)
       kind: Rule
       services:
         - name: aiostreams
