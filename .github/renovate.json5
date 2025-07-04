@@ -18,7 +18,7 @@
       "ignoreTests": true,
       "baseBranches": ["ci"],
       "packagePatterns": [ ".*" ],
-    "excludePackagePatterns": [ "prowlarr-nightly", "stremio-easynews-addon", "comet", "formulio", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "jackett", "jackettio", "mediafusion", "stremio-jackett", "shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev", "discussio", "stremio-jackett", "stremthru","tmdb-addon", "clickhouse-server" ]
+    "excludePackagePatterns": [ "prowlarr-nightly", "stremio-easynews-addon", "comet", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "jackett", "jackettio", "mediafusion", "stremthru","tmdb-addon", "postiz" ]
     },
     { // auto-merge upstream app-level images
       "matchPackagePatterns": ["digest","patch"],
@@ -27,7 +27,7 @@
       "platformAutomerge": true,
       "ignoreTests": true,
       "baseBranches": ["main"],
-      "packagePatterns": [ "byparr", "stremio-easynews-addon", "comet", "formulio", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "prowlarr-nightly", "jackettio", "jackett", "mediafusion", "stremio-jackett","shluflix", "stremify", "notcyberflix-server", "cyberflix-server-dev", "stremio-rating-addon", "discussio","stremio-jackett", "stremthru","tmdb-addon","clickhouse-server" ]
+      "packagePatterns": [ "byparr", "stremio-easynews-addon", "comet", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "prowlarr-nightly", "jackettio", "jackett", "mediafusion", "stremthru","tmdb-addon","postiz" ]
     } 
   ]
 }
