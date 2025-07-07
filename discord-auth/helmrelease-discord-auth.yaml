@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: discord-auth
+  namespace: discord-auth
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: discord-auth
+  values:
+    global:
+      nameOverride: discord-auth
+    image:
+      repository: ghcr.io/elfhosted/elf-discord-bot
+      tag: rolling@sha256:b7c00a556ce209bad89ee9c27e33b22d2d59a9f21965f0034f190fffcb07145b
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: false
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+    automountServiceAccountToken: false
+    envFrom:
+    - secretRef:
+        name: discord-auth-env    
+    - configMapRef:
+        name: discord-auth-env      
+    persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp     
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+      annotations:
+        configmap.reloader.stakater.com/reload: "discord-auth-env"
+        secret.reloader.stakater.com/reload: "discord-auth-env"             
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 3000

@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "discord-auth.${dns_domain}"
+  namespace: discord-auth
+spec:
+  endpoints:
+  - dnsName: "discord-auth.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "traefik-lb-ingress.${dns_domain}"
