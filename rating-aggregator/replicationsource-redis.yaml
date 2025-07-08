@@ -1,0 +1,41 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: rs-redis
+  namespace: rating-aggregator
+spec:
+  # The PVC to be backed up
+  sourcePVC: redis
+  trigger:
+    # Take a backup every 30 minutes
+    schedule: "0 9 * * *"
+  restic:
+    moverAffinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution: 
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - redis
+          topologyKey: "kubernetes.io/hostname"      
+    # Prune the repository (repack to free space) every 2 weeks
+    pruneIntervalDays: 7
+    # Name of the Secret with the connection information
+    repository: redis-restic-config
+    # Retention policy for backups
+    retain:
+      daily: 7
+    # Clone the source volume prior to taking a backup to ensure a
+    # point-in-time image.
+    copyMethod: Snapshot
+    # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
+    storageClassName: topolvm-provisioner-thin
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes: 
+    - ReadWriteOnce
+    # cache using topolvm
+    cacheCapacity: 20Gi
+    # The VSC to use if the copy method is Snapshot (default if omitted)
+    volumeSnapshotClassName: topolvm-provisioner-thin

@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: rating-aggregator
+  namespace: rating-aggregator
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: rating-aggregator
+  minAvailable: 1
