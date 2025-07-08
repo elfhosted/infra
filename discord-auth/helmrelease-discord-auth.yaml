@@ -20,7 +20,7 @@ spec:
       nameOverride: discord-auth
     image:
       repository: ghcr.io/elfhosted/elf-discord-bot
-      tag: rolling@sha256:8d35ef1365d8ac9d6585c78d93f59908c2c1793db1f246ce97b480fb87f251ec
+      tag: rolling@sha256:8552586877081a6786a6fa48501009ced3d4a0bdd0154413409cd5a1bfc180a8
     imagePullSecrets:
     - name: ghcr-io-elfhosted      
     securityContext:
@@ -41,8 +41,20 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /tmp     
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 99
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - discord-auth
+            topologyKey: "kubernetes.io/hostname"            
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
