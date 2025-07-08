@@ -4,6 +4,6 @@ metadata:
   name: rating-aggregator-env
   namespace: rating-aggregator
 data:
-  REDIS_URL: "redis://redis-headless:6379"
+  REDIS_URL: "redis://redis-master:6379"
   HOME_BLURB: |
     <img src="https://elfhosted.com/images/logo.svg" height="128px" width="128px" style="float: left; margin-right: 10px;"/><p>This is the public instance of <a href="https://github.com/SebastianMorel/AIOLists">AIOLists</a>, sponsored by <a href="https://store.elfhosted.com/">ElfHosted</a> ❤️ <br/>See our FREE <a href="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</a> for more great addons and features!</p>
