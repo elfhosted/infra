@@ -20,7 +20,7 @@ spec:
       nameOverride: discord-auth
     image:
       repository: ghcr.io/elfhosted/elf-discord-bot
-      tag: rolling@sha256:b7c00a556ce209bad89ee9c27e33b22d2d59a9f21965f0034f190fffcb07145b
+      tag: rolling@sha256:8d35ef1365d8ac9d6585c78d93f59908c2c1793db1f246ce97b480fb87f251ec
     imagePullSecrets:
     - name: ghcr-io-elfhosted      
     securityContext:
