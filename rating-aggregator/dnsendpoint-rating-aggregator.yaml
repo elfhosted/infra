@@ -1,11 +1,11 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "aiostreams.${dns_domain}"
-  namespace: aiostreams
+  name: "rating-aggregator.${dns_domain}"
+  namespace: rating-aggregator
 spec:
   endpoints:
-  - dnsName: "aiostreams.${dns_domain}"
+  - dnsName: "rating-aggregator.${dns_domain}"
     recordTTL: 180
     recordType: CNAME
     targets:

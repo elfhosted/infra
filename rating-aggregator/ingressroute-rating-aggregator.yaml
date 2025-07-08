@@ -12,4 +12,4 @@ spec:
       services:
         - name: rating-aggregator
           kind: Service
-          port: 7000          
+          port: 3000          
