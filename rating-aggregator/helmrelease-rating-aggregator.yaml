@@ -20,7 +20,7 @@ spec:
       nameOverride: rating-aggregator
     image:
       repository: ghcr.io/elfhosted/rating-aggregator
-      tag: v1.6.0@sha256:d27e34649ae08164db2595a5149afb279f2b6532534ff1246bdd3d7ec30effe3
+      tag: v1.6.1@sha256:245801278e0bd7a231b8e895b8423754c0e2534e1e009b66167d05a787719562
     securityContext:
       seccompProfile:
         type: RuntimeDefault
