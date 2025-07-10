@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bundleup.${dns_domain}
+  namespace: docassemble
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`bundleup.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: docassemble
+          kind: Service
+          port: 80
+      middlewares:  
+        - name: error-pages
+          namespace: traefik   
