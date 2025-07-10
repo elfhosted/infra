@@ -6,5 +6,6 @@ metadata:
 data:
   REDIS_URL: "redis://redis-master:6379"
   VITE_GA_MEASUREMENT_ID: G-X65B6K6HG2
+  ADDON_NAME: "📊 Rating Aggregator | ElfHosted"
   # VITE_HOME_BLURB: |
   #   <img src="https://elfhosted.com/images/logo.svg" height="128px" width="128px" style="float: left; margin-right: 10px;"/><p>This is the public instance of <a href="https://github.com/anmol210202/rating-aggregator-/">Rating Aggregator</a>, sponsored by <a href="https://store.elfhosted.com/">ElfHosted</a> ❤️ <br/>See our FREE <a href="https://stremio-addons-guide.elfhosted.com">Stremio Addons Guide</a> for more great addons and features!</p>
