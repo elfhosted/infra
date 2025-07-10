@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -20,7 +20,7 @@ spec:
       nameOverride: rating-aggregator
     image:
       repository: ghcr.io/elfhosted/rating-aggregator
-      tag: v1.6.1@sha256:c0410f75ed8d9fdc198db65de1422b616492c29be7c6b9df3be4c3f71c92f0eb
+      tag: v1.7.2@sha256:8918aa8ed27244aa671095b05aa319404a3badfc91ad4bac9e02245cdb74c5c1
     securityContext:
       seccompProfile:
         type: RuntimeDefault
