@@ -1,7 +1,7 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "feedback.${dns_domain}"
+  name: "bundleup.${dns_domain}"
   namespace: docassemble
 spec:
   endpoints:
