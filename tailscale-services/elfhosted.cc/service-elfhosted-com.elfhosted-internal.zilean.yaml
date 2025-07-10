@@ -3,7 +3,7 @@ kind: Service
 metadata:
   annotations:
     tailscale.com/tailnet-fqdn: elfhosted-internal-zilean-elfhosted-com.tail5bd7d1.ts.net
-    tailscale.com/hostname: ignore-zilean-scrape-com-from-${tailscale_suffix}
+    tailscale.com/hostname: ignore-also-zilean-scrape-com-from-${tailscale_suffix}
   name: elfhosted-internal
   namespace: zilean
 spec:
