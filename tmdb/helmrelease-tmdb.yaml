@@ -20,7 +20,7 @@ spec:
       nameOverride: tmdb
     image:
       repository: ghcr.io/elfhosted/tmdb-addon
-      tag: rolling@sha256:c85597808fa3cf07500103151a28f1ef637102343527ab9273fd40714b7ca537
+      tag: rolling@sha256:e78ddac057f8111f02dc17bd40d1752e819bbba62ad838b06e12a8c4b950d92b
     securityContext:
       seccompProfile:
         type: RuntimeDefault
