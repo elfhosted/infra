@@ -106,7 +106,7 @@ spec:
           timeoutSeconds: 10
     additionalContainers:
       tinyproxy:
-        image: ghcr.io/elfhosted/tinyproxy:v1.4.3@sha256:9370be1434e80f8ac7d3a24d9c19335742b2c74ba15129dcdc166bb0dd3c9098
+        image: ghcr.io/elfhosted/tinyproxy:v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
         volumeMounts:
         - mountPath: /etc/tinyproxy/tinyproxy.conf
           name: tinyproxy-conf
