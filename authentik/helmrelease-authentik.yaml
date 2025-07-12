@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2025.4.x
+      version: 2025.6.x
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -922,7 +922,7 @@ spec:
         # -- If defined, a repository for GeoIP images
         repository: ghcr.io/maxmind/geoipupdate
         # -- If defined, a tag for GeoIP images
-        tag: v7.1.0
+        tag: v7.1.1
         # -- If defined, an image digest for GeoIP images
         digest: ""
         # -- If defined, an imagePullPolicy for GeoIP images
@@ -999,7 +999,7 @@ spec:
       enabled: false
       image:
         repository: bitnami/postgresql
-        tag: 15.8.0-debian-12-r18
+        tag: 17.5.0-debian-12-r18
       auth:
         username: authentik
         database: authentik
