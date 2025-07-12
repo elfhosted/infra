@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
         name: elfhosted
@@ -21,7 +21,7 @@ spec:
     image:
       registry: ghcr.io
       repository: ghcr.io/browserless/chromium
-      tag: v2.25.2@sha256:a5f2cb9c71ce425e45b452e3a6ea67900af45e43b2928c5f6a02dd6b31145dc0
+      tag: v2.33.0@sha256:a7ef061130e593b2a8e03c3b1c379ef0cbca95f857ae532831d66ba6a933cd72
     securityContext:
       seccompProfile:
         type: RuntimeDefault
