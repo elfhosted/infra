@@ -16,7 +16,16 @@ spec:
       middlewares:  
         - name: error-pages
           namespace: traefik
-        # - name: rate-limit-stremthru        
+    # No rate-limits necessary for torz or lists (DB-based)
+    - match: Host(`stremthru.${dns_domain}`) && (PathPrefix(`/stremio/torz/`) || PathPrefix(`/stremio/list/`))
+      kind: Rule
+      services:
+        - name: stremthru
+          kind: Service
+          port: 8080
+      middlewares:  
+        - name: error-pages
+          namespace: traefik             
     # Block URLs we don't want public access to
     - match: Host(`stremthru.${dns_domain}`) && (PathPrefix(`/v0/store/magnets/check`) || PathPrefix(`/__experiment__`))
       kind: Rule
