@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: "icons.${dns_domain}"
+  namespace: homer
+spec:
+  endpoints:
+  - dnsName: "icons.${dns_domain}"
+    recordTTL: 180
+    recordType: CNAME
+    targets:
+    - "nginx-ingress.infra.${dns_domain}"

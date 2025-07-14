@@ -1,0 +1,61 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: icons
+  namespace: icons
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: icons
+  values:
+    global:
+      nameOverride: icons
+    image:
+      repository: ghcr.io/elfhosted/icons
+      tag: rolling@sha256:2ec168fef07cc369ed34fb5a8db4466626f39de090f3f94c4b9b1241009ae1a0
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      # readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      # runAsUser: 568
+      # runAsGroup: 568
+      # fsGroup: 568
+      allowPrivilegeEscalation: false
+      # runAsNonRoot: true
+      capabilities:
+        drop:
+        - ALL        
+    automountServiceAccountToken: false
+    controller:
+      replicas: 2
+      strategy: Recreate
+    resources:
+      requests:
+        cpu: 1m
+        memory: 50Mi
+        ephemeral-storage: 50Mi
+      limits:
+        cpu: 1
+        memory: 512Mi
+        ephemeral-storage: 100Mi        
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            port: 8080           
+
