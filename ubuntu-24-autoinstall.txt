@@ -170,11 +170,11 @@ storage:
       type: mount 
       options: 'rw,nodev,relatime,data=ordered'
 
-    # Create a 5GB root partition
+    # Create a 10GB root partition
     - id: lvm_partition-root
       name: root
       preserve: false
-      size: 5G
+      size: 10G
       type: lvm_partition
       volgroup: lvm_volgroup-0        
     - fstype: ext4
