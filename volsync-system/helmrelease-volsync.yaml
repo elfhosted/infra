@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: volsync
-      version: 0.12.x
+      version: 0.13.x
       sourceRef:
         kind: HelmRepository
         name: backube
