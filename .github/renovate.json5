@@ -18,7 +18,7 @@
       "ignoreTests": true,
       "baseBranches": ["ci"],
       "packagePatterns": [ ".*" ],
-    "excludePackagePatterns": [ "prowlarr-nightly", "stremio-easynews-addon", "comet", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "jackett", "jackettio", "mediafusion", "stremthru","tmdb-addon", "postiz", "rating-aggregator", "app-template" ]
+    "excludePackagePatterns": [ "prowlarr-nightly", "stremio-easynews-addon", "comet", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "jackett", "jackettio", "mediafusion", "stremthru","tmdb-addon", "postiz", "rating-aggregator", "app-template", "icons" ]
     },
     { // auto-merge upstream app-level images
       "matchPackagePatterns": ["digest","patch"],
@@ -27,7 +27,7 @@
       "platformAutomerge": true,
       "ignoreTests": true,
       "baseBranches": ["main"],
-      "packagePatterns": [ "byparr", "stremio-easynews-addon", "comet", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "prowlarr-nightly", "jackettio", "jackett", "mediafusion", "stremthru","tmdb-addon","postiz", "rating-aggregator", "app-template" ]
+      "packagePatterns": [ "byparr", "stremio-easynews-addon", "comet", "aiostreams", "dev-aiostreams", "aiolists", "zilean", "prowlarr-nightly", "jackettio", "jackett", "mediafusion", "stremthru","tmdb-addon","postiz", "rating-aggregator", "app-template", "icons" ]
     } 
   ]
 }
