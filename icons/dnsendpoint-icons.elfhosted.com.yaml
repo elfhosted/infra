@@ -2,11 +2,14 @@ apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
   name: "icons.${dns_domain}"
-  namespace: homer
+  namespace: icons
 spec:
   endpoints:
   - dnsName: "icons.${dns_domain}"
     recordTTL: 180
     recordType: CNAME
     targets:
-    - "nginx-ingress.infra.${dns_domain}"
+    - "traefik-ingress.${dns_domain}"
+    providerSpecific:
+      - name: external-dns.alpha.kubernetes.io/cloudflare-proxied
+        value: 'true'
