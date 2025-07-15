@@ -4,7 +4,7 @@ metadata:
   name: tmdb-env
   namespace: tmdb
 data:
-  HOST_NAME: tmdb.${dns_domain}
+  HOST_NAME: https://tmdb.${dns_domain}
   MONGODB_URI: mongodb://mongodb:27017/tmdb?retryWrites=true
   MONGODB_METRICS: mongodb://mongodb:27017/tmdb?retryWrites=true
   META_TTL: "604800"  # 1 week
