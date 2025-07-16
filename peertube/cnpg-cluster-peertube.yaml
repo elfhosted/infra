@@ -18,6 +18,15 @@ spec:
     storageClass: topolvm-provisioner-thin
     size: 20Gi
 
+  # This is a lightweight but important database, run it on control-plane nodes
+  affinity:
+    podAntiAffinityType: required
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: "Exists"
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: "true"
+      
   resources:
     requests:
       cpu: "50m"

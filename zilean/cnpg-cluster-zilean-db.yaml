@@ -28,6 +28,7 @@ spec:
   monitoring:
     enablePodMonitor: true
                 
+  # This is a lightweight but important database, run it on control-plane nodes
   affinity:
     podAntiAffinityType: required
     tolerations:
