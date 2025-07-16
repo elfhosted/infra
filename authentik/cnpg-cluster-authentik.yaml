@@ -17,6 +17,14 @@ spec:
     storageClass: topolvm-provisioner-thin
     size: 10Gi
 
+  resources:
+    requests:
+      cpu: "50m"
+      memory: 128Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
   monitoring:
     enablePodMonitor: true
                 

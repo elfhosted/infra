@@ -13,6 +13,15 @@ spec:
   #               the switchover of the primary
   primaryUpdateStrategy: unsupervised
 
+  # This is a lightweight but important database, run it on control-plane nodes
+  podAntiAffinityType: required
+  affinity:
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: "Exists"
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: "true"
+    
   # Persistent storage configuration
   storage:
     storageClass: topolvm-provisioner-thin
@@ -20,11 +29,11 @@ spec:
 
   resources:
     requests:
-      cpu: "1"
-      memory: 4Gi
+      cpu: "50m"
+      memory: 128Mi
     limits:
-      cpu: "4"
-      memory: 10Gi
+      cpu: "1"
+      memory: 1Gi
 
   monitoring:
     enablePodMonitor: true
