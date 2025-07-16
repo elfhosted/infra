@@ -14,8 +14,8 @@ spec:
   primaryUpdateStrategy: unsupervised
 
   # This is a lightweight but important database, run it on control-plane nodes
-  podAntiAffinityType: required
   affinity:
+    podAntiAffinityType: required
     tolerations:
     - key: node-role.kubernetes.io/control-plane
       operator: "Exists"
