@@ -20,7 +20,7 @@ spec:
       nameOverride: icons
     image:
       repository: ghcr.io/elfhosted/icons
-      tag: rolling@sha256:2ec168fef07cc369ed34fb5a8db4466626f39de090f3f94c4b9b1241009ae1a0
+      tag: rolling@sha256:d64683124bbb12253e0af4fedcbc66516190f8fa836eae197a41b47f71aab031
     securityContext:
       seccompProfile:
         type: RuntimeDefault
