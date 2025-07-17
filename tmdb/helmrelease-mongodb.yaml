@@ -150,7 +150,7 @@ spec:
     image:
       registry: docker.io
       repository: bitnami/mongodb
-      tag: 8.0.6-debian-12-r1
+      tag: 8.0.11-debian-12-r1
       digest: ""
       ## Specify a imagePullPolicy
       ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -868,7 +868,7 @@ spec:
         image:
           registry: docker.io
           repository: bitnami/kubectl
-          tag: 1.32.3-debian-12-r2
+          tag: 1.33.2-debian-12-r2
           digest: ""
           ## Specify a imagePullPolicy
           ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2443,7 +2443,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/mongodb-exporter
-        tag: 0.44.0-debian-12-r1
+        tag: 0.45.0-debian-12-r1
         digest: ""
         pullPolicy: IfNotPresent
         ## Optionally specify an array of imagePullSecrets.
