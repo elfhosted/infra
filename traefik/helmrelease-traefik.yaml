@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 35.x.x
+      version: 36.x.x
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -29,7 +29,8 @@ spec:
       registry: docker.io
       # -- Traefik image repository
       repository: traefik
-      # -- defaults to appVersion
+      # -- defaults to appVersion. It's used for version checking, even prefixed with experimental- or latest-.
+      # When a digest is required, `versionOverride` can be used to set the version.
       tag:  # @schema type:[string, null]
       # -- Traefik image pull policy
       pullPolicy: IfNotPresent
@@ -136,7 +137,7 @@ spec:
       name: ""
 
     core:  # @schema additionalProperties: false
-      # -- Can be used to use globally v2 router syntax
+      # -- Can be used to use globally v2 router syntax. Deprecated since v3.4 /!\.
       # See https://doc.traefik.io/traefik/v3.0/migration/v2-to-v3/#new-v3-syntax-notable-changes
       defaultRuleSyntax: ""
 
@@ -156,7 +157,7 @@ spec:
       plugins:
         traefikoidc:
           moduleName: github.com/lukaszraczylo/traefikoidc
-          version: v0.5.51-beta.6  # Supports per-user filtering
+          version: v0.6.1 
         rco:
           moduleName: github.com/Lepkem/traefik-plugin-response-code-override
           version: v0.0.3
@@ -221,6 +222,7 @@ spec:
       # -- Additional gatewayClass labels (e.g. for filtering gateway objects by custom labels)
       labels: {}
 
+    # -- Only dashboard & healthcheck IngressRoute are supported. It's recommended to create workloads CR outside of this Chart.
     ingressRoute:
       dashboard:
         # -- Create an IngressRoute for the dashboard
@@ -310,7 +312,7 @@ spec:
         # -- When the parameter is set, only resources containing an annotation with the same value are processed. Otherwise, resources missing the annotation, having an empty value, or the value traefik are processed. It will also set required annotation on Dashboard and Healthcheck IngressRoute when enabled.
         ingressClass: ""
         # labelSelector: environment=production,method=traefik
-        # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
+        # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
         namespaces: []
         # -- Defines whether to use Native Kubernetes load-balancing mode by default.
         nativeLBByDefault: false
@@ -324,7 +326,7 @@ spec:
         allowEmptyServices: false
         # ingressClass: traefik-internal
         # labelSelector: environment=production,method=traefik
-        # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
+        # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
         namespaces: []
         # IP used for Kubernetes Ingress endpoints
         publishedService:
@@ -342,7 +344,7 @@ spec:
         # -- Toggles support for the Experimental Channel resources (Gateway API release channels documentation).
         # This option currently enables support for TCPRoute and TLSRoute.
         experimentalChannel: false
-        # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces.
+        # -- Array of namespaces to watch. If left empty, Traefik watches all namespaces. . When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
         namespaces: []
         # -- A label selector can be defined to filter on specific GatewayClass objects only.
         labelselector: ""
@@ -539,6 +541,8 @@ spec:
         explicitBoundaries: []
         # -- Interval at which metrics are sent to the OpenTelemetry Collector. Default: 10s
         pushInterval: ""
+        # -- Service name used in OTLP backend. Default: traefik.
+        serviceName:  # @schema type:[string, null]
         http:
           # -- Set to true in order to send metrics to the OpenTelemetry Collector using HTTP.
           enabled: false
@@ -629,17 +633,33 @@ spec:
             # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
             insecureSkipVerify: false
 
-    # -- Global command arguments to be passed to all traefik's pods
-    globalArguments:
-    - "--global.checknewversion"
-    - "--global.sendanonymoususage"
-    - "--api.insecure=true" # for the dashboard to be exposed via nginx ingress
-    - "--providers.kubernetescrd.throttleduration=60s" # does this mean 60s refresh on ingresses? (if so, fantastic!)
+    global:
+      checkNewVersion: false
+      # -- Please take time to consider whether or not you wish to share anonymous data with us
+      # See https://doc.traefik.io/traefik/contributing/data-collection/
+      sendAnonymousUsage: false
+      # -- Required for Azure Marketplace integration.
+      # See https://learn.microsoft.com/en-us/partner-center/marketplace-offers/azure-container-technical-assets-kubernetes?tabs=linux,linux2#update-the-helm-chart
+      azure:
+        # -- Enable specific values for Azure Marketplace
+        enabled: false
+        images:
+          proxy:
+            image: traefik
+            tag: latest
+            registry: docker.io/library
+          hub:
+            image: traefik-hub
+            tag: latest
+            registry: ghcr.io/traefik
 
     # -- Additional arguments to be passed at Traefik's binary
     # See [CLI Reference](https://docs.traefik.io/reference/static-configuration/cli/)
     # Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress.ingressclass=traefik-internal,--log.level=DEBUG}"`
-    additionalArguments: []
+    additionalArguments:
+    - "--api.insecure=true" # for the dashboard to be exposed via nginx ingress
+    - "--providers.kubernetescrd.throttleduration=60s" # does this mean 60s refresh on ingresses? (if so, fantastic!)
+
     #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
     #  - "--log.level=DEBUG"
 
@@ -787,7 +807,7 @@ spec:
         # -- See [upstream documentation](https://doc.traefik.io/traefik/routing/entrypoints/#transport)
         transport:
           respondingTimeouts:
-            readTimeout: 180s # necessary for longer uploads with storyteller  # @schema type:[string, integer, null]
+            readTimeout:   # @schema type:[string, integer, null]
             writeTimeout:  # @schema type:[string, integer, null]
             idleTimeout:   # @schema type:[string, integer, null]
           lifeCycle:
@@ -878,10 +898,23 @@ spec:
       #   # externalIPs: []
       #   # ipFamilies: [ "IPv4","IPv6" ]
 
-    autoscaling:
+    autoscaling:  # @schema additionalProperties: false
       # -- Create HorizontalPodAutoscaler object.
       # See EXAMPLES.md for more details.
       enabled: false
+      # -- minReplicas is the lower limit for the number of replicas to which the autoscaler can scale down. It defaults to 1 pod.
+      minReplicas:  # @schema type:[integer, null]; minimum:0
+      # -- maxReplicas is the upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than MinReplicas.
+      maxReplicas:  # @schema type:[integer, null]; minimum:0
+      # -- metrics contains the specifications for which to use to calculate the desired replica count (the maximum replica count across all metrics will be used).
+      metrics: []
+      # -- behavior configures the scaling behavior of the target in both Up and Down directions (scaleUp and scaleDown fields respectively).
+      behavior: {}
+      # -- scaleTargetRef points to the target resource to scale, and is used to the pods for which metrics should be collected, as well as to actually change the replica count.
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: "{{ template \"traefik.fullname\" . }}"
 
     persistence:
       # -- Enable persistence using Persistent Volume Claims
@@ -952,6 +985,13 @@ spec:
     # -- on nodes where no other traefik pods are scheduled.
     # It should be used when hostNetwork: true to prevent port conflicts
     affinity: {}
+    #  podAntiAffinity:
+    #    requiredDuringSchedulingIgnoredDuringExecution:
+    #      - labelSelector:
+    #          matchLabels:
+    #            app.kubernetes.io/name: '{{ template "traefik.name" . }}'
+    #            app.kubernetes.io/instance: '{{ .Release.Name }}-{{ include "traefik.namespace" . }}'
+    #        topologyKey: kubernetes.io/hostname
 
     # -- nodeSelector is the simplest recommended form of node selection constraint.
     nodeSelector: {}
@@ -1000,29 +1040,42 @@ spec:
     # It will not affect optional CRDs such as `ServiceMonitor` and `PrometheusRules`
     namespaceOverride: ""
 
-    ## -- This field override the default app.kubernetes.io/instance label for all Objects.
+    # -- This field override the default app.kubernetes.io/instance label for all Objects.
     instanceLabelOverride: ""
+
+    # -- This field override the default version extracted from image.tag
+    versionOverride: ""
 
     # Traefik Hub configuration. See https://doc.traefik.io/traefik-hub/
     hub:
       # -- Name of `Secret` with key 'token' set to a valid license token.
       # It enables API Gateway.
       token: ""
+      # -- Disables all external network connections.
+      offline: false
+      # -- By default, Traefik Hub provider watches all namespaces. When using `rbac.namespaced`, it will watch helm release namespace and namespaces listed in this array.
+      namespaces: []  # @schema required:true
       apimanagement:
         # -- Set to true in order to enable API Management. Requires a valid license token.
         enabled: false
         admission:
           # -- WebHook admission server listen address. Default: "0.0.0.0:9943".
           listenAddr: ""
-          # -- Certificate of the WebHook admission server. Default: "hub-agent-cert".
-          secretName: ""
+          # -- Certificate name of the WebHook admission server. Default: "hub-agent-cert".
+          secretName: "hub-agent-cert"
+          # -- Set custom certificate for the WebHook admission server. The certificate should be specified with _tls.crt_ and _tls.key_ in base64 encoding.
+          customWebhookCertificate: {}
+          # -- Set it to false if you need to disable Traefik Hub pod restart when mutating webhook certificate is updated. It's done with a label update.
+          restartOnCertificateChange: true
         openApi:
           # -- When set to true, it will only accept paths and methods that are explicitly defined in its OpenAPI specification
           validateRequestMethodAndPath: false
 
-      experimental:
+      aigateway:
         # -- Set to true in order to enable AI Gateway. Requires a valid license token.
-        aigateway: false
+        enabled: false
+        # -- Hard limit for the size of request bodies inspected by the gateway. Accepts a plain integer representing **bytes**. The default value is `1048576` (1 MiB).
+        maxRequestBodySize:  # @schema type:[integer, null]; minimum:0
       providers:
         consulCatalogEnterprise:
           # -- Enable Consul Catalog Enterprise backend with default settings.
