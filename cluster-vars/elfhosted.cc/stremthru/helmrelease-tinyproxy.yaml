@@ -20,7 +20,7 @@ spec:
       nameOverride: tinyproxy
     image:
       repository: ghcr.io/elfhosted/tinyproxy
-      tag: v1.4.3@sha256:9370be1434e80f8ac7d3a24d9c19335742b2c74ba15129dcdc166bb0dd3c9098
+      tag: v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
     podLabels:
         app.elfhosted.com/name: tinyproxy
     priorityClassName: tenant-normal
@@ -116,7 +116,7 @@ spec:
         gluetun:
           image:
             repository: ghcr.io/elfhosted/gluetun
-            tag: 3.40.0@sha256:ac01473025f4ed729e49f26282702267785949518fcccb3ba1a523fe201def0d
+            tag: 3.40.0@sha256:59b0cc8a9412b9a4645d1f12dff0daba80b8be88acd1b5d1a0fb6dfa625eb9a5
         env:
           FIREWALL_OUTBOUND_SUBNETS: 10.0.0.0/8
           DNS_KEEP_NAMESERVER: "on"
