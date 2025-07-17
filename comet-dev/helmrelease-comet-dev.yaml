@@ -93,7 +93,7 @@ spec:
             name: jackett-config
     additionalContainers:
       jackett:
-        image: ghcr.io/elfhosted/jackett:0.22.2161
+        image: ghcr.io/elfhosted/jackett:0.22.2162
         volumeMounts:
         - name: jackett-config
           mountPath: /config/
