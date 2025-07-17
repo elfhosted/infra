@@ -20,7 +20,7 @@ spec:
       nameOverride: debridmediamanager
     image:
       repository: ghcr.io/geek-cookbook/debrid-media-manager
-      tag: 4.0.1@sha256:f02d2e02b527b159fedb878017f00730eebb883a9784d0d9df775566502e9d47
+      tag: 4.0.1@sha256:af0de6a7c2648cb916fd9809343e3e5ec8c2784caa07a242129106915d50062c
     securityContext:
       seccompProfile:
         type: RuntimeDefault
