@@ -12960,7 +12960,7 @@ spec:
       containers:
       - args:
         - --watch-all-namespaces=true
-        - --log-level=info
+        - --log-level=debug
         - --log-encoding=json
         - --enable-leader-election
         env:
@@ -12980,10 +12980,10 @@ spec:
               resource: limits.memory
         image: ghcr.io/fluxcd/notification-controller:v1.6.0
         imagePullPolicy: IfNotPresent
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: healthz
+        # livenessProbe:
+        #   httpGet:
+        #     path: /healthz
+        #     port: healthz
         name: manager
         ports:
         - containerPort: 9090
@@ -13004,8 +13004,8 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 10
+            memory: 10Gi
           requests:
             cpu: 100m
             memory: 64Mi
