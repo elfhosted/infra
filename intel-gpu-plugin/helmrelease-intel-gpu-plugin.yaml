@@ -27,7 +27,7 @@ spec:
       # -- image repository
       repository: intel/intel-gpu-plugin
       # -- image tag
-      tag: 0.32.0
+      tag: 0.32.1
       # -- image pull policy
       pullPolicy: IfNotPresent
 
