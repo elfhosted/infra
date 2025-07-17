@@ -40,6 +40,7 @@ gretel02     ansible_host=10.0.42.122 cluster_nic=eno1.4000
 gretel03     ansible_host=10.0.42.123 cluster_nic=eno1.4000 
 gretel04     ansible_host=10.0.42.124 cluster_nic=eno1.4000 
 gretel05     ansible_host=10.0.42.125 cluster_nic=eno1.4000 
+gretel06     ansible_host=10.0.42.126 cluster_nic=eno1.4000 
 gretel23     ansible_host=10.0.42.153 cluster_nic=eno1.4000 
 gretel33     ansible_host=10.0.42.153 cluster_nic=eno1.4000 
 gretel34     ansible_host=10.0.42.154 cluster_nic=eno1.4000 

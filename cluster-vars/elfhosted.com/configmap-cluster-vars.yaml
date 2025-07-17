@@ -41,11 +41,11 @@ data:
   hobbit_zurg_cpu_requests: 1800m
   ranger_zurg_cpu_requests: 3600m
   halfling_zurg_cpu_requests: 7200m
-  nazgul_zurg_cpu_requests: 10800m
+  nazgul_zurg_cpu_requests: 14400m
   hobbit_cpu_requests: 1800m
   ranger_cpu_requests: 3600m
   halfling_cpu_requests: 7200m
-  nazgul_cpu_requests: 10800m  
+  nazgul_cpu_requests: 14500m  
 
   # these provide sane limits for the streamers
   hobbit_streamer_cpu_limits: "2"

@@ -298,19 +298,7 @@
         - "{{ _profile_propertymapping.json.results[0].pk }}"
         - "{{ _offline_access_propertymapping.json.results[0].pk }}"
         - "{{ _openid_propertymapping.json.results[0].pk }}"
-        - "{{ gitea_propertymapping_pk }}"   
-      - name: postiz
-        secret: "{{ authentik_postiz_client_secret }}"
-        redirect_uris:
-          - matching_mode: strict
-            url: https://postiz.{{ dns_domain }}/settings
-        icon: https://infra.{{ dns_domain }}/assets/png/postiz.png  
-        property_mappings:
-        - "{{ _email_propertymapping.json.results[0].pk }}"
-        - "{{ _profile_propertymapping.json.results[0].pk }}"
-        - "{{ _offline_access_propertymapping.json.results[0].pk }}"
-        - "{{ _openid_propertymapping.json.results[0].pk }}"
-        - "{{ gitea_propertymapping_pk }}"             
+        - "{{ gitea_propertymapping_pk }}"               
     loop_control:
       loop_var: provider
 

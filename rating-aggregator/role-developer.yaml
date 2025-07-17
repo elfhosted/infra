@@ -1,0 +1,49 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: developer
+  namespace: rating-aggregator
+rules:
+- apiGroups:
+  - "*"
+  resources:
+  - configmaps
+  - cronjobs
+  - daemonsets
+  - deployments
+  - events
+  - ingresses
+  - jobs
+  - persistentvolumeclaims
+  - persistentvolumes
+  - pods
+  - pods/log
+  - replicasets
+  - replicationcontrollers
+  - secrets
+  - services
+  - statefulsets
+  verbs:
+  - describe
+  - get
+  - list
+  - watch
+# let developer effect their own reboots by deleting pods
+- apiGroups:
+  - "*"
+  resources:
+  - pods
+  verbs:
+  - delete
+# and update configmaps / secrets for env vars
+- apiGroups:
+  - "*"
+  resources:
+  - configmaps
+  - secrets  
+  resourceNames:
+  - rating-aggregator-env-dev-overrides
+  verbs:
+  - update
+  - create
+  - delete

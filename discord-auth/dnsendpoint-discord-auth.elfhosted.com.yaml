@@ -1,11 +1,11 @@
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: "help.${dns_domain}"
-  namespace: docassemble
+  name: "discord-auth.${dns_domain}"
+  namespace: discord-auth
 spec:
   endpoints:
-  - dnsName: "help.${dns_domain}"
+  - dnsName: "discord-auth.${dns_domain}"
     recordTTL: 180
     recordType: CNAME
     targets:

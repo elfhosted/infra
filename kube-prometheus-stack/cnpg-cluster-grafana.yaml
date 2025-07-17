@@ -19,17 +19,23 @@ spec:
 
   resources:
     requests:
-      cpu: "1m"
-      memory: 1Gi
+      cpu: "50m"
+      memory: 128Mi
     limits:
-      cpu: "2"
-      memory: 8Gi
+      cpu: "1"
+      memory: 1Gi
       
   monitoring:
     enablePodMonitor: true
                 
+  # This is a lightweight but important database, run it on control-plane nodes
   affinity:
     podAntiAffinityType: required
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: "Exists"
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: "true"
 
   superuserSecret:
       name: cnpg-postgres-credentials

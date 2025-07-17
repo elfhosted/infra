@@ -1,0 +1,20 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: rd-redis
+  namespace: rating-aggregator
+spec:
+  trigger:
+    manual: runonce
+  restic:
+    repository: redis-restic-config
+    copyMethod: Snapshot
+    cacheCapacity: 20Gi
+    capacity: 20Gi
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes:
+    - ReadWriteOnce
+    storageClassName: topolvm-provisioner-thin
+    cacheAccessModes:
+    - ReadWriteOnce
+    volumeSnapshotClassName: topolvm-provisioner-thin

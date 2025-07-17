@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: backup-discord-auth
+  namespace: discord-auth
+spec:
+  schedule: "0 0 0 * * *" # daily
+  backupOwnerReference: self
+  cluster:
+    name: discord-auth

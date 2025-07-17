@@ -1,10 +1,12 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: mediafusion
-  namespace: mediafusion
+  name: discord-auth
+  namespace: discord-auth
 spec:
   instances: 3
+
+  postgresql:
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
@@ -16,15 +18,24 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 20Gi
+    size: 5Gi
 
+  # This is a lightweight but important database, run it on control-plane nodes
+  affinity:
+    podAntiAffinityType: required
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: "Exists"
+    nodeSelector:
+      node-role.kubernetes.io/control-plane: "true"
+      
   resources:
     requests:
-      cpu: "200m"
-      memory: 1Gi
+      cpu: "50m"
+      memory: 128Mi
     limits:
       cpu: "1"
-      memory: 10Gi
+      memory: 1Gi
 
   monitoring:
     enablePodMonitor: true
@@ -34,8 +45,8 @@ spec:
 
   bootstrap:
     initdb:
-      database: mediafusion
-      owner: mediafusion
+      database: discord-auth
+      owner: discord-auth
       secret:
         name: app-secret
 
@@ -57,4 +68,4 @@ spec:
         wal:
           compression: gzip
           maxParallel: 2      
-      retentionPolicy: "7d"          
+      retentionPolicy: "7d"
