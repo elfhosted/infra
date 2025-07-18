@@ -16,6 +16,8 @@ spec:
   timeout: 5m
   releaseName: demo-booklore
   values:
+    global:
+      nameOverride: demo-booklore  
     image:
       repository: ghcr.io/elfhosted/booklore
       tag: v0.33.0@sha256:b564ebd2755fcdf51c0077a16c84c7725d57744108b29dae979993e192cc8f19
