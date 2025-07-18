@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: booklore
+  name: demo-booklore
   namespace: demo-booklore
   annotations:
     helm.sh/resource-policy: keep
@@ -9,7 +9,7 @@ spec:
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: rd-booklore
+    name: rd-demo-booklore
   accessModes:
   - ReadWriteOnce
   resources:

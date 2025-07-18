@@ -1,11 +1,11 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: rs-booklore
+  name: rs-demo-booklore
   namespace: demo-booklore
 spec:
   # The PVC to be backed up
-  sourcePVC: booklore
+  sourcePVC: demo-booklore
   trigger:
     # Take a backup every 30 minutes
     schedule: "0 9 * * *"
@@ -13,7 +13,7 @@ spec:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 7
     # Name of the Secret with the connection information
-    repository: booklore-restic-config
+    repository: demo-booklore-restic-config
     # Retention policy for backups
     moverAffinity:
       podAffinity:

@@ -1,8 +1,8 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: rd-booklore
-  namespace: booklore
+  name: rd-demo-booklore
+  namespace: demo-booklore
 spec:
   trigger:
     manual: runonce

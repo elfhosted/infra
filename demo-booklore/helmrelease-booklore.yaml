@@ -60,10 +60,10 @@ spec:
         enabled: true
         type: custom
         mountPath: /app/data
-        subPath: booklore
+        subPath: app
         volumeSpec:
           persistentVolumeClaim:
-            claimName: booklore
+            claimName: demo-booklore
     command: 
     - java 
     - -jar 
