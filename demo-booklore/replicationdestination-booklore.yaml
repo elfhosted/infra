@@ -7,7 +7,7 @@ spec:
   trigger:
     manual: runonce
   restic:
-    repository: booklore-restic-config
+    repository: demo-booklore-restic-config
     copyMethod: Snapshot
     cacheCapacity: 1Gi
     capacity: 1Gi
