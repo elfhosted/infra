@@ -1,0 +1,36 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: rs-booklore
+  namespace: demo-booklore
+spec:
+  # The PVC to be backed up
+  sourcePVC: booklore
+  trigger:
+    # Take a backup every 30 minutes
+    schedule: "0 9 * * *"
+  restic:
+    # Prune the repository (repack to free space) every 2 weeks
+    pruneIntervalDays: 7
+    # Name of the Secret with the connection information
+    repository: booklore-restic-config
+    # Retention policy for backups
+    moverAffinity:
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution: 
+        - labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - demo-booklore
+          topologyKey: "kubernetes.io/hostname"        
+    retain:
+      daily: 7
+    copyMethod: Snapshot
+    storageClassName: topolvm-provisioner-thin
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes: 
+    - ReadWriteOnce
+    cacheCapacity: 1Gi
+    volumeSnapshotClassName: topolvm-provisioner-thin

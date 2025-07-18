@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: demo-booklore.${dns_domain}
+  namespace: demo-booklore
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`demo-booklore.${dns_domain}`)
+      kind: Rule
+      services:
+        - name: demo-booklore
+          kind: Service
+          port: 6060
+      # middlewares:  
+      #   - name: error-pages
+      #     namespace: traefik
+      #   - name: headers-add-cors-for-stremio
+      #     namespace: traefik

@@ -1,0 +1,122 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: demo-booklore
+  namespace: demo-booklore
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: demo-booklore
+  values:
+    image:
+      repository: ghcr.io/elfhosted/booklore
+      tag: v0.33.0@sha256:b564ebd2755fcdf51c0077a16c84c7725d57744108b29dae979993e192cc8f19
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: false # because we need the permission-fixer to run as root
+      capabilities:
+        drop:
+        - ALL        
+    automountServiceAccountToken: false
+    env:
+      DATABASE_URL: jdbc:mariadb://localhost:3306/booklore
+      DATABASE_USERNAME: booklore 
+      DATABASE_PASSWORD: booklore
+    resources:
+      requests:
+        cpu: 0m
+        memory: 20Mi
+      limits:
+        cpu: 1
+        memory: 1Gi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 6060    
+    persistence:
+      config:
+        enabled: true
+        type: custom
+        mountPath: /app/data
+        subPath: booklore
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: booklore
+    command: 
+    - java 
+    - -jar 
+    - /app/app.jar     
+    initContainers:
+      setup-mariadb:
+        image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          mkdir -p /config/database
+          chown elfie:elfie /config/database -R
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: app
+        securityContext:
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault            
+    additionalContainers:
+      frontend:
+        image: ghcr.io/elfhosted/booklore:v0.33.0@sha256:b564ebd2755fcdf51c0077a16c84c7725d57744108b29dae979993e192cc8f19
+        command: 
+        - /usr/sbin/nginx 
+        - -g 
+        - "daemon off;"
+        securityContext:
+          readOnlyRootFilesystem: false
+          runAsUser: 0 # nginx insists on running as root
+      database:
+        image: mariadb:11 
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: booklore
+          - name: MYSQL_DATABASE
+            value: booklore
+          - name: MYSQL_USER
+            value: booklore
+          - name: MYSQL_PASSWORD
+            value: booklore
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: config
+          subPath: database
+        resources:
+          requests:
+            cpu: 0m
+            memory: 1Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
