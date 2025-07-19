@@ -58,6 +58,10 @@ spec:
           http:
             port: 6060    
     persistence:
+      tmp: 
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp        
       config:
         enabled: true
         type: custom
