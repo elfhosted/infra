@@ -20,7 +20,7 @@ spec:
       nameOverride: postiz
     image:
       repository: ghcr.io/elfhosted/postiz
-      tag: v1.65.5@sha256:a0ce92deddacf5e051f772825217300a7a6c67ebe54fb6b04d1cb7a784cdf36c
+      tag: v1.65.6@sha256:c70d18fbad0049864bbef4bdf3a23425c23ddb82bfabf58a43eb2ebc9a79b7f7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
