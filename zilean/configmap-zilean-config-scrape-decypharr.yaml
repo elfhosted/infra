@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zilean-config-scrape-decypharr
+  namespace: zilean
+data:
+  settings.json: |
+    {
+      "Zilean": {
+        "FirstRun": false,
+        "ApiKey": "overridden-in-env",
+        "Dmm": {
+          "EnableScraping": false,
+          "EnableEndpoint": false,
+          "ScrapeSchedule": "0 * * * *",
+          "MinimumReDownloadIntervalMinutes": 30,
+          "MaxFilteredResults": 200,
+          "MinimumScoreMatch": 0.9,
+          "ImportBatched": false
+        },
+        "Database": {
+          "ConnectionString": "overridden-in-env"
+        },        
+        "Torznab": {
+          "EnableEndpoint": true
+        },
+        "Torrents": {
+          "EnableEndpoint": false,
+          "EnableScrapeEndpoint": false,
+          "EnableCacheCheckEndpoint": false
+        },
+        "Imdb": {
+          "EnableImportMatching": true,
+          "EnableEndpoint": true,
+          "MinimumScoreMatch": 0.85,
+          "UseLucene": true
+        },
+        "Ingestion": {
+          "ZurgInstances": [],
+          "ZileanInstances": [],
+          "GenericInstances": [],
+          "EnableScraping": true,
+          "Kubernetes": {
+            "EnableServiceDiscovery": true,
+            "KubernetesSelectors": [
+              {
+                "UrlTemplate": "http://decypharr.{0}:8282",
+                "LabelSelector": "zilean.elfhosted.com/scrape=decypharr",
+                "EndpointType": 1
+              }              
+            ],
+            "KubeConfigFile": "/$HOME/.kube/config",
+            "AuthenticationType": 1
+          },
+          "BatchSize": 500,
+          "MaxChannelSize": 5000,
+          "ScrapeSchedule": "20 * * * *",
+          "ZurgEndpointSuffix": "/debug/ingests",
+          "ZileanEndpointSuffix": "/torrents/all"
+        }
+      }
+    }
