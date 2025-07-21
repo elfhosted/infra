@@ -22,8 +22,8 @@ spec:
       create: false # already created by cnpg
       name: zilean
     image:
-      repository: ghcr.io/elfhosted/zilean
-      tag: v3.5.0@sha256:eee4465f910014acd0198d33119bed319f70191c86b46339a35ee1803ab14403
+      repository: ghcr.io/elfhosted/zilean-dev
+      tag: rolling@sha256:baad5ff726ab0af131dde1820ff261539e716f2b3ac498f5465affc800dffb85
     securityContext:
       seccompProfile:
         type: RuntimeDefault
