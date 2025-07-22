@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: deprecations
+  releaseName: nginx
   values:
     global:
-      nameOverride: deprecations
+      nameOverride: nginx
     image:
       registry: docker.io
       repository: nginxinc/nginx-unprivileged
