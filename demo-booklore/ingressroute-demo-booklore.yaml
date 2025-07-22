@@ -13,8 +13,13 @@ spec:
         - name: demo-booklore
           kind: Service
           port: 6060
-      # middlewares:  
-      #   - name: error-pages
-      #     namespace: traefik
-      #   - name: headers-add-cors-origin-any
-      #     namespace: traefik
+      middlewares:  
+        - name: demo-accept
+    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/oauth2/start`)
+      kind: Rule
+      services:
+        - name: nginx
+          kind: Service
+          port: 8080
+      middlewares:
+        - name: stripprefix-oauth-start

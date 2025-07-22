@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: demo-accept
+  namespace: demo-booklore
+spec:
+  forwardAuth:
+    address: http://nginx/auth
+    trustForwardHeader: true
+    authResponseHeaders:
+      - "X-User"
