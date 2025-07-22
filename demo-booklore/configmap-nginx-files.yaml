@@ -1,0 +1,131 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-files
+  namespace: demo-booklore
+data:
+  annatar-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Annatar",
+                "title": "Annatar is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Annatar is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/annatar-is-deprecated.mp4"
+            }
+        ]
+    }
+  shluflix-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Shluflix",
+                "title": "Shluflix is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Shuflix is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/shluflix-is-deprecated.mp4"
+            }
+        ]
+    }
+  stremio-jackett-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] Stremio-Jackett",
+                "title": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "Stremio-Jackett is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/annatar-is-deprecated.mp4"
+            }
+        ]
+    }   
+
+  knightcrawler-is-deprecated.json: |
+    {
+        "streams": [
+            {
+                "name": "[😿] KnightCrawler",
+                "title": "KnightCrawler is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nSee https://fnky.nz/sag",
+                "torrentTitle": "KnightCrawler is deprecated 😿\nUse MediaFusion🎞️ or Comet💫\nMore addons at https://fnky.nz/sag",
+                "url": "https://elfhosted.com/assets/knightcrawler-is-deprecated.mp4"
+            }
+        ]
+    }   
+
+  mediafusion-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] MediaFusion",
+                "title": "MediaFusion public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }  
+  mediafusion-catalog-rate-limited.json: |
+    {
+    "metas": [
+        {
+        "id": "rate-limit-exceeded",
+        "name": "MediaFusion public rate-limit exceeded 🐢",
+        "type": "movie",
+        "poster": "https://docs.elfhosted.com/images/public-rate-limit-exceeded-movie-poster.png",
+        "description": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio"
+        }
+     ]
+    }  
+
+  comet-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] Comet",
+                "title": "Comet public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    } 
+  aiostreams-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] AIO",
+                "title": "AIO Streams public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }    
+  stremio-jackett-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] Stremio-Jackett",
+                "title": "Stremio-Jackett public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }  
+  stremthru-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] Stremthru",
+                "title": "Stremthru public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }             
+  jackettio-search-rate-limited.json: |
+    {
+        "streams": [
+            {
+                "name": "[🐢] Jackettio",
+                "title": "Jackettio public rate-limit exceeded 🐢",
+                "torrentTitle": "Public rate-limit exceeded 🐢\nSee https://fnky.nz/elf-stremio",
+                "url": "https://elfhosted.com/assets/public-rate-limit-exceeded.mp4"
+            }
+        ]
+    }                
