@@ -67,7 +67,7 @@ spec:
       oauth2-proxy:
         enabled: true # necessary for probes
         ports:
-          http:
+          oauth2-proxy:
             port: 4180                
     persistence:
       # we won't use this for the demo, but it seems to want it to exist
