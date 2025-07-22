@@ -131,3 +131,8 @@ spec:
           limits:
             cpu: 500m
             memory: 1Gi
+      oauth2-proxy:
+        image: quay.io/oauth2-proxy/oauth2-proxy:7.10.0
+        envFrom:
+        - configMapRef:
+            name: oauth2-proxy-env
