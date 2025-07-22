@@ -5,7 +5,7 @@ metadata:
   namespace: demo-booklore
 spec:
   forwardAuth:
-    address: http://nginx/auth
+    address: http://booklore:6060
     trustForwardHeader: true
     authResponseHeaders:
       - "X-User"

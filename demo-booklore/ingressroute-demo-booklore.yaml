@@ -15,6 +15,14 @@ spec:
           port: 6060
       middlewares:  
         - name: demo-accept
+    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/oauth2`)
+      kind: Rule
+      services:
+        - name: demo-booklore
+          kind: Service
+          port: 4180
+      middlewares:
+        - name: stripprefix-oauth-start
     - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/oauth2/start`)
       kind: Rule
       services:
