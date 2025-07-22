@@ -47,11 +47,6 @@ data:
                 "UrlTemplate": "http://zurg.{0}:9999",
                 "LabelSelector": "zilean.elfhosted.com/scrape=zurg",
                 "EndpointType": 1
-              },
-              {
-                "UrlTemplate": "http://decypharr.{0}:8282",
-                "LabelSelector": "zilean.elfhosted.com/scrape=decypharr",
-                "EndpointType": 1
               }              
             ],
             "KubeConfigFile": "/$HOME/.kube/config",
