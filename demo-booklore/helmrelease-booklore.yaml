@@ -25,6 +25,13 @@ spec:
       seccompProfile:
         type: RuntimeDefault
       readOnlyRootFilesystem: true
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1      
+      annotations:
+        configmap.reloader.stakater.com/reload: "oauth2-proxy-env"
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
