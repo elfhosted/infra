@@ -48,4 +48,6 @@ spec:
             key: ACCESS_SECRET_KEY
         wal:
           compression: gzip
-          maxParallel: 2      
+          maxParallel: 1
+          gzipCompressionLevel: 1
+        retentionPolicy: "7d"
