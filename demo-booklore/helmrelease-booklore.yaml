@@ -58,6 +58,11 @@ spec:
           http:
             port: 6060    
     persistence:
+      # we won't use this for the demo, but it seems to want it to exist
+      bookdrop: 
+        enabled: true
+        type: emptyDir
+        mountPath: /bookdrop        
       tmp: 
         enabled: true
         type: emptyDir
