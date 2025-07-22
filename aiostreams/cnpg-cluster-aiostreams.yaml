@@ -66,5 +66,4 @@ spec:
         wal:
           compression: gzip
           maxParallel: 1
-          gzipCompressionLevel: 1
           retentionPolicy: "7d"
