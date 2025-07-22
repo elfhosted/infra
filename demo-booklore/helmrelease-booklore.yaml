@@ -17,7 +17,7 @@ spec:
   releaseName: demo-booklore
   values:
     global:
-      nameOverride: demo-booklore  
+      nameOverride: demo-booklore
     image:
       repository: ghcr.io/elfhosted/booklore
       tag: v0.34.1@sha256:24a66641d5f1fc698a66cd78f8308fe24cb54f48d8ee6fd20b06831be26b4225
@@ -29,7 +29,7 @@ spec:
       replicas: 1
       strategy: RollingUpdate
       rollingUpdate:
-        unavailable: 1      
+        unavailable: 1
       annotations:
         configmap.reloader.stakater.com/reload: "oauth2-proxy-env"
     podSecurityContext:
@@ -42,11 +42,11 @@ spec:
       runAsNonRoot: false # because we need the permission-fixer to run as root
       capabilities:
         drop:
-        - ALL        
+        - ALL
     automountServiceAccountToken: false
     env:
       DATABASE_URL: jdbc:mariadb://localhost:3306/booklore
-      DATABASE_USERNAME: booklore 
+      DATABASE_USERNAME: booklore
       DATABASE_PASSWORD: booklore
     resources:
       requests:
@@ -63,22 +63,25 @@ spec:
         enabled: true # necessary for probes
         ports:
           http:
-            port: 6060    
+            port: 6060
       oauth2-proxy:
-        enabled: true # necessary for probes
+        enabled: true
         ports:
           oauth2-proxy:
-            port: 4180                
+            enabled: true
+            port: 4180
+            protocol: TCP
+            targetPort: 4180
     persistence:
       # we won't use this for the demo, but it seems to want it to exist
-      bookdrop: 
+      bookdrop:
         enabled: true
         type: emptyDir
-        mountPath: /bookdrop        
-      tmp: 
+        mountPath: /bookdrop
+      tmp:
         enabled: true
         type: emptyDir
-        mountPath: /tmp        
+        mountPath: /tmp
       config:
         enabled: true
         type: custom
@@ -87,10 +90,10 @@ spec:
         volumeSpec:
           persistentVolumeClaim:
             claimName: demo-booklore
-    command: 
-    - java 
-    - -jar 
-    - /app/app.jar     
+    command:
+    - java
+    - -jar
+    - /app/app.jar
     initContainers:
       setup-mariadb:
         image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
@@ -110,19 +113,19 @@ spec:
         securityContext:
           runAsUser: 0
           seccompProfile:
-            type: RuntimeDefault            
+            type: RuntimeDefault
     additionalContainers:
       frontend:
         image: ghcr.io/elfhosted/booklore:v0.34.1@sha256:24a66641d5f1fc698a66cd78f8308fe24cb54f48d8ee6fd20b06831be26b4225
-        command: 
-        - /usr/sbin/nginx 
-        - -g 
+        command:
+        - /usr/sbin/nginx
+        - -g
         - "daemon off;"
         securityContext:
           readOnlyRootFilesystem: false
           runAsUser: 0 # nginx insists on running as root
       database:
-        image: mariadb:11 
+        image: mariadb:11
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: booklore
