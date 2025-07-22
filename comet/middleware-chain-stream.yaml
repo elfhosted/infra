@@ -7,7 +7,7 @@ spec:
   chain:
     middlewares:
     # These are generic
-    - name: headers-add-cors-for-stremio
+    - name: headers-add-cors-origin-any
       namespace: traefik
     - name: headers-cache-for-5s
       namespace: traefik      

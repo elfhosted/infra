@@ -18,7 +18,7 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon
           namespace: traefik
-        - name: headers-add-cors-for-stremio
+        - name: headers-add-cors-origin-any
           namespace: traefik
         - name: redirectregex-stremio-jackett-is-deprecated
           namespace: traefik
@@ -32,7 +32,7 @@ spec:
       middlewares:  
         - name: chain-public-stremio-addon-cached
           namespace: traefik
-        - name: headers-add-cors-for-stremio
+        - name: headers-add-cors-origin-any
           namespace: traefik          
         - name: redirectregex-stremio-jackett-stream-is-deprecated
           namespace: traefik          

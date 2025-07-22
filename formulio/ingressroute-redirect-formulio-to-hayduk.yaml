@@ -10,7 +10,7 @@ spec:
   - kind: Rule
     match: Host(`formulio.elfhosted.com`)
     middlewares:
-    - name: headers-add-cors-for-stremio
+    - name: headers-add-cors-origin-any
       namespace: traefik    
     - name: redirect-stremio-addon-to-hayduk
       namespace: traefik

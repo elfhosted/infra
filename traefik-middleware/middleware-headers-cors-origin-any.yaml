@@ -1,7 +1,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: headers-add-cors-for-stremio
+  name: headers-add-cors-origin-any
   namespace: traefik
 spec:
   headers:

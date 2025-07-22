@@ -6,7 +6,7 @@ metadata:
 spec:
   chain:
     middlewares:
-    - name: headers-add-cors-for-stremio
+    - name: headers-add-cors-origin-any
       namespace: traefik
     - name: return-code-override-ratelimit
       namespace: traefik
