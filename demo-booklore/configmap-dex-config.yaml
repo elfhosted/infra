@@ -21,7 +21,7 @@ data:
         secret: demo-secret
 
     connectors:
-      - type: password
+      - type: static
         id: static
         name: Static Users
         config:
