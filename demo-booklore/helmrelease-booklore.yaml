@@ -30,8 +30,6 @@ spec:
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1
-      annotations:
-        configmap.reloader.stakater.com/reload: "oauth2-proxy-env"
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -64,14 +62,6 @@ spec:
         ports:
           http:
             port: 6060
-      oauth2-proxy:
-        enabled: true
-        ports:
-          oauth2-proxy:
-            enabled: true
-            port: 4180
-            protocol: TCP
-            targetPort: 4180
     persistence:
       # we won't use this for the demo, but it seems to want it to exist
       bookdrop:
@@ -89,15 +79,7 @@ spec:
         subPath: app
         volumeSpec:
           persistentVolumeClaim:
-            claimName: demo-booklore
-      dex-:
-        enabled: true
-        type: custom
-        mountPath: /app/data
-        subPath: app
-        volumeSpec:
-          configMap:
-            name: dex-config   
+            claimName: demo-booklore 
     command:
     - java
     - -jar
@@ -154,16 +136,3 @@ spec:
           limits:
             cpu: 500m
             memory: 1Gi
-      oauth2-proxy:
-        image: quay.io/oauth2-proxy/oauth2-proxy:v7.10.0
-        envFrom:
-        - configMapRef:
-            name: oauth2-proxy-env
-      dex:
-        image: ghcr.io/dexidp/dex:v2.43.1
-        args:
-        - serve
-        - /etc/dex/config.yaml
-        volumeMounts:
-        - mountPath: /etc/dex
-          name: dex-config

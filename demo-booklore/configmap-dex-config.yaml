@@ -5,7 +5,7 @@ metadata:
   namespace: demo-booklore
 data:
   config.yaml: |
-    issuer: http://localhost:5556/dex
+    issuer: http://dex:5556/dex
 
     storage:
       type: memory
@@ -16,7 +16,7 @@ data:
     staticClients:
       - id: demo-client
         redirectURIs:
-          - http://localhost:4180/oauth2/callback
+          - http://demo-booklore.${dns_domain}/oauth2/callback
         name: "Demo App"
         secret: demo-secret
 

@@ -18,7 +18,7 @@ spec:
     - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/oauth2`)
       kind: Rule
       services:
-        - name: demo-booklore-oauth2-proxy
+        - name: oauth2-proxy
           kind: Service
           port: 4180
       middlewares:
