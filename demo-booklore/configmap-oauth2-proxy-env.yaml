@@ -17,5 +17,5 @@ data:
   OAUTH2_PROXY_CLIENT_ID: dummy
   OAUTH2_PROXY_CLIENT_SECRET: dummy
   OAUTH2_PROXY_OIDC_ISSUER_URL: http://localhost
-  OAUTH2_PROXY_SKIP_OIDC_DISCOVERY: "true"
+  OAUTH2_PROXY_JWKSURL: http://localhost/jwks.json
 
