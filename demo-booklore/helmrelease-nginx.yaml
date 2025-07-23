@@ -38,7 +38,7 @@ spec:
         cpu: 1
         memory: 1Gi    
     controller:
-      replicas: 2  
+      replicas: 1 
       annotations:
         configmap.reloader.stakater.com/reload: "nginx-files"  
     ingress:

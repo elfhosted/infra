@@ -45,6 +45,7 @@ spec:
         - ALL
     automountServiceAccountToken: false
     command:
+    - dex
     - serve
     - /etc/dex/config.yaml    
     resources:
@@ -68,7 +69,6 @@ spec:
         enabled: true
         type: custom
         mountPath: /etc/dex
-        subPath: app
         volumeSpec:
           configMap:
             name: dex-config
