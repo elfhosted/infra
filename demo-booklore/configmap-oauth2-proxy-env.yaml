@@ -14,8 +14,7 @@ data:
   OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
   OAUTH2_PROXY_UPSTREAMS: "static://202"
   OAUTH2_PROXY_REDIRECT_URL: "https://demo.example.com/oauth2/callback"
-  OAUTH2_PROXY_CLIENT_ID: dummy
-  OAUTH2_PROXY_CLIENT_SECRET: dummy
-  OAUTH2_PROXY_OIDC_ISSUER_URL: http://localhost
-  OAUTH2_PROXY_JWKSURL: http://localhost/jwks.json
+  OAUTH2_PROXY_CLIENT_ID: demo-client
+  OAUTH2_PROXY_CLIENT_SECRET: demo-secret
+  OAUTH2_PROXY_OIDC_ISSUER_URL: http://localhost:5556/dex
 

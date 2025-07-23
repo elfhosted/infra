@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex-config
+  namespace: demo-booklore
+data:
+  config.yaml: |
+    issuer: http://localhost:5556/dex
+
+    storage:
+      type: memory
+
+    web:
+      http: 0.0.0.0:5556
+
+    staticClients:
+      - id: demo-client
+        redirectURIs:
+          - http://localhost:4180/oauth2/callback
+        name: "Demo App"
+        secret: demo-secret
+
+    connectors:
+      - type: password
+        id: static
+        name: Static Users
+        config:
+          staticPasswords:
+            - email: demo@example.com
+              hash: "$2y$12$ZzFt9oTqZraRH5ZKcZ5kOeb2JAjqHxbgQsZKQOa76.9yoNQfXdcTK"  # password: letmein
+              username: demo

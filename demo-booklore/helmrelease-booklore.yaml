@@ -90,6 +90,14 @@ spec:
         volumeSpec:
           persistentVolumeClaim:
             claimName: demo-booklore
+      dex-:
+        enabled: true
+        type: custom
+        mountPath: /app/data
+        subPath: app
+        volumeSpec:
+          configMap:
+            name: dex-config   
     command:
     - java
     - -jar
@@ -151,3 +159,11 @@ spec:
         envFrom:
         - configMapRef:
             name: oauth2-proxy-env
+      dex:
+        image: ghcr.io/dexidp/dex:v2.43.1
+        args:
+        - serve
+        - /etc/dex/config.yaml
+        volumeMounts:
+        - mountPath: /etc/dex
+          name: dex-config
