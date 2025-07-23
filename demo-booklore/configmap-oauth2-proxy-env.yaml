@@ -4,7 +4,7 @@ metadata:
   name: oauth2-proxy-env
   namespace: demo-booklore
 data:
-  OAUTH2_PROXY_PROVIDER: google
+  OAUTH2_PROXY_PROVIDER: oidc
   OAUTH2_PROXY_STATIC_USERNAME: demo
   OAUTH2_PROXY_STATIC_PASSWORD: letmein
   OAUTH2_PROXY_COOKIE_SECRET: "yESXjtYZVMLWa3FCpwaCXubRnseAbAkd9TYjpemWBVo" 
@@ -16,4 +16,6 @@ data:
   OAUTH2_PROXY_REDIRECT_URL: "https://demo.example.com/oauth2/callback"
   OAUTH2_PROXY_CLIENT_ID: dummy
   OAUTH2_PROXY_CLIENT_SECRET: dummy
+  OAUTH2_PROXY_OIDC_ISSUER_URL: http://localhost
+  OAUTH2_PROXY_SKIP_OIDC_DISCOVERY: "true"
 
