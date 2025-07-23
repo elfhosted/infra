@@ -41,6 +41,9 @@ spec:
       capabilities:
         drop:
         - ALL
+    env:
+      REDIRECT_URL: https://demo-booklore.${dns_domain}
+      APP_NAME: Booklore
     automountServiceAccountToken: false
     resources:
       requests:

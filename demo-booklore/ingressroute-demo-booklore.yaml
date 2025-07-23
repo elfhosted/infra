@@ -15,19 +15,3 @@ spec:
           port: 6060
       middlewares:  
         - name: demo-accept
-    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/oauth2`)
-      kind: Rule
-      services:
-        - name: oauth2-proxy
-          kind: Service
-          port: 4180
-      middlewares:
-        - name: stripprefix-oauth-start
-    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/oauth2/start`)
-      kind: Rule
-      services:
-        - name: nginx
-          kind: Service
-          port: 8080
-      middlewares:
-        - name: stripprefix-oauth-start
