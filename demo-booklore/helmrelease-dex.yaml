@@ -31,7 +31,7 @@ spec:
       rollingUpdate:
         unavailable: 1
       annotations:
-        configmap.reloader.stakater.com/reload: "oauth2-proxy-env"
+        configmap.reloader.stakater.com/reload: "dex-config"
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
