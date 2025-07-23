@@ -14,8 +14,8 @@ spec:
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
-      name: booklore
-      namespace: booklore 
+      name: demo-booklore
+      namespace: demo-booklore 
   postBuild:
     substituteFrom:
       - kind: ConfigMap
