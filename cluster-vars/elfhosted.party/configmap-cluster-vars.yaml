@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-vars
+  namespace: flux-system
+data:
+  dns_domain: elfhosted.party
+  tailscale_suffix: elfhosted-party
+  cluster_nic_class_c: 192.168.46
+  nginx_ingress_ip: 192.168.46.101 # 100.74.221.20 # Provided by tailscale in elfhosted.party
+  traefik_ingress_dns_ip: 104.36.82.66 # keystone01
+  k3s_server_endpoint_1: 192.168.46.11
+  k3s_server_endpoint_2: 192.168.46.12
+  k3s_server_endpoint_3: 192.168.46.13
+  k8s_ha_api_ip: 192.168.46.10
+  k8s_ha_api_port: "8443"
+  prometheus_retentionsize: '5GB'
+  prometheus_retention: "4d"   # enough to chart a month's progress with some headroom
+  prometheus_pvc_storage: 6Gi
+  minio_storage: '100Gi'
+  thanos_storage: '50Gi'
+  proxy_wildcard_dns: "true"
+  dashboard_background: development.jpg
+  k3s_version: v1.31.5+k3s1
+  pod_cidr_v4: 10.2.0.0/15
+  service_cidr_v4: 10.44.0.0/16
+  pod_cidr_v6: fd02::/104  
+  ha_replica_count: "2" # for ha-enabled deployments like topolvm - we only have 1 node currently
+  storageclass_rwx_name: topolvm-provisioner-thin
+  storageclass_rwx_apartyessMode: ReadWriteOnce
+  storageclass_rwx_volumeSnapshotClassName: topolvm-provisioner-thin
+  storageclass_rwo_name: topolvm-provisioner-thin
+  storageclass_rwo_apartyessMode: ReadWriteOnce
+  storageclass_rwo_volumeSnapshotClassName: topolvm-provisioner-thin
+  cilium_hubble_enabled: "false"
+
+  # These apportion semi-dedicated resources across the node types
+  hobbit_zurg_cpu_requests: 900m
+  ranger_zurg_cpu_requests: 1800m
+  halfling_zurg_cpu_requests: 3600m
+  nazgul_zurg_cpu_requests: 7200m
+  hobbit_cpu_requests: 1100m
+  ranger_cpu_requests: 2200m
+  halfling_cpu_requests: 3600m
+  nazgul_cpu_requests: 7200m  
+  
+  # these provide sane limits for the streamers
+  hobbit_streamer_cpu_limits: "2"
+  hobbit_streamer_ram_limits: "3Gi"
+  ranger_streamer_cpu_limits: "3"
+  ranger_streamer_ram_limits: "4Gi"
+  halfling_streamer_cpu_limits: "4"
+  halfling_streamer_ram_limits: "8Gi"
+  nazgul_streamer_cpu_limits: "8"
+  nazgul_streamer_ram_limits: "16Gi"    
+
+# And for riven, which can be a CPU/RAM hog
+  hobbit_riven_cpu_limits: "1"
+  hobbit_riven_ram_limits: "2Gi"
+  hobbit_riven_database_cpu_limits: "500m"
+  hobbit_riven_database_ram_limits: "500Mi"  
+
+  ranger_riven_cpu_limits: "1500m"
+  ranger_riven_ram_limits: "3Gi"
+  ranger_riven_database_cpu_limits: "500m"
+  ranger_riven_database_ram_limits: "500Mi"    
+
+  halfling_riven_cpu_limits: "2"
+  halfling_riven_ram_limits: "3Gi"
+  halfling_riven_database_cpu_limits: "1"
+  halfling_riven_database_ram_limits: "1Gi"    
+
+  nazgul_riven_cpu_limits: "4"
+  nazgul_riven_ram_limits: "4Gi"
+  nazgul_riven_database_cpu_limits: "2"
+  nazgul_riven_database_ram_limits: "2Gi"      

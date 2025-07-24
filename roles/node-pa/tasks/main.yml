@@ -10,14 +10,49 @@
     - iperf3
     - jq
     - snapd
-    - bzip2
-    - restic
     - intel-gpu-tools
     - vnstat
     - jnettop
     - ifenslave
     
   ignore_errors: true # sometimes apt is locked    
+
+- name: Check if /dev/nvme1n1 is already a physical volume
+  command: pvs --noheadings -o pv_name
+  register: existing_pvs
+  changed_when: false
+
+- name: Create physical volume on /dev/nvme1n1 if not present
+  command: pvcreate /dev/nvme1n1
+  when: "'/dev/nvme1n1' not in existing_pvs.stdout_lines"
+  ignore_errors: true
+
+- name: Add /dev/nvme1n1 to vg0 if not already part of it
+  command: vgextend vg0 /dev/nvme1n1
+  when: "'/dev/nvme1n1' not in existing_pvs.stdout_lines"
+  ignore_errors: true # so we can run it multiple times
+
+- name: Fetch public IP from ipify
+  uri:
+    url: "https://api.ipify.org"
+    return_content: yes
+  register: public_ip_response
+
+- name: Set public IP as a fact
+  set_fact:
+    external_ip: "{{ public_ip_response.content }}"
+
+- name: Get default route from ip route
+  command: ip route show default
+  register: default_route_output
+
+- name: Extract default gateway IP
+  set_fact:
+    default_gateway_ip: "{{ default_route_output.stdout.split(' ')[2] }}"
+
+- name: Show the default gateway IP
+  debug:
+    msg: "The default gateway IP is {{ default_gateway_ip }}"
 
 - name: Enable automatic updates
   copy:
@@ -61,34 +96,98 @@
   debug:
     var: unattended_output.stdout_lines
 
-- name: Add VLAN 4000
-  ansible.builtin.blockinfile:
-    path: /etc/netplan/01-netcfg.yaml
-    block: |
-      # For the vSwitch
-        vlans:
-            {{ cluster_nic }}:
-              id: 4000
-              link: {{ cluster_nic.split(".")[0] }}
-              mtu: 1400
-              addresses:
-                - {{ ansible_host }}/24
-                - fd00:10:0:42:0::{{ ansible_host.split(".")[3] }}/118
-              routes:
-                - to: "10.0.40.0/22"
-                  via: "10.0.42.1"
-                # Prevent leaking SMB requests towards service IPs
-                - to: "10.43.0.0/16"
-                  via: "10.0.42.1"   
-  notify: netplan apply
-  ignore_errors: true # some clusters don't have vlans
-                  
+- name: load bonding modules
+  modprobe:
+    name: "{{ item }}"
+  with_items: 
+  - bonding
+
+- name: add bonding modules to /etc/modules-load.d/bonding.conf
+  copy:
+    dest: /etc/modules-load.d/bonding.conf
+    content: |
+      bonding
+
+- name: Set i915.disable_display=1 to avoid EDID spam, disable cstates
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="i915.disable_display=1 intel_idle.max_cstate=1 processor.max_cstate=1 intel_pstate=disable"'
+  register: grub_config_changed
+
+- name: Update GRUB
+  ansible.builtin.command: update-grub
+  when: grub_config_changed.changed      
+
+- name: Remove initial cloud-init netplan
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+  - /etc/netplan/50-cloud-init.yaml
+  - /etc/netplan/00-installer-config.yaml
+
+- name: Replace with our own netplan
+  template:
+    src: netplan.yaml.j2
+    dest: /etc/netplan/elfhosted.yaml
+    mode: 0600
+  # notify: netplan apply
+
+# - name: flush handlers now if necessary
+#   meta: flush_handlers
+
+# this can be disruptive, so disabled for now
+- name: Reboot for grub fix
+  ansible.builtin.reboot:
+    msg: "Rebooting due to GRUB_CMDLINE_LINUX change"
+  when: grub_config_changed.changed
+
+- name: "Update /etc/hosts for k3s-servers"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }} {{item}}'
+    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    owner: root
+    group: root
+    mode: '0644'        
+  with_items: "{{ groups['k3s_servers'] }}"
+
+- name: "Update /etc/hosts for k3s-agents"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }} {{item}}'
+    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    owner: root
+    group: root
+    mode: '0644'        
+  with_items: "{{ groups['k3s_agents'] }}" 
+
+
+- name: "Update /etc/hosts for localhost"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127.0.0.1 localhost'
+    line: "127.0.0.1 localhost"
+    owner: root
+    group: root
+    mode: '0644'        
+
 - name: install yq via snap
   snap:
     name: yq
   when: "inventory_hostname in groups['k3s_servers']"  
   ignore_errors: true # sometimes snap has issues
 
+- name: Set default forward policy to ACCEPT
+  lineinfile:
+    path: /etc/default/ufw
+    regexp: '^DEFAULT_FORWARD_POLICY='
+    line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+  
 - name: Allow admin SSH sources to this host
   ufw:
     rule: allow
@@ -98,12 +197,21 @@
     state: enabled
   loop: "{{ firewall.admin_source }}"
 
+- name: Allow trusted kube-api sources to this host
+  ufw:
+    rule: allow
+    port: 6443
+    proto: tcp
+    src: '{{ item }}'
+    state: enabled
+  loop: "{{ firewall.kubeapi_source }}"  
+
 - name: Allow port 5201 for occasional iperf testing (enable when necessary)
   ufw:
     rule: allow
     port: 5201
     proto: tcp
-    state: enabled
+    state: disabled
 
 - name: Allow any incoming traffic to the public IP for host-port exposed services
   ufw:
@@ -115,38 +223,21 @@
     - { port: "80", proto: "tcp" }  # traefik web
     - { port: "443", proto: "tcp" } # traefik websecure
 
-- name: Allow any routed traffic on the cluster NIC
-  ufw:
-    # direction: in
-    rule: "allow"
-    route: true
-    interface_in: "{{ cluster_nic }}"
 
 - name: Allow any incoming traffic on the cluster NIC
   ufw:
     direction: in
     rule: "allow"
-    interface: "{{ cluster_nic }}"    
+    interface: "{{ item }}"    
+  with_items:
+  - internal
 
 - name: Allow any incoming traffic from the cluster range
   ufw:
     direction: in
     rule: "allow"
     src: "{{ item }}"
-  loop: "{{ firewall.cluster_source }}"    
-
-- name: Allow any incoming traffic to nginx-ingress-controller on the fairies from the Hetzner LB
-  ufw:
-    direction: in
-    rule: "allow"
-    port: "{{ item.port }}"
-    proto: "{{ item.proto }}"
-    src: 10.0.40.3/32 # hetzner LB
-  with_items:
-    # - { port: "7000", proto: "tcp" }  # http
-    - { port: "7443", proto: "tcp" }  # https    
-  when:
-  - "inventory_hostname in groups['k3s_servers']"
+  loop: "{{ firewall.cluster_source }}"
 
 - name: Allow any incoming traffic from the cluster for host-network exposed services
   ufw:
@@ -162,14 +253,9 @@
     - { port: "2381", proto: "tcp" }  # k3s etcd
     - { port: "9100", proto: "tcp" }  # node-exporter  
     - { port: "6443", proto: "tcp" }  # k8s-api   
-    - { port: "3300", proto: "tcp" }  # ceph-mon
-    - { port: "6789", proto: "tcp" }  # ceph-mon
-    - { port: "9283", proto: "tcp" }  # ceph metrics
-    - { port: "6800:7300", proto: "tcp" }  # ceph (not sure what, but necessary for csi-provisioner)  
     - { port: "8080", proto: "tcp" }  # kured
-    - { port: "7472", proto: "tcp" }  # metallb 
     - { port: "4244", proto: "tcp" }  # hubble  
-    - { port: "8472", proto: "udp" }  # vxlan
+    - { port: "9965", proto: "tcp" }  # hubble metrics  
 
 - name: Drop noisy traffic
   ufw:
@@ -182,23 +268,34 @@
   with_items:
     - { port: "5351", proto: "udp" } # NAT-PMP (Plex)
     - { port: "1900", proto: "udp" } # DLNA (Plex)
-    
-- name: Determine public NIC name (step 1/2)
-  set_fact: 
-    cluster_nic_split: "{{ cluster_nic | split('.')}}" 
 
-- name: Determine public NIC name (step 2/2)
-  set_fact: 
-    public_nic: "{{ cluster_nic_split.0 }}"     
-
-- name: Drop any unexpected incoming traffic hitting the hetzner public nic ({{ public_nic }}) # (this is the case anyway, but we want to avoid unnecessary logging)
+- name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
   ufw:
     direction: in
     rule: "deny"
-    interface: "{{ public_nic }}"
+    interface: "external"
     log: "false"
-  when: public_nic not in "eth1" # NICs work differently in ci
 
+- name: Ensure UFW service starts on boot
+  service:
+    name: ufw
+    enabled: yes
+    state: restarted
+
+- name: Check UFW status
+  command: ufw status
+  register: ufw_status
+  changed_when: false
+
+
+- name: Enable UFW if not active
+  ufw:
+    state: enabled
+    policy: deny
+    logging: "on"
+  when: "'Status: inactive' in ufw_status.stdout"
+  notify: reload ufw
+      
 - name: Set tuned profile to throughput-performance
   command: tuned-adm profile throughput-performance
 
@@ -223,20 +320,13 @@
     replace: '#\1\2\3swap\4'
     backup: yes  
 
-# - name: Ensure archive is set to 0 and uncommented in /etc/lvm/lvm.conf
-#   lineinfile:
-#     path: /etc/lvm/lvm.conf
-#     regexp: '^ *#? *archive *= *[01]'
-#     line: 'archive = 0'
-#     state: present
-#     backup: yes
-
 - name: Create a thin pool on vg0
   community.general.lvol:
     vg: vg0
     thinpool: thinpool
     size: 100%FREE  
   when: 
+  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers']"
   ignore_errors: true # so we can run it multiple times
 
 - name: copy scripts
@@ -246,6 +336,32 @@
     mode: u+x
   loop:
     - smartmon_metrics.sh
+
+# - name: Set igb modprobe defaults
+#   copy:
+#     dest: /etc/modprobe.d/igb.conf
+#     content: options igb InterruptThrottleRate=1,1,1,1 RSS=8 FlowControl=0 QueuePairs=4
+#     mode: '0644'
+  
+# - name: copy ethtool-config service
+#   copy:
+#     src: ethtool-config.service
+#     dest: /etc/systemd/system/ethtool-config.service
+#     mode: '0644'  
+
+# - name: Reload systemd to apply new service
+#   systemd:
+#     daemon_reload: yes
+
+# - name: Enable ethtool-config.service to start at boot
+#   systemd:
+#     name: ethtool-config.service
+#     enabled: yes
+
+# - name: Start ethtool-config.service
+#   systemd:
+#     name: ethtool-config.service
+#     state: started    
 
 - name: Install smartmontools
   apt: pkg=smartmontools
@@ -283,7 +399,7 @@
 - name: remove incorrect /etc/logrotate.d/syslog
   file:
     path: /etc/logrotate.d/syslog
-    state: absent
+    state: absent    
 
 - name: ensure resolveconf systemd directory exists
   file:
@@ -309,52 +425,3 @@
     name: rsyslog
     state: restarted
     enabled: yes
-
-- name: Set high open file limits in /etc/security/limits.conf
-  lineinfile:
-    path: /etc/security/limits.conf
-    line: "{{ item }}"
-    state: present
-  loop:
-    - "* soft nofile 1048576"
-    - "* hard nofile 1048576"
-
-- name: Set DefaultLimitNOFILE in system.conf
-  lineinfile:
-    path: /etc/systemd/system.conf
-    regexp: '^#?DefaultLimitNOFILE='
-    line: 'DefaultLimitNOFILE=1048576'
-
-- name: Set DefaultLimitNOFILE in user.conf
-  lineinfile:
-    path: /etc/systemd/user.conf
-    regexp: '^#?DefaultLimitNOFILE='
-    line: 'DefaultLimitNOFILE=1048576'
-
-- name: Create override directory for k3s-agent
-  file:
-    path: /etc/systemd/system/k3s-agent.service.d
-    state: directory
-    mode: '0755'
-
-- name: Set LimitNOFILE override for k3s-agent
-  copy:
-    dest: /etc/systemd/system/k3s-agent.service.d/override.conf
-    content: |
-      [Service]
-      LimitNOFILE=1048576
-    mode: '0644'
-
-- name: Reload systemd daemon
-  command: systemctl daemon-reexec
-
-- name: Reload systemd units
-  command: systemctl daemon-reload
-
-- name: Restart k3s-agent
-  systemd:
-    name: k3s-agent
-    state: restarted
-    daemon_reload: yes
-  when:
-  - "inventory_hostname in groups['k3s_agents']"    

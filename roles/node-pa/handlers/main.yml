@@ -1,0 +1,6 @@
+# - name: netplan apply
+#   command: netplan apply
+
+- name: reload ufw
+  ufw:
+    state: reloaded  

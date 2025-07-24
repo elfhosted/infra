@@ -1,0 +1,72 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tinyproxy
+  namespace: mediafusion
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: tinyproxy
+  values:
+    global:
+      nameOverride: tinyproxy
+    image:
+      repository: ghcr.io/elfhosted/tinyproxy
+      tag: v1.4.3@sha256:262bbdc0e468ee97c049203becc52b9ad7bf4c21405d58c82766d1aebb2e27e5
+    podLabels:
+        app.elfhosted.com/name: tinyproxy
+    priorityClassName: tenant-normal
+    controller:
+      annotations:
+        configmap.reloader.stakater.com/reload: "tinyproxy-conf"
+      strategy:
+      rollingUpdate:
+        unavailable: 1
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      fsGroupChangePolicy: "OnRootMismatch"
+    automountServiceAccountToken: false
+    persistence:
+      tmp:
+        enabled: true
+        mountPath: /tmp
+        type: emptyDir
+        volumeSpec:
+          medium: Memory   
+      tinyproxy-conf:
+        enabled: "true"
+        type: "custom"
+        mountPath: /etc/tinyproxy/tinyproxy.conf
+        subPath: tinyproxy.conf  
+        volumeSpec:
+          configMap:
+            name: tinyproxy-conf       
+    resources:
+      requests:
+        cpu: 1m
+        memory: 512Mi
+      limits:
+        cpu: 1
+        memory: 1Gi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8888

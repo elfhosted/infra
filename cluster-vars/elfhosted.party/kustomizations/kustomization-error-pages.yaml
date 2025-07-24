@@ -1,0 +1,29 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: error-pages
+  namespace: flux-system
+spec:
+  interval: 15m
+  path: ./error-pages
+  prune: true # remove any elements later removed from the above path
+  timeout: 10m # if not set, this defaults to interval duration, which is 1h
+  dependsOn:
+  - name: traefik
+  sourceRef:
+    kind: GitRepository
+    name: infra
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: error-pages
+      namespace: error-pages
+    # Always use the helmrelease to determine health too
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: error-pages
+      namespace: error-pages        
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars

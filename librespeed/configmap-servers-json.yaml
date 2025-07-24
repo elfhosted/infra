@@ -23,37 +23,13 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Auckland, New Zealand (elfhosted.tbc)",
-            "server" :"//speedtest-auckland.elfhosted.com/",
+            "name": "Pennsylvania, USA (elfhosted.party)",
+            "server" :"//keystone01-speed.elfhosted.party/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
-        },
-        {
-            "name": "Ashburn, USA (elfhosted.tbc)",
-            "server" :"//speedtest-ashburn.elfhosted.com/",
-            "dlURL" :"garbage.php",
-            "ulURL" :"empty.php",
-            "pingURL" :"empty.php",
-            "getIpURL" :"getIP.php"
-        },
-        {
-            "name": "Kansas, USA (elfhosted.tbc)",
-            "server" :"//speedtest-kansascity.elfhosted.com/",
-            "dlURL" :"garbage.php",
-            "ulURL" :"empty.php",
-            "pingURL" :"empty.php",
-            "getIpURL" :"getIP.php"
-        },
-        {
-            "name": "California, USA (elfhosted.tbc)",
-            "server" :"//speedtest-freemont.elfhosted.com/",
-            "dlURL" :"garbage.php",
-            "ulURL" :"empty.php",
-            "pingURL" :"empty.php",
-            "getIpURL" :"getIP.php"
-        }                         
+        }              
         //...more servers...
     ]
 
