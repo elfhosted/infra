@@ -7,7 +7,7 @@ data:
   servers.json: |
     [
         {
-            "name": "Falkenstein, Germany (elfhosted.com)",
+            "name": "EU, Falkenstein (elfhosted.com)",
             "server" :"//speed-backend.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
@@ -15,7 +15,7 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Washington State, USA West Coast (elfhosted.cc)",
+            "name": "US West, WA (elfhosted.cc)",
             "server" :"//speed-backend.elfhosted.cc/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
@@ -23,7 +23,7 @@ data:
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Pennsylvania, USA East Coast (elfhosted.party)",
+            "name": "US East, PA (elfhosted.party)",
             "server" :"//speed-backend.elfhosted.party/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
