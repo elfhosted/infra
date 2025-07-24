@@ -47,7 +47,7 @@ data:
               "EndpointType": 0
             },
             {
-              "Url": "http://scrape-pa:80",
+              "Url": "http://scrape-party:80",
               "EndpointType": 0
             }                                            
           ],
