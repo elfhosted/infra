@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: speed-backend.${dns_domain}`)
+    - match: Host(`speed-backend.${dns_domain}`)
       kind: Rule
       services:
         - name: librespeed-backend
