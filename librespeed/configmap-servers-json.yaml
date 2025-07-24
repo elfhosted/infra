@@ -24,7 +24,7 @@ data:
         },
         {
             "name": "Pennsylvania, USA (elfhosted.party)",
-            "server" :"//keystone01-speed.elfhosted.party/",
+            "server" :"//speed-backend.elfhosted.party/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
