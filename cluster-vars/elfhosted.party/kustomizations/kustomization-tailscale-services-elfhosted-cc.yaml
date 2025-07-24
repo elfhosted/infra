@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: tailscale-services-elfhosted-cc
+  name: tailscale-services-elfhosted-party
   namespace: flux-system
 spec:
   interval: 15m
-  path: tailscale-services/elfhosted.cc
+  path: tailscale-services/elfhosted.party
   dependsOn:
   - name: cluster-vars
   prune: false # remove any elements later removed from the above path

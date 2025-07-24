@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 15m
-  path: elfhosted.cc/bootstrap
+  path: elfhosted.party/bootstrap
   dependsOn:
   - name: sealed-secrets
   prune: false # remove any elements later removed from the above path

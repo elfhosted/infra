@@ -3,7 +3,7 @@ k8s_ha_api_ip: 192.168.46.10 # haproxy between keystones
 k8s_ha_api_port: 8443
 flux_repo_branch: main
 authentik_login_background: https://images.unsplash.com/photo-1608096275182-337284e623bd?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=karsten-winegeart-qbadM0DNF8Y-unsplash.jpg
-pod_cidr_v4: 10.4.0.0/15
+pod_cidr_v4: 10.2.0.0/15
 service_cidr_v4: 10.44.0.0/16
 pod_cidr_v6: fd01::/104 
 k3s_node_taint: node-role.kubernetes.io/control-plane=true:NoSchedule
@@ -11,23 +11,3 @@ firewall:
   admin_source: "{{ vault_admin_source }}"
   kubeapi_source: "{{ vault_kubeapi_source }}"
   cluster_source: "{{ vault_cluster_source }}"
-  
-packages:
-  flux:
-    version: 2.3.0
-  tetragon:
-    version: 1.0.1
-  helm:
-    version: v3.12.1
-  cilium:
-    version: 1.14.0
-    cli:
-      version: v0.15.0
-  kata_containers:
-    version: 3.1.3
-  velero:
-    version: v1.12.0
-  k3s:
-    version: v1.31.0+k3s1
-  autorestic:
-    version: 1.7.9        
