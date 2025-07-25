@@ -7,6 +7,12 @@ spec:
   entryPoints:
     - websecure
   routes:
+    # Auth stuff passes without redirecting to itself for more auth
+    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/auth`, `/terms.html`, `/agree`)
+      kind: Rule
+      services:
+        - name: demo-accept
+          port: 8080
     - match: Host(`demo-booklore.${dns_domain}`)
       kind: Rule
       services:
