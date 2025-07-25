@@ -16,3 +16,5 @@ packages:
     version: v1.12.0
   k3s:
     version: v1.31.5+k3s1
+  nvidia_driver:
+    version: "570.172.08"
