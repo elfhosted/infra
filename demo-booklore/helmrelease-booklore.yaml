@@ -94,7 +94,9 @@ spec:
           if [ -z ${READONLY_MODE} ]; then
             echo "READONLY_MODE is not set, copying all data to bootstrap"
             mkdir -p /config/bootstrap
-            cp /config/ephemeral/* /config/bootstrap/ -rfp
+            if [ -d /config/ephemeral ]; then
+              cp /config/ephemeral/* /config/bootstrap/ -rfp      
+            fi
           else
             echo "READONLY_MODE is set, removing and overwriting all data"
             rm -rf /config/ephemeral/*
