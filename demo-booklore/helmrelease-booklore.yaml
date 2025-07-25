@@ -102,6 +102,9 @@ spec:
             rm -rf /config/ephemeral/*
             cp /config/bootstrap/* /config/ephemeral/ -rfp
           fi
+
+          # bookdrop is a special case
+          mkdir -p /config/ephemeral/app/bookdrop
         volumeMounts:
         - mountPath: /config
           name: config
@@ -109,6 +112,18 @@ spec:
           runAsUser: 0
           seccompProfile:
             type: RuntimeDefault
+      setup-zbookdrop:
+        image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+        command:
+        - /bin/bash
+        - -c
+        - |
+          # bookdrop is a special case
+          mkdir -p /app/data/bookdrop
+        volumeMounts:
+        - mountPath: /app/data
+          name: config
+          subPath: ephemeral/app         
       setup-mariadb:
         image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
         command:
