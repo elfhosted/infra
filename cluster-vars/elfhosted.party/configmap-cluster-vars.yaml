@@ -21,7 +21,7 @@ data:
   thanos_storage: '50Gi'
   proxy_wildcard_dns: "true"
   dashboard_background: development.jpg
-  k3s_version: v1.31.5+k3s1
+  k3s_version: v1.32.6+k3s1
   pod_cidr_v4: 10.2.0.0/15
   service_cidr_v4: 10.44.0.0/16
   pod_cidr_v6: fd02::/104  

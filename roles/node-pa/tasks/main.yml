@@ -14,6 +14,7 @@
     - vnstat
     - jnettop
     - ifenslave
+    - nvidia-utils-575-server
     
   ignore_errors: true # sometimes apt is locked    
 
@@ -336,6 +337,9 @@
     mode: u+x
   loop:
     - smartmon_metrics.sh
+
+- name: install nvidia driver
+  command: ubuntu-drivers install --gpgpu nvidia:575-server
 
 # - name: Set igb modprobe defaults
 #   copy:
