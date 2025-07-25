@@ -9,9 +9,13 @@ data:
   TERMS_MD: |
     # Welcome, book nerd! 🤓
 
-    This is an ElfHosted sponsored demo of [Booklore](https://github.com/adityachandelgit/BookLore), a self-hosted book cataloging and reading platform.
+    This is an ElfHosted-sponsored demo of [Booklore](https://github.com/adityachandelgit/BookLore), a self-hosted book cataloging and reading platform.
+
+    Use of the demo is subject to the following terms:
+    - **No personal data**: Please do not upload any personal or sensitive information
+    - **Public domain content only**
 
   APP_NOTES: |
     * Username: `bookgeek`
     * Password: `elfhosted`
-    * Persistence: The demo will reset every hour, so feel free to play around with it. Please don't upload any non-public-domain content.
+    * Persistence: The demo will reset every hour, so feel free to play around with it
