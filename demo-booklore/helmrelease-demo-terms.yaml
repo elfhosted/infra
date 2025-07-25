@@ -29,7 +29,9 @@ spec:
       replicas: 1
       strategy: RollingUpdate
       rollingUpdate:
-        unavailable: 1
+        unavailable: 1      
+      annotations:
+        configmap.reloader.stakater.com/reload: "demo-terms-env"
     podSecurityContext:
       seccompProfile:
         type: RuntimeDefault
