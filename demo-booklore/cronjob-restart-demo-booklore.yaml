@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restart-demo-booklore
+  namespace: demo-booklore
+  labels:
+    app.kubernetes.io/name: restart-demo-booklore
+spec:
+  schedule: "0 * * * *" # run daily 5 min before maintenance
+  concurrencyPolicy: Forbid # no more than one instance
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: restart-demo-booklore
+        spec:
+          restartPolicy: Never
+          serviceAccountName: restart-demo-booklore
+          containers:
+          - name: "restart-demo-booklore"
+            command: [ "/restart-demo-booklore.sh" ]
+            image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              privileged: false
+              seccompProfile:
+                type: RuntimeDefault   
+              runAsNonRoot: true
+              runAsUser: 568
+              runAsGroup: 568
+              capabilities:
+                drop:
+                - ALL              
+            envFrom:
+            - configMapRef:
+                name: demo-booklore-env
+            volumeMounts:
+            - mountPath: "/restart-demo-booklore.sh"
+              subPath: restart-demo-booklore.sh
+              name: restart-demo-booklore
+          volumes:
+            - name: restart-demo-booklore
+              configMap:
+                name: restart-demo-booklore 
+                defaultMode: 0755       

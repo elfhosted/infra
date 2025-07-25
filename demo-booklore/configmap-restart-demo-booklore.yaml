@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restart-demo-booklore
+  namespace: demo-booklore
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+data:
+  restart-demo-booklore.sh: |
+    #!/bin/bash
+
+    # Just restart every hour if we're in READ_ONLY mode
+    if [ ! -z "$READONLY_MODE" ]; then
+      kubectl restart deployment demo-booklore
+    fi
+    
