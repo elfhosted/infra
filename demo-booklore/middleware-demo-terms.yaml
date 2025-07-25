@@ -5,7 +5,7 @@ metadata:
   namespace: demo-booklore
 spec:
   forwardAuth:
-    address: http://demo-terms:8080/auth
+    address: http://demo-terms.demo-booklore:8080/auth
     trustForwardHeader: true
     authResponseHeaders:
       - "X-Forwarded-User"
