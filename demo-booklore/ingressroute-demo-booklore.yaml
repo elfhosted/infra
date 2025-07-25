@@ -8,11 +8,12 @@ spec:
     - websecure
   routes:
     # Auth stuff passes without redirecting to itself for more auth
-    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/auth`, `/terms.html`, `/agree`)
+    - match: Host(`demo-booklore.${dns_domain}`) && (PathPrefix(`/auth`) || PathPrefix(`/terms.html`) || PathPrefix (`/agree`))
       kind: Rule
       services:
         - name: demo-accept
           port: 8080
+          kind: Service
     - match: Host(`demo-booklore.${dns_domain}`)
       kind: Rule
       services:
