@@ -7,22 +7,9 @@ data:
   REDIRECT_URL: https://demo-booklore.${dns_domain}
   APP_NAME: Booklore
   TERMS_MD: |
-    # Terms of Service
+    # Welcome, book nerd!
 
-    ## Introduction
-    Welcome to Booklore! By using our service, you agree to the following terms and conditions.
+    This is an ElfHosted sponsored demo of [Booklore](https://github.com/adityachandelgit/BookLore), a self-hosted book cataloging and reading platform.
 
-    ## User Responsibilities
-    Users must adhere to community guidelines and respect other users.
-
-    ## Privacy Policy
-    We value your privacy. Please review our [Privacy Policy](https://demo-booklore.${dns_domain}/privacy) for details on how we handle your data.
-  NOTES_MD: |
-    # Notes
-
-    ## Important Links
-    - [Privacy Policy](https://demo-booklore.${dns_domain}/privacy)
-    - [Contact Support](https://demo-booklore.${dns_domain}/support)
-
-    ## Community Guidelines
-    Please follow our community guidelines to ensure a positive experience for all users.
+  APP_NOTES: |
+    The demo will reset every hour, so feel free to play around with it. Please don't upload any non-public-domain content.
