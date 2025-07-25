@@ -20,7 +20,7 @@ spec:
       nameOverride: demo-terms
     image:
       repository: ghcr.io/elfhosted/demo-terms
-      tag: rolling@sha256:6307314c9ac60b6222fb3bff6a629ea8df33c296dedd65a00dc4b24358bc672d
+      tag: rolling@sha256:865cbe1b2e48840d4eab61c9edd607cd927eb3b6ace916795d0236c21e9a9e0a
     securityContext:
       seccompProfile:
         type: RuntimeDefault
