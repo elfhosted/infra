@@ -47,8 +47,8 @@ data:
               # if yes, and it's older than 31 days, then label for deletion
               TIMESTAMP_PVC=$(kubectl describe pvc -n $NS $PVC | grep elfhosted.com/unused-since | awk '{split($0,a); print a[3]}')
               TIMESTAMP_DIFF=$((TIMESTAMP_NOW-TIMESTAMP_PVC))
-              if [[ $TIMESTAMP_DIFF -gt 86400 ]]; then # 86400 sec = 1 days
-                echo "[$NS/$PVC] unused for > 1 days, deleting it (30s timeout).."
+              if [[ $TIMESTAMP_DIFF -gt 604800 ]]; then # 604800 sec = 7 days
+                echo "[$NS/$PVC] unused for > 7 days, deleting it (30s timeout).."
                 kubectl delete pvc -n $NS $PVC --timeout=30s
               else
                 echo "[$NS/$PVC] Found annotated, but it's less than 8d old, so ignoring"
