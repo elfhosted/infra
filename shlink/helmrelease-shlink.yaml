@@ -31,7 +31,7 @@ spec:
       # -- image pull policy
       pullPolicy: IfNotPresent
       # -- image tag
-      tag: 3.7.4
+      tag: 4.5.0
 
     # -- environment variables. See more environment variables in the [shlink documentation](https://shlink.io/documentation/install-docker-image/)
     env:
