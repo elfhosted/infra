@@ -76,7 +76,7 @@ spec:
         enabled: true
         type: custom
         mountPath: /app/data
-        subPath: app
+        subPath: ephemeral/app
         volumeSpec:
           persistentVolumeClaim:
             claimName: demo-booklore 
@@ -85,6 +85,28 @@ spec:
     - -jar
     - /app/app.jar
     initContainers:
+      setup-demo:
+        image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+        command:
+        - /bin/bash
+        - -c
+        - |
+          if [ -z ${READONLY_MODE} ]; then
+            echo "READONLY_MODE is not set, copying all data to bootstrap"
+            mkdir -p /config/bootstrap
+            cp /config/ephemeral/* /config/bootstrap/ -rfp
+          else
+            echo "READONLY_MODE is set, removing and overwriting all data"
+            rm -rf /config/ephemeral/*
+            cp /config/bootstrap/* /config/ephemeral/ -rfp
+          fi
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        securityContext:
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
       setup-mariadb:
         image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
         command:
@@ -99,7 +121,7 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: config
-          subPath: app
+          subPath: ephemeral
         securityContext:
           runAsUser: 0
           seccompProfile:
@@ -128,7 +150,7 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: config
-          subPath: database
+          subPath: ephemeral/database
         resources:
           requests:
             cpu: 0m

@@ -14,6 +14,16 @@ spec:
         - name: demo-terms
           port: 8080
           kind: Service
+    # Allow status checks without auth for https://status.elfhosted.com monitoring
+    - match: Host(`demo-booklore.${dns_domain}`) && PathPrefix(`/api/v1/setup/status`)
+      kind: Rule
+      services:
+        - name: demo-booklore
+          kind: Service
+          port: 6060
+      middlewares:  
+        - name: demo-terms          
+    # Put everything else in front of a terms-acceptance button
     - match: Host(`demo-booklore.${dns_domain}`)
       kind: Rule
       services:
