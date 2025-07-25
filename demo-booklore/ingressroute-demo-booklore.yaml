@@ -11,7 +11,7 @@ spec:
     - match: Host(`demo-booklore.${dns_domain}`) && (PathPrefix(`/auth`) || PathPrefix(`/terms.html`) || PathPrefix (`/agree`))
       kind: Rule
       services:
-        - name: demo-accept
+        - name: demo-terms
           port: 8080
           kind: Service
     - match: Host(`demo-booklore.${dns_domain}`)
@@ -21,4 +21,4 @@ spec:
           kind: Service
           port: 6060
       middlewares:  
-        - name: demo-accept
+        - name: demo-terms
