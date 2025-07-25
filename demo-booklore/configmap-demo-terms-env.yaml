@@ -12,6 +12,6 @@ data:
     This is an ElfHosted sponsored demo of [Booklore](https://github.com/adityachandelgit/BookLore), a self-hosted book cataloging and reading platform.
 
   APP_NOTES: |
-    * Username: `admin`
-    * Password: `admin123`
+    * Username: `bookgeek`
+    * Password: `elfhosted`
     * Persistence: The demo will reset every hour, so feel free to play around with it. Please don't upload any non-public-domain content.

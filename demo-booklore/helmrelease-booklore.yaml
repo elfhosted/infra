@@ -112,6 +112,9 @@ spec:
           runAsUser: 0
           seccompProfile:
             type: RuntimeDefault
+        envFrom:
+        - configMapRef:
+            name: demo-booklore-env                
       setup-zbookdrop:
         image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
         command:
