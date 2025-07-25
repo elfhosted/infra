@@ -91,7 +91,7 @@ spec:
         - /bin/bash
         - -c
         - |
-          if [ -z "${READONLY_MODE}" ]; then
+          if [ -z "$READONLY_MODE" ]; then
             echo "READONLY_MODE is not set, copying all data to bootstrap"
             mkdir -p /config/bootstrap
             if [ -d /config/ephemeral ]; then
