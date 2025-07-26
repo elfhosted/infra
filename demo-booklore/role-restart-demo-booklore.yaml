@@ -10,3 +10,5 @@ rules:
   - deployments
   verbs:
   - update
+  - get
+  - list
