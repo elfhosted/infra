@@ -7,7 +7,7 @@ data:
   REDIRECT_URL: https://demo-booklore.${dns_domain}
   APP_NAME: Booklore
   TERMS_MD: |
-    # Welcome, book nerd! 🤓
+    # Welcome, book geeks! 🤓
 
     This is an ElfHosted-sponsored demo of [Booklore](https://github.com/adityachandelgit/BookLore), a self-hosted book cataloging and reading platform.
 
