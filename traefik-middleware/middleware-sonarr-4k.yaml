@@ -1,12 +1,12 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: radarr-4k
+  name: sonarr-4k
   namespace: traefik
 spec:
   plugin:
     themepark:
-      app: radarr
+      app: sonarr
       theme: default
       addons:
-        - radarr-4k-logo
+        - sonarr-4k-logo
