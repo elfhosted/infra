@@ -12,3 +12,4 @@ rules:
   - update
   - get
   - list
+  - patch
