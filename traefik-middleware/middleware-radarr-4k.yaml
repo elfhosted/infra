@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: radarr-4k
+  namespace: traefik
+spec:
+  plugin:
+    themepark:
+      app: radarr
+      addons:
+        - radarr-4k-logo
