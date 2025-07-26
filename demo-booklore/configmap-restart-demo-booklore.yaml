@@ -11,6 +11,6 @@ data:
 
     # Just restart every hour if we're in READ_ONLY mode
     if [ ! -z "$READONLY_MODE" ]; then
-      kubectl restart deployment demo-booklore
+      kubectl rollout restart deployment demo-booklore
     fi
     
