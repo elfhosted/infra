@@ -24,10 +24,6 @@ spec:
       kind: DaemonSet
       name: topolvm-node
       namespace: topolvm-system
-    - apiVersion: apps/v1
-      kind: DaemonSet
-      name: topolvm-scheduler
-      namespace: topolvm-system
     # Always use the helmrelease to determine health too
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
