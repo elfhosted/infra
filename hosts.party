@@ -1,0 +1,71 @@
+
+[party:children]
+k3s_servers
+k3s_agents
+k3s_contended
+k3s_dedicated
+controllers
+public_hosts
+
+[k3s_servers]
+
+keystone01  ansible_host=keystone01-public.elfhosted.party cluster_ip=192.168.46.11 external_ip=104.36.82.66 interfaces=["eno1","eno2"] addresses=[104.36.82.66/28,192.168.46.11/24] gateway4=104.36.82.65  keepalived_priority=130
+
+[k3s_agents]
+pretzel01  ansible_host=pretzel01-public.elfhosted.party cluster_ip=192.168.46.21 external_ip=104.36.82.67 interfaces=["eno1","eno2"] addresses=[104.36.82.67/28,192.168.46.21/24] gateway4=104.36.82.65
+pretzel02  ansible_host=pretzel02-public.elfhosted.party cluster_ip=192.168.46.22 external_ip=104.36.82.68 interfaces=["eno1","eno2"] addresses=[104.36.82.68/28,192.168.46.22/24] gateway4=104.36.82.65
+pretzel03  ansible_host=pretzel03-public.elfhosted.party cluster_ip=192.168.46.23 external_ip=104.36.82.69 interfaces=["eno1","eno2"] addresses=[104.36.82.69/28,192.168.46.23/24] gateway4=104.36.82.65
+
+pretzel04  ansible_host=pretzel04.elfhosted.party cluster_ip=192.168.46.24 external_ip=23.147.152.154 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.154/29,192.168.46.24/24,fd00:192:168:44:0::24/118] gateway4=23.147.152.153
+pretzel05  ansible_host=pretzel05.elfhosted.party cluster_ip=192.168.46.25 external_ip=23.147.152.155 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.155/29,192.168.46.25/24,fd00:192:168:44:0::25/118] gateway4=23.147.152.153
+pretzel06  ansible_host=pretzel06.elfhosted.party cluster_ip=192.168.46.26 external_ip=23.147.152.156 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.156/29,192.168.46.26/24,fd00:192:168:44:0::26/118] gateway4=23.147.152.153
+
+pretzel07  ansible_host=pretzel07.elfhosted.party cluster_ip=192.168.46.27 external_ip=23.147.152.158 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.158/29,192.168.46.27/24,fd00:192:168:44:0::27/118] gateway4=23.147.152.153
+pretzel08  ansible_host=pretzel08.elfhosted.party cluster_ip=192.168.46.28 external_ip=23.147.152.130 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.130/29,192.168.46.28/24,fd00:192:168:44:0::28/118] gateway4=23.147.152.129
+pretzel09  ansible_host=pretzel09.elfhosted.party cluster_ip=192.168.46.29 external_ip=23.147.152.131 cluster_nic=bond0 interfaces=["enp1s0f0","enp1s0f1"] addresses=[23.147.152.131/29,192.168.46.29/24,fd00:192:168:44:0::29/118] gateway4=23.147.152.129
+
+
+# We use these for doing ansible installs
+# There's no DNS here but these are saved entries in my .ssh/config
+[public_hosts]
+pretzel01-public.elfhosted.party
+pretzel02-public.elfhosted.party
+pretzel03-public.elfhosted.party
+pretzel04-public.elfhosted.party
+pretzel05-public.elfhosted.party
+pretzel06-public.elfhosted.party
+pretzel07-public.elfhosted.party
+pretzel08-public.elfhosted.party
+pretzel09-public.elfhosted.party
+
+keystone01-public.elfhosted.party
+keystone02-public.elfhosted.party
+keystone03-public.elfhosted.party
+
+
+[k3s_elves]
+
+[k3s_contended]
+pretzel01
+pretzel02
+pretzel03
+pretzel04
+pretzel05
+pretzel06
+pretzel07
+pretzel08
+pretzel09
+
+[k3s_dedicated]
+pretzel01
+pretzel02
+pretzel03
+pretzel04
+pretzel05
+pretzel06
+pretzel07
+pretzel08
+pretzel09
+
+[controllers]
+keystone01

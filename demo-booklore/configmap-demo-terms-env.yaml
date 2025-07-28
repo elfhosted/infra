@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-terms-env
+  namespace: demo-booklore
+data:
+  REDIRECT_URL: https://demo-booklore.${dns_domain}
+  APP_NAME: Booklore
+  TERMS_MD: |
+    # Welcome, book geeks! 🤓
+
+    This is an ElfHosted-sponsored demo of [Booklore](https://github.com/adityachandelgit/BookLore), a self-hosted book cataloging and reading platform.
+
+    Use of the demo is subject to the following terms:
+
+    * **No personal data**: Please do not upload any personal or sensitive information
+    * **Public domain content only**
+
+  APP_NOTES: |
+    * Username: `bookgeek`
+    * Password: `elfhosted`
+    * Persistence: The demo will reset every hour, so feel free to play around with it

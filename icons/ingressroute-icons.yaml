@@ -13,3 +13,8 @@ spec:
         - name: icons
           kind: Service
           port: 8080
+      middlewares:
+        - name: headers-add-cors-origin-any
+          namespace: traefik
+
+          

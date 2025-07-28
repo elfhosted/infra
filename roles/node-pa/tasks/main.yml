@@ -1,0 +1,431 @@
+- name: install necessary packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+    - ufw
+    - unattended-upgrades
+    - tuned
+    - iperf3
+    - jq
+    - snapd
+    - intel-gpu-tools
+    - vnstat
+    - jnettop
+    - ifenslave
+    - nvidia-utils-575-server
+    
+  ignore_errors: true # sometimes apt is locked    
+
+- name: Check if /dev/nvme1n1 is already a physical volume
+  command: pvs --noheadings -o pv_name
+  register: existing_pvs
+  changed_when: false
+
+- name: Create physical volume on /dev/nvme1n1 if not present
+  command: pvcreate /dev/nvme1n1
+  when: "'/dev/nvme1n1' not in existing_pvs.stdout_lines"
+  ignore_errors: true
+
+- name: Add /dev/nvme1n1 to vg0 if not already part of it
+  command: vgextend vg0 /dev/nvme1n1
+  when: "'/dev/nvme1n1' not in existing_pvs.stdout_lines"
+  ignore_errors: true # so we can run it multiple times
+
+- name: Fetch public IP from ipify
+  uri:
+    url: "https://api.ipify.org"
+    return_content: yes
+  register: public_ip_response
+
+- name: Set public IP as a fact
+  set_fact:
+    external_ip: "{{ public_ip_response.content }}"
+
+- name: Get default route from ip route
+  command: ip route show default
+  register: default_route_output
+
+- name: Extract default gateway IP
+  set_fact:
+    default_gateway_ip: "{{ default_route_output.stdout.split(' ')[2] }}"
+
+- name: Show the default gateway IP
+  debug:
+    msg: "The default gateway IP is {{ default_gateway_ip }}"
+
+- name: Enable automatic updates
+  copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+      APT::Periodic::AutocleanInterval "7";
+
+- name: Configure unattended-upgrades to allow all updates but disable reboots
+  copy:
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    content: |
+      Unattended-Upgrade::Allowed-Origins {
+          "${distro_id}:${distro_codename}-security";
+          "${distro_id}:${distro_codename}-updates";
+          "${distro_id}:${distro_codename}-backports";
+      };
+      Unattended-Upgrade::Automatic-Reboot "false";
+
+- name: Ensure correct permissions for configuration files
+  file:
+    path: "{{ item }}"
+    mode: '0644'
+  loop:
+    - /etc/apt/apt.conf.d/20auto-upgrades
+    - /etc/apt/apt.conf.d/50unattended-upgrades
+
+- name: Restart unattended-upgrades service
+  systemd:
+    name: unattended-upgrades
+    state: restarted
+    enabled: yes
+
+- name: Run unattended-upgrades manually for verification (dry run)
+  command: unattended-upgrade --dry-run --debug
+  register: unattended_output
+  changed_when: false
+
+- name: Show unattended-upgrades output
+  debug:
+    var: unattended_output.stdout_lines
+
+- name: load bonding modules
+  modprobe:
+    name: "{{ item }}"
+  with_items: 
+  - bonding
+
+- name: add bonding modules to /etc/modules-load.d/bonding.conf
+  copy:
+    dest: /etc/modules-load.d/bonding.conf
+    content: |
+      bonding
+
+- name: Set i915.disable_display=1 to avoid EDID spam, disable cstates
+  ansible.builtin.lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="i915.disable_display=1 intel_idle.max_cstate=1 processor.max_cstate=1 intel_pstate=disable"'
+  register: grub_config_changed
+
+- name: Update GRUB
+  ansible.builtin.command: update-grub
+  when: grub_config_changed.changed      
+
+- name: Remove initial cloud-init netplan
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+  - /etc/netplan/50-cloud-init.yaml
+  - /etc/netplan/00-installer-config.yaml
+
+- name: Replace with our own netplan
+  template:
+    src: netplan.yaml.j2
+    dest: /etc/netplan/elfhosted.yaml
+    mode: 0600
+  # notify: netplan apply
+
+# - name: flush handlers now if necessary
+#   meta: flush_handlers
+
+# this can be disruptive, so disabled for now
+- name: Reboot for grub fix
+  ansible.builtin.reboot:
+    msg: "Rebooting due to GRUB_CMDLINE_LINUX change"
+  when: grub_config_changed.changed
+
+- name: "Update /etc/hosts for k3s-servers"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }} {{item}}'
+    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    owner: root
+    group: root
+    mode: '0644'        
+  with_items: "{{ groups['k3s_servers'] }}"
+
+- name: "Update /etc/hosts for k3s-agents"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ hostvars[item].ansible_host }} {{item}}'
+    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    owner: root
+    group: root
+    mode: '0644'        
+  with_items: "{{ groups['k3s_agents'] }}" 
+
+
+- name: "Update /etc/hosts for localhost"
+  tags: hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127.0.0.1 localhost'
+    line: "127.0.0.1 localhost"
+    owner: root
+    group: root
+    mode: '0644'        
+
+- name: install yq via snap
+  snap:
+    name: yq
+  when: "inventory_hostname in groups['k3s_servers']"  
+  ignore_errors: true # sometimes snap has issues
+
+- name: Set default forward policy to ACCEPT
+  lineinfile:
+    path: /etc/default/ufw
+    regexp: '^DEFAULT_FORWARD_POLICY='
+    line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+  
+- name: Allow admin SSH sources to this host
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+    src: '{{ item }}'
+    state: enabled
+  loop: "{{ firewall.admin_source }}"
+
+- name: Allow trusted kube-api sources to this host
+  ufw:
+    rule: allow
+    port: 6443
+    proto: tcp
+    src: '{{ item }}'
+    state: enabled
+  loop: "{{ firewall.kubeapi_source }}"  
+
+- name: Allow port 5201 for occasional iperf testing (enable when necessary)
+  ufw:
+    rule: allow
+    port: 5201
+    proto: tcp
+    state: disabled
+
+- name: Allow any incoming traffic to the public IP for host-port exposed services
+  ufw:
+    direction: in
+    rule: "allow"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "80", proto: "tcp" }  # traefik web
+    - { port: "443", proto: "tcp" } # traefik websecure
+
+
+- name: Allow any incoming traffic on the cluster NIC
+  ufw:
+    direction: in
+    rule: "allow"
+    interface: "{{ item }}"    
+  with_items:
+  - internal
+
+- name: Allow any incoming traffic from the cluster range
+  ufw:
+    direction: in
+    rule: "allow"
+    src: "{{ item }}"
+  loop: "{{ firewall.cluster_source }}"
+
+- name: Allow any incoming traffic from the cluster for host-network exposed services
+  ufw:
+    direction: in
+    rule: "allow"
+    src: "{{ pod_cidr_v4 }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "10250", proto: "tcp" } # kubelet metrics
+    - { port: "10257", proto: "tcp" } # kube-controller metrics
+    - { port: "10259", proto: "tcp" } # kube-scheduler metrics
+    - { port: "2381", proto: "tcp" }  # k3s etcd
+    - { port: "9100", proto: "tcp" }  # node-exporter  
+    - { port: "6443", proto: "tcp" }  # k8s-api   
+    - { port: "8080", proto: "tcp" }  # kured
+    - { port: "4244", proto: "tcp" }  # hubble  
+    - { port: "9965", proto: "tcp" }  # hubble metrics  
+
+- name: Drop noisy traffic
+  ufw:
+    direction: in
+    rule: "deny"
+    log: false
+    src: "{{ pod_cidr_v4 }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: "5351", proto: "udp" } # NAT-PMP (Plex)
+    - { port: "1900", proto: "udp" } # DLNA (Plex)
+
+- name: Drop any unexpected incoming traffic hitting the public nic (bond0) # (this is the case anyway, but we want to avoid unnecessary logging)
+  ufw:
+    direction: in
+    rule: "deny"
+    interface: "external"
+    log: "false"
+
+- name: Ensure UFW service starts on boot
+  service:
+    name: ufw
+    enabled: yes
+    state: restarted
+
+- name: Check UFW status
+  command: ufw status
+  register: ufw_status
+  changed_when: false
+
+
+- name: Enable UFW if not active
+  ufw:
+    state: enabled
+    policy: deny
+    logging: "on"
+  when: "'Status: inactive' in ufw_status.stdout"
+  notify: reload ufw
+      
+- name: Set tuned profile to throughput-performance
+  command: tuned-adm profile throughput-performance
+
+- name: Change various sysctl-settings
+  sysctl:
+    name: '{{ item.key }}'
+    value: '{{ item.value }}'
+    sysctl_set: yes
+    state: present
+    reload: yes
+    ignoreerrors: yes
+  with_dict: '{{ sysctl_config }}'
+
+- name: Disable swap for current session
+  command: swapoff -a
+  become: true
+
+- name: Disable swap permanently, persist reboots
+  replace:
+    path: /etc/fstab
+    regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
+    replace: '#\1\2\3swap\4'
+    backup: yes  
+
+- name: Create a thin pool on vg0
+  community.general.lvol:
+    vg: vg0
+    thinpool: thinpool
+    size: 100%FREE  
+  when: 
+  - "inventory_hostname in groups['k3s_agents'] or inventory_hostname in groups['k3s_servers']"
+  ignore_errors: true # so we can run it multiple times
+
+- name: copy scripts
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    mode: u+x
+  loop:
+    - smartmon_metrics.sh
+
+- name: install nvidia driver
+  command: ubuntu-drivers install --gpgpu nvidia:575-server
+
+# - name: Set igb modprobe defaults
+#   copy:
+#     dest: /etc/modprobe.d/igb.conf
+#     content: options igb InterruptThrottleRate=1,1,1,1 RSS=8 FlowControl=0 QueuePairs=4
+#     mode: '0644'
+  
+# - name: copy ethtool-config service
+#   copy:
+#     src: ethtool-config.service
+#     dest: /etc/systemd/system/ethtool-config.service
+#     mode: '0644'  
+
+# - name: Reload systemd to apply new service
+#   systemd:
+#     daemon_reload: yes
+
+# - name: Enable ethtool-config.service to start at boot
+#   systemd:
+#     name: ethtool-config.service
+#     enabled: yes
+
+# - name: Start ethtool-config.service
+#   systemd:
+#     name: ethtool-config.service
+#     state: started    
+
+- name: Install smartmontools
+  apt: pkg=smartmontools
+
+- name: Install lm-sensors
+  apt: pkg=lm-sensors  
+  
+- name: Ensure directory /var/lib/node-exporter/textfiles/ exists
+  file:
+     path: /var/lib/node-exporter/textfiles
+     state: directory    
+     
+- name: Expose smartmon metrics to node-exporter
+  cron:
+    name: "smartmon metrics"
+    minute: "*/5"
+    hour: "*"
+    job: "/usr/local/bin/smartmon_metrics.sh > /var/lib/node-exporter/textfiles/smart_metrics.prom && chmod 644 /var/lib/node-exporter/textfiles/smart_metrics.prom"
+
+- name: ignore irrelevant logs via rsyslog
+  copy:
+    src: ignore-irrelevant-logs.conf
+    dest: /etc/rsyslog.d/ignore-irrelevant-logs.conf
+
+- name: update logrotate.conf 
+  copy:
+    src: logrotate.conf
+    dest: /etc/logrotate.conf
+
+- name: update logrotate.d/syslog 
+  copy:
+    src: rsyslog
+    dest: /etc/logrotate.d/rsyslog
+
+- name: remove incorrect /etc/logrotate.d/syslog
+  file:
+    path: /etc/logrotate.d/syslog
+    state: absent    
+
+- name: ensure resolveconf systemd directory exists
+  file:
+    path: /etc/systemd/resolved.conf.d
+    state: directory
+
+- name: add cluster DNS to /etc/systemd/resolved.conf.d/dns_servers.conf
+  copy:
+    dest: /etc/systemd/resolved.conf.d/dns_servers.conf
+    content: |
+      [Resolve]
+      DNS=10.43.0.10
+      Domains=svc.cluster.local
+
+- name: restart systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: restarted
+    enabled: yes
+
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+    enabled: yes

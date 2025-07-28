@@ -1,0 +1,180 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: demo-booklore
+  namespace: demo-booklore
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: demo-booklore
+  values:
+    global:
+      nameOverride: demo-booklore  
+    image:
+      repository: ghcr.io/elfhosted/booklore
+      tag: v0.34.1@sha256:24a66641d5f1fc698a66cd78f8308fe24cb54f48d8ee6fd20b06831be26b4225
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: false # because we need the permission-fixer to run as root
+      capabilities:
+        drop:
+        - ALL
+    automountServiceAccountToken: false
+    env:
+      DATABASE_URL: jdbc:mariadb://localhost:3306/booklore
+      DATABASE_USERNAME: booklore
+      DATABASE_PASSWORD: booklore
+    resources:
+      requests:
+        cpu: 0m
+        memory: 20Mi
+      limits:
+        cpu: 1
+        memory: 1Gi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 6060
+    persistence:
+      # we won't use this for the demo, but it seems to want it to exist
+      bookdrop:
+        enabled: true
+        type: emptyDir
+        mountPath: /bookdrop
+      tmp:
+        enabled: true
+        type: emptyDir
+        mountPath: /tmp
+      config:
+        enabled: true
+        type: custom
+        mountPath: /app/data
+        subPath: ephemeral/app
+        volumeSpec:
+          persistentVolumeClaim:
+            claimName: demo-booklore 
+    command:
+    - java
+    - -jar
+    - /app/app.jar
+    initContainers:
+      setup-demo:
+        image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+        command:
+        - /bin/bash
+        - -c
+        - |
+          if [ -z "$READONLY_MODE" ]; then
+            echo "READONLY_MODE is not set, copying all data to bootstrap"
+            mkdir -p /config/bootstrap
+            if [ -d /config/ephemeral ]; then
+              cp /config/ephemeral/* /config/bootstrap/ -rfp      
+            fi
+          else
+            echo "READONLY_MODE is set, removing and overwriting all data"
+            rm -rf /config/ephemeral/*
+            cp /config/bootstrap/* /config/ephemeral/ -rfp
+          fi
+
+          # bookdrop is a special case
+          mkdir -p /config/ephemeral/app/bookdrop
+        volumeMounts:
+        - mountPath: /config
+          name: config
+        securityContext:
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+        envFrom:
+        - configMapRef:
+            name: demo-booklore-env                
+      setup-zbookdrop:
+        image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+        command:
+        - /bin/bash
+        - -c
+        - |
+          # bookdrop is a special case
+          mkdir -p /app/data/bookdrop
+        volumeMounts:
+        - mountPath: /app/data
+          name: config
+          subPath: ephemeral/app         
+      setup-mariadb:
+        image: ghcr.io/elfhosted/tooling:focal-20250404@sha256:e3a3d41c2c59c8844b5f4abc8fb3b3e5444904649a5a10f74db81b79ad8c2fe3
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -x
+          set -e
+
+          mkdir -p /config/database
+          chown elfie:elfie /config/database -R
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: ephemeral
+        securityContext:
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+    additionalContainers:
+      frontend:
+        image: ghcr.io/elfhosted/booklore:v0.34.1@sha256:24a66641d5f1fc698a66cd78f8308fe24cb54f48d8ee6fd20b06831be26b4225
+        command:
+        - /usr/sbin/nginx
+        - -g
+        - "daemon off;"
+        securityContext:
+          readOnlyRootFilesystem: false
+          runAsUser: 0 # nginx insists on running as root
+      database:
+        image: mariadb:11
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: booklore
+          - name: MYSQL_DATABASE
+            value: booklore
+          - name: MYSQL_USER
+            value: booklore
+          - name: MYSQL_PASSWORD
+            value: booklore
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: config
+          subPath: ephemeral/database
+        resources:
+          requests:
+            cpu: 0m
+            memory: 1Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi

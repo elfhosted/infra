@@ -16,7 +16,7 @@ spec:
           namespace: deprecations
           port: 8080
       middlewares:  
-        - name: headers-add-cors-for-stremio
+        - name: headers-add-cors-origin-any
           namespace: traefik
         - name: redirectregex-shluflix-is-deprecated
     - match: Host(`shluflix.${dns_domain}`) && PathPrefix(`/stream`)
@@ -27,6 +27,6 @@ spec:
           namespace: deprecations
           port: 8080
       middlewares:  
-        - name: headers-add-cors-for-stremio
+        - name: headers-add-cors-origin-any
           namespace: traefik          
         - name: redirectregex-shluflix-stream-is-deprecated

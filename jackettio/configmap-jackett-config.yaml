@@ -21,7 +21,7 @@ data:
       "CacheEnabled": true,
       "CacheTtl": 21000,
       "CacheMaxResultsPerIndexer": 10000,
-      "FlareSolverrUrl": "http://byparr:8191",
+      "FlareSolverrUrl": "",
       "FlareSolverrMaxTimeout": 55000,
       "OmdbApiKey": "",
       "OmdbApiUrl": "",

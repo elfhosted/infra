@@ -1,6 +1,5 @@
 # Debugged and validated on proxmox, thanks to https://sekureco42.ch/posts/deploy-ubuntu-24.04-with-autoinstall-to-proxmox/
-storage:
-
+# This must be pasted in exactly as is, with the whitespace in front of of the comment. The UI strips out the whitespace on the first line, so this is a workaround.
     # fake the indentation
     swap:
       # no swap

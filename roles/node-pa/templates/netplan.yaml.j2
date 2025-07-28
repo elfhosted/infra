@@ -1,0 +1,32 @@
+# Customized for ElfHosted
+network:
+    ethernets:
+        eno1:
+            dhcp4: no
+            optional: true
+        eno2:
+            dhcp4: no
+            optional: true
+    bonds:
+      external:
+        interfaces: ["eno1","eno2"]
+        parameters:
+          mode: 802.3ad
+          lacp-rate: fast
+          mii-monitor-interval: 100
+        addresses: [ {{ external_ip }}/28 ]
+        routes:
+          - on-link: true
+            to: 0.0.0.0/0
+            via: {{ default_gateway_ip }}
+        nameservers:
+          addresses: [8.8.8.8, 8.8.4.4]
+    vlans:
+      internal:
+        id: 2208
+        link: external
+        mtu: 1500
+        addresses:
+          - {{ cluster_ip }}/24
+    renderer: networkd
+    version: 2

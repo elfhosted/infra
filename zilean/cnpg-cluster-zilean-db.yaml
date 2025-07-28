@@ -22,8 +22,8 @@ spec:
       cpu: "50m"
       memory: 512Mi
     limits:
-      cpu: "1"
-      memory: 1Gi
+      cpu: "2"
+      memory: 2Gi
 
   monitoring:
     enablePodMonitor: true
@@ -64,5 +64,5 @@ spec:
             key: ACCESS_SECRET_KEY
         wal:
           compression: gzip
-          maxParallel: 2      
+          maxParallel: 1 
       retentionPolicy: "7d"          

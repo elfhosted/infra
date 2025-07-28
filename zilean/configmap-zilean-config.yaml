@@ -36,12 +36,7 @@ data:
           "UseLucene": true
         },
         "Ingestion": {
-          "ZurgInstances": [
-            {
-              "Url": "http://zurg:9999",
-              "EndpointType": 1
-            }
-          ],
+          "ZurgInstances": [],
           "ZileanInstances": [
             {
               "Url": "http://scrape-cc:80",
@@ -50,7 +45,11 @@ data:
             {
               "Url": "http://scrape-com:80",
               "EndpointType": 0
-            }                                
+            },
+            {
+              "Url": "http://scrape-party:80",
+              "EndpointType": 0
+            }                                            
           ],
           "GenericInstances": [
             {
@@ -62,21 +61,7 @@ data:
           ],
           "EnableScraping": true,
           "Kubernetes": {
-            "EnableServiceDiscovery": true,
-            "KubernetesSelectors": [
-              {
-                "UrlTemplate": "http://zurg.{0}:9999",
-                "LabelSelector": "zilean.elfhosted.com/scrape=zurg",
-                "EndpointType": 1
-              },
-              {
-                "UrlTemplate": "http://decypharr.{0}:8282",
-                "LabelSelector": "zilean.elfhosted.com/scrape=decypharr",
-                "EndpointType": 1
-              }              
-            ],
-            "KubeConfigFile": "/$HOME/.kube/config",
-            "AuthenticationType": 1
+            "EnableServiceDiscovery": false
           },
           "BatchSize": 500,
           "MaxChannelSize": 5000,

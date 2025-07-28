@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: demo-terms
+  namespace: demo-booklore
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: elfhosted
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: demo-terms
+  values:
+    global:
+      nameOverride: demo-terms
+    image:
+      repository: ghcr.io/elfhosted/demo-terms
+      tag: rolling@sha256:9300fdfb319ebab13a235ed9beca9c6b385a24f670e987d5e1fa0296815ad19f
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      readOnlyRootFilesystem: true
+    controller:
+      replicas: 1
+      strategy: RollingUpdate
+      rollingUpdate:
+        unavailable: 1      
+      annotations:
+        configmap.reloader.stakater.com/reload: "demo-terms-env"
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      allowPrivilegeEscalation: false
+      runAsNonRoot: false # because we need the permission-fixer to run as root
+      capabilities:
+        drop:
+        - ALL
+    envFrom:
+    - configMapRef:
+        name: demo-terms-env      
+    automountServiceAccountToken: false
+    resources:
+      requests:
+        cpu: 0m
+        memory: 20Mi
+      limits:
+        cpu: 100m
+        memory: 1Gi
+    ingress:
+      main:
+        enabled: false
+    service:
+      main:
+        enabled: true # necessary for probes
+        ports:
+          http:
+            port: 8080

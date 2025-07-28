@@ -16,5 +16,8 @@ data:
 
     See the [ElfHosted Stremio Addons Guide](https://stremio-addons-guide.elfhosted.com/) for more addons!
 
+    Looking for something beyond Stremio? Trial a [hosted Plex with RealDebrid](https://store.elfhosted.com/product-category/streaming-bundles/) streaming bundle! (*Jellyfin and Emby available too*)
+
+
   ADDON_ID: jackettio.elfhosted.com  
   STREMTHRU_URL: http://elfhosted-internal.stremthru

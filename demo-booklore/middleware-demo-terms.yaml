@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: demo-terms
+  namespace: demo-booklore
+spec:
+  forwardAuth:
+    address: http://demo-terms.demo-booklore:8080/auth
+    trustForwardHeader: true
+    authResponseHeaders:
+      - "X-Forwarded-User"

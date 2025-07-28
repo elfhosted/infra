@@ -1,0 +1,20 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: rd-demo-booklore
+  namespace: demo-booklore
+spec:
+  trigger:
+    manual: runonce
+  restic:
+    repository: demo-booklore-restic-config
+    copyMethod: Snapshot
+    cacheCapacity: 1Gi
+    capacity: 1Gi
+    cacheStorageClassName: topolvm-provisioner-thin
+    accessModes:
+    - ReadWriteOnce
+    storageClassName: topolvm-provisioner-thin
+    cacheAccessModes:
+    - ReadWriteOnce
+    volumeSnapshotClassName: topolvm-provisioner-thin

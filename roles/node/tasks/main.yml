@@ -15,7 +15,6 @@
     - intel-gpu-tools
     - vnstat
     - jnettop
-    # - linux-generic-hwe-22.04
     - ifenslave
     
   ignore_errors: true # sometimes apt is locked    

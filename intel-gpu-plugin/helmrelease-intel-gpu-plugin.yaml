@@ -99,6 +99,11 @@ spec:
                   operator: In
                   values:
                     - "true"
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/pci-0380_8086.present
+                  operator: In
+                  values:
+                    - "true"                    
     tolerations:
     - key: node-role.${dns_domain}/dedicated
       effect: NoSchedule

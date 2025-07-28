@@ -9,7 +9,7 @@ data:
   ENABLE_ID_OBFUSCATION: "true"
   REDACT_IP_ADDRESSES: "true"
   DISTANCE: "km"
-  # DB_TYPE: "postgresql"
+  DB_TYPE: "sqlite"
   # DB_HOSTNAME: librespeed
   # DB_NAME: librespeed
   # DB_USERNAME: librespeed

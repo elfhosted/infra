@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-booklore-env
+  namespace: demo-booklore
+data:
+  READONLY_MODE: "true"

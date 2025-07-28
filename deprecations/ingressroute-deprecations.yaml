@@ -16,5 +16,5 @@ spec:
       middlewares:  
         - name: error-pages
           namespace: traefik
-        - name: headers-add-cors-for-stremio
+        - name: headers-add-cors-origin-any
           namespace: traefik

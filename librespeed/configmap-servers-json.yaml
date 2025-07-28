@@ -7,53 +7,29 @@ data:
   servers.json: |
     [
         {
-            "name": "Falkenstein, Germany (elfhosted.com)",
-            "server" :"//fairy01-speed.elfhosted.com/",
+            "name": "EU, Falkenstein (elfhosted.com)",
+            "server" :"//speed-backend.elfhosted.com/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Washington State, USA (elfhosted.cc)",
-            "server" :"//eagle02-speed.elfhosted.cc/",
+            "name": "US West, WA (elfhosted.cc)",
+            "server" :"//speed-backend.elfhosted.cc/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
         },
         {
-            "name": "Auckland, New Zealand (elfhosted.tbc)",
-            "server" :"//speedtest-auckland.elfhosted.com/",
+            "name": "US East, PA (elfhosted.party)",
+            "server" :"//speed-backend.elfhosted.party/",
             "dlURL" :"garbage.php",
             "ulURL" :"empty.php",
             "pingURL" :"empty.php",
             "getIpURL" :"getIP.php"
-        },
-        {
-            "name": "Ashburn, USA (elfhosted.tbc)",
-            "server" :"//speedtest-ashburn.elfhosted.com/",
-            "dlURL" :"garbage.php",
-            "ulURL" :"empty.php",
-            "pingURL" :"empty.php",
-            "getIpURL" :"getIP.php"
-        },
-        {
-            "name": "Kansas, USA (elfhosted.tbc)",
-            "server" :"//speedtest-kansascity.elfhosted.com/",
-            "dlURL" :"garbage.php",
-            "ulURL" :"empty.php",
-            "pingURL" :"empty.php",
-            "getIpURL" :"getIP.php"
-        },
-        {
-            "name": "California, USA (elfhosted.tbc)",
-            "server" :"//speedtest-freemont.elfhosted.com/",
-            "dlURL" :"garbage.php",
-            "ulURL" :"empty.php",
-            "pingURL" :"empty.php",
-            "getIpURL" :"getIP.php"
-        }                         
+        }              
         //...more servers...
     ]
 
