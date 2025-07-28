@@ -4,4 +4,4 @@ metadata:
   name: demo-booklore-env
   namespace: demo-booklore
 data:
-  READONLY_MODE: "true"
+  NOT_READONLY_MODE: "true"
