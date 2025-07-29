@@ -177,7 +177,9 @@ spec:
       #     - --type=raid1
 
       # lvmd.args -- Arguments to be passed to the command.
-      args: []
+      args:
+      - -v0 
+      - --zap-log-level=debug
 
       # lvmd.securityContext -- Container securityContext.
       ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
