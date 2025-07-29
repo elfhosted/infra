@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.17.3
+      version: 1.18.0
       sourceRef:
         kind: HelmRepository
         name: cilium
@@ -3694,7 +3694,7 @@ spec:
                 # @schema
                 override: ~
                 repository: "ghcr.io/spiffe/spire-agent"
-                tag: "1.9.6"
+                tag: "1.12.4"
                 digest: "sha256:5106ac601272a88684db14daf7f54b9a45f31f77bb16a906bd5e87756ee7b97c"
                 useDigest: true
                 pullPolicy: "IfNotPresent"
@@ -3749,7 +3749,7 @@ spec:
                 # @schema
                 override: ~
                 repository: "ghcr.io/spiffe/spire-server"
-                tag: "1.9.6"
+                tag: "1.12.4"
                 digest: "sha256:59a0b92b39773515e25e68a46c40d3b931b9c1860bc445a79ceb45a805cab8b4"
                 useDigest: true
                 pullPolicy: "IfNotPresent"
