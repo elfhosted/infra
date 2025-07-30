@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: velero
-      version: 6.7.x
+      version: 10.0.x
       sourceRef:
         kind: HelmRepository
         name: vmware-tanzu
@@ -51,7 +51,7 @@ spec:
     # enabling node-agent). Required.
     image:
       repository: velero/velero
-      tag: v1.15.2
+      tag: v1.16.2
       # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
       # If used, it will take precedence over the image.tag.
       # digest:
@@ -130,7 +130,7 @@ spec:
       #     - mountPath: /target
       #       name: plugins
       - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.11.1
+        image: velero/velero-plugin-for-aws:v1.12.2
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
