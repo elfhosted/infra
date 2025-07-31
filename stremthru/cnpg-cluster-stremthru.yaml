@@ -16,7 +16,7 @@ spec:
   # Persistent storage configuration
   storage:
     storageClass: topolvm-provisioner-thin
-    size: 30Gi
+    size: 50Gi
 
   resources:
     requests:
