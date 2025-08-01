@@ -177,9 +177,7 @@ spec:
       #     - --type=raid1
 
       # lvmd.args -- Arguments to be passed to the command.
-      args:
-      - -v0 
-      - --zap-log-level=debug
+      args: []
 
       # lvmd.securityContext -- Container securityContext.
       ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
@@ -266,7 +264,7 @@ spec:
 
       metrics:
         # lvmd.metrics.enabled -- If true, enable scraping of metrics by Prometheus.
-        enabled: true
+        enabled: false
         # lvmd.metrics.annotations -- Annotations for Scrape used by Prometheus.
         annotations:
           prometheus.io/port: metrics
@@ -329,7 +327,7 @@ spec:
 
       metrics:
         # node.metrics.enabled -- If true, enable scraping of metrics by Prometheus.
-        enabled: true
+        enabled: false
         # node.metrics.annotations -- Annotations for Scrape used by Prometheus.
         annotations:
           prometheus.io/port: metrics
