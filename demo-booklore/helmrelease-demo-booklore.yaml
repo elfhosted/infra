@@ -20,7 +20,7 @@ spec:
       nameOverride: demo-booklore  
     image:
       repository: ghcr.io/elfhosted/booklore
-      tag: v0.35.0@sha256:ba4abf88aa8fa7d50bc2d6d7bcb492b17c29d670f3889fab1052ecbe1f89ae0f
+      tag: v0.35.0@sha256:92d8d481557a649f99490c6195756e98dc01718b06ce3571e93544e691cd99bc
     securityContext:
       seccompProfile:
         type: RuntimeDefault
@@ -148,7 +148,7 @@ spec:
             type: RuntimeDefault
     additionalContainers:
       frontend:
-        image: ghcr.io/elfhosted/booklore:v0.35.0@sha256:ba4abf88aa8fa7d50bc2d6d7bcb492b17c29d670f3889fab1052ecbe1f89ae0f
+        image: ghcr.io/elfhosted/booklore:v0.35.0@sha256:92d8d481557a649f99490c6195756e98dc01718b06ce3571e93544e691cd99bc
         command:
         - /usr/sbin/nginx
         - -g
