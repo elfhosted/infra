@@ -20,7 +20,7 @@ spec:
       nameOverride: phalanxdb
     image:
       repository: ghcr.io/elfhosted/phalanxdb-hyperswarm
-      tag: rolling@sha256:3f23b59300af9c0a0ccc1cdd976c7be87260dc29811155db90cf21f50aa41a46
+      tag: rolling@sha256:863495f509f238f75699def0f6b816aaf1fb568a314db7a1b20cc6cba0914dc9
     securityContext:
       seccompProfile:
         type: RuntimeDefault
