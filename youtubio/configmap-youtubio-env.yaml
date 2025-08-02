@@ -4,4 +4,4 @@ metadata:
   name: youtubio-env
   namespace: youtubio
 data:
-  SPACE_HOST: https://youtubio.${dns_domain}
+  SPACE_HOST: youtubio.${dns_domain}
