@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: zilean-scrape-zurg
+  name: zilean-scrape-dmm
   namespace: zilean
 spec:
   chart:
@@ -14,10 +14,10 @@ spec:
         namespace: flux-system
   interval: 15m
   timeout: 5m
-  releaseName: zilean-scrape-zurg
+  releaseName: zilean-scrape-dmm
   values:
     global:
-      nameOverride: zilean-scrape-zurg
+      nameOverride: zilean-scrape-dmm
     serviceAccount:
       create: false # already created by cnpg
       name: zilean
@@ -48,7 +48,7 @@ spec:
       rollingUpdate:
         unavailable: 1
       annotations:
-        configmap.reloader.stakater.com/reload: "zilean-config-scrape-zurg"  
+        configmap.reloader.stakater.com/reload: "zilean-config-scrape-dmm"  
         secret.reloader.stakater.com/reload: "zilean-env"             
     ingress:
       main:
@@ -69,7 +69,7 @@ spec:
         type: "custom"
         volumeSpec:
           configMap:
-            name: zilean-config-scrape-zurg
+            name: zilean-config-scrape-dmm
     envFrom:
     - secretRef:
         name: zilean-env
