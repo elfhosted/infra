@@ -20,7 +20,7 @@ spec:
       nameOverride: youtubio
     image:
       repository: ghcr.io/elfhosted/youtubio
-      tag: rolling@sha256:70e2075f1724c4df6f1baa48193f9ae1f06350300997e97087d42c48aea169c5
+      tag: rolling@sha256:cffafa3605abcf2c22d45facbf3c122fad7ec49733e3674196aaa08fa9fd7bb7
     securityContext:
       seccompProfile:
         type: RuntimeDefault
