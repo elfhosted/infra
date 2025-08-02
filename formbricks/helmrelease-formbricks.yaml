@@ -21,7 +21,7 @@ spec:
     image:
       registry: ghcr.io
       repository: formbricks/formbricks
-      tag: v3.15.0
+      tag: v3.16.1
     securityContext:
       seccompProfile:
         type: RuntimeDefault
