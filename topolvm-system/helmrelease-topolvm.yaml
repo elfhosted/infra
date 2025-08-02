@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: topolvm
-      version: 15.5.0 # uses topolvm 0.35.x, the last version with parallelized mounting
+      version: 15.4.0 # uses topolvm 0.35.x, the last version with parallelized mounting
       sourceRef:
         kind: HelmRepository
         name: topolvm
