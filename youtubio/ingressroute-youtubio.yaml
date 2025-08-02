@@ -13,3 +13,6 @@ spec:
         - name: youtubio
           kind: Service
           port: 7000
+      middlewares:
+        - name: headers-add-cors-origin-any
+          namespace: traefik
