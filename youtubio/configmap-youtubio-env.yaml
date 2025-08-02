@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tmdb-env
+  namespace: tmdb
+data:
+  HOST_NAME: https://tmdb.${dns_domain}
+  MONGODB_URI: mongodb://mongodb:27017/tmdb?retryWrites=true
+  MONGODB_METRICS: mongodb://mongodb:27017/tmdb?retryWrites=true
+  META_TTL: "604800"  # 1 week
+  CATALOG_TTL: "86400"  # 1 day
+  NO_CACHE: "false"  # Enable cache, set to true to disable
+
+  # Analytics Configuration (do these need to be secured?)
+  METRICS_USER: snuffles
+  METRICS_PASSWORD: iamahorcrux
