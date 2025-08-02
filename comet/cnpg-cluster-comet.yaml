@@ -58,7 +58,7 @@ spec:
           secretAccessKey:
             name: cnpg-minio-credentials
             key: ACCESS_SECRET_KEY
-        wal:
-          compression: gzip
-          maxParallel: 1
+        # wal:
+        #   compression: gzip
+        #   maxParallel: 1
       retentionPolicy: "7d"
