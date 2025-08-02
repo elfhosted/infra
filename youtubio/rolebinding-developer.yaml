@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: aa-xxcrashbomberxx-kubernetes-dashboard-developer
+  namespace: youtubio
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: aa-xxcrashbomberxx
+- kind: ServiceAccount
+  name: filebrowser
+  namespace: aa-xxcrashbomberxx  
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer
