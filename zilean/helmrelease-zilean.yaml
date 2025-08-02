@@ -34,11 +34,6 @@ spec:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
-    tolerations:
-    - key: node-role.elfhosted.com/dedicated
-      operator: Exists     
-    - key: node-role.elfhosted.com/hobbit
-      operator: Exists  
     probes:
       liveness:
         enabled: false
@@ -47,8 +42,20 @@ spec:
       readiness:
         enabled: false     
     automountServiceAccountToken: true
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution: 
+        - weight: 100  
+          podAffinityTerm:    
+            labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - zilean
+            topologyKey: "kubernetes.io/hostname"      
     controller:
-      replicas: 1
+      replicas: 2
       strategy: RollingUpdate
       rollingUpdate:
         unavailable: 1

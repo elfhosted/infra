@@ -59,7 +59,7 @@ data:
               "EndpointSuffix": "/__experiment__/zilean/torrents?exclude_source=dmm&no_missing_size=1"              
             }
           ],
-          "EnableScraping": true,
+          "EnableScraping": false,
           "Kubernetes": {
             "EnableServiceDiscovery": false
           },
